@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Calendar, Award, TrendingUp, Leaf, MapPin, Clock } from "lucide-react";
+import { Calendar, Award, TrendingUp, MapPin, Clock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
@@ -77,7 +77,11 @@ const Dashboard = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-3">
-              <Leaf className="h-8 w-8 text-green-600" />
+              <img 
+                src="/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png" 
+                alt="Virtuosity Logo" 
+                className="h-8 w-8 object-contain"
+              />
               <h1 className="text-2xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
                 Virtuosity
               </h1>
