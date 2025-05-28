@@ -202,7 +202,7 @@ const Marketplace = () => {
                   <CardHeader className="pb-3">
                     <div className="flex justify-between items-start mb-2">
                       <div className="text-3xl sm:text-4xl">{reward.image}</div>
-                      <Badge className={getCategoryColor(reward.category)} size="sm">
+                      <Badge className={getCategoryColor(reward.category)}>
                         {getCategoryName(reward.category)}
                       </Badge>
                     </div>
@@ -218,7 +218,7 @@ const Marketplace = () => {
                       
                       <div className="flex justify-between items-center">
                         <span className="text-sm text-gray-600">Disponibilità</span>
-                        <Badge variant={reward.availability === "Disponibile" ? "default" : "secondary"} size="sm">
+                        <Badge variant={reward.availability === "Disponibile" ? "default" : "secondary"}>
                           {reward.availability}
                         </Badge>
                       </div>
@@ -252,7 +252,7 @@ const Marketplace = () => {
                     <CardHeader className="pb-3">
                       <div className="flex justify-between items-start mb-2">
                         <div className="text-3xl sm:text-4xl">{reward.image}</div>
-                        <Badge className={getCategoryColor(reward.category)} size="sm">
+                        <Badge className={getCategoryColor(reward.category)}>
                           {getCategoryName(reward.category)}
                         </Badge>
                       </div>
@@ -268,7 +268,7 @@ const Marketplace = () => {
                         
                         <div className="flex justify-between items-center">
                           <span className="text-sm text-gray-600">Disponibilità</span>
-                          <Badge variant={reward.availability === "Disponibile" ? "default" : "secondary"} size="sm">
+                          <Badge variant={reward.availability === "Disponibile" ? "default" : "secondary"}>
                             {reward.availability}
                           </Badge>
                         </div>
