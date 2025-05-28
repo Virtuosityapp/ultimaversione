@@ -77,7 +77,7 @@ const About = () => {
                 size="sm"
               >
                 <ArrowLeft className="h-4 w-4 sm:mr-2" />
-                <span className="hidden sm:inline">Homepage</span>
+                <span className="hidden sm:inline">Home</span>
               </Button>
               <img 
                 src="/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png" 
