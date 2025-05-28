@@ -73,9 +73,11 @@ const About = () => {
               <Button 
                 variant="ghost" 
                 onClick={() => navigate("/")}
-                className="mr-2"
+                className="mr-1 sm:mr-2 p-2 sm:p-3"
+                size="sm"
               >
-                <ArrowLeft className="h-4 w-4 mr-2" />
+                <ArrowLeft className="h-4 w-4 sm:mr-2" />
+                <span className="hidden sm:inline">Homepage</span>
               </Button>
               <img 
                 src="/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png" 
