@@ -76,7 +76,6 @@ const About = () => {
                 className="mr-2"
               >
                 <ArrowLeft className="h-4 w-4 mr-2" />
-                Home
               </Button>
               <img 
                 src="/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png" 
