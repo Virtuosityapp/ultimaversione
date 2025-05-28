@@ -20,7 +20,7 @@ const Index = () => {
                 <img 
                   src="/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png" 
                   alt="Virtuosity Logo" 
-                  className="relative h-16 w-16 mx-auto"
+                  className="relative h-16 w-auto mx-auto"
                 />
               </div>
             </div>
