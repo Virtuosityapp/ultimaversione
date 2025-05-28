@@ -78,7 +78,11 @@ const About = () => {
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Home
               </Button>
-              <Leaf className="h-8 w-8 text-green-600" />
+              <img 
+                src="/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png" 
+                alt="Virtuosity Logo" 
+                className="relative h-10 w-10 sm:h-12 sm:w-12 lg:h-16 lg:w-16 mx-auto object-contain"
+              />
               <h1 className="text-2xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
                 Virtuosity
               </h1>
