@@ -17,7 +17,11 @@ const Index = () => {
             <div className="flex justify-center mb-6">
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-blue-500 rounded-full blur-xl opacity-30 animate-pulse"></div>
-                <Leaf className="relative h-16 w-16 text-green-600 mx-auto" />
+                <img 
+                  src="/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png" 
+                  alt="Virtuosity Logo" 
+                  className="relative h-16 w-16 mx-auto"
+                />
               </div>
             </div>
             
