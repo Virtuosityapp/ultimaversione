@@ -80,7 +80,7 @@ const Dashboard = () => {
               <img 
                 src="/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png" 
                 alt="Virtuosity Logo" 
-                className="h-8 w-8 object-contain"
+                className="relative h-16 w-16 mx-auto object-contain"
               />
               <h1 className="text-2xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
                 Virtuosity
