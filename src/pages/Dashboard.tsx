@@ -151,7 +151,7 @@ const Dashboard = () => {
             </CardHeader>
             <CardContent>
               <div className="text-lg sm:text-2xl font-bold">ECO EXPERT</div>
-              <Progress value={75} className="h-2 bg-orange-200" />
+              <Progress value={75} className="h-2 bg-orange-200 [&>div]:bg-green-500" />
             </CardContent>
           </Card>
         </div>
