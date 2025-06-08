@@ -2,7 +2,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Leaf, ArrowLeft, Shield, Zap, Globe, Award, Users, TrendingUp } from "lucide-react";
+import { Leaf, ArrowLeft, Shield, Zap, Globe, Award, Users, TrendingUp, CheckCircle, Target, Heart, Lightbulb } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const About = () => {
@@ -12,7 +12,7 @@ const About = () => {
     {
       icon: <Zap className="h-6 w-6" />,
       title: "Tracking Automatico",
-      description: "Nessun input manuale. Le tue azioni sostenibili vengono rilevate automaticamente tramite sensori del telefono e integrazioni con app esterne.",
+      description: "Nessun input manuale. Le tue azioni sostenibili vengono rilevate automaticamente tramite sensori del telefone e integrazioni con app esterne.",
       details: ["Accelerometro e GPS", "Integrazione Google Fit/Apple Health", "API Bike/Car Sharing", "Sensori smart city"]
     },
     {
@@ -32,18 +32,54 @@ const About = () => {
       title: "Community & Gamification",
       description: "Partecipa a sfide, conquista badge, scala le classifiche e connettiti con altri cittadini virtuosi nella community sostenibile.",
       details: ["Badge achievements", "Classifiche settimanali", "Sfide mensili", "Sistema referral"]
+    }
+  ];
+
+  const benefits = [
+    {
+      icon: <Target className="h-6 w-6" />,
+      title: "Per i Cittadini",
+      description: "Premi concreti per comportamenti sostenibili quotidiani",
+      points: ["Incentivi economici reali", "Riconoscimento sociale", "Miglioramento qualità vita", "Contributo ambientale misurabile"]
     },
     {
-      icon: <TrendingUp className="h-6 w-6" />,
-      title: "Analytics & Reporting",
-      description: "Dashboard avanzate per monitorare il tuo impatto ambientale e report ESG per aziende e pubbliche amministrazioni.",
-      details: ["Metriche CO₂ risparmiate", "Report ESG automatici", "Analytics predittive", "Dashboard personalizzate"]
+      icon: <Heart className="h-6 w-6" />,
+      title: "Per le Aziende",
+      description: "Strumenti ESG avanzati e coinvolgimento dei dipendenti",
+      points: ["Report ESG automatici", "Engagement dei dipendenti", "Riduzione carbon footprint", "Compliance normative"]
     },
     {
       icon: <Globe className="h-6 w-6" />,
-      title: "Integrazione Multi-Partner",
-      description: "Ecosistema aperto che si integra con bike sharing, car sharing, trasporti pubblici, smart parking e servizi di mobilità urbana.",
-      details: ["API RESTful aperte", "Standard GTFS/TPL", "Integrazione IoT", "Partnership strategiche"]
+      title: "Per le Città",
+      description: "Dati real-time per politiche di sostenibilità efficaci",
+      points: ["Analytics mobilità urbana", "Monitoraggio obiettivi ambientali", "Citizen engagement", "Smart city integration"]
+    }
+  ];
+
+  const roadmap = [
+    {
+      phase: "Q1 2024",
+      title: "MVP & Pilot Cities",
+      status: "completed",
+      items: ["Lancio app mobile", "Prime 5 città pilota", "Integrazione bike sharing", "1000 utenti beta"]
+    },
+    {
+      phase: "Q2 2024",
+      title: "Espansione & Partnership",
+      status: "current",
+      items: ["50 città partner", "Integrazione trasporti pubblici", "10.000 utenti attivi", "Prime aziende B2B"]
+    },
+    {
+      phase: "Q3 2024",
+      title: "Marketplace & Blockchain",
+      status: "upcoming",
+      items: ["Lancio marketplace", "Certificati blockchain", "100.000 utenti", "Partnership retail"]
+    },
+    {
+      phase: "Q4 2024",
+      title: "Scala Europea",
+      status: "upcoming",
+      items: ["Espansione EU", "API pubbliche", "1M utenti", "Carbon credit trading"]
     }
   ];
 
@@ -61,6 +97,27 @@ const About = () => {
     { label: "Aziende Attive", value: "80+", color: "text-blue-600" },
     { label: "Utenti Registrati", value: "25k+", color: "text-purple-600" },
     { label: "CO₂ Risparmiata", value: "500t+", color: "text-orange-600" }
+  ];
+
+  const team = [
+    {
+      name: "Marco Rossi",
+      role: "CEO & Founder",
+      bio: "Ex Google, esperto in sostenibilità digitale",
+      image: "👨‍💼"
+    },
+    {
+      name: "Sarah Chen",
+      role: "CTO",
+      bio: "Blockchain architect, ex Ethereum Foundation",
+      image: "👩‍💻"
+    },
+    {
+      name: "Giulia Bianchi",
+      role: "Chief Sustainability Officer",
+      bio: "Ex ONU, esperta in politiche ambientali",
+      image: "👩‍🔬"
+    }
   ];
 
   return (
@@ -111,13 +168,25 @@ const About = () => {
           </p>
           
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-12">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
                 <div className={`text-3xl font-bold ${stat.color}`}>{stat.value}</div>
                 <div className="text-sm text-gray-600">{stat.label}</div>
               </div>
             ))}
+          </div>
+
+          {/* Video/Demo Section */}
+          <div className="bg-gradient-to-r from-green-100 to-blue-100 rounded-lg p-8 mb-12">
+            <h3 className="text-2xl font-bold mb-4">Guarda Virtuosity in Azione</h3>
+            <div className="aspect-video bg-gray-200 rounded-lg flex items-center justify-center">
+              <div className="text-center">
+                <Lightbulb className="h-16 w-16 mx-auto mb-4 text-gray-400" />
+                <p className="text-gray-600">Demo Video Coming Soon</p>
+                <p className="text-sm text-gray-500">Scopri come funziona la piattaforma</p>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -134,12 +203,12 @@ const About = () => {
           </CardContent>
         </Card>
 
-        {/* Features Grid */}
+        {/* How It Works */}
         <div className="mb-16">
           <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">
             Come Funziona Virtuosity
           </h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
               <Card key={index} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
                 <CardHeader>
@@ -155,11 +224,112 @@ const About = () => {
                   <div className="space-y-2">
                     {feature.details.map((detail, idx) => (
                       <div key={idx} className="flex items-center text-sm text-gray-600">
-                        <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
+                        <CheckCircle className="w-3 h-3 text-green-500 mr-2" />
                         {detail}
                       </div>
                     ))}
                   </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* Benefits Section */}
+        <div className="mb-16">
+          <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">
+            Vantaggi per Tutti
+          </h3>
+          <div className="grid md:grid-cols-3 gap-8">
+            {benefits.map((benefit, index) => (
+              <Card key={index} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+                <CardHeader className="text-center">
+                  <div className="w-12 h-12 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center text-white mb-4 mx-auto">
+                    {benefit.icon}
+                  </div>
+                  <CardTitle className="text-xl">{benefit.title}</CardTitle>
+                  <CardDescription>{benefit.description}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    {benefit.points.map((point, idx) => (
+                      <div key={idx} className="flex items-start text-sm text-gray-600">
+                        <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                        {point}
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* Roadmap */}
+        <div className="mb-16">
+          <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">
+            La Nostra Roadmap
+          </h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {roadmap.map((phase, index) => (
+              <Card key={index} className={`border-0 shadow-lg ${
+                phase.status === 'completed' ? 'bg-green-50' :
+                phase.status === 'current' ? 'bg-blue-50' :
+                'bg-gray-50'
+              }`}>
+                <CardHeader>
+                  <div className="flex items-center justify-between">
+                    <Badge variant={
+                      phase.status === 'completed' ? 'default' :
+                      phase.status === 'current' ? 'secondary' :
+                      'outline'
+                    } className={
+                      phase.status === 'completed' ? 'bg-green-500' :
+                      phase.status === 'current' ? 'bg-blue-500' :
+                      ''
+                    }>
+                      {phase.phase}
+                    </Badge>
+                    {phase.status === 'completed' && (
+                      <CheckCircle className="w-5 h-5 text-green-500" />
+                    )}
+                  </div>
+                  <CardTitle className="text-lg">{phase.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2">
+                    {phase.items.map((item, idx) => (
+                      <div key={idx} className="flex items-center text-sm text-gray-600">
+                        <div className={`w-2 h-2 rounded-full mr-2 ${
+                          phase.status === 'completed' ? 'bg-green-400' :
+                          phase.status === 'current' ? 'bg-blue-400' :
+                          'bg-gray-400'
+                        }`}></div>
+                        {item}
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* Team Section */}
+        <div className="mb-16">
+          <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">
+            Il Nostro Team
+          </h3>
+          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            {team.map((member, index) => (
+              <Card key={index} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm text-center">
+                <CardHeader>
+                  <div className="text-6xl mb-4">{member.image}</div>
+                  <CardTitle className="text-xl">{member.name}</CardTitle>
+                  <Badge variant="secondary">{member.role}</Badge>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-gray-600">{member.bio}</p>
                 </CardContent>
               </Card>
             ))}
@@ -231,6 +401,30 @@ const About = () => {
                   <div>ESG Standards</div>
                   <div>CSRD/ESRS</div>
                 </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Contact Section */}
+        <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm mb-16">
+          <CardHeader className="text-center">
+            <CardTitle className="text-2xl">Contattaci</CardTitle>
+            <CardDescription>Vuoi saperne di più? Siamo qui per aiutarti</CardDescription>
+          </CardHeader>
+          <CardContent className="text-center">
+            <div className="grid md:grid-cols-3 gap-6">
+              <div>
+                <h4 className="font-bold mb-2">Email</h4>
+                <p className="text-sm text-gray-600">info@virtuosity.eu</p>
+              </div>
+              <div>
+                <h4 className="font-bold mb-2">Telefono</h4>
+                <p className="text-sm text-gray-600">+39 02 1234 5678</p>
+              </div>
+              <div>
+                <h4 className="font-bold mb-2">Sede</h4>
+                <p className="text-sm text-gray-600">Milano, Italia</p>
               </div>
             </div>
           </CardContent>
