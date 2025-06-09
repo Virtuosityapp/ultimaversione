@@ -4,6 +4,294 @@ import { Badge } from "@/components/ui/badge";
 import { Leaf, ArrowLeft, Shield, Zap, Globe, Award, Users, TrendingUp, CheckCircle, Target, Heart, Lightbulb, Droplets, Recycle, Battery } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
+const CertificateTypeCard = ({ cert }) => (
+  <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+    <CardHeader className="text-center">
+      <div className={`w-16 h-16 bg-gradient-to-r ${cert.color} rounded-full flex items-center justify-center text-white mb-4 mx-auto`}>
+        {cert.icon}
+      </div>
+      <CardTitle className="text-lg">{cert.title}</CardTitle>
+      <CardDescription className="text-gray-600">
+        {cert.description}
+      </CardDescription>
+    </CardHeader>
+  </Card>
+);
+
+const FeatureCard = ({ feature }) => (
+  <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+    <CardHeader>
+      <div className="w-12 h-12 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center text-white mb-4">
+        {feature.icon}
+      </div>
+      <CardTitle className="text-lg">{feature.title}</CardTitle>
+      <CardDescription className="text-gray-600">
+        {feature.description}
+      </CardDescription>
+    </CardHeader>
+    <CardContent>
+      <div className="space-y-2">
+        {feature.details.map((detail, idx) => (
+          <div key={idx} className="flex items-center text-sm text-gray-600">
+            <CheckCircle className="w-3 h-3 text-green-500 mr-2" />
+            {detail}
+          </div>
+        ))}
+      </div>
+    </CardContent>
+  </Card>
+);
+
+const BenefitCard = ({ benefit }) => (
+  <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+    <CardHeader className="text-center">
+      <div className="w-12 h-12 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center text-white mb-4 mx-auto">
+        {benefit.icon}
+      </div>
+      <CardTitle className="text-xl">{benefit.title}</CardTitle>
+      <CardDescription>{benefit.description}</CardDescription>
+    </CardHeader>
+    <CardContent>
+      <div className="space-y-3">
+        {benefit.points.map((point, idx) => (
+          <div key={idx} className="flex items-start text-sm text-gray-600">
+            <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+            {point}
+          </div>
+        ))}
+      </div>
+    </CardContent>
+  </Card>
+);
+
+const RoadmapCard = ({ phase }) => (
+  <Card className={`border-0 shadow-lg ${
+    phase.status === 'completed' ? 'bg-green-50' :
+    phase.status === 'current' ? 'bg-blue-50' :
+    'bg-gray-50'
+  }`}>
+    <CardHeader>
+      <div className="flex items-center justify-between">
+        <Badge variant={
+          phase.status === 'completed' ? 'default' :
+          phase.status === 'current' ? 'secondary' :
+          'outline'
+        } className={
+          phase.status === 'completed' ? 'bg-green-500' :
+          phase.status === 'current' ? 'bg-blue-500' :
+          ''
+        }>
+          {phase.phase}
+        </Badge>
+        {phase.status === 'completed' && (
+          <CheckCircle className="w-5 h-5 text-green-500" />
+        )}
+      </div>
+      <CardTitle className="text-lg">{phase.title}</CardTitle>
+    </CardHeader>
+    <CardContent>
+      <div className="space-y-2">
+        {phase.items.map((item, idx) => (
+          <div key={idx} className="flex items-center text-sm text-gray-600">
+            <div className={`w-2 h-2 rounded-full mr-2 ${
+              phase.status === 'completed' ? 'bg-green-400' :
+              phase.status === 'current' ? 'bg-blue-400' :
+              'bg-gray-400'
+            }`}></div>
+            {item}
+          </div>
+        ))}
+      </div>
+    </CardContent>
+  </Card>
+);
+
+const TeamMemberCard = ({ member }) => (
+  <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm text-center">
+    <CardHeader>
+      <div className="text-6xl mb-4">{member.image}</div>
+      <CardTitle className="text-xl">{member.name}</CardTitle>
+      <Badge variant="secondary">{member.role}</Badge>
+    </CardHeader>
+    <CardContent>
+      <p className="text-sm text-gray-600">{member.bio}</p>
+    </CardContent>
+  </Card>
+);
+
+const IntegrationCard = ({ integration }) => (
+  <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+    <CardHeader className="text-center">
+      <div className="text-4xl mb-2">{integration.icon}</div>
+      <CardTitle className="text-lg">{integration.name}</CardTitle>
+    </CardHeader>
+    <CardContent>
+      <div className="flex flex-wrap gap-2 justify-center">
+        {integration.providers.map((provider, idx) => (
+          <Badge key={idx} variant="secondary" className="text-xs">
+            {provider}
+          </Badge>
+        ))}
+      </div>
+    </CardContent>
+  </Card>
+);
+
+const PrivacySecurityCard = () => (
+  <Card className="border-0 shadow-lg bg-gradient-to-r from-purple-50 via-blue-50 to-green-50">
+    <CardHeader className="text-center">
+      <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-600 rounded-full flex items-center justify-center text-white mb-4 mx-auto">
+        <Shield className="h-8 w-8" />
+      </div>
+      <CardTitle className="text-3xl font-bold text-gray-900">
+        Privacy e Sicurezza con Zero-Knowledge Proofs
+      </CardTitle>
+      <CardDescription className="text-lg text-gray-700 max-w-4xl mx-auto">
+        La tua privacy è al sicuro grazie alle Zero-Knowledge Proofs (ZKP), 
+        che permettono di verificare i tuoi comportamenti sostenibili senza rivelare dati personali sensibili
+      </CardDescription>
+    </CardHeader>
+    <CardContent className="p-8">
+      <div className="grid md:grid-cols-2 gap-12 mb-12">
+        <div>
+          <h4 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
+            <Shield className="w-6 h-6 text-purple-500 mr-3" />
+            Cosa sono le Zero-Knowledge Proofs
+          </h4>
+          <div className="space-y-4">
+            <div className="flex items-start">
+              <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-1" />
+              <div>
+                <strong>Prova senza Rivelazione:</strong> Le ZKP permettono di dimostrare che hai compiuto un'azione sostenibile senza rivelare dettagli personali come posizione esatta, orari specifici o abitudini
+              </div>
+            </div>
+            <div className="flex items-start">
+              <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-1" />
+              <div>
+                <strong>Crittografia Avanzata:</strong> Utilizzano algoritmi matematici complessi per creare prove verificabili senza esporre i dati sottostanti
+              </div>
+            </div>
+            <div className="flex items-start">
+              <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-1" />
+              <div>
+                <strong>Standard Industriale:</strong> Tecnologia utilizzata da blockchain leader come Ethereum e protocolli DeFi per garantire privacy e sicurezza
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h4 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
+            <Lightbulb className="w-6 h-6 text-blue-500 mr-3" />
+            Come Funziona in Virtuosity
+          </h4>
+          <div className="space-y-4">
+            <div className="flex items-start">
+              <Zap className="w-5 h-5 text-blue-500 mr-3 mt-1" />
+              <div>
+                <strong>Raccolta Dati Minimale:</strong> L'app rileva solo l'essenziale (es. "hai usato una bici") senza registrare percorsi dettagliati o orari precisi
+              </div>
+            </div>
+            <div className="flex items-start">
+              <Award className="w-5 h-5 text-purple-500 mr-3 mt-1" />
+              <div>
+                <strong>Proof Generation:</strong> I tuoi dispositivi generano localmente prove crittografiche che dimostrano l'azione sostenibile senza inviare dati raw
+              </div>
+            </div>
+            <div className="flex items-start">
+              <Globe className="w-5 h-5 text-green-500 mr-3 mt-1" />
+              <div>
+                <strong>Verifica Blockchain:</strong> Le prove vengono verificate sulla blockchain senza mai esporre i tuoi dati personali, generando certificati anonimi
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid md:grid-cols-3 gap-8 mb-12">
+        <Card className="border border-purple-200 bg-white/50">
+          <CardHeader className="text-center pb-4">
+            <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center text-white mb-3 mx-auto">
+              <Shield className="h-6 w-6" />
+            </div>
+            <CardTitle className="text-lg">Anonimato Totale</CardTitle>
+          </CardHeader>
+          <CardContent className="text-center">
+            <p className="text-sm text-gray-600">
+              Nessun dato personale identificabile viene mai memorizzato o trasmesso. 
+              Solo le prove matematiche delle tue azioni sostenibili.
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card className="border border-blue-200 bg-white/50">
+          <CardHeader className="text-center pb-4">
+            <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white mb-3 mx-auto">
+              <Zap className="h-6 w-6" />
+            </div>
+            <CardTitle className="text-lg">Elaborazione Locale</CardTitle>
+          </CardHeader>
+          <CardContent className="text-center">
+            <p className="text-sm text-gray-600">
+              Le ZKP vengono generate direttamente sul tuo dispositivo. 
+              I dati sensibili non lasciano mai il tuo telefono.
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card className="border border-green-200 bg-white/50">
+          <CardHeader className="text-center pb-4">
+            <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white mb-3 mx-auto">
+              <CheckCircle className="h-6 w-6" />
+            </div>
+            <CardTitle className="text-lg">Conformità GDPR</CardTitle>
+          </CardHeader>
+          <CardContent className="text-center">
+            <p className="text-sm text-gray-600">
+              Privacy by design e conformità totale alle normative europee. 
+              I tuoi diritti digitali sono sempre protetti.
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="bg-white/70 rounded-lg p-6">
+        <h4 className="text-xl font-bold text-gray-900 mb-4 text-center">Esempio Pratico: Come Funziona</h4>
+        <div className="grid md:grid-cols-4 gap-4">
+          <div className="text-center">
+            <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white mb-2 mx-auto text-sm font-bold">1</div>
+            <h5 className="font-bold text-sm mb-1">Azione Sostenibile</h5>
+            <p className="text-xs text-gray-600">Usi una bici elettrica per 5km</p>
+          </div>
+          <div className="text-center">
+            <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white mb-2 mx-auto text-sm font-bold">2</div>
+            <h5 className="font-bold text-sm mb-1">Generazione ZKP</h5>
+            <p className="text-xs text-gray-600">Il tuo phone crea una prova: "ho risparmiato CO2" senza rivelare dove/quando</p>
+          </div>
+          <div className="text-center">
+            <div className="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center text-white mb-2 mx-auto text-sm font-bold">3</div>
+            <h5 className="font-bold text-sm mb-1">Verifica Blockchain</h5>
+            <p className="text-xs text-gray-600">La rete valida la prova senza accedere ai tuoi dati personali</p>
+          </div>
+          <div className="text-center">
+            <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center text-white mb-2 mx-auto text-sm font-bold">4</div>
+            <h5 className="font-bold text-sm mb-1">Certificato Anonimo</h5>
+            <p className="text-xs text-gray-600">Ricevi certificati CO2 verificabili ma completamente anonimi</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-8 p-6 bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg text-white text-center">
+        <h4 className="text-lg font-bold mb-2">Privacy First, Sostenibilità Sempre</h4>
+        <p className="text-sm">
+          Con Virtuosity, la tua privacy non è negoziabile. Le Zero-Knowledge Proofs garantiscono 
+          che puoi dimostrare il tuo impegno per l'ambiente mantenendo il controllo totale sui tuoi dati personali.
+        </p>
+      </div>
+    </CardContent>
+  </Card>
+);
+
 const About = () => {
   const navigate = useNavigate();
 
@@ -211,17 +499,7 @@ const About = () => {
           </p>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {certificateTypes.map((cert, index) => (
-              <Card key={index} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
-                <CardHeader className="text-center">
-                  <div className={`w-16 h-16 bg-gradient-to-r ${cert.color} rounded-full flex items-center justify-center text-white mb-4 mx-auto`}>
-                    {cert.icon}
-                  </div>
-                  <CardTitle className="text-lg">{cert.title}</CardTitle>
-                  <CardDescription className="text-gray-600">
-                    {cert.description}
-                  </CardDescription>
-                </CardHeader>
-              </Card>
+              <CertificateTypeCard key={index} cert={cert} />
             ))}
           </div>
         </div>
@@ -233,27 +511,7 @@ const About = () => {
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
-              <Card key={index} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
-                <CardHeader>
-                  <div className="w-12 h-12 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center text-white mb-4">
-                    {feature.icon}
-                  </div>
-                  <CardTitle className="text-lg">{feature.title}</CardTitle>
-                  <CardDescription className="text-gray-600">
-                    {feature.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-2">
-                    {feature.details.map((detail, idx) => (
-                      <div key={idx} className="flex items-center text-sm text-gray-600">
-                        <CheckCircle className="w-3 h-3 text-green-500 mr-2" />
-                        {detail}
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+              <FeatureCard key={index} feature={feature} />
             ))}
           </div>
         </div>
@@ -369,25 +627,7 @@ const About = () => {
           </h3>
           <div className="grid md:grid-cols-3 gap-8">
             {benefits.map((benefit, index) => (
-              <Card key={index} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-                <CardHeader className="text-center">
-                  <div className="w-12 h-12 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center text-white mb-4 mx-auto">
-                    {benefit.icon}
-                  </div>
-                  <CardTitle className="text-xl">{benefit.title}</CardTitle>
-                  <CardDescription>{benefit.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    {benefit.points.map((point, idx) => (
-                      <div key={idx} className="flex items-start text-sm text-gray-600">
-                        <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        {point}
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+              <BenefitCard key={index} benefit={benefit} />
             ))}
           </div>
         </div>
@@ -399,45 +639,7 @@ const About = () => {
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {roadmap.map((phase, index) => (
-              <Card key={index} className={`border-0 shadow-lg ${
-                phase.status === 'completed' ? 'bg-green-50' :
-                phase.status === 'current' ? 'bg-blue-50' :
-                'bg-gray-50'
-              }`}>
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <Badge variant={
-                      phase.status === 'completed' ? 'default' :
-                      phase.status === 'current' ? 'secondary' :
-                      'outline'
-                    } className={
-                      phase.status === 'completed' ? 'bg-green-500' :
-                      phase.status === 'current' ? 'bg-blue-500' :
-                      ''
-                    }>
-                      {phase.phase}
-                    </Badge>
-                    {phase.status === 'completed' && (
-                      <CheckCircle className="w-5 h-5 text-green-500" />
-                    )}
-                  </div>
-                  <CardTitle className="text-lg">{phase.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-2">
-                    {phase.items.map((item, idx) => (
-                      <div key={idx} className="flex items-center text-sm text-gray-600">
-                        <div className={`w-2 h-2 rounded-full mr-2 ${
-                          phase.status === 'completed' ? 'bg-green-400' :
-                          phase.status === 'current' ? 'bg-blue-400' :
-                          'bg-gray-400'
-                        }`}></div>
-                        {item}
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+              <RoadmapCard key={index} phase={phase} />
             ))}
           </div>
         </div>
@@ -449,16 +651,7 @@ const About = () => {
           </h3>
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {team.map((member, index) => (
-              <Card key={index} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm text-center">
-                <CardHeader>
-                  <div className="text-6xl mb-4">{member.image}</div>
-                  <CardTitle className="text-xl">{member.name}</CardTitle>
-                  <Badge variant="secondary">{member.role}</Badge>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-gray-600">{member.bio}</p>
-                </CardContent>
-              </Card>
+              <TeamMemberCard key={index} member={member} />
             ))}
           </div>
         </div>
@@ -470,21 +663,7 @@ const About = () => {
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {integrations.map((integration, index) => (
-              <Card key={index} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-                <CardHeader className="text-center">
-                  <div className="text-4xl mb-2">{integration.icon}</div>
-                  <CardTitle className="text-lg">{integration.name}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2 justify-center">
-                    {integration.providers.map((provider, idx) => (
-                      <Badge key={idx} variant="secondary" className="text-xs">
-                        {provider}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+              <IntegrationCard key={index} integration={integration} />
             ))}
           </div>
         </div>
@@ -532,6 +711,9 @@ const About = () => {
             </div>
           </CardContent>
         </Card>
+
+        {/* Privacy & Security Section */}
+        <PrivacySecurityCard />
 
         {/* CTA Section */}
         <div className="text-center bg-gradient-to-r from-green-600 to-blue-600 rounded-lg p-12 text-white">
