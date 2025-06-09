@@ -524,6 +524,16 @@ const About = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
             Il Futuro della <span className="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">Sostenibilità Digitale</span>
           </h2>
+          
+          {/* Dashboard Screenshot */}
+          <div className="mb-8">
+            <img 
+              src="/lovable-uploads/d8fa748d-c1e4-4fb0-9883-1cfaf70b6c12.png" 
+              alt="Virtuosity Dashboard Screenshot" 
+              className="mx-auto rounded-lg shadow-2xl max-w-full h-auto"
+            />
+          </div>
+          
           <p className="text-xl text-gray-600 max-w-4xl mx-auto mb-8">
             Virtuosity è la prima piattaforma europea che trasforma automaticamente i comportamenti sostenibili 
             in certificati blockchain verificabili, creando un ecosistema di incentivi concreti per cittadini, 
