@@ -47,6 +47,12 @@ const Index = () => {
                 Utente
               </Button>
               <Button 
+                onClick={() => navigate("/marketplace")} 
+                className="bg-gradient-to-r from-green-500 to-green-600 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
+              >
+                Scambia nel Marketplace
+              </Button>
+              <Button 
                 onClick={() => navigate("/dashboard-aziende")} 
                 className="bg-gradient-to-r from-sky-500 to-cyan-500 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-sky-600 hover:to-cyan-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
               >
