@@ -161,31 +161,31 @@ const Dashboard = () => {
           <TabsList className="grid w-full grid-cols-5 bg-white/80 backdrop-blur-sm h-auto p-1 shadow-md">
             <TabsTrigger 
               value="activities" 
-              className="text-[10px] sm:text-sm px-1 py-2 hover:bg-green-50 hover:text-green-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-green-100 data-[state=active]:text-green-800 data-[state=active]:shadow-sm"
+              className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-green-100 hover:to-emerald-100 hover:text-green-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-400 data-[state=active]:to-emerald-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
             >
               Attività
             </TabsTrigger>
             <TabsTrigger 
               value="certificates" 
-              className="text-[10px] sm:text-sm px-1 py-2 hover:bg-blue-50 hover:text-blue-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-blue-100 data-[state=active]:text-blue-800 data-[state=active]:shadow-sm"
+              className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-blue-100 hover:to-cyan-100 hover:text-blue-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-400 data-[state=active]:to-cyan-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
             >
               Certificati
             </TabsTrigger>
             <TabsTrigger 
               value="insights" 
-              className="text-[10px] sm:text-sm px-1 py-2 hover:bg-purple-50 hover:text-purple-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-purple-100 data-[state=active]:text-purple-800 data-[state=active]:shadow-sm"
+              className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-purple-100 hover:to-pink-100 hover:text-purple-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-400 data-[state=active]:to-pink-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
             >
               Insights
             </TabsTrigger>
             <TabsTrigger 
               value="reporting" 
-              className="text-[10px] sm:text-sm px-1 py-2 hover:bg-orange-50 hover:text-orange-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-orange-100 data-[state=active]:text-orange-800 data-[state=active]:shadow-sm"
+              className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-orange-100 hover:to-red-100 hover:text-orange-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-400 data-[state=active]:to-red-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
             >
               Segnala
             </TabsTrigger>
             <TabsTrigger 
               value="dpp" 
-              className="text-[10px] sm:text-sm px-1 py-2 hover:bg-cyan-50 hover:text-cyan-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-cyan-100 data-[state=active]:text-cyan-800 data-[state=active]:shadow-sm"
+              className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-cyan-100 hover:to-teal-100 hover:text-cyan-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-400 data-[state=active]:to-teal-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
             >
               DPP
             </TabsTrigger>
