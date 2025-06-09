@@ -1,4 +1,5 @@
 
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -753,9 +754,10 @@ const About = () => {
                     <CardTitle className="text-xl">Contact Info</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-center">
+                    <div className="text-center space-y-2">
                       <p className="text-sm text-gray-600">Via per Avertana, 23</p>
                       <p className="text-sm text-gray-600">Manduria (TA) 74024</p>
+                      <p className="text-sm text-gray-600">gianfranco.leone@virtuosity.it</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -792,3 +794,4 @@ const About = () => {
 };
 
 export default About;
+
