@@ -44,13 +44,13 @@ const Marketplace = () => {
     },
     {
       id: 4,
-      title: "Gift Card Amazon €20",
-      description: "Spendibile su tutti i prodotti Amazon",
+      title: "Visita Odontoiatrica",
+      description: "Visita dentistica completa presso cliniche convenzionate",
       cost: 500,
       category: "shopping",
-      image: "🛒",
+      image: "🦷",
       availability: "Disponibile",
-      provider: "Amazon"
+      provider: "Cliniche Partner"
     },
     {
       id: 5,
@@ -74,33 +74,33 @@ const Marketplace = () => {
     },
     {
       id: 7,
-      title: "Gardaland Salta Fila",
-      description: "Ingresso a Gardaland con accesso prioritario alle attrazioni",
+      title: "Parco Divertimenti Salta Fila",
+      description: "Ingresso con accesso prioritario alle attrazioni",
       cost: 600,
       category: "culture",
       image: "🎢",
       availability: "Disponibile",
-      provider: "Gardaland"
+      provider: "Parchi Partner"
     },
     {
       id: 8,
-      title: "Buoni Spesa Esselunga",
-      description: "Buoni spesa del valore di €25 per Esselunga",
+      title: "Buoni Spesa Supermercato",
+      description: "Buoni spesa del valore di €25 per supermercati convenzionati",
       cost: 400,
       category: "shopping",
       image: "🛍️",
       availability: "Disponibile",
-      provider: "Esselunga"
+      provider: "Supermercati Partner"
     },
     {
       id: 9,
-      title: "Caffè Lavazza - Marchesi",
-      description: "Voucher per caffè gratuito alla Caffetteria Marchesi",
+      title: "Aperitivo",
+      description: "Voucher per aperitivo gratuito presso locali convenzionati",
       cost: 120,
       category: "shopping",
-      image: "☕",
+      image: "🍸",
       availability: "Disponibile",
-      provider: "Caffetteria Marchesi"
+      provider: "Locali Partner"
     }
   ];
 
