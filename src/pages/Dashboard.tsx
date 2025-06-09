@@ -3,9 +3,10 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Calendar, Award, TrendingUp, MapPin, Clock, QrCode } from "lucide-react";
+import { Calendar, Award, TrendingUp, MapPin, Clock, QrCode, Camera } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { DppVerification } from "@/components/DppVerification";
+import CitizenReporting from "@/components/CitizenReporting";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -157,10 +158,11 @@ const Dashboard = () => {
         </div>
 
         <Tabs defaultValue="activities" className="space-y-4 sm:space-y-6">
-          <TabsList className="grid w-full grid-cols-4 bg-white/80 backdrop-blur-sm">
+          <TabsList className="grid w-full grid-cols-5 bg-white/80 backdrop-blur-sm">
             <TabsTrigger value="activities" className="text-xs sm:text-sm">Attività</TabsTrigger>
             <TabsTrigger value="certificates" className="text-xs sm:text-sm">Certificati</TabsTrigger>
             <TabsTrigger value="insights" className="text-xs sm:text-sm">Insights</TabsTrigger>
+            <TabsTrigger value="reporting" className="text-xs sm:text-sm">Segnalazioni</TabsTrigger>
             <TabsTrigger value="dpp" className="text-xs sm:text-sm">Verifica DPP</TabsTrigger>
           </TabsList>
 
@@ -325,6 +327,23 @@ const Dashboard = () => {
                 </CardContent>
               </Card>
             </div>
+          </TabsContent>
+
+          <TabsContent value="reporting" className="space-y-4 sm:space-y-6">
+            <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+                  <Camera className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
+                  Segnala Problema al Comune
+                </CardTitle>
+                <CardDescription className="text-sm">
+                  Contribuisci al miglioramento della tua città segnalando problemi urbani
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <CitizenReporting />
+              </CardContent>
+            </Card>
           </TabsContent>
 
           <TabsContent value="dpp" className="space-y-4 sm:space-y-6">

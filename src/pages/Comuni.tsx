@@ -16,13 +16,11 @@ import {
   Clock,
   Settings,
   MapPin,
-  AlertTriangle,
-  Camera
+  AlertTriangle
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useEffect, useRef } from "react";
-import CitizenReporting from "@/components/CitizenReporting";
 
 const Comuni = () => {
   const navigate = useNavigate();
@@ -307,8 +305,7 @@ const Comuni = () => {
             <TabsTrigger value="overview" className="px-2 sm:px-4">Panoramica</TabsTrigger>
             <TabsTrigger value="integrations" className="px-1 sm:px-4">Integrazioni</TabsTrigger>
             <TabsTrigger value="map" className="px-1 sm:px-4">Mappa</TabsTrigger>
-            <TabsTrigger value="reporting" className="px-1 sm:px-4">Segnalazioni</TabsTrigger>
-            <TabsTrigger value="analytics" className="px-1 sm:px-4 hidden sm:block">Analytics</TabsTrigger>
+            <TabsTrigger value="analytics" className="px-1 sm:px-4">Analytics</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="space-y-4 sm:space-y-6">
@@ -486,10 +483,6 @@ const Comuni = () => {
                 </Card>
               </div>
             </div>
-          </TabsContent>
-
-          <TabsContent value="reporting" className="space-y-4 sm:space-y-6">
-            <CitizenReporting />
           </TabsContent>
 
           <TabsContent value="analytics" className="space-y-4 sm:space-y-6">
