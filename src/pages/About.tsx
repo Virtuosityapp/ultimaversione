@@ -1,7 +1,8 @@
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Leaf, ArrowLeft, Shield, Zap, Globe, Award, Users, TrendingUp, CheckCircle, Target, Heart, Lightbulb, Droplets, Recycle, Battery } from "lucide-react";
+import { Leaf, ArrowLeft, Shield, Zap, Globe, Award, Users, TrendingUp, CheckCircle, Target, Heart, Lightbulb, Droplets, Recycle, Battery, MapPin, Building } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const CertificateTypeCard = ({ cert }) => (
@@ -714,6 +715,54 @@ const About = () => {
 
         {/* Privacy & Security Section */}
         <PrivacySecurityCard />
+
+        {/* Contact Section */}
+        <div className="mb-16">
+          <Card className="border-0 shadow-lg bg-gradient-to-r from-green-50 to-blue-50">
+            <CardHeader className="text-center">
+              <CardTitle className="text-3xl font-bold text-gray-900">
+                Un ecosistema digitale per trasformare la sostenibilità in valore
+              </CardTitle>
+              <CardDescription className="text-lg text-gray-700">
+                Contattaci per iniziare il tuo viaggio verso la sostenibilità digitale
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="p-8">
+              <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <Card className="border border-green-200 bg-white/50">
+                  <CardHeader className="text-center">
+                    <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center text-white mb-4 mx-auto">
+                      <Building className="h-6 w-6" />
+                    </div>
+                    <CardTitle className="text-xl">Informazioni Aziendali</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="text-center">
+                      <h4 className="font-bold text-gray-900">Virtuosity Srl</h4>
+                      <p className="text-sm text-gray-600">P.iva: 03438420733</p>
+                      <p className="text-sm text-gray-600">N.REA 254707</p>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="border border-blue-200 bg-white/50">
+                  <CardHeader className="text-center">
+                    <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-green-500 rounded-full flex items-center justify-center text-white mb-4 mx-auto">
+                      <MapPin className="h-6 w-6" />
+                    </div>
+                    <CardTitle className="text-xl">Contact Info</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-center">
+                      <p className="text-sm text-gray-600">Via per Avertana, 23</p>
+                      <p className="text-sm text-gray-600">Manduria (TA) 74024</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
 
         {/* CTA Section */}
         <div className="text-center bg-gradient-to-r from-green-600 to-blue-600 rounded-lg p-12 text-white">
