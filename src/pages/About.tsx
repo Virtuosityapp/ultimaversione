@@ -1,5 +1,3 @@
-
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -518,6 +516,176 @@ const About = () => {
           </div>
         </div>
 
+        {/* Certificate Exchange Models */}
+        <div className="mb-16">
+          <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">
+            Modelli di Scambio Certificati
+          </h3>
+          
+          <div className="grid lg:grid-cols-2 gap-8 mb-8">
+            {/* Employee-Company Exchange */}
+            <Card className="border-0 shadow-lg bg-gradient-to-r from-purple-50 via-blue-50 to-green-50">
+              <CardHeader className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-600 rounded-full flex items-center justify-center text-white mb-4 mx-auto">
+                  <Building className="h-8 w-8" />
+                </div>
+                <CardTitle className="text-2xl font-bold text-gray-900">
+                  Dipendente ↔ Azienda
+                </CardTitle>
+                <CardDescription className="text-lg text-gray-700">
+                  Scambio di certificati sostenibili in cambio di welfare aziendale
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="p-6">
+                <div className="space-y-6">
+                  <div>
+                    <h4 className="text-lg font-bold text-gray-900 mb-3 flex items-center">
+                      <Award className="w-5 h-5 text-purple-500 mr-2" />
+                      Come Funziona
+                    </h4>
+                    <p className="text-gray-600 mb-4">
+                      I dipendenti accumulano certificati attraverso comportamenti sostenibili e li scambiano 
+                      con l'azienda per ottenere benefit welfare personalizzati, migliorando engagement e ESG score aziendale.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                      <Heart className="w-5 h-5 text-red-500 mr-2" />
+                      Esempi Pratici di Welfare
+                    </h4>
+                    <div className="space-y-4">
+                      <div className="bg-white/70 rounded-lg p-4 border-l-4 border-purple-400">
+                        <h5 className="font-bold text-purple-700 mb-2">🚗 Mobilità Sostenibile</h5>
+                        <p className="text-sm text-gray-600">
+                          <strong>Certificati richiesti:</strong> 50 certificati CO2 (equivalenti a 100km in bici)
+                          <br />
+                          <strong>Benefit ottenuto:</strong> Rimborso parcheggio aziendale per 1 mese o abbonamento car sharing
+                        </p>
+                      </div>
+                      
+                      <div className="bg-white/70 rounded-lg p-4 border-l-4 border-green-400">
+                        <h5 className="font-bold text-green-700 mb-2">🏠 Smart Working Green</h5>
+                        <p className="text-sm text-gray-600">
+                          <strong>Certificati richiesti:</strong> 30 certificati Energia + 20 certificati CO2
+                          <br />
+                          <strong>Benefit ottenuto:</strong> Giorni di smart working extra o rimborso bollette per home office sostenibile
+                        </p>
+                      </div>
+                      
+                      <div className="bg-white/70 rounded-lg p-4 border-l-4 border-blue-400">
+                        <h5 className="font-bold text-blue-700 mb-2">🎯 Formazione & Sviluppo</h5>
+                        <p className="text-sm text-gray-600">
+                          <strong>Certificati richiesti:</strong> 100 certificati misti (CO2 + Rifiuti + Acqua)
+                          <br />
+                          <strong>Benefit ottenuto:</strong> Corso di formazione professionale o master in sostenibilità aziendale
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg p-4 text-white">
+                    <h5 className="font-bold mb-2">Vantaggi per l'Azienda</h5>
+                    <ul className="text-sm space-y-1">
+                      <li>• Miglioramento ESG score e reporting</li>
+                      <li>• Maggiore engagement dei dipendenti</li>
+                      <li>• Riduzione carbon footprint aziendale</li>
+                      <li>• Attrazione talenti orientati alla sostenibilità</li>
+                    </ul>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Citizen-Municipality Exchange */}
+            <Card className="border-0 shadow-lg bg-gradient-to-r from-green-50 via-emerald-50 to-blue-50">
+              <CardHeader className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full flex items-center justify-center text-white mb-4 mx-auto">
+                  <MapPin className="h-8 w-8" />
+                </div>
+                <CardTitle className="text-2xl font-bold text-gray-900">
+                  Cittadino ↔ Comune
+                </CardTitle>
+                <CardDescription className="text-lg text-gray-700">
+                  Scambio di certificati sostenibili per servizi e agevolazioni comunali
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="p-6">
+                <div className="space-y-6">
+                  <div>
+                    <h4 className="text-lg font-bold text-gray-900 mb-3 flex items-center">
+                      <Globe className="w-5 h-5 text-green-500 mr-2" />
+                      Come Funziona
+                    </h4>
+                    <p className="text-gray-600 mb-4">
+                      I cittadini virtuosi accumulano certificati attraverso comportamenti sostenibili quotidiani 
+                      e li riscattano presso il comune per ottenere servizi, agevolazioni e accessi prioritari, 
+                      contribuendo agli obiettivi di sostenibilità urbana.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                      <Target className="w-5 h-5 text-blue-500 mr-2" />
+                      Servizi e Agevolazioni Disponibili
+                    </h4>
+                    <div className="space-y-3">
+                      <div className="flex items-start">
+                        <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-1" />
+                        <div>
+                          <strong>Trasporti Pubblici:</strong> Sconti o abbonamenti gratuiti per bus, metro e bike sharing cittadino
+                        </div>
+                      </div>
+                      <div className="flex items-start">
+                        <CheckCircle className="w-5 h-5 text-blue-500 mr-3 mt-1" />
+                        <div>
+                          <strong>Servizi Culturali:</strong> Ingressi gratuiti a musei, biblioteche, teatri e eventi cittadini
+                        </div>
+                      </div>
+                      <div className="flex items-start">
+                        <CheckCircle className="w-5 h-5 text-purple-500 mr-3 mt-1" />
+                        <div>
+                          <strong>Agevolazioni Fiscali:</strong> Riduzioni su TARI, parcheggi e altre tasse comunali
+                        </div>
+                      </div>
+                      <div className="flex items-start">
+                        <CheckCircle className="w-5 h-5 text-orange-500 mr-3 mt-1" />
+                        <div>
+                          <strong>Accessi Prioritari:</strong> Corsie preferenziali per pratiche comunali e servizi demografici
+                        </div>
+                      </div>
+                      <div className="flex items-start">
+                        <CheckCircle className="w-5 h-5 text-emerald-500 mr-3 mt-1" />
+                        <div>
+                          <strong>Programmi Ambientali:</strong> Partecipazione gratuita a corsi di giardinaggio urbano e compostaggio
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg p-4 text-white">
+                    <h5 className="font-bold mb-2">Vantaggi per il Comune</h5>
+                    <ul className="text-sm space-y-1">
+                      <li>• Dati real-time su comportamenti sostenibili</li>
+                      <li>• Raggiungimento obiettivi climatici EU</li>
+                      <li>• Maggiore coinvolgimento cittadini</li>
+                      <li>• Riduzione costi gestione rifiuti e trasporti</li>
+                    </ul>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="bg-gradient-to-r from-blue-600 to-green-600 rounded-lg p-8 text-white text-center">
+            <h4 className="text-2xl font-bold mb-4">Ecosistema Virtuosity: Win-Win per Tutti</h4>
+            <p className="text-lg">
+              Ogni certificato sostenibile genera valore concreto per cittadini, aziende e istituzioni, 
+              creando un circolo virtuoso dove la sostenibilità diventa economicamente vantaggiosa per tutti gli attori coinvolti.
+            </p>
+          </div>
+        </div>
+
         {/* DPP Integration Section */}
         <div className="mb-16">
           <Card className="border-0 shadow-lg bg-gradient-to-r from-blue-50 via-green-50 to-purple-50">
@@ -794,4 +962,3 @@ const About = () => {
 };
 
 export default About;
-
