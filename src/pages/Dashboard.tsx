@@ -91,14 +91,14 @@ const Dashboard = () => {
               <Button 
                 variant="outline" 
                 onClick={() => navigate("/marketplace")}
-                className="border-green-300 text-green-700 hover:bg-green-50 text-xs px-2 py-1.5 sm:text-sm sm:px-4 sm:py-2"
+                className="border-green-300 text-green-700 hover:bg-green-50 hover:border-green-400 hover:scale-105 transition-all duration-200 text-xs px-2 py-1.5 sm:text-sm sm:px-4 sm:py-2 active:scale-95"
               >
                 Marketplace
               </Button>
               <Button 
                 variant="outline" 
                 onClick={() => navigate("/")}
-                className="border-blue-300 text-blue-700 hover:bg-blue-50 text-xs px-2 py-1.5 sm:text-sm sm:px-4 sm:py-2"
+                className="border-blue-300 text-blue-700 hover:bg-blue-50 hover:border-blue-400 hover:scale-105 transition-all duration-200 text-xs px-2 py-1.5 sm:text-sm sm:px-4 sm:py-2 active:scale-95"
               >
                 Home
               </Button>
@@ -116,7 +116,7 @@ const Dashboard = () => {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-6 mb-4 sm:mb-8">
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-green-400 to-emerald-500 text-white">
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-green-400 to-emerald-500 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
             <CardHeader className="pb-1 sm:pb-2">
               <CardTitle className="text-xs sm:text-sm font-medium text-green-100">CO₂ Risparmiata</CardTitle>
             </CardHeader>
@@ -126,7 +126,7 @@ const Dashboard = () => {
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-400 to-cyan-500 text-white">
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-400 to-cyan-500 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
             <CardHeader className="pb-1 sm:pb-2">
               <CardTitle className="text-xs sm:text-sm font-medium text-blue-100">Punti Totali</CardTitle>
             </CardHeader>
@@ -136,7 +136,7 @@ const Dashboard = () => {
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-purple-400 to-pink-500 text-white">
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-purple-400 to-pink-500 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
             <CardHeader className="pb-1 sm:pb-2">
               <CardTitle className="text-xs sm:text-sm font-medium text-purple-100">Certificati</CardTitle>
             </CardHeader>
@@ -146,7 +146,7 @@ const Dashboard = () => {
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-orange-400 to-red-500 text-white">
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-orange-400 to-red-500 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
             <CardHeader className="pb-1 sm:pb-2">
               <CardTitle className="text-xs sm:text-sm font-medium text-orange-100">Livello</CardTitle>
             </CardHeader>
@@ -158,12 +158,37 @@ const Dashboard = () => {
         </div>
 
         <Tabs defaultValue="activities" className="space-y-3 sm:space-y-6">
-          <TabsList className="grid w-full grid-cols-5 bg-white/80 backdrop-blur-sm h-auto p-1">
-            <TabsTrigger value="activities" className="text-[10px] sm:text-sm px-1 py-2">Attività</TabsTrigger>
-            <TabsTrigger value="certificates" className="text-[10px] sm:text-sm px-1 py-2">Certificati</TabsTrigger>
-            <TabsTrigger value="insights" className="text-[10px] sm:text-sm px-1 py-2">Insights</TabsTrigger>
-            <TabsTrigger value="reporting" className="text-[10px] sm:text-sm px-1 py-2">Segnala</TabsTrigger>
-            <TabsTrigger value="dpp" className="text-[10px] sm:text-sm px-1 py-2">DPP</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-5 bg-white/80 backdrop-blur-sm h-auto p-1 shadow-md">
+            <TabsTrigger 
+              value="activities" 
+              className="text-[10px] sm:text-sm px-1 py-2 hover:bg-green-50 hover:text-green-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-green-100 data-[state=active]:text-green-800 data-[state=active]:shadow-sm"
+            >
+              Attività
+            </TabsTrigger>
+            <TabsTrigger 
+              value="certificates" 
+              className="text-[10px] sm:text-sm px-1 py-2 hover:bg-blue-50 hover:text-blue-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-blue-100 data-[state=active]:text-blue-800 data-[state=active]:shadow-sm"
+            >
+              Certificati
+            </TabsTrigger>
+            <TabsTrigger 
+              value="insights" 
+              className="text-[10px] sm:text-sm px-1 py-2 hover:bg-purple-50 hover:text-purple-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-purple-100 data-[state=active]:text-purple-800 data-[state=active]:shadow-sm"
+            >
+              Insights
+            </TabsTrigger>
+            <TabsTrigger 
+              value="reporting" 
+              className="text-[10px] sm:text-sm px-1 py-2 hover:bg-orange-50 hover:text-orange-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-orange-100 data-[state=active]:text-orange-800 data-[state=active]:shadow-sm"
+            >
+              Segnala
+            </TabsTrigger>
+            <TabsTrigger 
+              value="dpp" 
+              className="text-[10px] sm:text-sm px-1 py-2 hover:bg-cyan-50 hover:text-cyan-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-cyan-100 data-[state=active]:text-cyan-800 data-[state=active]:shadow-sm"
+            >
+              DPP
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="activities" className="space-y-3 sm:space-y-6">
@@ -180,7 +205,7 @@ const Dashboard = () => {
               <CardContent>
                 <div className="space-y-2 sm:space-y-4">
                   {activities.map((activity) => (
-                    <div key={activity.id} className="flex items-center justify-between p-2 sm:p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                    <div key={activity.id} className="flex items-center justify-between p-2 sm:p-4 bg-gray-50 rounded-lg hover:bg-green-50 hover:shadow-md hover:scale-[1.02] transition-all duration-200 cursor-pointer active:scale-[0.98]">
                       <div className="flex items-center space-x-2 sm:space-x-4 flex-1 min-w-0">
                         <div className="w-8 h-8 sm:w-12 sm:h-12 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center text-sm sm:text-xl flex-shrink-0">
                           {activity.type === 'bike' && '🚴'}
@@ -226,7 +251,7 @@ const Dashboard = () => {
               <CardContent>
                 <div className="space-y-3 sm:space-y-4">
                   {certificates.map((cert) => (
-                    <div key={cert.id} className="p-3 sm:p-6 bg-gradient-to-r from-blue-50 to-green-50 rounded-lg border border-blue-200">
+                    <div key={cert.id} className="p-3 sm:p-6 bg-gradient-to-r from-blue-50 to-green-50 rounded-lg border border-blue-200 hover:shadow-lg hover:scale-[1.02] transition-all duration-200 cursor-pointer">
                       <div className="flex justify-between items-start mb-2 sm:mb-4">
                         <div className="flex-1 min-w-0">
                           <h3 className="font-bold text-sm sm:text-lg text-gray-900 truncate">{cert.title}</h3>
@@ -256,7 +281,11 @@ const Dashboard = () => {
                         <p className="text-xs text-gray-500 font-mono truncate">
                           Hash: {cert.blockchainHash}
                         </p>
-                        <Button size="sm" variant="outline" className="text-xs self-start sm:self-auto">
+                        <Button 
+                          size="sm" 
+                          variant="outline" 
+                          className="text-xs self-start sm:self-auto hover:bg-blue-50 hover:border-blue-300 hover:scale-105 active:scale-95 transition-all duration-200"
+                        >
                           Visualizza
                         </Button>
                       </div>
