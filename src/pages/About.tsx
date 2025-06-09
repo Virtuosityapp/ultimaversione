@@ -57,28 +57,34 @@ const About = () => {
 
   const roadmap = [
     {
-      phase: "Q1 2024",
+      phase: "Q4 2025",
       title: "MVP & Pilot Cities",
-      status: "completed",
+      status: "upcoming",
       items: ["Lancio app mobile", "Prime 5 città pilota", "Integrazione bike sharing", "1000 utenti beta"]
     },
     {
-      phase: "Q2 2024",
+      phase: "Q1-Q2 2026",
       title: "Espansione & Partnership",
-      status: "current",
-      items: ["50 città partner", "Integrazione trasporti pubblici", "10.000 utenti attivi", "Prime aziende B2B"]
+      status: "upcoming",
+      items: ["20 città partner", "Integrazione trasporti pubblici", "10.000 utenti attivi", "Prime aziende B2B"]
     },
     {
-      phase: "Q3 2024",
+      phase: "Q3-Q4 2026",
       title: "Marketplace & Blockchain",
       status: "upcoming",
-      items: ["Lancio marketplace", "Certificati blockchain", "100.000 utenti", "Partnership retail"]
+      items: ["Lancio marketplace", "Certificati blockchain", "Integrazione DPP", "100.000 utenti"]
     },
     {
-      phase: "Q4 2024",
-      title: "Scala Europea",
+      phase: "2027-2028",
+      title: "Scala Europea & IA",
       status: "upcoming",
-      items: ["Espansione EU", "API pubbliche", "1M utenti", "Carbon credit trading"]
+      items: ["Espansione EU", "API pubbliche", "IA predittiva", "1M utenti", "Carbon credit trading"]
+    },
+    {
+      phase: "2029-2030",
+      title: "Global & Smart Cities",
+      status: "upcoming",
+      items: ["Espansione globale", "Smart city integration", "10M utenti", "Standard ESG europei"]
     }
   ];
 
