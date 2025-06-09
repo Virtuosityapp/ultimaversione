@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -528,7 +529,7 @@ const About = () => {
           {/* Dashboard Screenshots */}
           <div className="mb-8 grid md:grid-cols-2 gap-6">
             <img 
-              src="/lovable-uploads/d8fa748d-c1e4-4fb0-9883-1cfaf70b6c12.png" 
+              src="/lovable-uploads/7942f312-9a3e-4b02-9bdd-c96f9d500a13.png" 
               alt="Virtuosity Dashboard Screenshot" 
               className="mx-auto rounded-lg shadow-2xl max-w-[75%] h-auto"
             />
