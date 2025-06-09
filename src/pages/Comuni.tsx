@@ -301,11 +301,31 @@ const Comuni = () => {
         </div>
 
         <Tabs defaultValue="overview" className="space-y-4 sm:space-y-6">
-          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 bg-white/80 backdrop-blur-sm text-xs sm:text-sm">
-            <TabsTrigger value="overview" className="px-2 sm:px-4">Panoramica</TabsTrigger>
-            <TabsTrigger value="integrations" className="px-1 sm:px-4">Integrazioni</TabsTrigger>
-            <TabsTrigger value="map" className="px-1 sm:px-4">Mappa</TabsTrigger>
-            <TabsTrigger value="analytics" className="px-1 sm:px-4">Analytics</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 bg-white/80 backdrop-blur-sm shadow-md p-1 gap-1 sm:gap-0">
+            <TabsTrigger 
+              value="overview" 
+              className="px-2 py-2 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-blue-100 hover:to-indigo-100 hover:text-blue-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-400 data-[state=active]:to-indigo-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
+            >
+              Panoramica
+            </TabsTrigger>
+            <TabsTrigger 
+              value="integrations" 
+              className="px-1 py-2 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-green-100 hover:to-emerald-100 hover:text-green-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-400 data-[state=active]:to-emerald-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
+            >
+              Integrazioni
+            </TabsTrigger>
+            <TabsTrigger 
+              value="map" 
+              className="px-1 py-2 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-purple-100 hover:to-pink-100 hover:text-purple-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-400 data-[state=active]:to-pink-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
+            >
+              Mappa
+            </TabsTrigger>
+            <TabsTrigger 
+              value="analytics" 
+              className="px-1 py-2 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-orange-100 hover:to-red-100 hover:text-orange-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-400 data-[state=active]:to-red-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
+            >
+              Analytics
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="space-y-4 sm:space-y-6">
