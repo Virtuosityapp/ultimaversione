@@ -162,7 +162,7 @@ const Marketplace = () => {
                 className="relative h-10 w-10 sm:h-12 sm:w-12 lg:h-16 lg:w-16 mx-auto object-contain"
               />
               <h1 className="text-lg sm:text-xl lg:text-2xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
-                Marketplace
+                Exchange
               </h1>
             </div>
             <div className="flex items-center space-x-2 sm:space-x-4">
