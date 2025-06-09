@@ -33,23 +33,22 @@ const Index = () => {
               Tracciamento automatico, certificati blockchain e premi reali per un futuro più verde.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-12 px-4">
+            <div className="flex flex-col gap-4 justify-center mb-8 sm:mb-12 px-4 max-w-md mx-auto">
               <Button 
                 onClick={() => navigate("/dashboard")} 
-                className="bg-gradient-to-r from-green-600 to-blue-600 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-green-700 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full sm:w-auto"
+                className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
               >
                 Inizia il Tuo Viaggio Sostenibile
               </Button>
               <Button 
-                variant="outline" 
                 onClick={() => navigate("/about")}
-                className="border-green-300 text-green-700 hover:bg-green-50 px-6 sm:px-8 py-3 text-base sm:text-lg w-full sm:w-auto"
+                className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
               >
                 Scopri Come Funziona
               </Button>
               <Button 
                 onClick={() => navigate("/comuni")} 
-                className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full sm:w-auto"
+                className="bg-gradient-to-r from-orange-600 to-red-600 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-orange-700 hover:to-red-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
               >
                 Dashboard Comuni
               </Button>
