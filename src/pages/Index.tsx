@@ -1,7 +1,6 @@
 
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -54,20 +53,6 @@ const Index = () => {
               >
                 Dashboard Comuni
               </Button>
-            </div>
-
-            {/* Integration Preview */}
-            <div className="mt-12 sm:mt-16 text-center">
-              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">Integrazioni Supportate</h3>
-              <div className="flex flex-wrap justify-center gap-2 sm:gap-4 px-4">
-                <Badge variant="secondary" className="px-3 sm:px-4 py-2 text-xs sm:text-sm">🚴 Bike Sharing</Badge>
-                <Badge variant="secondary" className="px-3 sm:px-4 py-2 text-xs sm:text-sm">🚗 Car Sharing</Badge>
-                <Badge variant="secondary" className="px-3 sm:px-4 py-2 text-xs sm:text-sm">🚌 Trasporti Pubblici</Badge>
-                <Badge variant="secondary" className="px-3 sm:px-4 py-2 text-xs sm:text-sm">📱 Google Fit</Badge>
-                <Badge variant="secondary" className="px-3 sm:px-4 py-2 text-xs sm:text-sm">🍎 Apple Health</Badge>
-                <Badge variant="secondary" className="px-3 sm:px-4 py-2 text-xs sm:text-sm">📊 Strava</Badge>
-                <Badge variant="secondary" className="px-3 sm:px-4 py-2 text-xs sm:text-sm">🅿️ Smart Parking</Badge>
-              </div>
             </div>
           </div>
         </div>
