@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -70,6 +71,36 @@ const Marketplace = () => {
       image: "🚴",
       availability: "Disponibile",
       provider: "Mobike"
+    },
+    {
+      id: 7,
+      title: "Gardaland Salta Fila",
+      description: "Ingresso a Gardaland con accesso prioritario alle attrazioni",
+      cost: 600,
+      category: "culture",
+      image: "🎢",
+      availability: "Disponibile",
+      provider: "Gardaland"
+    },
+    {
+      id: 8,
+      title: "Buoni Spesa Esselunga",
+      description: "Buoni spesa del valore di €25 per Esselunga",
+      cost: 400,
+      category: "shopping",
+      image: "🛍️",
+      availability: "Disponibile",
+      provider: "Esselunga"
+    },
+    {
+      id: 9,
+      title: "Caffè Lavazza - Marchesi",
+      description: "Voucher per caffè gratuito alla Caffetteria Marchesi",
+      cost: 120,
+      category: "shopping",
+      image: "☕",
+      availability: "Disponibile",
+      provider: "Caffetteria Marchesi"
     }
   ];
 
