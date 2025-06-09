@@ -1,11 +1,11 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Calendar, Award, TrendingUp, MapPin, Clock } from "lucide-react";
+import { Calendar, Award, TrendingUp, MapPin, Clock, QrCode } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { DppVerification } from "@/components/DppVerification";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -157,10 +157,11 @@ const Dashboard = () => {
         </div>
 
         <Tabs defaultValue="activities" className="space-y-4 sm:space-y-6">
-          <TabsList className="grid w-full grid-cols-3 bg-white/80 backdrop-blur-sm">
+          <TabsList className="grid w-full grid-cols-4 bg-white/80 backdrop-blur-sm">
             <TabsTrigger value="activities" className="text-xs sm:text-sm">Attività</TabsTrigger>
             <TabsTrigger value="certificates" className="text-xs sm:text-sm">Certificati</TabsTrigger>
             <TabsTrigger value="insights" className="text-xs sm:text-sm">Insights</TabsTrigger>
+            <TabsTrigger value="dpp" className="text-xs sm:text-sm">Verifica DPP</TabsTrigger>
           </TabsList>
 
           <TabsContent value="activities" className="space-y-4 sm:space-y-6">
@@ -324,6 +325,23 @@ const Dashboard = () => {
                 </CardContent>
               </Card>
             </div>
+          </TabsContent>
+
+          <TabsContent value="dpp" className="space-y-4 sm:space-y-6">
+            <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+                  <QrCode className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
+                  Verifica Passaporto Digitale del Prodotto
+                </CardTitle>
+                <CardDescription className="text-sm">
+                  Scansiona il QR code per verificare l'origine e la sostenibilità del prodotto
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <DppVerification />
+              </CardContent>
+            </Card>
           </TabsContent>
         </Tabs>
       </div>
