@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -6,9 +5,11 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
-import { Users, UserCheck, Upload, FileText, Award, Gift, Plane } from 'lucide-react';
+import { Users, UserCheck, Upload, FileText, Award, Gift, Plane, ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const DashboardAziende = () => {
+  const navigate = useNavigate();
   const [certificatiDipendenti] = useState(245);
   const [certificatiEsterni] = useState(89);
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
@@ -55,13 +56,18 @@ const DashboardAziende = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-6">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
-            Dashboard Aziende
-          </h1>
-          <p className="text-lg text-muted-foreground">Gestisci certificati, welfare e sostenibilità aziendale</p>
+        {/* Navigation Button */}
+        <div className="mb-6">
+          <Button 
+            onClick={() => navigate('/')} 
+            variant="outline" 
+            className="flex items-center gap-2 hover:bg-white/80 border-blue-200 text-blue-700 hover:text-blue-800"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Torna al Menu
+          </Button>
         </div>
-        
+
         {/* Metriche Certificati */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <Card className="border-0 shadow-lg bg-gradient-to-br from-green-500 to-emerald-600 text-white">
