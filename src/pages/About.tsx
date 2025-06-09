@@ -448,12 +448,6 @@ const About = () => {
       image: "👨‍🏫"
     },
     {
-      name: "Angela Chiara Mollace",
-      role: "Legal & Compliance Expert",
-      bio: "Avvocato e consulente - Compliance expert Privacy, modello organizzativo 231/01, LPD",
-      image: "⚖️"
-    },
-    {
       name: "Edoardo Degli Innocenti",
       role: "Web3 Industry Leader",
       bio: "CEO e Co-Founder di B3YOND, principale consorzio Web3 italiano, membro Commissione per l'IA della Presidenza del Consiglio",
@@ -494,12 +488,6 @@ const About = () => {
       role: "CSRD & ESRS Expert",
       bio: "Dottore Commercialista esperto della normativa CSRD e degli standard ESRS",
       image: "📋"
-    },
-    {
-      name: "Paolo Luigi Burlone",
-      role: "CSR & Accounting Expert",
-      bio: "Dottore Commercialista, revisore contabile e CSR",
-      image: "🔍"
     }
   ];
 
