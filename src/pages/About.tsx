@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -530,7 +531,7 @@ const About = () => {
             <img 
               src="/lovable-uploads/d8fa748d-c1e4-4fb0-9883-1cfaf70b6c12.png" 
               alt="Virtuosity Dashboard Screenshot" 
-              className="mx-auto rounded-lg shadow-2xl max-w-full h-auto"
+              className="mx-auto rounded-lg shadow-2xl max-w-[50%] h-auto"
             />
           </div>
           
