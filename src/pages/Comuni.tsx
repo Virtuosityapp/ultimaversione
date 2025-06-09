@@ -35,7 +35,7 @@ const Comuni = () => {
       type: "alert",
       title: "Contenitore rifiuti pieno",
       location: "Via Roma 45",
-      coords: [9.1900, 45.4642],
+      coords: [9.1900, 45.4642] as [number, number],
       severity: "high",
       timestamp: "10 min fa"
     },
@@ -44,7 +44,7 @@ const Comuni = () => {
       type: "alert",
       title: "Lampione non funzionante",
       location: "Piazza Duomo",
-      coords: [9.1916, 45.4640],
+      coords: [9.1916, 45.4640] as [number, number],
       severity: "medium",
       timestamp: "25 min fa"
     },
@@ -53,7 +53,7 @@ const Comuni = () => {
       type: "resolved",
       title: "Parcheggio riparato",
       location: "Via Brera 12",
-      coords: [9.1885, 45.4720],
+      coords: [9.1885, 45.4720] as [number, number],
       timestamp: "2 ore fa"
     },
     {
@@ -61,7 +61,7 @@ const Comuni = () => {
       type: "resolved",
       title: "Illuminazione ripristinata",
       location: "Corso Buenos Aires",
-      coords: [9.2050, 45.4780],
+      coords: [9.2050, 45.4780] as [number, number],
       timestamp: "4 ore fa"
     }
   ];
