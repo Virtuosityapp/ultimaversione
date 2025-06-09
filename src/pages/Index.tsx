@@ -1,8 +1,7 @@
+
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Leaf, Users, Award, TrendingUp } from "lucide-react";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -56,90 +55,20 @@ const Index = () => {
                 Dashboard Comuni
               </Button>
             </div>
-          </div>
-        </div>
-      </div>
 
-      {/* Features Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
-        <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
-            Come Funziona Virtuosity
-          </h2>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto px-4">
-            Tracciamento automatico, validazione certificata e premi reali per ogni azione sostenibile
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-white/80 backdrop-blur-sm">
-            <CardHeader className="text-center">
-              <div className="mx-auto w-12 h-12 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full flex items-center justify-center mb-4">
-                <TrendingUp className="h-6 w-6 text-white" />
+            {/* Integration Preview */}
+            <div className="mt-12 sm:mt-16 text-center">
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">Integrazioni Supportate</h3>
+              <div className="flex flex-wrap justify-center gap-2 sm:gap-4 px-4">
+                <Badge variant="secondary" className="px-3 sm:px-4 py-2 text-xs sm:text-sm">🚴 Bike Sharing</Badge>
+                <Badge variant="secondary" className="px-3 sm:px-4 py-2 text-xs sm:text-sm">🚗 Car Sharing</Badge>
+                <Badge variant="secondary" className="px-3 sm:px-4 py-2 text-xs sm:text-sm">🚌 Trasporti Pubblici</Badge>
+                <Badge variant="secondary" className="px-3 sm:px-4 py-2 text-xs sm:text-sm">📱 Google Fit</Badge>
+                <Badge variant="secondary" className="px-3 sm:px-4 py-2 text-xs sm:text-sm">🍎 Apple Health</Badge>
+                <Badge variant="secondary" className="px-3 sm:px-4 py-2 text-xs sm:text-sm">📊 Strava</Badge>
+                <Badge variant="secondary" className="px-3 sm:px-4 py-2 text-xs sm:text-sm">🅿️ Smart Parking</Badge>
               </div>
-              <CardTitle className="text-lg">Tracking Automatico</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription className="text-center text-sm sm:text-base">
-                Le tue azioni sostenibili vengono registrate automaticamente tramite app e sensori del telefono
-              </CardDescription>
-            </CardContent>
-          </Card>
-
-          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-white/80 backdrop-blur-sm">
-            <CardHeader className="text-center">
-              <div className="mx-auto w-12 h-12 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full flex items-center justify-center mb-4">
-                <Award className="h-6 w-6 text-white" />
-              </div>
-              <CardTitle className="text-lg">Certificati Blockchain</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription className="text-center text-sm sm:text-base">
-                Ogni azione genera certificati digitali verificabili e tracciabili su blockchain
-              </CardDescription>
-            </CardContent>
-          </Card>
-
-          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-white/80 backdrop-blur-sm">
-            <CardHeader className="text-center">
-              <div className="mx-auto w-12 h-12 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full flex items-center justify-center mb-4">
-                <Users className="h-6 w-6 text-white" />
-              </div>
-              <CardTitle className="text-lg">Community & Sfide</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription className="text-center text-sm sm:text-base">
-                Partecipa a sfide, conquista badge e confrontati con altri utenti sostenibili
-              </CardDescription>
-            </CardContent>
-          </Card>
-
-          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-white/80 backdrop-blur-sm">
-            <CardHeader className="text-center">
-              <div className="mx-auto w-12 h-12 bg-gradient-to-r from-orange-400 to-red-500 rounded-full flex items-center justify-center mb-4">
-                <Leaf className="h-6 w-6 text-white" />
-              </div>
-              <CardTitle className="text-lg">Premi Reali</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription className="text-center text-sm sm:text-base">
-                Scambia i tuoi certificati con premi, benefit aziendali e vantaggi esclusivi
-              </CardDescription>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Integration Preview */}
-        <div className="mt-12 sm:mt-16 text-center">
-          <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">Integrazioni Supportate</h3>
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-4 px-4">
-            <Badge variant="secondary" className="px-3 sm:px-4 py-2 text-xs sm:text-sm">🚴 Bike Sharing</Badge>
-            <Badge variant="secondary" className="px-3 sm:px-4 py-2 text-xs sm:text-sm">🚗 Car Sharing</Badge>
-            <Badge variant="secondary" className="px-3 sm:px-4 py-2 text-xs sm:text-sm">🚌 Trasporti Pubblici</Badge>
-            <Badge variant="secondary" className="px-3 sm:px-4 py-2 text-xs sm:text-sm">📱 Google Fit</Badge>
-            <Badge variant="secondary" className="px-3 sm:px-4 py-2 text-xs sm:text-sm">🍎 Apple Health</Badge>
-            <Badge variant="secondary" className="px-3 sm:px-4 py-2 text-xs sm:text-sm">📊 Strava</Badge>
-            <Badge variant="secondary" className="px-3 sm:px-4 py-2 text-xs sm:text-sm">🅿️ Smart Parking</Badge>
+            </div>
           </div>
         </div>
       </div>
