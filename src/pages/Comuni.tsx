@@ -441,7 +441,7 @@ const Comuni = () => {
                   <CardHeader className="pb-3">
                     <CardTitle className="text-lg flex items-center space-x-2">
                       <AlertTriangle className="h-5 w-5 text-orange-500" />
-                      <span>Allerte Attive</span>
+                      <span>Segnalazioni Cittadini</span>
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-3">
