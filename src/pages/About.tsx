@@ -79,12 +79,6 @@ const About = () => {
       title: "Scala Europea & IA",
       status: "upcoming",
       items: ["Espansione EU", "API pubbliche", "IA predittiva", "1M utenti", "Carbon credit trading"]
-    },
-    {
-      phase: "2029-2030",
-      title: "Global & Smart Cities",
-      status: "upcoming",
-      items: ["Espansione globale", "Smart city integration", "10M utenti", "Standard ESG europei"]
     }
   ];
 
