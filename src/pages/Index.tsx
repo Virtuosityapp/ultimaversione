@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
@@ -29,7 +28,7 @@ const Index = () => {
             </h1>
             
             <p className="text-xl sm:text-2xl text-gray-700 mb-4 max-w-4xl mx-auto px-4 font-medium">
-              Un modello innovativo che stimola l'interazione tra comuni, aziende e cittadini per costruire insieme un futuro sostenibile.
+              Un modello innovativo che stimola e premia l'interazione tra comuni, aziende e cittadini per costruire insieme un futuro sostenibile.
             </p>
             
             <p className="text-lg sm:text-xl text-gray-600 mb-6 sm:mb-8 max-w-3xl mx-auto px-4">
@@ -42,7 +41,7 @@ const Index = () => {
                 onClick={() => navigate("/about")}
                 className="bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
               >
-                Sito Web
+                Virtuosity
               </Button>
               <Button 
                 onClick={() => navigate("/dashboard")} 
