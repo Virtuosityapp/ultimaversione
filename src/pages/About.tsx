@@ -39,7 +39,7 @@ const About = () => {
       icon: <Target className="h-6 w-6" />,
       title: "Per i Cittadini",
       description: "Premi concreti per comportamenti sostenibili quotidiani",
-      points: ["Incentivi economici reali", "Riconoscimento sociale", "Miglioramento qualità vita", "Contributo ambientale misurabile"]
+      points: ["Incentivi reali", "Riconoscimento sociale", "Miglioramento qualità vita", "Contributo ambientale misurabile"]
     },
     {
       icon: <Heart className="h-6 w-6" />,
