@@ -28,6 +28,10 @@ const Index = () => {
               </span>
             </h1>
             
+            <p className="text-xl sm:text-2xl text-gray-700 mb-4 max-w-4xl mx-auto px-4 font-medium">
+              Un modello innovativo che stimola l'interazione tra comuni, aziende e cittadini per costruire insieme un futuro sostenibile.
+            </p>
+            
             <p className="text-lg sm:text-xl text-gray-600 mb-6 sm:mb-8 max-w-3xl mx-auto px-4">
               La piattaforma che premia i tuoi comportamenti sostenibili. 
               Tracciamento automatico, certificati blockchain e premi reali per un futuro più verde.
