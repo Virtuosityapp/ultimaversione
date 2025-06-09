@@ -91,9 +91,9 @@ const Dashboard = () => {
               <Button 
                 variant="outline" 
                 onClick={() => navigate("/marketplace")}
-                className="border-green-300 text-green-700 hover:bg-green-50 hover:border-green-400 hover:scale-105 transition-all duration-200 text-xs px-2 py-1.5 sm:text-sm sm:px-4 sm:py-2 active:scale-95"
+                className="border-green-300 text-green-700 hover:bg-green-50 hover:border-green-400 hover:scale-105 transition-all duration-200 text-xs px-2 py-1.5 sm:text-sm sm:px-4 sm:py-2 active:scale-95 bg-gradient-to-r from-green-500 to-green-600 text-white border-green-500 hover:from-green-600 hover:to-green-700"
               >
-                Marketplace
+                Scambia nel Marketplace
               </Button>
               <Button 
                 variant="outline" 
