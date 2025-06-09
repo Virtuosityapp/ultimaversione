@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -94,22 +93,22 @@ const About = () => {
 
   const team = [
     {
-      name: "Marco Rossi",
-      role: "CEO & Founder",
-      bio: "Ex Google, esperto in sostenibilità digitale",
+      name: "Alessio Pagani",
+      role: "Research Director and Data Scientist",
+      bio: "PhD in Information Technology | Web3, blockchain, AI, DeFi",
+      image: "👨‍🔬"
+    },
+    {
+      name: "Gianfranco Leone",
+      role: "Web3 Expert Marketing Specialist",
+      bio: "Esperto in strategie di marketing per tecnologie blockchain e Web3",
       image: "👨‍💼"
     },
     {
-      name: "Sarah Chen",
-      role: "CTO",
-      bio: "Blockchain architect, ex Ethereum Foundation",
-      image: "👩‍💻"
-    },
-    {
-      name: "Giulia Bianchi",
-      role: "Chief Sustainability Officer",
-      bio: "Ex ONU, esperta in politiche ambientali",
-      image: "👩‍🔬"
+      name: "Davide Galbiati",
+      role: "Computer Engineer",
+      bio: "Web and mobile Developer specializzato in soluzioni digitali innovative",
+      image: "👨‍💻"
     }
   ];
 
