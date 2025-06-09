@@ -50,6 +50,12 @@ const Index = () => {
               >
                 Scopri Come Funziona
               </Button>
+              <Button 
+                onClick={() => navigate("/comuni")} 
+                className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full sm:w-auto"
+              >
+                Dashboard Comuni
+              </Button>
             </div>
 
             {/* Stats Preview */}
