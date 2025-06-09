@@ -12,7 +12,7 @@ const About = () => {
     {
       icon: <Zap className="h-6 w-6" />,
       title: "Tracking Automatico",
-      description: "Nessun input manuale. Le tue azioni sostenibili vengono rilevate automaticamente tramite sensori del telefone e integrazioni con app esterne.",
+      description: "Nessun input manuale. Le tue azioni sostenibili vengono rilevate automaticamente tramite sensori del telefono e integrazioni con app esterne.",
       details: ["Accelerometro e GPS", "Integrazione Google Fit/Apple Health", "API Bike/Car Sharing", "Sensori smart city"]
     },
     {
@@ -92,13 +92,6 @@ const About = () => {
     { name: "E-Scooters", providers: ["Bird", "Voi", "Tier"], icon: "🛴" }
   ];
 
-  const stats = [
-    { label: "Comuni Partner", value: "150+", color: "text-green-600" },
-    { label: "Aziende Attive", value: "80+", color: "text-blue-600" },
-    { label: "Utenti Registrati", value: "25k+", color: "text-purple-600" },
-    { label: "CO₂ Risparmiata", value: "500t+", color: "text-orange-600" }
-  ];
-
   const team = [
     {
       name: "Marco Rossi",
@@ -166,28 +159,6 @@ const About = () => {
             in certificati blockchain verificabili, creando un ecosistema di incentivi concreti per cittadini, 
             aziende e pubbliche amministrazioni.
           </p>
-          
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-12">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className={`text-3xl font-bold ${stat.color}`}>{stat.value}</div>
-                <div className="text-sm text-gray-600">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* Video/Demo Section */}
-          <div className="bg-gradient-to-r from-green-100 to-blue-100 rounded-lg p-8 mb-12">
-            <h3 className="text-2xl font-bold mb-4">Guarda Virtuosity in Azione</h3>
-            <div className="aspect-video bg-gray-200 rounded-lg flex items-center justify-center">
-              <div className="text-center">
-                <Lightbulb className="h-16 w-16 mx-auto mb-4 text-gray-400" />
-                <p className="text-gray-600">Demo Video Coming Soon</p>
-                <p className="text-sm text-gray-500">Scopri come funziona la piattaforma</p>
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* Mission Statement */}
