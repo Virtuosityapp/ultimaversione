@@ -825,7 +825,7 @@ const About = () => {
         {/* Integrations Section */}
         <div className="mb-16">
           <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            Integrazioni & Partner
+            Integrazioni & Possibili Partnership
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {integrations.map((integration, index) => (
