@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Leaf, ArrowLeft, Shield, Zap, Globe, Award, Users, TrendingUp, CheckCircle, Target, Heart, Lightbulb } from "lucide-react";
+import { Leaf, ArrowLeft, Shield, Zap, Globe, Award, Users, TrendingUp, CheckCircle, Target, Heart, Lightbulb, Droplets, Recycle, Battery } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const About = () => {
@@ -17,7 +17,7 @@ const About = () => {
     {
       icon: <Shield className="h-6 w-6" />,
       title: "Certificazione Blockchain",
-      description: "Ogni azione genera certificati digitali verificabili e immutabili su blockchain Ethereum/Polygon per garantire trasparenza totale.",
+      description: "Ogni azione genera 4 tipologie di certificati digitali verificabili e immutabili su blockchain Ethereum/Polygon: CO2, Rifiuti e Riciclo, Risparmio Energetico e Acqua.",
       details: ["Hash crittografici unici", "Validazione automatica", "Tracciabilità completa", "Standard ESG compliance"]
     },
     {
@@ -89,6 +89,33 @@ const About = () => {
     { name: "Fitness Tracking", providers: ["Google Fit", "Apple Health", "Strava"], icon: "📱" },
     { name: "Smart Parking", providers: ["EasyPark", "ParkMan", "Sensori IoT"], icon: "🅿️" },
     { name: "E-Scooters", providers: ["Bird", "Voi", "Tier"], icon: "🛴" }
+  ];
+
+  const certificateTypes = [
+    {
+      icon: <Leaf className="h-8 w-8" />,
+      title: "Certificati CO2",
+      description: "Riduzione emissioni attraverso mobilità sostenibile",
+      color: "from-green-500 to-emerald-600"
+    },
+    {
+      icon: <Recycle className="h-8 w-8" />,
+      title: "Rifiuti e Riciclo",
+      description: "Gestione responsabile e riciclo dei materiali",
+      color: "from-blue-500 to-cyan-600"
+    },
+    {
+      icon: <Battery className="h-8 w-8" />,
+      title: "Risparmio Energetico",
+      description: "Ottimizzazione consumi e efficienza energetica",
+      color: "from-yellow-500 to-orange-600"
+    },
+    {
+      icon: <Droplets className="h-8 w-8" />,
+      title: "Certificati Acqua",
+      description: "Conservazione e uso responsabile delle risorse idriche",
+      color: "from-blue-400 to-blue-600"
+    }
   ];
 
   const team = [
@@ -172,6 +199,32 @@ const About = () => {
             </p>
           </CardContent>
         </Card>
+
+        {/* Certificate Types Section */}
+        <div className="mb-16">
+          <h3 className="text-3xl font-bold text-center text-gray-900 mb-4">
+            I 4 Tipi di Certificati Virtuosity
+          </h3>
+          <p className="text-lg text-gray-600 text-center mb-12 max-w-3xl mx-auto">
+            Ogni azione sostenibile genera certificati blockchain specifici per categoria ambientale, 
+            garantendo tracciabilità e valore misurabile ai tuoi comportamenti virtuosi.
+          </p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {certificateTypes.map((cert, index) => (
+              <Card key={index} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+                <CardHeader className="text-center">
+                  <div className={`w-16 h-16 bg-gradient-to-r ${cert.color} rounded-full flex items-center justify-center text-white mb-4 mx-auto`}>
+                    {cert.icon}
+                  </div>
+                  <CardTitle className="text-lg">{cert.title}</CardTitle>
+                  <CardDescription className="text-gray-600">
+                    {cert.description}
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            ))}
+          </div>
+        </div>
 
         {/* How It Works */}
         <div className="mb-16">
