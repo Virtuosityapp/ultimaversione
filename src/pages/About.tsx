@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -463,7 +464,7 @@ const About = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Hero Section */}
+        {/* 1. Hero Section - Introduzione */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
             Il Futuro della <span className="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">Sostenibilità Digitale</span>
@@ -475,7 +476,7 @@ const About = () => {
           </p>
         </div>
 
-        {/* Mission Statement */}
+        {/* 2. Mission Statement - Perché esistiamo */}
         <Card className="border-0 shadow-lg bg-gradient-to-r from-green-50 to-blue-50 mb-16">
           <CardContent className="p-8 text-center">
             <h3 className="text-2xl font-bold text-gray-900 mb-4">La Nostra Missione</h3>
@@ -488,7 +489,19 @@ const About = () => {
           </CardContent>
         </Card>
 
-        {/* Certificate Types Section */}
+        {/* 3. Come Funziona - Il meccanismo base */}
+        <div className="mb-16">
+          <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">
+            Come Funziona Virtuosity
+          </h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {features.map((feature, index) => (
+              <FeatureCard key={index} feature={feature} />
+            ))}
+          </div>
+        </div>
+
+        {/* 4. Certificate Types - Cosa genera il sistema */}
         <div className="mb-16">
           <h3 className="text-3xl font-bold text-center text-gray-900 mb-4">
             I 4 Tipi di Certificati Virtuosity
@@ -504,19 +517,10 @@ const About = () => {
           </div>
         </div>
 
-        {/* How It Works */}
-        <div className="mb-16">
-          <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            Come Funziona Virtuosity
-          </h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature, index) => (
-              <FeatureCard key={index} feature={feature} />
-            ))}
-          </div>
-        </div>
+        {/* 5. Privacy & Security - Come proteggiamo i dati */}
+        <PrivacySecurityCard />
 
-        {/* Certificate Exchange Models */}
+        {/* 6. Modelli di Scambio - Come si crea valore */}
         <div className="mb-16">
           <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">
             Modelli di Scambio Certificati
@@ -682,7 +686,31 @@ const About = () => {
           </div>
         </div>
 
-        {/* DPP Integration Section */}
+        {/* 7. Vantaggi per gli Stakeholder - Chi beneficia e come */}
+        <div className="mb-16">
+          <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">
+            Vantaggi per Tutti gli Stakeholder
+          </h3>
+          <div className="grid md:grid-cols-3 gap-8">
+            {benefits.map((benefit, index) => (
+              <BenefitCard key={index} benefit={benefit} />
+            ))}
+          </div>
+        </div>
+
+        {/* 8. Integrazioni Tecnologiche - Come si connette con l'esistente */}
+        <div className="mb-16">
+          <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">
+            Integrazioni & Possibili Partnership
+          </h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {integrations.map((integration, index) => (
+              <IntegrationCard key={index} integration={integration} />
+            ))}
+          </div>
+        </div>
+
+        {/* 9. DPP Integration - Il futuro della tracciabilità */}
         <div className="mb-16">
           <Card className="border-0 shadow-lg bg-gradient-to-r from-blue-50 via-green-50 to-purple-50">
             <CardHeader className="text-center">
@@ -786,55 +814,7 @@ const About = () => {
           </Card>
         </div>
 
-        {/* Benefits Section */}
-        <div className="mb-16">
-          <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            Vantaggi per Tutti
-          </h3>
-          <div className="grid md:grid-cols-3 gap-8">
-            {benefits.map((benefit, index) => (
-              <BenefitCard key={index} benefit={benefit} />
-            ))}
-          </div>
-        </div>
-
-        {/* Roadmap */}
-        <div className="mb-16">
-          <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            La Nostra Roadmap
-          </h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {roadmap.map((phase, index) => (
-              <RoadmapCard key={index} phase={phase} />
-            ))}
-          </div>
-        </div>
-
-        {/* Team Section */}
-        <div className="mb-16">
-          <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            Il Nostro Team
-          </h3>
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            {team.map((member, index) => (
-              <TeamMemberCard key={index} member={member} />
-            ))}
-          </div>
-        </div>
-
-        {/* Integrations Section */}
-        <div className="mb-16">
-          <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            Integrazioni & Possibili Partnership
-          </h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {integrations.map((integration, index) => (
-              <IntegrationCard key={index} integration={integration} />
-            ))}
-          </div>
-        </div>
-
-        {/* Technology Stack */}
+        {/* 10. Technology Stack - Su cosa si basa */}
         <Card className="border-0 shadow-lg bg-gradient-to-r from-blue-50 to-green-50 mb-16">
           <CardHeader className="text-center">
             <CardTitle className="text-2xl">Stack Tecnologico</CardTitle>
@@ -878,10 +858,31 @@ const About = () => {
           </CardContent>
         </Card>
 
-        {/* Privacy & Security Section */}
-        <PrivacySecurityCard />
+        {/* 11. Roadmap - Quando e come si sviluppa */}
+        <div className="mb-16">
+          <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">
+            La Nostra Roadmap
+          </h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {roadmap.map((phase, index) => (
+              <RoadmapCard key={index} phase={phase} />
+            ))}
+          </div>
+        </div>
 
-        {/* Contact Section */}
+        {/* 12. Team - Chi c'è dietro */}
+        <div className="mb-16">
+          <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">
+            Il Nostro Team
+          </h3>
+          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            {team.map((member, index) => (
+              <TeamMemberCard key={index} member={member} />
+            ))}
+          </div>
+        </div>
+
+        {/* 13. Contact Section - Come contattarci */}
         <div className="mb-16">
           <Card className="border-0 shadow-lg bg-gradient-to-r from-green-50 to-blue-50">
             <CardHeader className="text-center">
@@ -930,7 +931,7 @@ const About = () => {
           </Card>
         </div>
 
-        {/* CTA Section */}
+        {/* 14. CTA Section - Call to action finale */}
         <div className="text-center bg-gradient-to-r from-green-600 to-blue-600 rounded-lg p-12 text-white">
           <h3 className="text-3xl font-bold mb-4">Pronto a Iniziare il Tuo Viaggio Sostenibile?</h3>
           <p className="text-xl mb-8 text-green-100">
