@@ -587,9 +587,9 @@ const About = () => {
                   <div className="bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg p-4 text-white">
                     <h5 className="font-bold mb-2">Vantaggi per l'Azienda</h5>
                     <ul className="text-sm space-y-1">
-                      <li>• Miglioramento ESG score e reporting</li>
-                      <li>• Maggiore engagement dei dipendenti</li>
-                      <li>• Riduzione carbon footprint aziendale</li>
+                      <li>• Miglioramento ESG score e reporting automatico</li>
+                      <li>• Maggiore engagement e retention dei dipendenti</li>
+                      <li>• Riduzione carbon footprint aziendale misurabile</li>
                       <li>• Attrazione talenti orientati alla sostenibilità</li>
                     </ul>
                   </div>
@@ -662,9 +662,9 @@ const About = () => {
                   <div className="bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg p-4 text-white">
                     <h5 className="font-bold mb-2">Vantaggi per il Comune</h5>
                     <ul className="text-sm space-y-1">
-                      <li>• Dati real-time su comportamenti sostenibili</li>
-                      <li>• Raggiungimento obiettivi climatici EU</li>
-                      <li>• Maggiore coinvolgimento cittadini</li>
+                      <li>• Dati real-time su comportamenti sostenibili cittadini</li>
+                      <li>• Raggiungimento obiettivi climatici EU 2030</li>
+                      <li>• Maggiore coinvolgimento e partecipazione civica</li>
                       <li>• Riduzione costi gestione rifiuti e trasporti</li>
                     </ul>
                   </div>
