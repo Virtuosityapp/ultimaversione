@@ -1,8 +1,8 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { 
   Car, 
   Lightbulb, 
@@ -14,14 +14,118 @@ import {
   AlertCircle,
   CheckCircle,
   Clock,
-  Settings
+  Settings,
+  MapPin,
+  AlertTriangle
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { useEffect, useRef } from "react";
 
 const Comuni = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const mapContainer = useRef<HTMLDivElement>(null);
+  const map = useRef<any>(null);
+
+  // Mock data for map alerts and resolved issues
+  const mapAlerts = [
+    {
+      id: 1,
+      type: "alert",
+      title: "Contenitore rifiuti pieno",
+      location: "Via Roma 45",
+      coords: [9.1900, 45.4642],
+      severity: "high",
+      timestamp: "10 min fa"
+    },
+    {
+      id: 2,
+      type: "alert",
+      title: "Lampione non funzionante",
+      location: "Piazza Duomo",
+      coords: [9.1916, 45.4640],
+      severity: "medium",
+      timestamp: "25 min fa"
+    },
+    {
+      id: 3,
+      type: "resolved",
+      title: "Parcheggio riparato",
+      location: "Via Brera 12",
+      coords: [9.1885, 45.4720],
+      timestamp: "2 ore fa"
+    },
+    {
+      id: 4,
+      type: "resolved",
+      title: "Illuminazione ripristinata",
+      location: "Corso Buenos Aires",
+      coords: [9.2050, 45.4780],
+      timestamp: "4 ore fa"
+    }
+  ];
+
+  useEffect(() => {
+    if (!mapContainer.current || map.current) return;
+
+    // Initialize map with a placeholder (users should add their Mapbox token)
+    const initializeMap = async () => {
+      try {
+        const mapboxgl = await import('mapbox-gl');
+        
+        // Placeholder token - users need to replace with their own
+        mapboxgl.default.accessToken = 'pk.eyJ1IjoiZXhhbXBsZSIsImEiOiJjbGV4YW1wbGUifQ.example';
+        
+        map.current = new mapboxgl.default.Map({
+          container: mapContainer.current!,
+          style: 'mapbox://styles/mapbox/light-v11',
+          center: [9.1900, 45.4642], // Milan coordinates
+          zoom: 13
+        });
+
+        // Add navigation controls
+        map.current.addControl(new mapboxgl.default.NavigationControl(), 'top-right');
+
+        // Add markers for alerts and resolved issues
+        mapAlerts.forEach((item) => {
+          const el = document.createElement('div');
+          el.className = `w-6 h-6 rounded-full border-2 border-white shadow-lg cursor-pointer ${
+            item.type === 'alert' 
+              ? item.severity === 'high' 
+                ? 'bg-red-500' 
+                : 'bg-orange-500'
+              : 'bg-green-500'
+          }`;
+          
+          const popup = new mapboxgl.default.Popup({ offset: 25 })
+            .setHTML(`
+              <div class="p-2">
+                <h3 class="font-bold text-sm">${item.title}</h3>
+                <p class="text-xs text-gray-600">${item.location}</p>
+                <p class="text-xs text-gray-500">${item.timestamp}</p>
+              </div>
+            `);
+
+          new mapboxgl.default.Marker(el)
+            .setLngLat(item.coords)
+            .setPopup(popup)
+            .addTo(map.current);
+        });
+
+      } catch (error) {
+        console.error('Error initializing map:', error);
+      }
+    };
+
+    initializeMap();
+
+    return () => {
+      if (map.current) {
+        map.current.remove();
+      }
+    };
+  }, []);
 
   const integrations = [
     {
@@ -200,6 +304,7 @@ const Comuni = () => {
           <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 bg-white/80 backdrop-blur-sm text-xs sm:text-sm">
             <TabsTrigger value="overview" className="px-2 sm:px-4">Panoramica</TabsTrigger>
             <TabsTrigger value="integrations" className="px-1 sm:px-4">Integrazioni</TabsTrigger>
+            <TabsTrigger value="map" className="px-1 sm:px-4">Mappa</TabsTrigger>
             <TabsTrigger value="analytics" className="px-1 sm:px-4 hidden sm:block">Analytics</TabsTrigger>
           </TabsList>
 
@@ -292,6 +397,91 @@ const Comuni = () => {
                   </Card>
                 );
               })}
+            </div>
+          </TabsContent>
+
+          <TabsContent value="map" className="space-y-4 sm:space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+              {/* Map */}
+              <Card className="lg:col-span-2 border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+                <CardHeader>
+                  <CardTitle className="flex items-center space-x-2">
+                    <MapPin className="h-5 w-5" />
+                    <span>Mappa del Comune</span>
+                  </CardTitle>
+                  <CardDescription>
+                    Visualizzazione in tempo reale di allerte e problemi risolti
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="h-96 w-full rounded-lg overflow-hidden">
+                    <div ref={mapContainer} className="h-full w-full" />
+                  </div>
+                  <div className="mt-4 flex items-center space-x-4 text-sm">
+                    <div className="flex items-center space-x-1">
+                      <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                      <span>Allerte critiche</span>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+                      <span>Allerte moderate</span>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                      <span>Problemi risolti</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Alerts and Issues Panel */}
+              <div className="space-y-4">
+                {/* Active Alerts */}
+                <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-lg flex items-center space-x-2">
+                      <AlertTriangle className="h-5 w-5 text-orange-500" />
+                      <span>Allerte Attive</span>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    {mapAlerts.filter(alert => alert.type === 'alert').map((alert) => (
+                      <Alert key={alert.id} className={`border-l-4 ${
+                        alert.severity === 'high' ? 'border-red-500' : 'border-orange-500'
+                      }`}>
+                        <AlertCircle className="h-4 w-4" />
+                        <AlertTitle className="text-sm">{alert.title}</AlertTitle>
+                        <AlertDescription className="text-xs text-gray-600">
+                          {alert.location} • {alert.timestamp}
+                        </AlertDescription>
+                      </Alert>
+                    ))}
+                  </CardContent>
+                </Card>
+
+                {/* Resolved Issues */}
+                <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-lg flex items-center space-x-2">
+                      <CheckCircle className="h-5 w-5 text-green-500" />
+                      <span>Risolti di Recente</span>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    {mapAlerts.filter(alert => alert.type === 'resolved').map((issue) => (
+                      <div key={issue.id} className="p-3 bg-green-50 rounded-lg border-l-4 border-green-500">
+                        <div className="flex items-center space-x-2">
+                          <CheckCircle className="h-4 w-4 text-green-600" />
+                          <span className="text-sm font-medium">{issue.title}</span>
+                        </div>
+                        <p className="text-xs text-gray-600 mt-1">
+                          {issue.location} • {issue.timestamp}
+                        </p>
+                      </div>
+                    ))}
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           </TabsContent>
 
