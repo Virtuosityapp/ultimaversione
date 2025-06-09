@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -293,6 +292,19 @@ const PrivacySecurityCard = () => (
   </Card>
 );
 
+const AdvisorCard = ({ advisor }) => (
+  <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm text-center">
+    <CardHeader>
+      <div className="text-4xl mb-4">{advisor.image}</div>
+      <CardTitle className="text-lg">{advisor.name}</CardTitle>
+      <Badge variant="secondary" className="text-xs">{advisor.role}</Badge>
+    </CardHeader>
+    <CardContent>
+      <p className="text-sm text-gray-600">{advisor.bio}</p>
+    </CardContent>
+  </Card>
+);
+
 const About = () => {
   const navigate = useNavigate();
 
@@ -425,6 +437,69 @@ const About = () => {
       role: "Computer Engineer",
       bio: "Web and mobile Developer specializzato in soluzioni digitali innovative",
       image: "👨‍💻"
+    }
+  ];
+
+  const advisors = [
+    {
+      name: "Vincenzo Rana",
+      role: "Blockchain Expert",
+      bio: "Docente e ricercatore dell'Osservatorio Blockchain & DLT al Politecnico di Milano",
+      image: "👨‍🏫"
+    },
+    {
+      name: "Angela Chiara Mollace",
+      role: "Legal & Compliance Expert",
+      bio: "Avvocato e consulente - Compliance expert Privacy, modello organizzativo 231/01, LPD",
+      image: "⚖️"
+    },
+    {
+      name: "Edoardo Degli Innocenti",
+      role: "Web3 Industry Leader",
+      bio: "CEO e Co-Founder di B3YOND, principale consorzio Web3 italiano, membro Commissione per l'IA della Presidenza del Consiglio",
+      image: "🚀"
+    },
+    {
+      name: "Emma Zavarrone",
+      role: "Social Statistics Expert",
+      bio: "Professore associato di statistica sociale presso la facoltà di Comunicazione, Pubbliche Relazioni e Pubblicità presso IULM, Milano",
+      image: "📊"
+    },
+    {
+      name: "Laura Iacovone",
+      role: "Economics & Management Expert",
+      bio: "Docente e ricercatore del Dipartimento di Economia, Management e Metodi Quantitativi dell'Università degli Studi di Milano",
+      image: "📈"
+    },
+    {
+      name: "Andrea Grieco",
+      role: "Sustainability Expert",
+      bio: "Sustainability Expert - LinkedInTopVoices Green & Climate Change",
+      image: "🌱"
+    },
+    {
+      name: "Vincenzo Pone",
+      role: "Business Ethics Expert",
+      bio: "Dott. Commercialista e Revisore dei Conti - Studioso di etica di azienda e delle nuove realtà economiche virtuali",
+      image: "💼"
+    },
+    {
+      name: "Sara Noggler",
+      role: "Web3 Innovation Expert",
+      bio: "Building Milano Future Play - Distributed Minds, Public Speaker Web3",
+      image: "🎯"
+    },
+    {
+      name: "Stefano Capaccioli",
+      role: "CSRD & ESRS Expert",
+      bio: "Dottore Commercialista esperto della normativa CSRD e degli standard ESRS",
+      image: "📋"
+    },
+    {
+      name: "Paolo Luigi Burlone",
+      role: "CSR & Accounting Expert",
+      bio: "Dottore Commercialista, revisore contabile e CSR",
+      image: "🔍"
     }
   ];
 
@@ -678,7 +753,7 @@ const About = () => {
           </div>
 
           <div className="bg-gradient-to-r from-blue-600 to-green-600 rounded-lg p-8 text-white text-center">
-            <h4 className="text-2xl font-bold mb-4">Ecosistema Virtuosity: Win-Win per Tutti</h4>
+            <h4 className="text-2xl font-bold mb-2">Ecosistema Virtuosity: Win-Win per Tutti</h4>
             <p className="text-lg">
               Ogni certificato sostenibile genera valore concreto per cittadini, aziende e istituzioni, 
               creando un circolo virtuoso dove la sostenibilità diventa economicamente vantaggiosa per tutti gli attori coinvolti.
@@ -882,7 +957,23 @@ const About = () => {
           </div>
         </div>
 
-        {/* 13. Contact Section - Come contattarci */}
+        {/* 13. Advisors - I nostri consulenti esperti */}
+        <div className="mb-16">
+          <h3 className="text-3xl font-bold text-center text-gray-900 mb-4">
+            I Nostri Advisor
+          </h3>
+          <p className="text-lg text-gray-600 text-center mb-12 max-w-4xl mx-auto">
+            Un team di esperti di livello internazionale che ci guida nell'innovazione sostenibile, 
+            dalla blockchain alla compliance, dall'economia all'intelligenza artificiale.
+          </p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {advisors.map((advisor, index) => (
+              <AdvisorCard key={index} advisor={advisor} />
+            ))}
+          </div>
+        </div>
+
+        {/* 14. Contact Section - Come contattarci */}
         <div className="mb-16">
           <Card className="border-0 shadow-lg bg-gradient-to-r from-green-50 to-blue-50">
             <CardHeader className="text-center">
@@ -931,7 +1022,7 @@ const About = () => {
           </Card>
         </div>
 
-        {/* 14. CTA Section - Call to action finale */}
+        {/* 15. CTA Section - Call to action finale */}
         <div className="text-center bg-gradient-to-r from-green-600 to-blue-600 rounded-lg p-12 text-white">
           <h3 className="text-3xl font-bold mb-4">Pronto a Iniziare il Tuo Viaggio Sostenibile?</h3>
           <p className="text-xl mb-8 text-green-100">
