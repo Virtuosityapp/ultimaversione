@@ -43,34 +43,52 @@ const DashboardAziende = () => {
     }
   };
 
+  const getBadgeColor = (tipo: string) => {
+    switch (tipo.toLowerCase()) {
+      case 'premio': return 'bg-emerald-100 text-emerald-700 border-emerald-200';
+      case 'viaggio': return 'bg-blue-100 text-blue-700 border-blue-200';
+      case 'gadget': return 'bg-purple-100 text-purple-700 border-purple-200';
+      default: return 'bg-gray-100 text-gray-700 border-gray-200';
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-background p-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-6">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl font-bold text-foreground mb-8">Dashboard Aziende</h1>
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
+            Dashboard Aziende
+          </h1>
+          <p className="text-lg text-muted-foreground">Gestisci certificati, welfare e sostenibilità aziendale</p>
+        </div>
         
         {/* Metriche Certificati */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <Card>
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-green-500 to-emerald-600 text-white">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Certificati Dipendenti</CardTitle>
-              <Users className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium text-green-100">Certificati Dipendenti</CardTitle>
+              <div className="p-2 bg-white/20 rounded-lg">
+                <Users className="h-5 w-5 text-white" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-primary">{certificatiDipendenti}</div>
-              <p className="text-xs text-muted-foreground">
+              <div className="text-3xl font-bold text-white">{certificatiDipendenti}</div>
+              <p className="text-xs text-green-100 mt-1">
                 Certificati DPP ricevuti dai dipendenti aziendali
               </p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-500 to-cyan-600 text-white">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Certificati Esterni</CardTitle>
-              <UserCheck className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium text-blue-100">Certificati Esterni</CardTitle>
+              <div className="p-2 bg-white/20 rounded-lg">
+                <UserCheck className="h-5 w-5 text-white" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-primary">{certificatiEsterni}</div>
-              <p className="text-xs text-muted-foreground">
+              <div className="text-3xl font-bold text-white">{certificatiEsterni}</div>
+              <p className="text-xs text-blue-100 mt-1">
                 Certificati DPP ricevuti da soggetti esterni
               </p>
             </CardContent>
@@ -78,45 +96,54 @@ const DashboardAziende = () => {
         </div>
 
         {/* Sezione Welfare */}
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle>Welfare, Premi e Gadget Aziendali</CardTitle>
-            <CardDescription>
+        <Card className="mb-8 border-0 shadow-xl bg-white/80 backdrop-blur-sm">
+          <CardHeader className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-t-lg">
+            <CardTitle className="flex items-center gap-2">
+              <Gift className="h-6 w-6" />
+              Welfare, Premi e Gadget Aziendali
+            </CardTitle>
+            <CardDescription className="text-purple-100">
               Gestisci i premi welfare, gadget aziendali e viaggi premio disponibili per i dipendenti
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-6">
             {/* Form per aggiungere nuovo item */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6 p-4 border rounded-lg bg-muted/50">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6 p-6 border-2 border-dashed border-purple-200 rounded-xl bg-gradient-to-r from-purple-50 to-pink-50">
               <div>
-                <Label htmlFor="tipo">Tipo</Label>
+                <Label htmlFor="tipo" className="text-purple-700 font-medium">Tipo</Label>
                 <Input
                   id="tipo"
                   placeholder="Premio/Viaggio/Gadget"
                   value={newWelfareItem.tipo}
                   onChange={(e) => setNewWelfareItem({...newWelfareItem, tipo: e.target.value})}
+                  className="border-purple-200 focus:border-purple-400"
                 />
               </div>
               <div>
-                <Label htmlFor="nome">Nome</Label>
+                <Label htmlFor="nome" className="text-purple-700 font-medium">Nome</Label>
                 <Input
                   id="nome"
                   placeholder="Nome del premio"
                   value={newWelfareItem.nome}
                   onChange={(e) => setNewWelfareItem({...newWelfareItem, nome: e.target.value})}
+                  className="border-purple-200 focus:border-purple-400"
                 />
               </div>
               <div>
-                <Label htmlFor="valore">Valore</Label>
+                <Label htmlFor="valore" className="text-purple-700 font-medium">Valore</Label>
                 <Input
                   id="valore"
                   placeholder="€ 0"
                   value={newWelfareItem.valore}
                   onChange={(e) => setNewWelfareItem({...newWelfareItem, valore: e.target.value})}
+                  className="border-purple-200 focus:border-purple-400"
                 />
               </div>
               <div className="flex items-end">
-                <Button onClick={handleAddWelfareItem} className="w-full">
+                <Button 
+                  onClick={handleAddWelfareItem} 
+                  className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg"
+                >
                   <Upload className="mr-2 h-4 w-4" />
                   Aggiungi
                 </Button>
@@ -124,17 +151,17 @@ const DashboardAziende = () => {
             </div>
 
             {/* Lista items welfare */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {welfareItems.map((item) => (
-                <div key={item.id} className="p-4 border rounded-lg bg-card">
-                  <div className="flex items-center justify-between mb-2">
-                    <Badge variant="secondary" className="flex items-center gap-1">
+                <div key={item.id} className="p-6 border-0 rounded-xl shadow-lg bg-gradient-to-br from-white to-gray-50 hover:shadow-xl transition-shadow">
+                  <div className="flex items-center justify-between mb-3">
+                    <Badge className={`flex items-center gap-1 ${getBadgeColor(item.tipo)}`}>
                       {getIconForType(item.tipo)}
                       {item.tipo}
                     </Badge>
-                    <span className="font-semibold text-primary">{item.valore}</span>
+                    <span className="font-bold text-lg text-gray-700">{item.valore}</span>
                   </div>
-                  <h4 className="font-medium">{item.nome}</h4>
+                  <h4 className="font-semibold text-gray-800">{item.nome}</h4>
                 </div>
               ))}
             </div>
@@ -142,24 +169,29 @@ const DashboardAziende = () => {
         </Card>
 
         {/* Pulsante Report Sostenibilità */}
-        <Card>
+        <Card className="border-0 shadow-xl bg-gradient-to-r from-orange-400 to-red-500 text-white">
           <CardHeader>
-            <CardTitle>Report Bilancio di Sostenibilità</CardTitle>
-            <CardDescription>
+            <CardTitle className="flex items-center gap-2 text-white">
+              <FileText className="h-6 w-6" />
+              Report Bilancio di Sostenibilità
+            </CardTitle>
+            <CardDescription className="text-orange-100">
               Genera report con i dati per il bilancio di sostenibilità aziendale
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Dialog open={reportDialogOpen} onOpenChange={setReportDialogOpen}>
               <DialogTrigger asChild>
-                <Button size="lg" className="w-full md:w-auto">
-                  <FileText className="mr-2 h-5 w-5" />
+                <Button size="lg" className="w-full md:w-auto bg-white text-orange-600 hover:bg-gray-100 shadow-lg text-lg py-6 px-8">
+                  <FileText className="mr-2 h-6 w-6" />
                   Certifica e Compensa
                 </Button>
               </DialogTrigger>
               <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
                 <DialogHeader>
-                  <DialogTitle>Report Bilancio di Sostenibilità</DialogTitle>
+                  <DialogTitle className="text-2xl bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
+                    Report Bilancio di Sostenibilità
+                  </DialogTitle>
                   <DialogDescription>
                     Dati ambientali e sociali per il bilancio di sostenibilità aziendale
                   </DialogDescription>
@@ -168,72 +200,72 @@ const DashboardAziende = () => {
                 <div className="space-y-6">
                   {/* Sezione Certificazioni DPP */}
                   <div>
-                    <h3 className="text-lg font-semibold mb-3">Certificazioni DPP</h3>
+                    <h3 className="text-lg font-semibold mb-3 text-green-700">Certificazioni DPP</h3>
                     <div className="grid grid-cols-2 gap-4">
-                      <div className="p-4 bg-muted rounded-lg">
-                        <p className="text-sm text-muted-foreground">Certificati Dipendenti</p>
-                        <p className="text-2xl font-bold">{certificatiDipendenti}</p>
+                      <div className="p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border border-green-200">
+                        <p className="text-sm text-green-600 font-medium">Certificati Dipendenti</p>
+                        <p className="text-2xl font-bold text-green-700">{certificatiDipendenti}</p>
                       </div>
-                      <div className="p-4 bg-muted rounded-lg">
-                        <p className="text-sm text-muted-foreground">Certificati Esterni</p>
-                        <p className="text-2xl font-bold">{certificatiEsterni}</p>
+                      <div className="p-4 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg border border-blue-200">
+                        <p className="text-sm text-blue-600 font-medium">Certificati Esterni</p>
+                        <p className="text-2xl font-bold text-blue-700">{certificatiEsterni}</p>
                       </div>
                     </div>
                   </div>
 
                   {/* Sezione Impatto Ambientale */}
                   <div>
-                    <h3 className="text-lg font-semibold mb-3">Impatto Ambientale</h3>
+                    <h3 className="text-lg font-semibold mb-3 text-blue-700">Impatto Ambientale</h3>
                     <div className="space-y-3">
-                      <div className="flex justify-between items-center p-3 bg-muted rounded">
-                        <span>CO2 evitata tramite digitalizzazione</span>
-                        <span className="font-semibold">2.8 tonnellate</span>
+                      <div className="flex justify-between items-center p-3 bg-gradient-to-r from-blue-50 to-cyan-50 rounded border border-blue-200">
+                        <span className="text-blue-700">CO2 evitata tramite digitalizzazione</span>
+                        <span className="font-semibold text-blue-800">2.8 tonnellate</span>
                       </div>
-                      <div className="flex justify-between items-center p-3 bg-muted rounded">
-                        <span>Riduzione uso carta</span>
-                        <span className="font-semibold">89%</span>
+                      <div className="flex justify-between items-center p-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded border border-green-200">
+                        <span className="text-green-700">Riduzione uso carta</span>
+                        <span className="font-semibold text-green-800">89%</span>
                       </div>
-                      <div className="flex justify-between items-center p-3 bg-muted rounded">
-                        <span>Trasparenza supply chain</span>
-                        <span className="font-semibold">78% prodotti tracciati</span>
+                      <div className="flex justify-between items-center p-3 bg-gradient-to-r from-purple-50 to-pink-50 rounded border border-purple-200">
+                        <span className="text-purple-700">Trasparenza supply chain</span>
+                        <span className="font-semibold text-purple-800">78% prodotti tracciati</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Sezione Welfare e Benefit */}
                   <div>
-                    <h3 className="text-lg font-semibold mb-3">Welfare e Benefit</h3>
+                    <h3 className="text-lg font-semibold mb-3 text-purple-700">Welfare e Benefit</h3>
                     <div className="space-y-3">
-                      <div className="flex justify-between items-center p-3 bg-muted rounded">
-                        <span>Valore welfare erogato</span>
-                        <span className="font-semibold">€ {welfareItems.reduce((acc, item) => acc + parseInt(item.valore.replace(/[€\s]/g, '') || '0'), 0).toLocaleString()}</span>
+                      <div className="flex justify-between items-center p-3 bg-gradient-to-r from-purple-50 to-pink-50 rounded border border-purple-200">
+                        <span className="text-purple-700">Valore welfare erogato</span>
+                        <span className="font-semibold text-purple-800">€ {welfareItems.reduce((acc, item) => acc + parseInt(item.valore.replace(/[€\s]/g, '') || '0'), 0).toLocaleString()}</span>
                       </div>
-                      <div className="flex justify-between items-center p-3 bg-muted rounded">
-                        <span>Dipendenti coinvolti</span>
-                        <span className="font-semibold">85%</span>
+                      <div className="flex justify-between items-center p-3 bg-gradient-to-r from-orange-50 to-red-50 rounded border border-orange-200">
+                        <span className="text-orange-700">Dipendenti coinvolti</span>
+                        <span className="font-semibold text-orange-800">85%</span>
                       </div>
-                      <div className="flex justify-between items-center p-3 bg-muted rounded">
-                        <span>Soddisfazione media</span>
-                        <span className="font-semibold">4.2/5</span>
+                      <div className="flex justify-between items-center p-3 bg-gradient-to-r from-yellow-50 to-orange-50 rounded border border-yellow-200">
+                        <span className="text-yellow-700">Soddisfazione media</span>
+                        <span className="font-semibold text-yellow-800">4.2/5</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Sezione Governance */}
                   <div>
-                    <h3 className="text-lg font-semibold mb-3">Governance e Trasparenza</h3>
+                    <h3 className="text-lg font-semibold mb-3 text-indigo-700">Governance e Trasparenza</h3>
                     <div className="space-y-3">
-                      <div className="flex justify-between items-center p-3 bg-muted rounded">
-                        <span>Certificazioni di conformità</span>
-                        <span className="font-semibold">100%</span>
+                      <div className="flex justify-between items-center p-3 bg-gradient-to-r from-indigo-50 to-blue-50 rounded border border-indigo-200">
+                        <span className="text-indigo-700">Certificazioni di conformità</span>
+                        <span className="font-semibold text-indigo-800">100%</span>
                       </div>
-                      <div className="flex justify-between items-center p-3 bg-muted rounded">
-                        <span>Audit di sostenibilità</span>
-                        <span className="font-semibold">Completati</span>
+                      <div className="flex justify-between items-center p-3 bg-gradient-to-r from-teal-50 to-cyan-50 rounded border border-teal-200">
+                        <span className="text-teal-700">Audit di sostenibilità</span>
+                        <span className="font-semibold text-teal-800">Completati</span>
                       </div>
-                      <div className="flex justify-between items-center p-3 bg-muted rounded">
-                        <span>Obiettivi SDG raggiunti</span>
-                        <span className="font-semibold">7/9</span>
+                      <div className="flex justify-between items-center p-3 bg-gradient-to-r from-emerald-50 to-green-50 rounded border border-emerald-200">
+                        <span className="text-emerald-700">Obiettivi SDG raggiunti</span>
+                        <span className="font-semibold text-emerald-800">7/9</span>
                       </div>
                     </div>
                   </div>
@@ -243,7 +275,7 @@ const DashboardAziende = () => {
                   <Button variant="outline" onClick={() => setReportDialogOpen(false)}>
                     Chiudi
                   </Button>
-                  <Button>
+                  <Button className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600">
                     <FileText className="mr-2 h-4 w-4" />
                     Esporta Report
                   </Button>
