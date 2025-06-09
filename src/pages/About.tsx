@@ -533,30 +533,6 @@ const About = () => {
           </CardContent>
         </Card>
 
-        {/* Contact Section */}
-        <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm mb-16">
-          <CardHeader className="text-center">
-            <CardTitle className="text-2xl">Contattaci</CardTitle>
-            <CardDescription>Vuoi saperne di più? Siamo qui per aiutarti</CardDescription>
-          </CardHeader>
-          <CardContent className="text-center">
-            <div className="grid md:grid-cols-3 gap-6">
-              <div>
-                <h4 className="font-bold mb-2">Email</h4>
-                <p className="text-sm text-gray-600">info@virtuosity.eu</p>
-              </div>
-              <div>
-                <h4 className="font-bold mb-2">Telefono</h4>
-                <p className="text-sm text-gray-600">+39 02 1234 5678</p>
-              </div>
-              <div>
-                <h4 className="font-bold mb-2">Sede</h4>
-                <p className="text-sm text-gray-600">Milano, Italia</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
         {/* CTA Section */}
         <div className="text-center bg-gradient-to-r from-green-600 to-blue-600 rounded-lg p-12 text-white">
           <h3 className="text-3xl font-bold mb-4">Pronto a Iniziare il Tuo Viaggio Sostenibile?</h3>
