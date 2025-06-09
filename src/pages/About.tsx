@@ -444,50 +444,42 @@ const About = () => {
     {
       name: "Vincenzo Rana",
       role: "Blockchain Expert",
-      bio: "Docente e ricercatore dell'Osservatorio Blockchain & DLT al Politecnico di Milano",
-      image: "👨‍🏫"
+      bio: "Docente e ricercatore dell'Osservatorio Blockchain & DLT al Politecnico di Milano"
     },
     {
       name: "Edoardo Degli Innocenti",
       role: "Web3 Industry Leader",
-      bio: "CEO e Co-Founder di B3YOND, principale consorzio Web3 italiano, membro Commissione per l'IA della Presidenza del Consiglio",
-      image: "🚀"
+      bio: "CEO e Co-Founder di B3YOND, principale consorzio Web3 italiano, membro Commissione per l'IA della Presidenza del Consiglio"
     },
     {
       name: "Emma Zavarrone",
       role: "Social Statistics Expert",
-      bio: "Professore associato di statistica sociale presso la facoltà di Comunicazione, Pubbliche Relazioni e Pubblicità presso IULM, Milano",
-      image: "📊"
+      bio: "Professore associato di statistica sociale presso la facoltà di Comunicazione, Pubbliche Relazioni e Pubblicità presso IULM, Milano"
     },
     {
       name: "Laura Iacovone",
       role: "Economics & Management Expert",
-      bio: "Docente e ricercatore del Dipartimento di Economia, Management e Metodi Quantitativi dell'Università degli Studi di Milano",
-      image: "📈"
+      bio: "Docente e ricercatore del Dipartimento di Economia, Management e Metodi Quantitativi dell'Università degli Studi di Milano"
     },
     {
       name: "Andrea Grieco",
       role: "Sustainability Expert",
-      bio: "Sustainability Expert - LinkedInTopVoices Green & Climate Change",
-      image: "🌱"
+      bio: "Sustainability Expert - LinkedInTopVoices Green & Climate Change"
     },
     {
       name: "Vincenzo Pone",
       role: "Business Ethics Expert",
-      bio: "Dott. Commercialista e Revisore dei Conti - Studioso di etica di azienda e delle nuove realtà economiche virtuali",
-      image: "💼"
+      bio: "Dott. Commercialista e Revisore dei Conti - Studioso di etica di azienda e delle nuove realtà economiche virtuali"
     },
     {
       name: "Sara Noggler",
       role: "Web3 Innovation Expert",
-      bio: "Building Milano Future Play - Distributed Minds, Public Speaker Web3",
-      image: "🎯"
+      bio: "Building Milano Future Play - Distributed Minds, Public Speaker Web3"
     },
     {
       name: "Stefano Capaccioli",
       role: "CSRD & ESRS Expert",
-      bio: "Dottore Commercialista esperto della normativa CSRD e degli standard ESRS",
-      image: "📋"
+      bio: "Dottore Commercialista esperto della normativa CSRD e degli standard ESRS"
     }
   ];
 
@@ -956,7 +948,15 @@ const About = () => {
           </p>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {advisors.map((advisor, index) => (
-              <AdvisorCard key={index} advisor={advisor} />
+              <Card key={index} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm text-center">
+                <CardHeader>
+                  <CardTitle className="text-lg">{advisor.name}</CardTitle>
+                  <Badge variant="secondary" className="text-xs">{advisor.role}</Badge>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-gray-600">{advisor.bio}</p>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
