@@ -206,6 +206,110 @@ const About = () => {
           </div>
         </div>
 
+        {/* DPP Integration Section */}
+        <div className="mb-16">
+          <Card className="border-0 shadow-lg bg-gradient-to-r from-blue-50 via-green-50 to-purple-50">
+            <CardHeader className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white mb-4 mx-auto">
+                <Globe className="h-8 w-8" />
+              </div>
+              <CardTitle className="text-3xl font-bold text-gray-900">
+                Integrazione con Digital Product Passports (DPP)
+              </CardTitle>
+              <CardDescription className="text-lg text-gray-700 max-w-4xl mx-auto">
+                Virtuosity sarà tra le prime piattaforme europee ad integrare i Digital Product Passports, 
+                rivoluzionando la tracciabilità e sostenibilità dei prodotti secondo la normativa EU 2024
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="p-8">
+              <div className="grid md:grid-cols-2 gap-12">
+                <div>
+                  <h4 className="text-xl font-bold text-gray-900 mb-6">Cosa sono i DPP</h4>
+                  <div className="space-y-4">
+                    <div className="flex items-start">
+                      <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-1" />
+                      <div>
+                        <strong>Passaporti Digitali Obbligatori:</strong> Dal 2026, ogni prodotto venduto in EU avrà un QR code con informazioni complete su origine, materiali, impatto ambientale e riciclabilità
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-1" />
+                      <div>
+                        <strong>Tracciabilità Completa:</strong> Ogni fase del ciclo di vita del prodotto viene registrata in modo immutabile su blockchain
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-1" />
+                      <div>
+                        <strong>Trasparenza Totale:</strong> Consumatori e aziende possono verificare istantaneamente l'autenticità e sostenibilità di ogni prodotto
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="text-xl font-bold text-gray-900 mb-6">Come Virtuosity Integra i DPP</h4>
+                  <div className="space-y-4">
+                    <div className="flex items-start">
+                      <Zap className="w-5 h-5 text-blue-500 mr-3 mt-1" />
+                      <div>
+                        <strong>Scansione Automatica:</strong> L'app rileva automaticamente i QR code DPP durante gli acquisti, calcolando l'impatto ambientale in tempo reale
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <Award className="w-5 h-5 text-purple-500 mr-3 mt-1" />
+                      <div>
+                        <strong>Premi per Scelte Sostenibili:</strong> Acquistare prodotti con DPP ad alto rating di sostenibilità genera certificati e ricompense extra
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <TrendingUp className="w-5 h-5 text-orange-500 mr-3 mt-1" />
+                      <div>
+                        <strong>Analytics Avanzate:</strong> Dashboard personalizzate mostrano l'impatto ambientale dei tuoi acquisti e suggeriscono alternative più sostenibili
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-12 p-6 bg-white/50 rounded-lg">
+                <h4 className="text-xl font-bold text-gray-900 mb-4 text-center">Il Flusso di Lavoro DPP in Virtuosity</h4>
+                <div className="grid md:grid-cols-4 gap-6">
+                  <div className="text-center">
+                    <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white mb-3 mx-auto">1</div>
+                    <h5 className="font-bold text-sm mb-2">Scansione QR</h5>
+                    <p className="text-xs text-gray-600">App rileva automaticamente DPP durante acquisti o uso prodotti</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white mb-3 mx-auto">2</div>
+                    <h5 className="font-bold text-sm mb-2">Validazione Blockchain</h5>
+                    <p className="text-xs text-gray-600">Verifica autenticità e calcola impact score basato su dati DPP</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center text-white mb-3 mx-auto">3</div>
+                    <h5 className="font-bold text-sm mb-2">Generazione Certificati</h5>
+                    <p className="text-xs text-gray-600">Crea certificati ESG basati su sostenibilità prodotto acquistato</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white mb-3 mx-auto">4</div>
+                    <h5 className="font-bold text-sm mb-2">Premi & Insights</h5>
+                    <p className="text-xs text-gray-600">Sblocca ricompense e ricevi suggerimenti per scelte più sostenibili</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-8 p-6 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg text-white text-center">
+                <h4 className="text-lg font-bold mb-2">Vantaggi Competitivi</h4>
+                <p className="text-sm">
+                  Con l'integrazione DPP, Virtuosity diventa l'unica piattaforma che collega automaticamente 
+                  le scelte di consumo sostenibile con un sistema di incentivi concreti, 
+                  preparando utenti e aziende alla nuova era della trasparenza ambientale europea.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
         {/* Benefits Section */}
         <div className="mb-16">
           <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">
