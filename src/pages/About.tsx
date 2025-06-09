@@ -949,12 +949,14 @@ const About = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {advisors.map((advisor, index) => (
               <Card key={index} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm text-center">
-                <CardHeader>
-                  <CardTitle className="text-lg">{advisor.name}</CardTitle>
-                  <Badge variant="secondary" className="text-xs">{advisor.role}</Badge>
+                <CardHeader className="text-center">
+                  <CardTitle className="text-lg text-center">{advisor.name}</CardTitle>
+                  <div className="flex justify-center">
+                    <Badge variant="secondary" className="text-xs">{advisor.role}</Badge>
+                  </div>
                 </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-gray-600">{advisor.bio}</p>
+                <CardContent className="text-center">
+                  <p className="text-sm text-gray-600 text-center">{advisor.bio}</p>
                 </CardContent>
               </Card>
             ))}
