@@ -42,13 +42,13 @@ const Index = () => {
               </Button>
               <Button 
                 onClick={() => navigate("/about")}
-                className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
+                className="bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
               >
                 Scopri Come Funziona
               </Button>
               <Button 
                 onClick={() => navigate("/comuni")} 
-                className="bg-gradient-to-r from-orange-600 to-red-600 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-orange-700 hover:to-red-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
+                className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
               >
                 Dashboard Comuni
               </Button>
