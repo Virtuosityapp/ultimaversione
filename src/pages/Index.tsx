@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -56,26 +55,6 @@ const Index = () => {
               >
                 Dashboard Comuni
               </Button>
-            </div>
-
-            {/* Stats Preview */}
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-4xl mx-auto px-4">
-              <div className="text-center">
-                <div className="text-xl sm:text-2xl font-bold text-green-600">12.5k</div>
-                <div className="text-xs sm:text-sm text-gray-600">Kg CO₂ Risparmiata</div>
-              </div>
-              <div className="text-center">
-                <div className="text-xl sm:text-2xl font-bold text-blue-600">2.8k</div>
-                <div className="text-xs sm:text-sm text-gray-600">Utenti Attivi</div>
-              </div>
-              <div className="text-center">
-                <div className="text-xl sm:text-2xl font-bold text-emerald-600">450</div>
-                <div className="text-xs sm:text-sm text-gray-600">Certificati Emessi</div>
-              </div>
-              <div className="text-center">
-                <div className="text-xl sm:text-2xl font-bold text-cyan-600">95%</div>
-                <div className="text-xs sm:text-sm text-gray-600">Tracking Automatico</div>
-              </div>
             </div>
           </div>
         </div>
