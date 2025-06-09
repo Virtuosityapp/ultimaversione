@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -526,17 +525,12 @@ const About = () => {
             Il Futuro della <span className="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">Sostenibilità Digitale</span>
           </h2>
           
-          {/* Dashboard Screenshots */}
-          <div className="mb-8 grid md:grid-cols-2 gap-6">
+          {/* Dashboard Screenshot - Single Image */}
+          <div className="mb-8">
             <img 
               src="/lovable-uploads/7942f312-9a3e-4b02-9bdd-c96f9d500a13.png" 
               alt="Virtuosity Dashboard Screenshot" 
-              className="mx-auto rounded-lg shadow-2xl max-w-[75%] h-auto"
-            />
-            <img 
-              src="/lovable-uploads/a2f433fc-90cc-487d-adfc-0941147c59df.png" 
-              alt="Virtuosity Marketplace Screenshot" 
-              className="mx-auto rounded-lg shadow-2xl max-w-[75%] h-auto"
+              className="mx-auto rounded-lg shadow-2xl max-w-[50%] h-auto"
             />
           </div>
           
