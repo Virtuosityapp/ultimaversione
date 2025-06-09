@@ -50,7 +50,7 @@ const Index = () => {
                 onClick={() => navigate("/marketplace")} 
                 className="bg-gradient-to-r from-green-500 to-green-600 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
               >
-                Scambia nel Marketplace
+                Marketplace
               </Button>
               <Button 
                 onClick={() => navigate("/dashboard-aziende")} 
