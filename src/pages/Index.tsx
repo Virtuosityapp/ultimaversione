@@ -47,6 +47,12 @@ const Index = () => {
                 Scopri Come Funziona
               </Button>
               <Button 
+                onClick={() => navigate("/dashboard-aziende")} 
+                className="bg-gradient-to-r from-sky-500 to-cyan-500 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-sky-600 hover:to-cyan-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
+              >
+                Dashboard Aziende
+              </Button>
+              <Button 
                 onClick={() => navigate("/comuni")} 
                 className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
               >
