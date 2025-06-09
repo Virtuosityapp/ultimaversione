@@ -627,38 +627,34 @@ const About = () => {
                   <div>
                     <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
                       <Target className="w-5 h-5 text-blue-500 mr-2" />
-                      Servizi e Agevolazioni Disponibili
+                      Esempi Pratici di Servizi
                     </h4>
-                    <div className="space-y-3">
-                      <div className="flex items-start">
-                        <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-1" />
-                        <div>
-                          <strong>Trasporti Pubblici:</strong> Sconti o abbonamenti gratuiti per bus, metro e bike sharing cittadino
-                        </div>
+                    <div className="space-y-4">
+                      <div className="bg-white/70 rounded-lg p-4 border-l-4 border-green-400">
+                        <h5 className="font-bold text-green-700 mb-2">🚌 Trasporti Pubblici</h5>
+                        <p className="text-sm text-gray-600">
+                          <strong>Certificati richiesti:</strong> 40 certificati CO2 (equivalenti a 80km in mezzi sostenibili)
+                          <br />
+                          <strong>Servizio ottenuto:</strong> Abbonamento mensile gratuito bus/metro o 20 corse bike sharing
+                        </p>
                       </div>
-                      <div className="flex items-start">
-                        <CheckCircle className="w-5 h-5 text-blue-500 mr-3 mt-1" />
-                        <div>
-                          <strong>Servizi Culturali:</strong> Ingressi gratuiti a musei, biblioteche, teatri e eventi cittadini
-                        </div>
+                      
+                      <div className="bg-white/70 rounded-lg p-4 border-l-4 border-blue-400">
+                        <h5 className="font-bold text-blue-700 mb-2">🎭 Cultura & Tempo Libero</h5>
+                        <p className="text-sm text-gray-600">
+                          <strong>Certificati richiesti:</strong> 25 certificati Rifiuti + 15 certificati Acqua
+                          <br />
+                          <strong>Servizio ottenuto:</strong> Ingressi gratuiti a musei comunali, teatro e biblioteche per 1 mese
+                        </p>
                       </div>
-                      <div className="flex items-start">
-                        <CheckCircle className="w-5 h-5 text-purple-500 mr-3 mt-1" />
-                        <div>
-                          <strong>Agevolazioni Fiscali:</strong> Riduzioni su TARI, parcheggi e altre tasse comunali
-                        </div>
-                      </div>
-                      <div className="flex items-start">
-                        <CheckCircle className="w-5 h-5 text-orange-500 mr-3 mt-1" />
-                        <div>
-                          <strong>Accessi Prioritari:</strong> Corsie preferenziali per pratiche comunali e servizi demografici
-                        </div>
-                      </div>
-                      <div className="flex items-start">
-                        <CheckCircle className="w-5 h-5 text-emerald-500 mr-3 mt-1" />
-                        <div>
-                          <strong>Programmi Ambientali:</strong> Partecipazione gratuita a corsi di giardinaggio urbano e compostaggio
-                        </div>
+                      
+                      <div className="bg-white/70 rounded-lg p-4 border-l-4 border-purple-400">
+                        <h5 className="font-bold text-purple-700 mb-2">🏛️ Agevolazioni Fiscali</h5>
+                        <p className="text-sm text-gray-600">
+                          <strong>Certificati richiesti:</strong> 80 certificati misti (tutti i tipi)
+                          <br />
+                          <strong>Servizio ottenuto:</strong> Riduzione 30% TARI o parcheggi gratuiti in centro per 2 mesi
+                        </p>
                       </div>
                     </div>
                   </div>
