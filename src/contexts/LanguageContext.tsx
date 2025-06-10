@@ -6,7 +6,7 @@ type Language = 'it' | 'en';
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: (key: string) => string;
+  t: (key: string) => string | string[];
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -258,7 +258,34 @@ const translations = {
       "• Raggiungimento obiettivi climatici EU 2030",
       "• Maggiore coinvolgimento e partecipazione civica",
       "• Riduzione costi gestione rifiuti e trasporti"
-    ]
+    ],
+    teamMembers: [
+      "Marco Santarelli - CEO & Co-founder",
+      "Francesco Bianchi - CTO & Co-founder", 
+      "Elena Rossi - Head of Sustainability",
+      "Giuseppe Verde - Blockchain Developer"
+    ],
+    advisors: [
+      "Prof. Andrea Sustainability - Università Bocconi",
+      "Dr. Maria Green - Ex-Director EU Climate Action",
+      "Roberto Blockchain - Ethereum Foundation"
+    ],
+    roadmapItems: [
+      "Q1 2025: MVP e prime città pilota",
+      "Q2 2025: Partnership strategiche e scaling",
+      "Q3 2025: Marketplace e certificati avanzati", 
+      "Q4 2025: Espansione europea e IA predittiva"
+    ],
+    integrationPartners: [
+      "Bike Sharing", "Car Sharing", "Trasporti Pubblici",
+      "Fitness Tracking", "Smart Parking", "E-Scooters"
+    ],
+    techStack: {
+      frontend: ["React", "TypeScript", "Tailwind CSS"],
+      blockchain: ["Ethereum", "Polygon", "Zero-Knowledge Proofs"],
+      backend: ["Node.js", "PostgreSQL", "Redis"],
+      compliance: ["GDPR", "CSRD", "EU DPP"]
+    }
   },
   en: {
     // Index page translations
@@ -506,14 +533,41 @@ const translations = {
       "• Achievement of EU 2030 climate goals",
       "• Greater involvement and civic participation",
       "• Reduction of waste management and transport costs"
-    ]
+    ],
+    teamMembers: [
+      "Marco Santarelli - CEO & Co-founder",
+      "Francesco Bianchi - CTO & Co-founder",
+      "Elena Rossi - Head of Sustainability", 
+      "Giuseppe Verde - Blockchain Developer"
+    ],
+    advisors: [
+      "Prof. Andrea Sustainability - Bocconi University",
+      "Dr. Maria Green - Former Director EU Climate Action",
+      "Roberto Blockchain - Ethereum Foundation"
+    ],
+    roadmapItems: [
+      "Q1 2025: MVP and first pilot cities",
+      "Q2 2025: Strategic partnerships and scaling",
+      "Q3 2025: Marketplace and advanced certificates",
+      "Q4 2025: European expansion and predictive AI"
+    ],
+    integrationPartners: [
+      "Bike Sharing", "Car Sharing", "Public Transport",
+      "Fitness Tracking", "Smart Parking", "E-Scooters"
+    ],
+    techStack: {
+      frontend: ["React", "TypeScript", "Tailwind CSS"],
+      blockchain: ["Ethereum", "Polygon", "Zero-Knowledge Proofs"], 
+      backend: ["Node.js", "PostgreSQL", "Redis"],
+      compliance: ["GDPR", "CSRD", "EU DPP"]
+    }
   }
 };
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguage] = useState<Language>('it');
 
-  const t = (key: string): string => {
+  const t = (key: string): string | string[] => {
     return translations[language][key as keyof typeof translations['it']] || key;
   };
 
