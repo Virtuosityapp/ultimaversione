@@ -37,19 +37,6 @@ const Index = () => {
             <p className="text-lg sm:text-xl text-gray-600 mb-6 sm:mb-8 max-w-3xl mx-auto px-4">
               {t('heroDescription')}
             </p>
-
-            {/* Video Section */}
-            <div className="mb-8 sm:mb-12 max-w-4xl mx-auto px-4">
-              <AspectRatio ratio={16 / 9}>
-                <iframe
-                  src="https://www.youtube.com/embed/rdCqQPQfogs"
-                  title="Virtuosity Video"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  className="w-full h-full rounded-lg shadow-lg"
-                />
-              </AspectRatio>
-            </div>
             
             <div className="flex flex-col gap-4 justify-center mb-8 sm:mb-12 px-4 max-w-md mx-auto">
               <Button onClick={() => navigate("/about")} className="bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full">{t('buttonVirtusosity')}</Button>
@@ -65,6 +52,19 @@ const Index = () => {
               <Button onClick={() => navigate("/comuni")} className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full">
                 {t('buttonMunicipalities')}
               </Button>
+            </div>
+
+            {/* Video Section */}
+            <div className="mb-8 sm:mb-12 max-w-4xl mx-auto px-4">
+              <AspectRatio ratio={16 / 9}>
+                <iframe
+                  src="https://www.youtube.com/embed/rdCqQPQfogs"
+                  title="Virtuosity Video"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="w-full h-full rounded-lg shadow-lg"
+                />
+              </AspectRatio>
             </div>
           </div>
         </div>
