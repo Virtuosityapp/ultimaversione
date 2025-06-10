@@ -925,7 +925,7 @@ const About = () => {
                   </div>
                   <div className="flex items-center text-sm text-gray-600">
                     <CheckCircle className="w-4 h-4 text-green-500 mr-3 flex-shrink-0" />
-                    <span>Accesso marketplace</span>
+                    <span>Accesso Exchange</span>
                   </div>
                 </div>
                 <Button className="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white hover:from-green-600 hover:to-emerald-700">
@@ -937,9 +937,7 @@ const About = () => {
             {/* Piano PMI */}
             <Card className="border-2 border-blue-300 shadow-lg bg-white/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300 relative">
               <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                <Badge className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-1">
-                  Più Popolare
-                </Badge>
+                
               </div>
               <CardHeader className="text-center pb-4">
                 <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white mb-4 mx-auto">
