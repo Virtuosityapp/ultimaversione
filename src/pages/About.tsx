@@ -3,12 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Leaf, ArrowLeft, Shield, Zap, Globe, Award, Users, TrendingUp, CheckCircle, Target, Heart, Lightbulb, Droplets, Recycle, Battery, MapPin, Building, Euro, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+
 const CertificateTypeCard = ({
   cert
 }) => <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
     <CardHeader className="text-center">
-      <div className={`w-16 h-16 bg-gradient-to-r ${cert.color} rounded-full flex items-center justify-center text-white mb-4 mx-auto`}>
-        {cert.icon}
+      <div className="w-24 h-24 mx-auto mb-4 flex items-center justify-center">
+        <img src={cert.image} alt={cert.title} className="w-full h-full object-contain" />
       </div>
       <CardTitle className="text-lg">{cert.title}</CardTitle>
       <CardDescription className="text-gray-600">
@@ -16,9 +17,10 @@ const CertificateTypeCard = ({
       </CardDescription>
     </CardHeader>
   </Card>;
+
 const FeatureCard = ({
   feature
-}) => <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+}) => <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
     <CardHeader>
       <div className="w-12 h-12 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center text-white mb-4">
         {feature.icon}
@@ -37,6 +39,7 @@ const FeatureCard = ({
       </div>
     </CardContent>
   </Card>;
+
 const BenefitCard = ({
   benefit
 }) => <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
@@ -56,6 +59,7 @@ const BenefitCard = ({
       </div>
     </CardContent>
   </Card>;
+
 const RoadmapCard = ({
   phase
 }) => <Card className={`border-0 shadow-lg ${phase.status === 'completed' ? 'bg-green-50' : phase.status === 'current' ? 'bg-blue-50' : 'bg-gray-50'}`}>
@@ -77,6 +81,7 @@ const RoadmapCard = ({
       </div>
     </CardContent>
   </Card>;
+
 const TeamMemberCard = ({
   member
 }) => <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm text-center">
@@ -91,6 +96,7 @@ const TeamMemberCard = ({
       <p className="text-sm text-gray-600 text-center">{member.bio}</p>
     </CardContent>
   </Card>;
+
 const IntegrationCard = ({
   integration
 }) => <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
@@ -106,6 +112,7 @@ const IntegrationCard = ({
       </div>
     </CardContent>
   </Card>;
+
 const PrivacySecurityCard = () => <Card className="border-0 shadow-lg bg-gradient-to-r from-purple-50 via-blue-50 to-green-50">
     <CardHeader className="text-center">
       <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-600 rounded-full flex items-center justify-center text-white mb-4 mx-auto">
@@ -258,6 +265,7 @@ const PrivacySecurityCard = () => <Card className="border-0 shadow-lg bg-gradien
       </div>
     </CardContent>
   </Card>;
+
 const AdvisorCard = ({
   advisor
 }) => <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm text-center">
@@ -270,6 +278,7 @@ const AdvisorCard = ({
       <p className="text-sm text-gray-600">{advisor.bio}</p>
     </CardContent>
   </Card>;
+
 const About = () => {
   const navigate = useNavigate();
   const features = [{
@@ -356,22 +365,22 @@ const About = () => {
     icon: "🛴"
   }];
   const certificateTypes = [{
-    icon: <Leaf className="h-8 w-8" />,
+    image: "/lovable-uploads/cef6f7ab-d91d-4e9f-8b7e-76e0c1eaa373.png",
     title: "Certificati CO2",
     description: "Riduzione emissioni attraverso mobilità sostenibile",
     color: "from-green-500 to-emerald-600"
   }, {
-    icon: <Recycle className="h-8 w-8" />,
+    image: "/lovable-uploads/9fb70260-01a6-45a7-8a67-f234cf098899.png",
     title: "Rifiuti e Riciclo",
     description: "Gestione responsabile e riciclo dei materiali",
     color: "from-blue-500 to-cyan-600"
   }, {
-    icon: <Battery className="h-8 w-8" />,
+    image: "/lovable-uploads/16190dbd-ebd1-4b29-968d-8c8f8d26066d.png",
     title: "Risparmio Energetico",
     description: "Ottimizzazione consumi e efficienza energetica",
     color: "from-yellow-500 to-orange-600"
   }, {
-    icon: <Droplets className="h-8 w-8" />,
+    image: "/lovable-uploads/c6969dcf-1661-4aed-966e-43b21ed8f62a.png",
     title: "Certificati Acqua",
     description: "Conservazione e uso responsabile delle risorse idriche",
     color: "from-blue-400 to-blue-600"
