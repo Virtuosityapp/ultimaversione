@@ -451,7 +451,7 @@ const About = () => {
         {/* 1. Hero Section - Introduzione */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Il Futuro della <span className="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">Sostenibilità Digitale</span>
+            Il valore delle <span className="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">azioni quotidiane</span>
           </h2>
           
           {/* Marketplace Screenshot - Single Image */}
