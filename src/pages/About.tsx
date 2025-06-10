@@ -459,11 +459,7 @@ const About = () => {
             <img src="/lovable-uploads/f68e2d05-2991-4af9-a328-4b8b0b3e6728.png" alt="Virtuosity Marketplace Screenshot" className="mx-auto rounded-lg shadow-2xl max-w-[50%] h-auto" />
           </div>
           
-          <p className="text-xl text-gray-600 max-w-4xl mx-auto mb-8">
-            Virtuosity è la prima piattaforma europea che trasforma automaticamente i comportamenti sostenibili 
-            in certificati blockchain verificabili, creando un ecosistema di incentivi concreti per cittadini, 
-            aziende e pubbliche amministrazioni.
-          </p>
+          <p className="text-xl text-gray-600 max-w-4xl mx-auto mb-8">Virtuosity è la prima piattaforma europea che trasforma automaticamente i comportamenti sostenibili in certificati verificabili, creando un ecosistema di incentivi concreti per cittadini, aziende e pubbliche amministrazioni.</p>
         </div>
 
         {/* 2. Mission Statement - Perché esistiamo */}
