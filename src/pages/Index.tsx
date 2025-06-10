@@ -1,10 +1,12 @@
 
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const Index = () => {
   const navigate = useNavigate();
+  const { t } = useLanguage();
   
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
@@ -23,32 +25,31 @@ const Index = () => {
             
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6">
               <span className="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
-                Virtuosity
+                {t('heroTitle')}
               </span>
             </h1>
             
             <p className="text-xl sm:text-2xl text-gray-700 mb-4 max-w-4xl mx-auto px-4 font-medium">
-              Un modello innovativo che stimola l'interazione tra comuni, aziende e cittadini per costruire insieme un futuro sostenibile.
+              {t('heroSubtitle')}
             </p>
             
             <p className="text-lg sm:text-xl text-gray-600 mb-6 sm:mb-8 max-w-3xl mx-auto px-4">
-              La piattaforma che premia i tuoi comportamenti sostenibili. 
-              Tracciamento automatico, certificati blockchain e premi reali per un futuro più verde.
+              {t('heroDescription')}
             </p>
             
             <div className="flex flex-col gap-4 justify-center mb-8 sm:mb-12 px-4 max-w-md mx-auto">
-              <Button onClick={() => navigate("/about")} className="bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full">Virtusosity</Button>
+              <Button onClick={() => navigate("/about")} className="bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full">{t('buttonVirtusosity')}</Button>
               <Button onClick={() => navigate("/dashboard")} className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full">
-                Utente
+                {t('buttonUser')}
               </Button>
               <Button onClick={() => navigate("/exchange")} className="bg-gradient-to-r from-green-500 to-green-600 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full">
-                Exchange
+                {t('buttonExchange')}
               </Button>
               <Button onClick={() => navigate("/dashboard-aziende")} className="bg-gradient-to-r from-sky-500 to-cyan-500 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-sky-600 hover:to-cyan-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full">
-                Aziende
+                {t('buttonCompanies')}
               </Button>
               <Button onClick={() => navigate("/comuni")} className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full">
-                Comuni
+                {t('buttonMunicipalities')}
               </Button>
             </div>
           </div>
