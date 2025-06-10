@@ -608,11 +608,7 @@ const About = () => {
 
         {/* 7. Modelli di Scambio - Come si crea valore */}
         <div className="mb-16">
-          <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">
-
-
-
-Modelli di Scambio Certificati</h3>
+          <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">Modelli di Scambio Certificati</h3>
           
           <div className="grid lg:grid-cols-2 gap-8 mb-8">
             {/* Employee-Company Exchange */}
@@ -752,9 +748,7 @@ Modelli di Scambio Certificati</h3>
                   </div>
 
                   <div className="bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg p-4 text-white py-[12px]">
-                    <h5 className="font-bold mb-2">
-
-Vantaggi per il Comune</h5>
+                    <h5 className="font-bold mb-2">Vantaggi per il Comune</h5>
                     <ul className="text-sm space-y-1">
                       <li>• Dati real-time su comportamenti sostenibili cittadini</li>
                       <li>• Raggiungimento obiettivi climatici EU 2030</li>
@@ -898,8 +892,8 @@ Vantaggi per il Comune</h5>
                 <div className="w-16 h-16 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full flex items-center justify-center text-white mb-4 mx-auto">
                   <Euro className="h-8 w-8" />
                 </div>
-                <CardTitle className="text-2xl font-bold text-gray-900">Piano Micro</CardTitle>
-                <CardDescription className="text-gray-600">
+                <CardTitle className="text-2xl font-bold text-gray-900 text-center">Piano Micro</CardTitle>
+                <CardDescription className="text-gray-600 text-center">
                   Perfetto per P.IVA e micro aziende
                 </CardDescription>
                 <div className="mt-4">
@@ -911,19 +905,19 @@ Vantaggi per il Comune</h5>
               </CardHeader>
               <CardContent className="text-center">
                 <div className="space-y-3 mb-6">
-                  <div className="flex items-center text-sm text-gray-600">
+                  <div className="flex items-center text-sm text-gray-600 justify-center">
                     <CheckCircle className="w-4 h-4 text-green-500 mr-3 flex-shrink-0" />
                     <span>Tracking automatico comportamenti</span>
                   </div>
-                  <div className="flex items-center text-sm text-gray-600">
+                  <div className="flex items-center text-sm text-gray-600 justify-center">
                     <CheckCircle className="w-4 h-4 text-green-500 mr-3 flex-shrink-0" />
                     <span>Certificati blockchain illimitati</span>
                   </div>
-                  <div className="flex items-center text-sm text-gray-600">
+                  <div className="flex items-center text-sm text-gray-600 justify-center">
                     <CheckCircle className="w-4 h-4 text-green-500 mr-3 flex-shrink-0" />
                     <span>Dashboard ESG basic</span>
                   </div>
-                  <div className="flex items-center text-sm text-gray-600">
+                  <div className="flex items-center text-sm text-gray-600 justify-center">
                     <CheckCircle className="w-4 h-4 text-green-500 mr-3 flex-shrink-0" />
                     <span>Accesso Exchange</span>
                   </div>
@@ -943,8 +937,8 @@ Vantaggi per il Comune</h5>
                 <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white mb-4 mx-auto">
                   <Building className="h-8 w-8" />
                 </div>
-                <CardTitle className="text-2xl font-bold text-gray-900">Piano PMI</CardTitle>
-                <CardDescription className="text-gray-600">
+                <CardTitle className="text-2xl font-bold text-gray-900 text-center">Piano PMI</CardTitle>
+                <CardDescription className="text-gray-600 text-center">
                   Ideale per aziende 20-250 dipendenti
                 </CardDescription>
                 <div className="mt-4">
@@ -956,23 +950,23 @@ Vantaggi per il Comune</h5>
               </CardHeader>
               <CardContent className="text-center">
                 <div className="space-y-3 mb-6">
-                  <div className="flex items-center text-sm text-gray-600">
+                  <div className="flex items-center text-sm text-gray-600 justify-center">
                     <CheckCircle className="w-4 h-4 text-blue-500 mr-3 flex-shrink-0" />
                     Tutto del piano Micro +
                   </div>
-                  <div className="flex items-center text-sm text-gray-600">
+                  <div className="flex items-center text-sm text-gray-600 justify-center">
                     <CheckCircle className="w-4 h-4 text-blue-500 mr-3 flex-shrink-0" />
                     <span>Dashboard ESG avanzata</span>
                   </div>
-                  <div className="flex items-center text-sm text-gray-600">
+                  <div className="flex items-center text-sm text-gray-600 justify-center">
                     <CheckCircle className="w-4 h-4 text-blue-500 mr-3 flex-shrink-0" />
                     <span>Report automatici CSRD/ESRS</span>
                   </div>
-                  <div className="flex items-center text-sm text-gray-600">
+                  <div className="flex items-center text-sm text-gray-600 justify-center">
                     <CheckCircle className="w-4 h-4 text-blue-500 mr-3 flex-shrink-0" />
                     <span>Sistema welfare aziendale</span>
                   </div>
-                  <div className="flex items-center text-sm text-gray-600">
+                  <div className="flex items-center text-sm text-gray-600 justify-center">
                     <CheckCircle className="w-4 h-4 text-blue-500 mr-3 flex-shrink-0" />
                     <span>API integration</span>
                   </div>
@@ -989,8 +983,8 @@ Vantaggi per il Comune</h5>
                 <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full flex items-center justify-center text-white mb-4 mx-auto">
                   <Globe className="h-8 w-8" />
                 </div>
-                <CardTitle className="text-2xl font-bold text-gray-900">Piano Enterprise</CardTitle>
-                <CardDescription className="text-gray-600">
+                <CardTitle className="text-2xl font-bold text-gray-900 text-center">Piano Enterprise</CardTitle>
+                <CardDescription className="text-gray-600 text-center">
                   Per aziende +250 dipendenti e Comuni
                 </CardDescription>
                 <div className="mt-4">
@@ -1002,23 +996,23 @@ Vantaggi per il Comune</h5>
               </CardHeader>
               <CardContent className="text-center">
                 <div className="space-y-3 mb-6">
-                  <div className="flex items-center text-sm text-gray-600">
+                  <div className="flex items-center text-sm text-gray-600 justify-center">
                     <CheckCircle className="w-4 h-4 text-purple-500 mr-3 flex-shrink-0" />
                     <span>Tutto del piano PMI +</span>
                   </div>
-                  <div className="flex items-center text-sm text-gray-600">
+                  <div className="flex items-center text-sm text-gray-600 justify-center">
                     <CheckCircle className="w-4 h-4 text-purple-500 mr-3 flex-shrink-0" />
                     <span>White label solution</span>
                   </div>
-                  <div className="flex items-center text-sm text-gray-600">
+                  <div className="flex items-center text-sm text-gray-600 justify-center">
                     <CheckCircle className="w-4 h-4 text-purple-500 mr-3 flex-shrink-0" />
                     <span>Integrazione DPP completa</span>
                   </div>
-                  <div className="flex items-center text-sm text-gray-600">
+                  <div className="flex items-center text-sm text-gray-600 justify-center">
                     <CheckCircle className="w-4 h-4 text-purple-500 mr-3 flex-shrink-0" />
                     <span>Analytics predittive IA</span>
                   </div>
-                  <div className="flex items-center text-sm text-gray-600">
+                  <div className="flex items-center text-sm text-gray-600 justify-center">
                     <CheckCircle className="w-4 h-4 text-purple-500 mr-3 flex-shrink-0" />
                     <span>Account manager dedicato</span>
                   </div>
