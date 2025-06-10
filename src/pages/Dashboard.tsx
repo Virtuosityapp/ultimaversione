@@ -7,8 +7,10 @@ import { Calendar, Award, TrendingUp, MapPin, Clock, QrCode, Camera, Smartphone 
 import { useNavigate } from "react-router-dom";
 import { DppVerification } from "@/components/DppVerification";
 import CitizenReporting from "@/components/CitizenReporting";
+
 const Dashboard = () => {
   const navigate = useNavigate();
+  
   const activities = [{
     id: 1,
     type: "bike",
@@ -43,6 +45,7 @@ const Dashboard = () => {
     location: "Parco Sempione",
     source: "Samsung Health"
   }];
+  
   const certificates = [{
     id: "CERT-001",
     title: "Mobilità Sostenibile",
@@ -53,13 +56,14 @@ const Dashboard = () => {
     status: "verified"
   }, {
     id: "CERT-002",
-    title: "Eco Commuter",
+    title: "Trasporto Pubblico",
     co2Saved: "8.7 kg",
     points: 470,
     validatedAt: "2024-01-10",
     blockchainHash: "0x4d5e6f...",
     status: "verified"
   }];
+
   return <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
       {/* Header */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-green-100 sticky top-0 z-50">
@@ -346,4 +350,5 @@ const Dashboard = () => {
       </div>
     </div>;
 };
+
 export default Dashboard;
