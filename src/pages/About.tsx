@@ -862,9 +862,7 @@ Vantaggi per il Comune</h5>
 
         {/* 13. Advisors - I nostri consulenti esperti */}
         <div className="mb-16">
-          <h3 className="text-3xl font-bold text-center text-gray-900 mb-4">
-            I Nostri Advisor
-          </h3>
+          <h3 className="text-3xl font-bold text-center text-gray-900 mb-4">I Nostri Advisors</h3>
           <p className="text-lg text-gray-600 text-center mb-12 max-w-4xl mx-auto">
             Un team di esperti di livello internazionale che ci guida nell'innovazione sostenibile, 
             dalla blockchain alla compliance, dall'economia all'intelligenza artificiale.
