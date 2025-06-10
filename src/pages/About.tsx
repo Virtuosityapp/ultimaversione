@@ -904,7 +904,7 @@ const About = () => {
                 </CardDescription>
                 <div className="mt-4">
                   <div className="flex items-center justify-center">
-                    <span className="text-4xl font-bold text-green-600">18€</span>
+                    <span className="text-4xl font-bold text-green-600">9€</span>
                     <span className="text-lg text-gray-500 ml-2">/mese</span>
                   </div>
                 </div>
@@ -951,7 +951,7 @@ const About = () => {
                 </CardDescription>
                 <div className="mt-4">
                   <div className="flex items-center justify-center">
-                    <span className="text-4xl font-bold text-blue-600">198€</span>
+                    <span className="text-4xl font-bold text-blue-600">99€</span>
                     <span className="text-lg text-gray-500 ml-2">/mese</span>
                   </div>
                 </div>
@@ -997,7 +997,7 @@ const About = () => {
                 </CardDescription>
                 <div className="mt-4">
                   <div className="flex items-center justify-center">
-                    <span className="text-4xl font-bold text-purple-600">1998€</span>
+                    <span className="text-4xl font-bold text-purple-600">999€</span>
                     <span className="text-lg text-gray-500 ml-2">/mese</span>
                   </div>
                 </div>
