@@ -10,6 +10,7 @@ import DashboardAziende from "./pages/DashboardAziende";
 import Exchange from "./pages/Exchange";
 import About from "./pages/About";
 import Comuni from "./pages/Comuni";
+import Report from "./pages/Report";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/marketplace" element={<Exchange />} />
           <Route path="/comuni" element={<Comuni />} />
           <Route path="/about" element={<About />} />
+          <Route path="/report" element={<Report />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
