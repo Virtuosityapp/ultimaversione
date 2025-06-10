@@ -7,106 +7,76 @@ import { Calendar, Award, TrendingUp, MapPin, Clock, QrCode, Camera, Smartphone 
 import { useNavigate } from "react-router-dom";
 import { DppVerification } from "@/components/DppVerification";
 import CitizenReporting from "@/components/CitizenReporting";
-
 const Dashboard = () => {
   const navigate = useNavigate();
-
-  const activities = [
-    {
-      id: 1,
-      type: "bike",
-      action: "Pedalata in bicicletta",
-      distance: "12.5 km",
-      co2Saved: "2.8 kg",
-      points: 150,
-      time: "45 min",
-      timestamp: "2024-01-15T08:30:00",
-      location: "Milano Centro",
-      source: "Strava"
-    },
-    {
-      id: 2,
-      type: "public_transport",
-      action: "Trasporto pubblico",
-      distance: "8.2 km",
-      co2Saved: "1.5 kg",
-      points: 80,
-      time: "25 min",
-      timestamp: "2024-01-15T18:15:00",
-      location: "Milano - Roma",
-      source: "ATM App"
-    },
-    {
-      id: 3,
-      type: "walk",
-      action: "Camminata sostenibile",
-      distance: "3.1 km",
-      co2Saved: "0.7 kg",
-      points: 45,
-      time: "32 min",
-      timestamp: "2024-01-14T12:20:00",
-      location: "Parco Sempione",
-      source: "Samsung Health"
-    }
-  ];
-
-  const certificates = [
-    {
-      id: "CERT-001",
-      title: "Mobilità Sostenibile",
-      co2Saved: "15.2 kg",
-      points: 850,
-      validatedAt: "2024-01-15",
-      blockchainHash: "0x1a2b3c...",
-      status: "verified"
-    },
-    {
-      id: "CERT-002",
-      title: "Eco Commuter",
-      co2Saved: "8.7 kg",
-      points: 470,
-      validatedAt: "2024-01-10",
-      blockchainHash: "0x4d5e6f...",
-      status: "verified"
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
+  const activities = [{
+    id: 1,
+    type: "bike",
+    action: "Pedalata in bicicletta",
+    distance: "12.5 km",
+    co2Saved: "2.8 kg",
+    points: 150,
+    time: "45 min",
+    timestamp: "2024-01-15T08:30:00",
+    location: "Milano Centro",
+    source: "Strava"
+  }, {
+    id: 2,
+    type: "public_transport",
+    action: "Trasporto pubblico",
+    distance: "8.2 km",
+    co2Saved: "1.5 kg",
+    points: 80,
+    time: "25 min",
+    timestamp: "2024-01-15T18:15:00",
+    location: "Milano - Roma",
+    source: "ATM App"
+  }, {
+    id: 3,
+    type: "walk",
+    action: "Camminata sostenibile",
+    distance: "3.1 km",
+    co2Saved: "0.7 kg",
+    points: 45,
+    time: "32 min",
+    timestamp: "2024-01-14T12:20:00",
+    location: "Parco Sempione",
+    source: "Samsung Health"
+  }];
+  const certificates = [{
+    id: "CERT-001",
+    title: "Mobilità Sostenibile",
+    co2Saved: "15.2 kg",
+    points: 850,
+    validatedAt: "2024-01-15",
+    blockchainHash: "0x1a2b3c...",
+    status: "verified"
+  }, {
+    id: "CERT-002",
+    title: "Eco Commuter",
+    co2Saved: "8.7 kg",
+    points: 470,
+    validatedAt: "2024-01-10",
+    blockchainHash: "0x4d5e6f...",
+    status: "verified"
+  }];
+  return <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
       {/* Header */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-green-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-3 sm:py-4 space-y-3 sm:space-y-0">
             <div className="flex items-center justify-center sm:justify-start space-x-2">
-              <img 
-                src="/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png" 
-                alt="Virtuosity Logo" 
-                className="h-10 w-10 sm:h-16 sm:w-16 object-contain"
-              />
+              <img src="/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png" alt="Virtuosity Logo" className="h-10 w-10 sm:h-16 sm:w-16 object-contain" />
               <h1 className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
                 Virtuosity
               </h1>
             </div>
             <div className="flex items-center justify-center space-x-2">
-              <Button 
-                variant="outline" 
-                onClick={() => navigate("/report")}
-                className="border-purple-300 text-purple-700 hover:bg-purple-50 hover:border-purple-400 hover:scale-105 transition-all duration-200 text-xs px-2 py-1.5 sm:text-sm sm:px-4 sm:py-2 active:scale-95"
-              >
-                Genera Report
-              </Button>
-              <Button 
-                variant="outline" 
-                onClick={() => navigate("/marketplace")}
-                className="border-green-300 text-green-700 hover:bg-green-50 hover:border-green-400 hover:scale-105 transition-all duration-200 text-xs px-2 py-1.5 sm:text-sm sm:px-4 sm:py-2 active:scale-95 bg-gradient-to-r from-green-500 to-green-600 text-white border-green-500 hover:from-green-600 hover:to-green-700"
-              >
+              
+              <Button variant="outline" onClick={() => navigate("/marketplace")} className="border-green-300 text-green-700 hover:bg-green-50 hover:border-green-400 hover:scale-105 transition-all duration-200 text-xs px-2 py-1.5 sm:text-sm sm:px-4 sm:py-2 active:scale-95 bg-gradient-to-r from-green-500 to-green-600 text-white border-green-500 hover:from-green-600 hover:to-green-700">
                 Exchange
               </Button>
-              <Button 
-                variant="outline" 
-                onClick={() => navigate("/")}
-                className="border-blue-300 text-blue-700 hover:bg-blue-50 hover:border-blue-400 hover:scale-105 transition-all duration-200 text-xs px-2 py-1.5 sm:text-sm sm:px-4 sm:py-2 active:scale-95"
-              >
+              <Button variant="outline" onClick={() => navigate("/")} className="border-blue-300 text-blue-700 hover:bg-blue-50 hover:border-blue-400 hover:scale-105 transition-all duration-200 text-xs px-2 py-1.5 sm:text-sm sm:px-4 sm:py-2 active:scale-95">
                 Home
               </Button>
             </div>
@@ -166,34 +136,19 @@ const Dashboard = () => {
 
         <Tabs defaultValue="activities" className="space-y-3 sm:space-y-6">
           <TabsList className="grid w-full grid-cols-5 bg-white/80 backdrop-blur-sm h-auto p-1 shadow-md">
-            <TabsTrigger 
-              value="activities" 
-              className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-green-100 hover:to-emerald-100 hover:text-green-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-400 data-[state=active]:to-emerald-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
-            >
+            <TabsTrigger value="activities" className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-green-100 hover:to-emerald-100 hover:text-green-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-400 data-[state=active]:to-emerald-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
               Attività
             </TabsTrigger>
-            <TabsTrigger 
-              value="certificates" 
-              className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-blue-100 hover:to-cyan-100 hover:text-blue-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-400 data-[state=active]:to-cyan-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
-            >
+            <TabsTrigger value="certificates" className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-blue-100 hover:to-cyan-100 hover:text-blue-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-400 data-[state=active]:to-cyan-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
               Certificati
             </TabsTrigger>
-            <TabsTrigger 
-              value="insights" 
-              className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-purple-100 hover:to-pink-100 hover:text-purple-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-400 data-[state=active]:to-pink-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
-            >
+            <TabsTrigger value="insights" className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-purple-100 hover:to-pink-100 hover:text-purple-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-400 data-[state=active]:to-pink-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
               Insights
             </TabsTrigger>
-            <TabsTrigger 
-              value="reporting" 
-              className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-orange-100 hover:to-red-100 hover:text-orange-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-400 data-[state=active]:to-red-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
-            >
+            <TabsTrigger value="reporting" className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-orange-100 hover:to-red-100 hover:text-orange-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-400 data-[state=active]:to-red-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
               Segnala
             </TabsTrigger>
-            <TabsTrigger 
-              value="dpp" 
-              className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-cyan-100 hover:to-teal-100 hover:text-cyan-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-400 data-[state=active]:to-teal-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
-            >
+            <TabsTrigger value="dpp" className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-cyan-100 hover:to-teal-100 hover:text-cyan-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-400 data-[state=active]:to-teal-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
               DPP
             </TabsTrigger>
           </TabsList>
@@ -211,8 +166,7 @@ const Dashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-2 sm:space-y-4">
-                  {activities.map((activity) => (
-                    <div key={activity.id} className="flex items-center justify-between p-2 sm:p-4 bg-gray-50 rounded-lg hover:bg-green-50 hover:shadow-md hover:scale-[1.02] transition-all duration-200 cursor-pointer active:scale-[0.98]">
+                  {activities.map(activity => <div key={activity.id} className="flex items-center justify-between p-2 sm:p-4 bg-gray-50 rounded-lg hover:bg-green-50 hover:shadow-md hover:scale-[1.02] transition-all duration-200 cursor-pointer active:scale-[0.98]">
                       <div className="flex items-center space-x-2 sm:space-x-4 flex-1 min-w-0">
                         <div className="w-8 h-8 sm:w-12 sm:h-12 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center text-sm sm:text-xl flex-shrink-0">
                           {activity.type === 'bike' && '🚴'}
@@ -237,8 +191,7 @@ const Dashboard = () => {
                         <div className="font-bold text-green-600 text-xs sm:text-base">+{activity.points}</div>
                         <div className="text-xs text-gray-600">{activity.co2Saved}</div>
                       </div>
-                    </div>
-                  ))}
+                    </div>)}
                 </div>
               </CardContent>
             </Card>
@@ -257,8 +210,7 @@ const Dashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3 sm:space-y-4">
-                  {certificates.map((cert) => (
-                    <div key={cert.id} className="p-3 sm:p-6 bg-gradient-to-r from-blue-50 to-green-50 rounded-lg border border-blue-200 hover:shadow-lg hover:scale-[1.02] transition-all duration-200 cursor-pointer">
+                  {certificates.map(cert => <div key={cert.id} className="p-3 sm:p-6 bg-gradient-to-r from-blue-50 to-green-50 rounded-lg border border-blue-200 hover:shadow-lg hover:scale-[1.02] transition-all duration-200 cursor-pointer">
                       <div className="flex justify-between items-start mb-2 sm:mb-4">
                         <div className="flex-1 min-w-0">
                           <h3 className="font-bold text-sm sm:text-lg text-gray-900 truncate">{cert.title}</h3>
@@ -288,16 +240,11 @@ const Dashboard = () => {
                         <p className="text-xs text-gray-500 font-mono truncate">
                           Hash: {cert.blockchainHash}
                         </p>
-                        <Button 
-                          size="sm" 
-                          variant="outline" 
-                          className="text-xs self-start sm:self-auto hover:bg-blue-50 hover:border-blue-300 hover:scale-105 active:scale-95 transition-all duration-200"
-                        >
+                        <Button size="sm" variant="outline" className="text-xs self-start sm:self-auto hover:bg-blue-50 hover:border-blue-300 hover:scale-105 active:scale-95 transition-all duration-200">
                           Visualizza
                         </Button>
                       </div>
-                    </div>
-                  ))}
+                    </div>)}
                 </div>
               </CardContent>
             </Card>
@@ -397,8 +344,6 @@ const Dashboard = () => {
           </TabsContent>
         </Tabs>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Dashboard;
