@@ -887,15 +887,8 @@ const About = () => {
           <h3 className="text-3xl font-bold text-center text-gray-900 mb-4">
             Offerta Commerciale
           </h3>
-          <div className="flex justify-center mb-6">
-            <Badge variant="secondary" className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 text-lg">
-              <Sparkles className="w-4 h-4 mr-2" />
-              Prezzo Promozionale - 50% di Sconto
-            </Badge>
-          </div>
           <p className="text-lg text-gray-600 text-center mb-12 max-w-3xl mx-auto">
-            Approfitta della nostra offerta di lancio e accedi alla piattaforma di sostenibilità più innovativa d'Europa 
-            a metà prezzo per i primi clienti.
+            Scegli il piano più adatto alle tue esigenze e accedi alla piattaforma di sostenibilità più innovativa d'Europa.
           </p>
           
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -911,12 +904,8 @@ const About = () => {
                 </CardDescription>
                 <div className="mt-4">
                   <div className="flex items-center justify-center">
-                    <span className="text-4xl font-bold text-green-600">9€</span>
+                    <span className="text-4xl font-bold text-green-600">18€</span>
                     <span className="text-lg text-gray-500 ml-2">/mese</span>
-                  </div>
-                  <div className="flex items-center justify-center mt-1">
-                    <span className="text-lg text-gray-400 line-through mr-2">18€</span>
-                    <Badge variant="secondary" className="bg-red-100 text-red-600 text-xs">-50%</Badge>
                   </div>
                 </div>
               </CardHeader>
@@ -962,12 +951,8 @@ const About = () => {
                 </CardDescription>
                 <div className="mt-4">
                   <div className="flex items-center justify-center">
-                    <span className="text-4xl font-bold text-blue-600">99€</span>
+                    <span className="text-4xl font-bold text-blue-600">198€</span>
                     <span className="text-lg text-gray-500 ml-2">/mese</span>
-                  </div>
-                  <div className="flex items-center justify-center mt-1">
-                    <span className="text-lg text-gray-400 line-through mr-2">198€</span>
-                    <Badge variant="secondary" className="bg-red-100 text-red-600 text-xs">-50%</Badge>
                   </div>
                 </div>
               </CardHeader>
@@ -1012,12 +997,8 @@ const About = () => {
                 </CardDescription>
                 <div className="mt-4">
                   <div className="flex items-center justify-center">
-                    <span className="text-4xl font-bold text-purple-600">999€</span>
+                    <span className="text-4xl font-bold text-purple-600">1998€</span>
                     <span className="text-lg text-gray-500 ml-2">/mese</span>
-                  </div>
-                  <div className="flex items-center justify-center mt-1">
-                    <span className="text-lg text-gray-400 line-through mr-2">1998€</span>
-                    <Badge variant="secondary" className="bg-red-100 text-red-600 text-xs">-50%</Badge>
                   </div>
                 </div>
               </CardHeader>
@@ -1049,17 +1030,6 @@ const About = () => {
                 </Button>
               </CardContent>
             </Card>
-          </div>
-
-          <div className="mt-12 p-6 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg text-white text-center">
-            <h4 className="text-xl font-bold mb-2 flex items-center justify-center">
-              <Sparkles className="w-5 h-5 mr-2" />
-              Offerta Limitata - Solo per i Primi 100 Clienti
-            </h4>
-            <p className="text-lg">
-              Questa promozione del 50% è valida solo per i primi 100 clienti che si iscrivono. 
-              Dopo il periodo promozionale, i prezzi torneranno ai valori standard.
-            </p>
           </div>
         </div>
 
