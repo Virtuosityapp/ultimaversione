@@ -824,7 +824,7 @@ Vantaggi per il Comune</h5>
                 <h4 className="font-bold text-gray-900 mb-2">Backend</h4>
                 <div className="space-y-1 text-sm text-gray-600">
                   <div>Node.js/Python</div>
-                  <div>PostgreSQL</div>
+                  <div>Zero Knowledge Proof</div>
                   <div>API Gateway</div>
                 </div>
               </div>
