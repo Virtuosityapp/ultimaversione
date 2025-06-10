@@ -753,7 +753,7 @@ const About = () => {
                     </div>
                   </div>
 
-                  <div className="bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg p-4 text-white py-[14px]">
+                  <div className="bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg p-4 text-white py-[12px]">
                     <h5 className="font-bold mb-2">
 
 Vantaggi per il Comune</h5>
