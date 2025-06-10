@@ -310,8 +310,8 @@ const Comuni = () => {
           </Card>
         </div>
 
-        <Tabs defaultValue="overview" className="space-y-4 sm:space-y-6">
-          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 bg-white/80 backdrop-blur-sm shadow-md p-1 gap-1 sm:gap-0">
+        <Tabs defaultValue="overview" className="space-y-6 sm:space-y-8">
+          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 bg-white/80 backdrop-blur-sm shadow-md p-1 gap-1 sm:gap-0 sticky top-20 z-40">
             <TabsTrigger 
               value="overview" 
               className="px-2 py-2 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-blue-100 hover:to-indigo-100 hover:text-blue-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-400 data-[state=active]:to-indigo-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
@@ -338,198 +338,200 @@ const Comuni = () => {
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="overview" className="space-y-4 sm:space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-              {integrations.map((integration) => {
-                const IconComponent = integration.icon;
-                return (
-                  <Card key={integration.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
-                    <CardHeader className="pb-3">
-                      <div className="flex justify-between items-start mb-2">
-                        <div className="flex items-center space-x-3">
-                          <div className={`p-2 rounded-lg ${integration.color}`}>
-                            <IconComponent className="h-5 w-5" />
-                          </div>
-                          <div>
-                            <CardTitle className="text-base sm:text-lg">{integration.name}</CardTitle>
-                            <CardDescription className="text-sm">{integration.description}</CardDescription>
-                          </div>
-                        </div>
-                        {getStatusBadge(integration.status)}
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-3 sm:space-y-4">
-                        <div className="flex justify-between items-center text-sm">
-                          <span className="text-gray-600">Ultimo aggiornamento:</span>
-                          <span className="font-medium">{integration.lastSync}</span>
-                        </div>
-                        
-                        <div className="flex justify-between items-center text-sm">
-                          <span className="text-gray-600">Punti dati:</span>
-                          <span className="font-medium">{integration.dataPoints}</span>
-                        </div>
-                        
-                        <div className="grid grid-cols-3 gap-2 text-xs">
-                          {Object.entries(integration.metrics).map(([key, value]) => (
-                            <div key={key} className="text-center p-2 bg-gray-50 rounded">
-                              <div className="font-bold text-gray-900">{value}</div>
-                              <div className="text-gray-600 capitalize">{key}</div>
+          <div className="mt-8">
+            <TabsContent value="overview" className="space-y-4 sm:space-y-6 mt-0">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+                {integrations.map((integration) => {
+                  const IconComponent = integration.icon;
+                  return (
+                    <Card key={integration.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+                      <CardHeader className="pb-3">
+                        <div className="flex justify-between items-start mb-2">
+                          <div className="flex items-center space-x-3">
+                            <div className={`p-2 rounded-lg ${integration.color}`}>
+                              <IconComponent className="h-5 w-5" />
                             </div>
-                          ))}
-                        </div>
-                        
-                        <Button 
-                          className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 text-sm"
-                          onClick={() => handleManageIntegration(integration)}
-                          size="sm"
-                        >
-                          <Settings className="h-4 w-4 mr-2" />
-                          Gestisci
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                );
-              })}
-            </div>
-          </TabsContent>
-
-          <TabsContent value="integrations" className="space-y-4 sm:space-y-6">
-            <div className="grid grid-cols-1 gap-4 sm:gap-6">
-              {integrations.map((integration) => {
-                const IconComponent = integration.icon;
-                return (
-                  <Card key={integration.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-                    <CardContent className="p-4 sm:p-6">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-4">
-                          <div className={`p-3 rounded-lg ${integration.color}`}>
-                            <IconComponent className="h-6 w-6" />
-                          </div>
-                          <div>
-                            <h3 className="font-bold text-lg">{integration.name}</h3>
-                            <p className="text-gray-600 text-sm">{integration.description}</p>
-                            <div className="flex items-center space-x-4 mt-2 text-xs text-gray-500">
-                              <span>🔄 {integration.lastSync}</span>
-                              <span>📊 {integration.dataPoints} punti dati</span>
+                            <div>
+                              <CardTitle className="text-base sm:text-lg">{integration.name}</CardTitle>
+                              <CardDescription className="text-sm">{integration.description}</CardDescription>
                             </div>
                           </div>
-                        </div>
-                        <div className="flex items-center space-x-3">
                           {getStatusBadge(integration.status)}
-                          <Button variant="outline" size="sm">
-                            <Wifi className="h-4 w-4" />
+                        </div>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-3 sm:space-y-4">
+                          <div className="flex justify-between items-center text-sm">
+                            <span className="text-gray-600">Ultimo aggiornamento:</span>
+                            <span className="font-medium">{integration.lastSync}</span>
+                          </div>
+                          
+                          <div className="flex justify-between items-center text-sm">
+                            <span className="text-gray-600">Punti dati:</span>
+                            <span className="font-medium">{integration.dataPoints}</span>
+                          </div>
+                          
+                          <div className="grid grid-cols-3 gap-2 text-xs">
+                            {Object.entries(integration.metrics).map(([key, value]) => (
+                              <div key={key} className="text-center p-2 bg-gray-50 rounded">
+                                <div className="font-bold text-gray-900">{value}</div>
+                                <div className="text-gray-600 capitalize">{key}</div>
+                              </div>
+                            ))}
+                          </div>
+                          
+                          <Button 
+                            className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 text-sm"
+                            onClick={() => handleManageIntegration(integration)}
+                            size="sm"
+                          >
+                            <Settings className="h-4 w-4 mr-2" />
+                            Gestisci
                           </Button>
                         </div>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="integrations" className="space-y-4 sm:space-y-6 mt-0">
+              <div className="grid grid-cols-1 gap-4 sm:gap-6">
+                {integrations.map((integration) => {
+                  const IconComponent = integration.icon;
+                  return (
+                    <Card key={integration.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+                      <CardContent className="p-4 sm:p-6">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-4">
+                            <div className={`p-3 rounded-lg ${integration.color}`}>
+                              <IconComponent className="h-6 w-6" />
+                            </div>
+                            <div>
+                              <h3 className="font-bold text-lg">{integration.name}</h3>
+                              <p className="text-gray-600 text-sm">{integration.description}</p>
+                              <div className="flex items-center space-x-4 mt-2 text-xs text-gray-500">
+                                <span>🔄 {integration.lastSync}</span>
+                                <span>📊 {integration.dataPoints} punti dati</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="flex items-center space-x-3">
+                            {getStatusBadge(integration.status)}
+                            <Button variant="outline" size="sm">
+                              <Wifi className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="map" className="space-y-4 sm:space-y-6 mt-0">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+                {/* Map */}
+                <Card className="lg:col-span-2 border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+                  <CardHeader>
+                    <CardTitle className="flex items-center space-x-2">
+                      <MapPin className="h-5 w-5" />
+                      <span>Mappa del Comune</span>
+                    </CardTitle>
+                    <CardDescription>
+                      Visualizzazione in tempo reale di allerte e problemi risolti
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="h-96 w-full rounded-lg overflow-hidden">
+                      <div ref={mapContainer} className="h-full w-full" />
+                    </div>
+                    <div className="mt-4 flex items-center space-x-4 text-sm">
+                      <div className="flex items-center space-x-1">
+                        <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                        <span>Allerte critiche</span>
                       </div>
+                      <div className="flex items-center space-x-1">
+                        <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+                        <span>Allerte moderate</span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                        <span>Problemi risolti</span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Alerts and Issues Panel */}
+                <div className="space-y-4">
+                  {/* Active Alerts */}
+                  <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+                    <CardHeader className="pb-3">
+                      <CardTitle className="text-lg flex items-center space-x-2">
+                        <AlertTriangle className="h-5 w-5 text-orange-500" />
+                        <span>Segnalazioni Cittadini</span>
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-3">
+                      {mapAlerts.filter(alert => alert.type === 'alert').map((alert) => (
+                        <Alert key={alert.id} className={`border-l-4 ${
+                          alert.severity === 'high' ? 'border-red-500' : 'border-orange-500'
+                        }`}>
+                          <AlertCircle className="h-4 w-4" />
+                          <AlertTitle className="text-sm">{alert.title}</AlertTitle>
+                          <AlertDescription className="text-xs text-gray-600">
+                            {alert.location} • {alert.timestamp}
+                          </AlertDescription>
+                        </Alert>
+                      ))}
                     </CardContent>
                   </Card>
-                );
-              })}
-            </div>
-          </TabsContent>
 
-          <TabsContent value="map" className="space-y-4 sm:space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
-              {/* Map */}
-              <Card className="lg:col-span-2 border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+                  {/* Resolved Issues */}
+                  <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+                    <CardHeader className="pb-3">
+                      <CardTitle className="text-lg flex items-center space-x-2">
+                        <CheckCircle className="h-5 w-5 text-green-500" />
+                        <span>Risolti di Recente</span>
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-3">
+                      {mapAlerts.filter(alert => alert.type === 'resolved').map((issue) => (
+                        <div key={issue.id} className="p-3 bg-green-50 rounded-lg border-l-4 border-green-500">
+                          <div className="flex items-center space-x-2">
+                            <CheckCircle className="h-4 w-4 text-green-600" />
+                            <span className="text-sm font-medium">{issue.title}</span>
+                          </div>
+                          <p className="text-xs text-gray-600 mt-1">
+                            {issue.location} • {issue.timestamp}
+                          </p>
+                        </div>
+                      ))}
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="analytics" className="space-y-4 sm:space-y-6 mt-0">
+              <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
                 <CardHeader>
-                  <CardTitle className="flex items-center space-x-2">
-                    <MapPin className="h-5 w-5" />
-                    <span>Mappa del Comune</span>
-                  </CardTitle>
-                  <CardDescription>
-                    Visualizzazione in tempo reale di allerte e problemi risolti
-                  </CardDescription>
+                  <CardTitle>Analytics Avanzate</CardTitle>
+                  <CardDescription>Analisi dettagliate delle performance delle integrazioni</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="h-96 w-full rounded-lg overflow-hidden">
-                    <div ref={mapContainer} className="h-full w-full" />
-                  </div>
-                  <div className="mt-4 flex items-center space-x-4 text-sm">
-                    <div className="flex items-center space-x-1">
-                      <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                      <span>Allerte critiche</span>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
-                      <span>Allerte moderate</span>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                      <span>Problemi risolti</span>
-                    </div>
+                  <div className="text-center py-8 text-gray-500">
+                    <Activity className="h-12 w-12 mx-auto mb-4" />
+                    <p>Dashboard analytics in fase di sviluppo</p>
+                    <p className="text-sm">Qui verranno mostrati grafici e metriche dettagliate</p>
                   </div>
                 </CardContent>
               </Card>
-
-              {/* Alerts and Issues Panel */}
-              <div className="space-y-4">
-                {/* Active Alerts */}
-                <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-                  <CardHeader className="pb-3">
-                    <CardTitle className="text-lg flex items-center space-x-2">
-                      <AlertTriangle className="h-5 w-5 text-orange-500" />
-                      <span>Segnalazioni Cittadini</span>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-3">
-                    {mapAlerts.filter(alert => alert.type === 'alert').map((alert) => (
-                      <Alert key={alert.id} className={`border-l-4 ${
-                        alert.severity === 'high' ? 'border-red-500' : 'border-orange-500'
-                      }`}>
-                        <AlertCircle className="h-4 w-4" />
-                        <AlertTitle className="text-sm">{alert.title}</AlertTitle>
-                        <AlertDescription className="text-xs text-gray-600">
-                          {alert.location} • {alert.timestamp}
-                        </AlertDescription>
-                      </Alert>
-                    ))}
-                  </CardContent>
-                </Card>
-
-                {/* Resolved Issues */}
-                <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-                  <CardHeader className="pb-3">
-                    <CardTitle className="text-lg flex items-center space-x-2">
-                      <CheckCircle className="h-5 w-5 text-green-500" />
-                      <span>Risolti di Recente</span>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-3">
-                    {mapAlerts.filter(alert => alert.type === 'resolved').map((issue) => (
-                      <div key={issue.id} className="p-3 bg-green-50 rounded-lg border-l-4 border-green-500">
-                        <div className="flex items-center space-x-2">
-                          <CheckCircle className="h-4 w-4 text-green-600" />
-                          <span className="text-sm font-medium">{issue.title}</span>
-                        </div>
-                        <p className="text-xs text-gray-600 mt-1">
-                          {issue.location} • {issue.timestamp}
-                        </p>
-                      </div>
-                    ))}
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
-          </TabsContent>
-
-          <TabsContent value="analytics" className="space-y-4 sm:space-y-6">
-            <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle>Analytics Avanzate</CardTitle>
-                <CardDescription>Analisi dettagliate delle performance delle integrazioni</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="text-center py-8 text-gray-500">
-                  <Activity className="h-12 w-12 mx-auto mb-4" />
-                  <p>Dashboard analytics in fase di sviluppo</p>
-                  <p className="text-sm">Qui verranno mostrati grafici e metriche dettagliate</p>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
+            </TabsContent>
+          </div>
         </Tabs>
 
         {/* Bottom Info */}
