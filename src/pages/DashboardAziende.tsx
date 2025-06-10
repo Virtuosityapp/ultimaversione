@@ -7,9 +7,12 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Badge } from '@/components/ui/badge';
 import { Users, UserCheck, Upload, FileText, Award, Gift, Plane, ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useLanguage } from '@/contexts/LanguageContext';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 const DashboardAziende = () => {
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const [certificatiDipendenti] = useState(245);
   const [certificatiEsterni] = useState(89);
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
@@ -55,6 +58,8 @@ const DashboardAziende = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-6">
+      <LanguageSwitcher />
+      
       <div className="max-w-7xl mx-auto">
         {/* Navigation Button */}
         <div className="mb-6">
@@ -64,7 +69,7 @@ const DashboardAziende = () => {
             className="flex items-center gap-2 hover:bg-white/80 border-blue-200 text-blue-700 hover:text-blue-800"
           >
             <ArrowLeft className="h-4 w-4" />
-            Torna al Menu
+            {t('backToMenu')}
           </Button>
         </div>
 
@@ -72,7 +77,7 @@ const DashboardAziende = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <Card className="border-0 shadow-lg bg-gradient-to-br from-green-500 to-emerald-600 text-white">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-green-100">Certificati Dipendenti</CardTitle>
+              <CardTitle className="text-sm font-medium text-green-100">{t('employeeCertificates')}</CardTitle>
               <div className="p-2 bg-white/20 rounded-lg">
                 <Users className="h-5 w-5 text-white" />
               </div>
@@ -80,14 +85,14 @@ const DashboardAziende = () => {
             <CardContent>
               <div className="text-3xl font-bold text-white">{certificatiDipendenti}</div>
               <p className="text-xs text-green-100 mt-1">
-                Certificati DPP ricevuti dai dipendenti aziendali
+                {t('employeeCertificatesDesc')}
               </p>
             </CardContent>
           </Card>
 
           <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-500 to-cyan-600 text-white">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-blue-100">Certificati Esterni</CardTitle>
+              <CardTitle className="text-sm font-medium text-blue-100">{t('externalCertificates')}</CardTitle>
               <div className="p-2 bg-white/20 rounded-lg">
                 <UserCheck className="h-5 w-5 text-white" />
               </div>
@@ -95,7 +100,7 @@ const DashboardAziende = () => {
             <CardContent>
               <div className="text-3xl font-bold text-white">{certificatiEsterni}</div>
               <p className="text-xs text-blue-100 mt-1">
-                Certificati DPP ricevuti da soggetti esterni
+                {t('externalCertificatesDesc')}
               </p>
             </CardContent>
           </Card>
@@ -106,17 +111,17 @@ const DashboardAziende = () => {
           <CardHeader className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-t-lg">
             <CardTitle className="flex items-center gap-2">
               <Gift className="h-6 w-6" />
-              Welfare, Premi e Gadget Aziendali
+              {t('welfareTitle')}
             </CardTitle>
             <CardDescription className="text-purple-100">
-              Gestisci i premi welfare, gadget aziendali e viaggi premio disponibili per i dipendenti
+              {t('welfareDescription')}
             </CardDescription>
           </CardHeader>
           <CardContent className="p-6">
             {/* Form per aggiungere nuovo item */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6 p-6 border-2 border-dashed border-purple-200 rounded-xl bg-gradient-to-r from-purple-50 to-pink-50">
               <div>
-                <Label htmlFor="tipo" className="text-purple-700 font-medium">Tipo</Label>
+                <Label htmlFor="tipo" className="text-purple-700 font-medium">{t('type')}</Label>
                 <Input
                   id="tipo"
                   placeholder="Premio/Viaggio/Gadget"
@@ -126,7 +131,7 @@ const DashboardAziende = () => {
                 />
               </div>
               <div>
-                <Label htmlFor="nome" className="text-purple-700 font-medium">Nome</Label>
+                <Label htmlFor="nome" className="text-purple-700 font-medium">{t('name')}</Label>
                 <Input
                   id="nome"
                   placeholder="Nome del premio"
@@ -136,7 +141,7 @@ const DashboardAziende = () => {
                 />
               </div>
               <div>
-                <Label htmlFor="valore" className="text-purple-700 font-medium">Valore</Label>
+                <Label htmlFor="valore" className="text-purple-700 font-medium">{t('value')}</Label>
                 <Input
                   id="valore"
                   placeholder="€ 0"
@@ -151,7 +156,7 @@ const DashboardAziende = () => {
                   className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg"
                 >
                   <Upload className="mr-2 h-4 w-4" />
-                  Aggiungi
+                  {t('add')}
                 </Button>
               </div>
             </div>
@@ -179,10 +184,10 @@ const DashboardAziende = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-white">
               <FileText className="h-6 w-6" />
-              Report Bilancio di Sostenibilità
+              {t('sustainabilityReport')}
             </CardTitle>
             <CardDescription className="text-orange-100">
-              Genera report con i dati per il bilancio di sostenibilità aziendale
+              {t('sustainabilityDescription')}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -190,13 +195,13 @@ const DashboardAziende = () => {
               <DialogTrigger asChild>
                 <Button size="lg" className="w-full md:w-auto bg-white text-orange-600 hover:bg-gray-100 shadow-lg text-lg py-6 px-8">
                   <FileText className="mr-2 h-6 w-6" />
-                  Certifica e Compensa
+                  {t('certifyAndCompensate')}
                 </Button>
               </DialogTrigger>
               <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
                 <DialogHeader>
                   <DialogTitle className="text-2xl bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
-                    Report Bilancio di Sostenibilità
+                    {t('sustainabilityReport')}
                   </DialogTitle>
                   <DialogDescription>
                     Dati ambientali e sociali per il bilancio di sostenibilità aziendale
@@ -279,11 +284,11 @@ const DashboardAziende = () => {
 
                 <DialogFooter>
                   <Button variant="outline" onClick={() => setReportDialogOpen(false)}>
-                    Chiudi
+                    {t('close')}
                   </Button>
                   <Button className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600">
                     <FileText className="mr-2 h-4 w-4" />
-                    Esporta Report
+                    {t('exportReport')}
                   </Button>
                 </DialogFooter>
               </DialogContent>

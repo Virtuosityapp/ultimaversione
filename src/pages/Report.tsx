@@ -1,13 +1,15 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { FileText, Download, Calendar, TrendingUp, Award, MapPin, Clock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const Report = () => {
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   const activities = [
     {
@@ -156,6 +158,8 @@ const Report = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
+      <LanguageSwitcher />
+      
       {/* Header */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-green-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
@@ -167,7 +171,7 @@ const Report = () => {
                 className="h-10 w-10 sm:h-16 sm:w-16 object-contain"
               />
               <h1 className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
-                Report Virtuosity
+                {t('reportTitle')}
               </h1>
             </div>
             <div className="flex items-center justify-center space-x-2">
@@ -177,14 +181,14 @@ const Report = () => {
                 className="border-green-300 text-green-700 hover:bg-green-50 hover:border-green-400 hover:scale-105 transition-all duration-200 text-xs px-2 py-1.5 sm:text-sm sm:px-4 sm:py-2 active:scale-95"
               >
                 <Download className="h-4 w-4 mr-2" />
-                Scarica Report
+                {t('downloadReport')}
               </Button>
               <Button 
                 variant="outline" 
                 onClick={() => navigate("/dashboard")}
                 className="border-blue-300 text-blue-700 hover:bg-blue-50 hover:border-blue-400 hover:scale-105 transition-all duration-200 text-xs px-2 py-1.5 sm:text-sm sm:px-4 sm:py-2 active:scale-95"
               >
-                Torna alla Dashboard
+                {t('backToDashboard')}
               </Button>
             </div>
           </div>
@@ -196,10 +200,10 @@ const Report = () => {
         <div className="mb-4 sm:mb-8 text-center">
           <h2 className="text-xl sm:text-3xl font-bold text-gray-900 mb-1 sm:mb-2 flex items-center justify-center gap-2">
             <FileText className="h-6 w-6 sm:h-8 sm:w-8 text-green-600" />
-            Report Attività Sostenibili
+            {t('reportSubtitle')}
           </h2>
           <p className="text-gray-600 text-xs sm:text-base">
-            Riepilogo completo delle tue attività e certificazioni - Periodo: Gennaio 2024
+            {t('reportDescription')}
           </p>
         </div>
 
@@ -207,7 +211,7 @@ const Report = () => {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-6 mb-4 sm:mb-8">
           <Card className="border-0 shadow-lg bg-gradient-to-br from-green-400 to-emerald-500 text-white">
             <CardHeader className="pb-1 sm:pb-2">
-              <CardTitle className="text-xs sm:text-sm font-medium text-green-100">CO₂ Totale Risparmiata</CardTitle>
+              <CardTitle className="text-xs sm:text-sm font-medium text-green-100">{t('totalCO2Saved')}</CardTitle>
             </CardHeader>
             <CardContent className="pt-0">
               <div className="text-lg sm:text-2xl font-bold">{totalCO2Saved.toFixed(1)} kg</div>
@@ -217,7 +221,7 @@ const Report = () => {
 
           <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-400 to-cyan-500 text-white">
             <CardHeader className="pb-1 sm:pb-2">
-              <CardTitle className="text-xs sm:text-sm font-medium text-blue-100">Punti Totali</CardTitle>
+              <CardTitle className="text-xs sm:text-sm font-medium text-blue-100">{t('totalPoints')}</CardTitle>
             </CardHeader>
             <CardContent className="pt-0">
               <div className="text-lg sm:text-2xl font-bold">{totalPoints}</div>
@@ -227,7 +231,7 @@ const Report = () => {
 
           <Card className="border-0 shadow-lg bg-gradient-to-br from-purple-400 to-pink-500 text-white">
             <CardHeader className="pb-1 sm:pb-2">
-              <CardTitle className="text-xs sm:text-sm font-medium text-purple-100">CO₂ Certificata</CardTitle>
+              <CardTitle className="text-xs sm:text-sm font-medium text-purple-100">{t('certifiedCO2')}</CardTitle>
             </CardHeader>
             <CardContent className="pt-0">
               <div className="text-lg sm:text-2xl font-bold">{totalCertifiedCO2.toFixed(1)} kg</div>
@@ -237,7 +241,7 @@ const Report = () => {
 
           <Card className="border-0 shadow-lg bg-gradient-to-br from-orange-400 to-red-500 text-white">
             <CardHeader className="pb-1 sm:pb-2">
-              <CardTitle className="text-xs sm:text-sm font-medium text-orange-100">Punti Certificati</CardTitle>
+              <CardTitle className="text-xs sm:text-sm font-medium text-orange-100">{t('certifiedPoints')}</CardTitle>
             </CardHeader>
             <CardContent className="pt-0">
               <div className="text-lg sm:text-2xl font-bold">{totalCertifiedPoints}</div>
@@ -251,10 +255,10 @@ const Report = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base sm:text-xl">
               <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
-              Dettaglio Attività
+              {t('activitiesDetail')}
             </CardTitle>
             <CardDescription className="text-xs sm:text-sm">
-              Elenco completo di tutte le attività sostenibili registrate
+              {t('activitiesDescription')}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -262,13 +266,13 @@ const Report = () => {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="text-xs">Tipo</TableHead>
-                    <TableHead className="text-xs">Attività</TableHead>
-                    <TableHead className="text-xs">Distanza</TableHead>
-                    <TableHead className="text-xs">CO₂ Risp.</TableHead>
-                    <TableHead className="text-xs">Punti</TableHead>
-                    <TableHead className="text-xs">Data</TableHead>
-                    <TableHead className="text-xs">Luogo</TableHead>
+                    <TableHead className="text-xs">{t('activityType')}</TableHead>
+                    <TableHead className="text-xs">{t('activity')}</TableHead>
+                    <TableHead className="text-xs">{t('distance')}</TableHead>
+                    <TableHead className="text-xs">{t('co2Saved')}</TableHead>
+                    <TableHead className="text-xs">{t('points')}</TableHead>
+                    <TableHead className="text-xs">{t('date')}</TableHead>
+                    <TableHead className="text-xs">{t('location')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -294,10 +298,10 @@ const Report = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base sm:text-xl">
               <Award className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />
-              Certificati Blockchain
+              {t('blockchainCertificates')}
             </CardTitle>
             <CardDescription className="text-xs sm:text-sm">
-              Certificazioni digitali verificate e immutabili
+              {t('certificatesDescription')}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -305,13 +309,13 @@ const Report = () => {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="text-xs">ID</TableHead>
-                    <TableHead className="text-xs">Titolo</TableHead>
-                    <TableHead className="text-xs">CO₂ Certificata</TableHead>
-                    <TableHead className="text-xs">Punti</TableHead>
-                    <TableHead className="text-xs">Data Validazione</TableHead>
-                    <TableHead className="text-xs">Hash Blockchain</TableHead>
-                    <TableHead className="text-xs">Stato</TableHead>
+                    <TableHead className="text-xs">{t('id')}</TableHead>
+                    <TableHead className="text-xs">{t('title')}</TableHead>
+                    <TableHead className="text-xs">{t('certifiedCO2Short')}</TableHead>
+                    <TableHead className="text-xs">{t('points')}</TableHead>
+                    <TableHead className="text-xs">{t('validationDate')}</TableHead>
+                    <TableHead className="text-xs">{t('blockchainHash')}</TableHead>
+                    <TableHead className="text-xs">{t('status')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -325,7 +329,7 @@ const Report = () => {
                       <TableCell className="text-xs sm:text-sm font-mono">{cert.blockchainHash}</TableCell>
                       <TableCell>
                         <Badge className="bg-green-100 text-green-800 text-xs">
-                          Verificato
+                          {t('verified')}
                         </Badge>
                       </TableCell>
                     </TableRow>
