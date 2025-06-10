@@ -279,39 +279,39 @@ const About = () => {
 
   const features = [{
     icon: <Zap className="h-6 w-6" />,
-    title: "Tracking Automatico",
-    description: "Nessun input manuale. Le tue azioni sostenibili vengono rilevate automaticamente tramite sensori del telefono e integrazioni con app esterne.",
+    title: t('trackingAutomatico'),
+    description: t('trackingDesc'),
     details: ["Accelerometro e GPS", "Integrazione Google Fit/Apple Health", "API Bike/Car Sharing", "Sensori smart city"]
   }, {
     icon: <Shield className="h-6 w-6" />,
-    title: "Certificazione Blockchain",
-    description: "Ogni azione genera 4 tipologie di certificati digitali verificabili e immutabili su blockchain Ethereum/Polygon: CO2, Rifiuti e Riciclo, Risparmio Energetico e Acqua.",
+    title: t('certificazioneBlockchain'),
+    description: t('certificazioneDesc'),
     details: ["Hash crittografici unici", "Validazione automatica", "Tracciabilità completa", "Standard ESG compliance"]
   }, {
     icon: <Award className="h-6 w-6" />,
-    title: "Premi Reali",
-    description: "Converti i tuoi certificati in benefit aziendali, sconti sui trasporti, ingressi gratuiti e molto altro tramite il marketplace integrato.",
+    title: t('premiReali'),
+    description: t('premiDesc'),
     details: ["Benefit aziendali", "Sconti trasporti pubblici", "Accessi musei/eventi", "Gift card partner"]
   }, {
     icon: <Users className="h-6 w-6" />,
-    title: "Community & Gamification",
-    description: "Partecipa a sfide, conquista badge, scala le classifiche e connettiti con altri cittadini virtuosi nella community sostenibile.",
+    title: t('communityGamification'),
+    description: t('communityDesc'),
     details: ["Badge achievements", "Classifiche settimanali", "Sfide mensili", "Sistema referral"]
   }];
   const benefits = [{
     icon: <Target className="h-6 w-6" />,
-    title: "Per i Cittadini",
-    description: "Premi concreti per comportamenti sostenibili quotidiani",
+    title: t('perCittadini'),
+    description: t('perCittadiniDesc'),
     points: ["Incentivi reali", "Riconoscimento sociale", "Miglioramento qualità vita", "Contributo ambientale misurabile"]
   }, {
     icon: <Heart className="h-6 w-6" />,
-    title: "Per le Aziende",
-    description: "Strumenti ESG avanzati e coinvolgimento dei dipendenti",
+    title: t('perAziende'),
+    description: t('perAziendeDesc'),
     points: ["Report ESG automatici", "Engagement dei dipendenti", "Riduzione carbon footprint", "Compliance normative"]
   }, {
     icon: <Globe className="h-6 w-6" />,
-    title: "Per le Città",
-    description: "Dati real-time per politiche di sostenibilità efficaci",
+    title: t('perCitta'),
+    description: t('perCittaDesc'),
     points: ["Analytics mobilità urbana", "Monitoraggio obiettivi ambientali", "Citizen engagement", "Smart city integration"]
   }];
   const roadmap = [{
@@ -362,23 +362,23 @@ const About = () => {
   }];
   const certificateTypes = [{
     image: "/lovable-uploads/cef6f7ab-d91d-4e9f-8b7e-76e0c1eaa373.png",
-    title: "Certificati CO2",
-    description: "Riduzione emissioni attraverso mobilità sostenibile",
+    title: t('certificatiCO2'),
+    description: t('certificatiCO2Desc'),
     color: "from-green-500 to-emerald-600"
   }, {
     image: "/lovable-uploads/9fb70260-01a6-45a7-8a67-f234cf098899.png",
-    title: "Rifiuti e Riciclo",
-    description: "Gestione responsabile e riciclo dei materiali",
+    title: t('rifiutiRiciclo'),
+    description: t('rifiutiRicicloDesc'),
     color: "from-blue-500 to-cyan-600"
   }, {
     image: "/lovable-uploads/16190dbd-ebd1-4b29-968d-8c8f8d26066d.png",
-    title: "Risparmio Energetico",
-    description: "Ottimizzazione consumi e efficienza energetica",
+    title: t('risparmiEnergetico'),
+    description: t('risparmiEnergeticoDesc'),
     color: "from-yellow-500 to-orange-600"
   }, {
     image: "/lovable-uploads/c6969dcf-1661-4aed-966e-43b21ed8f62a.png",
-    title: "Certificati Acqua",
-    description: "Conservazione e uso responsabile delle risorse idriche",
+    title: t('certificatiAcqua'),
+    description: t('certificatiAcquaDesc'),
     color: "from-blue-400 to-blue-600"
   }];
   const team = [{
@@ -467,7 +467,7 @@ const About = () => {
             <img src="/lovable-uploads/f68e2d05-2991-4af9-a328-4b8b0b3e6728.png" alt="Virtuosity Marketplace Screenshot" className="mx-auto rounded-lg shadow-2xl max-w-[50%] h-auto" />
           </div>
           
-          <p className="text-xl text-gray-600 max-w-4xl mx-auto mb-8">Virtuosity è la prima piattaforma europea che trasforma automaticamente i comportamenti sostenibili in certificati verificabili, creando un ecosistema di incentivi concreti per cittadini, aziende e pubbliche amministrazioni.</p>
+          <p className="text-xl text-gray-600 max-w-4xl mx-auto mb-8">{t('aboutDescription')}</p>
         </div>
 
         {/* 2. Mission Statement - Perché esistiamo */}
@@ -512,11 +512,10 @@ const About = () => {
                 <Globe className="h-8 w-8" />
               </div>
               <CardTitle className="text-3xl font-bold text-gray-900">
-                Integrazione con Digital Product Passports (DPP)
+                {t('integrazioneDpp')}
               </CardTitle>
               <CardDescription className="text-lg text-gray-700 max-w-4xl mx-auto">
-                Virtuosity sarà tra le prime piattaforme europee ad integrare i Digital Product Passports, 
-                rivoluzionando la tracciabilità e sostenibilità dei prodotti secondo la normativa EU 2024
+                {t('integrazioneDppDesc')}
               </CardDescription>
             </CardHeader>
             <CardContent className="p-8">
@@ -609,7 +608,111 @@ const About = () => {
         </div>
 
         {/* 6. Privacy & Security - Come proteggiamo i dati */}
-        <PrivacySecurityCard />
+        <Card className="border-0 shadow-lg bg-gradient-to-r from-purple-50 via-blue-50 to-green-50 mb-16">
+          <CardHeader className="text-center">
+            <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-600 rounded-full flex items-center justify-center text-white mb-4 mx-auto">
+              <Shield className="h-8 w-8" />
+            </div>
+            <CardTitle className="text-3xl font-bold text-gray-900">
+              {t('privacySecurity')}
+            </CardTitle>
+            <CardDescription className="text-lg text-gray-700 max-w-4xl mx-auto">
+              {t('privacyDesc')}
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="p-8">
+            <div className="grid md:grid-cols-2 gap-12">
+              <div>
+                <h4 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                  <Shield className="w-6 h-6 text-purple-500 mr-3" />
+                  Cosa sono le Zero-Knowledge Proofs
+                </h4>
+                <div className="space-y-4">
+                  <div className="flex items-start">
+                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-1" />
+                    <div>
+                      <strong>Prova senza Rivelazione:</strong> Le ZKP permettono di dimostrare che hai compiuto un'azione sostenibile senza rivelare dettagli personali come posizione esatta, orari specifici o abitudini
+                    </div>
+                  </div>
+                  <div className="flex items-start">
+                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-1" />
+                    <div>
+                      <strong>Crittografia Avanzata:</strong> Utilizzano algoritmi matematici complessi per creare prove verificabili senza esporre i dati sottostanti
+                    </div>
+                  </div>
+                  <div className="flex items-start">
+                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-1" />
+                    <div>
+                      <strong>Standard Industriale:</strong> Tecnologia utilizzata da blockchain leader come Ethereum e protocolli DeFi per garantire privacy e sicurezza
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h4 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                  <Lightbulb className="w-6 h-6 text-blue-500 mr-3" />
+                  Come Funziona in Virtuosity
+                </h4>
+                <div className="space-y-4">
+                  <div className="flex items-start">
+                    <Zap className="w-5 h-5 text-blue-500 mr-3 mt-1" />
+                    <div>
+                      <strong>Raccolta Dati Minimale:</strong> L'app rileva solo l'essenziale (es. "hai usato una bici") senza registrare percorsi dettagliati o orari precisi
+                    </div>
+                  </div>
+                  <div className="flex items-start">
+                    <Award className="w-5 h-5 text-purple-500 mr-3 mt-1" />
+                    <div>
+                      <strong>Proof Generation:</strong> I tuoi dispositivi generano localmente prove crittografiche che dimostrano l'azione sostenibile senza inviare dati raw
+                    </div>
+                  </div>
+                  <div className="flex items-start">
+                    <Globe className="w-5 h-5 text-green-500 mr-3 mt-1" />
+                    <div>
+                      <strong>Verifica Blockchain:</strong> Le prove vengono verificate sulla blockchain senza mai esporre i tuoi dati personali, generando certificati anonimi
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-12 p-6 bg-white/50 rounded-lg">
+              <h4 className="text-xl font-bold text-gray-900 mb-4 text-center">Il Flusso di Lavoro DPP in Virtuosity</h4>
+              <div className="grid md:grid-cols-4 gap-6">
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white mb-3 mx-auto">1</div>
+                  <h5 className="font-bold text-sm mb-2">Scansione QR</h5>
+                  <p className="text-xs text-gray-600">App rileva automaticamente DPP durante acquisti o uso prodotti</p>
+                </div>
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white mb-3 mx-auto">2</div>
+                  <h5 className="font-bold text-sm mb-2">Validazione Blockchain</h5>
+                  <p className="text-xs text-gray-600">Verifica autenticità e calcola impact score basato su dati DPP</p>
+                </div>
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center text-white mb-3 mx-auto">3</div>
+                  <h5 className="font-bold text-sm mb-2">Generazione Certificati</h5>
+                  <p className="text-xs text-gray-600">Crea certificati ESG basati su sostenibilità prodotto acquistato</p>
+                </div>
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white mb-3 mx-auto">4</div>
+                  <h5 className="font-bold text-sm mb-2">Premi & Insights</h5>
+                  <p className="text-xs text-gray-600">Sblocca ricompense e ricevi suggerimenti per scelte più sostenibili</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-8 p-6 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg text-white text-center">
+              <h4 className="text-lg font-bold mb-2">Vantaggi Competitivi</h4>
+              <p className="text-sm font-normal">
+                Con l'integrazione DPP, Virtuosity diventa l'unica piattaforma che collega automaticamente 
+                le scelte di consumo sostenibile con un sistema di incentivi concreti, 
+                preparando utenti e aziende alla nuova era della trasparenza ambientale europea.
+              </p>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* 7. Modelli di Scambio - Come si crea valore */}
         <div className="mb-16">
@@ -757,9 +860,7 @@ Modelli di Scambio Certificati</h3>
                   </div>
 
                   <div className="bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg p-4 text-white py-[12px]">
-                    <h5 className="font-bold mb-2">
-
-Vantaggi per il Comune</h5>
+                    <h5 className="font-bold mb-2">Vantaggi per il Comune</h5>
                     <ul className="text-sm space-y-1">
                       <li>• Dati real-time su comportamenti sostenibili cittadini</li>
                       <li>• Raggiungimento obiettivi climatici EU 2030</li>
@@ -858,7 +959,7 @@ Vantaggi per il Comune</h5>
         {/* 12. Team - Chi c'è dietro */}
         <div className="mb-16">
           <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            Il Nostro Team
+            {t('ilNostroTeam')}
           </h3>
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {team.map((member, index) => <TeamMemberCard key={index} member={member} />)}
@@ -867,7 +968,7 @@ Vantaggi per il Comune</h5>
 
         {/* 13. Advisors - I nostri consulenti esperti */}
         <div className="mb-16">
-          <h3 className="text-3xl font-bold text-center text-gray-900 mb-4">I Nostri Advisors</h3>
+          <h3 className="text-3xl font-bold text-center text-gray-900 mb-4">{t('iNostriAdvisors')}</h3>
           <p className="text-lg text-gray-600 text-center mb-12 max-w-4xl mx-auto">
             Un team di esperti di livello internazionale che ci guida nell'innovazione sostenibile, 
             dalla blockchain alla compliance, dall'economia all'intelligenza artificiale.
@@ -890,7 +991,7 @@ Vantaggi per il Comune</h5>
         {/* 14. Offerta Commerciale - Piani di pricing */}
         <div className="mb-16">
           <h3 className="text-3xl font-bold text-center text-gray-900 mb-4">
-            Offerta Commerciale
+            {t('offertaCommerciale')}
           </h3>
           <p className="text-lg text-gray-600 text-center mb-12 max-w-3xl mx-auto">
             Scegli il piano più adatto alle tue esigenze e accedi alla piattaforma di sostenibilità più innovativa d'Europa.
@@ -903,7 +1004,7 @@ Vantaggi per il Comune</h5>
                 <div className="w-16 h-16 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full flex items-center justify-center text-white mb-4 mx-auto">
                   <Euro className="h-8 w-8" />
                 </div>
-                <CardTitle className="text-2xl font-bold text-gray-900">Piano Micro</CardTitle>
+                <CardTitle className="text-2xl font-bold text-gray-900">{t('pianoMicro')}</CardTitle>
                 <CardDescription className="text-gray-600">
                   Perfetto per P.IVA e micro aziende
                 </CardDescription>
@@ -934,7 +1035,7 @@ Vantaggi per il Comune</h5>
                   </div>
                 </div>
                 <Button className="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white hover:from-green-600 hover:to-emerald-700">
-                  Inizia Subito
+                  {t('iniziaSubito')}
                 </Button>
               </CardContent>
             </Card>

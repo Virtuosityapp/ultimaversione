@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 type Language = 'it' | 'en';
@@ -21,11 +22,9 @@ const translations = {
     buttonExchange: "Exchange",
     buttonCompanies: "Aziende",
     buttonMunicipalities: "Comuni",
-    // Language switcher
     switchToEnglish: "Switch to English",
     englishVersion: "English Version",
     englishComingSoon: "English translation coming soon! 🇬🇧",
-    // Report page translations
     reportTitle: "Report Virtuosity",
     reportSubtitle: "Report Attività Sostenibili",
     reportDescription: "Riepilogo completo delle tue attività e certificazioni - Periodo: Gennaio 2024",
@@ -39,7 +38,6 @@ const translations = {
     activitiesDescription: "Elenco completo di tutte le attività sostenibili registrate",
     blockchainCertificates: "Certificati Blockchain",
     certificatesDescription: "Certificazioni digitali verificate e immutabili",
-    // DashboardAziende page translations
     backToMenu: "Torna al Menu",
     employeeCertificates: "Certificati Dipendenti",
     externalCertificates: "Certificati Esterni",
@@ -56,7 +54,6 @@ const translations = {
     certifyAndCompensate: "Certifica e Compensa",
     close: "Chiudi",
     exportReport: "Esporta Report",
-    // Table headers
     activityType: "Tipo",
     activity: "Attività",
     distance: "Distanza",
@@ -71,14 +68,49 @@ const translations = {
     blockchainHash: "Hash Blockchain",
     status: "Stato",
     verified: "Verificato",
-    // About page translations
     aboutValueOfActions: "Il valore delle azioni quotidiane",
     aboutOurMission: "La Nostra Missione",
     aboutMissionText: "Democratizzare la sostenibilità attraverso la tecnologia blockchain, rendendo ogni azione sostenibile misurabile, verificabile e premiabile. Costruiamo un futuro dove fare la scelta giusta per il pianeta diventa anche la scelta più conveniente per le persone.",
     aboutHowItWorks: "Come Funziona Virtuosity",
     aboutStartNow: "Inizia Ora",
     aboutHome: "Home",
-    aboutBackHome: "Torna alla Home"
+    aboutBackHome: "Torna alla Home",
+    // New About page translations
+    aboutDescription: "Virtuosity è la prima piattaforma europea che trasforma automaticamente i comportamenti sostenibili in certificati verificabili, creando un ecosistema di incentivi concreti per cittadini, aziende e pubbliche amministrazioni.",
+    trackingAutomatico: "Tracking Automatico",
+    trackingDesc: "Nessun input manuale. Le tue azioni sostenibili vengono rilevate automaticamente tramite sensori del telefono e integrazioni con app esterne.",
+    certificazioneBlockchain: "Certificazione Blockchain",
+    certificazioneDesc: "Ogni azione genera 4 tipologie di certificati digitali verificabili e immutabili su blockchain Ethereum/Polygon: CO2, Rifiuti e Riciclo, Risparmio Energetico e Acqua.",
+    premiReali: "Premi Reali",
+    premiDesc: "Converti i tuoi certificati in benefit aziendali, sconti sui trasporti, ingressi gratuiti e molto altro tramite il marketplace integrato.",
+    communityGamification: "Community & Gamification",
+    communityDesc: "Partecipa a sfide, conquista badge, scala le classifiche e connettiti con altri cittadini virtuosi nella community sostenibile.",
+    certificatiCO2: "Certificati CO2",
+    certificatiCO2Desc: "Riduzione emissioni attraverso mobilità sostenibile",
+    rifiutiRiciclo: "Rifiuti e Riciclo",
+    rifiutiRicicloDesc: "Gestione responsabile e riciclo dei materiali",
+    risparmiEnergetico: "Risparmio Energetico",
+    risparmiEnergeticoDesc: "Ottimizzazione consumi e efficienza energetica",
+    certificatiAcqua: "Certificati Acqua",
+    certificatiAcquaDesc: "Conservazione e uso responsabile delle risorse idriche",
+    integrazioneDpp: "Integrazione con Digital Product Passports (DPP)",
+    integrazioneDppDesc: "Virtuosity sarà tra le prime piattaforme europee ad integrare i Digital Product Passports, rivoluzionando la tracciabilità e sostenibilità dei prodotti secondo la normativa EU 2024",
+    privacySecurity: "Privacy e Sicurezza con Zero-Knowledge Proofs",
+    privacyDesc: "La tua privacy è al sicuro grazie alle Zero-Knowledge Proofs (ZKP), che permettono di verificare i tuoi comportamenti sostenibili senza rivelare dati personali sensibili",
+    perCittadini: "Per i Cittadini",
+    perCittadiniDesc: "Premi concreti per comportamenti sostenibili quotidiani",
+    perAziende: "Per le Aziende",
+    perAziendeDesc: "Strumenti ESG avanzati e coinvolgimento dei dipendenti",
+    perCitta: "Per le Città",
+    perCittaDesc: "Dati real-time per politiche di sostenibilità efficaci",
+    ilNostroTeam: "Il Nostro Team",
+    iNostriAdvisors: "I Nostri Advisors",
+    offertaCommerciale: "Offerta Commerciale",
+    pianoMicro: "Piano Micro",
+    pianoPMI: "Piano PMI",
+    pianoEnterprise: "Piano Enterprise",
+    iniziaSubito: "Inizia Subito",
+    contattaci: "Contattaci"
   },
   en: {
     // Index page translations
@@ -90,11 +122,9 @@ const translations = {
     buttonExchange: "Exchange",
     buttonCompanies: "Companies",
     buttonMunicipalities: "Municipalities",
-    // Language switcher
     switchToEnglish: "Passa all'Italiano",
     englishVersion: "Versione Italiana",
     englishComingSoon: "Traduzione italiana già disponibile! 🇮🇹",
-    // Report page translations
     reportTitle: "Virtuosity Report",
     reportSubtitle: "Sustainable Activities Report",
     reportDescription: "Complete summary of your activities and certifications - Period: January 2024",
@@ -108,7 +138,6 @@ const translations = {
     activitiesDescription: "Complete list of all registered sustainable activities",
     blockchainCertificates: "Blockchain Certificates",
     certificatesDescription: "Verified and immutable digital certifications",
-    // DashboardAziende page translations
     backToMenu: "Back to Menu",
     employeeCertificates: "Employee Certificates",
     externalCertificates: "External Certificates",
@@ -125,7 +154,6 @@ const translations = {
     certifyAndCompensate: "Certify and Compensate",
     close: "Close",
     exportReport: "Export Report",
-    // Table headers
     activityType: "Type",
     activity: "Activity",
     distance: "Distance",
@@ -140,14 +168,49 @@ const translations = {
     blockchainHash: "Blockchain Hash",
     status: "Status",
     verified: "Verified",
-    // About page translations
     aboutValueOfActions: "The value of daily actions",
     aboutOurMission: "Our Mission",
     aboutMissionText: "Democratize sustainability through blockchain technology, making every sustainable action measurable, verifiable and rewarding. We build a future where making the right choice for the planet also becomes the most convenient choice for people.",
     aboutHowItWorks: "How Virtuosity Works",
     aboutStartNow: "Start Now",
     aboutHome: "Home",
-    aboutBackHome: "Back to Home"
+    aboutBackHome: "Back to Home",
+    // New About page translations
+    aboutDescription: "Virtuosity is the first European platform that automatically transforms sustainable behaviors into verifiable certificates, creating an ecosystem of concrete incentives for citizens, companies and public administrations.",
+    trackingAutomatico: "Automatic Tracking",
+    trackingDesc: "No manual input. Your sustainable actions are automatically detected through phone sensors and integrations with external apps.",
+    certificazioneBlockchain: "Blockchain Certification",
+    certificazioneDesc: "Every action generates 4 types of verifiable and immutable digital certificates on Ethereum/Polygon blockchain: CO2, Waste and Recycling, Energy Saving and Water.",
+    premiReali: "Real Rewards",
+    premiDesc: "Convert your certificates into corporate benefits, transport discounts, free admissions and much more through the integrated marketplace.",
+    communityGamification: "Community & Gamification",
+    communityDesc: "Participate in challenges, earn badges, climb leaderboards and connect with other virtuous citizens in the sustainable community.",
+    certificatiCO2: "CO2 Certificates",
+    certificatiCO2Desc: "Emission reduction through sustainable mobility",
+    rifiutiRiciclo: "Waste and Recycling",
+    rifiutiRicicloDesc: "Responsible management and recycling of materials",
+    risparmiEnergetico: "Energy Saving",
+    risparmiEnergeticoDesc: "Consumption optimization and energy efficiency",
+    certificatiAcqua: "Water Certificates",
+    certificatiAcquaDesc: "Conservation and responsible use of water resources",
+    integrazioneDpp: "Integration with Digital Product Passports (DPP)",
+    integrazioneDppDesc: "Virtuosity will be among the first European platforms to integrate Digital Product Passports, revolutionizing product traceability and sustainability according to EU 2024 regulations",
+    privacySecurity: "Privacy and Security with Zero-Knowledge Proofs",
+    privacyDesc: "Your privacy is safe thanks to Zero-Knowledge Proofs (ZKP), which allow verifying your sustainable behaviors without revealing sensitive personal data",
+    perCittadini: "For Citizens",
+    perCittadiniDesc: "Concrete rewards for daily sustainable behaviors",
+    perAziende: "For Companies",
+    perAziendeDesc: "Advanced ESG tools and employee engagement",
+    perCitta: "For Cities",
+    perCittaDesc: "Real-time data for effective sustainability policies",
+    ilNostroTeam: "Our Team",
+    iNostriAdvisors: "Our Advisors",
+    offertaCommerciale: "Commercial Offer",
+    pianoMicro: "Micro Plan",
+    pianoPMI: "SME Plan",
+    pianoEnterprise: "Enterprise Plan",
+    iniziaSubito: "Start Now",
+    contattaci: "Contact Us"
   }
 };
 
