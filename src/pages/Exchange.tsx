@@ -18,7 +18,7 @@ const Exchange = () => {
   const rewards = [
     {
       id: 1,
-      title: "Buono Pasto €10",
+      title: "Buono Pasto",
       description: "Buono spendibile in mense aziendali partner",
       cost: 250,
       category: "corporate",
