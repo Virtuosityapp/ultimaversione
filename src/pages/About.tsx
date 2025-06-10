@@ -80,13 +80,15 @@ const RoadmapCard = ({
 const TeamMemberCard = ({
   member
 }) => <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm text-center">
-    <CardHeader>
+    <CardHeader className="text-center">
       <div className="text-6xl mb-4">{member.image}</div>
-      <CardTitle className="text-xl">{member.name}</CardTitle>
-      <Badge variant="secondary">{member.role}</Badge>
+      <CardTitle className="text-xl text-center">{member.name}</CardTitle>
+      <div className="flex justify-center">
+        <Badge variant="secondary">{member.role}</Badge>
+      </div>
     </CardHeader>
-    <CardContent>
-      <p className="text-sm text-gray-600">{member.bio}</p>
+    <CardContent className="text-center">
+      <p className="text-sm text-gray-600 text-center">{member.bio}</p>
     </CardContent>
   </Card>;
 const IntegrationCard = ({
