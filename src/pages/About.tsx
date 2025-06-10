@@ -3,6 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Leaf, ArrowLeft, Shield, Zap, Globe, Award, Users, TrendingUp, CheckCircle, Target, Heart, Lightbulb, Droplets, Recycle, Battery, MapPin, Building, Euro, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+
 const CertificateTypeCard = ({
   cert
 }) => <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
@@ -272,6 +275,8 @@ const AdvisorCard = ({
   </Card>;
 const About = () => {
   const navigate = useNavigate();
+  const { t } = useLanguage();
+
   const features = [{
     icon: <Zap className="h-6 w-6" />,
     title: "Tracking Automatico",
@@ -425,7 +430,10 @@ const About = () => {
     role: "CSRD & ESRS Expert",
     bio: "Dottore Commercialista esperto della normativa CSRD e degli standard ESRS"
   }];
-  return <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
+      <LanguageSwitcher />
+      
       {/* Header */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-green-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -433,7 +441,7 @@ const About = () => {
             <div className="flex items-center space-x-3">
               <Button variant="ghost" onClick={() => navigate("/")} className="mr-1 sm:mr-2 p-2 sm:p-3" size="sm">
                 <ArrowLeft className="h-4 w-4 sm:mr-2" />
-                <span className="hidden sm:inline">Home</span>
+                <span className="hidden sm:inline">{t('aboutHome')}</span>
               </Button>
               <img src="/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png" alt="Virtuosity Logo" className="relative h-10 w-10 sm:h-12 sm:w-12 lg:h-16 lg:w-16 mx-auto object-contain" />
               <h1 className="text-2xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
@@ -441,7 +449,7 @@ const About = () => {
               </h1>
             </div>
             <Button onClick={() => navigate("/dashboard")} className="bg-gradient-to-r from-green-600 to-blue-600 text-white hover:from-green-700 hover:to-blue-700">
-              Inizia Ora
+              {t('aboutStartNow')}
             </Button>
           </div>
         </div>
@@ -451,7 +459,7 @@ const About = () => {
         {/* 1. Hero Section - Introduzione */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Il valore delle <span className="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">azioni quotidiane</span>
+            {t('aboutValueOfActions')} <span className="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent"></span>
           </h2>
           
           {/* Marketplace Screenshot - Single Image */}
@@ -465,12 +473,9 @@ const About = () => {
         {/* 2. Mission Statement - Perché esistiamo */}
         <Card className="border-0 shadow-lg bg-gradient-to-r from-green-50 to-blue-50 mb-16">
           <CardContent className="p-8 text-center">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">La Nostra Missione</h3>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">{t('aboutOurMission')}</h3>
             <p className="text-lg text-gray-700 max-w-4xl mx-auto">
-              Democratizzare la sostenibilità attraverso la tecnologia blockchain, 
-              rendendo ogni azione sostenibile misurabile, verificabile e premiabile. 
-              Costruiamo un futuro dove fare la scelta giusta per il pianeta 
-              diventa anche la scelta più conveniente per le persone.
+              {t('aboutMissionText')}
             </p>
           </CardContent>
         </Card>
@@ -478,7 +483,7 @@ const About = () => {
         {/* 3. Come Funziona - Il meccanismo base */}
         <div className="mb-16">
           <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            Come Funziona Virtuosity
+            {t('aboutHowItWorks')}
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => <FeatureCard key={index} feature={feature} />)}
@@ -1088,14 +1093,16 @@ Vantaggi per il Comune</h5>
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button onClick={() => navigate("/dashboard")} className="bg-white text-green-600 hover:bg-gray-100 px-8 py-3 text-lg font-semibold">
-              Inizia Subito
+              {t('aboutStartNow')}
             </Button>
             <Button variant="outline" onClick={() => navigate("/")} className="border-white text-white hover:bg-white hover:text-green-600 px-8 py-3 text-lg">
-              Torna alla Home
+              {t('aboutBackHome')}
             </Button>
           </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default About;

@@ -70,7 +70,15 @@ const translations = {
     validationDate: "Data Validazione",
     blockchainHash: "Hash Blockchain",
     status: "Stato",
-    verified: "Verificato"
+    verified: "Verificato",
+    // About page translations
+    aboutValueOfActions: "Il valore delle azioni quotidiane",
+    aboutOurMission: "La Nostra Missione",
+    aboutMissionText: "Democratizzare la sostenibilità attraverso la tecnologia blockchain, rendendo ogni azione sostenibile misurabile, verificabile e premiabile. Costruiamo un futuro dove fare la scelta giusta per il pianeta diventa anche la scelta più conveniente per le persone.",
+    aboutHowItWorks: "Come Funziona Virtuosity",
+    aboutStartNow: "Inizia Ora",
+    aboutHome: "Home",
+    aboutBackHome: "Torna alla Home"
   },
   en: {
     // Index page translations
@@ -131,7 +139,15 @@ const translations = {
     validationDate: "Validation Date",
     blockchainHash: "Blockchain Hash",
     status: "Status",
-    verified: "Verified"
+    verified: "Verified",
+    // About page translations
+    aboutValueOfActions: "The value of daily actions",
+    aboutOurMission: "Our Mission",
+    aboutMissionText: "Democratize sustainability through blockchain technology, making every sustainable action measurable, verifiable and rewarding. We build a future where making the right choice for the planet also becomes the most convenient choice for people.",
+    aboutHowItWorks: "How Virtuosity Works",
+    aboutStartNow: "Start Now",
+    aboutHome: "Home",
+    aboutBackHome: "Back to Home"
   }
 };
 
