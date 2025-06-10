@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Calendar, Award, TrendingUp, MapPin, Clock, QrCode, Camera } from "lucide-react";
+import { Calendar, Award, TrendingUp, MapPin, Clock, QrCode, Camera, Smartphone } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { DppVerification } from "@/components/DppVerification";
 import CitizenReporting from "@/components/CitizenReporting";
@@ -46,7 +46,7 @@ const Dashboard = () => {
       time: "32 min",
       timestamp: "2024-01-14T12:20:00",
       location: "Parco Sempione",
-      source: "Apple Health"
+      source: "Samsung Health"
     }
   ];
 
@@ -223,8 +223,8 @@ const Dashboard = () => {
                           <h3 className="font-semibold text-gray-900 text-xs sm:text-base truncate">{activity.action}</h3>
                           <div className="flex items-center space-x-2 text-xs text-gray-600">
                             <span className="flex items-center gap-1">
-                              <MapPin className="h-3 w-3 flex-shrink-0" />
-                              <span className="truncate max-w-20 sm:max-w-none">{activity.location}</span>
+                              <Smartphone className="h-3 w-3 flex-shrink-0" />
+                              <span className="truncate max-w-20 sm:max-w-none">{activity.source}</span>
                             </span>
                             <span className="flex items-center gap-1">
                               <Clock className="h-3 w-3 flex-shrink-0" />
@@ -402,3 +402,5 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+</edits_to_apply>
