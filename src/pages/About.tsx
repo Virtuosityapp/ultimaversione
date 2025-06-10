@@ -3,9 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Leaf, ArrowLeft, Shield, Zap, Globe, Award, Users, TrendingUp, CheckCircle, Target, Heart, Lightbulb, Droplets, Recycle, Battery, MapPin, Building } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-
-const CertificateTypeCard = ({ cert }) => (
-  <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+const CertificateTypeCard = ({
+  cert
+}) => <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
     <CardHeader className="text-center">
       <div className={`w-16 h-16 bg-gradient-to-r ${cert.color} rounded-full flex items-center justify-center text-white mb-4 mx-auto`}>
         {cert.icon}
@@ -15,11 +15,10 @@ const CertificateTypeCard = ({ cert }) => (
         {cert.description}
       </CardDescription>
     </CardHeader>
-  </Card>
-);
-
-const FeatureCard = ({ feature }) => (
-  <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+  </Card>;
+const FeatureCard = ({
+  feature
+}) => <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
     <CardHeader>
       <div className="w-12 h-12 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center text-white mb-4">
         {feature.icon}
@@ -31,19 +30,16 @@ const FeatureCard = ({ feature }) => (
     </CardHeader>
     <CardContent>
       <div className="space-y-2">
-        {feature.details.map((detail, idx) => (
-          <div key={idx} className="flex items-center text-sm text-gray-600">
+        {feature.details.map((detail, idx) => <div key={idx} className="flex items-center text-sm text-gray-600">
             <CheckCircle className="w-3 h-3 text-green-500 mr-2" />
             {detail}
-          </div>
-        ))}
+          </div>)}
       </div>
     </CardContent>
-  </Card>
-);
-
-const BenefitCard = ({ benefit }) => (
-  <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+  </Card>;
+const BenefitCard = ({
+  benefit
+}) => <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
     <CardHeader className="text-center">
       <div className="w-12 h-12 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center text-white mb-4 mx-auto">
         {benefit.icon}
@@ -53,61 +49,37 @@ const BenefitCard = ({ benefit }) => (
     </CardHeader>
     <CardContent>
       <div className="space-y-3">
-        {benefit.points.map((point, idx) => (
-          <div key={idx} className="flex items-start text-sm text-gray-600">
+        {benefit.points.map((point, idx) => <div key={idx} className="flex items-start text-sm text-gray-600">
             <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
             {point}
-          </div>
-        ))}
+          </div>)}
       </div>
     </CardContent>
-  </Card>
-);
-
-const RoadmapCard = ({ phase }) => (
-  <Card className={`border-0 shadow-lg ${
-    phase.status === 'completed' ? 'bg-green-50' :
-    phase.status === 'current' ? 'bg-blue-50' :
-    'bg-gray-50'
-  }`}>
+  </Card>;
+const RoadmapCard = ({
+  phase
+}) => <Card className={`border-0 shadow-lg ${phase.status === 'completed' ? 'bg-green-50' : phase.status === 'current' ? 'bg-blue-50' : 'bg-gray-50'}`}>
     <CardHeader>
       <div className="flex items-center justify-between">
-        <Badge variant={
-          phase.status === 'completed' ? 'default' :
-          phase.status === 'current' ? 'secondary' :
-          'outline'
-        } className={
-          phase.status === 'completed' ? 'bg-green-500' :
-          phase.status === 'current' ? 'bg-blue-500' :
-          ''
-        }>
+        <Badge variant={phase.status === 'completed' ? 'default' : phase.status === 'current' ? 'secondary' : 'outline'} className={phase.status === 'completed' ? 'bg-green-500' : phase.status === 'current' ? 'bg-blue-500' : ''}>
           {phase.phase}
         </Badge>
-        {phase.status === 'completed' && (
-          <CheckCircle className="w-5 h-5 text-green-500" />
-        )}
+        {phase.status === 'completed' && <CheckCircle className="w-5 h-5 text-green-500" />}
       </div>
       <CardTitle className="text-lg">{phase.title}</CardTitle>
     </CardHeader>
     <CardContent>
       <div className="space-y-2">
-        {phase.items.map((item, idx) => (
-          <div key={idx} className="flex items-center text-sm text-gray-600">
-            <div className={`w-2 h-2 rounded-full mr-2 ${
-              phase.status === 'completed' ? 'bg-green-400' :
-              phase.status === 'current' ? 'bg-blue-400' :
-              'bg-gray-400'
-            }`}></div>
+        {phase.items.map((item, idx) => <div key={idx} className="flex items-center text-sm text-gray-600">
+            <div className={`w-2 h-2 rounded-full mr-2 ${phase.status === 'completed' ? 'bg-green-400' : phase.status === 'current' ? 'bg-blue-400' : 'bg-gray-400'}`}></div>
             {item}
-          </div>
-        ))}
+          </div>)}
       </div>
     </CardContent>
-  </Card>
-);
-
-const TeamMemberCard = ({ member }) => (
-  <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm text-center">
+  </Card>;
+const TeamMemberCard = ({
+  member
+}) => <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm text-center">
     <CardHeader>
       <div className="text-6xl mb-4">{member.image}</div>
       <CardTitle className="text-xl">{member.name}</CardTitle>
@@ -116,29 +88,23 @@ const TeamMemberCard = ({ member }) => (
     <CardContent>
       <p className="text-sm text-gray-600">{member.bio}</p>
     </CardContent>
-  </Card>
-);
-
-const IntegrationCard = ({ integration }) => (
-  <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+  </Card>;
+const IntegrationCard = ({
+  integration
+}) => <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
     <CardHeader className="text-center">
       <div className="text-4xl mb-2">{integration.icon}</div>
       <CardTitle className="text-lg">{integration.name}</CardTitle>
     </CardHeader>
     <CardContent>
       <div className="flex flex-wrap gap-2 justify-center">
-        {integration.providers.map((provider, idx) => (
-          <Badge key={idx} variant="secondary" className="text-xs">
+        {integration.providers.map((provider, idx) => <Badge key={idx} variant="secondary" className="text-xs">
             {provider}
-          </Badge>
-        ))}
+          </Badge>)}
       </div>
     </CardContent>
-  </Card>
-);
-
-const PrivacySecurityCard = () => (
-  <Card className="border-0 shadow-lg bg-gradient-to-r from-purple-50 via-blue-50 to-green-50">
+  </Card>;
+const PrivacySecurityCard = () => <Card className="border-0 shadow-lg bg-gradient-to-r from-purple-50 via-blue-50 to-green-50">
     <CardHeader className="text-center">
       <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-600 rounded-full flex items-center justify-center text-white mb-4 mx-auto">
         <Shield className="h-8 w-8" />
@@ -289,11 +255,10 @@ const PrivacySecurityCard = () => (
         </p>
       </div>
     </CardContent>
-  </Card>
-);
-
-const AdvisorCard = ({ advisor }) => (
-  <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm text-center">
+  </Card>;
+const AdvisorCard = ({
+  advisor
+}) => <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm text-center">
     <CardHeader>
       <div className="text-4xl mb-4">{advisor.image}</div>
       <CardTitle className="text-lg">{advisor.name}</CardTitle>
@@ -302,216 +267,178 @@ const AdvisorCard = ({ advisor }) => (
     <CardContent>
       <p className="text-sm text-gray-600">{advisor.bio}</p>
     </CardContent>
-  </Card>
-);
-
+  </Card>;
 const About = () => {
   const navigate = useNavigate();
-
-  const features = [
-    {
-      icon: <Zap className="h-6 w-6" />,
-      title: "Tracking Automatico",
-      description: "Nessun input manuale. Le tue azioni sostenibili vengono rilevate automaticamente tramite sensori del telefono e integrazioni con app esterne.",
-      details: ["Accelerometro e GPS", "Integrazione Google Fit/Apple Health", "API Bike/Car Sharing", "Sensori smart city"]
-    },
-    {
-      icon: <Shield className="h-6 w-6" />,
-      title: "Certificazione Blockchain",
-      description: "Ogni azione genera 4 tipologie di certificati digitali verificabili e immutabili su blockchain Ethereum/Polygon: CO2, Rifiuti e Riciclo, Risparmio Energetico e Acqua.",
-      details: ["Hash crittografici unici", "Validazione automatica", "Tracciabilità completa", "Standard ESG compliance"]
-    },
-    {
-      icon: <Award className="h-6 w-6" />,
-      title: "Premi Reali",
-      description: "Converti i tuoi certificati in benefit aziendali, sconti sui trasporti, ingressi gratuiti e molto altro tramite il marketplace integrato.",
-      details: ["Benefit aziendali", "Sconti trasporti pubblici", "Accessi musei/eventi", "Gift card partner"]
-    },
-    {
-      icon: <Users className="h-6 w-6" />,
-      title: "Community & Gamification",
-      description: "Partecipa a sfide, conquista badge, scala le classifiche e connettiti con altri cittadini virtuosi nella community sostenibile.",
-      details: ["Badge achievements", "Classifiche settimanali", "Sfide mensili", "Sistema referral"]
-    }
-  ];
-
-  const benefits = [
-    {
-      icon: <Target className="h-6 w-6" />,
-      title: "Per i Cittadini",
-      description: "Premi concreti per comportamenti sostenibili quotidiani",
-      points: ["Incentivi reali", "Riconoscimento sociale", "Miglioramento qualità vita", "Contributo ambientale misurabile"]
-    },
-    {
-      icon: <Heart className="h-6 w-6" />,
-      title: "Per le Aziende",
-      description: "Strumenti ESG avanzati e coinvolgimento dei dipendenti",
-      points: ["Report ESG automatici", "Engagement dei dipendenti", "Riduzione carbon footprint", "Compliance normative"]
-    },
-    {
-      icon: <Globe className="h-6 w-6" />,
-      title: "Per le Città",
-      description: "Dati real-time per politiche di sostenibilità efficaci",
-      points: ["Analytics mobilità urbana", "Monitoraggio obiettivi ambientali", "Citizen engagement", "Smart city integration"]
-    }
-  ];
-
-  const roadmap = [
-    {
-      phase: "Q4 2025",
-      title: "MVP & Pilot Cities",
-      status: "upcoming",
-      items: ["Lancio app mobile", "Prime 5 città pilota", "Integrazione bike sharing", "1000 utenti beta"]
-    },
-    {
-      phase: "Q1-Q2 2026",
-      title: "Espansione & Partnership",
-      status: "upcoming",
-      items: ["20 città partner", "Integrazione trasporti pubblici", "10.000 utenti attivi", "Prime aziende B2B"]
-    },
-    {
-      phase: "Q3-Q4 2026",
-      title: "Marketplace & Blockchain",
-      status: "upcoming",
-      items: ["Lancio marketplace", "Certificati blockchain", "Integrazione DPP", "100.000 utenti"]
-    },
-    {
-      phase: "2027-2028",
-      title: "Scala Europea & IA",
-      status: "upcoming",
-      items: ["Espansione EU", "API pubbliche", "IA predittiva", "1M utenti", "Carbon credit trading"]
-    }
-  ];
-
-  const integrations = [
-    { name: "Bike Sharing", providers: ["Mobike", "Lime", "Helbiz"], icon: "🚴" },
-    { name: "Car Sharing", providers: ["Enjoy", "ShareNow", "Car2Go"], icon: "🚗" },
-    { name: "Trasporti Pubblici", providers: ["ATM", "ATAC", "Open Data"], icon: "🚌" },
-    { name: "Fitness Tracking", providers: ["Google Fit", "Apple Health", "Strava"], icon: "📱" },
-    { name: "Smart Parking", providers: ["EasyPark", "ParkMan", "Sensori IoT"], icon: "🅿️" },
-    { name: "E-Scooters", providers: ["Bird", "Voi", "Tier"], icon: "🛴" }
-  ];
-
-  const certificateTypes = [
-    {
-      icon: <Leaf className="h-8 w-8" />,
-      title: "Certificati CO2",
-      description: "Riduzione emissioni attraverso mobilità sostenibile",
-      color: "from-green-500 to-emerald-600"
-    },
-    {
-      icon: <Recycle className="h-8 w-8" />,
-      title: "Rifiuti e Riciclo",
-      description: "Gestione responsabile e riciclo dei materiali",
-      color: "from-blue-500 to-cyan-600"
-    },
-    {
-      icon: <Battery className="h-8 w-8" />,
-      title: "Risparmio Energetico",
-      description: "Ottimizzazione consumi e efficienza energetica",
-      color: "from-yellow-500 to-orange-600"
-    },
-    {
-      icon: <Droplets className="h-8 w-8" />,
-      title: "Certificati Acqua",
-      description: "Conservazione e uso responsabile delle risorse idriche",
-      color: "from-blue-400 to-blue-600"
-    }
-  ];
-
-  const team = [
-    {
-      name: "Alessio Pagani",
-      role: "Research Director and Data Scientist",
-      bio: "PhD in Information Technology | Web3, blockchain, AI, DeFi",
-      image: "👨‍🔬"
-    },
-    {
-      name: "Gianfranco Leone",
-      role: "Web3 Expert Marketing Specialist",
-      bio: "Esperto in strategie di marketing per tecnologie blockchain e Web3",
-      image: "👨‍💼"
-    },
-    {
-      name: "Davide Galbiati",
-      role: "Computer Engineer",
-      bio: "Web and mobile Developer specializzato in soluzioni digitali innovative",
-      image: "👨‍💻"
-    }
-  ];
-
-  const advisors = [
-    {
-      name: "Vincenzo Rana",
-      role: "Blockchain Expert",
-      bio: "Docente e ricercatore dell'Osservatorio Blockchain & DLT al Politecnico di Milano"
-    },
-    {
-      name: "Edoardo Degli Innocenti",
-      role: "Web3 Industry Leader",
-      bio: "CEO e Co-Founder di B3YOND, principale consorzio Web3 italiano, membro Commissione per l'IA della Presidenza del Consiglio"
-    },
-    {
-      name: "Emma Zavarrone",
-      role: "Social Statistics Expert",
-      bio: "Professore associato di statistica sociale presso la facoltà di Comunicazione, Pubbliche Relazioni e Pubblicità presso IULM, Milano"
-    },
-    {
-      name: "Laura Iacovone",
-      role: "Economics & Management Expert",
-      bio: "Docente e ricercatore del Dipartimento di Economia, Management e Metodi Quantitativi dell'Università degli Studi di Milano"
-    },
-    {
-      name: "Andrea Grieco",
-      role: "Sustainability Expert",
-      bio: "Sustainability Expert - LinkedInTopVoices Green & Climate Change"
-    },
-    {
-      name: "Vincenzo Pone",
-      role: "Business Ethics Expert",
-      bio: "Dott. Commercialista e Revisore dei Conti - Studioso di etica di azienda e delle nuove realtà economiche virtuali"
-    },
-    {
-      name: "Sara Noggler",
-      role: "Web3 Innovation Expert",
-      bio: "Building Milano Future Play - Distributed Minds, Public Speaker Web3"
-    },
-    {
-      name: "Stefano Capaccioli",
-      role: "CSRD & ESRS Expert",
-      bio: "Dottore Commercialista esperto della normativa CSRD e degli standard ESRS"
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
+  const features = [{
+    icon: <Zap className="h-6 w-6" />,
+    title: "Tracking Automatico",
+    description: "Nessun input manuale. Le tue azioni sostenibili vengono rilevate automaticamente tramite sensori del telefono e integrazioni con app esterne.",
+    details: ["Accelerometro e GPS", "Integrazione Google Fit/Apple Health", "API Bike/Car Sharing", "Sensori smart city"]
+  }, {
+    icon: <Shield className="h-6 w-6" />,
+    title: "Certificazione Blockchain",
+    description: "Ogni azione genera 4 tipologie di certificati digitali verificabili e immutabili su blockchain Ethereum/Polygon: CO2, Rifiuti e Riciclo, Risparmio Energetico e Acqua.",
+    details: ["Hash crittografici unici", "Validazione automatica", "Tracciabilità completa", "Standard ESG compliance"]
+  }, {
+    icon: <Award className="h-6 w-6" />,
+    title: "Premi Reali",
+    description: "Converti i tuoi certificati in benefit aziendali, sconti sui trasporti, ingressi gratuiti e molto altro tramite il marketplace integrato.",
+    details: ["Benefit aziendali", "Sconti trasporti pubblici", "Accessi musei/eventi", "Gift card partner"]
+  }, {
+    icon: <Users className="h-6 w-6" />,
+    title: "Community & Gamification",
+    description: "Partecipa a sfide, conquista badge, scala le classifiche e connettiti con altri cittadini virtuosi nella community sostenibile.",
+    details: ["Badge achievements", "Classifiche settimanali", "Sfide mensili", "Sistema referral"]
+  }];
+  const benefits = [{
+    icon: <Target className="h-6 w-6" />,
+    title: "Per i Cittadini",
+    description: "Premi concreti per comportamenti sostenibili quotidiani",
+    points: ["Incentivi reali", "Riconoscimento sociale", "Miglioramento qualità vita", "Contributo ambientale misurabile"]
+  }, {
+    icon: <Heart className="h-6 w-6" />,
+    title: "Per le Aziende",
+    description: "Strumenti ESG avanzati e coinvolgimento dei dipendenti",
+    points: ["Report ESG automatici", "Engagement dei dipendenti", "Riduzione carbon footprint", "Compliance normative"]
+  }, {
+    icon: <Globe className="h-6 w-6" />,
+    title: "Per le Città",
+    description: "Dati real-time per politiche di sostenibilità efficaci",
+    points: ["Analytics mobilità urbana", "Monitoraggio obiettivi ambientali", "Citizen engagement", "Smart city integration"]
+  }];
+  const roadmap = [{
+    phase: "Q4 2025",
+    title: "MVP & Pilot Cities",
+    status: "upcoming",
+    items: ["Lancio app mobile", "Prime 5 città pilota", "Integrazione bike sharing", "1000 utenti beta"]
+  }, {
+    phase: "Q1-Q2 2026",
+    title: "Espansione & Partnership",
+    status: "upcoming",
+    items: ["20 città partner", "Integrazione trasporti pubblici", "10.000 utenti attivi", "Prime aziende B2B"]
+  }, {
+    phase: "Q3-Q4 2026",
+    title: "Marketplace & Blockchain",
+    status: "upcoming",
+    items: ["Lancio marketplace", "Certificati blockchain", "Integrazione DPP", "100.000 utenti"]
+  }, {
+    phase: "2027-2028",
+    title: "Scala Europea & IA",
+    status: "upcoming",
+    items: ["Espansione EU", "API pubbliche", "IA predittiva", "1M utenti", "Carbon credit trading"]
+  }];
+  const integrations = [{
+    name: "Bike Sharing",
+    providers: ["Mobike", "Lime", "Helbiz"],
+    icon: "🚴"
+  }, {
+    name: "Car Sharing",
+    providers: ["Enjoy", "ShareNow", "Car2Go"],
+    icon: "🚗"
+  }, {
+    name: "Trasporti Pubblici",
+    providers: ["ATM", "ATAC", "Open Data"],
+    icon: "🚌"
+  }, {
+    name: "Fitness Tracking",
+    providers: ["Google Fit", "Apple Health", "Strava"],
+    icon: "📱"
+  }, {
+    name: "Smart Parking",
+    providers: ["EasyPark", "ParkMan", "Sensori IoT"],
+    icon: "🅿️"
+  }, {
+    name: "E-Scooters",
+    providers: ["Bird", "Voi", "Tier"],
+    icon: "🛴"
+  }];
+  const certificateTypes = [{
+    icon: <Leaf className="h-8 w-8" />,
+    title: "Certificati CO2",
+    description: "Riduzione emissioni attraverso mobilità sostenibile",
+    color: "from-green-500 to-emerald-600"
+  }, {
+    icon: <Recycle className="h-8 w-8" />,
+    title: "Rifiuti e Riciclo",
+    description: "Gestione responsabile e riciclo dei materiali",
+    color: "from-blue-500 to-cyan-600"
+  }, {
+    icon: <Battery className="h-8 w-8" />,
+    title: "Risparmio Energetico",
+    description: "Ottimizzazione consumi e efficienza energetica",
+    color: "from-yellow-500 to-orange-600"
+  }, {
+    icon: <Droplets className="h-8 w-8" />,
+    title: "Certificati Acqua",
+    description: "Conservazione e uso responsabile delle risorse idriche",
+    color: "from-blue-400 to-blue-600"
+  }];
+  const team = [{
+    name: "Alessio Pagani",
+    role: "Research Director and Data Scientist",
+    bio: "PhD in Information Technology | Web3, blockchain, AI, DeFi",
+    image: "👨‍🔬"
+  }, {
+    name: "Gianfranco Leone",
+    role: "Web3 Expert Marketing Specialist",
+    bio: "Esperto in strategie di marketing per tecnologie blockchain e Web3",
+    image: "👨‍💼"
+  }, {
+    name: "Davide Galbiati",
+    role: "Computer Engineer",
+    bio: "Web and mobile Developer specializzato in soluzioni digitali innovative",
+    image: "👨‍💻"
+  }];
+  const advisors = [{
+    name: "Vincenzo Rana",
+    role: "Blockchain Expert",
+    bio: "Docente e ricercatore dell'Osservatorio Blockchain & DLT al Politecnico di Milano"
+  }, {
+    name: "Edoardo Degli Innocenti",
+    role: "Web3 Industry Leader",
+    bio: "CEO e Co-Founder di B3YOND, principale consorzio Web3 italiano, membro Commissione per l'IA della Presidenza del Consiglio"
+  }, {
+    name: "Emma Zavarrone",
+    role: "Social Statistics Expert",
+    bio: "Professore associato di statistica sociale presso la facoltà di Comunicazione, Pubbliche Relazioni e Pubblicità presso IULM, Milano"
+  }, {
+    name: "Laura Iacovone",
+    role: "Economics & Management Expert",
+    bio: "Docente e ricercatore del Dipartimento di Economia, Management e Metodi Quantitativi dell'Università degli Studi di Milano"
+  }, {
+    name: "Andrea Grieco",
+    role: "Sustainability Expert",
+    bio: "Sustainability Expert - LinkedInTopVoices Green & Climate Change"
+  }, {
+    name: "Vincenzo Pone",
+    role: "Business Ethics Expert",
+    bio: "Dott. Commercialista e Revisore dei Conti - Studioso di etica di azienda e delle nuove realtà economiche virtuali"
+  }, {
+    name: "Sara Noggler",
+    role: "Web3 Innovation Expert",
+    bio: "Building Milano Future Play - Distributed Minds, Public Speaker Web3"
+  }, {
+    name: "Stefano Capaccioli",
+    role: "CSRD & ESRS Expert",
+    bio: "Dottore Commercialista esperto della normativa CSRD e degli standard ESRS"
+  }];
+  return <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
       {/* Header */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-green-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-3">
-              <Button 
-                variant="ghost" 
-                onClick={() => navigate("/")}
-                className="mr-1 sm:mr-2 p-2 sm:p-3"
-                size="sm"
-              >
+              <Button variant="ghost" onClick={() => navigate("/")} className="mr-1 sm:mr-2 p-2 sm:p-3" size="sm">
                 <ArrowLeft className="h-4 w-4 sm:mr-2" />
                 <span className="hidden sm:inline">Home</span>
               </Button>
-              <img 
-                src="/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png" 
-                alt="Virtuosity Logo" 
-                className="relative h-10 w-10 sm:h-12 sm:w-12 lg:h-16 lg:w-16 mx-auto object-contain"
-              />
+              <img src="/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png" alt="Virtuosity Logo" className="relative h-10 w-10 sm:h-12 sm:w-12 lg:h-16 lg:w-16 mx-auto object-contain" />
               <h1 className="text-2xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
                 Virtuosity
               </h1>
             </div>
-            <Button 
-              onClick={() => navigate("/dashboard")}
-              className="bg-gradient-to-r from-green-600 to-blue-600 text-white hover:from-green-700 hover:to-blue-700"
-            >
+            <Button onClick={() => navigate("/dashboard")} className="bg-gradient-to-r from-green-600 to-blue-600 text-white hover:from-green-700 hover:to-blue-700">
               Inizia Ora
             </Button>
           </div>
@@ -527,11 +454,7 @@ const About = () => {
           
           {/* Marketplace Screenshot - Single Image */}
           <div className="mb-8">
-            <img 
-              src="/lovable-uploads/f68e2d05-2991-4af9-a328-4b8b0b3e6728.png" 
-              alt="Virtuosity Marketplace Screenshot" 
-              className="mx-auto rounded-lg shadow-2xl max-w-[50%] h-auto"
-            />
+            <img src="/lovable-uploads/f68e2d05-2991-4af9-a328-4b8b0b3e6728.png" alt="Virtuosity Marketplace Screenshot" className="mx-auto rounded-lg shadow-2xl max-w-[50%] h-auto" />
           </div>
           
           <p className="text-xl text-gray-600 max-w-4xl mx-auto mb-8">
@@ -560,9 +483,7 @@ const About = () => {
             Come Funziona Virtuosity
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature, index) => (
-              <FeatureCard key={index} feature={feature} />
-            ))}
+            {features.map((feature, index) => <FeatureCard key={index} feature={feature} />)}
           </div>
         </div>
 
@@ -576,9 +497,7 @@ const About = () => {
             garantendo tracciabilità e valore misurabile ai tuoi comportamenti virtuosi.
           </p>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {certificateTypes.map((cert, index) => (
-              <CertificateTypeCard key={index} cert={cert} />
-            ))}
+            {certificateTypes.map((cert, index) => <CertificateTypeCard key={index} cert={cert} />)}
           </div>
         </div>
 
@@ -676,7 +595,7 @@ const About = () => {
 
               <div className="mt-8 p-6 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg text-white text-center">
                 <h4 className="text-lg font-bold mb-2">Vantaggi Competitivi</h4>
-                <p className="text-sm">
+                <p className="text-sm font-normal">
                   Con l'integrazione DPP, Virtuosity diventa l'unica piattaforma che collega automaticamente 
                   le scelte di consumo sostenibile con un sistema di incentivi concreti, 
                   preparando utenti e aziende alla nuova era della trasparenza ambientale europea.
@@ -832,8 +751,10 @@ const About = () => {
                     </div>
                   </div>
 
-                  <div className="bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg p-4 text-white">
-                    <h5 className="font-bold mb-2">Vantaggi per il Comune</h5>
+                  <div className="bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg p-4 text-white py-[14px]">
+                    <h5 className="font-bold mb-2">
+
+Vantaggi per il Comune</h5>
                     <ul className="text-sm space-y-1">
                       <li>• Dati real-time su comportamenti sostenibili cittadini</li>
                       <li>• Raggiungimento obiettivi climatici EU 2030</li>
@@ -861,9 +782,7 @@ const About = () => {
             Vantaggi per Tutti gli Stakeholder
           </h3>
           <div className="grid md:grid-cols-3 gap-8">
-            {benefits.map((benefit, index) => (
-              <BenefitCard key={index} benefit={benefit} />
-            ))}
+            {benefits.map((benefit, index) => <BenefitCard key={index} benefit={benefit} />)}
           </div>
         </div>
 
@@ -873,9 +792,7 @@ const About = () => {
             Integrazioni & Possibili Partnership
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {integrations.map((integration, index) => (
-              <IntegrationCard key={index} integration={integration} />
-            ))}
+            {integrations.map((integration, index) => <IntegrationCard key={index} integration={integration} />)}
           </div>
         </div>
 
@@ -929,9 +846,7 @@ const About = () => {
             La Nostra Roadmap
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {roadmap.map((phase, index) => (
-              <RoadmapCard key={index} phase={phase} />
-            ))}
+            {roadmap.map((phase, index) => <RoadmapCard key={index} phase={phase} />)}
           </div>
         </div>
 
@@ -941,9 +856,7 @@ const About = () => {
             Il Nostro Team
           </h3>
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            {team.map((member, index) => (
-              <TeamMemberCard key={index} member={member} />
-            ))}
+            {team.map((member, index) => <TeamMemberCard key={index} member={member} />)}
           </div>
         </div>
 
@@ -957,8 +870,7 @@ const About = () => {
             dalla blockchain alla compliance, dall'economia all'intelligenza artificiale.
           </p>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {advisors.map((advisor, index) => (
-              <Card key={index} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm text-center">
+            {advisors.map((advisor, index) => <Card key={index} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm text-center">
                 <CardHeader className="text-center">
                   <CardTitle className="text-lg text-center">{advisor.name}</CardTitle>
                   <div className="flex justify-center">
@@ -968,8 +880,7 @@ const About = () => {
                 <CardContent className="text-center">
                   <p className="text-sm text-gray-600 text-center">{advisor.bio}</p>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
 
@@ -1029,24 +940,15 @@ const About = () => {
             Unisciti a migliaia di cittadini che stanno già facendo la differenza per il pianeta
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              onClick={() => navigate("/dashboard")}
-              className="bg-white text-green-600 hover:bg-gray-100 px-8 py-3 text-lg font-semibold"
-            >
+            <Button onClick={() => navigate("/dashboard")} className="bg-white text-green-600 hover:bg-gray-100 px-8 py-3 text-lg font-semibold">
               Inizia Subito
             </Button>
-            <Button 
-              variant="outline"
-              onClick={() => navigate("/")}
-              className="border-white text-white hover:bg-white hover:text-green-600 px-8 py-3 text-lg"
-            >
+            <Button variant="outline" onClick={() => navigate("/")} className="border-white text-white hover:bg-white hover:text-green-600 px-8 py-3 text-lg">
               Torna alla Home
             </Button>
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default About;
