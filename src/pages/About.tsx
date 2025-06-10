@@ -924,19 +924,19 @@ const About = () => {
                 <div className="space-y-3 mb-6">
                   <div className="flex items-center text-sm text-gray-600">
                     <CheckCircle className="w-4 h-4 text-green-500 mr-3 flex-shrink-0" />
-                    Tracking automatico comportamenti sostenibili
+                    <span>Tracking automatico comportamenti</span>
                   </div>
                   <div className="flex items-center text-sm text-gray-600">
                     <CheckCircle className="w-4 h-4 text-green-500 mr-3 flex-shrink-0" />
-                    Certificati blockchain illimitati
+                    <span>Certificati blockchain illimitati</span>
                   </div>
                   <div className="flex items-center text-sm text-gray-600">
                     <CheckCircle className="w-4 h-4 text-green-500 mr-3 flex-shrink-0" />
-                    Dashboard ESG basic
+                    <span>Dashboard ESG basic</span>
                   </div>
                   <div className="flex items-center text-sm text-gray-600">
                     <CheckCircle className="w-4 h-4 text-green-500 mr-3 flex-shrink-0" />
-                    Accesso marketplace
+                    <span>Accesso marketplace</span>
                   </div>
                 </div>
                 <Button className="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white hover:from-green-600 hover:to-emerald-700">
@@ -979,19 +979,19 @@ const About = () => {
                   </div>
                   <div className="flex items-center text-sm text-gray-600">
                     <CheckCircle className="w-4 h-4 text-blue-500 mr-3 flex-shrink-0" />
-                    Dashboard ESG avanzata
+                    <span>Dashboard ESG avanzata</span>
                   </div>
                   <div className="flex items-center text-sm text-gray-600">
                     <CheckCircle className="w-4 h-4 text-blue-500 mr-3 flex-shrink-0" />
-                    Report automatici CSRD/ESRS
+                    <span>Report automatici CSRD/ESRS</span>
                   </div>
                   <div className="flex items-center text-sm text-gray-600">
                     <CheckCircle className="w-4 h-4 text-blue-500 mr-3 flex-shrink-0" />
-                    Sistema welfare aziendale
+                    <span>Sistema welfare aziendale</span>
                   </div>
                   <div className="flex items-center text-sm text-gray-600">
                     <CheckCircle className="w-4 h-4 text-blue-500 mr-3 flex-shrink-0" />
-                    API integration
+                    <span>API integration</span>
                   </div>
                 </div>
                 <Button className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700">
@@ -1025,23 +1025,23 @@ const About = () => {
                 <div className="space-y-3 mb-6">
                   <div className="flex items-center text-sm text-gray-600">
                     <CheckCircle className="w-4 h-4 text-purple-500 mr-3 flex-shrink-0" />
-                    Tutto del piano PMI +
+                    <span>Tutto del piano PMI +</span>
                   </div>
                   <div className="flex items-center text-sm text-gray-600">
                     <CheckCircle className="w-4 h-4 text-purple-500 mr-3 flex-shrink-0" />
-                    White label solution
+                    <span>White label solution</span>
                   </div>
                   <div className="flex items-center text-sm text-gray-600">
                     <CheckCircle className="w-4 h-4 text-purple-500 mr-3 flex-shrink-0" />
-                    Integrazione DPP completa
+                    <span>Integrazione DPP completa</span>
                   </div>
                   <div className="flex items-center text-sm text-gray-600">
                     <CheckCircle className="w-4 h-4 text-purple-500 mr-3 flex-shrink-0" />
-                    Analytics predittive IA
+                    <span>Analytics predittive IA</span>
                   </div>
                   <div className="flex items-center text-sm text-gray-600">
                     <CheckCircle className="w-4 h-4 text-purple-500 mr-3 flex-shrink-0" />
-                    Account manager dedicato
+                    <span>Account manager dedicato</span>
                   </div>
                 </div>
                 <Button className="w-full bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:from-purple-600 hover:to-pink-700">
