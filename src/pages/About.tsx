@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Leaf, ArrowLeft, Shield, Zap, Globe, Award, Users, TrendingUp, CheckCircle, Target, Heart, Lightbulb, Droplets, Recycle, Battery, MapPin, Building, Euro, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-
 const CertificateTypeCard = ({
   cert
 }) => <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
@@ -17,7 +16,6 @@ const CertificateTypeCard = ({
       </CardDescription>
     </CardHeader>
   </Card>;
-
 const FeatureCard = ({
   feature
 }) => <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
@@ -39,7 +37,6 @@ const FeatureCard = ({
       </div>
     </CardContent>
   </Card>;
-
 const BenefitCard = ({
   benefit
 }) => <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
@@ -59,7 +56,6 @@ const BenefitCard = ({
       </div>
     </CardContent>
   </Card>;
-
 const RoadmapCard = ({
   phase
 }) => <Card className={`border-0 shadow-lg ${phase.status === 'completed' ? 'bg-green-50' : phase.status === 'current' ? 'bg-blue-50' : 'bg-gray-50'}`}>
@@ -81,7 +77,6 @@ const RoadmapCard = ({
       </div>
     </CardContent>
   </Card>;
-
 const TeamMemberCard = ({
   member
 }) => <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm text-center">
@@ -96,7 +91,6 @@ const TeamMemberCard = ({
       <p className="text-sm text-gray-600 text-center">{member.bio}</p>
     </CardContent>
   </Card>;
-
 const IntegrationCard = ({
   integration
 }) => <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
@@ -112,7 +106,6 @@ const IntegrationCard = ({
       </div>
     </CardContent>
   </Card>;
-
 const PrivacySecurityCard = () => <Card className="border-0 shadow-lg bg-gradient-to-r from-purple-50 via-blue-50 to-green-50">
     <CardHeader className="text-center">
       <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-600 rounded-full flex items-center justify-center text-white mb-4 mx-auto">
@@ -265,7 +258,6 @@ const PrivacySecurityCard = () => <Card className="border-0 shadow-lg bg-gradien
       </div>
     </CardContent>
   </Card>;
-
 const AdvisorCard = ({
   advisor
 }) => <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm text-center">
@@ -278,7 +270,6 @@ const AdvisorCard = ({
       <p className="text-sm text-gray-600">{advisor.bio}</p>
     </CardContent>
   </Card>;
-
 const About = () => {
   const navigate = useNavigate();
   const features = [{
@@ -618,6 +609,8 @@ const About = () => {
         {/* 7. Modelli di Scambio - Come si crea valore */}
         <div className="mb-16">
           <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">
+
+
 
 Modelli di Scambio Certificati</h3>
           
