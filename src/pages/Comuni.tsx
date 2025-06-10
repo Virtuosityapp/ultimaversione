@@ -16,7 +16,8 @@ import {
   Clock,
   Settings,
   MapPin,
-  AlertTriangle
+  AlertTriangle,
+  FileText
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
@@ -239,6 +240,15 @@ const Comuni = () => {
               </h1>
             </div>
             <div className="flex items-center space-x-2 sm:space-x-4">
+              <Button 
+                variant="outline" 
+                onClick={() => navigate("/report")}
+                className="border-green-300 text-green-700 hover:bg-green-50 hover:border-green-400 hover:scale-105 transition-all duration-200 text-xs px-2 py-1.5 sm:text-sm sm:px-4 sm:py-2 active:scale-95"
+              >
+                <FileText className="h-4 w-4 mr-2" />
+                <span className="hidden sm:inline">Genera Report</span>
+                <span className="sm:hidden">Report</span>
+              </Button>
               <div className="bg-gradient-to-r from-blue-400 to-indigo-500 text-white px-2 sm:px-4 py-1 sm:py-2 rounded-full font-bold text-sm sm:text-base">
                 <Activity className="h-4 w-4 mr-1 inline" />
                 {totalDataPoints}
