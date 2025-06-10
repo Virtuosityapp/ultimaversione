@@ -219,8 +219,8 @@ const Comuni = () => {
       {/* Header */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-blue-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-3 sm:py-4">
-            <div className="flex items-center space-x-2 sm:space-x-3">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center py-3 sm:py-4 gap-3 sm:gap-0">
+            <div className="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
               <Button 
                 variant="ghost" 
                 onClick={() => navigate("/dashboard")}
@@ -233,24 +233,24 @@ const Comuni = () => {
               <img 
                 src="/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png" 
                 alt="Virtuosity Logo" 
-                className="relative h-10 w-10 sm:h-12 sm:w-12 lg:h-16 lg:w-16 mx-auto object-contain"
+                className="relative h-8 w-8 sm:h-10 sm:w-10 lg:h-12 lg:w-12 object-contain"
               />
-              <h1 className="text-lg sm:text-xl lg:text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+              <h1 className="text-base sm:text-lg lg:text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent whitespace-nowrap">
                 Dashboard Comuni
               </h1>
             </div>
-            <div className="flex items-center space-x-2 sm:space-x-4">
+            <div className="flex items-center space-x-2 sm:space-x-3 w-full sm:w-auto justify-end">
               <Button 
                 variant="outline" 
                 onClick={() => navigate("/report")}
-                className="border-green-300 text-green-700 hover:bg-green-50 hover:border-green-400 hover:scale-105 transition-all duration-200 text-xs px-2 py-1.5 sm:text-sm sm:px-4 sm:py-2 active:scale-95"
+                className="border-green-300 text-green-700 hover:bg-green-50 hover:border-green-400 hover:scale-105 transition-all duration-200 text-xs px-2 py-1.5 sm:text-sm sm:px-3 sm:py-2 active:scale-95 flex-shrink-0"
               >
-                <FileText className="h-4 w-4 mr-2" />
+                <FileText className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                 <span className="hidden sm:inline">Genera Report</span>
                 <span className="sm:hidden">Report</span>
               </Button>
-              <div className="bg-gradient-to-r from-blue-400 to-indigo-500 text-white px-2 sm:px-4 py-1 sm:py-2 rounded-full font-bold text-sm sm:text-base">
-                <Activity className="h-4 w-4 mr-1 inline" />
+              <div className="bg-gradient-to-r from-blue-400 to-indigo-500 text-white px-2 sm:px-3 py-1 sm:py-2 rounded-full font-bold text-xs sm:text-sm flex-shrink-0">
+                <Activity className="h-3 w-3 sm:h-4 sm:w-4 mr-1 inline" />
                 {totalDataPoints}
               </div>
             </div>
@@ -261,7 +261,7 @@ const Comuni = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {/* Welcome Section */}
         <div className="mb-6 sm:mb-8 text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Centro di Controllo Integrazioni 🏛️</h2>
+          <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-2">Centro di Controllo Integrazioni 🏛️</h2>
           <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base px-4">
             Monitora tutte le integrazioni del comune con Virtuosity. Controlla lo stato dei servizi smart della città.
           </p>
@@ -310,39 +310,39 @@ const Comuni = () => {
           </Card>
         </div>
 
-        <Tabs defaultValue="overview" className="space-y-6 sm:space-y-8">
-          <div className="bg-white/80 backdrop-blur-sm shadow-md rounded-lg p-2 sticky top-20 z-40">
-            <TabsList className="w-full bg-transparent grid grid-cols-2 lg:grid-cols-4 gap-1 h-auto">
+        <Tabs defaultValue="overview" className="space-y-4 sm:space-y-6">
+          <div className="bg-white/80 backdrop-blur-sm shadow-md rounded-lg p-1 sm:p-2 sticky top-20 z-40">
+            <TabsList className="w-full bg-transparent grid grid-cols-2 lg:grid-cols-4 gap-1 h-auto p-1">
               <TabsTrigger 
                 value="overview" 
-                className="px-2 py-3 text-xs sm:text-sm font-medium rounded-md transition-all duration-200 hover:bg-gradient-to-r hover:from-blue-100 hover:to-indigo-100 hover:text-blue-700 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-400 data-[state=active]:to-indigo-500 data-[state=active]:text-white data-[state=active]:shadow-lg whitespace-nowrap"
+                className="px-1 sm:px-2 py-2 sm:py-3 text-xs sm:text-sm font-medium rounded-md transition-all duration-200 hover:bg-gradient-to-r hover:from-blue-100 hover:to-indigo-100 hover:text-blue-700 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-400 data-[state=active]:to-indigo-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
               >
                 <span className="hidden sm:inline">Panoramica</span>
                 <span className="sm:hidden">Overview</span>
               </TabsTrigger>
               <TabsTrigger 
                 value="integrations" 
-                className="px-2 py-3 text-xs sm:text-sm font-medium rounded-md transition-all duration-200 hover:bg-gradient-to-r hover:from-green-100 hover:to-emerald-100 hover:text-green-700 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-400 data-[state=active]:to-emerald-500 data-[state=active]:text-white data-[state=active]:shadow-lg whitespace-nowrap"
+                className="px-1 sm:px-2 py-2 sm:py-3 text-xs sm:text-sm font-medium rounded-md transition-all duration-200 hover:bg-gradient-to-r hover:from-green-100 hover:to-emerald-100 hover:text-green-700 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-400 data-[state=active]:to-emerald-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
               >
                 <span className="hidden sm:inline">Integrazioni</span>
                 <span className="sm:hidden">Apps</span>
               </TabsTrigger>
               <TabsTrigger 
                 value="map" 
-                className="px-2 py-3 text-xs sm:text-sm font-medium rounded-md transition-all duration-200 hover:bg-gradient-to-r hover:from-purple-100 hover:to-pink-100 hover:text-purple-700 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-400 data-[state=active]:to-pink-500 data-[state=active]:text-white data-[state=active]:shadow-lg whitespace-nowrap"
+                className="px-1 sm:px-2 py-2 sm:py-3 text-xs sm:text-sm font-medium rounded-md transition-all duration-200 hover:bg-gradient-to-r hover:from-purple-100 hover:to-pink-100 hover:text-purple-700 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-400 data-[state=active]:to-pink-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
               >
                 Mappa
               </TabsTrigger>
               <TabsTrigger 
                 value="analytics" 
-                className="px-2 py-3 text-xs sm:text-sm font-medium rounded-md transition-all duration-200 hover:bg-gradient-to-r hover:from-orange-100 hover:to-red-100 hover:text-orange-700 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-400 data-[state=active]:to-red-500 data-[state=active]:text-white data-[state=active]:shadow-lg whitespace-nowrap"
+                className="px-1 sm:px-2 py-2 sm:py-3 text-xs sm:text-sm font-medium rounded-md transition-all duration-200 hover:bg-gradient-to-r hover:from-orange-100 hover:to-red-100 hover:text-orange-700 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-400 data-[state=active]:to-red-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
               >
                 Analytics
               </TabsTrigger>
             </TabsList>
           </div>
 
-          <div className="mt-8">
+          <div className="mt-6 sm:mt-8">
             <TabsContent value="overview" className="space-y-4 sm:space-y-6 mt-0">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
                 {integrations.map((integration) => {
