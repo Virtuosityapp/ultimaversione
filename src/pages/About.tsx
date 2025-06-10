@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Leaf, ArrowLeft, Shield, Zap, Globe, Award, Users, TrendingUp, CheckCircle, Target, Heart, Lightbulb, Droplets, Recycle, Battery, MapPin, Building } from "lucide-react";
+import { Leaf, ArrowLeft, Shield, Zap, Globe, Award, Users, TrendingUp, CheckCircle, Target, Heart, Lightbulb, Droplets, Recycle, Battery, MapPin, Building, Euro, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 const CertificateTypeCard = ({
   cert
@@ -751,8 +751,8 @@ const About = () => {
 
                   <div className="bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg p-4 text-white py-[12px]">
                     <h5 className="font-bold mb-2">
-
-Vantaggi per il Comune</h5>
+                      Vantaggi per il Comune
+                    </h5>
                     <ul className="text-sm space-y-1">
                       <li>• Dati real-time su comportamenti sostenibili cittadini</li>
                       <li>• Raggiungimento obiettivi climatici EU 2030</li>
@@ -882,7 +882,188 @@ Vantaggi per il Comune</h5>
           </div>
         </div>
 
-        {/* 14. Contact Section - Come contattarci */}
+        {/* 14. Offerta Commerciale - Piani di pricing */}
+        <div className="mb-16">
+          <h3 className="text-3xl font-bold text-center text-gray-900 mb-4">
+            Offerta Commerciale
+          </h3>
+          <div className="flex justify-center mb-6">
+            <Badge variant="secondary" className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 text-lg">
+              <Sparkles className="w-4 h-4 mr-2" />
+              Prezzo Promozionale - 50% di Sconto
+            </Badge>
+          </div>
+          <p className="text-lg text-gray-600 text-center mb-12 max-w-3xl mx-auto">
+            Approfitta della nostra offerta di lancio e accedi alla piattaforma di sostenibilità più innovativa d'Europa 
+            a metà prezzo per i primi clienti.
+          </p>
+          
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {/* Piano Micro */}
+            <Card className="border-2 border-green-200 shadow-lg bg-white/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+              <CardHeader className="text-center pb-4">
+                <div className="w-16 h-16 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full flex items-center justify-center text-white mb-4 mx-auto">
+                  <Euro className="h-8 w-8" />
+                </div>
+                <CardTitle className="text-2xl font-bold text-gray-900">Piano Micro</CardTitle>
+                <CardDescription className="text-gray-600">
+                  Perfetto per P.IVA e micro aziende
+                </CardDescription>
+                <div className="mt-4">
+                  <div className="flex items-center justify-center">
+                    <span className="text-4xl font-bold text-green-600">9€</span>
+                    <span className="text-lg text-gray-500 ml-2">/mese</span>
+                  </div>
+                  <div className="flex items-center justify-center mt-1">
+                    <span className="text-lg text-gray-400 line-through mr-2">18€</span>
+                    <Badge variant="secondary" className="bg-red-100 text-red-600 text-xs">-50%</Badge>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="text-center">
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="w-4 h-4 text-green-500 mr-3 flex-shrink-0" />
+                    Tracking automatico comportamenti sostenibili
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="w-4 h-4 text-green-500 mr-3 flex-shrink-0" />
+                    Certificati blockchain illimitati
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="w-4 h-4 text-green-500 mr-3 flex-shrink-0" />
+                    Dashboard ESG basic
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="w-4 h-4 text-green-500 mr-3 flex-shrink-0" />
+                    Accesso marketplace
+                  </div>
+                </div>
+                <Button className="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white hover:from-green-600 hover:to-emerald-700">
+                  Inizia Subito
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Piano PMI */}
+            <Card className="border-2 border-blue-300 shadow-lg bg-white/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300 relative">
+              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                <Badge className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-1">
+                  Più Popolare
+                </Badge>
+              </div>
+              <CardHeader className="text-center pb-4">
+                <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white mb-4 mx-auto">
+                  <Building className="h-8 w-8" />
+                </div>
+                <CardTitle className="text-2xl font-bold text-gray-900">Piano PMI</CardTitle>
+                <CardDescription className="text-gray-600">
+                  Ideale per aziende 20-250 dipendenti
+                </CardDescription>
+                <div className="mt-4">
+                  <div className="flex items-center justify-center">
+                    <span className="text-4xl font-bold text-blue-600">99€</span>
+                    <span className="text-lg text-gray-500 ml-2">/mese</span>
+                  </div>
+                  <div className="flex items-center justify-center mt-1">
+                    <span className="text-lg text-gray-400 line-through mr-2">198€</span>
+                    <Badge variant="secondary" className="bg-red-100 text-red-600 text-xs">-50%</Badge>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="text-center">
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="w-4 h-4 text-blue-500 mr-3 flex-shrink-0" />
+                    Tutto del piano Micro +
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="w-4 h-4 text-blue-500 mr-3 flex-shrink-0" />
+                    Dashboard ESG avanzata
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="w-4 h-4 text-blue-500 mr-3 flex-shrink-0" />
+                    Report automatici CSRD/ESRS
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="w-4 h-4 text-blue-500 mr-3 flex-shrink-0" />
+                    Sistema welfare aziendale
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="w-4 h-4 text-blue-500 mr-3 flex-shrink-0" />
+                    API integration
+                  </div>
+                </div>
+                <Button className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700">
+                  Inizia Subito
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Piano Enterprise */}
+            <Card className="border-2 border-purple-200 shadow-lg bg-white/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+              <CardHeader className="text-center pb-4">
+                <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full flex items-center justify-center text-white mb-4 mx-auto">
+                  <Globe className="h-8 w-8" />
+                </div>
+                <CardTitle className="text-2xl font-bold text-gray-900">Piano Enterprise</CardTitle>
+                <CardDescription className="text-gray-600">
+                  Per aziende +250 dipendenti e Comuni
+                </CardDescription>
+                <div className="mt-4">
+                  <div className="flex items-center justify-center">
+                    <span className="text-4xl font-bold text-purple-600">999€</span>
+                    <span className="text-lg text-gray-500 ml-2">/mese</span>
+                  </div>
+                  <div className="flex items-center justify-center mt-1">
+                    <span className="text-lg text-gray-400 line-through mr-2">1998€</span>
+                    <Badge variant="secondary" className="bg-red-100 text-red-600 text-xs">-50%</Badge>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="text-center">
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="w-4 h-4 text-purple-500 mr-3 flex-shrink-0" />
+                    Tutto del piano PMI +
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="w-4 h-4 text-purple-500 mr-3 flex-shrink-0" />
+                    White label solution
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="w-4 h-4 text-purple-500 mr-3 flex-shrink-0" />
+                    Integrazione DPP completa
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="w-4 h-4 text-purple-500 mr-3 flex-shrink-0" />
+                    Analytics predittive IA
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="w-4 h-4 text-purple-500 mr-3 flex-shrink-0" />
+                    Account manager dedicato
+                  </div>
+                </div>
+                <Button className="w-full bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:from-purple-600 hover:to-pink-700">
+                  Contattaci
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="mt-12 p-6 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg text-white text-center">
+            <h4 className="text-xl font-bold mb-2 flex items-center justify-center">
+              <Sparkles className="w-5 h-5 mr-2" />
+              Offerta Limitata - Solo per i Primi 100 Clienti
+            </h4>
+            <p className="text-lg">
+              Questa promozione del 50% è valida solo per i primi 100 clienti che si iscrivono. 
+              Dopo il periodo promozionale, i prezzi torneranno ai valori standard.
+            </p>
+          </div>
+        </div>
+
+        {/* 15. Contact Section - Come contattarci */}
         <div className="mb-16">
           <Card className="border-0 shadow-lg bg-gradient-to-r from-green-50 to-blue-50">
             <CardHeader className="text-center">
@@ -931,7 +1112,7 @@ Vantaggi per il Comune</h5>
           </Card>
         </div>
 
-        {/* 15. CTA Section - Call to action finale */}
+        {/* 16. CTA Section - Call to action finale */}
         <div className="text-center bg-gradient-to-r from-green-600 to-blue-600 rounded-lg p-12 text-white">
           <h3 className="text-3xl font-bold mb-4">Pronto a Iniziare il Tuo Viaggio Sostenibile?</h3>
           <p className="text-xl mb-8 text-green-100">
