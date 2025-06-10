@@ -751,8 +751,8 @@ Modelli di Scambio Certificati</h3>
 
                   <div className="bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg p-4 text-white py-[12px]">
                     <h5 className="font-bold mb-2">
-                      Vantaggi per il Comune
-                    </h5>
+
+Vantaggi per il Comune</h5>
                     <ul className="text-sm space-y-1">
                       <li>• Dati real-time su comportamenti sostenibili cittadini</li>
                       <li>• Raggiungimento obiettivi climatici EU 2030</li>
