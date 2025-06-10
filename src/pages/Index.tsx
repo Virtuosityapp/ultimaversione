@@ -1,8 +1,15 @@
+
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+
 const Index = () => {
   const navigate = useNavigate();
-  return <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
+  
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
+      <LanguageSwitcher />
+      
       {/* Hero Section */}
       <div className="relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
@@ -47,6 +54,8 @@ const Index = () => {
           </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default Index;
