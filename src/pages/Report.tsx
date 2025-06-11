@@ -1,11 +1,14 @@
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { FileText, Download, Calendar, TrendingUp, Award, MapPin, Clock } from "lucide-react";
+import { FileText, Download, TrendingUp, Award, Clock, BarChart3, PieChart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, BarChart, Bar, PieChart as RechartsPieChart, Cell } from "recharts";
 
 const Report = () => {
   const navigate = useNavigate();
@@ -21,7 +24,6 @@ const Report = () => {
       points: 150,
       time: "45 min",
       timestamp: "2024-01-15T08:30:00",
-      location: "Milano Centro",
       source: "Strava"
     },
     {
@@ -33,7 +35,6 @@ const Report = () => {
       points: 80,
       time: "25 min",
       timestamp: "2024-01-15T18:15:00",
-      location: "Milano - Roma",
       source: "ATM App"
     },
     {
@@ -45,7 +46,6 @@ const Report = () => {
       points: 45,
       time: "32 min",
       timestamp: "2024-01-14T12:20:00",
-      location: "Parco Sempione",
       source: "Apple Health"
     },
     {
@@ -57,7 +57,6 @@ const Report = () => {
       points: 105,
       time: "30 min",
       timestamp: "2024-01-13T07:45:00",
-      location: "Milano Navigli",
       source: "Strava"
     },
     {
@@ -69,7 +68,6 @@ const Report = () => {
       points: 160,
       time: "40 min",
       timestamp: "2024-01-12T17:30:00",
-      location: "Milano - Bergamo",
       source: "ATM App"
     }
   ];
@@ -104,6 +102,29 @@ const Report = () => {
     }
   ];
 
+  // Chart data for CO2 savings over time
+  const co2TrendData = [
+    { date: "12 Gen", co2: 2.8, points: 160 },
+    { date: "13 Gen", co2: 4.7, points: 265 },
+    { date: "14 Gen", co2: 5.4, points: 310 },
+    { date: "15 Gen", co2: 7.9, points: 390 },
+    { date: "16 Gen", co2: 9.2, points: 470 }
+  ];
+
+  // Activity type distribution
+  const activityDistribution = [
+    { name: "Bicicletta", value: 45, color: "#10b981" },
+    { name: "Trasporto Pubblico", value: 35, color: "#3b82f6" },
+    { name: "Camminata", value: 20, color: "#8b5cf6" }
+  ];
+
+  // Monthly savings comparison
+  const monthlySavings = [
+    { month: "Nov", co2: 18.5, energy: 42.3 },
+    { month: "Dic", co2: 22.1, energy: 51.2 },
+    { month: "Gen", co2: 28.7, energy: 63.8 }
+  ];
+
   const totalCO2Saved = activities.reduce((total, activity) => total + parseFloat(activity.co2Saved), 0);
   const totalPoints = activities.reduce((total, activity) => total + activity.points, 0);
   const totalCertifiedCO2 = certificates.reduce((total, cert) => total + parseFloat(cert.co2Saved), 0);
@@ -129,7 +150,6 @@ const Report = () => {
   };
 
   const handleDownloadReport = () => {
-    // Simula il download del report
     const reportData = {
       generatedAt: new Date().toISOString(),
       period: "Gennaio 2024",
@@ -142,7 +162,12 @@ const Report = () => {
         totalCertifiedPoints
       },
       activities,
-      certificates
+      certificates,
+      charts: {
+        co2TrendData,
+        activityDistribution,
+        monthlySavings
+      }
     };
 
     const blob = new Blob([JSON.stringify(reportData, null, 2)], { type: 'application/json' });
@@ -200,10 +225,10 @@ const Report = () => {
         <div className="mb-4 sm:mb-8 text-center">
           <h2 className="text-xl sm:text-3xl font-bold text-gray-900 mb-1 sm:mb-2 flex items-center justify-center gap-2">
             <FileText className="h-6 w-6 sm:h-8 sm:w-8 text-green-600" />
-            {t('reportSubtitle')}
+            Report Sostenibilità e Monitoraggio
           </h2>
           <p className="text-gray-600 text-xs sm:text-base">
-            {t('reportDescription')}
+            Analisi dettagliata del tuo impatto ambientale e risparmi energetici
           </p>
         </div>
 
@@ -211,7 +236,7 @@ const Report = () => {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-6 mb-4 sm:mb-8">
           <Card className="border-0 shadow-lg bg-gradient-to-br from-green-400 to-emerald-500 text-white">
             <CardHeader className="pb-1 sm:pb-2">
-              <CardTitle className="text-xs sm:text-sm font-medium text-green-100">{t('totalCO2Saved')}</CardTitle>
+              <CardTitle className="text-xs sm:text-sm font-medium text-green-100">CO₂ Risparmiata</CardTitle>
             </CardHeader>
             <CardContent className="pt-0">
               <div className="text-lg sm:text-2xl font-bold">{totalCO2Saved.toFixed(1)} kg</div>
@@ -221,7 +246,7 @@ const Report = () => {
 
           <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-400 to-cyan-500 text-white">
             <CardHeader className="pb-1 sm:pb-2">
-              <CardTitle className="text-xs sm:text-sm font-medium text-blue-100">{t('totalPoints')}</CardTitle>
+              <CardTitle className="text-xs sm:text-sm font-medium text-blue-100">Punti Totali</CardTitle>
             </CardHeader>
             <CardContent className="pt-0">
               <div className="text-lg sm:text-2xl font-bold">{totalPoints}</div>
@@ -231,34 +256,125 @@ const Report = () => {
 
           <Card className="border-0 shadow-lg bg-gradient-to-br from-purple-400 to-pink-500 text-white">
             <CardHeader className="pb-1 sm:pb-2">
-              <CardTitle className="text-xs sm:text-sm font-medium text-purple-100">{t('certifiedCO2')}</CardTitle>
+              <CardTitle className="text-xs sm:text-sm font-medium text-purple-100">Energia Risparmiata</CardTitle>
             </CardHeader>
             <CardContent className="pt-0">
-              <div className="text-lg sm:text-2xl font-bold">{totalCertifiedCO2.toFixed(1)} kg</div>
-              <p className="text-xs text-purple-100 hidden sm:block">{certificates.length} certificati</p>
+              <div className="text-lg sm:text-2xl font-bold">63.8 kWh</div>
+              <p className="text-xs text-purple-100 hidden sm:block">Questo mese</p>
             </CardContent>
           </Card>
 
           <Card className="border-0 shadow-lg bg-gradient-to-br from-orange-400 to-red-500 text-white">
             <CardHeader className="pb-1 sm:pb-2">
-              <CardTitle className="text-xs sm:text-sm font-medium text-orange-100">{t('certifiedPoints')}</CardTitle>
+              <CardTitle className="text-xs sm:text-sm font-medium text-orange-100">Certificati</CardTitle>
             </CardHeader>
             <CardContent className="pt-0">
-              <div className="text-lg sm:text-2xl font-bold">{totalCertifiedPoints}</div>
+              <div className="text-lg sm:text-2xl font-bold">{certificates.length}</div>
               <p className="text-xs text-orange-100 hidden sm:block">Blockchain verified</p>
             </CardContent>
           </Card>
         </div>
+
+        {/* Charts Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6">
+          {/* CO2 Trend Chart */}
+          <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-base sm:text-xl">
+                <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
+                Trend CO₂ Risparmiata
+              </CardTitle>
+              <CardDescription className="text-xs sm:text-sm">
+                Andamento del risparmio di CO₂ negli ultimi giorni
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="h-64">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={co2TrendData}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="date" />
+                    <YAxis />
+                    <ChartTooltip content={<ChartTooltipContent />} />
+                    <Line type="monotone" dataKey="co2" stroke="#10b981" strokeWidth={2} name="CO₂ (kg)" />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Activity Distribution */}
+          <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-base sm:text-xl">
+                <PieChart className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />
+                Distribuzione Attività
+              </CardTitle>
+              <CardDescription className="text-xs sm:text-sm">
+                Percentuale di utilizzo per tipo di trasporto sostenibile
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="h-64">
+                <ResponsiveContainer width="100%" height="100%">
+                  <RechartsPieChart>
+                    <ChartTooltip content={<ChartTooltipContent />} />
+                    <RechartsPieChart data={activityDistribution} dataKey="value" cx="50%" cy="50%" outerRadius={80}>
+                      {activityDistribution.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.color} />
+                      ))}
+                    </RechartsPieChart>
+                  </RechartsPieChart>
+                </ResponsiveContainer>
+              </div>
+              <div className="flex justify-center gap-4 mt-4">
+                {activityDistribution.map((item, index) => (
+                  <div key={index} className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }}></div>
+                    <span className="text-xs">{item.name}</span>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Monthly Comparison Chart */}
+        <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm mb-6">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-base sm:text-xl">
+              <BarChart3 className="h-4 w-4 sm:h-5 sm:w-5 text-purple-600" />
+              Confronto Risparmi Mensili
+            </CardTitle>
+            <CardDescription className="text-xs sm:text-sm">
+              Evoluzione dei risparmi di CO₂ ed energia negli ultimi mesi
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={monthlySavings}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="month" />
+                  <YAxis />
+                  <ChartTooltip content={<ChartTooltipContent />} />
+                  <Bar dataKey="co2" fill="#10b981" name="CO₂ (kg)" />
+                  <Bar dataKey="energy" fill="#3b82f6" name="Energia (kWh)" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Activities Table */}
         <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm mb-6">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base sm:text-xl">
               <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
-              {t('activitiesDetail')}
+              Dettaglio Attività
             </CardTitle>
             <CardDescription className="text-xs sm:text-sm">
-              {t('activitiesDescription')}
+              Registro completo delle attività sostenibili registrate
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -266,13 +382,13 @@ const Report = () => {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="text-xs">{t('activityType')}</TableHead>
-                    <TableHead className="text-xs">{t('activity')}</TableHead>
-                    <TableHead className="text-xs">{t('distance')}</TableHead>
-                    <TableHead className="text-xs">{t('co2Saved')}</TableHead>
-                    <TableHead className="text-xs">{t('points')}</TableHead>
-                    <TableHead className="text-xs">{t('date')}</TableHead>
-                    <TableHead className="text-xs">{t('location')}</TableHead>
+                    <TableHead className="text-xs">Tipo</TableHead>
+                    <TableHead className="text-xs">Attività</TableHead>
+                    <TableHead className="text-xs">Distanza</TableHead>
+                    <TableHead className="text-xs">CO₂ Risparmiata</TableHead>
+                    <TableHead className="text-xs">Punti</TableHead>
+                    <TableHead className="text-xs">Data</TableHead>
+                    <TableHead className="text-xs">Fonte</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -284,7 +400,7 @@ const Report = () => {
                       <TableCell className="text-xs sm:text-sm font-semibold text-green-600">{activity.co2Saved}</TableCell>
                       <TableCell className="text-xs sm:text-sm font-semibold text-blue-600">{activity.points}</TableCell>
                       <TableCell className="text-xs sm:text-sm">{formatDate(activity.timestamp)}</TableCell>
-                      <TableCell className="text-xs sm:text-sm">{activity.location}</TableCell>
+                      <TableCell className="text-xs sm:text-sm">{activity.source}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -298,10 +414,10 @@ const Report = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base sm:text-xl">
               <Award className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />
-              {t('blockchainCertificates')}
+              Certificati Blockchain
             </CardTitle>
             <CardDescription className="text-xs sm:text-sm">
-              {t('certificatesDescription')}
+              Certificazioni digitali verificate dei tuoi risparmi
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -309,13 +425,13 @@ const Report = () => {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="text-xs">{t('id')}</TableHead>
-                    <TableHead className="text-xs">{t('title')}</TableHead>
-                    <TableHead className="text-xs">{t('certifiedCO2Short')}</TableHead>
-                    <TableHead className="text-xs">{t('points')}</TableHead>
-                    <TableHead className="text-xs">{t('validationDate')}</TableHead>
-                    <TableHead className="text-xs">{t('blockchainHash')}</TableHead>
-                    <TableHead className="text-xs">{t('status')}</TableHead>
+                    <TableHead className="text-xs">ID</TableHead>
+                    <TableHead className="text-xs">Titolo</TableHead>
+                    <TableHead className="text-xs">CO₂ Certificata</TableHead>
+                    <TableHead className="text-xs">Punti</TableHead>
+                    <TableHead className="text-xs">Data Validazione</TableHead>
+                    <TableHead className="text-xs">Hash Blockchain</TableHead>
+                    <TableHead className="text-xs">Stato</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -329,7 +445,7 @@ const Report = () => {
                       <TableCell className="text-xs sm:text-sm font-mono">{cert.blockchainHash}</TableCell>
                       <TableCell>
                         <Badge className="bg-green-100 text-green-800 text-xs">
-                          {t('verified')}
+                          Verificato
                         </Badge>
                       </TableCell>
                     </TableRow>
