@@ -7,10 +7,8 @@ import { Calendar, Award, TrendingUp, MapPin, Clock, QrCode, Camera, Smartphone,
 import { useNavigate } from "react-router-dom";
 import { DppVerification } from "@/components/DppVerification";
 import CitizenReporting from "@/components/CitizenReporting";
-
 const Dashboard = () => {
   const navigate = useNavigate();
-  
   const activities = [{
     id: 1,
     type: "bike",
@@ -45,7 +43,6 @@ const Dashboard = () => {
     location: "Parco Sempione",
     source: "Samsung Health"
   }];
-  
   const certificates = [{
     id: "CERT-001",
     title: "Mobilità Sostenibile",
@@ -63,72 +60,67 @@ const Dashboard = () => {
     blockchainHash: "0x4d5e6f...",
     status: "verified"
   }];
-
-  const challenges = [
-    {
-      id: 1,
-      title: "Settimana della Mobilità Verde",
-      description: "Chi percorre più km con mezzi sostenibili questa settimana?",
-      type: "weekly",
-      participants: 12,
-      yourPosition: 3,
-      leadingUser: "Anna M.",
-      leadingScore: "45.2 km",
-      yourScore: "32.7 km",
-      timeLeft: "3 giorni",
-      category: "Mobilità",
-      prize: "Buono spesa €50",
-      progress: 73,
-      status: "active"
-    },
-    {
-      id: 2,
-      title: "Challenge CO₂ Aziendale",
-      description: "Squadra che risparmia più CO₂ questo mese",
-      type: "team",
-      participants: 8,
-      yourPosition: 1,
-      leadingUser: "Il tuo team",
-      leadingScore: "128.5 kg CO₂",
-      yourScore: "128.5 kg CO₂",
-      timeLeft: "12 giorni",
-      category: "Riduzione CO₂",
-      prize: "Team Building ecologico",
-      progress: 85,
-      status: "leading"
-    },
-    {
-      id: 3,
-      title: "Sfida Risparmio Energetico",
-      description: "Chi ottiene più certificati di risparmio energetico?",
-      type: "individual",
-      participants: 25,
-      yourPosition: 7,
-      leadingUser: "Marco P.",
-      leadingScore: "18 certificati",
-      yourScore: "12 certificati",
-      timeLeft: "5 giorni",
-      category: "Energia",
-      prize: "Smartwatch eco-friendly",
-      progress: 67,
-      status: "active"
-    }
-  ];
-
+  const challenges = [{
+    id: 1,
+    title: "Settimana della Mobilità Verde",
+    description: "Chi percorre più km con mezzi sostenibili questa settimana?",
+    type: "weekly",
+    participants: 12,
+    yourPosition: 3,
+    leadingUser: "Anna M.",
+    leadingScore: "45.2 km",
+    yourScore: "32.7 km",
+    timeLeft: "3 giorni",
+    category: "Mobilità",
+    prize: "Buono spesa €50",
+    progress: 73,
+    status: "active"
+  }, {
+    id: 2,
+    title: "Challenge CO₂ Aziendale",
+    description: "Squadra che risparmia più CO₂ questo mese",
+    type: "team",
+    participants: 8,
+    yourPosition: 1,
+    leadingUser: "Il tuo team",
+    leadingScore: "128.5 kg CO₂",
+    yourScore: "128.5 kg CO₂",
+    timeLeft: "12 giorni",
+    category: "Riduzione CO₂",
+    prize: "Team Building ecologico",
+    progress: 85,
+    status: "leading"
+  }, {
+    id: 3,
+    title: "Sfida Risparmio Energetico",
+    description: "Chi ottiene più certificati di risparmio energetico?",
+    type: "individual",
+    participants: 25,
+    yourPosition: 7,
+    leadingUser: "Marco P.",
+    leadingScore: "18 certificati",
+    yourScore: "12 certificati",
+    timeLeft: "5 giorni",
+    category: "Energia",
+    prize: "Smartwatch eco-friendly",
+    progress: 67,
+    status: "active"
+  }];
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'leading': return 'bg-gradient-to-r from-yellow-400 to-orange-500 text-white';
-      case 'active': return 'bg-gradient-to-r from-blue-400 to-purple-500 text-white';
-      default: return 'bg-gray-100 text-gray-700';
+      case 'leading':
+        return 'bg-gradient-to-r from-yellow-400 to-orange-500 text-white';
+      case 'active':
+        return 'bg-gradient-to-r from-blue-400 to-purple-500 text-white';
+      default:
+        return 'bg-gray-100 text-gray-700';
     }
   };
-
   const getPositionBadge = (position: number) => {
     if (position === 1) return 'bg-yellow-100 text-yellow-800 border-yellow-300';
     if (position <= 3) return 'bg-green-100 text-green-800 border-green-300';
     return 'bg-blue-100 text-blue-800 border-blue-300';
   };
-
   return <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
       {/* Header */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-green-100 sticky top-0 z-50">
@@ -278,8 +270,7 @@ const Dashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3 sm:space-y-4">
-                  {challenges.map(challenge => (
-                    <div key={challenge.id} className={`p-3 sm:p-4 rounded-lg border-2 hover:shadow-lg hover:scale-[1.01] transition-all duration-200 cursor-pointer ${getStatusColor(challenge.status)}`}>
+                  {challenges.map(challenge => <div key={challenge.id} className={`p-3 sm:p-4 rounded-lg border-2 hover:shadow-lg hover:scale-[1.01] transition-all duration-200 cursor-pointer ${getStatusColor(challenge.status)}`}>
                       <div className="flex justify-between items-start mb-2 sm:mb-3">
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 mb-1">
@@ -324,11 +315,10 @@ const Dashboard = () => {
                         </div>
                         <div className="flex items-center gap-1">
                           <Trophy className="h-3 w-3" />
-                          <span className="font-medium">{challenge.prize}</span>
+                          
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    </div>)}
                   
                   <div className="pt-2">
                     <Button className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg text-xs sm:text-sm py-2 sm:py-3">
@@ -490,5 +480,4 @@ const Dashboard = () => {
       </div>
     </div>;
 };
-
 export default Dashboard;
