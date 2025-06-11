@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -5,7 +6,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
-import { Users, UserCheck, Upload, FileText, Award, Gift, Plane, ArrowLeft } from 'lucide-react';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Users, UserCheck, Upload, FileText, Award, Gift, Plane, ArrowLeft, TrendingUp, Eye, Target } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
@@ -13,13 +15,22 @@ import LanguageSwitcher from '@/components/LanguageSwitcher';
 const DashboardAziende = () => {
   const navigate = useNavigate();
   const { t } = useLanguage();
-  const [certificatiDipendenti] = useState(245);
-  const [certificatiEsterni] = useState(89);
+  const [certificatiDipendenti] = useState(1589);
+  const [certificatiEsterni] = useState(14568);
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
   const [welfareItems, setWelfareItems] = useState([
     { id: 1, tipo: 'Premio', nome: 'Voucher Cena Ristorante', valore: '€ 50' },
     { id: 2, tipo: 'Viaggio', nome: 'Weekend Spa Toscana', valore: '€ 300' },
     { id: 3, tipo: 'Gadget', nome: 'Smartwatch Aziendale', valore: '€ 150' }
+  ]);
+
+  const [certificateMonitoring] = useState([
+    { tipo: 'Mobilità Sostenibile', count: 456, trend: '+12%', action: 'Promuovi carpooling aziendale' },
+    { tipo: 'Efficienza Energetica', count: 234, trend: '+8%', action: 'Incentiva smart working' },
+    { tipo: 'Riciclo e Riuso', count: 189, trend: '+15%', action: 'Campagna zero waste' },
+    { tipo: 'Consumo Responsabile', count: 167, trend: '+5%', action: 'Partnership negozi green' },
+    { tipo: 'Biodiversità', count: 89, trend: '+20%', action: 'Progetti di riforestazione' },
+    { tipo: 'Acqua e Risorse', count: 78, trend: '+3%', action: 'Sensibilizzazione risparmio idrico' }
   ]);
 
   const [newWelfareItem, setNewWelfareItem] = useState({
@@ -56,6 +67,10 @@ const DashboardAziende = () => {
     }
   };
 
+  const getTrendColor = (trend: string) => {
+    return trend.startsWith('+') ? 'text-green-600' : 'text-red-600';
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-6">
       <LanguageSwitcher />
@@ -85,7 +100,7 @@ const DashboardAziende = () => {
             <CardContent>
               <div className="text-3xl font-bold text-white">{certificatiDipendenti}</div>
               <p className="text-xs text-green-100 mt-1">
-                {t('employeeCertificatesDesc')}
+                Certificati scambiati con i dipendenti
               </p>
             </CardContent>
           </Card>
@@ -100,11 +115,56 @@ const DashboardAziende = () => {
             <CardContent>
               <div className="text-3xl font-bold text-white">{certificatiEsterni}</div>
               <p className="text-xs text-blue-100 mt-1">
-                {t('externalCertificatesDesc')}
+                Certificati ricevuti da followers
               </p>
             </CardContent>
           </Card>
         </div>
+
+        {/* Monitoraggio Certificati Dipendenti */}
+        <Card className="mb-8 border-0 shadow-xl bg-white/80 backdrop-blur-sm">
+          <CardHeader className="bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-t-lg">
+            <CardTitle className="flex items-center gap-2">
+              <Eye className="h-6 w-6" />
+              Monitoraggio Certificati Dipendenti
+            </CardTitle>
+            <CardDescription className="text-green-100">
+              Analisi dei comportamenti sostenibili per strategie di marketing mirate
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="p-6">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Categoria Certificato</TableHead>
+                  <TableHead>Quantità</TableHead>
+                  <TableHead>Trend</TableHead>
+                  <TableHead>Azione Marketing Suggerita</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {certificateMonitoring.map((item, index) => (
+                  <TableRow key={index}>
+                    <TableCell className="font-medium">{item.tipo}</TableCell>
+                    <TableCell className="text-center font-semibold">{item.count}</TableCell>
+                    <TableCell className={`text-center font-semibold ${getTrendColor(item.trend)}`}>
+                      <div className="flex items-center justify-center gap-1">
+                        <TrendingUp className="h-4 w-4" />
+                        {item.trend}
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant="outline" className="flex items-center gap-1">
+                        <Target className="h-3 w-3" />
+                        {item.action}
+                      </Badge>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
 
         {/* Sezione Welfare */}
         <Card className="mb-8 border-0 shadow-xl bg-white/80 backdrop-blur-sm">
