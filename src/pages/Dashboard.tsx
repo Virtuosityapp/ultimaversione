@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Calendar, Award, TrendingUp, MapPin, Clock, QrCode, Camera, Smartphone } from "lucide-react";
+import { Calendar, Award, TrendingUp, MapPin, Clock, QrCode, Camera, Smartphone, Users, Trophy, Target, Zap } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { DppVerification } from "@/components/DppVerification";
 import CitizenReporting from "@/components/CitizenReporting";
@@ -63,6 +63,71 @@ const Dashboard = () => {
     blockchainHash: "0x4d5e6f...",
     status: "verified"
   }];
+
+  const challenges = [
+    {
+      id: 1,
+      title: "Settimana della Mobilità Verde",
+      description: "Chi percorre più km con mezzi sostenibili questa settimana?",
+      type: "weekly",
+      participants: 12,
+      yourPosition: 3,
+      leadingUser: "Anna M.",
+      leadingScore: "45.2 km",
+      yourScore: "32.7 km",
+      timeLeft: "3 giorni",
+      category: "Mobilità",
+      prize: "Buono spesa €50",
+      progress: 73,
+      status: "active"
+    },
+    {
+      id: 2,
+      title: "Challenge CO₂ Aziendale",
+      description: "Squadra che risparmia più CO₂ questo mese",
+      type: "team",
+      participants: 8,
+      yourPosition: 1,
+      leadingUser: "Il tuo team",
+      leadingScore: "128.5 kg CO₂",
+      yourScore: "128.5 kg CO₂",
+      timeLeft: "12 giorni",
+      category: "Riduzione CO₂",
+      prize: "Team Building ecologico",
+      progress: 85,
+      status: "leading"
+    },
+    {
+      id: 3,
+      title: "Sfida Risparmio Energetico",
+      description: "Chi ottiene più certificati di risparmio energetico?",
+      type: "individual",
+      participants: 25,
+      yourPosition: 7,
+      leadingUser: "Marco P.",
+      leadingScore: "18 certificati",
+      yourScore: "12 certificati",
+      timeLeft: "5 giorni",
+      category: "Energia",
+      prize: "Smartwatch eco-friendly",
+      progress: 67,
+      status: "active"
+    }
+  ];
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'leading': return 'bg-gradient-to-r from-yellow-400 to-orange-500 text-white';
+      case 'active': return 'bg-gradient-to-r from-blue-400 to-purple-500 text-white';
+      default: return 'bg-gray-100 text-gray-700';
+    }
+  };
+
+  const getPositionBadge = (position: number) => {
+    if (position === 1) return 'bg-yellow-100 text-yellow-800 border-yellow-300';
+    if (position <= 3) return 'bg-green-100 text-green-800 border-green-300';
+    return 'bg-blue-100 text-blue-800 border-blue-300';
+  };
 
   return <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
       {/* Header */}
@@ -196,6 +261,81 @@ const Dashboard = () => {
                         <div className="text-xs text-gray-600">{activity.co2Saved}</div>
                       </div>
                     </div>)}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* New Gamification Section */}
+            <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+              <CardHeader className="pb-3 sm:pb-6">
+                <CardTitle className="flex items-center gap-2 text-base sm:text-xl">
+                  <Trophy className="h-4 w-4 sm:h-5 sm:w-5 text-purple-600" />
+                  Sfide Virtuosity
+                </CardTitle>
+                <CardDescription className="text-xs sm:text-sm">
+                  Compete con altri utenti e dipendenti per essere più sostenibili
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3 sm:space-y-4">
+                  {challenges.map(challenge => (
+                    <div key={challenge.id} className={`p-3 sm:p-4 rounded-lg border-2 hover:shadow-lg hover:scale-[1.01] transition-all duration-200 cursor-pointer ${getStatusColor(challenge.status)}`}>
+                      <div className="flex justify-between items-start mb-2 sm:mb-3">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-1">
+                            <h3 className="font-bold text-sm sm:text-base truncate">{challenge.title}</h3>
+                            <Badge className={`text-xs ${getPositionBadge(challenge.yourPosition)}`}>
+                              #{challenge.yourPosition}
+                            </Badge>
+                          </div>
+                          <p className="text-xs opacity-90">{challenge.description}</p>
+                        </div>
+                        <div className="flex items-center gap-1 ml-2 flex-shrink-0">
+                          <Users className="h-3 w-3" />
+                          <span className="text-xs">{challenge.participants}</span>
+                        </div>
+                      </div>
+                      
+                      <div className="grid grid-cols-2 gap-2 sm:gap-4 mb-2 sm:mb-3">
+                        <div>
+                          <p className="text-xs opacity-75">🥇 In testa</p>
+                          <p className="font-semibold text-xs sm:text-sm">{challenge.leadingUser}</p>
+                          <p className="text-xs opacity-90">{challenge.leadingScore}</p>
+                        </div>
+                        <div>
+                          <p className="text-xs opacity-75">🎯 Il tuo punteggio</p>
+                          <p className="font-semibold text-xs sm:text-sm">{challenge.yourScore}</p>
+                          <p className="text-xs opacity-90">Categoria: {challenge.category}</p>
+                        </div>
+                      </div>
+
+                      <div className="mb-2 sm:mb-3">
+                        <div className="flex justify-between text-xs mb-1">
+                          <span>Progresso</span>
+                          <span>{challenge.progress}%</span>
+                        </div>
+                        <Progress value={challenge.progress} className="h-1.5 sm:h-2 bg-white/20 [&>div]:bg-white" />
+                      </div>
+                      
+                      <div className="flex justify-between items-center text-xs">
+                        <div className="flex items-center gap-1">
+                          <Clock className="h-3 w-3" />
+                          <span>Tempo rimanente: {challenge.timeLeft}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Trophy className="h-3 w-3" />
+                          <span className="font-medium">{challenge.prize}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                  
+                  <div className="pt-2">
+                    <Button className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg text-xs sm:text-sm py-2 sm:py-3">
+                      <Target className="mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                      Partecipa a Nuove Sfide
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -352,3 +492,5 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+</edits_to_apply>
