@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -7,7 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Users, UserCheck, Upload, FileText, Award, Gift, Plane, ArrowLeft, TrendingUp, Eye, Target } from 'lucide-react';
+import { Users, UserCheck, Upload, FileText, Award, Gift, Plane, ArrowLeft, TrendingUp, Eye, Target, Globe } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
@@ -31,6 +30,15 @@ const DashboardAziende = () => {
     { tipo: 'Consumo Responsabile', count: 167, trend: '+5%', action: 'Partnership negozi green' },
     { tipo: 'Biodiversità', count: 89, trend: '+20%', action: 'Progetti di riforestazione' },
     { tipo: 'Acqua e Risorse', count: 78, trend: '+3%', action: 'Sensibilizzazione risparmio idrico' }
+  ]);
+
+  const [externalCertificateMonitoring] = useState([
+    { tipo: 'Mobilità Sostenibile', count: 3240, trend: '+18%', action: 'Partnership con app mobilità' },
+    { tipo: 'Consumo Responsabile', count: 2156, trend: '+22%', action: 'Campagne influencer green' },
+    { tipo: 'Efficienza Energetica', count: 1890, trend: '+14%', action: 'Collaborazioni utility rinnovabili' },
+    { tipo: 'Riciclo e Riuso', count: 1654, trend: '+10%', action: 'Ambassador program rifiuti zero' },
+    { tipo: 'Biodiversità', count: 987, trend: '+25%', action: 'Community gardening urbano' },
+    { tipo: 'Acqua e Risorse', count: 743, trend: '+7%', action: 'Challenge risparmio idrico social' }
   ]);
 
   const [newWelfareItem, setNewWelfareItem] = useState({
@@ -144,6 +152,51 @@ const DashboardAziende = () => {
               </TableHeader>
               <TableBody>
                 {certificateMonitoring.map((item, index) => (
+                  <TableRow key={index}>
+                    <TableCell className="font-medium">{item.tipo}</TableCell>
+                    <TableCell className="text-center font-semibold">{item.count}</TableCell>
+                    <TableCell className={`text-center font-semibold ${getTrendColor(item.trend)}`}>
+                      <div className="flex items-center justify-center gap-1">
+                        <TrendingUp className="h-4 w-4" />
+                        {item.trend}
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant="outline" className="flex items-center gap-1">
+                        <Target className="h-3 w-3" />
+                        {item.action}
+                      </Badge>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+
+        {/* Monitoraggio Certificati Esterni */}
+        <Card className="mb-8 border-0 shadow-xl bg-white/80 backdrop-blur-sm">
+          <CardHeader className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-t-lg">
+            <CardTitle className="flex items-center gap-2">
+              <Globe className="h-6 w-6" />
+              Monitoraggio Certificati Esterni
+            </CardTitle>
+            <CardDescription className="text-blue-100">
+              Analisi dei comportamenti sostenibili dei followers per strategie di engagement
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="p-6">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Categoria Certificato</TableHead>
+                  <TableHead>Quantità</TableHead>
+                  <TableHead>Trend</TableHead>
+                  <TableHead>Azione Marketing Suggerita</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {externalCertificateMonitoring.map((item, index) => (
                   <TableRow key={index}>
                     <TableCell className="font-medium">{item.tipo}</TableCell>
                     <TableCell className="text-center font-semibold">{item.count}</TableCell>
