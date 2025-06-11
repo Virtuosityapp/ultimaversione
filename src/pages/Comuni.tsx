@@ -9,10 +9,11 @@ import { Car, Lightbulb, Trash2, Recycle, ArrowLeft, Activity, Wifi, AlertCircle
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useEffect, useRef, useState } from "react";
-
 const Comuni = () => {
   const navigate = useNavigate();
-  const { toast } = useToast();
+  const {
+    toast
+  } = useToast();
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<any>(null);
   const [selectedReward, setSelectedReward] = useState<any>(null);
@@ -113,7 +114,6 @@ const Comuni = () => {
     coords: [9.2050, 45.4780] as [number, number],
     timestamp: "4 ore fa"
   }];
-
   useEffect(() => {
     if (!mapContainer.current || map.current) return;
 
@@ -161,7 +161,6 @@ const Comuni = () => {
       }
     };
   }, []);
-
   const integrations = [{
     id: 1,
     name: "Smart Parking",
@@ -219,7 +218,6 @@ const Comuni = () => {
       citizens: 0
     }
   }];
-
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "active":
@@ -234,7 +232,6 @@ const Comuni = () => {
         return <Badge variant="secondary">Sconosciuto</Badge>;
     }
   };
-
   const getCategoryColor = (category: string) => {
     switch (category) {
       case "transport":
@@ -251,14 +248,12 @@ const Comuni = () => {
         return "bg-gray-100 text-gray-800";
     }
   };
-
   const handleManageIntegration = (integration: any) => {
     toast({
       title: "Gestione Integrazione",
       description: `Apertura pannello di controllo per ${integration.name}`
     });
   };
-
   const handleEditReward = (reward: any) => {
     setSelectedReward(reward);
     toast({
@@ -266,50 +261,33 @@ const Comuni = () => {
       description: `Modifica di ${reward.title}`
     });
   };
-
   const handleDeleteReward = (rewardId: number) => {
     toast({
       title: "Incentivo Eliminato",
       description: "L'incentivo è stato rimosso con successo"
     });
   };
-
   const totalDataPoints = integrations.reduce((sum, int) => sum + int.dataPoints, 0);
   const activeIntegrations = integrations.filter(int => int.status === "active").length;
   const totalRewards = communityRewards.length;
   const activeRewards = communityRewards.filter(r => r.status === "active").length;
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-cyan-50">
+  return <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-cyan-50">
       {/* Header - Improved mobile spacing */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-blue-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-3 sm:py-4">
             <div className="flex items-center space-x-2 sm:space-x-3">
-              <Button 
-                variant="ghost" 
-                onClick={() => navigate("/dashboard")} 
-                className="mr-1 sm:mr-2 p-2 sm:p-3 min-h-[44px] min-w-[44px]" 
-                size="sm"
-              >
+              <Button variant="ghost" onClick={() => navigate("/dashboard")} className="mr-1 sm:mr-2 p-2 sm:p-3 min-h-[44px] min-w-[44px]" size="sm">
                 <ArrowLeft className="h-4 w-4 sm:mr-2" />
                 <span className="hidden sm:inline">Dashboard</span>
               </Button>
-              <img 
-                src="/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png" 
-                alt="Virtuosity Logo" 
-                className="relative h-8 w-8 sm:h-12 sm:w-12 lg:h-16 lg:w-16 object-contain" 
-              />
+              <img src="/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png" alt="Virtuosity Logo" className="relative h-8 w-8 sm:h-12 sm:w-12 lg:h-16 lg:w-16 object-contain" />
               <h1 className="text-sm sm:text-xl lg:text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                 Dashboard Comuni
               </h1>
             </div>
             <div className="flex items-center space-x-2 sm:space-x-4">
-              <Button 
-                variant="outline" 
-                onClick={() => navigate("/report")} 
-                className="border-green-300 text-green-700 hover:bg-green-50 hover:border-green-400 hover:scale-105 transition-all duration-200 text-xs px-2 py-2 sm:text-sm sm:px-4 active:scale-95 min-h-[44px]"
-              >
+              <Button variant="outline" onClick={() => navigate("/report")} className="border-green-300 text-green-700 hover:bg-green-50 hover:border-green-400 hover:scale-105 transition-all duration-200 text-xs px-2 py-2 sm:text-sm sm:px-4 active:scale-95 min-h-[44px]">
                 <FileText className="h-4 w-4 mr-1 sm:mr-2" />
                 <span className="hidden sm:inline">Genera Report</span>
                 <span className="sm:hidden">Report</span>
@@ -366,7 +344,7 @@ const Comuni = () => {
 
           <Card className="border-0 shadow-lg bg-gradient-to-br from-orange-400 to-red-500 text-white">
             <CardHeader className="pb-2 p-3 sm:p-6">
-              <CardTitle className="text-xs sm:text-sm font-medium text-orange-100">Allerte</CardTitle>
+              <CardTitle className="text-xs sm:text-sm font-medium text-orange-100">Segnalazioni Cittadini</CardTitle>
             </CardHeader>
             <CardContent className="p-3 sm:p-6 pt-0">
               <div className="text-lg sm:text-2xl font-bold">2</div>
@@ -378,28 +356,16 @@ const Comuni = () => {
         <Tabs defaultValue="overview" className="space-y-6 sm:space-y-8">
           {/* Improved mobile tabs */}
           <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 bg-white/80 backdrop-blur-sm shadow-md p-1 gap-1 sm:gap-0 sticky top-20 z-40">
-            <TabsTrigger 
-              value="overview" 
-              className="px-1 py-3 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-blue-100 hover:to-indigo-100 hover:text-blue-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-400 data-[state=active]:to-indigo-500 data-[state=active]:text-white data-[state=active]:shadow-lg min-h-[44px]"
-            >
+            <TabsTrigger value="overview" className="px-1 py-3 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-blue-100 hover:to-indigo-100 hover:text-blue-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-400 data-[state=active]:to-indigo-500 data-[state=active]:text-white data-[state=active]:shadow-lg min-h-[44px]">
               Panoramica
             </TabsTrigger>
-            <TabsTrigger 
-              value="integrations" 
-              className="px-1 py-3 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-green-100 hover:to-emerald-100 hover:text-green-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-400 data-[state=active]:to-emerald-500 data-[state=active]:text-white data-[state=active]:shadow-lg min-h-[44px]"
-            >
+            <TabsTrigger value="integrations" className="px-1 py-3 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-green-100 hover:to-emerald-100 hover:text-green-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-400 data-[state=active]:to-emerald-500 data-[state=active]:text-white data-[state=active]:shadow-lg min-h-[44px]">
               Integrazioni
             </TabsTrigger>
-            <TabsTrigger 
-              value="rewards" 
-              className="px-1 py-3 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-purple-100 hover:to-pink-100 hover:text-purple-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-400 data-[state=active]:to-pink-500 data-[state=active]:text-white data-[state=active]:shadow-lg min-h-[44px]"
-            >
+            <TabsTrigger value="rewards" className="px-1 py-3 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-purple-100 hover:to-pink-100 hover:text-purple-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-400 data-[state=active]:to-pink-500 data-[state=active]:text-white data-[state=active]:shadow-lg min-h-[44px]">
               Incentivi
             </TabsTrigger>
-            <TabsTrigger 
-              value="map" 
-              className="px-1 py-3 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-cyan-100 hover:to-blue-100 hover:text-cyan-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-400 data-[state=active]:to-blue-500 data-[state=active]:text-white data-[state=active]:shadow-lg min-h-[44px]"
-            >
+            <TabsTrigger value="map" className="px-1 py-3 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-cyan-100 hover:to-blue-100 hover:text-cyan-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-400 data-[state=active]:to-blue-500 data-[state=active]:text-white data-[state=active]:shadow-lg min-h-[44px]">
               Mappa
             </TabsTrigger>
           </TabsList>
@@ -407,10 +373,9 @@ const Comuni = () => {
           <div className="mt-6 sm:mt-8">
             <TabsContent value="overview" className="space-y-4 sm:space-y-6 mt-0">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-                {integrations.map((integration) => {
-                  const IconComponent = integration.icon;
-                  return (
-                    <Card key={integration.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+                {integrations.map(integration => {
+                const IconComponent = integration.icon;
+                return <Card key={integration.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
                       <CardHeader className="pb-3 p-4 sm:p-6">
                         <div className="flex justify-between items-start mb-2">
                           <div className="flex items-center space-x-3">
@@ -438,36 +403,28 @@ const Comuni = () => {
                           </div>
                           
                           <div className="grid grid-cols-3 gap-2 text-xs">
-                            {Object.entries(integration.metrics).map(([key, value]) => (
-                              <div key={key} className="text-center p-2 bg-gray-50 rounded">
+                            {Object.entries(integration.metrics).map(([key, value]) => <div key={key} className="text-center p-2 bg-gray-50 rounded">
                                 <div className="font-bold text-gray-900 text-xs sm:text-sm">{value}</div>
                                 <div className="text-gray-600 capitalize text-xs">{key}</div>
-                              </div>
-                            ))}
+                              </div>)}
                           </div>
                           
-                          <Button 
-                            className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 text-sm min-h-[44px]" 
-                            onClick={() => handleManageIntegration(integration)} 
-                            size="sm"
-                          >
+                          <Button className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 text-sm min-h-[44px]" onClick={() => handleManageIntegration(integration)} size="sm">
                             <Settings className="h-4 w-4 mr-2" />
                             Gestisci
                           </Button>
                         </div>
                       </CardContent>
-                    </Card>
-                  );
-                })}
+                    </Card>;
+              })}
               </div>
             </TabsContent>
 
             <TabsContent value="integrations" className="space-y-4 sm:space-y-6 mt-0">
               <div className="grid grid-cols-1 gap-4 sm:gap-6">
-                {integrations.map((integration) => {
-                  const IconComponent = integration.icon;
-                  return (
-                    <Card key={integration.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+                {integrations.map(integration => {
+                const IconComponent = integration.icon;
+                return <Card key={integration.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
                       <CardContent className="p-4 sm:p-6">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center space-x-3 sm:space-x-4">
@@ -491,9 +448,8 @@ const Comuni = () => {
                           </div>
                         </div>
                       </CardContent>
-                    </Card>
-                  );
-                })}
+                    </Card>;
+              })}
               </div>
             </TabsContent>
 
@@ -503,10 +459,7 @@ const Comuni = () => {
                   <h3 className="text-lg sm:text-xl font-bold text-gray-900">Gestione Incentivi Cittadini 🎁</h3>
                   <p className="text-gray-600 text-sm">Configura i servizi e vantaggi offerti in cambio di certificati ambientali</p>
                 </div>
-                <Button 
-                  onClick={() => setShowAddReward(true)} 
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 w-full sm:w-auto min-h-[44px]"
-                >
+                <Button onClick={() => setShowAddReward(true)} className="bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 w-full sm:w-auto min-h-[44px]">
                   <Plus className="h-4 w-4 mr-2" />
                   Nuovo Incentivo
                 </Button>
@@ -565,11 +518,10 @@ const Comuni = () => {
 
               {/* Rewards List - Better mobile layout */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-                {communityRewards.map((reward) => {
-                  const IconComponent = reward.icon;
-                  const usagePercentage = (reward.currentUsers / reward.maxUsers) * 100;
-                  return (
-                    <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+                {communityRewards.map(reward => {
+                const IconComponent = reward.icon;
+                const usagePercentage = reward.currentUsers / reward.maxUsers * 100;
+                return <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
                       <CardHeader className="pb-3 p-4 sm:p-6">
                         <div className="flex justify-between items-start">
                           <div className="flex items-center space-x-3">
@@ -611,10 +563,9 @@ const Comuni = () => {
                               <span className="font-medium">{reward.currentUsers}/{reward.maxUsers}</span>
                             </div>
                             <div className="w-full bg-gray-200 rounded-full h-2">
-                              <div 
-                                className="bg-gradient-to-r from-blue-400 to-purple-500 h-2 rounded-full transition-all duration-300" 
-                                style={{ width: `${Math.min(usagePercentage, 100)}%` }}
-                              ></div>
+                              <div className="bg-gradient-to-r from-blue-400 to-purple-500 h-2 rounded-full transition-all duration-300" style={{
+                            width: `${Math.min(usagePercentage, 100)}%`
+                          }}></div>
                             </div>
                             <div className="text-xs text-gray-500 mt-1">
                               {usagePercentage.toFixed(1)}% utilizzato
@@ -629,34 +580,22 @@ const Comuni = () => {
 
                           {/* Actions - Better mobile buttons */}
                           <div className="flex space-x-2">
-                            <Button 
-                              variant="outline" 
-                              size="sm" 
-                              className="flex-1 min-h-[40px]" 
-                              onClick={() => handleEditReward(reward)}
-                            >
+                            <Button variant="outline" size="sm" className="flex-1 min-h-[40px]" onClick={() => handleEditReward(reward)}>
                               <Edit className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
                               <span className="text-xs sm:text-sm">Modifica</span>
                             </Button>
-                            <Button 
-                              variant="outline" 
-                              size="sm" 
-                              className="text-red-600 border-red-300 hover:bg-red-50 min-h-[40px] min-w-[40px]" 
-                              onClick={() => handleDeleteReward(reward.id)}
-                            >
+                            <Button variant="outline" size="sm" className="text-red-600 border-red-300 hover:bg-red-50 min-h-[40px] min-w-[40px]" onClick={() => handleDeleteReward(reward.id)}>
                               <Trash className="h-3 w-3 sm:h-4 sm:w-4" />
                             </Button>
                           </div>
                         </div>
                       </CardContent>
-                    </Card>
-                  );
-                })}
+                    </Card>;
+              })}
               </div>
 
               {/* Add New Reward Form - Better mobile layout */}
-              {showAddReward && (
-                <Card className="border-0 shadow-lg bg-white/90 backdrop-blur-sm border-purple-200">
+              {showAddReward && <Card className="border-0 shadow-lg bg-white/90 backdrop-blur-sm border-purple-200">
                   <CardHeader className="p-4 sm:p-6">
                     <CardTitle className="flex items-center space-x-2">
                       <Plus className="h-5 w-5 text-purple-600" />
@@ -699,29 +638,21 @@ const Comuni = () => {
                     </div>
                     
                     <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
-                      <Button 
-                        className="bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 flex-1 min-h-[44px]" 
-                        onClick={() => {
-                          toast({
-                            title: "Incentivo Creato",
-                            description: "Il nuovo incentivo è stato aggiunto con successo"
-                          });
-                          setShowAddReward(false);
-                        }}
-                      >
+                      <Button className="bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 flex-1 min-h-[44px]" onClick={() => {
+                    toast({
+                      title: "Incentivo Creato",
+                      description: "Il nuovo incentivo è stato aggiunto con successo"
+                    });
+                    setShowAddReward(false);
+                  }}>
                         Crea Incentivo
                       </Button>
-                      <Button 
-                        variant="outline" 
-                        onClick={() => setShowAddReward(false)}
-                        className="min-h-[44px]"
-                      >
+                      <Button variant="outline" onClick={() => setShowAddReward(false)} className="min-h-[44px]">
                         Annulla
                       </Button>
                     </div>
                   </CardContent>
-                </Card>
-              )}
+                </Card>}
             </TabsContent>
 
             <TabsContent value="map" className="space-y-4 sm:space-y-6 mt-0">
@@ -769,18 +700,13 @@ const Comuni = () => {
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-3 p-4 sm:p-6 pt-0">
-                      {mapAlerts.filter((alert) => alert.type === "alert").map((alert) => (
-                        <Alert 
-                          key={alert.id} 
-                          className={`border-l-4 ${alert.severity === "high" ? "border-red-500" : "border-orange-500"}`}
-                        >
+                      {mapAlerts.filter(alert => alert.type === "alert").map(alert => <Alert key={alert.id} className={`border-l-4 ${alert.severity === "high" ? "border-red-500" : "border-orange-500"}`}>
                           <AlertCircle className="h-4 w-4" />
                           <AlertTitle className="text-xs sm:text-sm">{alert.title}</AlertTitle>
                           <AlertDescription className="text-xs text-gray-600">
                             {alert.location} • {alert.timestamp}
                           </AlertDescription>
-                        </Alert>
-                      ))}
+                        </Alert>)}
                     </CardContent>
                   </Card>
 
@@ -793,8 +719,7 @@ const Comuni = () => {
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-3 p-4 sm:p-6 pt-0">
-                      {mapAlerts.filter((alert) => alert.type === "resolved").map((issue) => (
-                        <div key={issue.id} className="p-3 bg-green-50 rounded-lg border-l-4 border-green-500">
+                      {mapAlerts.filter(alert => alert.type === "resolved").map(issue => <div key={issue.id} className="p-3 bg-green-50 rounded-lg border-l-4 border-green-500">
                           <div className="flex items-center space-x-2">
                             <CheckCircle className="h-4 w-4 text-green-600" />
                             <span className="text-xs sm:text-sm font-medium">{issue.title}</span>
@@ -802,8 +727,7 @@ const Comuni = () => {
                           <p className="text-xs text-gray-600 mt-1">
                             {issue.location} • {issue.timestamp}
                           </p>
-                        </div>
-                      ))}
+                        </div>)}
                     </CardContent>
                   </Card>
                 </div>
@@ -821,8 +745,6 @@ const Comuni = () => {
           </p>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Comuni;
