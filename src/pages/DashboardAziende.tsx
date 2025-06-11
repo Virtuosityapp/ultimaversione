@@ -29,10 +29,10 @@ const DashboardAziende = () => {
 
   // Premi per Followers (Sconti e Offerte) - Limited to 4 items
   const [followersRewards, setFollowersRewards] = useState([
-    { id: 1, tipo: 'Sconto', nome: 'Sconto Prodotti Bio', valore: '15%', partner: 'EcoMarket', certificatiRichiesti: 'Risparmio Energetico', quantitaCertificati: 3 },
-    { id: 2, tipo: 'Premio', nome: 'Borraccia Ecologica Gratis', valore: '€ 25', partner: 'GreenLife', certificatiRichiesti: 'Risparmio Idrico', quantitaCertificati: 2 },
-    { id: 3, tipo: 'Sconto', nome: 'Pannelli Solari Casa', valore: '20%', partner: 'SolarTech', certificatiRichiesti: 'Riduzione CO2', quantitaCertificati: 15 },
-    { id: 4, tipo: 'Premio', nome: 'Kit Compostaggio Domestico', valore: '€ 45', partner: 'EcoGarden', certificatiRichiesti: 'Riciclo Rifiuti', quantitaCertificati: 5 }
+    { id: 1, tipo: 'Sconto', nome: 'Sconto Prodotti Bio', valore: '15%', certificatiRichiesti: 'Risparmio Energetico', quantitaCertificati: 3 },
+    { id: 2, tipo: 'Premio', nome: 'Borraccia Ecologica Gratis', valore: '€ 25', certificatiRichiesti: 'Risparmio Idrico', quantitaCertificati: 2 },
+    { id: 3, tipo: 'Sconto', nome: 'Pannelli Solari Casa', valore: '20%', certificatiRichiesti: 'Riduzione CO2', quantitaCertificati: 15 },
+    { id: 4, tipo: 'Premio', nome: 'Kit Compostaggio Domestico', valore: '€ 45', certificatiRichiesti: 'Riciclo Rifiuti', quantitaCertificati: 5 }
   ]);
 
   const [certificateMonitoringCategories] = useState([
@@ -133,7 +133,6 @@ const DashboardAziende = () => {
     tipo: '',
     nome: '',
     valore: '',
-    partner: '',
     certificatiRichiesti: '',
     quantitaCertificati: ''
   });
@@ -150,13 +149,13 @@ const DashboardAziende = () => {
   };
 
   const handleAddFollowersReward = () => {
-    if (newFollowersReward.tipo && newFollowersReward.nome && newFollowersReward.valore && newFollowersReward.partner && newFollowersReward.certificatiRichiesti && newFollowersReward.quantitaCertificati) {
+    if (newFollowersReward.tipo && newFollowersReward.nome && newFollowersReward.valore && newFollowersReward.certificatiRichiesti && newFollowersReward.quantitaCertificati) {
       setFollowersRewards([...followersRewards, {
         id: Date.now(),
         ...newFollowersReward,
         quantitaCertificati: parseInt(newFollowersReward.quantitaCertificati)
       }]);
-      setNewFollowersReward({ tipo: '', nome: '', valore: '', partner: '', certificatiRichiesti: '', quantitaCertificati: '' });
+      setNewFollowersReward({ tipo: '', nome: '', valore: '', certificatiRichiesti: '', quantitaCertificati: '' });
     }
   };
 
@@ -507,16 +506,6 @@ const DashboardAziende = () => {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="followers-partner" className="text-blue-700 font-medium">Partner</Label>
-                  <Input
-                    id="followers-partner"
-                    placeholder="Nome partner"
-                    value={newFollowersReward.partner}
-                    onChange={(e) => setNewFollowersReward({...newFollowersReward, partner: e.target.value})}
-                    className="border-blue-200 focus:border-blue-400"
-                  />
-                </div>
-                <div>
                   <Label htmlFor="followers-certificati" className="text-blue-700 font-medium">Tipo Certificati</Label>
                   <Input
                     id="followers-certificati"
@@ -559,7 +548,6 @@ const DashboardAziende = () => {
                     </div>
                     <h4 className="font-semibold text-gray-800 mb-2">{item.nome}</h4>
                     <div className="text-sm text-gray-600 space-y-1">
-                      <p>Partner: <span className="font-medium">{item.partner}</span></p>
                       <p><span className="font-medium">Richiede:</span> {item.quantitaCertificati}x {item.certificatiRichiesti}</p>
                     </div>
                   </div>
