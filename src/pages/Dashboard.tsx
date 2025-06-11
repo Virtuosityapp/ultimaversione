@@ -181,15 +181,12 @@ const Dashboard = () => {
         </div>
 
         <Tabs defaultValue="activities" className="space-y-3 sm:space-y-6">
-          <TabsList className="grid w-full grid-cols-5 bg-white/80 backdrop-blur-sm h-auto p-1 shadow-md">
+          <TabsList className="grid w-full grid-cols-4 bg-white/80 backdrop-blur-sm h-auto p-1 shadow-md">
             <TabsTrigger value="activities" className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-green-100 hover:to-emerald-100 hover:text-green-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-400 data-[state=active]:to-emerald-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
               Attività
             </TabsTrigger>
             <TabsTrigger value="certificates" className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-blue-100 hover:to-cyan-100 hover:text-blue-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-400 data-[state=active]:to-cyan-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
               Certificati
-            </TabsTrigger>
-            <TabsTrigger value="insights" className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-purple-100 hover:to-pink-100 hover:text-purple-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-400 data-[state=active]:to-pink-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
-              Insights
             </TabsTrigger>
             <TabsTrigger value="reporting" className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-orange-100 hover:to-red-100 hover:text-orange-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-400 data-[state=active]:to-red-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
               Segnala
@@ -367,65 +364,6 @@ const Dashboard = () => {
                 </div>
               </CardContent>
             </Card>
-          </TabsContent>
-
-          <TabsContent value="insights" className="space-y-3 sm:space-y-6">
-            <div className="grid grid-cols-1 gap-3 sm:gap-6">
-              <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-                <CardHeader className="pb-3 sm:pb-6">
-                  <CardTitle className="text-base sm:text-xl">Impatto Ambientale</CardTitle>
-                  <CardDescription className="text-xs sm:text-sm">Il tuo contributo al pianeta</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-2 sm:space-y-4">
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm">Alberi Equivalenti</span>
-                      <span className="font-bold text-green-600 text-sm">2.3 🌳</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm">Energia Risparmiata</span>
-                      <span className="font-bold text-blue-600 text-sm">45.7 kWh</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm">Km Sostenibili</span>
-                      <span className="font-bold text-purple-600 text-sm">127.3 km</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-                <CardHeader className="pb-3 sm:pb-6">
-                  <CardTitle className="text-base sm:text-xl">Obiettivi Mensili</CardTitle>
-                  <CardDescription className="text-xs sm:text-sm">Traguardi per gennaio 2024</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    <div>
-                      <div className="flex justify-between text-xs mb-1">
-                        <span>CO₂ Risparmiata</span>
-                        <span>24.3/50 kg</span>
-                      </div>
-                      <Progress value={48.6} className="h-2" />
-                    </div>
-                    <div>
-                      <div className="flex justify-between text-xs mb-1">
-                        <span>Certificati</span>
-                        <span>12/20</span>
-                      </div>
-                      <Progress value={60} className="h-2" />
-                    </div>
-                    <div>
-                      <div className="flex justify-between text-xs mb-1">
-                        <span>Attività</span>
-                        <span>18/30</span>
-                      </div>
-                      <Progress value={60} className="h-2" />
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
           </TabsContent>
 
           <TabsContent value="reporting" className="space-y-3 sm:space-y-6">
