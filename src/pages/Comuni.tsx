@@ -3,6 +3,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { 
   Car, 
   Lightbulb, 
@@ -17,17 +19,96 @@ import {
   Settings,
   MapPin,
   AlertTriangle,
-  FileText
+  FileText,
+  Gift,
+  Plus,
+  Edit,
+  Trash,
+  Euro,
+  Users,
+  Target,
+  Award
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Comuni = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<any>(null);
+  const [selectedReward, setSelectedReward] = useState<any>(null);
+  const [showAddReward, setShowAddReward] = useState(false);
+
+  // Mock data for rewards/incentives
+  const communityRewards = [
+    {
+      id: 1,
+      title: "Sconto Trasporto Pubblico",
+      description: "Riduzione del 20% sugli abbonamenti mensili per autobus e metro",
+      category: "transport",
+      certificatesRequired: 50,
+      value: "€15",
+      maxUsers: 500,
+      currentUsers: 127,
+      status: "active",
+      icon: Car,
+      validUntil: "31/12/2024"
+    },
+    {
+      id: 2,
+      title: "Parcheggio Gratuito Centro",
+      description: "2 ore di parcheggio gratuito nelle zone blu del centro storico",
+      category: "parking",
+      certificatesRequired: 30,
+      value: "€3/uso",
+      maxUsers: 200,
+      currentUsers: 89,
+      status: "active",
+      icon: Car,
+      validUntil: "30/06/2025"
+    },
+    {
+      id: 3,
+      title: "Tariffa Agevolata Rifiuti",
+      description: "Sconto del 15% sulla TARI per famiglie virtuose",
+      category: "waste",
+      certificatesRequired: 100,
+      value: "€80",
+      maxUsers: 1000,
+      currentUsers: 234,
+      status: "active",
+      icon: Trash2,
+      validUntil: "31/12/2024"
+    },
+    {
+      id: 4,
+      title: "Accesso Prioritario Servizi",
+      description: "Accesso prioritario agli sportelli comunali e prenotazioni online",
+      category: "services",
+      certificatesRequired: 75,
+      value: "Tempo",
+      maxUsers: 300,
+      currentUsers: 156,
+      status: "active",
+      icon: Users,
+      validUntil: "31/12/2025"
+    },
+    {
+      id: 5,
+      title: "Kit Energia Sostenibile",
+      description: "Kit gratuito con lampadine LED e dispositivi per il risparmio energetico",
+      category: "energy",
+      certificatesRequired: 80,
+      value: "€45",
+      maxUsers: 150,
+      currentUsers: 67,
+      status: "draft",
+      icon: Lightbulb,
+      validUntil: "30/09/2024"
+    }
+  ];
 
   // Mock data for map alerts and resolved issues
   const mapAlerts = [
@@ -199,8 +280,21 @@ const Comuni = () => {
         return <Badge className="bg-orange-100 text-orange-800"><AlertCircle className="w-3 h-3 mr-1" />Attenzione</Badge>;
       case "inactive":
         return <Badge className="bg-gray-100 text-gray-800"><Clock className="w-3 h-3 mr-1" />Inattivo</Badge>;
+      case "draft":
+        return <Badge className="bg-blue-100 text-blue-800"><Edit className="w-3 h-3 mr-1" />Bozza</Badge>;
       default:
         return <Badge variant="secondary">Sconosciuto</Badge>;
+    }
+  };
+
+  const getCategoryColor = (category: string) => {
+    switch (category) {
+      case "transport": return "bg-blue-100 text-blue-800";
+      case "parking": return "bg-purple-100 text-purple-800";
+      case "waste": return "bg-green-100 text-green-800";
+      case "services": return "bg-orange-100 text-orange-800";
+      case "energy": return "bg-yellow-100 text-yellow-800";
+      default: return "bg-gray-100 text-gray-800";
     }
   };
 
@@ -211,8 +305,25 @@ const Comuni = () => {
     });
   };
 
+  const handleEditReward = (reward: any) => {
+    setSelectedReward(reward);
+    toast({
+      title: "Modifica Incentivo",
+      description: `Modifica di ${reward.title}`,
+    });
+  };
+
+  const handleDeleteReward = (rewardId: number) => {
+    toast({
+      title: "Incentivo Eliminato",
+      description: "L'incentivo è stato rimosso con successo",
+    });
+  };
+
   const totalDataPoints = integrations.reduce((sum, int) => sum + int.dataPoints, 0);
   const activeIntegrations = integrations.filter(int => int.status === "active").length;
+  const totalRewards = communityRewards.length;
+  const activeRewards = communityRewards.filter(r => r.status === "active").length;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-cyan-50">
@@ -291,11 +402,11 @@ const Comuni = () => {
 
           <Card className="border-0 shadow-lg bg-gradient-to-br from-purple-400 to-pink-500 text-white">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-purple-100">Efficienza</CardTitle>
+              <CardTitle className="text-sm font-medium text-purple-100">Incentivi Attivi</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-xl sm:text-2xl font-bold">94%</div>
-              <p className="text-xs text-purple-100">Media servizi</p>
+              <div className="text-xl sm:text-2xl font-bold">{activeRewards}</div>
+              <p className="text-xs text-purple-100">di {totalRewards} totali</p>
             </CardContent>
           </Card>
 
@@ -311,7 +422,7 @@ const Comuni = () => {
         </div>
 
         <Tabs defaultValue="overview" className="space-y-6 sm:space-y-8">
-          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 bg-white/80 backdrop-blur-sm shadow-md p-1 gap-1 sm:gap-0 sticky top-20 z-40">
+          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-5 bg-white/80 backdrop-blur-sm shadow-md p-1 gap-1 sm:gap-0 sticky top-20 z-40">
             <TabsTrigger 
               value="overview" 
               className="px-2 py-2 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-blue-100 hover:to-indigo-100 hover:text-blue-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-400 data-[state=active]:to-indigo-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
@@ -325,8 +436,14 @@ const Comuni = () => {
               Integrazioni
             </TabsTrigger>
             <TabsTrigger 
-              value="map" 
+              value="rewards" 
               className="px-1 py-2 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-purple-100 hover:to-pink-100 hover:text-purple-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-400 data-[state=active]:to-pink-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
+            >
+              Incentivi
+            </TabsTrigger>
+            <TabsTrigger 
+              value="map" 
+              className="px-1 py-2 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-cyan-100 hover:to-blue-100 hover:text-cyan-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-400 data-[state=active]:to-blue-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
             >
               Mappa
             </TabsTrigger>
@@ -429,6 +546,233 @@ const Comuni = () => {
                   );
                 })}
               </div>
+            </TabsContent>
+
+            <TabsContent value="rewards" className="space-y-4 sm:space-y-6 mt-0">
+              <div className="flex justify-between items-center mb-6">
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900">Gestione Incentivi Cittadini 🎁</h3>
+                  <p className="text-gray-600 text-sm">Configura i servizi e vantaggi offerti in cambio di certificati ambientali</p>
+                </div>
+                <Button 
+                  onClick={() => setShowAddReward(true)}
+                  className="bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700"
+                >
+                  <Plus className="h-4 w-4 mr-2" />
+                  Nuovo Incentivo
+                </Button>
+              </div>
+
+              {/* Rewards Stats */}
+              <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-6">
+                <Card className="border-0 shadow-lg bg-gradient-to-br from-purple-400 to-pink-500 text-white">
+                  <CardContent className="p-4">
+                    <div className="flex items-center space-x-2">
+                      <Gift className="h-5 w-5" />
+                      <div>
+                        <div className="text-2xl font-bold">{totalRewards}</div>
+                        <div className="text-xs text-purple-100">Incentivi Totali</div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+                
+                <Card className="border-0 shadow-lg bg-gradient-to-br from-green-400 to-emerald-500 text-white">
+                  <CardContent className="p-4">
+                    <div className="flex items-center space-x-2">
+                      <CheckCircle className="h-5 w-5" />
+                      <div>
+                        <div className="text-2xl font-bold">{activeRewards}</div>
+                        <div className="text-xs text-green-100">Attivi</div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-400 to-cyan-500 text-white">
+                  <CardContent className="p-4">
+                    <div className="flex items-center space-x-2">
+                      <Users className="h-5 w-5" />
+                      <div>
+                        <div className="text-2xl font-bold">{communityRewards.reduce((sum, r) => sum + r.currentUsers, 0)}</div>
+                        <div className="text-xs text-blue-100">Utenti Coinvolti</div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-0 shadow-lg bg-gradient-to-br from-orange-400 to-red-500 text-white">
+                  <CardContent className="p-4">
+                    <div className="flex items-center space-x-2">
+                      <Award className="h-5 w-5" />
+                      <div>
+                        <div className="text-2xl font-bold">{communityRewards.reduce((sum, r) => sum + r.certificatesRequired, 0)}</div>
+                        <div className="text-xs text-orange-100">Certificati Target</div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Rewards List */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+                {communityRewards.map((reward) => {
+                  const IconComponent = reward.icon;
+                  const usagePercentage = (reward.currentUsers / reward.maxUsers) * 100;
+                  
+                  return (
+                    <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+                      <CardHeader className="pb-3">
+                        <div className="flex justify-between items-start">
+                          <div className="flex items-center space-x-3">
+                            <div className={`p-2 rounded-lg ${getCategoryColor(reward.category)}`}>
+                              <IconComponent className="h-5 w-5" />
+                            </div>
+                            <div>
+                              <CardTitle className="text-base sm:text-lg">{reward.title}</CardTitle>
+                              <CardDescription className="text-sm">{reward.description}</CardDescription>
+                            </div>
+                          </div>
+                          {getStatusBadge(reward.status)}
+                        </div>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-4">
+                          {/* Requirement and Value */}
+                          <div className="grid grid-cols-2 gap-4 text-sm">
+                            <div className="flex items-center space-x-2">
+                              <Target className="h-4 w-4 text-blue-600" />
+                              <div>
+                                <div className="font-medium">{reward.certificatesRequired} certificati</div>
+                                <div className="text-gray-500 text-xs">Richiesti</div>
+                              </div>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <Euro className="h-4 w-4 text-green-600" />
+                              <div>
+                                <div className="font-medium">{reward.value}</div>
+                                <div className="text-gray-500 text-xs">Valore</div>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Usage Progress */}
+                          <div>
+                            <div className="flex justify-between text-sm mb-1">
+                              <span className="text-gray-600">Utilizzo</span>
+                              <span className="font-medium">{reward.currentUsers}/{reward.maxUsers}</span>
+                            </div>
+                            <div className="w-full bg-gray-200 rounded-full h-2">
+                              <div 
+                                className="bg-gradient-to-r from-blue-400 to-purple-500 h-2 rounded-full transition-all duration-300"
+                                style={{ width: `${Math.min(usagePercentage, 100)}%` }}
+                              ></div>
+                            </div>
+                            <div className="text-xs text-gray-500 mt-1">
+                              {usagePercentage.toFixed(1)}% utilizzato
+                            </div>
+                          </div>
+
+                          {/* Validity */}
+                          <div className="text-xs text-gray-500">
+                            <span>Valido fino al: </span>
+                            <span className="font-medium">{reward.validUntil}</span>
+                          </div>
+
+                          {/* Actions */}
+                          <div className="flex space-x-2">
+                            <Button 
+                              variant="outline" 
+                              size="sm" 
+                              className="flex-1"
+                              onClick={() => handleEditReward(reward)}
+                            >
+                              <Edit className="h-4 w-4 mr-1" />
+                              Modifica
+                            </Button>
+                            <Button 
+                              variant="outline" 
+                              size="sm" 
+                              className="text-red-600 border-red-300 hover:bg-red-50"
+                              onClick={() => handleDeleteReward(reward.id)}
+                            >
+                              <Trash className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+
+              {/* Add New Reward Form (shown when showAddReward is true) */}
+              {showAddReward && (
+                <Card className="border-0 shadow-lg bg-white/90 backdrop-blur-sm border-purple-200">
+                  <CardHeader>
+                    <CardTitle className="flex items-center space-x-2">
+                      <Plus className="h-5 w-5 text-purple-600" />
+                      <span>Crea Nuovo Incentivo</span>
+                    </CardTitle>
+                    <CardDescription>
+                      Configura un nuovo servizio o vantaggio da offrire ai cittadini
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="title">Titolo Incentivo</Label>
+                        <Input id="title" placeholder="es. Sconto Trasporto Pubblico" />
+                      </div>
+                      <div>
+                        <Label htmlFor="category">Categoria</Label>
+                        <Input id="category" placeholder="transport, parking, waste..." />
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="description">Descrizione</Label>
+                      <Input id="description" placeholder="Descrizione dettagliata del vantaggio offerto" />
+                    </div>
+                    
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      <div>
+                        <Label htmlFor="certificates">Certificati Richiesti</Label>
+                        <Input id="certificates" type="number" placeholder="50" />
+                      </div>
+                      <div>
+                        <Label htmlFor="value">Valore</Label>
+                        <Input id="value" placeholder="€15" />
+                      </div>
+                      <div>
+                        <Label htmlFor="maxUsers">Utenti Max</Label>
+                        <Input id="maxUsers" type="number" placeholder="500" />
+                      </div>
+                    </div>
+                    
+                    <div className="flex space-x-2">
+                      <Button 
+                        className="bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700"
+                        onClick={() => {
+                          toast({
+                            title: "Incentivo Creato",
+                            description: "Il nuovo incentivo è stato aggiunto con successo",
+                          });
+                          setShowAddReward(false);
+                        }}
+                      >
+                        Crea Incentivo
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        onClick={() => setShowAddReward(false)}
+                      >
+                        Annulla
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
             </TabsContent>
 
             <TabsContent value="map" className="space-y-4 sm:space-y-6 mt-0">
