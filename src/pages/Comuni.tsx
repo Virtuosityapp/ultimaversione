@@ -377,7 +377,7 @@ const Comuni = () => {
 
         <Tabs defaultValue="overview" className="space-y-6 sm:space-y-8">
           {/* Improved mobile tabs */}
-          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-5 bg-white/80 backdrop-blur-sm shadow-md p-1 gap-1 sm:gap-0 sticky top-20 z-40">
+          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 bg-white/80 backdrop-blur-sm shadow-md p-1 gap-1 sm:gap-0 sticky top-20 z-40">
             <TabsTrigger 
               value="overview" 
               className="px-1 py-3 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-blue-100 hover:to-indigo-100 hover:text-blue-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-400 data-[state=active]:to-indigo-500 data-[state=active]:text-white data-[state=active]:shadow-lg min-h-[44px]"
@@ -401,12 +401,6 @@ const Comuni = () => {
               className="px-1 py-3 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-cyan-100 hover:to-blue-100 hover:text-cyan-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-400 data-[state=active]:to-blue-500 data-[state=active]:text-white data-[state=active]:shadow-lg min-h-[44px]"
             >
               Mappa
-            </TabsTrigger>
-            <TabsTrigger 
-              value="analytics" 
-              className="px-1 py-3 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-orange-100 hover:to-red-100 hover:text-orange-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-400 data-[state=active]:to-red-500 data-[state=active]:text-white data-[state=active]:shadow-lg min-h-[44px]"
-            >
-              Analytics
             </TabsTrigger>
           </TabsList>
 
@@ -848,3 +842,5 @@ const Comuni = () => {
 };
 
 export default Comuni;
+
+</edits_to_apply>
