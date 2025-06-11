@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, BarChart, Bar, PieChart as RechartsPieChart, Cell } from "recharts";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, BarChart, Bar, PieChart as RechartsPieChart, Cell } from "recharts";
 
 const Report = () => {
   const navigate = useNavigate();
@@ -124,6 +124,25 @@ const Report = () => {
     { month: "Dic", co2: 22.1, energy: 51.2 },
     { month: "Gen", co2: 28.7, energy: 63.8 }
   ];
+
+  // Chart configurations
+  const co2TrendConfig = {
+    co2: {
+      label: "CO₂ (kg)",
+      color: "#10b981",
+    },
+  };
+
+  const monthlySavingsConfig = {
+    co2: {
+      label: "CO₂ (kg)",
+      color: "#10b981",
+    },
+    energy: {
+      label: "Energia (kWh)",
+      color: "#3b82f6",
+    },
+  };
 
   const totalCO2Saved = activities.reduce((total, activity) => total + parseFloat(activity.co2Saved), 0);
   const totalPoints = activities.reduce((total, activity) => total + activity.points, 0);
@@ -289,17 +308,15 @@ const Report = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="h-64">
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={co2TrendData}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="date" />
-                    <YAxis />
-                    <ChartTooltip content={<ChartTooltipContent />} />
-                    <Line type="monotone" dataKey="co2" stroke="#10b981" strokeWidth={2} name="CO₂ (kg)" />
-                  </LineChart>
-                </ResponsiveContainer>
-              </div>
+              <ChartContainer config={co2TrendConfig} className="h-64">
+                <LineChart data={co2TrendData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="date" />
+                  <YAxis />
+                  <ChartTooltip content={<ChartTooltipContent />} />
+                  <Line type="monotone" dataKey="co2" stroke="var(--color-co2)" strokeWidth={2} />
+                </LineChart>
+              </ChartContainer>
             </CardContent>
           </Card>
 
@@ -315,25 +332,16 @@ const Report = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="h-64">
-                <ResponsiveContainer width="100%" height="100%">
-                  <RechartsPieChart>
-                    <ChartTooltip content={<ChartTooltipContent />} />
-                    <RechartsPieChart data={activityDistribution} dataKey="value" cx="50%" cy="50%" outerRadius={80}>
-                      {activityDistribution.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.color} />
-                      ))}
-                    </RechartsPieChart>
-                  </RechartsPieChart>
-                </ResponsiveContainer>
-              </div>
-              <div className="flex justify-center gap-4 mt-4">
-                {activityDistribution.map((item, index) => (
-                  <div key={index} className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }}></div>
-                    <span className="text-xs">{item.name}</span>
-                  </div>
-                ))}
+              <div className="h-64 flex flex-col items-center justify-center">
+                <div className="grid grid-cols-2 gap-4 w-full">
+                  {activityDistribution.map((item, index) => (
+                    <div key={index} className="flex items-center gap-2 justify-center">
+                      <div className="w-4 h-4 rounded-full" style={{ backgroundColor: item.color }}></div>
+                      <span className="text-sm font-medium">{item.name}</span>
+                      <span className="text-sm text-gray-600">{item.value}%</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -351,18 +359,16 @@ const Report = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="h-64">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={monthlySavings}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="month" />
-                  <YAxis />
-                  <ChartTooltip content={<ChartTooltipContent />} />
-                  <Bar dataKey="co2" fill="#10b981" name="CO₂ (kg)" />
-                  <Bar dataKey="energy" fill="#3b82f6" name="Energia (kWh)" />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
+            <ChartContainer config={monthlySavingsConfig} className="h-64">
+              <BarChart data={monthlySavings}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="month" />
+                <YAxis />
+                <ChartTooltip content={<ChartTooltipContent />} />
+                <Bar dataKey="co2" fill="var(--color-co2)" />
+                <Bar dataKey="energy" fill="var(--color-energy)" />
+              </BarChart>
+            </ChartContainer>
           </CardContent>
         </Card>
 
