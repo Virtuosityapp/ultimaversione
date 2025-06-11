@@ -809,22 +809,6 @@ const Comuni = () => {
                 </div>
               </div>
             </TabsContent>
-
-            <TabsContent value="analytics" className="space-y-4 sm:space-y-6 mt-0">
-              <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-                <CardHeader className="p-4 sm:p-6">
-                  <CardTitle>Analytics Avanzate</CardTitle>
-                  <CardDescription>Analisi dettagliate delle performance delle integrazioni</CardDescription>
-                </CardHeader>
-                <CardContent className="p-4 sm:p-6 pt-0">
-                  <div className="text-center py-8 text-gray-500">
-                    <Activity className="h-8 w-8 sm:h-12 sm:w-12 mx-auto mb-4" />
-                    <p className="text-sm sm:text-base">Dashboard analytics in fase di sviluppo</p>
-                    <p className="text-xs sm:text-sm">Qui verranno mostrati grafici e metriche dettagliate</p>
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
           </div>
         </Tabs>
 
@@ -842,5 +826,3 @@ const Comuni = () => {
 };
 
 export default Comuni;
-
-</edits_to_apply>
