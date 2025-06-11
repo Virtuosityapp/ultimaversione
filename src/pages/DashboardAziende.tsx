@@ -7,7 +7,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Users, UserCheck, Upload, FileText, Award, Gift, Plane, ArrowLeft, TrendingUp, Eye, Target, Globe, Droplet, Zap, Trash2 } from 'lucide-react';
+import { Users, UserCheck, Upload, FileText, Award, Gift, Plane, ArrowLeft, TrendingUp, Eye, Target, Globe, Droplet, Zap, Trash2, Percent } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
@@ -18,10 +18,35 @@ const DashboardAziende = () => {
   const [certificatiDipendenti] = useState(1589);
   const [certificatiEsterni] = useState(14568);
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
+  
+  // Welfare per Dipendenti
   const [welfareItems, setWelfareItems] = useState([
     { id: 1, tipo: 'Premio', nome: 'Voucher Cena Ristorante', valore: '€ 50' },
     { id: 2, tipo: 'Viaggio', nome: 'Weekend Spa Toscana', valore: '€ 300' },
-    { id: 3, tipo: 'Gadget', nome: 'Smartwatch Aziendale', valore: '€ 150' }
+    { id: 3, tipo: 'Gadget', nome: 'Smartwatch Aziendale', valore: '€ 150' },
+    { id: 4, tipo: 'Premio', nome: 'Buono Acquisto Shopping', valore: '€ 100' },
+    { id: 5, tipo: 'Viaggio', nome: 'Settimana Bianca Dolomiti', valore: '€ 800' },
+    { id: 6, tipo: 'Gadget', nome: 'Tablet per Smart Working', valore: '€ 250' },
+    { id: 7, tipo: 'Premio', nome: 'Corso di Formazione Online', valore: '€ 75' },
+    { id: 8, tipo: 'Viaggio', nome: 'City Break Europa', valore: '€ 400' },
+    { id: 9, tipo: 'Gadget', nome: 'Auricolari Wireless Premium', valore: '€ 120' },
+    { id: 10, tipo: 'Premio', nome: 'Abbonamento Palestra Annuale', valore: '€ 600' }
+  ]);
+
+  // Premi per Followers (Sconti e Offerte)
+  const [followersRewards, setFollowersRewards] = useState([
+    { id: 1, tipo: 'Sconto', nome: 'Sconto Prodotti Bio', valore: '15%', partner: 'EcoMarket' },
+    { id: 2, tipo: 'Premio', nome: 'Borraccia Ecologica Gratis', valore: '€ 25', partner: 'GreenLife' },
+    { id: 3, tipo: 'Sconto', nome: 'Pannelli Solari Casa', valore: '20%', partner: 'SolarTech' },
+    { id: 4, tipo: 'Premio', nome: 'Kit Compostaggio Domestico', valore: '€ 45', partner: 'EcoGarden' },
+    { id: 5, tipo: 'Sconto', nome: 'Bici Elettrica', valore: '12%', partner: 'eBike Store' },
+    { id: 6, tipo: 'Premio', nome: 'Lampade LED Omaggio', valore: '€ 30', partner: 'LightSaver' },
+    { id: 7, tipo: 'Sconto', nome: 'Cosmetici Naturali', valore: '25%', partner: 'NaturalBeauty' },
+    { id: 8, tipo: 'Premio', nome: 'Semi per Orto Urbano', valore: '€ 15', partner: 'UrbanGarden' },
+    { id: 9, tipo: 'Sconto', nome: 'Isolamento Termico Casa', valore: '18%', partner: 'ThermoSave' },
+    { id: 10, tipo: 'Premio', nome: 'Borsa Shopping Riutilizzabile', valore: '€ 20', partner: 'EcoBag' },
+    { id: 11, tipo: 'Sconto', nome: 'Auto Elettrica Noleggio', valore: '30%', partner: 'ElectricCar' },
+    { id: 12, tipo: 'Premio', nome: 'Filtro Acqua per Casa', valore: '€ 80', partner: 'AquaPure' }
   ]);
 
   const [certificateMonitoringCategories] = useState([
@@ -116,6 +141,13 @@ const DashboardAziende = () => {
     valore: ''
   });
 
+  const [newFollowersReward, setNewFollowersReward] = useState({
+    tipo: '',
+    nome: '',
+    valore: '',
+    partner: ''
+  });
+
   const handleAddWelfareItem = () => {
     if (newWelfareItem.tipo && newWelfareItem.nome && newWelfareItem.valore) {
       setWelfareItems([...welfareItems, {
@@ -126,11 +158,22 @@ const DashboardAziende = () => {
     }
   };
 
+  const handleAddFollowersReward = () => {
+    if (newFollowersReward.tipo && newFollowersReward.nome && newFollowersReward.valore && newFollowersReward.partner) {
+      setFollowersRewards([...followersRewards, {
+        id: Date.now(),
+        ...newFollowersReward
+      }]);
+      setNewFollowersReward({ tipo: '', nome: '', valore: '', partner: '' });
+    }
+  };
+
   const getIconForType = (tipo: string) => {
     switch (tipo.toLowerCase()) {
       case 'premio': return <Gift className="h-4 w-4" />;
       case 'viaggio': return <Plane className="h-4 w-4" />;
       case 'gadget': return <Award className="h-4 w-4" />;
+      case 'sconto': return <Percent className="h-4 w-4" />;
       default: return <Gift className="h-4 w-4" />;
     }
   };
@@ -140,6 +183,7 @@ const DashboardAziende = () => {
       case 'premio': return 'bg-emerald-100 text-emerald-700 border-emerald-200';
       case 'viaggio': return 'bg-blue-100 text-blue-700 border-blue-200';
       case 'gadget': return 'bg-purple-100 text-purple-700 border-purple-200';
+      case 'sconto': return 'bg-orange-100 text-orange-700 border-orange-200';
       default: return 'bg-gray-100 text-gray-700 border-gray-200';
     }
   };
@@ -329,54 +373,54 @@ const DashboardAziende = () => {
           </Card>
         </div>
 
-        {/* Sezione Welfare */}
+        {/* Sezione Welfare Dipendenti */}
         <Card className="mb-8 border-0 shadow-xl bg-white/80 backdrop-blur-sm">
-          <CardHeader className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-t-lg">
+          <CardHeader className="bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-t-lg">
             <CardTitle className="flex items-center gap-2">
-              <Gift className="h-6 w-6" />
-              {t('welfareTitle')}
+              <Users className="h-6 w-6" />
+              Welfare per Dipendenti
             </CardTitle>
-            <CardDescription className="text-purple-100">
-              {t('welfareDescription')}
+            <CardDescription className="text-green-100">
+              Premi e benefit in cambio di comportamenti sostenibili certificati
             </CardDescription>
           </CardHeader>
           <CardContent className="p-6">
-            {/* Form per aggiungere nuovo item */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6 p-6 border-2 border-dashed border-purple-200 rounded-xl bg-gradient-to-r from-purple-50 to-pink-50">
+            {/* Form per aggiungere nuovo item welfare */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6 p-6 border-2 border-dashed border-green-200 rounded-xl bg-gradient-to-r from-green-50 to-emerald-50">
               <div>
-                <Label htmlFor="tipo" className="text-purple-700 font-medium">{t('type')}</Label>
+                <Label htmlFor="welfare-tipo" className="text-green-700 font-medium">{t('type')}</Label>
                 <Input
-                  id="tipo"
+                  id="welfare-tipo"
                   placeholder="Premio/Viaggio/Gadget"
                   value={newWelfareItem.tipo}
                   onChange={(e) => setNewWelfareItem({...newWelfareItem, tipo: e.target.value})}
-                  className="border-purple-200 focus:border-purple-400"
+                  className="border-green-200 focus:border-green-400"
                 />
               </div>
               <div>
-                <Label htmlFor="nome" className="text-purple-700 font-medium">{t('name')}</Label>
+                <Label htmlFor="welfare-nome" className="text-green-700 font-medium">{t('name')}</Label>
                 <Input
-                  id="nome"
+                  id="welfare-nome"
                   placeholder="Nome del premio"
                   value={newWelfareItem.nome}
                   onChange={(e) => setNewWelfareItem({...newWelfareItem, nome: e.target.value})}
-                  className="border-purple-200 focus:border-purple-400"
+                  className="border-green-200 focus:border-green-400"
                 />
               </div>
               <div>
-                <Label htmlFor="valore" className="text-purple-700 font-medium">{t('value')}</Label>
+                <Label htmlFor="welfare-valore" className="text-green-700 font-medium">{t('value')}</Label>
                 <Input
-                  id="valore"
+                  id="welfare-valore"
                   placeholder="€ 0"
                   value={newWelfareItem.valore}
                   onChange={(e) => setNewWelfareItem({...newWelfareItem, valore: e.target.value})}
-                  className="border-purple-200 focus:border-purple-400"
+                  className="border-green-200 focus:border-green-400"
                 />
               </div>
               <div className="flex items-end">
                 <Button 
                   onClick={handleAddWelfareItem} 
-                  className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg"
+                  className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white shadow-lg"
                 >
                   <Upload className="mr-2 h-4 w-4" />
                   {t('add')}
@@ -387,7 +431,7 @@ const DashboardAziende = () => {
             {/* Lista items welfare */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {welfareItems.map((item) => (
-                <div key={item.id} className="p-6 border-0 rounded-xl shadow-lg bg-gradient-to-br from-white to-gray-50 hover:shadow-xl transition-shadow">
+                <div key={item.id} className="p-6 border-0 rounded-xl shadow-lg bg-gradient-to-br from-white to-green-50 hover:shadow-xl transition-shadow">
                   <div className="flex items-center justify-between mb-3">
                     <Badge className={`flex items-center gap-1 ${getBadgeColor(item.tipo)}`}>
                       {getIconForType(item.tipo)}
@@ -396,6 +440,90 @@ const DashboardAziende = () => {
                     <span className="font-bold text-lg text-gray-700">{item.valore}</span>
                   </div>
                   <h4 className="font-semibold text-gray-800">{item.nome}</h4>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Sezione Premi per Followers */}
+        <Card className="mb-8 border-0 shadow-xl bg-white/80 backdrop-blur-sm">
+          <CardHeader className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-t-lg">
+            <CardTitle className="flex items-center gap-2">
+              <Globe className="h-6 w-6" />
+              Premi e Sconti per Followers
+            </CardTitle>
+            <CardDescription className="text-blue-100">
+              Offerte e sconti per followers in cambio di certificati sostenibili
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="p-6">
+            {/* Form per aggiungere nuovo premio followers */}
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6 p-6 border-2 border-dashed border-blue-200 rounded-xl bg-gradient-to-r from-blue-50 to-cyan-50">
+              <div>
+                <Label htmlFor="followers-tipo" className="text-blue-700 font-medium">Tipo</Label>
+                <Input
+                  id="followers-tipo"
+                  placeholder="Sconto/Premio"
+                  value={newFollowersReward.tipo}
+                  onChange={(e) => setNewFollowersReward({...newFollowersReward, tipo: e.target.value})}
+                  className="border-blue-200 focus:border-blue-400"
+                />
+              </div>
+              <div>
+                <Label htmlFor="followers-nome" className="text-blue-700 font-medium">Nome</Label>
+                <Input
+                  id="followers-nome"
+                  placeholder="Nome dell'offerta"
+                  value={newFollowersReward.nome}
+                  onChange={(e) => setNewFollowersReward({...newFollowersReward, nome: e.target.value})}
+                  className="border-blue-200 focus:border-blue-400"
+                />
+              </div>
+              <div>
+                <Label htmlFor="followers-valore" className="text-blue-700 font-medium">Valore</Label>
+                <Input
+                  id="followers-valore"
+                  placeholder="€ 0 / %"
+                  value={newFollowersReward.valore}
+                  onChange={(e) => setNewFollowersReward({...newFollowersReward, valore: e.target.value})}
+                  className="border-blue-200 focus:border-blue-400"
+                />
+              </div>
+              <div>
+                <Label htmlFor="followers-partner" className="text-blue-700 font-medium">Partner</Label>
+                <Input
+                  id="followers-partner"
+                  placeholder="Nome partner"
+                  value={newFollowersReward.partner}
+                  onChange={(e) => setNewFollowersReward({...newFollowersReward, partner: e.target.value})}
+                  className="border-blue-200 focus:border-blue-400"
+                />
+              </div>
+              <div className="flex items-end">
+                <Button 
+                  onClick={handleAddFollowersReward} 
+                  className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white shadow-lg"
+                >
+                  <Upload className="mr-2 h-4 w-4" />
+                  Aggiungi
+                </Button>
+              </div>
+            </div>
+
+            {/* Lista premi followers */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {followersRewards.map((item) => (
+                <div key={item.id} className="p-6 border-0 rounded-xl shadow-lg bg-gradient-to-br from-white to-blue-50 hover:shadow-xl transition-shadow">
+                  <div className="flex items-center justify-between mb-3">
+                    <Badge className={`flex items-center gap-1 ${getBadgeColor(item.tipo)}`}>
+                      {getIconForType(item.tipo)}
+                      {item.tipo}
+                    </Badge>
+                    <span className="font-bold text-lg text-gray-700">{item.valore}</span>
+                  </div>
+                  <h4 className="font-semibold text-gray-800 mb-2">{item.nome}</h4>
+                  <p className="text-sm text-gray-600">Partner: <span className="font-medium">{item.partner}</span></p>
                 </div>
               ))}
             </div>
