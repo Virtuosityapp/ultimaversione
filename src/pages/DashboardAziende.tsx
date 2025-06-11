@@ -7,7 +7,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Users, UserCheck, Upload, FileText, Award, Gift, Plane, ArrowLeft, TrendingUp, Eye, Target, Globe } from 'lucide-react';
+import { Users, UserCheck, Upload, FileText, Award, Gift, Plane, ArrowLeft, TrendingUp, Eye, Target, Globe, Droplet, Zap, Trash2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
@@ -26,56 +26,86 @@ const DashboardAziende = () => {
 
   const [certificateMonitoringCategories] = useState([
     {
-      category: 'Mobilità Sostenibile',
-      mascot: 'https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=100&h=100&fit=crop&crop=face',
+      category: 'Risparmio Idrico',
+      mascot: '/lovable-uploads/0a948061-d9ea-4555-839e-59bc31cd4c9a.png',
+      icon: <Droplet className="h-5 w-5" />,
       data: [
-        { tipo: 'Trasporto Pubblico', count: 256, trend: '+15%', action: 'Convenzioni con ATAC' },
-        { tipo: 'Carpooling', count: 134, trend: '+8%', action: 'App aziendale condivisione auto' },
-        { tipo: 'Bicicletta', count: 66, trend: '+12%', action: 'Bike sharing aziendale' }
+        { tipo: 'Uso Consapevole Acqua', count: 145, trend: '+12%', action: 'Sensori smart per rubinetti' },
+        { tipo: 'Raccolta Acqua Piovana', count: 89, trend: '+8%', action: 'Sistemi di recupero in ufficio' },
+        { tipo: 'Riduzione Sprechi', count: 67, trend: '+15%', action: 'Monitoraggio consumi real-time' }
       ]
     },
     {
-      category: 'Efficienza Energetica',
-      mascot: 'https://images.unsplash.com/photo-1535268647677-300dbf3d78d1?w=100&h=100&fit=crop&crop=face',
+      category: 'Risparmio Energetico',
+      mascot: '/lovable-uploads/89a2a2c5-7071-4df2-8e73-c5e5b645b38b.png',
+      icon: <Zap className="h-5 w-5" />,
       data: [
-        { tipo: 'Smart Working', count: 145, trend: '+10%', action: 'Incentivi lavoro da remoto' },
-        { tipo: 'Risparmio Energetico', count: 89, trend: '+6%', action: 'Sensori movimento uffici' }
+        { tipo: 'Smart Working', count: 245, trend: '+18%', action: 'Incentivi lavoro da remoto' },
+        { tipo: 'LED e Sensori', count: 134, trend: '+10%', action: 'Sostituzione illuminazione tradizionale' },
+        { tipo: 'Elettrodomestici A+++', count: 78, trend: '+6%', action: 'Programma di rinnovo attrezzature' }
       ]
     },
     {
-      category: 'Riciclo e Riuso',
-      mascot: 'https://images.unsplash.com/photo-1501286353178-1ec881214838?w=100&h=100&fit=crop&crop=face',
+      category: 'Riciclo e Rifiuti',
+      mascot: '/lovable-uploads/491544c4-c37d-4c3b-a368-e0c71002d237.png',
+      icon: <Trash2 className="h-5 w-5" />,
       data: [
-        { tipo: 'Raccolta Differenziata', count: 134, trend: '+18%', action: 'Contenitori smart in ufficio' },
-        { tipo: 'Riuso Materiali', count: 55, trend: '+12%', action: 'Mercatino interno usato' }
+        { tipo: 'Raccolta Differenziata', count: 298, trend: '+22%', action: 'Contenitori smart in ufficio' },
+        { tipo: 'Riuso Materiali', count: 156, trend: '+14%', action: 'Mercatino interno usato' },
+        { tipo: 'Zero Waste', count: 89, trend: '+16%', action: 'Challenge rifiuti zero mensile' }
+      ]
+    },
+    {
+      category: 'Riduzione CO2',
+      mascot: '/lovable-uploads/f7195bbc-9cea-4e2a-93c5-b33349aed6ac.png',
+      icon: <FileText className="h-5 w-5" />,
+      data: [
+        { tipo: 'Trasporto Sostenibile', count: 167, trend: '+20%', action: 'Bike sharing aziendale' },
+        { tipo: 'Compensazione CO2', count: 112, trend: '+12%', action: 'Progetti di riforestazione' },
+        { tipo: 'Digital First', count: 89, trend: '+25%', action: 'Riduzione carta e stampe' }
       ]
     }
   ]);
 
   const [externalCertificateCategories] = useState([
     {
-      category: 'Mobilità Sostenibile',
-      mascot: 'https://images.unsplash.com/photo-1441057206919-63d19fac2369?w=100&h=100&fit=crop&crop=face',
+      category: 'Risparmio Idrico',
+      mascot: '/lovable-uploads/0a948061-d9ea-4555-839e-59bc31cd4c9a.png',
+      icon: <Droplet className="h-5 w-5" />,
       data: [
-        { tipo: 'Trasporto Pubblico', count: 1890, trend: '+22%', action: 'Partnership app mobilità urbana' },
-        { tipo: 'Veicoli Elettrici', count: 945, trend: '+18%', action: 'Sconti colonnine ricarica' },
-        { tipo: 'Micromobilità', count: 405, trend: '+15%', action: 'Monopattini elettrici aziendali' }
+        { tipo: 'Sistemi Raccolta Acqua', count: 1456, trend: '+28%', action: 'Sconti su sistemi di recupero' },
+        { tipo: 'Elettrodomestici Water-Saving', count: 892, trend: '+15%', action: 'Partnership produttori eco' },
+        { tipo: 'Giardini Sostenibili', count: 634, trend: '+18%', action: 'Workshop giardinaggio sostenibile' }
       ]
     },
     {
-      category: 'Consumo Responsabile',
-      mascot: 'https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=100&h=100&fit=crop&crop=face',
+      category: 'Risparmio Energetico',
+      mascot: '/lovable-uploads/89a2a2c5-7071-4df2-8e73-c5e5b645b38b.png',
+      icon: <Zap className="h-5 w-5" />,
       data: [
-        { tipo: 'Prodotti Locali', count: 1234, trend: '+25%', action: 'Marketplace produttori locali' },
-        { tipo: 'Zero Waste', count: 922, trend: '+20%', action: 'Challenge rifiuti zero' }
+        { tipo: 'Pannelli Solari', count: 2134, trend: '+32%', action: 'Finanziamenti agevolati installazione' },
+        { tipo: 'Isolamento Termico', count: 1567, trend: '+22%', action: 'Incentivi ristrutturazione green' },
+        { tipo: 'Smart Home', count: 987, trend: '+19%', action: 'Sconti dispositivi domotici' }
       ]
     },
     {
-      category: 'Efficienza Energetica',
-      mascot: 'https://images.unsplash.com/photo-1535268647677-300dbf3d78d1?w=100&h=100&fit=crop&crop=face',
+      category: 'Riciclo e Rifiuti',
+      mascot: '/lovable-uploads/491544c4-c37d-4c3b-a368-e0c71002d237.png',
+      icon: <Trash2 className="h-5 w-5" />,
       data: [
-        { tipo: 'Pannelli Solari', count: 1123, trend: '+16%', action: 'Finanziamenti agevolati' },
-        { tipo: 'Elettrodomestici A+++', count: 767, trend: '+12%', action: 'Sconti su elettrodomestici green' }
+        { tipo: 'Compostaggio Domestico', count: 1789, trend: '+25%', action: 'Distribuzione compostiere gratuite' },
+        { tipo: 'Riparazione vs Sostituzione', count: 1234, trend: '+20%', action: 'Rete repair café locali' },
+        { tipo: 'Upcycling Creativo', count: 856, trend: '+30%', action: 'Workshop creativi riutilizzo' }
+      ]
+    },
+    {
+      category: 'Riduzione CO2',
+      mascot: '/lovable-uploads/f7195bbc-9cea-4e2a-93c5-b33349aed6ac.png',
+      icon: <FileText className="h-5 w-5" />,
+      data: [
+        { tipo: 'Mobilità Elettrica', count: 2456, trend: '+35%', action: 'Incentivi acquisto e-bike/auto elettriche' },
+        { tipo: 'Alimentazione Plant-Based', count: 1678, trend: '+28%', action: 'Ricettari e corsi cucina sostenibile' },
+        { tipo: 'Turismo Sostenibile', count: 923, trend: '+22%', action: 'Partnership strutture eco-certificate' }
       ]
     }
   ]);
@@ -192,6 +222,7 @@ const DashboardAziende = () => {
                           alt={category.category}
                           className="w-8 h-8 rounded-full object-cover"
                         />
+                        {category.icon}
                         <span>{category.category}</span>
                       </div>
                     </AccordionTrigger>
@@ -255,6 +286,7 @@ const DashboardAziende = () => {
                           alt={category.category}
                           className="w-8 h-8 rounded-full object-cover"
                         />
+                        {category.icon}
                         <span>{category.category}</span>
                       </div>
                     </AccordionTrigger>
