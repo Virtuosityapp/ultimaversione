@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 type Language = 'it' | 'en';
@@ -44,7 +45,7 @@ const translations = {
     employeeCertificates: "Certificati Dipendenti",
     externalCertificates: "Certificati Esterni",
     employeeCertificatesDesc: "Certificati DPP ricevuti dai dipendenti aziendali",
-    externalCertificatesDesc: "Certificati DPP ricevuti da soggetti esterni",
+    externalCertificatesDesc: "Certificati DPP ricevuti da followers",
     welfareTitle: "Welfare, Premi e Gadget Aziendali",
     welfareDescription: "Gestisci i premi welfare, gadget aziendali e viaggi premio disponibili per i dipendenti",
     type: "Tipo",
@@ -105,7 +106,7 @@ const translations = {
     employeeCertificates: "Employee Certificates",
     externalCertificates: "External Certificates",
     employeeCertificatesDesc: "DPP certificates received from company employees",
-    externalCertificatesDesc: "DPP certificates received from external subjects",
+    externalCertificatesDesc: "DPP certificates received from followers",
     welfareTitle: "Corporate Welfare, Rewards and Gadgets",
     welfareDescription: "Manage welfare rewards, corporate gadgets and prize trips available for employees",
     type: "Type",
