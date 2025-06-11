@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -7,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Users, UserCheck, Upload, FileText, Award, Gift, Plane, ArrowLeft, TrendingUp, Eye, Target, Globe } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -24,22 +24,60 @@ const DashboardAziende = () => {
     { id: 3, tipo: 'Gadget', nome: 'Smartwatch Aziendale', valore: '€ 150' }
   ]);
 
-  const [certificateMonitoring] = useState([
-    { tipo: 'Mobilità Sostenibile', count: 456, trend: '+12%', action: 'Promuovi carpooling aziendale' },
-    { tipo: 'Efficienza Energetica', count: 234, trend: '+8%', action: 'Incentiva smart working' },
-    { tipo: 'Riciclo e Riuso', count: 189, trend: '+15%', action: 'Campagna zero waste' },
-    { tipo: 'Consumo Responsabile', count: 167, trend: '+5%', action: 'Partnership negozi green' },
-    { tipo: 'Biodiversità', count: 89, trend: '+20%', action: 'Progetti di riforestazione' },
-    { tipo: 'Acqua e Risorse', count: 78, trend: '+3%', action: 'Sensibilizzazione risparmio idrico' }
+  const [certificateMonitoringCategories] = useState([
+    {
+      category: 'Mobilità Sostenibile',
+      mascot: 'https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=100&h=100&fit=crop&crop=face',
+      data: [
+        { tipo: 'Trasporto Pubblico', count: 256, trend: '+15%', action: 'Convenzioni con ATAC' },
+        { tipo: 'Carpooling', count: 134, trend: '+8%', action: 'App aziendale condivisione auto' },
+        { tipo: 'Bicicletta', count: 66, trend: '+12%', action: 'Bike sharing aziendale' }
+      ]
+    },
+    {
+      category: 'Efficienza Energetica',
+      mascot: 'https://images.unsplash.com/photo-1535268647677-300dbf3d78d1?w=100&h=100&fit=crop&crop=face',
+      data: [
+        { tipo: 'Smart Working', count: 145, trend: '+10%', action: 'Incentivi lavoro da remoto' },
+        { tipo: 'Risparmio Energetico', count: 89, trend: '+6%', action: 'Sensori movimento uffici' }
+      ]
+    },
+    {
+      category: 'Riciclo e Riuso',
+      mascot: 'https://images.unsplash.com/photo-1501286353178-1ec881214838?w=100&h=100&fit=crop&crop=face',
+      data: [
+        { tipo: 'Raccolta Differenziata', count: 134, trend: '+18%', action: 'Contenitori smart in ufficio' },
+        { tipo: 'Riuso Materiali', count: 55, trend: '+12%', action: 'Mercatino interno usato' }
+      ]
+    }
   ]);
 
-  const [externalCertificateMonitoring] = useState([
-    { tipo: 'Mobilità Sostenibile', count: 3240, trend: '+18%', action: 'Partnership con app mobilità' },
-    { tipo: 'Consumo Responsabile', count: 2156, trend: '+22%', action: 'Campagne influencer green' },
-    { tipo: 'Efficienza Energetica', count: 1890, trend: '+14%', action: 'Collaborazioni utility rinnovabili' },
-    { tipo: 'Riciclo e Riuso', count: 1654, trend: '+10%', action: 'Ambassador program rifiuti zero' },
-    { tipo: 'Biodiversità', count: 987, trend: '+25%', action: 'Community gardening urbano' },
-    { tipo: 'Acqua e Risorse', count: 743, trend: '+7%', action: 'Challenge risparmio idrico social' }
+  const [externalCertificateCategories] = useState([
+    {
+      category: 'Mobilità Sostenibile',
+      mascot: 'https://images.unsplash.com/photo-1441057206919-63d19fac2369?w=100&h=100&fit=crop&crop=face',
+      data: [
+        { tipo: 'Trasporto Pubblico', count: 1890, trend: '+22%', action: 'Partnership app mobilità urbana' },
+        { tipo: 'Veicoli Elettrici', count: 945, trend: '+18%', action: 'Sconti colonnine ricarica' },
+        { tipo: 'Micromobilità', count: 405, trend: '+15%', action: 'Monopattini elettrici aziendali' }
+      ]
+    },
+    {
+      category: 'Consumo Responsabile',
+      mascot: 'https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=100&h=100&fit=crop&crop=face',
+      data: [
+        { tipo: 'Prodotti Locali', count: 1234, trend: '+25%', action: 'Marketplace produttori locali' },
+        { tipo: 'Zero Waste', count: 922, trend: '+20%', action: 'Challenge rifiuti zero' }
+      ]
+    },
+    {
+      category: 'Efficienza Energetica',
+      mascot: 'https://images.unsplash.com/photo-1535268647677-300dbf3d78d1?w=100&h=100&fit=crop&crop=face',
+      data: [
+        { tipo: 'Pannelli Solari', count: 1123, trend: '+16%', action: 'Finanziamenti agevolati' },
+        { tipo: 'Elettrodomestici A+++', count: 767, trend: '+12%', action: 'Sconti su elettrodomestici green' }
+      ]
+    }
   ]);
 
   const [newWelfareItem, setNewWelfareItem] = useState({
@@ -144,36 +182,54 @@ const DashboardAziende = () => {
               </CardDescription>
             </CardHeader>
             <CardContent className="p-6">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Categoria Certificato</TableHead>
-                    <TableHead>Quantità</TableHead>
-                    <TableHead>Trend</TableHead>
-                    <TableHead>Azione Marketing Suggerita</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {certificateMonitoring.map((item, index) => (
-                    <TableRow key={index}>
-                      <TableCell className="font-medium">{item.tipo}</TableCell>
-                      <TableCell className="text-center font-semibold">{item.count}</TableCell>
-                      <TableCell className={`text-center font-semibold ${getTrendColor(item.trend)}`}>
-                        <div className="flex items-center justify-center gap-1">
-                          <TrendingUp className="h-4 w-4" />
-                          {item.trend}
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <Badge variant="outline" className="flex items-center gap-1">
-                          <Target className="h-3 w-3" />
-                          {item.action}
-                        </Badge>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+              <Accordion type="single" collapsible className="w-full">
+                {certificateMonitoringCategories.map((category, categoryIndex) => (
+                  <AccordionItem key={categoryIndex} value={`item-${categoryIndex}`}>
+                    <AccordionTrigger className="flex items-center gap-3">
+                      <div className="flex items-center gap-3">
+                        <img 
+                          src={category.mascot} 
+                          alt={category.category}
+                          className="w-8 h-8 rounded-full object-cover"
+                        />
+                        <span>{category.category}</span>
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>Tipo Certificato</TableHead>
+                            <TableHead>Quantità</TableHead>
+                            <TableHead>Trend</TableHead>
+                            <TableHead>Azione Marketing</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {category.data.map((item, index) => (
+                            <TableRow key={index}>
+                              <TableCell className="font-medium">{item.tipo}</TableCell>
+                              <TableCell className="text-center font-semibold">{item.count}</TableCell>
+                              <TableCell className={`text-center font-semibold ${getTrendColor(item.trend)}`}>
+                                <div className="flex items-center justify-center gap-1">
+                                  <TrendingUp className="h-4 w-4" />
+                                  {item.trend}
+                                </div>
+                              </TableCell>
+                              <TableCell>
+                                <Badge variant="outline" className="flex items-center gap-1 text-xs">
+                                  <Target className="h-3 w-3" />
+                                  {item.action}
+                                </Badge>
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
             </CardContent>
           </Card>
 
@@ -189,36 +245,54 @@ const DashboardAziende = () => {
               </CardDescription>
             </CardHeader>
             <CardContent className="p-6">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Categoria Certificato</TableHead>
-                    <TableHead>Quantità</TableHead>
-                    <TableHead>Trend</TableHead>
-                    <TableHead>Azione Marketing Suggerita</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {externalCertificateMonitoring.map((item, index) => (
-                    <TableRow key={index}>
-                      <TableCell className="font-medium">{item.tipo}</TableCell>
-                      <TableCell className="text-center font-semibold">{item.count}</TableCell>
-                      <TableCell className={`text-center font-semibold ${getTrendColor(item.trend)}`}>
-                        <div className="flex items-center justify-center gap-1">
-                          <TrendingUp className="h-4 w-4" />
-                          {item.trend}
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <Badge variant="outline" className="flex items-center gap-1">
-                          <Target className="h-3 w-3" />
-                          {item.action}
-                        </Badge>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+              <Accordion type="single" collapsible className="w-full">
+                {externalCertificateCategories.map((category, categoryIndex) => (
+                  <AccordionItem key={categoryIndex} value={`external-item-${categoryIndex}`}>
+                    <AccordionTrigger className="flex items-center gap-3">
+                      <div className="flex items-center gap-3">
+                        <img 
+                          src={category.mascot} 
+                          alt={category.category}
+                          className="w-8 h-8 rounded-full object-cover"
+                        />
+                        <span>{category.category}</span>
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>Tipo Certificato</TableHead>
+                            <TableHead>Quantità</TableHead>
+                            <TableHead>Trend</TableHead>
+                            <TableHead>Azione Marketing</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {category.data.map((item, index) => (
+                            <TableRow key={index}>
+                              <TableCell className="font-medium">{item.tipo}</TableCell>
+                              <TableCell className="text-center font-semibold">{item.count}</TableCell>
+                              <TableCell className={`text-center font-semibold ${getTrendColor(item.trend)}`}>
+                                <div className="flex items-center justify-center gap-1">
+                                  <TrendingUp className="h-4 w-4" />
+                                  {item.trend}
+                                </div>
+                              </TableCell>
+                              <TableCell>
+                                <Badge variant="outline" className="flex items-center gap-1 text-xs">
+                                  <Target className="h-3 w-3" />
+                                  {item.action}
+                                </Badge>
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
             </CardContent>
           </Card>
         </div>
