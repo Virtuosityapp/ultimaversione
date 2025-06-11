@@ -9,11 +9,10 @@ import { Car, Lightbulb, Trash2, Recycle, ArrowLeft, Activity, Wifi, AlertCircle
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useEffect, useRef, useState } from "react";
+
 const Comuni = () => {
   const navigate = useNavigate();
-  const {
-    toast
-  } = useToast();
+  const { toast } = useToast();
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<any>(null);
   const [selectedReward, setSelectedReward] = useState<any>(null);
@@ -114,6 +113,7 @@ const Comuni = () => {
     coords: [9.2050, 45.4780] as [number, number],
     timestamp: "4 ore fa"
   }];
+
   useEffect(() => {
     if (!mapContainer.current || map.current) return;
 
@@ -161,6 +161,7 @@ const Comuni = () => {
       }
     };
   }, []);
+
   const integrations = [{
     id: 1,
     name: "Smart Parking",
@@ -218,6 +219,7 @@ const Comuni = () => {
       citizens: 0
     }
   }];
+
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "active":
@@ -232,6 +234,7 @@ const Comuni = () => {
         return <Badge variant="secondary">Sconosciuto</Badge>;
     }
   };
+
   const getCategoryColor = (category: string) => {
     switch (category) {
       case "transport":
@@ -248,12 +251,14 @@ const Comuni = () => {
         return "bg-gray-100 text-gray-800";
     }
   };
+
   const handleManageIntegration = (integration: any) => {
     toast({
       title: "Gestione Integrazione",
       description: `Apertura pannello di controllo per ${integration.name}`
     });
   };
+
   const handleEditReward = (reward: any) => {
     setSelectedReward(reward);
     toast({
@@ -261,39 +266,56 @@ const Comuni = () => {
       description: `Modifica di ${reward.title}`
     });
   };
+
   const handleDeleteReward = (rewardId: number) => {
     toast({
       title: "Incentivo Eliminato",
       description: "L'incentivo è stato rimosso con successo"
     });
   };
+
   const totalDataPoints = integrations.reduce((sum, int) => sum + int.dataPoints, 0);
   const activeIntegrations = integrations.filter(int => int.status === "active").length;
   const totalRewards = communityRewards.length;
   const activeRewards = communityRewards.filter(r => r.status === "active").length;
-  return <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-cyan-50">
-      {/* Header */}
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-cyan-50">
+      {/* Header - Improved mobile spacing */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-blue-100 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-3 sm:py-4">
             <div className="flex items-center space-x-2 sm:space-x-3">
-              <Button variant="ghost" onClick={() => navigate("/dashboard")} className="mr-1 sm:mr-2 p-2 sm:p-3" size="sm">
+              <Button 
+                variant="ghost" 
+                onClick={() => navigate("/dashboard")} 
+                className="mr-1 sm:mr-2 p-2 sm:p-3 min-h-[44px] min-w-[44px]" 
+                size="sm"
+              >
                 <ArrowLeft className="h-4 w-4 sm:mr-2" />
                 <span className="hidden sm:inline">Dashboard</span>
               </Button>
-              <img src="/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png" alt="Virtuosity Logo" className="relative h-10 w-10 sm:h-12 sm:w-12 lg:h-16 lg:w-16 mx-auto object-contain" />
-              <h1 className="text-lg sm:text-xl lg:text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+              <img 
+                src="/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png" 
+                alt="Virtuosity Logo" 
+                className="relative h-8 w-8 sm:h-12 sm:w-12 lg:h-16 lg:w-16 object-contain" 
+              />
+              <h1 className="text-sm sm:text-xl lg:text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                 Dashboard Comuni
               </h1>
             </div>
             <div className="flex items-center space-x-2 sm:space-x-4">
-              <Button variant="outline" onClick={() => navigate("/report")} className="border-green-300 text-green-700 hover:bg-green-50 hover:border-green-400 hover:scale-105 transition-all duration-200 text-xs px-2 py-1.5 sm:text-sm sm:px-4 sm:py-2 active:scale-95">
-                <FileText className="h-4 w-4 mr-2" />
+              <Button 
+                variant="outline" 
+                onClick={() => navigate("/report")} 
+                className="border-green-300 text-green-700 hover:bg-green-50 hover:border-green-400 hover:scale-105 transition-all duration-200 text-xs px-2 py-2 sm:text-sm sm:px-4 active:scale-95 min-h-[44px]"
+              >
+                <FileText className="h-4 w-4 mr-1 sm:mr-2" />
                 <span className="hidden sm:inline">Genera Report</span>
                 <span className="sm:hidden">Report</span>
               </Button>
-              <div className="bg-gradient-to-r from-blue-400 to-indigo-500 text-white px-2 sm:px-4 py-1 sm:py-2 rounded-full font-bold text-sm sm:text-base">
-                <Activity className="h-4 w-4 mr-1 inline" />
+              <div className="bg-gradient-to-r from-blue-400 to-indigo-500 text-white px-2 sm:px-4 py-2 sm:py-2 rounded-full font-bold text-xs sm:text-base min-h-[36px] flex items-center">
+                <Activity className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
                 {totalDataPoints}
               </div>
             </div>
@@ -301,180 +323,209 @@ const Comuni = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-        {/* Welcome Section */}
-        <div className="mb-6 sm:mb-8 text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Centro di Controllo Integrazioni 🏛️</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base px-4">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8">
+        {/* Welcome Section - Better mobile spacing */}
+        <div className="mb-6 sm:mb-8 text-center px-2">
+          <h2 className="text-xl sm:text-3xl font-bold text-gray-900 mb-2">Centro di Controllo Integrazioni 🏛️</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
             Monitora tutte le integrazioni del comune con Virtuosity. Controlla lo stato dei servizi smart della città.
           </p>
         </div>
 
-        {/* Overview Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
+        {/* Overview Cards - Better mobile grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-6 sm:mb-8">
           <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-400 to-indigo-500 text-white">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-blue-100">Integrazioni Attive</CardTitle>
+            <CardHeader className="pb-2 p-3 sm:p-6">
+              <CardTitle className="text-xs sm:text-sm font-medium text-blue-100">Integrazioni Attive</CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="text-xl sm:text-2xl font-bold">{activeIntegrations}</div>
+            <CardContent className="p-3 sm:p-6 pt-0">
+              <div className="text-lg sm:text-2xl font-bold">{activeIntegrations}</div>
               <p className="text-xs text-blue-100">di {integrations.length} totali</p>
             </CardContent>
           </Card>
 
           <Card className="border-0 shadow-lg bg-gradient-to-br from-green-400 to-emerald-500 text-white">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-green-100">Punti Dati</CardTitle>
+            <CardHeader className="pb-2 p-3 sm:p-6">
+              <CardTitle className="text-xs sm:text-sm font-medium text-green-100">Punti Dati</CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="text-xl sm:text-2xl font-bold">{totalDataPoints.toLocaleString()}</div>
+            <CardContent className="p-3 sm:p-6 pt-0">
+              <div className="text-lg sm:text-2xl font-bold">{totalDataPoints.toLocaleString()}</div>
               <p className="text-xs text-green-100">Oggi</p>
             </CardContent>
           </Card>
 
           <Card className="border-0 shadow-lg bg-gradient-to-br from-purple-400 to-pink-500 text-white">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-purple-100">Incentivi Attivi</CardTitle>
+            <CardHeader className="pb-2 p-3 sm:p-6">
+              <CardTitle className="text-xs sm:text-sm font-medium text-purple-100">Incentivi Attivi</CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="text-xl sm:text-2xl font-bold">{activeRewards}</div>
+            <CardContent className="p-3 sm:p-6 pt-0">
+              <div className="text-lg sm:text-2xl font-bold">{activeRewards}</div>
               <p className="text-xs text-purple-100">di {totalRewards} totali</p>
             </CardContent>
           </Card>
 
           <Card className="border-0 shadow-lg bg-gradient-to-br from-orange-400 to-red-500 text-white">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-orange-100">Allerte</CardTitle>
+            <CardHeader className="pb-2 p-3 sm:p-6">
+              <CardTitle className="text-xs sm:text-sm font-medium text-orange-100">Allerte</CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="text-xl sm:text-2xl font-bold">2</div>
+            <CardContent className="p-3 sm:p-6 pt-0">
+              <div className="text-lg sm:text-2xl font-bold">2</div>
               <p className="text-xs text-orange-100">Richiedono attenzione</p>
             </CardContent>
           </Card>
         </div>
 
         <Tabs defaultValue="overview" className="space-y-6 sm:space-y-8">
+          {/* Improved mobile tabs */}
           <TabsList className="grid w-full grid-cols-2 sm:grid-cols-5 bg-white/80 backdrop-blur-sm shadow-md p-1 gap-1 sm:gap-0 sticky top-20 z-40">
-            <TabsTrigger value="overview" className="px-2 py-2 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-blue-100 hover:to-indigo-100 hover:text-blue-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-400 data-[state=active]:to-indigo-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
+            <TabsTrigger 
+              value="overview" 
+              className="px-1 py-3 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-blue-100 hover:to-indigo-100 hover:text-blue-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-400 data-[state=active]:to-indigo-500 data-[state=active]:text-white data-[state=active]:shadow-lg min-h-[44px]"
+            >
               Panoramica
             </TabsTrigger>
-            <TabsTrigger value="integrations" className="px-1 py-2 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-green-100 hover:to-emerald-100 hover:text-green-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-400 data-[state=active]:to-emerald-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
+            <TabsTrigger 
+              value="integrations" 
+              className="px-1 py-3 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-green-100 hover:to-emerald-100 hover:text-green-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-400 data-[state=active]:to-emerald-500 data-[state=active]:text-white data-[state=active]:shadow-lg min-h-[44px]"
+            >
               Integrazioni
             </TabsTrigger>
-            <TabsTrigger value="rewards" className="px-1 py-2 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-purple-100 hover:to-pink-100 hover:text-purple-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-400 data-[state=active]:to-pink-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
+            <TabsTrigger 
+              value="rewards" 
+              className="px-1 py-3 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-purple-100 hover:to-pink-100 hover:text-purple-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-400 data-[state=active]:to-pink-500 data-[state=active]:text-white data-[state=active]:shadow-lg min-h-[44px]"
+            >
               Incentivi
             </TabsTrigger>
-            <TabsTrigger value="map" className="px-1 py-2 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-cyan-100 hover:to-blue-100 hover:text-cyan-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-400 data-[state=active]:to-blue-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
+            <TabsTrigger 
+              value="map" 
+              className="px-1 py-3 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-cyan-100 hover:to-blue-100 hover:text-cyan-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-400 data-[state=active]:to-blue-500 data-[state=active]:text-white data-[state=active]:shadow-lg min-h-[44px]"
+            >
               Mappa
             </TabsTrigger>
-            <TabsTrigger value="analytics" className="px-1 py-2 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-orange-100 hover:to-red-100 hover:text-orange-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-400 data-[state=active]:to-red-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
+            <TabsTrigger 
+              value="analytics" 
+              className="px-1 py-3 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-orange-100 hover:to-red-100 hover:text-orange-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-400 data-[state=active]:to-red-500 data-[state=active]:text-white data-[state=active]:shadow-lg min-h-[44px]"
+            >
               Analytics
             </TabsTrigger>
           </TabsList>
 
-          <div className="mt-8">
+          <div className="mt-6 sm:mt-8">
             <TabsContent value="overview" className="space-y-4 sm:space-y-6 mt-0">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-                {integrations.map(integration => {
-                const IconComponent = integration.icon;
-                return <Card key={integration.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300 my-[90px]">
-                      <CardHeader className="pb-3 my-[30px]">
+                {integrations.map((integration) => {
+                  const IconComponent = integration.icon;
+                  return (
+                    <Card key={integration.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+                      <CardHeader className="pb-3 p-4 sm:p-6">
                         <div className="flex justify-between items-start mb-2">
                           <div className="flex items-center space-x-3">
                             <div className={`p-2 rounded-lg ${integration.color}`}>
                               <IconComponent className="h-5 w-5" />
                             </div>
                             <div>
-                              <CardTitle className="text-base sm:text-lg">{integration.name}</CardTitle>
-                              <CardDescription className="text-sm">{integration.description}</CardDescription>
+                              <CardTitle className="text-sm sm:text-lg">{integration.name}</CardTitle>
+                              <CardDescription className="text-xs sm:text-sm">{integration.description}</CardDescription>
                             </div>
                           </div>
                           {getStatusBadge(integration.status)}
                         </div>
                       </CardHeader>
-                      <CardContent>
+                      <CardContent className="p-4 sm:p-6 pt-0">
                         <div className="space-y-3 sm:space-y-4">
-                          <div className="flex justify-between items-center text-sm">
+                          <div className="flex justify-between items-center text-xs sm:text-sm">
                             <span className="text-gray-600">Ultimo aggiornamento:</span>
                             <span className="font-medium">{integration.lastSync}</span>
                           </div>
                           
-                          <div className="flex justify-between items-center text-sm">
+                          <div className="flex justify-between items-center text-xs sm:text-sm">
                             <span className="text-gray-600">Punti dati:</span>
                             <span className="font-medium">{integration.dataPoints}</span>
                           </div>
                           
                           <div className="grid grid-cols-3 gap-2 text-xs">
-                            {Object.entries(integration.metrics).map(([key, value]) => <div key={key} className="text-center p-2 bg-gray-50 rounded">
-                                <div className="font-bold text-gray-900">{value}</div>
-                                <div className="text-gray-600 capitalize">{key}</div>
-                              </div>)}
+                            {Object.entries(integration.metrics).map(([key, value]) => (
+                              <div key={key} className="text-center p-2 bg-gray-50 rounded">
+                                <div className="font-bold text-gray-900 text-xs sm:text-sm">{value}</div>
+                                <div className="text-gray-600 capitalize text-xs">{key}</div>
+                              </div>
+                            ))}
                           </div>
                           
-                          <Button className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 text-sm" onClick={() => handleManageIntegration(integration)} size="sm">
+                          <Button 
+                            className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 text-sm min-h-[44px]" 
+                            onClick={() => handleManageIntegration(integration)} 
+                            size="sm"
+                          >
                             <Settings className="h-4 w-4 mr-2" />
                             Gestisci
                           </Button>
                         </div>
                       </CardContent>
-                    </Card>;
-              })}
+                    </Card>
+                  );
+                })}
               </div>
             </TabsContent>
 
             <TabsContent value="integrations" className="space-y-4 sm:space-y-6 mt-0">
               <div className="grid grid-cols-1 gap-4 sm:gap-6">
-                {integrations.map(integration => {
-                const IconComponent = integration.icon;
-                return <Card key={integration.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+                {integrations.map((integration) => {
+                  const IconComponent = integration.icon;
+                  return (
+                    <Card key={integration.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
                       <CardContent className="p-4 sm:p-6">
                         <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-4">
+                          <div className="flex items-center space-x-3 sm:space-x-4">
                             <div className={`p-3 rounded-lg ${integration.color}`}>
-                              <IconComponent className="h-6 w-6" />
+                              <IconComponent className="h-5 w-5 sm:h-6 sm:w-6" />
                             </div>
                             <div>
-                              <h3 className="font-bold text-lg">{integration.name}</h3>
-                              <p className="text-gray-600 text-sm">{integration.description}</p>
-                              <div className="flex items-center space-x-4 mt-2 text-xs text-gray-500">
+                              <h3 className="font-bold text-sm sm:text-lg">{integration.name}</h3>
+                              <p className="text-gray-600 text-xs sm:text-sm">{integration.description}</p>
+                              <div className="flex items-center space-x-2 sm:space-x-4 mt-2 text-xs text-gray-500">
                                 <span>🔄 {integration.lastSync}</span>
                                 <span>📊 {integration.dataPoints} punti dati</span>
                               </div>
                             </div>
                           </div>
-                          <div className="flex items-center space-x-3">
+                          <div className="flex items-center space-x-2 sm:space-x-3">
                             {getStatusBadge(integration.status)}
-                            <Button variant="outline" size="sm">
+                            <Button variant="outline" size="sm" className="min-h-[40px] min-w-[40px]">
                               <Wifi className="h-4 w-4" />
                             </Button>
                           </div>
                         </div>
                       </CardContent>
-                    </Card>;
-              })}
+                    </Card>
+                  );
+                })}
               </div>
             </TabsContent>
 
             <TabsContent value="rewards" className="space-y-4 sm:space-y-6 mt-0">
-              <div className="flex justify-between items-center mb-6">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 space-y-3 sm:space-y-0">
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900">Gestione Incentivi Cittadini 🎁</h3>
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-900">Gestione Incentivi Cittadini 🎁</h3>
                   <p className="text-gray-600 text-sm">Configura i servizi e vantaggi offerti in cambio di certificati ambientali</p>
                 </div>
-                <Button onClick={() => setShowAddReward(true)} className="bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700">
+                <Button 
+                  onClick={() => setShowAddReward(true)} 
+                  className="bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 w-full sm:w-auto min-h-[44px]"
+                >
                   <Plus className="h-4 w-4 mr-2" />
                   Nuovo Incentivo
                 </Button>
               </div>
 
-              {/* Rewards Stats */}
-              <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-6">
+              {/* Rewards Stats - Better mobile grid */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6">
                 <Card className="border-0 shadow-lg bg-gradient-to-br from-purple-400 to-pink-500 text-white">
-                  <CardContent className="p-4">
+                  <CardContent className="p-3 sm:p-4">
                     <div className="flex items-center space-x-2">
-                      <Gift className="h-5 w-5" />
+                      <Gift className="h-4 w-4 sm:h-5 sm:w-5" />
                       <div>
-                        <div className="text-2xl font-bold">{totalRewards}</div>
+                        <div className="text-lg sm:text-2xl font-bold">{totalRewards}</div>
                         <div className="text-xs text-purple-100">Incentivi Totali</div>
                       </div>
                     </div>
@@ -482,11 +533,11 @@ const Comuni = () => {
                 </Card>
                 
                 <Card className="border-0 shadow-lg bg-gradient-to-br from-green-400 to-emerald-500 text-white">
-                  <CardContent className="p-4">
+                  <CardContent className="p-3 sm:p-4">
                     <div className="flex items-center space-x-2">
-                      <CheckCircle className="h-5 w-5" />
+                      <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5" />
                       <div>
-                        <div className="text-2xl font-bold">{activeRewards}</div>
+                        <div className="text-lg sm:text-2xl font-bold">{activeRewards}</div>
                         <div className="text-xs text-green-100">Attivi</div>
                       </div>
                     </div>
@@ -494,11 +545,11 @@ const Comuni = () => {
                 </Card>
 
                 <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-400 to-cyan-500 text-white">
-                  <CardContent className="p-4">
+                  <CardContent className="p-3 sm:p-4">
                     <div className="flex items-center space-x-2">
-                      <Users className="h-5 w-5" />
+                      <Users className="h-4 w-4 sm:h-5 sm:w-5" />
                       <div>
-                        <div className="text-2xl font-bold">{communityRewards.reduce((sum, r) => sum + r.currentUsers, 0)}</div>
+                        <div className="text-lg sm:text-2xl font-bold">{communityRewards.reduce((sum, r) => sum + r.currentUsers, 0)}</div>
                         <div className="text-xs text-blue-100">Utenti Coinvolti</div>
                       </div>
                     </div>
@@ -506,11 +557,11 @@ const Comuni = () => {
                 </Card>
 
                 <Card className="border-0 shadow-lg bg-gradient-to-br from-orange-400 to-red-500 text-white">
-                  <CardContent className="p-4">
+                  <CardContent className="p-3 sm:p-4">
                     <div className="flex items-center space-x-2">
-                      <Award className="h-5 w-5" />
+                      <Award className="h-4 w-4 sm:h-5 sm:w-5" />
                       <div>
-                        <div className="text-2xl font-bold">{communityRewards.reduce((sum, r) => sum + r.certificatesRequired, 0)}</div>
+                        <div className="text-lg sm:text-2xl font-bold">{communityRewards.reduce((sum, r) => sum + r.certificatesRequired, 0)}</div>
                         <div className="text-xs text-orange-100">Certificati Target</div>
                       </div>
                     </div>
@@ -518,41 +569,42 @@ const Comuni = () => {
                 </Card>
               </div>
 
-              {/* Rewards List */}
+              {/* Rewards List - Better mobile layout */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-                {communityRewards.map(reward => {
-                const IconComponent = reward.icon;
-                const usagePercentage = reward.currentUsers / reward.maxUsers * 100;
-                return <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
-                      <CardHeader className="pb-3">
+                {communityRewards.map((reward) => {
+                  const IconComponent = reward.icon;
+                  const usagePercentage = (reward.currentUsers / reward.maxUsers) * 100;
+                  return (
+                    <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+                      <CardHeader className="pb-3 p-4 sm:p-6">
                         <div className="flex justify-between items-start">
                           <div className="flex items-center space-x-3">
                             <div className={`p-2 rounded-lg ${getCategoryColor(reward.category)}`}>
-                              <IconComponent className="h-5 w-5" />
+                              <IconComponent className="h-4 w-4 sm:h-5 sm:w-5" />
                             </div>
                             <div>
-                              <CardTitle className="text-base sm:text-lg">{reward.title}</CardTitle>
-                              <CardDescription className="text-sm">{reward.description}</CardDescription>
+                              <CardTitle className="text-sm sm:text-lg">{reward.title}</CardTitle>
+                              <CardDescription className="text-xs sm:text-sm">{reward.description}</CardDescription>
                             </div>
                           </div>
                           {getStatusBadge(reward.status)}
                         </div>
                       </CardHeader>
-                      <CardContent>
+                      <CardContent className="p-4 sm:p-6 pt-0">
                         <div className="space-y-4">
-                          {/* Requirement and Value */}
-                          <div className="grid grid-cols-2 gap-4 text-sm">
+                          {/* Requirement and Value - Mobile optimized */}
+                          <div className="grid grid-cols-2 gap-3 sm:gap-4 text-sm">
                             <div className="flex items-center space-x-2">
-                              <Target className="h-4 w-4 text-blue-600" />
+                              <Target className="h-3 w-3 sm:h-4 sm:w-4 text-blue-600" />
                               <div>
-                                <div className="font-medium">{reward.certificatesRequired} certificati</div>
+                                <div className="font-medium text-xs sm:text-sm">{reward.certificatesRequired} certificati</div>
                                 <div className="text-gray-500 text-xs">Richiesti</div>
                               </div>
                             </div>
                             <div className="flex items-center space-x-2">
-                              <Euro className="h-4 w-4 text-green-600" />
+                              <Euro className="h-3 w-3 sm:h-4 sm:w-4 text-green-600" />
                               <div>
-                                <div className="font-medium">{reward.value}</div>
+                                <div className="font-medium text-xs sm:text-sm">{reward.value}</div>
                                 <div className="text-gray-500 text-xs">Valore</div>
                               </div>
                             </div>
@@ -560,14 +612,15 @@ const Comuni = () => {
 
                           {/* Usage Progress */}
                           <div>
-                            <div className="flex justify-between text-sm mb-1">
+                            <div className="flex justify-between text-xs sm:text-sm mb-1">
                               <span className="text-gray-600">Utilizzo</span>
                               <span className="font-medium">{reward.currentUsers}/{reward.maxUsers}</span>
                             </div>
                             <div className="w-full bg-gray-200 rounded-full h-2">
-                              <div className="bg-gradient-to-r from-blue-400 to-purple-500 h-2 rounded-full transition-all duration-300" style={{
-                            width: `${Math.min(usagePercentage, 100)}%`
-                          }}></div>
+                              <div 
+                                className="bg-gradient-to-r from-blue-400 to-purple-500 h-2 rounded-full transition-all duration-300" 
+                                style={{ width: `${Math.min(usagePercentage, 100)}%` }}
+                              ></div>
                             </div>
                             <div className="text-xs text-gray-500 mt-1">
                               {usagePercentage.toFixed(1)}% utilizzato
@@ -580,25 +633,37 @@ const Comuni = () => {
                             <span className="font-medium">{reward.validUntil}</span>
                           </div>
 
-                          {/* Actions */}
+                          {/* Actions - Better mobile buttons */}
                           <div className="flex space-x-2">
-                            <Button variant="outline" size="sm" className="flex-1" onClick={() => handleEditReward(reward)}>
-                              <Edit className="h-4 w-4 mr-1" />
-                              Modifica
+                            <Button 
+                              variant="outline" 
+                              size="sm" 
+                              className="flex-1 min-h-[40px]" 
+                              onClick={() => handleEditReward(reward)}
+                            >
+                              <Edit className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
+                              <span className="text-xs sm:text-sm">Modifica</span>
                             </Button>
-                            <Button variant="outline" size="sm" className="text-red-600 border-red-300 hover:bg-red-50" onClick={() => handleDeleteReward(reward.id)}>
-                              <Trash className="h-4 w-4" />
+                            <Button 
+                              variant="outline" 
+                              size="sm" 
+                              className="text-red-600 border-red-300 hover:bg-red-50 min-h-[40px] min-w-[40px]" 
+                              onClick={() => handleDeleteReward(reward.id)}
+                            >
+                              <Trash className="h-3 w-3 sm:h-4 sm:w-4" />
                             </Button>
                           </div>
                         </div>
                       </CardContent>
-                    </Card>;
-              })}
+                    </Card>
+                  );
+                })}
               </div>
 
-              {/* Add New Reward Form (shown when showAddReward is true) */}
-              {showAddReward && <Card className="border-0 shadow-lg bg-white/90 backdrop-blur-sm border-purple-200">
-                  <CardHeader>
+              {/* Add New Reward Form - Better mobile layout */}
+              {showAddReward && (
+                <Card className="border-0 shadow-lg bg-white/90 backdrop-blur-sm border-purple-200">
+                  <CardHeader className="p-4 sm:p-6">
                     <CardTitle className="flex items-center space-x-2">
                       <Plus className="h-5 w-5 text-purple-600" />
                       <span>Crea Nuovo Incentivo</span>
@@ -607,61 +672,69 @@ const Comuni = () => {
                       Configura un nuovo servizio o vantaggio da offrire ai cittadini
                     </CardDescription>
                   </CardHeader>
-                  <CardContent className="space-y-4">
+                  <CardContent className="space-y-4 p-4 sm:p-6 pt-0">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <Label htmlFor="title">Titolo Incentivo</Label>
-                        <Input id="title" placeholder="es. Sconto Trasporto Pubblico" />
+                        <Input id="title" placeholder="es. Sconto Trasporto Pubblico" className="min-h-[44px]" />
                       </div>
                       <div>
                         <Label htmlFor="category">Categoria</Label>
-                        <Input id="category" placeholder="transport, parking, waste..." />
+                        <Input id="category" placeholder="transport, parking, waste..." className="min-h-[44px]" />
                       </div>
                     </div>
                     
                     <div>
                       <Label htmlFor="description">Descrizione</Label>
-                      <Input id="description" placeholder="Descrizione dettagliata del vantaggio offerto" />
+                      <Input id="description" placeholder="Descrizione dettagliata del vantaggio offerto" className="min-h-[44px]" />
                     </div>
                     
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                       <div>
                         <Label htmlFor="certificates">Certificati Richiesti</Label>
-                        <Input id="certificates" type="number" placeholder="50" />
+                        <Input id="certificates" type="number" placeholder="50" className="min-h-[44px]" />
                       </div>
                       <div>
                         <Label htmlFor="value">Valore</Label>
-                        <Input id="value" placeholder="€15" />
+                        <Input id="value" placeholder="€15" className="min-h-[44px]" />
                       </div>
                       <div>
                         <Label htmlFor="maxUsers">Utenti Max</Label>
-                        <Input id="maxUsers" type="number" placeholder="500" />
+                        <Input id="maxUsers" type="number" placeholder="500" className="min-h-[44px]" />
                       </div>
                     </div>
                     
-                    <div className="flex space-x-2">
-                      <Button className="bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700" onClick={() => {
-                    toast({
-                      title: "Incentivo Creato",
-                      description: "Il nuovo incentivo è stato aggiunto con successo"
-                    });
-                    setShowAddReward(false);
-                  }}>
+                    <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
+                      <Button 
+                        className="bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 flex-1 min-h-[44px]" 
+                        onClick={() => {
+                          toast({
+                            title: "Incentivo Creato",
+                            description: "Il nuovo incentivo è stato aggiunto con successo"
+                          });
+                          setShowAddReward(false);
+                        }}
+                      >
                         Crea Incentivo
                       </Button>
-                      <Button variant="outline" onClick={() => setShowAddReward(false)}>
+                      <Button 
+                        variant="outline" 
+                        onClick={() => setShowAddReward(false)}
+                        className="min-h-[44px]"
+                      >
                         Annulla
                       </Button>
                     </div>
                   </CardContent>
-                </Card>}
+                </Card>
+              )}
             </TabsContent>
 
             <TabsContent value="map" className="space-y-4 sm:space-y-6 mt-0">
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
                 {/* Map */}
                 <Card className="lg:col-span-2 border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-                  <CardHeader>
+                  <CardHeader className="p-4 sm:p-6">
                     <CardTitle className="flex items-center space-x-2">
                       <MapPin className="h-5 w-5" />
                       <span>Mappa del Comune</span>
@@ -670,11 +743,11 @@ const Comuni = () => {
                       Visualizzazione in tempo reale di allerte e problemi risolti
                     </CardDescription>
                   </CardHeader>
-                  <CardContent>
-                    <div className="h-96 w-full rounded-lg overflow-hidden">
+                  <CardContent className="p-4 sm:p-6 pt-0">
+                    <div className="h-64 sm:h-96 w-full rounded-lg overflow-hidden">
                       <div ref={mapContainer} className="h-full w-full" />
                     </div>
-                    <div className="mt-4 flex items-center space-x-4 text-sm">
+                    <div className="mt-4 flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm">
                       <div className="flex items-center space-x-1">
                         <div className="w-3 h-3 bg-red-500 rounded-full"></div>
                         <span>Allerte critiche</span>
@@ -695,41 +768,48 @@ const Comuni = () => {
                 <div className="space-y-4">
                   {/* Active Alerts */}
                   <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-                    <CardHeader className="pb-3">
-                      <CardTitle className="text-lg flex items-center space-x-2">
-                        <AlertTriangle className="h-5 w-5 text-orange-500" />
+                    <CardHeader className="pb-3 p-4 sm:p-6">
+                      <CardTitle className="text-sm sm:text-lg flex items-center space-x-2">
+                        <AlertTriangle className="h-4 w-4 sm:h-5 sm:w-5 text-orange-500" />
                         <span>Segnalazioni Cittadini</span>
                       </CardTitle>
                     </CardHeader>
-                    <CardContent className="space-y-3">
-                      {mapAlerts.filter(alert => alert.type === 'alert').map(alert => <Alert key={alert.id} className={`border-l-4 ${alert.severity === 'high' ? 'border-red-500' : 'border-orange-500'}`}>
+                    <CardContent className="space-y-3 p-4 sm:p-6 pt-0">
+                      {mapAlerts.filter((alert) => alert.type === "alert").map((alert) => (
+                        <Alert 
+                          key={alert.id} 
+                          className={`border-l-4 ${alert.severity === "high" ? "border-red-500" : "border-orange-500"}`}
+                        >
                           <AlertCircle className="h-4 w-4" />
-                          <AlertTitle className="text-sm">{alert.title}</AlertTitle>
+                          <AlertTitle className="text-xs sm:text-sm">{alert.title}</AlertTitle>
                           <AlertDescription className="text-xs text-gray-600">
                             {alert.location} • {alert.timestamp}
                           </AlertDescription>
-                        </Alert>)}
+                        </Alert>
+                      ))}
                     </CardContent>
                   </Card>
 
                   {/* Resolved Issues */}
                   <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-                    <CardHeader className="pb-3">
-                      <CardTitle className="text-lg flex items-center space-x-2">
-                        <CheckCircle className="h-5 w-5 text-green-500" />
+                    <CardHeader className="pb-3 p-4 sm:p-6">
+                      <CardTitle className="text-sm sm:text-lg flex items-center space-x-2">
+                        <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-green-500" />
                         <span>Risolti di Recente</span>
                       </CardTitle>
                     </CardHeader>
-                    <CardContent className="space-y-3">
-                      {mapAlerts.filter(alert => alert.type === 'resolved').map(issue => <div key={issue.id} className="p-3 bg-green-50 rounded-lg border-l-4 border-green-500">
+                    <CardContent className="space-y-3 p-4 sm:p-6 pt-0">
+                      {mapAlerts.filter((alert) => alert.type === "resolved").map((issue) => (
+                        <div key={issue.id} className="p-3 bg-green-50 rounded-lg border-l-4 border-green-500">
                           <div className="flex items-center space-x-2">
                             <CheckCircle className="h-4 w-4 text-green-600" />
-                            <span className="text-sm font-medium">{issue.title}</span>
+                            <span className="text-xs sm:text-sm font-medium">{issue.title}</span>
                           </div>
                           <p className="text-xs text-gray-600 mt-1">
                             {issue.location} • {issue.timestamp}
                           </p>
-                        </div>)}
+                        </div>
+                      ))}
                     </CardContent>
                   </Card>
                 </div>
@@ -738,15 +818,15 @@ const Comuni = () => {
 
             <TabsContent value="analytics" className="space-y-4 sm:space-y-6 mt-0">
               <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-                <CardHeader>
+                <CardHeader className="p-4 sm:p-6">
                   <CardTitle>Analytics Avanzate</CardTitle>
                   <CardDescription>Analisi dettagliate delle performance delle integrazioni</CardDescription>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="p-4 sm:p-6 pt-0">
                   <div className="text-center py-8 text-gray-500">
-                    <Activity className="h-12 w-12 mx-auto mb-4" />
-                    <p>Dashboard analytics in fase di sviluppo</p>
-                    <p className="text-sm">Qui verranno mostrati grafici e metriche dettagliate</p>
+                    <Activity className="h-8 w-8 sm:h-12 sm:w-12 mx-auto mb-4" />
+                    <p className="text-sm sm:text-base">Dashboard analytics in fase di sviluppo</p>
+                    <p className="text-xs sm:text-sm">Qui verranno mostrati grafici e metriche dettagliate</p>
                   </div>
                 </CardContent>
               </Card>
@@ -754,7 +834,7 @@ const Comuni = () => {
           </div>
         </Tabs>
 
-        {/* Bottom Info */}
+        {/* Bottom Info - Better mobile spacing */}
         <div className="mt-8 sm:mt-12 bg-white/80 backdrop-blur-sm rounded-lg p-4 sm:p-6 border-l-4 border-blue-500">
           <h3 className="font-bold text-gray-900 mb-2 text-sm sm:text-base">🏛️ Centro di Controllo Virtuosity</h3>
           <p className="text-gray-600 text-xs sm:text-sm">
@@ -763,6 +843,8 @@ const Comuni = () => {
           </p>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default Comuni;
