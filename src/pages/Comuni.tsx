@@ -5,149 +5,115 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { 
-  Car, 
-  Lightbulb, 
-  Trash2, 
-  Recycle, 
-  ArrowLeft, 
-  Activity, 
-  Wifi, 
-  AlertCircle,
-  CheckCircle,
-  Clock,
-  Settings,
-  MapPin,
-  AlertTriangle,
-  FileText,
-  Gift,
-  Plus,
-  Edit,
-  Trash,
-  Euro,
-  Users,
-  Target,
-  Award
-} from "lucide-react";
+import { Car, Lightbulb, Trash2, Recycle, ArrowLeft, Activity, Wifi, AlertCircle, CheckCircle, Clock, Settings, MapPin, AlertTriangle, FileText, Gift, Plus, Edit, Trash, Euro, Users, Target, Award } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useEffect, useRef, useState } from "react";
-
 const Comuni = () => {
   const navigate = useNavigate();
-  const { toast } = useToast();
+  const {
+    toast
+  } = useToast();
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<any>(null);
   const [selectedReward, setSelectedReward] = useState<any>(null);
   const [showAddReward, setShowAddReward] = useState(false);
 
   // Mock data for rewards/incentives
-  const communityRewards = [
-    {
-      id: 1,
-      title: "Sconto Trasporto Pubblico",
-      description: "Riduzione del 20% sugli abbonamenti mensili per autobus e metro",
-      category: "transport",
-      certificatesRequired: 50,
-      value: "€15",
-      maxUsers: 500,
-      currentUsers: 127,
-      status: "active",
-      icon: Car,
-      validUntil: "31/12/2024"
-    },
-    {
-      id: 2,
-      title: "Parcheggio Gratuito Centro",
-      description: "2 ore di parcheggio gratuito nelle zone blu del centro storico",
-      category: "parking",
-      certificatesRequired: 30,
-      value: "€3/uso",
-      maxUsers: 200,
-      currentUsers: 89,
-      status: "active",
-      icon: Car,
-      validUntil: "30/06/2025"
-    },
-    {
-      id: 3,
-      title: "Tariffa Agevolata Rifiuti",
-      description: "Sconto del 15% sulla TARI per famiglie virtuose",
-      category: "waste",
-      certificatesRequired: 100,
-      value: "€80",
-      maxUsers: 1000,
-      currentUsers: 234,
-      status: "active",
-      icon: Trash2,
-      validUntil: "31/12/2024"
-    },
-    {
-      id: 4,
-      title: "Accesso Prioritario Servizi",
-      description: "Accesso prioritario agli sportelli comunali e prenotazioni online",
-      category: "services",
-      certificatesRequired: 75,
-      value: "Tempo",
-      maxUsers: 300,
-      currentUsers: 156,
-      status: "active",
-      icon: Users,
-      validUntil: "31/12/2025"
-    },
-    {
-      id: 5,
-      title: "Kit Energia Sostenibile",
-      description: "Kit gratuito con lampadine LED e dispositivi per il risparmio energetico",
-      category: "energy",
-      certificatesRequired: 80,
-      value: "€45",
-      maxUsers: 150,
-      currentUsers: 67,
-      status: "draft",
-      icon: Lightbulb,
-      validUntil: "30/09/2024"
-    }
-  ];
+  const communityRewards = [{
+    id: 1,
+    title: "Sconto Trasporto Pubblico",
+    description: "Riduzione del 20% sugli abbonamenti mensili per autobus e metro",
+    category: "transport",
+    certificatesRequired: 50,
+    value: "€15",
+    maxUsers: 500,
+    currentUsers: 127,
+    status: "active",
+    icon: Car,
+    validUntil: "31/12/2024"
+  }, {
+    id: 2,
+    title: "Parcheggio Gratuito Centro",
+    description: "2 ore di parcheggio gratuito nelle zone blu del centro storico",
+    category: "parking",
+    certificatesRequired: 30,
+    value: "€3/uso",
+    maxUsers: 200,
+    currentUsers: 89,
+    status: "active",
+    icon: Car,
+    validUntil: "30/06/2025"
+  }, {
+    id: 3,
+    title: "Tariffa Agevolata Rifiuti",
+    description: "Sconto del 15% sulla TARI per famiglie virtuose",
+    category: "waste",
+    certificatesRequired: 100,
+    value: "€80",
+    maxUsers: 1000,
+    currentUsers: 234,
+    status: "active",
+    icon: Trash2,
+    validUntil: "31/12/2024"
+  }, {
+    id: 4,
+    title: "Accesso Prioritario Servizi",
+    description: "Accesso prioritario agli sportelli comunali e prenotazioni online",
+    category: "services",
+    certificatesRequired: 75,
+    value: "Tempo",
+    maxUsers: 300,
+    currentUsers: 156,
+    status: "active",
+    icon: Users,
+    validUntil: "31/12/2025"
+  }, {
+    id: 5,
+    title: "Kit Energia Sostenibile",
+    description: "Kit gratuito con lampadine LED e dispositivi per il risparmio energetico",
+    category: "energy",
+    certificatesRequired: 80,
+    value: "€45",
+    maxUsers: 150,
+    currentUsers: 67,
+    status: "draft",
+    icon: Lightbulb,
+    validUntil: "30/09/2024"
+  }];
 
   // Mock data for map alerts and resolved issues
-  const mapAlerts = [
-    {
-      id: 1,
-      type: "alert",
-      title: "Contenitore rifiuti pieno",
-      location: "Via Roma 45",
-      coords: [9.1900, 45.4642] as [number, number],
-      severity: "high",
-      timestamp: "10 min fa"
-    },
-    {
-      id: 2,
-      type: "alert",
-      title: "Lampione non funzionante",
-      location: "Piazza Duomo",
-      coords: [9.1916, 45.4640] as [number, number],
-      severity: "medium",
-      timestamp: "25 min fa"
-    },
-    {
-      id: 3,
-      type: "resolved",
-      title: "Parcheggio riparato",
-      location: "Via Brera 12",
-      coords: [9.1885, 45.4720] as [number, number],
-      timestamp: "2 ore fa"
-    },
-    {
-      id: 4,
-      type: "resolved",
-      title: "Illuminazione ripristinata",
-      location: "Corso Buenos Aires",
-      coords: [9.2050, 45.4780] as [number, number],
-      timestamp: "4 ore fa"
-    }
-  ];
-
+  const mapAlerts = [{
+    id: 1,
+    type: "alert",
+    title: "Contenitore rifiuti pieno",
+    location: "Via Roma 45",
+    coords: [9.1900, 45.4642] as [number, number],
+    severity: "high",
+    timestamp: "10 min fa"
+  }, {
+    id: 2,
+    type: "alert",
+    title: "Lampione non funzionante",
+    location: "Piazza Duomo",
+    coords: [9.1916, 45.4640] as [number, number],
+    severity: "medium",
+    timestamp: "25 min fa"
+  }, {
+    id: 3,
+    type: "resolved",
+    title: "Parcheggio riparato",
+    location: "Via Brera 12",
+    coords: [9.1885, 45.4720] as [number, number],
+    timestamp: "2 ore fa"
+  }, {
+    id: 4,
+    type: "resolved",
+    title: "Illuminazione ripristinata",
+    location: "Corso Buenos Aires",
+    coords: [9.2050, 45.4780] as [number, number],
+    timestamp: "4 ore fa"
+  }];
   useEffect(() => {
     if (!mapContainer.current || map.current) return;
 
@@ -155,14 +121,14 @@ const Comuni = () => {
     const initializeMap = async () => {
       try {
         const mapboxgl = await import('mapbox-gl');
-        
+
         // Placeholder token - users need to replace with their own
         mapboxgl.default.accessToken = 'pk.eyJ1IjoiZXhhbXBsZSIsImEiOiJjbGV4YW1wbGUifQ.example';
-        
         map.current = new mapboxgl.default.Map({
           container: mapContainer.current!,
           style: 'mapbox://styles/mapbox/light-v11',
-          center: [9.1900, 45.4642], // Milan coordinates
+          center: [9.1900, 45.4642],
+          // Milan coordinates
           zoom: 13
         });
 
@@ -170,108 +136,88 @@ const Comuni = () => {
         map.current.addControl(new mapboxgl.default.NavigationControl(), 'top-right');
 
         // Add markers for alerts and resolved issues
-        mapAlerts.forEach((item) => {
+        mapAlerts.forEach(item => {
           const el = document.createElement('div');
-          el.className = `w-6 h-6 rounded-full border-2 border-white shadow-lg cursor-pointer ${
-            item.type === 'alert' 
-              ? item.severity === 'high' 
-                ? 'bg-red-500' 
-                : 'bg-orange-500'
-              : 'bg-green-500'
-          }`;
-          
-          const popup = new mapboxgl.default.Popup({ offset: 25 })
-            .setHTML(`
+          el.className = `w-6 h-6 rounded-full border-2 border-white shadow-lg cursor-pointer ${item.type === 'alert' ? item.severity === 'high' ? 'bg-red-500' : 'bg-orange-500' : 'bg-green-500'}`;
+          const popup = new mapboxgl.default.Popup({
+            offset: 25
+          }).setHTML(`
               <div class="p-2">
                 <h3 class="font-bold text-sm">${item.title}</h3>
                 <p class="text-xs text-gray-600">${item.location}</p>
                 <p class="text-xs text-gray-500">${item.timestamp}</p>
               </div>
             `);
-
-          new mapboxgl.default.Marker(el)
-            .setLngLat(item.coords)
-            .setPopup(popup)
-            .addTo(map.current);
+          new mapboxgl.default.Marker(el).setLngLat(item.coords).setPopup(popup).addTo(map.current);
         });
-
       } catch (error) {
         console.error('Error initializing map:', error);
       }
     };
-
     initializeMap();
-
     return () => {
       if (map.current) {
         map.current.remove();
       }
     };
   }, []);
-
-  const integrations = [
-    {
-      id: 1,
-      name: "Smart Parking",
-      description: "Gestione aree parcheggio e monitoraggio occupazione",
-      status: "active",
-      lastSync: "2 minuti fa",
-      dataPoints: 1247,
-      icon: Car,
-      color: "bg-green-100 text-green-800",
-      metrics: {
-        parkingSpaces: 850,
-        occupied: 634,
-        revenue: "€2,340"
-      }
-    },
-    {
-      id: 2,
-      name: "Illuminazione Pubblica",
-      description: "Controllo LED e risparmio energetico",
-      status: "active",
-      lastSync: "5 minuti fa",
-      dataPoints: 892,
-      icon: Lightbulb,
-      color: "bg-yellow-100 text-yellow-800",
-      metrics: {
-        lampPosts: 456,
-        energySaved: "23%",
-        cost: "€890"
-      }
-    },
-    {
-      id: 3,
-      name: "Gestione Rifiuti",
-      description: "Monitoraggio raccolta e ottimizzazione percorsi",
-      status: "warning",
-      lastSync: "15 minuti fa",
-      dataPoints: 567,
-      icon: Trash2,
-      color: "bg-orange-100 text-orange-800",
-      metrics: {
-        containers: 234,
-        fullContainers: 12,
-        efficiency: "87%"
-      }
-    },
-    {
-      id: 4,
-      name: "Riciclo e Tracciamento",
-      description: "Tracciamento materiali riciclabili e incentivi",
-      status: "inactive",
-      lastSync: "2 ore fa",
-      dataPoints: 0,
-      icon: Recycle,
-      color: "bg-blue-100 text-blue-800",
-      metrics: {
-        materials: 0,
-        recycled: "0kg",
-        citizens: 0
-      }
+  const integrations = [{
+    id: 1,
+    name: "Smart Parking",
+    description: "Gestione aree parcheggio e monitoraggio occupazione",
+    status: "active",
+    lastSync: "2 minuti fa",
+    dataPoints: 1247,
+    icon: Car,
+    color: "bg-green-100 text-green-800",
+    metrics: {
+      parkingSpaces: 850,
+      occupied: 634,
+      revenue: "€2,340"
     }
-  ];
-
+  }, {
+    id: 2,
+    name: "Illuminazione Pubblica",
+    description: "Controllo LED e risparmio energetico",
+    status: "active",
+    lastSync: "5 minuti fa",
+    dataPoints: 892,
+    icon: Lightbulb,
+    color: "bg-yellow-100 text-yellow-800",
+    metrics: {
+      lampPosts: 456,
+      energySaved: "23%",
+      cost: "€890"
+    }
+  }, {
+    id: 3,
+    name: "Gestione Rifiuti",
+    description: "Monitoraggio raccolta e ottimizzazione percorsi",
+    status: "warning",
+    lastSync: "15 minuti fa",
+    dataPoints: 567,
+    icon: Trash2,
+    color: "bg-orange-100 text-orange-800",
+    metrics: {
+      containers: 234,
+      fullContainers: 12,
+      efficiency: "87%"
+    }
+  }, {
+    id: 4,
+    name: "Riciclo e Tracciamento",
+    description: "Tracciamento materiali riciclabili e incentivi",
+    status: "inactive",
+    lastSync: "2 ore fa",
+    dataPoints: 0,
+    icon: Recycle,
+    color: "bg-blue-100 text-blue-800",
+    metrics: {
+      materials: 0,
+      recycled: "0kg",
+      citizens: 0
+    }
+  }];
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "active":
@@ -286,76 +232,62 @@ const Comuni = () => {
         return <Badge variant="secondary">Sconosciuto</Badge>;
     }
   };
-
   const getCategoryColor = (category: string) => {
     switch (category) {
-      case "transport": return "bg-blue-100 text-blue-800";
-      case "parking": return "bg-purple-100 text-purple-800";
-      case "waste": return "bg-green-100 text-green-800";
-      case "services": return "bg-orange-100 text-orange-800";
-      case "energy": return "bg-yellow-100 text-yellow-800";
-      default: return "bg-gray-100 text-gray-800";
+      case "transport":
+        return "bg-blue-100 text-blue-800";
+      case "parking":
+        return "bg-purple-100 text-purple-800";
+      case "waste":
+        return "bg-green-100 text-green-800";
+      case "services":
+        return "bg-orange-100 text-orange-800";
+      case "energy":
+        return "bg-yellow-100 text-yellow-800";
+      default:
+        return "bg-gray-100 text-gray-800";
     }
   };
-
   const handleManageIntegration = (integration: any) => {
     toast({
       title: "Gestione Integrazione",
-      description: `Apertura pannello di controllo per ${integration.name}`,
+      description: `Apertura pannello di controllo per ${integration.name}`
     });
   };
-
   const handleEditReward = (reward: any) => {
     setSelectedReward(reward);
     toast({
       title: "Modifica Incentivo",
-      description: `Modifica di ${reward.title}`,
+      description: `Modifica di ${reward.title}`
     });
   };
-
   const handleDeleteReward = (rewardId: number) => {
     toast({
       title: "Incentivo Eliminato",
-      description: "L'incentivo è stato rimosso con successo",
+      description: "L'incentivo è stato rimosso con successo"
     });
   };
-
   const totalDataPoints = integrations.reduce((sum, int) => sum + int.dataPoints, 0);
   const activeIntegrations = integrations.filter(int => int.status === "active").length;
   const totalRewards = communityRewards.length;
   const activeRewards = communityRewards.filter(r => r.status === "active").length;
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-cyan-50">
+  return <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-cyan-50">
       {/* Header */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-blue-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-3 sm:py-4">
             <div className="flex items-center space-x-2 sm:space-x-3">
-              <Button 
-                variant="ghost" 
-                onClick={() => navigate("/dashboard")}
-                className="mr-1 sm:mr-2 p-2 sm:p-3"
-                size="sm"
-              >
+              <Button variant="ghost" onClick={() => navigate("/dashboard")} className="mr-1 sm:mr-2 p-2 sm:p-3" size="sm">
                 <ArrowLeft className="h-4 w-4 sm:mr-2" />
                 <span className="hidden sm:inline">Dashboard</span>
               </Button>
-              <img 
-                src="/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png" 
-                alt="Virtuosity Logo" 
-                className="relative h-10 w-10 sm:h-12 sm:w-12 lg:h-16 lg:w-16 mx-auto object-contain"
-              />
+              <img src="/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png" alt="Virtuosity Logo" className="relative h-10 w-10 sm:h-12 sm:w-12 lg:h-16 lg:w-16 mx-auto object-contain" />
               <h1 className="text-lg sm:text-xl lg:text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                 Dashboard Comuni
               </h1>
             </div>
             <div className="flex items-center space-x-2 sm:space-x-4">
-              <Button 
-                variant="outline" 
-                onClick={() => navigate("/report")}
-                className="border-green-300 text-green-700 hover:bg-green-50 hover:border-green-400 hover:scale-105 transition-all duration-200 text-xs px-2 py-1.5 sm:text-sm sm:px-4 sm:py-2 active:scale-95"
-              >
+              <Button variant="outline" onClick={() => navigate("/report")} className="border-green-300 text-green-700 hover:bg-green-50 hover:border-green-400 hover:scale-105 transition-all duration-200 text-xs px-2 py-1.5 sm:text-sm sm:px-4 sm:py-2 active:scale-95">
                 <FileText className="h-4 w-4 mr-2" />
                 <span className="hidden sm:inline">Genera Report</span>
                 <span className="sm:hidden">Report</span>
@@ -423,34 +355,19 @@ const Comuni = () => {
 
         <Tabs defaultValue="overview" className="space-y-6 sm:space-y-8">
           <TabsList className="grid w-full grid-cols-2 sm:grid-cols-5 bg-white/80 backdrop-blur-sm shadow-md p-1 gap-1 sm:gap-0 sticky top-20 z-40">
-            <TabsTrigger 
-              value="overview" 
-              className="px-2 py-2 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-blue-100 hover:to-indigo-100 hover:text-blue-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-400 data-[state=active]:to-indigo-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
-            >
+            <TabsTrigger value="overview" className="px-2 py-2 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-blue-100 hover:to-indigo-100 hover:text-blue-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-400 data-[state=active]:to-indigo-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
               Panoramica
             </TabsTrigger>
-            <TabsTrigger 
-              value="integrations" 
-              className="px-1 py-2 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-green-100 hover:to-emerald-100 hover:text-green-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-400 data-[state=active]:to-emerald-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
-            >
+            <TabsTrigger value="integrations" className="px-1 py-2 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-green-100 hover:to-emerald-100 hover:text-green-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-400 data-[state=active]:to-emerald-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
               Integrazioni
             </TabsTrigger>
-            <TabsTrigger 
-              value="rewards" 
-              className="px-1 py-2 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-purple-100 hover:to-pink-100 hover:text-purple-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-400 data-[state=active]:to-pink-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
-            >
+            <TabsTrigger value="rewards" className="px-1 py-2 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-purple-100 hover:to-pink-100 hover:text-purple-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-400 data-[state=active]:to-pink-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
               Incentivi
             </TabsTrigger>
-            <TabsTrigger 
-              value="map" 
-              className="px-1 py-2 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-cyan-100 hover:to-blue-100 hover:text-cyan-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-400 data-[state=active]:to-blue-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
-            >
+            <TabsTrigger value="map" className="px-1 py-2 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-cyan-100 hover:to-blue-100 hover:text-cyan-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-400 data-[state=active]:to-blue-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
               Mappa
             </TabsTrigger>
-            <TabsTrigger 
-              value="analytics" 
-              className="px-1 py-2 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-orange-100 hover:to-red-100 hover:text-orange-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-400 data-[state=active]:to-red-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
-            >
+            <TabsTrigger value="analytics" className="px-1 py-2 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-orange-100 hover:to-red-100 hover:text-orange-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-400 data-[state=active]:to-red-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
               Analytics
             </TabsTrigger>
           </TabsList>
@@ -458,11 +375,10 @@ const Comuni = () => {
           <div className="mt-8">
             <TabsContent value="overview" className="space-y-4 sm:space-y-6 mt-0">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-                {integrations.map((integration) => {
-                  const IconComponent = integration.icon;
-                  return (
-                    <Card key={integration.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
-                      <CardHeader className="pb-3">
+                {integrations.map(integration => {
+                const IconComponent = integration.icon;
+                return <Card key={integration.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300 my-[90px]">
+                      <CardHeader className="pb-3 my-[30px]">
                         <div className="flex justify-between items-start mb-2">
                           <div className="flex items-center space-x-3">
                             <div className={`p-2 rounded-lg ${integration.color}`}>
@@ -489,36 +405,28 @@ const Comuni = () => {
                           </div>
                           
                           <div className="grid grid-cols-3 gap-2 text-xs">
-                            {Object.entries(integration.metrics).map(([key, value]) => (
-                              <div key={key} className="text-center p-2 bg-gray-50 rounded">
+                            {Object.entries(integration.metrics).map(([key, value]) => <div key={key} className="text-center p-2 bg-gray-50 rounded">
                                 <div className="font-bold text-gray-900">{value}</div>
                                 <div className="text-gray-600 capitalize">{key}</div>
-                              </div>
-                            ))}
+                              </div>)}
                           </div>
                           
-                          <Button 
-                            className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 text-sm"
-                            onClick={() => handleManageIntegration(integration)}
-                            size="sm"
-                          >
+                          <Button className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 text-sm" onClick={() => handleManageIntegration(integration)} size="sm">
                             <Settings className="h-4 w-4 mr-2" />
                             Gestisci
                           </Button>
                         </div>
                       </CardContent>
-                    </Card>
-                  );
-                })}
+                    </Card>;
+              })}
               </div>
             </TabsContent>
 
             <TabsContent value="integrations" className="space-y-4 sm:space-y-6 mt-0">
               <div className="grid grid-cols-1 gap-4 sm:gap-6">
-                {integrations.map((integration) => {
-                  const IconComponent = integration.icon;
-                  return (
-                    <Card key={integration.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+                {integrations.map(integration => {
+                const IconComponent = integration.icon;
+                return <Card key={integration.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
                       <CardContent className="p-4 sm:p-6">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center space-x-4">
@@ -542,9 +450,8 @@ const Comuni = () => {
                           </div>
                         </div>
                       </CardContent>
-                    </Card>
-                  );
-                })}
+                    </Card>;
+              })}
               </div>
             </TabsContent>
 
@@ -554,10 +461,7 @@ const Comuni = () => {
                   <h3 className="text-xl font-bold text-gray-900">Gestione Incentivi Cittadini 🎁</h3>
                   <p className="text-gray-600 text-sm">Configura i servizi e vantaggi offerti in cambio di certificati ambientali</p>
                 </div>
-                <Button 
-                  onClick={() => setShowAddReward(true)}
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700"
-                >
+                <Button onClick={() => setShowAddReward(true)} className="bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700">
                   <Plus className="h-4 w-4 mr-2" />
                   Nuovo Incentivo
                 </Button>
@@ -616,12 +520,10 @@ const Comuni = () => {
 
               {/* Rewards List */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-                {communityRewards.map((reward) => {
-                  const IconComponent = reward.icon;
-                  const usagePercentage = (reward.currentUsers / reward.maxUsers) * 100;
-                  
-                  return (
-                    <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+                {communityRewards.map(reward => {
+                const IconComponent = reward.icon;
+                const usagePercentage = reward.currentUsers / reward.maxUsers * 100;
+                return <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
                       <CardHeader className="pb-3">
                         <div className="flex justify-between items-start">
                           <div className="flex items-center space-x-3">
@@ -663,10 +565,9 @@ const Comuni = () => {
                               <span className="font-medium">{reward.currentUsers}/{reward.maxUsers}</span>
                             </div>
                             <div className="w-full bg-gray-200 rounded-full h-2">
-                              <div 
-                                className="bg-gradient-to-r from-blue-400 to-purple-500 h-2 rounded-full transition-all duration-300"
-                                style={{ width: `${Math.min(usagePercentage, 100)}%` }}
-                              ></div>
+                              <div className="bg-gradient-to-r from-blue-400 to-purple-500 h-2 rounded-full transition-all duration-300" style={{
+                            width: `${Math.min(usagePercentage, 100)}%`
+                          }}></div>
                             </div>
                             <div className="text-xs text-gray-500 mt-1">
                               {usagePercentage.toFixed(1)}% utilizzato
@@ -681,34 +582,22 @@ const Comuni = () => {
 
                           {/* Actions */}
                           <div className="flex space-x-2">
-                            <Button 
-                              variant="outline" 
-                              size="sm" 
-                              className="flex-1"
-                              onClick={() => handleEditReward(reward)}
-                            >
+                            <Button variant="outline" size="sm" className="flex-1" onClick={() => handleEditReward(reward)}>
                               <Edit className="h-4 w-4 mr-1" />
                               Modifica
                             </Button>
-                            <Button 
-                              variant="outline" 
-                              size="sm" 
-                              className="text-red-600 border-red-300 hover:bg-red-50"
-                              onClick={() => handleDeleteReward(reward.id)}
-                            >
+                            <Button variant="outline" size="sm" className="text-red-600 border-red-300 hover:bg-red-50" onClick={() => handleDeleteReward(reward.id)}>
                               <Trash className="h-4 w-4" />
                             </Button>
                           </div>
                         </div>
                       </CardContent>
-                    </Card>
-                  );
-                })}
+                    </Card>;
+              })}
               </div>
 
               {/* Add New Reward Form (shown when showAddReward is true) */}
-              {showAddReward && (
-                <Card className="border-0 shadow-lg bg-white/90 backdrop-blur-sm border-purple-200">
+              {showAddReward && <Card className="border-0 shadow-lg bg-white/90 backdrop-blur-sm border-purple-200">
                   <CardHeader>
                     <CardTitle className="flex items-center space-x-2">
                       <Plus className="h-5 w-5 text-purple-600" />
@@ -751,28 +640,21 @@ const Comuni = () => {
                     </div>
                     
                     <div className="flex space-x-2">
-                      <Button 
-                        className="bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700"
-                        onClick={() => {
-                          toast({
-                            title: "Incentivo Creato",
-                            description: "Il nuovo incentivo è stato aggiunto con successo",
-                          });
-                          setShowAddReward(false);
-                        }}
-                      >
+                      <Button className="bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700" onClick={() => {
+                    toast({
+                      title: "Incentivo Creato",
+                      description: "Il nuovo incentivo è stato aggiunto con successo"
+                    });
+                    setShowAddReward(false);
+                  }}>
                         Crea Incentivo
                       </Button>
-                      <Button 
-                        variant="outline" 
-                        onClick={() => setShowAddReward(false)}
-                      >
+                      <Button variant="outline" onClick={() => setShowAddReward(false)}>
                         Annulla
                       </Button>
                     </div>
                   </CardContent>
-                </Card>
-              )}
+                </Card>}
             </TabsContent>
 
             <TabsContent value="map" className="space-y-4 sm:space-y-6 mt-0">
@@ -820,17 +702,13 @@ const Comuni = () => {
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-3">
-                      {mapAlerts.filter(alert => alert.type === 'alert').map((alert) => (
-                        <Alert key={alert.id} className={`border-l-4 ${
-                          alert.severity === 'high' ? 'border-red-500' : 'border-orange-500'
-                        }`}>
+                      {mapAlerts.filter(alert => alert.type === 'alert').map(alert => <Alert key={alert.id} className={`border-l-4 ${alert.severity === 'high' ? 'border-red-500' : 'border-orange-500'}`}>
                           <AlertCircle className="h-4 w-4" />
                           <AlertTitle className="text-sm">{alert.title}</AlertTitle>
                           <AlertDescription className="text-xs text-gray-600">
                             {alert.location} • {alert.timestamp}
                           </AlertDescription>
-                        </Alert>
-                      ))}
+                        </Alert>)}
                     </CardContent>
                   </Card>
 
@@ -843,8 +721,7 @@ const Comuni = () => {
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-3">
-                      {mapAlerts.filter(alert => alert.type === 'resolved').map((issue) => (
-                        <div key={issue.id} className="p-3 bg-green-50 rounded-lg border-l-4 border-green-500">
+                      {mapAlerts.filter(alert => alert.type === 'resolved').map(issue => <div key={issue.id} className="p-3 bg-green-50 rounded-lg border-l-4 border-green-500">
                           <div className="flex items-center space-x-2">
                             <CheckCircle className="h-4 w-4 text-green-600" />
                             <span className="text-sm font-medium">{issue.title}</span>
@@ -852,8 +729,7 @@ const Comuni = () => {
                           <p className="text-xs text-gray-600 mt-1">
                             {issue.location} • {issue.timestamp}
                           </p>
-                        </div>
-                      ))}
+                        </div>)}
                     </CardContent>
                   </Card>
                 </div>
@@ -887,8 +763,6 @@ const Comuni = () => {
           </p>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Comuni;
