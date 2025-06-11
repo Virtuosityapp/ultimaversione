@@ -264,9 +264,7 @@ const Dashboard = () => {
                   <Trophy className="h-4 w-4 sm:h-5 sm:w-5 text-purple-600" />
                   Sfide Virtuosity
                 </CardTitle>
-                <CardDescription className="text-xs sm:text-sm">
-                  Compete con altri utenti e dipendenti per essere più sostenibili
-                </CardDescription>
+                
               </CardHeader>
               <CardContent>
                 <div className="space-y-3 sm:space-y-4">
