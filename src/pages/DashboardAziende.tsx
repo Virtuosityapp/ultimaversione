@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -129,95 +130,98 @@ const DashboardAziende = () => {
           </Card>
         </div>
 
-        {/* Monitoraggio Certificati Dipendenti */}
-        <Card className="mb-8 border-0 shadow-xl bg-white/80 backdrop-blur-sm">
-          <CardHeader className="bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-t-lg">
-            <CardTitle className="flex items-center gap-2">
-              <Eye className="h-6 w-6" />
-              Monitoraggio Certificati Dipendenti
-            </CardTitle>
-            <CardDescription className="text-green-100">
-              Analisi dei comportamenti sostenibili per strategie di marketing mirate
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="p-6">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Categoria Certificato</TableHead>
-                  <TableHead>Quantità</TableHead>
-                  <TableHead>Trend</TableHead>
-                  <TableHead>Azione Marketing Suggerita</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {certificateMonitoring.map((item, index) => (
-                  <TableRow key={index}>
-                    <TableCell className="font-medium">{item.tipo}</TableCell>
-                    <TableCell className="text-center font-semibold">{item.count}</TableCell>
-                    <TableCell className={`text-center font-semibold ${getTrendColor(item.trend)}`}>
-                      <div className="flex items-center justify-center gap-1">
-                        <TrendingUp className="h-4 w-4" />
-                        {item.trend}
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant="outline" className="flex items-center gap-1">
-                        <Target className="h-3 w-3" />
-                        {item.action}
-                      </Badge>
-                    </TableCell>
+        {/* Monitoraggio Certificati - Side by Side */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+          {/* Monitoraggio Certificati Dipendenti */}
+          <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
+            <CardHeader className="bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-t-lg">
+              <CardTitle className="flex items-center gap-2">
+                <Eye className="h-6 w-6" />
+                Monitoraggio Certificati Dipendenti
+              </CardTitle>
+              <CardDescription className="text-green-100">
+                Analisi dei comportamenti sostenibili per strategie di marketing mirate
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="p-6">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Categoria Certificato</TableHead>
+                    <TableHead>Quantità</TableHead>
+                    <TableHead>Trend</TableHead>
+                    <TableHead>Azione Marketing Suggerita</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </CardContent>
-        </Card>
+                </TableHeader>
+                <TableBody>
+                  {certificateMonitoring.map((item, index) => (
+                    <TableRow key={index}>
+                      <TableCell className="font-medium">{item.tipo}</TableCell>
+                      <TableCell className="text-center font-semibold">{item.count}</TableCell>
+                      <TableCell className={`text-center font-semibold ${getTrendColor(item.trend)}`}>
+                        <div className="flex items-center justify-center gap-1">
+                          <TrendingUp className="h-4 w-4" />
+                          {item.trend}
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <Badge variant="outline" className="flex items-center gap-1">
+                          <Target className="h-3 w-3" />
+                          {item.action}
+                        </Badge>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
 
-        {/* Monitoraggio Certificati Esterni */}
-        <Card className="mb-8 border-0 shadow-xl bg-white/80 backdrop-blur-sm">
-          <CardHeader className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-t-lg">
-            <CardTitle className="flex items-center gap-2">
-              <Globe className="h-6 w-6" />
-              Monitoraggio Certificati Esterni
-            </CardTitle>
-            <CardDescription className="text-blue-100">
-              Analisi dei comportamenti sostenibili dei followers per strategie di engagement
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="p-6">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Categoria Certificato</TableHead>
-                  <TableHead>Quantità</TableHead>
-                  <TableHead>Trend</TableHead>
-                  <TableHead>Azione Marketing Suggerita</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {externalCertificateMonitoring.map((item, index) => (
-                  <TableRow key={index}>
-                    <TableCell className="font-medium">{item.tipo}</TableCell>
-                    <TableCell className="text-center font-semibold">{item.count}</TableCell>
-                    <TableCell className={`text-center font-semibold ${getTrendColor(item.trend)}`}>
-                      <div className="flex items-center justify-center gap-1">
-                        <TrendingUp className="h-4 w-4" />
-                        {item.trend}
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant="outline" className="flex items-center gap-1">
-                        <Target className="h-3 w-3" />
-                        {item.action}
-                      </Badge>
-                    </TableCell>
+          {/* Monitoraggio Certificati Esterni */}
+          <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
+            <CardHeader className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-t-lg">
+              <CardTitle className="flex items-center gap-2">
+                <Globe className="h-6 w-6" />
+                Monitoraggio Certificati Esterni
+              </CardTitle>
+              <CardDescription className="text-blue-100">
+                Analisi dei comportamenti sostenibili dei followers per strategie di engagement
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="p-6">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Categoria Certificato</TableHead>
+                    <TableHead>Quantità</TableHead>
+                    <TableHead>Trend</TableHead>
+                    <TableHead>Azione Marketing Suggerita</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </CardContent>
-        </Card>
+                </TableHeader>
+                <TableBody>
+                  {externalCertificateMonitoring.map((item, index) => (
+                    <TableRow key={index}>
+                      <TableCell className="font-medium">{item.tipo}</TableCell>
+                      <TableCell className="text-center font-semibold">{item.count}</TableCell>
+                      <TableCell className={`text-center font-semibold ${getTrendColor(item.trend)}`}>
+                        <div className="flex items-center justify-center gap-1">
+                          <TrendingUp className="h-4 w-4" />
+                          {item.trend}
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <Badge variant="outline" className="flex items-center gap-1">
+                          <Target className="h-3 w-3" />
+                          {item.action}
+                        </Badge>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+        </div>
 
         {/* Sezione Welfare */}
         <Card className="mb-8 border-0 shadow-xl bg-white/80 backdrop-blur-sm">
