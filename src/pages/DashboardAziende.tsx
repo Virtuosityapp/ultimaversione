@@ -21,18 +21,18 @@ const DashboardAziende = () => {
   
   // Welfare per Dipendenti - Limited to 4 items
   const [welfareItems, setWelfareItems] = useState([
-    { id: 1, tipo: 'Premio', nome: 'Voucher Cena Ristorante', valore: '€ 50' },
-    { id: 2, tipo: 'Viaggio', nome: 'Weekend Spa Toscana', valore: '€ 300' },
-    { id: 3, tipo: 'Gadget', nome: 'Smartwatch Aziendale', valore: '€ 150' },
-    { id: 4, tipo: 'Premio', nome: 'Buono Acquisto Shopping', valore: '€ 100' }
+    { id: 1, tipo: 'Premio', nome: 'Voucher Cena Ristorante', valore: '€ 50', certificatiRichiesti: 'Risparmio Energetico', quantitaCertificati: 5 },
+    { id: 2, tipo: 'Viaggio', nome: 'Weekend Spa Toscana', valore: '€ 300', certificatiRichiesti: 'Mobilità Sostenibile', quantitaCertificati: 20 },
+    { id: 3, tipo: 'Gadget', nome: 'Smartwatch Aziendale', valore: '€ 150', certificatiRichiesti: 'Riciclo Rifiuti', quantitaCertificati: 10 },
+    { id: 4, tipo: 'Premio', nome: 'Buono Acquisto Shopping', valore: '€ 100', certificatiRichiesti: 'Risparmio Idrico', quantitaCertificati: 8 }
   ]);
 
   // Premi per Followers (Sconti e Offerte) - Limited to 4 items
   const [followersRewards, setFollowersRewards] = useState([
-    { id: 1, tipo: 'Sconto', nome: 'Sconto Prodotti Bio', valore: '15%', partner: 'EcoMarket' },
-    { id: 2, tipo: 'Premio', nome: 'Borraccia Ecologica Gratis', valore: '€ 25', partner: 'GreenLife' },
-    { id: 3, tipo: 'Sconto', nome: 'Pannelli Solari Casa', valore: '20%', partner: 'SolarTech' },
-    { id: 4, tipo: 'Premio', nome: 'Kit Compostaggio Domestico', valore: '€ 45', partner: 'EcoGarden' }
+    { id: 1, tipo: 'Sconto', nome: 'Sconto Prodotti Bio', valore: '15%', partner: 'EcoMarket', certificatiRichiesti: 'Risparmio Energetico', quantitaCertificati: 3 },
+    { id: 2, tipo: 'Premio', nome: 'Borraccia Ecologica Gratis', valore: '€ 25', partner: 'GreenLife', certificatiRichiesti: 'Risparmio Idrico', quantitaCertificati: 2 },
+    { id: 3, tipo: 'Sconto', nome: 'Pannelli Solari Casa', valore: '20%', partner: 'SolarTech', certificatiRichiesti: 'Riduzione CO2', quantitaCertificati: 15 },
+    { id: 4, tipo: 'Premio', nome: 'Kit Compostaggio Domestico', valore: '€ 45', partner: 'EcoGarden', certificatiRichiesti: 'Riciclo Rifiuti', quantitaCertificati: 5 }
   ]);
 
   const [certificateMonitoringCategories] = useState([
@@ -124,33 +124,39 @@ const DashboardAziende = () => {
   const [newWelfareItem, setNewWelfareItem] = useState({
     tipo: '',
     nome: '',
-    valore: ''
+    valore: '',
+    certificatiRichiesti: '',
+    quantitaCertificati: ''
   });
 
   const [newFollowersReward, setNewFollowersReward] = useState({
     tipo: '',
     nome: '',
     valore: '',
-    partner: ''
+    partner: '',
+    certificatiRichiesti: '',
+    quantitaCertificati: ''
   });
 
   const handleAddWelfareItem = () => {
-    if (newWelfareItem.tipo && newWelfareItem.nome && newWelfareItem.valore) {
+    if (newWelfareItem.tipo && newWelfareItem.nome && newWelfareItem.valore && newWelfareItem.certificatiRichiesti && newWelfareItem.quantitaCertificati) {
       setWelfareItems([...welfareItems, {
         id: Date.now(),
-        ...newWelfareItem
+        ...newWelfareItem,
+        quantitaCertificati: parseInt(newWelfareItem.quantitaCertificati)
       }]);
-      setNewWelfareItem({ tipo: '', nome: '', valore: '' });
+      setNewWelfareItem({ tipo: '', nome: '', valore: '', certificatiRichiesti: '', quantitaCertificati: '' });
     }
   };
 
   const handleAddFollowersReward = () => {
-    if (newFollowersReward.tipo && newFollowersReward.nome && newFollowersReward.valore && newFollowersReward.partner) {
+    if (newFollowersReward.tipo && newFollowersReward.nome && newFollowersReward.valore && newFollowersReward.partner && newFollowersReward.certificatiRichiesti && newFollowersReward.quantitaCertificati) {
       setFollowersRewards([...followersRewards, {
         id: Date.now(),
-        ...newFollowersReward
+        ...newFollowersReward,
+        quantitaCertificati: parseInt(newFollowersReward.quantitaCertificati)
       }]);
-      setNewFollowersReward({ tipo: '', nome: '', valore: '', partner: '' });
+      setNewFollowersReward({ tipo: '', nome: '', valore: '', partner: '', certificatiRichiesti: '', quantitaCertificati: '' });
     }
   };
 
@@ -405,6 +411,27 @@ const DashboardAziende = () => {
                     className="border-green-200 focus:border-green-400"
                   />
                 </div>
+                <div>
+                  <Label htmlFor="welfare-certificati" className="text-green-700 font-medium">Tipo Certificati</Label>
+                  <Input
+                    id="welfare-certificati"
+                    placeholder="Es. Risparmio Energetico"
+                    value={newWelfareItem.certificatiRichiesti}
+                    onChange={(e) => setNewWelfareItem({...newWelfareItem, certificatiRichiesti: e.target.value})}
+                    className="border-green-200 focus:border-green-400"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="welfare-quantita" className="text-green-700 font-medium">Quantità Certificati</Label>
+                  <Input
+                    id="welfare-quantita"
+                    type="number"
+                    placeholder="0"
+                    value={newWelfareItem.quantitaCertificati}
+                    onChange={(e) => setNewWelfareItem({...newWelfareItem, quantitaCertificati: e.target.value})}
+                    className="border-green-200 focus:border-green-400"
+                  />
+                </div>
                 <Button 
                   onClick={handleAddWelfareItem} 
                   className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white shadow-lg"
@@ -425,7 +452,10 @@ const DashboardAziende = () => {
                       </Badge>
                       <span className="font-bold text-lg text-gray-700">{item.valore}</span>
                     </div>
-                    <h4 className="font-semibold text-gray-800">{item.nome}</h4>
+                    <h4 className="font-semibold text-gray-800 mb-2">{item.nome}</h4>
+                    <div className="text-sm text-gray-600 space-y-1">
+                      <p><span className="font-medium">Richiede:</span> {item.quantitaCertificati}x {item.certificatiRichiesti}</p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -486,6 +516,27 @@ const DashboardAziende = () => {
                     className="border-blue-200 focus:border-blue-400"
                   />
                 </div>
+                <div>
+                  <Label htmlFor="followers-certificati" className="text-blue-700 font-medium">Tipo Certificati</Label>
+                  <Input
+                    id="followers-certificati"
+                    placeholder="Es. Risparmio Idrico"
+                    value={newFollowersReward.certificatiRichiesti}
+                    onChange={(e) => setNewFollowersReward({...newFollowersReward, certificatiRichiesti: e.target.value})}
+                    className="border-blue-200 focus:border-blue-400"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="followers-quantita" className="text-blue-700 font-medium">Quantità Certificati</Label>
+                  <Input
+                    id="followers-quantita"
+                    type="number"
+                    placeholder="0"
+                    value={newFollowersReward.quantitaCertificati}
+                    onChange={(e) => setNewFollowersReward({...newFollowersReward, quantitaCertificati: e.target.value})}
+                    className="border-blue-200 focus:border-blue-400"
+                  />
+                </div>
                 <Button 
                   onClick={handleAddFollowersReward} 
                   className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white shadow-lg"
@@ -507,7 +558,10 @@ const DashboardAziende = () => {
                       <span className="font-bold text-lg text-gray-700">{item.valore}</span>
                     </div>
                     <h4 className="font-semibold text-gray-800 mb-2">{item.nome}</h4>
-                    <p className="text-sm text-gray-600">Partner: <span className="font-medium">{item.partner}</span></p>
+                    <div className="text-sm text-gray-600 space-y-1">
+                      <p>Partner: <span className="font-medium">{item.partner}</span></p>
+                      <p><span className="font-medium">Richiede:</span> {item.quantitaCertificati}x {item.certificatiRichiesti}</p>
+                    </div>
                   </div>
                 ))}
               </div>
