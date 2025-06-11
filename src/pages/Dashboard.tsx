@@ -90,21 +90,6 @@ const Dashboard = () => {
     prize: "Team Building ecologico",
     progress: 85,
     status: "leading"
-  }, {
-    id: 3,
-    title: "Sfida Risparmio Energetico",
-    description: "Chi ottiene più certificati di risparmio energetico?",
-    type: "individual",
-    participants: 25,
-    yourPosition: 7,
-    leadingUser: "Marco P.",
-    leadingScore: "18 certificati",
-    yourScore: "12 certificati",
-    timeLeft: "5 giorni",
-    category: "Energia",
-    prize: "Smartwatch eco-friendly",
-    progress: 67,
-    status: "active"
   }];
   const getStatusColor = (status: string) => {
     switch (status) {
