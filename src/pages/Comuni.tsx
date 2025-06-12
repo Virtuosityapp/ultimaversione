@@ -706,19 +706,13 @@ const Comuni = () => {
         </div>
 
         <Tabs defaultValue="overview" className="space-y-6 sm:space-y-8">
-          {/* Navigation tabs now at the bottom */}
-          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 bg-white/80 backdrop-blur-sm shadow-md p-1 gap-1 sm:gap-0 sticky bottom-0 z-40">
+          {/* Navigation tabs - Only "Panoramica" and "Incentivi" */}
+          <TabsList className="grid w-full grid-cols-2 bg-white/80 backdrop-blur-sm shadow-md p-1 gap-1 sm:gap-0 sticky bottom-0 z-40">
             <TabsTrigger value="overview" className="px-1 py-3 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-blue-100 hover:to-indigo-100 hover:text-blue-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-400 data-[state=active]:to-indigo-500 data-[state=active]:text-white data-[state=active]:shadow-lg min-h-[44px]">
               Panoramica
             </TabsTrigger>
-            <TabsTrigger value="integrations" className="px-1 py-3 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-green-100 hover:to-emerald-100 hover:text-green-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-400 data-[state=active]:to-emerald-500 data-[state=active]:text-white data-[state=active]:shadow-lg min-h-[44px]">
-              Integrazioni
-            </TabsTrigger>
             <TabsTrigger value="rewards" className="px-1 py-3 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-purple-100 hover:to-pink-100 hover:text-purple-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-400 data-[state=active]:to-pink-500 data-[state=active]:text-white data-[state=active]:shadow-lg min-h-[44px]">
               Incentivi
-            </TabsTrigger>
-            <TabsTrigger value="map" className="px-1 py-3 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-cyan-100 hover:to-blue-100 hover:text-cyan-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-400 data-[state=active]:to-blue-500 data-[state=active]:text-white data-[state=active]:shadow-lg min-h-[44px]">
-              Mappa
             </TabsTrigger>
           </TabsList>
 
@@ -765,39 +759,6 @@ const Comuni = () => {
                             <Settings className="h-4 w-4 mr-2" />
                             Gestisci
                           </Button>
-                        </div>
-                      </CardContent>
-                    </Card>;
-              })}
-              </div>
-            </TabsContent>
-
-            <TabsContent value="integrations" className="space-y-4 sm:space-y-6 mt-0">
-              <div className="grid grid-cols-1 gap-4 sm:gap-6">
-                {integrations.map(integration => {
-                const IconComponent = integration.icon;
-                return <Card key={integration.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-                      <CardContent className="p-4 sm:p-6">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-3 sm:space-x-4">
-                            <div className={`p-3 rounded-lg ${integration.color}`}>
-                              <IconComponent className="h-5 w-5 sm:h-6 sm:w-6" />
-                            </div>
-                            <div>
-                              <h3 className="font-bold text-sm sm:text-lg">{integration.name}</h3>
-                              <p className="text-gray-600 text-xs sm:text-sm">{integration.description}</p>
-                              <div className="flex items-center space-x-2 sm:space-x-4 mt-2 text-xs text-gray-500">
-                                <span>🔄 {integration.lastSync}</span>
-                                <span>📊 {integration.dataPoints} punti dati</span>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="flex items-center space-x-2 sm:space-x-3">
-                            {getStatusBadge(integration.status)}
-                            <Button variant="outline" size="sm" className="min-h-[40px] min-w-[40px]">
-                              <Wifi className="h-4 w-4" />
-                            </Button>
-                          </div>
                         </div>
                       </CardContent>
                     </Card>;
@@ -1005,85 +966,6 @@ const Comuni = () => {
                     </div>
                   </CardContent>
                 </Card>}
-            </TabsContent>
-
-            <TabsContent value="map" className="space-y-4 sm:space-y-6 mt-0">
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
-                {/* Map */}
-                <Card className="lg:col-span-2 border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-                  <CardHeader className="p-4 sm:p-6">
-                    <CardTitle className="flex items-center space-x-2">
-                      <MapPin className="h-5 w-5" />
-                      <span>Mappa del Comune</span>
-                    </CardTitle>
-                    <CardDescription>
-                      Visualizzazione in tempo reale di allerte e problemi risolti
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="p-4 sm:p-6 pt-0">
-                    <div className="h-64 sm:h-96 w-full rounded-lg overflow-hidden">
-                      <div ref={mapContainer} className="h-full w-full" />
-                    </div>
-                    <div className="mt-4 flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm">
-                      <div className="flex items-center space-x-1">
-                        <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                        <span>Allerte critiche</span>
-                      </div>
-                      <div className="flex items-center space-x-1">
-                        <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
-                        <span>Allerte moderate</span>
-                      </div>
-                      <div className="flex items-center space-x-1">
-                        <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                        <span>Problemi risolti</span>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Alerts and Issues Panel */}
-                <div className="space-y-4">
-                  {/* Active Alerts */}
-                  <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-                    <CardHeader className="pb-3 p-4 sm:p-6">
-                      <CardTitle className="text-sm sm:text-lg flex items-center space-x-2">
-                        <AlertTriangle className="h-4 w-4 sm:h-5 sm:w-5 text-orange-500" />
-                        <span>Segnalazioni Cittadini</span>
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-3 p-4 sm:p-6 pt-0">
-                      {mapAlerts.filter(alert => alert.type === "alert").map(alert => <Alert key={alert.id} className={`border-l-4 ${alert.severity === "high" ? "border-red-500" : "border-orange-500"}`}>
-                          <AlertCircle className="h-4 w-4" />
-                          <AlertTitle className="text-xs sm:text-sm">{alert.title}</AlertTitle>
-                          <AlertDescription className="text-xs text-gray-600">
-                            {alert.location} • {alert.timestamp}
-                          </AlertDescription>
-                        </Alert>)}
-                    </CardContent>
-                  </Card>
-
-                  {/* Resolved Issues */}
-                  <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-                    <CardHeader className="pb-3 p-4 sm:p-6">
-                      <CardTitle className="text-sm sm:text-lg flex items-center space-x-2">
-                        <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-green-500" />
-                        <span>Risolti di Recente</span>
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-3 p-4 sm:p-6 pt-0">
-                      {mapAlerts.filter(alert => alert.type === "resolved").map(issue => <div key={issue.id} className="p-3 bg-green-50 rounded-lg border-l-4 border-green-500">
-                          <div className="flex items-center space-x-2">
-                            <CheckCircle className="h-4 w-4 text-green-600" />
-                            <span className="text-xs sm:text-sm font-medium">{issue.title}</span>
-                          </div>
-                          <p className="text-xs text-gray-600 mt-1">
-                            {issue.location} • {issue.timestamp}
-                          </p>
-                        </div>)}
-                    </CardContent>
-                  </Card>
-                </div>
-              </div>
             </TabsContent>
           </div>
         </Tabs>
