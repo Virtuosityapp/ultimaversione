@@ -417,7 +417,7 @@ const Comuni = () => {
                 <span className="sm:hidden">Report</span>
               </Button>
               <div className="bg-gradient-to-r from-blue-400 to-indigo-500 text-white px-2 sm:px-4 py-2 sm:py-2 rounded-full font-bold text-xs sm:text-base min-h-[36px] flex items-center">
-                <Activity className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
+                <Activity className="h-3 w-3 mr-1" />
                 {totalDataPoints}
               </div>
             </div>
@@ -502,8 +502,8 @@ const Comuni = () => {
               <CardContent className="p-4 sm:p-6 pt-0">
                 <div className="h-64 sm:h-80 w-full rounded-lg overflow-hidden bg-gray-50 relative">
                   <img 
-                    src="https://images.unsplash.com/photo-1431576901776-e539bd916ba2?w=800&h=600&fit=crop&auto=format"
-                    alt="Vista aerea della città"
+                    src="/lovable-uploads/9bea380e-98ea-4b94-a376-e7d9e45cc143.png"
+                    alt="Mappa della città con strade e località"
                     className="w-full h-full object-cover"
                   />
                   {/* Overlay con punti di interesse */}
