@@ -2,10 +2,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Leaf, Gift, Star, ShoppingCart, ArrowLeft, Menu } from "lucide-react";
+import { Leaf, Gift, Star, ShoppingCart, ArrowLeft, Menu, ExternalLink, Calendar, MapPin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useEffect } from "react";
+
 const Exchange = () => {
   const navigate = useNavigate();
   const {
@@ -129,7 +130,132 @@ const Exchange = () => {
     };
     return names[category as keyof typeof names] || category;
   };
-  return <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
+  const partnerOffers = [
+    {
+      id: 1,
+      partner: "ENEL",
+      title: "Fotovoltaico Residenziale",
+      description: "Installa pannelli solari a casa tua con incentivi esclusivi per utenti Virtuosity",
+      discount: "Sconto 15%",
+      category: "energia",
+      image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=300&fit=crop",
+      validUntil: "31 Marzo 2024",
+      pointsRequired: 0,
+      benefits: ["Consulenza gratuita", "Installazione inclusa", "10 anni di garanzia"]
+    },
+    {
+      id: 2,
+      partner: "GARDALAND",
+      title: "Nuove Attrazioni Eco-Friendly",
+      description: "Scopri le nuove giostre alimentate da energia rinnovabile nel parco più green d'Italia",
+      discount: "Biglietto ridotto",
+      category: "intrattenimento",
+      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
+      validUntil: "30 Giugno 2024",
+      pointsRequired: 200,
+      benefits: ["Accesso prioritario", "Pranzo sostenibile incluso", "Gadget ecologico"]
+    },
+    {
+      id: 3,
+      partner: "COMUNE DI MILANO",
+      title: "Mostra Design Sostenibile",
+      description: "Esposizione dedicata al design circolare e sostenibile alla Triennale di Milano",
+      discount: "Ingresso gratuito",
+      category: "cultura",
+      image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
+      validUntil: "15 Maggio 2024",
+      pointsRequired: 150,
+      benefits: ["Audioguida inclusa", "Workshop gratuito", "Catalogo digitale"]
+    },
+    {
+      id: 4,
+      partner: "ATM",
+      title: "Nuova Linea Bus Elettrici",
+      description: "Prova la nuova tratta di autobus 100% elettrici che collegano i quartieri green di Milano",
+      discount: "Abbonamento speciale",
+      category: "trasporti",
+      image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&h=300&fit=crop",
+      validUntil: "31 Dicembre 2024",
+      pointsRequired: 300,
+      benefits: ["1 mese gratuito", "App premium", "Priority boarding"]
+    },
+    {
+      id: 5,
+      partner: "IKEA",
+      title: "Mobili da Materiali Riciclati",
+      description: "Nuova collezione di arredi realizzati al 100% con materiali riciclati e sostenibili",
+      discount: "Sconto 20%",
+      category: "casa",
+      image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop",
+      validUntil: "30 Aprile 2024",
+      pointsRequired: 400,
+      benefits: ["Consegna gratuita", "Montaggio incluso", "Ritiro mobili usati"]
+    },
+    {
+      id: 6,
+      partner: "COOP",
+      title: "Prodotti Biologici Locali",
+      description: "Selezione esclusiva di prodotti bio a km zero dai migliori produttori lombardi",
+      discount: "Sconto 10%",
+      category: "alimentare",
+      image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop",
+      validUntil: "31 Maggio 2024",
+      pointsRequired: 100,
+      benefits: ["Spesa a domicilio", "Ricette esclusive", "Degustazioni gratuite"]
+    },
+    {
+      id: 7,
+      partner: "TESLA",
+      title: "Test Drive Veicoli Elettrici",
+      description: "Prova gratuitamente i nuovi modelli Tesla e scopri la mobilità del futuro",
+      discount: "Test drive gratuito",
+      category: "automotive",
+      image: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=400&h=300&fit=crop",
+      validUntil: "31 Luglio 2024",
+      pointsRequired: 500,
+      benefits: ["Consulenza personalizzata", "Configuratore online", "Incentivi statali info"]
+    },
+    {
+      id: 8,
+      partner: "DECATHLON",
+      title: "Abbigliamento Sportivo Eco",
+      description: "Nuova linea di abbigliamento sportivo realizzato con fibre riciclate marine",
+      discount: "Sconto 25%",
+      category: "sport",
+      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+      validUntil: "30 Giugno 2024",
+      pointsRequired: 250,
+      benefits: ["Reso gratuito", "Programma fedeltà", "Riparazione gratuita"]
+    },
+    {
+      id: 9,
+      partner: "WWF",
+      title: "Adotta un Bosco Urbano",
+      description: "Partecipa al progetto di riforestazione urbana e adotta simbolicamente un albero",
+      discount: "Partecipazione gratuita",
+      category: "ambiente",
+      image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop",
+      validUntil: "31 Dicembre 2024",
+      pointsRequired: 200,
+      benefits: ["Certificato digitale", "Aggiornamenti mensili", "Visita guidata"]
+    }
+  ];
+  const getCategoryColorAd = (category: string) => {
+    const colors = {
+      energia: "bg-yellow-100 text-yellow-800",
+      intrattenimento: "bg-pink-100 text-pink-800",
+      cultura: "bg-purple-100 text-purple-800",
+      trasporti: "bg-green-100 text-green-800",
+      casa: "bg-blue-100 text-blue-800",
+      alimentare: "bg-orange-100 text-orange-800",
+      automotive: "bg-red-100 text-red-800",
+      sport: "bg-cyan-100 text-cyan-800",
+      ambiente: "bg-emerald-100 text-emerald-800"
+    };
+    return colors[category as keyof typeof colors] || "bg-gray-100 text-gray-800";
+  };
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
       {/* Header */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-green-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -298,6 +424,94 @@ const Exchange = () => {
             </TabsContent>)}
         </Tabs>
 
+        {/* Partner Offers Section */}
+        <div className="mt-12 sm:mt-16">
+          <div className="text-center mb-6 sm:mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Offerte Partner Esclusives 🤝</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base px-4">
+              Scopri le proposte sostenibili dei nostri partner e approfitta di sconti esclusivi per utenti Virtuosity
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {partnerOffers.map(offer => (
+              <Card key={offer.id} className="border-0 shadow-lg bg-white/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300 overflow-hidden">
+                <div className="relative">
+                  <img 
+                    src={offer.image} 
+                    alt={offer.title}
+                    className="w-full h-40 sm:h-48 object-cover"
+                  />
+                  <div className="absolute top-3 left-3">
+                    <Badge className="bg-white/90 text-gray-800 font-bold">
+                      {offer.partner}
+                    </Badge>
+                  </div>
+                  <div className="absolute top-3 right-3">
+                    <Badge className={getCategoryColorAd(offer.category)}>
+                      {offer.discount}
+                    </Badge>
+                  </div>
+                </div>
+
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-base sm:text-lg">{offer.title}</CardTitle>
+                  <CardDescription className="text-sm">{offer.description}</CardDescription>
+                </CardHeader>
+
+                <CardContent>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center text-sm">
+                      <div className="flex items-center gap-1 text-gray-600">
+                        <Calendar className="h-4 w-4" />
+                        <span>Valido fino al</span>
+                      </div>
+                      <span className="font-semibold">{offer.validUntil}</span>
+                    </div>
+
+                    {offer.pointsRequired > 0 && (
+                      <div className="flex justify-between items-center text-sm">
+                        <span className="text-gray-600">Punti richiesti</span>
+                        <span className="font-bold text-blue-600">{offer.pointsRequired} punti</span>
+                      </div>
+                    )}
+
+                    <div>
+                      <p className="text-sm text-gray-600 mb-2">Benefici inclusi:</p>
+                      <div className="space-y-1">
+                        {offer.benefits.slice(0, 2).map((benefit, index) => (
+                          <div key={index} className="flex items-center text-xs text-gray-700">
+                            <Star className="h-3 w-3 text-yellow-500 mr-1 flex-shrink-0" />
+                            <span>{benefit}</span>
+                          </div>
+                        ))}
+                        {offer.benefits.length > 2 && (
+                          <div className="flex items-center text-xs text-gray-700">
+                            <Star className="h-3 w-3 text-yellow-500 mr-1 flex-shrink-0" />
+                            <span>+{offer.benefits.length - 2} altri vantaggi</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    <Button 
+                      className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700 text-sm" 
+                      size="sm"
+                      disabled={offer.pointsRequired > userPoints}
+                    >
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      {offer.pointsRequired > userPoints && offer.pointsRequired > 0 
+                        ? "Punti Insufficienti" 
+                        : "Scopri l'Offerta"
+                      }
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+
         {/* Bottom Info */}
         <div className="mt-8 sm:mt-12 bg-white/80 backdrop-blur-sm rounded-lg p-4 sm:p-6 border-l-4 border-green-500">
           <h3 className="font-bold text-gray-900 mb-2 text-sm sm:text-base">💡 Come Funziona</h3>
@@ -308,6 +522,8 @@ const Exchange = () => {
           </p>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default Exchange;
