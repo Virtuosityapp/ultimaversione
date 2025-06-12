@@ -3,13 +3,98 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Calendar, Award, TrendingUp, MapPin, Clock, QrCode, Camera, Smartphone, Users, Trophy, Target, Zap, Wallet } from "lucide-react";
+import { Calendar, Award, TrendingUp, MapPin, Clock, QrCode, Camera, Smartphone, Users, Trophy, Target, Zap, Wallet, Eye, Shield, ShoppingBag } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { DppVerification } from "@/components/DppVerification";
 import CitizenReporting from "@/components/CitizenReporting";
 
+interface WalletProduct {
+  id: string;
+  name: string;
+  brand: string;
+  model: string;
+  image: string;
+  purchaseDate: string;
+  warranty: {
+    period: string;
+    expires: string;
+    coverage: string[];
+  };
+  sustainability: {
+    score: number;
+    certifications: string[];
+  };
+  value: string;
+  category: string;
+  status: 'active' | 'expired' | 'claimed';
+}
+
 const Dashboard = () => {
   const navigate = useNavigate();
+
+  // Mock wallet products - same as in DPP component
+  const walletProducts: WalletProduct[] = [
+    {
+      id: "DPP-PRADA-001",
+      name: "Borsa Saffiano",
+      brand: "PRADA",
+      model: "1BA274",
+      image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=300&h=300&fit=crop",
+      purchaseDate: "2024-01-15",
+      warranty: {
+        period: "2 anni",
+        expires: "2026-01-15",
+        coverage: ["Difetti di fabbricazione", "Riparazione pelletteria", "Sostituzione hardware"]
+      },
+      sustainability: {
+        score: 92,
+        certifications: ["Made in Italy", "Pelle certificata", "Carbon Neutral"]
+      },
+      value: "€ 2.850",
+      category: "Pelletteria",
+      status: 'active'
+    },
+    {
+      id: "DPP-ROLEX-002",
+      name: "Submariner Date",
+      brand: "ROLEX",
+      model: "126610LN",
+      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=300&h=300&fit=crop",
+      purchaseDate: "2023-11-20",
+      warranty: {
+        period: "5 anni",
+        expires: "2028-11-20",
+        coverage: ["Movimento", "Cassa e bracciale", "Impermeabilità"]
+      },
+      sustainability: {
+        score: 88,
+        certifications: ["Swiss Made", "Oro responsabile", "Packaging eco"]
+      },
+      value: "€ 9.150",
+      category: "Orologeria",
+      status: 'active'
+    },
+    {
+      id: "DPP-APPLE-003",
+      name: "iPhone 15 Pro",
+      brand: "APPLE",
+      model: "A3101",
+      image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=300&h=300&fit=crop",
+      purchaseDate: "2023-09-22",
+      warranty: {
+        period: "1 anno",
+        expires: "2024-09-22",
+        coverage: ["Hardware", "Batteria", "AppleCare+"]
+      },
+      sustainability: {
+        score: 85,
+        certifications: ["Carbon Neutral", "Materiali riciclati", "Packaging plastic-free"]
+      },
+      value: "€ 1.199",
+      category: "Tecnologia",
+      status: 'expired'
+    }
+  ];
 
   const activities = [{
     id: 1,
@@ -107,6 +192,21 @@ const Dashboard = () => {
     if (position === 1) return 'bg-yellow-100 text-yellow-800 border-yellow-300';
     if (position <= 3) return 'bg-green-100 text-green-800 border-green-300';
     return 'bg-blue-100 text-blue-800 border-blue-300';
+  };
+
+  const getSustainabilityColor = (score: number) => {
+    if (score >= 80) return "text-green-600 bg-green-100";
+    if (score >= 60) return "text-yellow-600 bg-yellow-100";
+    return "text-red-600 bg-red-100";
+  };
+
+  const getCategoryIcon = (category: string) => {
+    switch (category) {
+      case 'Pelletteria': return '👜';
+      case 'Orologeria': return '⌚';
+      case 'Tecnologia': return '📱';
+      default: return '📦';
+    }
   };
 
   const handleWalletClick = () => {
@@ -266,6 +366,114 @@ const Dashboard = () => {
                   <p className="text-xs text-gray-500 text-center mt-2">
                     Visualizza i tuoi certificati digitali e garanzie prodotti
                   </p>
+                </div>
+
+                {/* Wallet Products Display */}
+                <div className="mt-6 p-4 sm:p-6 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg border border-blue-200">
+                  <div className="mb-4 text-center">
+                    <h3 className="text-lg font-bold text-gray-900 mb-2">
+                      Il Mio Wallet DPP
+                    </h3>
+                    <p className="text-sm text-gray-600 mb-3">
+                      Conserva e gestisci le garanzie digitali dei tuoi prodotti di lusso
+                    </p>
+                    <div className="text-2xl font-bold text-gray-900 mb-1">
+                      {walletProducts.length} Prodotti
+                    </div>
+                    <p className="text-sm text-gray-600">
+                      Valore totale: {walletProducts.reduce((sum, product) => sum + parseFloat(product.value.replace(/[€\s.]/g, '').replace(',', '.')), 0).toLocaleString('it-IT', { style: 'currency', currency: 'EUR' })}
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {walletProducts.map((product) => (
+                      <Card key={product.id} className="border-0 shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden">
+                        <div className="relative">
+                          <img 
+                            src={product.image} 
+                            alt={product.name}
+                            className="w-full h-32 object-cover"
+                          />
+                          <div className="absolute top-2 right-2">
+                            <Badge className={getStatusColor(product.status)}>
+                              {product.status === 'active' ? 'Attiva' : product.status === 'expired' ? 'Scaduta' : 'Utilizzata'}
+                            </Badge>
+                          </div>
+                          <div className="absolute top-2 left-2">
+                            <div className="bg-white/90 backdrop-blur-sm rounded-full p-1 text-lg">
+                              {getCategoryIcon(product.category)}
+                            </div>
+                          </div>
+                        </div>
+
+                        <CardContent className="p-3">
+                          <div className="flex items-center justify-between mb-2">
+                            <div>
+                              <h3 className="font-bold text-sm text-gray-900">{product.brand}</h3>
+                              <p className="text-xs text-gray-600">{product.name}</p>
+                              <p className="text-xs text-gray-500">Modello: {product.model}</p>
+                            </div>
+                            <div className="text-right">
+                              <p className="font-bold text-sm text-blue-600">{product.value}</p>
+                            </div>
+                          </div>
+
+                          <div className="space-y-2">
+                            <div className="flex items-center justify-between text-xs">
+                              <span className="text-gray-600">Garanzia:</span>
+                              <span className="font-semibold">{product.warranty.period}</span>
+                            </div>
+                            
+                            <div className="flex items-center justify-between text-xs">
+                              <span className="text-gray-600">Scade:</span>
+                              <span className="font-semibold">{new Date(product.warranty.expires).toLocaleDateString('it-IT')}</span>
+                            </div>
+
+                            <div className="flex items-center justify-between text-xs">
+                              <span className="text-gray-600">Sostenibilità:</span>
+                              <Badge className={getSustainabilityColor(product.sustainability.score)}>
+                                {product.sustainability.score}/100
+                              </Badge>
+                            </div>
+
+                            <div>
+                              <p className="text-xs text-gray-600 mb-1">Certificazioni:</p>
+                              <div className="flex flex-wrap gap-1">
+                                {product.sustainability.certifications.slice(0, 2).map((cert, index) => (
+                                  <Badge key={index} variant="outline" className="text-xs">
+                                    {cert}
+                                  </Badge>
+                                ))}
+                                {product.sustainability.certifications.length > 2 && (
+                                  <Badge variant="outline" className="text-xs">
+                                    +{product.sustainability.certifications.length - 2}
+                                  </Badge>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="flex gap-2 mt-3">
+                            <Button size="sm" variant="outline" className="flex-1 text-xs">
+                              <Eye className="h-3 w-3 mr-1" />
+                              Dettagli
+                            </Button>
+                            <Button size="sm" className="flex-1 bg-blue-600 hover:bg-blue-700 text-xs">
+                              <Shield className="h-3 w-3 mr-1" />
+                              Garanzia
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+
+                  <div className="mt-4 text-center">
+                    <Button className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white shadow-lg text-sm">
+                      <ShoppingBag className="mr-2 h-4 w-4" />
+                      Aggiungi Nuovo Prodotto
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>
