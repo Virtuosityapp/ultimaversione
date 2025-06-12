@@ -447,7 +447,7 @@ const Comuni = () => {
 
           <Card className="border-0 shadow-lg bg-gradient-to-br from-green-400 to-emerald-500 text-white">
             <CardHeader className="pb-2 p-3 sm:p-6">
-              <CardTitle className="text-xs sm:text-sm font-medium text-green-100">Punti Dati</CardTitle>
+              <CardTitle className="text-xs sm:text-sm font-medium text-green-100">Certificati ricevuti dai cittadini</CardTitle>
             </CardHeader>
             <CardContent className="p-3 sm:p-6 pt-0">
               <div className="text-lg sm:text-2xl font-bold">{totalDataPoints.toLocaleString()}</div>
