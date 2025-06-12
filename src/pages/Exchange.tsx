@@ -321,70 +321,37 @@ const Exchange = () => {
           </Card>
         </div>
 
-        <Tabs defaultValue="all" className="space-y-4 sm:space-y-6">
-          <TabsList className="grid w-full grid-cols-3 sm:grid-cols-5 bg-white/80 backdrop-blur-sm text-xs sm:text-sm shadow-md">
-            <TabsTrigger value="all" className="px-2 sm:px-4 hover:bg-gradient-to-r hover:from-gray-100 hover:to-slate-100 hover:text-gray-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-gray-400 data-[state=active]:to-slate-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
-              Tutti
-            </TabsTrigger>
-            <TabsTrigger value="corporate" className="px-1 sm:px-4 hover:bg-gradient-to-r hover:from-blue-100 hover:to-cyan-100 hover:text-blue-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-400 data-[state=active]:to-cyan-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
-              Azienda
-            </TabsTrigger>
-            <TabsTrigger value="transport" className="px-1 sm:px-4 hover:bg-gradient-to-r hover:from-green-100 hover:to-emerald-100 hover:text-green-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-400 data-[state=active]:to-emerald-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
-              Trasporti
-            </TabsTrigger>
-            <TabsTrigger value="culture" className="px-1 sm:px-4 hidden sm:block hover:bg-gradient-to-r hover:from-purple-100 hover:to-pink-100 hover:text-purple-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-400 data-[state=active]:to-pink-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
-              Cultura
-            </TabsTrigger>
-            <TabsTrigger value="shopping" className="px-1 sm:px-4 hidden sm:block hover:bg-gradient-to-r hover:from-orange-100 hover:to-red-100 hover:text-orange-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-400 data-[state=active]:to-red-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
-              Shopping
-            </TabsTrigger>
-          </TabsList>
+        {/* Company Rewards Section */}
+        <div className="mb-8 sm:mb-12">
+          <div className="text-center mb-6 sm:mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Premi Aziendali 🏢</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base px-4">
+              Utilizza i tuoi punti per ottenere vantaggi esclusivi offerti dalla tua azienda
+            </p>
+          </div>
 
-          <TabsContent value="all" className="space-y-4 sm:space-y-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-              {rewards.map(reward => <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
-                  <CardHeader className="pb-3">
-                    <div className="flex justify-between items-start mb-2">
-                      <div className="text-3xl sm:text-4xl">{reward.image}</div>
-                      <Badge className={getCategoryColor(reward.category)}>
-                        {getCategoryName(reward.category)}
-                      </Badge>
-                    </div>
-                    <CardTitle className="text-base sm:text-lg">{reward.title}</CardTitle>
-                    <CardDescription className="text-sm">{reward.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-3 sm:space-y-4">
-                      <div className="flex justify-between items-center">
-                        <span className="text-sm text-gray-600">Costo</span>
-                        <span className="font-bold text-base sm:text-lg text-blue-600">{reward.cost} punti</span>
-                      </div>
-                      
-                      <div className="flex justify-between items-center">
-                        <span className="text-sm text-gray-600">Disponibilità</span>
-                        <Badge variant={reward.availability === "Disponibile" ? "default" : "secondary"}>
-                          {reward.availability}
-                        </Badge>
-                      </div>
-                      
-                      <div className="text-xs text-gray-500">
-                        Partner: {reward.provider}
-                      </div>
-                      
-                      <Button className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white hover:from-green-700 hover:to-blue-700 text-sm sm:text-base" onClick={() => handleRedeem(reward)} disabled={userPoints < reward.cost} size="sm">
-                        <ShoppingCart className="h-4 w-4 mr-2" />
-                        {userPoints >= reward.cost ? "Riscatta Ora" : "Punti Insufficienti"}
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>)}
-            </div>
-          </TabsContent>
+          <Tabs defaultValue="all" className="space-y-4 sm:space-y-6">
+            <TabsList className="grid w-full grid-cols-3 sm:grid-cols-5 bg-white/80 backdrop-blur-sm text-xs sm:text-sm shadow-md">
+              <TabsTrigger value="all" className="px-2 sm:px-4 hover:bg-gradient-to-r hover:from-gray-100 hover:to-slate-100 hover:text-gray-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-gray-400 data-[state=active]:to-slate-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
+                Tutti
+              </TabsTrigger>
+              <TabsTrigger value="corporate" className="px-1 sm:px-4 hover:bg-gradient-to-r hover:from-blue-100 hover:to-cyan-100 hover:text-blue-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-400 data-[state=active]:to-cyan-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
+                Azienda
+              </TabsTrigger>
+              <TabsTrigger value="transport" className="px-1 sm:px-4 hover:bg-gradient-to-r hover:from-green-100 hover:to-emerald-100 hover:text-green-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-400 data-[state=active]:to-emerald-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
+                Trasporti
+              </TabsTrigger>
+              <TabsTrigger value="culture" className="px-1 sm:px-4 hidden sm:block hover:bg-gradient-to-r hover:from-purple-100 hover:to-pink-100 hover:text-purple-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-400 data-[state=active]:to-pink-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
+                Cultura
+              </TabsTrigger>
+              <TabsTrigger value="shopping" className="px-1 sm:px-4 hidden sm:block hover:bg-gradient-to-r hover:from-orange-100 hover:to-red-100 hover:text-orange-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-400 data-[state=active]:to-red-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
+                Shopping
+              </TabsTrigger>
+            </TabsList>
 
-          {/* Category specific tabs */}
-          {["corporate", "transport", "culture", "shopping"].map(category => <TabsContent key={category} value={category} className="space-y-4 sm:space-y-6">
+            <TabsContent value="all" className="space-y-4 sm:space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                {rewards.filter(reward => reward.category === category).map(reward => <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+                {rewards.map(reward => <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
                     <CardHeader className="pb-3">
                       <div className="flex justify-between items-start mb-2">
                         <div className="text-3xl sm:text-4xl">{reward.image}</div>
@@ -421,13 +388,56 @@ const Exchange = () => {
                     </CardContent>
                   </Card>)}
               </div>
-            </TabsContent>)}
-        </Tabs>
+            </TabsContent>
+
+            {/* Category specific tabs */}
+            {["corporate", "transport", "culture", "shopping"].map(category => <TabsContent key={category} value={category} className="space-y-4 sm:space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                  {rewards.filter(reward => reward.category === category).map(reward => <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+                      <CardHeader className="pb-3">
+                        <div className="flex justify-between items-start mb-2">
+                          <div className="text-3xl sm:text-4xl">{reward.image}</div>
+                          <Badge className={getCategoryColor(reward.category)}>
+                            {getCategoryName(reward.category)}
+                          </Badge>
+                        </div>
+                        <CardTitle className="text-base sm:text-lg">{reward.title}</CardTitle>
+                        <CardDescription className="text-sm">{reward.description}</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-3 sm:space-y-4">
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm text-gray-600">Costo</span>
+                            <span className="font-bold text-base sm:text-lg text-blue-600">{reward.cost} punti</span>
+                          </div>
+                          
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm text-gray-600">Disponibilità</span>
+                            <Badge variant={reward.availability === "Disponibile" ? "default" : "secondary"}>
+                              {reward.availability}
+                            </Badge>
+                          </div>
+                          
+                          <div className="text-xs text-gray-500">
+                            Partner: {reward.provider}
+                          </div>
+                          
+                          <Button className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white hover:from-green-700 hover:to-blue-700 text-sm sm:text-base" onClick={() => handleRedeem(reward)} disabled={userPoints < reward.cost} size="sm">
+                            <ShoppingCart className="h-4 w-4 mr-2" />
+                            {userPoints >= reward.cost ? "Riscatta Ora" : "Punti Insufficienti"}
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>)}
+                </div>
+              </TabsContent>)}
+          </Tabs>
+        </div>
 
         {/* Partner Offers Section */}
         <div className="mt-12 sm:mt-16">
           <div className="text-center mb-6 sm:mb-8">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Offerte Partner Esclusives 🤝</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Offerte Partner Esclusive 🤝</h2>
             <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base px-4">
               Scopri le proposte sostenibili dei nostri partner e approfitta di sconti esclusivi per utenti Virtuosity
             </p>
