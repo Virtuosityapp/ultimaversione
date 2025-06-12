@@ -506,32 +506,84 @@ const Comuni = () => {
                     alt="Mappa della città con strade e località"
                     className="w-full h-full object-cover"
                   />
-                  {/* Overlay con punti di interesse */}
-                  <div className="absolute top-4 left-4">
-                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                  {/* Sensori distribuiti in modo sparso sulla mappa */}
+                  
+                  {/* Cassonetto pieno - rosso */}
+                  <div className="absolute top-6 left-8 group">
+                    <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse cursor-pointer"></div>
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                      Cassonetto pieno - Via Roma
+                    </div>
                   </div>
-                  <div className="absolute top-8 right-6">
-                    <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+
+                  {/* Lampione non funzionante - arancione */}
+                  <div className="absolute top-12 right-12 group">
+                    <div className="w-3 h-3 bg-orange-500 rounded-full animate-pulse cursor-pointer"></div>
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                      Lampione non funzionante - Piazza Centro
+                    </div>
                   </div>
-                  <div className="absolute bottom-6 left-8">
-                    <div className="w-3 h-3 bg-orange-500 rounded-full animate-pulse"></div>
+
+                  {/* Fontana rotta - rosso */}
+                  <div className="absolute top-1/3 left-1/4 group">
+                    <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse cursor-pointer"></div>
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                      Fontana rotta - Parco Centrale
+                    </div>
                   </div>
-                  <div className="absolute bottom-4 right-4">
-                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+
+                  {/* Parcheggio libero - verde */}
+                  <div className="absolute bottom-8 right-8 group">
+                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse cursor-pointer"></div>
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                      Parcheggio libero - Via Manzoni
+                    </div>
+                  </div>
+
+                  {/* Sensore aria attivo - verde */}
+                  <div className="absolute top-1/2 right-1/4 group">
+                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse cursor-pointer"></div>
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                      Qualità aria OK - Stazione Meteo
+                    </div>
+                  </div>
+
+                  {/* Traffico intenso - arancione */}
+                  <div className="absolute bottom-1/4 left-6 group">
+                    <div className="w-3 h-3 bg-orange-500 rounded-full animate-pulse cursor-pointer"></div>
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                      Traffico intenso - Corso Italia
+                    </div>
+                  </div>
+
+                  {/* Raccolta rifiuti completata - verde */}
+                  <div className="absolute top-3/4 right-1/3 group">
+                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse cursor-pointer"></div>
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                      Raccolta completata - Via Verdi
+                    </div>
+                  </div>
+
+                  {/* Semaforo malfunzionante - rosso */}
+                  <div className="absolute top-1/4 right-6 group">
+                    <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse cursor-pointer"></div>
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                      Semaforo guasto - Incrocio Nord
+                    </div>
                   </div>
                 </div>
                 <div className="mt-4 flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm">
                   <div className="flex items-center space-x-1">
                     <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                    <span>Sensori attivi</span>
-                  </div>
-                  <div className="flex items-center space-x-1">
-                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                    <span>Problemi critici</span>
+                    <span>Tutto OK</span>
                   </div>
                   <div className="flex items-center space-x-1">
                     <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
-                    <span>Anomalie</span>
+                    <span>Attenzione</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <span>Critico</span>
                   </div>
                 </div>
               </CardContent>
