@@ -44,9 +44,6 @@ const Index = () => {
               <Button onClick={() => navigate("/about")} className="bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full">{t('buttonVirtusosity')}</Button>
             </div>
 
-            {/* Circularity Icons Section */}
-            <CircularityIcons />
-
             {/* Four Dashboard Blocks */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 sm:mb-12 max-w-4xl mx-auto px-4">
               
@@ -106,6 +103,9 @@ const Index = () => {
                 </Button>
               </div>
             </div>
+
+            {/* Circularity Icons Section - moved to bottom */}
+            <CircularityIcons />
 
             {/* Video Section */}
             <div className="mb-8 sm:mb-12 max-w-4xl mx-auto px-4">
