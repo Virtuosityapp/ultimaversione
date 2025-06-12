@@ -47,7 +47,7 @@ const Exchange = () => {
     title: "Visita Odontoiatrica",
     description: "Visita dentistica completa presso cliniche convenzionate",
     cost: 500,
-    category: "shopping",
+    category: "welfare",
     image: "🦷",
     availability: "Disponibile",
     provider: "Cliniche Partner"
@@ -83,7 +83,7 @@ const Exchange = () => {
     title: "Buoni Spesa Supermercato",
     description: "Buoni spesa del valore di €25 per supermercati convenzionati",
     cost: 400,
-    category: "shopping",
+    category: "welfare",
     image: "🛍️",
     availability: "Disponibile",
     provider: "Supermercati Partner"
@@ -92,7 +92,7 @@ const Exchange = () => {
     title: "Aperitivo",
     description: "Voucher per aperitivo gratuito presso locali convenzionati",
     cost: 120,
-    category: "shopping",
+    category: "welfare",
     image: "🍸",
     availability: "Disponibile",
     provider: "Locali Partner"
@@ -117,7 +117,7 @@ const Exchange = () => {
       corporate: "bg-blue-100 text-blue-800",
       transport: "bg-green-100 text-green-800",
       culture: "bg-purple-100 text-purple-800",
-      shopping: "bg-orange-100 text-orange-800"
+      welfare: "bg-orange-100 text-orange-800"
     };
     return colors[category as keyof typeof colors] || "bg-gray-100 text-gray-800";
   };
@@ -126,7 +126,7 @@ const Exchange = () => {
       corporate: "Aziendale",
       transport: "Trasporti",
       culture: "Cultura",
-      shopping: "Shopping"
+      welfare: "Welfare"
     };
     return names[category as keyof typeof names] || category;
   };
@@ -331,21 +331,18 @@ const Exchange = () => {
           </div>
 
           <Tabs defaultValue="all" className="space-y-4 sm:space-y-6">
-            <TabsList className="grid w-full grid-cols-3 sm:grid-cols-5 bg-white/80 backdrop-blur-sm text-xs sm:text-sm shadow-md">
+            <TabsList className="grid w-full grid-cols-4 bg-white/80 backdrop-blur-sm text-xs sm:text-sm shadow-md">
               <TabsTrigger value="all" className="px-2 sm:px-4 hover:bg-gradient-to-r hover:from-gray-100 hover:to-slate-100 hover:text-gray-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-gray-400 data-[state=active]:to-slate-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
                 Tutti
-              </TabsTrigger>
-              <TabsTrigger value="corporate" className="px-1 sm:px-4 hover:bg-gradient-to-r hover:from-blue-100 hover:to-cyan-100 hover:text-blue-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-400 data-[state=active]:to-cyan-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
-                Azienda
               </TabsTrigger>
               <TabsTrigger value="transport" className="px-1 sm:px-4 hover:bg-gradient-to-r hover:from-green-100 hover:to-emerald-100 hover:text-green-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-400 data-[state=active]:to-emerald-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
                 Trasporti
               </TabsTrigger>
-              <TabsTrigger value="culture" className="px-1 sm:px-4 hidden sm:block hover:bg-gradient-to-r hover:from-purple-100 hover:to-pink-100 hover:text-purple-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-400 data-[state=active]:to-pink-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
+              <TabsTrigger value="culture" className="px-1 sm:px-4 hover:bg-gradient-to-r hover:from-purple-100 hover:to-pink-100 hover:text-purple-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-400 data-[state=active]:to-pink-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
                 Cultura
               </TabsTrigger>
-              <TabsTrigger value="shopping" className="px-1 sm:px-4 hidden sm:block hover:bg-gradient-to-r hover:from-orange-100 hover:to-red-100 hover:text-orange-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-400 data-[state=active]:to-red-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
-                Shopping
+              <TabsTrigger value="welfare" className="px-1 sm:px-4 hover:bg-gradient-to-r hover:from-orange-100 hover:to-red-100 hover:text-orange-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-400 data-[state=active]:to-red-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
+                Welfare
               </TabsTrigger>
             </TabsList>
 
@@ -391,7 +388,7 @@ const Exchange = () => {
             </TabsContent>
 
             {/* Category specific tabs */}
-            {["corporate", "transport", "culture", "shopping"].map(category => <TabsContent key={category} value={category} className="space-y-4 sm:space-y-6">
+            {["transport", "culture", "welfare"].map(category => <TabsContent key={category} value={category} className="space-y-4 sm:space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                   {rewards.filter(reward => reward.category === category).map(reward => <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
                       <CardHeader className="pb-3">
