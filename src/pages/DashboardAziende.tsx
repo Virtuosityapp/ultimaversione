@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -15,9 +16,6 @@ import LanguageSwitcher from '@/components/LanguageSwitcher';
 const DashboardAziende = () => {
   const navigate = useNavigate();
   const { t } = useLanguage();
-  const [certificatiDipendenti] = useState(1589);
-  const [certificatiEsterni] = useState(14568);
-  const [reportDialogOpen, setReportDialogOpen] = useState(false);
   
   // Welfare per Dipendenti - Limited to 4 items
   const [welfareItems, setWelfareItems] = useState([
@@ -188,6 +186,16 @@ const DashboardAziende = () => {
       <LanguageSwitcher />
       
       <div className="max-w-7xl mx-auto">
+        {/* Page Title */}
+        <div className="text-center mb-8">
+          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            Dashboard Aziendale
+          </h1>
+          <p className="text-lg text-gray-600 mt-2">
+            Gestisci le performance di sostenibilità e configura incentivi personalizzati
+          </p>
+        </div>
+
         {/* Navigation Button */}
         <div className="mb-6">
           <Button 
