@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -467,15 +468,15 @@ const Comuni = () => {
                     config={{
                       co2: {
                         label: "CO2 (ton)",
-                        theme: { light: "#EF4444" }
+                        theme: { light: "#EF4444", dark: "#EF4444" }
                       },
                       energia: { 
                         label: "Energia (MWh)",
-                        theme: { light: "#F59E0B" }
+                        theme: { light: "#F59E0B", dark: "#F59E0B" }
                       },
                       acqua: {
                         label: "Acqua (m³x100)",
-                        theme: { light: "#3B82F6" }
+                        theme: { light: "#3B82F6", dark: "#3B82F6" }
                       }
                     }}
                   >
