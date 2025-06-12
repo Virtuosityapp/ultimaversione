@@ -9,7 +9,7 @@ import CircularityIcons from "@/components/CircularityIcons";
 const Index = () => {
   const navigate = useNavigate();
   const { t } = useLanguage();
-
+  
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
       <LanguageSwitcher />
@@ -21,11 +21,7 @@ const Index = () => {
             <div className="flex justify-center mb-4 sm:mb-6">
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-blue-500 rounded-full blur-xl opacity-30 animate-pulse"></div>
-                <img 
-                  src="/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png" 
-                  alt="Virtuosity Logo" 
-                  className="relative h-20 sm:h-24 md:h-32 w-auto mx-auto" 
-                />
+                <img src="/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png" alt="Virtuosity Logo" className="relative h-20 sm:h-24 md:h-32 w-auto mx-auto" />
               </div>
             </div>
             
@@ -43,14 +39,9 @@ const Index = () => {
               {t('heroDescription')}
             </p>
             
-            {/* Enhanced Virtuosity Button */}
+            {/* Virtuosity Button - unchanged */}
             <div className="flex justify-center mb-8 sm:mb-12 px-4 max-w-md mx-auto">
-              <Button 
-                onClick={() => navigate("/about")} 
-                className="bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full border-4 border-yellow-600 hover:border-yellow-700 ring-4 ring-yellow-300/50 hover:ring-yellow-400/60 font-bold transform hover:scale-105"
-              >
-                {t('buttonVirtusosity')}
-              </Button>
+              <Button onClick={() => navigate("/about")} className="bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full">{t('buttonVirtusosity')}</Button>
             </div>
 
             {/* Four Dashboard Blocks */}
@@ -88,7 +79,7 @@ const Index = () => {
               <div className="bg-white/80 backdrop-blur-sm rounded-lg p-6 shadow-lg border border-sky-200 hover:shadow-xl transition-all duration-300">
                 <h3 className="text-xl font-bold text-gray-900 mb-3">Dashboard Aziende</h3>
                 <p className="text-gray-600 mb-4 text-sm">
-                  Accedi al pannello di controllo aziendale per monitorare le performance di sostenibilità e configurare incentivi personalizzati.
+                  Accedi al pannello di controllo aziendale per gestire i dipendenti, monitorare le performance di sostenibilità e configurare incentivi personalizzati.
                 </p>
                 <Button 
                   onClick={() => navigate("/dashboard-aziende")} 
@@ -119,12 +110,12 @@ const Index = () => {
             {/* Video Section */}
             <div className="mb-8 sm:mb-12 max-w-4xl mx-auto px-4">
               <AspectRatio ratio={16 / 9}>
-                <iframe 
-                  src="https://www.youtube.com/embed/rdCqQPQfogs" 
-                  title="Virtuosity Video" 
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                  allowFullScreen 
-                  className="w-full h-full rounded-lg shadow-lg" 
+                <iframe
+                  src="https://www.youtube.com/embed/rdCqQPQfogs"
+                  title="Virtuosity Video"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="w-full h-full rounded-lg shadow-lg"
                 />
               </AspectRatio>
             </div>
