@@ -78,36 +78,6 @@ const Exchange = () => {
       image: "🚴",
       availability: "Disponibile",
       provider: "Mobike"
-    },
-    {
-      id: 7,
-      title: "Parchi a Tema Salta Fila",
-      description: "Ingresso con accesso prioritario alle attrazioni",
-      cost: 600,
-      category: "culture",
-      image: "🎢",
-      availability: "Disponibile",
-      provider: "Parchi Partner"
-    },
-    {
-      id: 8,
-      title: "Buoni Spesa Supermercato",
-      description: "Buoni spesa del valore di €25 per supermercati convenzionati",
-      cost: 400,
-      category: "welfare",
-      image: "🛍️",
-      availability: "Disponibile",
-      provider: "Supermercati Partner"
-    },
-    {
-      id: 9,
-      title: "Visita Oculistica",
-      description: "Controllo completo della vista presso ottici convenzionati",
-      cost: 120,
-      category: "welfare",
-      image: "👁️",
-      availability: "Disponibile",
-      provider: "Ottici Partner"
     }
   ];
 
@@ -177,39 +147,6 @@ const Exchange = () => {
       category: "infanzia",
       impact: "100 bambini coinvolti",
       location: "Quartieri Periferici"
-    },
-    {
-      id: 7,
-      title: "Assistenza Domiciliare Disabili",
-      description: "Supporto domiciliare per persone con disabilità motorie",
-      certificatesNeeded: 30,
-      association: "Insieme Onlus",
-      image: "♿",
-      category: "disabilità",
-      impact: "25 famiglie assistite",
-      location: "Provincia di Milano"
-    },
-    {
-      id: 8,
-      title: "Orti Urbani Comunitari",
-      description: "Creazione di spazi verdi condivisi per la coltivazione sostenibile",
-      certificatesNeeded: 22,
-      association: "Orti Milanesi",
-      image: "🥬",
-      category: "comunità",
-      impact: "5 orti realizzati",
-      location: "Periferia Milano"
-    },
-    {
-      id: 9,
-      title: "Biblioteca Mobile Borghi",
-      description: "Servizio di prestito libri itinerante per comunità rurali",
-      certificatesNeeded: 16,
-      association: "Libri in Movimento",
-      image: "📚",
-      category: "cultura",
-      impact: "15 borghi raggiunti",
-      location: "Provincia Lombarda"
     }
   ];
 
@@ -356,45 +293,6 @@ const Exchange = () => {
       pointsRequired: 100,
       benefits: ["Spesa a domicilio", "Ricette esclusive", "Degustazioni gratuite"],
       websiteUrl: "https://www.e-coop.it"
-    },
-    {
-      id: 7,
-      partner: "TESLA",
-      title: "Test Drive Veicoli Elettrici",
-      description: "Prova gratuitamente i nuovi modelli Tesla e scopri la mobilità del futuro",
-      discount: "Test drive gratuito",
-      category: "automotive",
-      image: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=400&h=300&fit=crop",
-      validUntil: "31 Luglio 2024",
-      pointsRequired: 500,
-      benefits: ["Consulenza personalizzata", "Configuratore online", "Incentivi statali info"],
-      websiteUrl: "https://www.tesla.com/it_it"
-    },
-    {
-      id: 8,
-      partner: "DECATHLON",
-      title: "Abbigliamento Sportivo Eco",
-      description: "Nuova linea di abbigliamento sportivo realizzato con fibre riciclate marine",
-      discount: "Sconto 25%",
-      category: "sport",
-      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
-      validUntil: "30 Giugno 2024",
-      pointsRequired: 250,
-      benefits: ["Reso gratuito", "Programma fedeltà", "Riparazione gratuita"],
-      websiteUrl: "https://www.decathlon.it"
-    },
-    {
-      id: 9,
-      partner: "WWF",
-      title: "Adotta un Bosco Urbano",
-      description: "Partecipa al progetto di riforestazione urbana e adotta simbolicamente un albero",
-      discount: "Partecipazione gratuita",
-      category: "ambiente",
-      image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop",
-      validUntil: "31 Dicembre 2024",
-      pointsRequired: 200,
-      benefits: ["Certificato digitale", "Aggiornamenti mensili", "Visita guidata"],
-      websiteUrl: "https://www.wwf.it"
     }
   ];
 
