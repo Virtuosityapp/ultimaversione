@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -6,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Car, Lightbulb, Trash2, Recycle, ArrowLeft, Activity, Wifi, AlertCircle, CheckCircle, Clock, Settings, MapPin, AlertTriangle, FileText, Gift, Plus, Edit, Trash, Euro, Users, Target, Award, TrendingUp, TrendingDown, Leaf, TrafficCone } from "lucide-react";
+import { Car, Lightbulb, Trash2, Recycle, ArrowLeft, Activity, Wifi, AlertCircle, CheckCircle, Clock, Settings, MapPin, AlertTriangle, FileText, Gift, Plus, Edit, Trash, Euro, Users, Target, Award, TrendingUp, TrendingDown, Leaf, Droplets } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useEffect, useRef, useState } from "react";
@@ -41,15 +40,15 @@ const Comuni = () => {
     { zone: "Ovest", occupati: 160, totali: 200 },
   ];
 
-  const trafficData = [
-    { ora: "06:00", flusso: 45 },
-    { ora: "08:00", flusso: 85 },
-    { ora: "10:00", flusso: 65 },
-    { ora: "12:00", flusso: 75 },
-    { ora: "14:00", flusso: 70 },
-    { ora: "16:00", flusso: 80 },
-    { ora: "18:00", flusso: 90 },
-    { ora: "20:00", flusso: 55 },
+  const waterSavingData = [
+    { ora: "06:00", risparmio: 15 },
+    { ora: "08:00", risparmio: 25 },
+    { ora: "10:00", risparmio: 35 },
+    { ora: "12:00", risparmio: 45 },
+    { ora: "14:00", risparmio: 40 },
+    { ora: "16:00", risparmio: 30 },
+    { ora: "18:00", risparmio: 20 },
+    { ora: "20:00", risparmio: 18 },
   ];
 
   const lightingData = [
@@ -535,27 +534,27 @@ const Comuni = () => {
             </Card>
           </div>
           
-          {/* Traffic, Parking, Lighting, and Waste/Recycling */}
+          {/* Water Saving, Parking, Lighting, and Waste/Recycling */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {/* Traffic Monitoring */}
+            {/* Water Saving Monitoring */}
             <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
               <CardHeader className="p-3 sm:p-4">
                 <CardTitle className="flex items-center text-base sm:text-lg">
-                  <TrafficCone className="h-5 w-5 mr-2 text-orange-600" />
-                  Traffico
+                  <Droplets className="h-5 w-5 mr-2 text-blue-600" />
+                  Risparmio Acqua
                 </CardTitle>
                 <CardDescription className="text-xs">
-                  Flusso veicoli - Oggi
+                  Percentuale risparmio - Oggi
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-3 sm:p-4 pt-0">
                 <div className="h-36 sm:h-44 w-full">
                   <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={trafficData}>
+                    <AreaChart data={waterSavingData}>
                       <defs>
-                        <linearGradient id="trafficGradient" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#F97316" stopOpacity={0.8}/>
-                          <stop offset="95%" stopColor="#F97316" stopOpacity={0}/>
+                        <linearGradient id="waterGradient" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.8}/>
+                          <stop offset="95%" stopColor="#3B82F6" stopOpacity={0}/>
                         </linearGradient>
                       </defs>
                       <XAxis dataKey="ora" tick={{ fontSize: 10 }} />
@@ -563,16 +562,16 @@ const Comuni = () => {
                       <CartesianGrid strokeDasharray="3 3" />
                       <Area
                         type="monotone"
-                        dataKey="flusso"
-                        stroke="#F97316"
-                        fill="url(#trafficGradient)"
+                        dataKey="risparmio"
+                        stroke="#3B82F6"
+                        fill="url(#waterGradient)"
                       />
                     </AreaChart>
                   </ResponsiveContainer>
                 </div>
                 <div className="mt-2 flex justify-between items-center text-xs sm:text-sm">
-                  <div>Picco: <span className="font-bold">18:00</span></div>
-                  <Badge className="bg-orange-100 text-orange-700">+12% vs ieri</Badge>
+                  <div>Picco: <span className="font-bold">12:00</span></div>
+                  <Badge className="bg-blue-100 text-blue-700">+8% vs ieri</Badge>
                 </div>
               </CardContent>
             </Card>
