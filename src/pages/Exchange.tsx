@@ -2,14 +2,17 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { AlertDialog, AlertDialogAction, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { Leaf, Gift, Star, ShoppingCart, ArrowLeft, Menu, ExternalLink, Calendar, MapPin, Heart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Exchange = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const [showDonationDialog, setShowDonationDialog] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<any>(null);
   
   useEffect(() => {
     document.title = "Exchange - Virtuosity";
@@ -230,10 +233,8 @@ const Exchange = () => {
 
   const handleDonate = (project: any) => {
     if (userCertificates >= project.certificatesNeeded) {
-      toast({
-        title: "Donazione Completata! ❤️",
-        description: `Hai donato ${project.certificatesNeeded} certificati a: ${project.title}. Grazie per il tuo contributo!`
-      });
+      setSelectedProject(project);
+      setShowDonationDialog(true);
     } else {
       toast({
         title: "Certificati Insufficienti",
@@ -770,6 +771,37 @@ const Exchange = () => {
           </p>
         </div>
       </div>
+
+      {/* Donation Success Dialog */}
+      <AlertDialog open={showDonationDialog} onOpenChange={setShowDonationDialog}>
+        <AlertDialogContent className="max-w-md bg-white border-0 shadow-2xl">
+          <AlertDialogHeader className="text-center">
+            <div className="mx-auto mb-4 w-16 h-16 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full flex items-center justify-center">
+              <Heart className="h-8 w-8 text-white" />
+            </div>
+            <AlertDialogTitle className="text-xl font-bold text-gray-900">
+              Congratulazioni! 🎉
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-gray-600 space-y-2">
+              <p>Hai donato con successo {selectedProject?.certificatesNeeded} certificati al progetto:</p>
+              <p className="font-semibold text-gray-900">"{selectedProject?.title}"</p>
+              <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-4 rounded-lg mt-4">
+                <div className="text-4xl mb-2">🏆</div>
+                <p className="font-semibold text-green-700">Questo è il tuo badge!</p>
+                <p className="text-sm text-green-600">Lo troverai nel tuo wallet come certificato di donazione.</p>
+              </div>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction 
+              className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-green-700 hover:to-emerald-700"
+              onClick={() => setShowDonationDialog(false)}
+            >
+              Perfetto! 🚀
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
