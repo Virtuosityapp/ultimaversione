@@ -7,6 +7,7 @@ import { Calendar, Award, TrendingUp, MapPin, Clock, QrCode, Camera, Smartphone,
 import { useNavigate } from "react-router-dom";
 import { DppVerification } from "@/components/DppVerification";
 import CitizenReporting from "@/components/CitizenReporting";
+import { useState } from "react";
 
 interface WalletProduct {
   id: string;
@@ -31,6 +32,7 @@ interface WalletProduct {
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const [showWallet, setShowWallet] = useState(false);
 
   // Mock wallet products - same as in DPP component
   const walletProducts: WalletProduct[] = [
@@ -210,17 +212,7 @@ const Dashboard = () => {
   };
 
   const handleWalletClick = () => {
-    // Switch to DPP tab and scroll to wallet section
-    const tabsTrigger = document.querySelector('[value="dpp"]') as HTMLElement;
-    if (tabsTrigger) {
-      tabsTrigger.click();
-      setTimeout(() => {
-        const walletSection = document.getElementById('dpp-wallet-section');
-        if (walletSection) {
-          walletSection.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
-    }
+    setShowWallet(!showWallet);
   };
 
   return <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
@@ -361,120 +353,122 @@ const Dashboard = () => {
                     className="w-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200 text-sm sm:text-base py-2 sm:py-3"
                   >
                     <Wallet className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                    Il tuo Wallet
+                    {showWallet ? 'Nascondi Wallet' : 'Il tuo Wallet'}
                   </Button>
                   <p className="text-xs text-gray-500 text-center mt-2">
                     Visualizza i tuoi certificati digitali e garanzie prodotti
                   </p>
                 </div>
 
-                {/* Wallet Products Display */}
-                <div className="mt-6 p-4 sm:p-6 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg border border-blue-200">
-                  <div className="mb-4 text-center">
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">
-                      Il Mio Wallet DPP
-                    </h3>
-                    <p className="text-sm text-gray-600 mb-3">
-                      Conserva e gestisci le garanzie digitali dei tuoi prodotti di lusso
-                    </p>
-                    <div className="text-2xl font-bold text-gray-900 mb-1">
-                      {walletProducts.length} Prodotti
+                {/* Wallet Products Display - Only show when showWallet is true */}
+                {showWallet && (
+                  <div className="mt-6 p-4 sm:p-6 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg border border-blue-200">
+                    <div className="mb-4 text-center">
+                      <h3 className="text-lg font-bold text-gray-900 mb-2">
+                        Il Mio Wallet DPP
+                      </h3>
+                      <p className="text-sm text-gray-600 mb-3">
+                        Conserva e gestisci le garanzie digitali dei tuoi prodotti di lusso
+                      </p>
+                      <div className="text-2xl font-bold text-gray-900 mb-1">
+                        {walletProducts.length} Prodotti
+                      </div>
+                      <p className="text-sm text-gray-600">
+                        Valore totale: {walletProducts.reduce((sum, product) => sum + parseFloat(product.value.replace(/[€\s.]/g, '').replace(',', '.')), 0).toLocaleString('it-IT', { style: 'currency', currency: 'EUR' })}
+                      </p>
                     </div>
-                    <p className="text-sm text-gray-600">
-                      Valore totale: {walletProducts.reduce((sum, product) => sum + parseFloat(product.value.replace(/[€\s.]/g, '').replace(',', '.')), 0).toLocaleString('it-IT', { style: 'currency', currency: 'EUR' })}
-                    </p>
-                  </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {walletProducts.map((product) => (
-                      <Card key={product.id} className="border-0 shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden">
-                        <div className="relative">
-                          <img 
-                            src={product.image} 
-                            alt={product.name}
-                            className="w-full h-32 object-cover"
-                          />
-                          <div className="absolute top-2 right-2">
-                            <Badge className={getStatusColor(product.status)}>
-                              {product.status === 'active' ? 'Attiva' : product.status === 'expired' ? 'Scaduta' : 'Utilizzata'}
-                            </Badge>
-                          </div>
-                          <div className="absolute top-2 left-2">
-                            <div className="bg-white/90 backdrop-blur-sm rounded-full p-1 text-lg">
-                              {getCategoryIcon(product.category)}
-                            </div>
-                          </div>
-                        </div>
-
-                        <CardContent className="p-3">
-                          <div className="flex items-center justify-between mb-2">
-                            <div>
-                              <h3 className="font-bold text-sm text-gray-900">{product.brand}</h3>
-                              <p className="text-xs text-gray-600">{product.name}</p>
-                              <p className="text-xs text-gray-500">Modello: {product.model}</p>
-                            </div>
-                            <div className="text-right">
-                              <p className="font-bold text-sm text-blue-600">{product.value}</p>
-                            </div>
-                          </div>
-
-                          <div className="space-y-2">
-                            <div className="flex items-center justify-between text-xs">
-                              <span className="text-gray-600">Garanzia:</span>
-                              <span className="font-semibold">{product.warranty.period}</span>
-                            </div>
-                            
-                            <div className="flex items-center justify-between text-xs">
-                              <span className="text-gray-600">Scade:</span>
-                              <span className="font-semibold">{new Date(product.warranty.expires).toLocaleDateString('it-IT')}</span>
-                            </div>
-
-                            <div className="flex items-center justify-between text-xs">
-                              <span className="text-gray-600">Sostenibilità:</span>
-                              <Badge className={getSustainabilityColor(product.sustainability.score)}>
-                                {product.sustainability.score}/100
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {walletProducts.map((product) => (
+                        <Card key={product.id} className="border-0 shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden">
+                          <div className="relative">
+                            <img 
+                              src={product.image} 
+                              alt={product.name}
+                              className="w-full h-32 object-cover"
+                            />
+                            <div className="absolute top-2 right-2">
+                              <Badge className={getStatusColor(product.status)}>
+                                {product.status === 'active' ? 'Attiva' : product.status === 'expired' ? 'Scaduta' : 'Utilizzata'}
                               </Badge>
                             </div>
-
-                            <div>
-                              <p className="text-xs text-gray-600 mb-1">Certificazioni:</p>
-                              <div className="flex flex-wrap gap-1">
-                                {product.sustainability.certifications.slice(0, 2).map((cert, index) => (
-                                  <Badge key={index} variant="outline" className="text-xs">
-                                    {cert}
-                                  </Badge>
-                                ))}
-                                {product.sustainability.certifications.length > 2 && (
-                                  <Badge variant="outline" className="text-xs">
-                                    +{product.sustainability.certifications.length - 2}
-                                  </Badge>
-                                )}
+                            <div className="absolute top-2 left-2">
+                              <div className="bg-white/90 backdrop-blur-sm rounded-full p-1 text-lg">
+                                {getCategoryIcon(product.category)}
                               </div>
                             </div>
                           </div>
 
-                          <div className="flex gap-2 mt-3">
-                            <Button size="sm" variant="outline" className="flex-1 text-xs">
-                              <Eye className="h-3 w-3 mr-1" />
-                              Dettagli
-                            </Button>
-                            <Button size="sm" className="flex-1 bg-blue-600 hover:bg-blue-700 text-xs">
-                              <Shield className="h-3 w-3 mr-1" />
-                              Garanzia
-                            </Button>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
+                          <CardContent className="p-3">
+                            <div className="flex items-center justify-between mb-2">
+                              <div>
+                                <h3 className="font-bold text-sm text-gray-900">{product.brand}</h3>
+                                <p className="text-xs text-gray-600">{product.name}</p>
+                                <p className="text-xs text-gray-500">Modello: {product.model}</p>
+                              </div>
+                              <div className="text-right">
+                                <p className="font-bold text-sm text-blue-600">{product.value}</p>
+                              </div>
+                            </div>
 
-                  <div className="mt-4 text-center">
-                    <Button className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white shadow-lg text-sm">
-                      <ShoppingBag className="mr-2 h-4 w-4" />
-                      Aggiungi Nuovo Prodotto
-                    </Button>
+                            <div className="space-y-2">
+                              <div className="flex items-center justify-between text-xs">
+                                <span className="text-gray-600">Garanzia:</span>
+                                <span className="font-semibold">{product.warranty.period}</span>
+                              </div>
+                              
+                              <div className="flex items-center justify-between text-xs">
+                                <span className="text-gray-600">Scade:</span>
+                                <span className="font-semibold">{new Date(product.warranty.expires).toLocaleDateString('it-IT')}</span>
+                              </div>
+
+                              <div className="flex items-center justify-between text-xs">
+                                <span className="text-gray-600">Sostenibilità:</span>
+                                <Badge className={getSustainabilityColor(product.sustainability.score)}>
+                                  {product.sustainability.score}/100
+                                </Badge>
+                              </div>
+
+                              <div>
+                                <p className="text-xs text-gray-600 mb-1">Certificazioni:</p>
+                                <div className="flex flex-wrap gap-1">
+                                  {product.sustainability.certifications.slice(0, 2).map((cert, index) => (
+                                    <Badge key={index} variant="outline" className="text-xs">
+                                      {cert}
+                                    </Badge>
+                                  ))}
+                                  {product.sustainability.certifications.length > 2 && (
+                                    <Badge variant="outline" className="text-xs">
+                                      +{product.sustainability.certifications.length - 2}
+                                    </Badge>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="flex gap-2 mt-3">
+                              <Button size="sm" variant="outline" className="flex-1 text-xs">
+                                <Eye className="h-3 w-3 mr-1" />
+                                Dettagli
+                              </Button>
+                              <Button size="sm" className="flex-1 bg-blue-600 hover:bg-blue-700 text-xs">
+                                <Shield className="h-3 w-3 mr-1" />
+                                Garanzia
+                              </Button>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+
+                    <div className="mt-4 text-center">
+                      <Button className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white shadow-lg text-sm">
+                        <ShoppingBag className="mr-2 h-4 w-4" />
+                        Aggiungi Nuovo Prodotto
+                      </Button>
+                    </div>
                   </div>
-                </div>
+                )}
               </CardContent>
             </Card>
 
