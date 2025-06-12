@@ -289,7 +289,8 @@ const Exchange = () => {
       image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=300&fit=crop",
       validUntil: "31 Marzo 2024",
       pointsRequired: 0,
-      benefits: ["Consulenza gratuita", "Installazione inclusa", "10 anni di garanzia"]
+      benefits: ["Consulenza gratuita", "Installazione inclusa", "10 anni di garanzia"],
+      websiteUrl: "https://www.enel.it/it/casa/fotovoltaico"
     },
     {
       id: 2,
@@ -301,7 +302,8 @@ const Exchange = () => {
       image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
       validUntil: "30 Giugno 2024",
       pointsRequired: 200,
-      benefits: ["Accesso prioritario", "Pranzo sostenibile incluso", "Gadget ecologico"]
+      benefits: ["Accesso prioritario", "Pranzo sostenibile incluso", "Gadget ecologico"],
+      websiteUrl: "https://www.gardaland.it"
     },
     {
       id: 3,
@@ -313,7 +315,8 @@ const Exchange = () => {
       image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
       validUntil: "15 Maggio 2024",
       pointsRequired: 150,
-      benefits: ["Audioguida inclusa", "Workshop gratuito", "Catalogo digitale"]
+      benefits: ["Audioguida inclusa", "Workshop gratuito", "Catalogo digitale"],
+      websiteUrl: "https://www.triennale.org"
     },
     {
       id: 4,
@@ -325,7 +328,8 @@ const Exchange = () => {
       image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&h=300&fit=crop",
       validUntil: "31 Dicembre 2024",
       pointsRequired: 300,
-      benefits: ["1 mese gratuito", "App premium", "Priority boarding"]
+      benefits: ["1 mese gratuito", "App premium", "Priority boarding"],
+      websiteUrl: "https://www.atm.it"
     },
     {
       id: 5,
@@ -337,7 +341,8 @@ const Exchange = () => {
       image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop",
       validUntil: "30 Aprile 2024",
       pointsRequired: 400,
-      benefits: ["Consegna gratuita", "Montaggio incluso", "Ritiro mobili usati"]
+      benefits: ["Consegna gratuita", "Montaggio incluso", "Ritiro mobili usati"],
+      websiteUrl: "https://www.ikea.com/it/it/"
     },
     {
       id: 6,
@@ -349,7 +354,8 @@ const Exchange = () => {
       image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop",
       validUntil: "31 Maggio 2024",
       pointsRequired: 100,
-      benefits: ["Spesa a domicilio", "Ricette esclusive", "Degustazioni gratuite"]
+      benefits: ["Spesa a domicilio", "Ricette esclusive", "Degustazioni gratuite"],
+      websiteUrl: "https://www.e-coop.it"
     },
     {
       id: 7,
@@ -361,7 +367,8 @@ const Exchange = () => {
       image: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=400&h=300&fit=crop",
       validUntil: "31 Luglio 2024",
       pointsRequired: 500,
-      benefits: ["Consulenza personalizzata", "Configuratore online", "Incentivi statali info"]
+      benefits: ["Consulenza personalizzata", "Configuratore online", "Incentivi statali info"],
+      websiteUrl: "https://www.tesla.com/it_it"
     },
     {
       id: 8,
@@ -373,7 +380,8 @@ const Exchange = () => {
       image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
       validUntil: "30 Giugno 2024",
       pointsRequired: 250,
-      benefits: ["Reso gratuito", "Programma fedeltà", "Riparazione gratuita"]
+      benefits: ["Reso gratuito", "Programma fedeltà", "Riparazione gratuita"],
+      websiteUrl: "https://www.decathlon.it"
     },
     {
       id: 9,
@@ -385,7 +393,8 @@ const Exchange = () => {
       image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop",
       validUntil: "31 Dicembre 2024",
       pointsRequired: 200,
-      benefits: ["Certificato digitale", "Aggiornamenti mensili", "Visita guidata"]
+      benefits: ["Certificato digitale", "Aggiornamenti mensili", "Visita guidata"],
+      websiteUrl: "https://www.wwf.it"
     }
   ];
 
@@ -402,6 +411,25 @@ const Exchange = () => {
       ambiente: "bg-emerald-100 text-emerald-800"
     };
     return colors[category as keyof typeof colors] || "bg-gray-100 text-gray-800";
+  };
+
+  const handlePartnerOfferClick = (offer: any) => {
+    if (offer.pointsRequired > userPoints && offer.pointsRequired > 0) {
+      toast({
+        title: "Punti Insufficienti",
+        description: `Ti servono ${offer.pointsRequired - userPoints} punti in più per accedere a questa offerta.`,
+        variant: "destructive"
+      });
+      return;
+    }
+
+    // Open partner website in new tab
+    window.open(offer.websiteUrl, '_blank', 'noopener,noreferrer');
+    
+    toast({
+      title: "Offerta Attivata! 🎉",
+      description: `Ti abbiamo reindirizzato al sito di ${offer.partner}. Mostra questo messaggio per ottenere lo sconto.`
+    });
   };
 
   return (
@@ -742,7 +770,7 @@ const Exchange = () => {
                     <Button 
                       className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700 text-sm" 
                       size="sm"
-                      disabled={offer.pointsRequired > userPoints}
+                      onClick={() => handlePartnerOfferClick(offer)}
                     >
                       <ExternalLink className="h-4 w-4 mr-2" />
                       {offer.pointsRequired > userPoints && offer.pointsRequired > 0 
