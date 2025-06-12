@@ -5,10 +5,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Car, Lightbulb, Trash2, Recycle, ArrowLeft, Activity, Wifi, AlertCircle, CheckCircle, Clock, Settings, MapPin, AlertTriangle, FileText, Gift, Plus, Edit, Trash, Euro, Users, Target, Award } from "lucide-react";
+import { Car, Lightbulb, Trash2, Recycle, ArrowLeft, Activity, Wifi, AlertCircle, CheckCircle, Clock, Settings, MapPin, AlertTriangle, FileText, Gift, Plus, Edit, Trash, Euro, Users, Target, Award, TrendingUp, TrendingDown, Leaf, TrafficCone } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useEffect, useRef, useState } from "react";
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, ResponsiveContainer, AreaChart, Area } from "recharts";
+
 const Comuni = () => {
   const navigate = useNavigate();
   const {
@@ -18,6 +21,51 @@ const Comuni = () => {
   const map = useRef<any>(null);
   const [selectedReward, setSelectedReward] = useState<any>(null);
   const [showAddReward, setShowAddReward] = useState(false);
+
+  // Mock data for charts
+  const environmentalData = [
+    { month: "Gen", co2: 120, energia: 85, acqua: 90 },
+    { month: "Feb", co2: 115, energia: 82, acqua: 88 },
+    { month: "Mar", co2: 108, energia: 78, acqua: 85 },
+    { month: "Apr", co2: 102, energia: 75, acqua: 82 },
+    { month: "Mag", co2: 98, energia: 73, acqua: 80 },
+    { month: "Giu", co2: 95, energia: 70, acqua: 78 },
+  ];
+
+  const parkingData = [
+    { zone: "Centro", occupati: 340, totali: 400 },
+    { zone: "Nord", occupati: 280, totali: 350 },
+    { zone: "Sud", occupati: 220, totali: 300 },
+    { zone: "Est", occupati: 190, totali: 250 },
+    { zone: "Ovest", occupati: 160, totali: 200 },
+  ];
+
+  const trafficData = [
+    { ora: "06:00", flusso: 45 },
+    { ora: "08:00", flusso: 85 },
+    { ora: "10:00", flusso: 65 },
+    { ora: "12:00", flusso: 75 },
+    { ora: "14:00", flusso: 70 },
+    { ora: "16:00", flusso: 80 },
+    { ora: "18:00", flusso: 90 },
+    { ora: "20:00", flusso: 55 },
+  ];
+
+  const lightingData = [
+    { name: "Funzionanti", value: 1245, color: "#10B981" },
+    { name: "Guasti", value: 23, color: "#EF4444" },
+    { name: "Manutenzione", value: 12, color: "#F59E0B" },
+  ];
+
+  const wasteData = [
+    { giorno: "Lun", raccolto: 450, riciclato: 320 },
+    { giorno: "Mar", raccolto: 420, riciclato: 295 },
+    { giorno: "Mer", raccolto: 480, riciclato: 340 },
+    { giorno: "Gio", raccolto: 460, riciclato: 330 },
+    { giorno: "Ven", raccolto: 510, riciclato: 380 },
+    { giorno: "Sab", raccolto: 380, riciclato: 270 },
+    { giorno: "Dom", raccolto: 320, riciclato: 240 },
+  ];
 
   // Mock data for rewards/incentives
   const communityRewards = [{
@@ -138,7 +186,11 @@ const Comuni = () => {
         // Add markers for alerts and resolved issues
         mapAlerts.forEach(item => {
           const el = document.createElement('div');
-          el.className = `w-6 h-6 rounded-full border-2 border-white shadow-lg cursor-pointer ${item.type === 'alert' ? item.severity === 'high' ? 'bg-red-500' : 'bg-orange-500' : 'bg-green-500'}`;
+          el.className = `w-6 h-6 rounded-full border-2 border-white shadow-lg cursor-pointer ${
+            item.type === 'alert' 
+              ? item.severity === 'high' ? 'bg-red-500' : 'bg-orange-500' 
+              : 'bg-green-500'
+          }`;
           const popup = new mapboxgl.default.Popup({
             offset: 25
           }).setHTML(`
@@ -148,7 +200,10 @@ const Comuni = () => {
                 <p class="text-xs text-gray-500">${item.timestamp}</p>
               </div>
             `);
-          new mapboxgl.default.Marker(el).setLngLat(item.coords).setPopup(popup).addTo(map.current);
+          new mapboxgl.default.Marker(el)
+            .setLngLat(item.coords)
+            .setPopup(popup)
+            .addTo(map.current);
         });
       } catch (error) {
         console.error('Error initializing map:', error);
@@ -352,10 +407,307 @@ const Comuni = () => {
             </CardContent>
           </Card>
         </div>
+        
+        {/* Dashboard Monitoring Section */}
+        <div className="mb-8 space-y-6">
+          <div className="flex justify-between items-center">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Dashboard di Monitoraggio 📊</h2>
+            <Badge className="bg-blue-100 text-blue-800 py-1.5">
+              <Activity className="w-3 h-3 mr-1" />
+              <span>Aggiornamento ogni 5 minuti</span>
+            </Badge>
+          </div>
+          
+          {/* Map and Environmental Impact */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+            <Card className="lg:col-span-2 border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="flex items-center text-lg">
+                  <MapPin className="h-5 w-5 mr-2 text-blue-600" />
+                  Mappa Città
+                </CardTitle>
+                <CardDescription>
+                  Visualizzazione in tempo reale di sensori e infrastrutture
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="p-4 sm:p-6 pt-0">
+                <div className="h-64 sm:h-80 w-full rounded-lg overflow-hidden bg-gray-50">
+                  <div ref={mapContainer} className="h-full w-full" />
+                </div>
+                <div className="mt-4 flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm">
+                  <div className="flex items-center space-x-1">
+                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                    <span>Sensori attivi</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <span>Problemi critici</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+                    <span>Anomalie</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            
+            <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="flex items-center text-lg">
+                  <Leaf className="h-5 w-5 mr-2 text-green-600" />
+                  Impatto Ambientale
+                </CardTitle>
+                <CardDescription>
+                  Trend mensile di sostenibilità
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="p-4 sm:p-6 pt-0">
+                <div className="h-64 w-full">
+                  <ChartContainer
+                    config={{
+                      co2: {
+                        label: "CO2 (ton)",
+                        theme: { light: "#EF4444" }
+                      },
+                      energia: { 
+                        label: "Energia (MWh)",
+                        theme: { light: "#F59E0B" }
+                      },
+                      acqua: {
+                        label: "Acqua (m³x100)",
+                        theme: { light: "#3B82F6" }
+                      }
+                    }}
+                  >
+                    <LineChart data={environmentalData}>
+                      <XAxis dataKey="month" />
+                      <YAxis />
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <ChartTooltip 
+                        content={<ChartTooltipContent />}
+                      />
+                      <Line
+                        type="monotone"
+                        dataKey="co2"
+                        stroke="var(--color-co2, #EF4444)"
+                        strokeWidth={2}
+                        dot={true}
+                      />
+                      <Line
+                        type="monotone"
+                        dataKey="energia"
+                        stroke="var(--color-energia, #F59E0B)"
+                        strokeWidth={2}
+                        dot={true}
+                      />
+                      <Line
+                        type="monotone"
+                        dataKey="acqua"
+                        stroke="var(--color-acqua, #3B82F6)"
+                        strokeWidth={2}
+                        dot={true}
+                      />
+                    </LineChart>
+                  </ChartContainer>
+                </div>
+                <div className="mt-4 grid grid-cols-3 gap-2 text-center">
+                  <div className="bg-red-50 p-1.5 rounded">
+                    <div className="text-red-600 font-bold text-sm sm:text-base flex items-center justify-center">
+                      <TrendingDown className="h-3 w-3 mr-1" />-12%
+                    </div>
+                    <div className="text-xs text-gray-600">CO2</div>
+                  </div>
+                  <div className="bg-amber-50 p-1.5 rounded">
+                    <div className="text-amber-600 font-bold text-sm sm:text-base flex items-center justify-center">
+                      <TrendingDown className="h-3 w-3 mr-1" />-9%
+                    </div>
+                    <div className="text-xs text-gray-600">Energia</div>
+                  </div>
+                  <div className="bg-blue-50 p-1.5 rounded">
+                    <div className="text-blue-600 font-bold text-sm sm:text-base flex items-center justify-center">
+                      <TrendingDown className="h-3 w-3 mr-1" />-5%
+                    </div>
+                    <div className="text-xs text-gray-600">Acqua</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+          
+          {/* Traffic, Parking, Lighting, and Waste/Recycling */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            {/* Traffic Monitoring */}
+            <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+              <CardHeader className="p-3 sm:p-4">
+                <CardTitle className="flex items-center text-base sm:text-lg">
+                  <TrafficCone className="h-5 w-5 mr-2 text-orange-600" />
+                  Traffico
+                </CardTitle>
+                <CardDescription className="text-xs">
+                  Flusso veicoli - Oggi
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="p-3 sm:p-4 pt-0">
+                <div className="h-36 sm:h-44 w-full">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart data={trafficData}>
+                      <defs>
+                        <linearGradient id="trafficGradient" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor="#F97316" stopOpacity={0.8}/>
+                          <stop offset="95%" stopColor="#F97316" stopOpacity={0}/>
+                        </linearGradient>
+                      </defs>
+                      <XAxis dataKey="ora" tick={{ fontSize: 10 }} />
+                      <YAxis tick={{ fontSize: 10 }} />
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <Area
+                        type="monotone"
+                        dataKey="flusso"
+                        stroke="#F97316"
+                        fill="url(#trafficGradient)"
+                      />
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </div>
+                <div className="mt-2 flex justify-between items-center text-xs sm:text-sm">
+                  <div>Picco: <span className="font-bold">18:00</span></div>
+                  <Badge className="bg-orange-100 text-orange-700">+12% vs ieri</Badge>
+                </div>
+              </CardContent>
+            </Card>
+            
+            {/* Parking Monitoring */}
+            <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+              <CardHeader className="p-3 sm:p-4">
+                <CardTitle className="flex items-center text-base sm:text-lg">
+                  <Car className="h-5 w-5 mr-2 text-blue-600" />
+                  Parcheggi
+                </CardTitle>
+                <CardDescription className="text-xs">
+                  Occupazione per zone
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="p-3 sm:p-4 pt-0">
+                <div className="h-36 sm:h-44 w-full">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={parkingData}>
+                      <XAxis dataKey="zone" tick={{ fontSize: 10 }} />
+                      <YAxis tick={{ fontSize: 10 }} />
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <Bar dataKey="occupati" stackId="a" fill="#3B82F6">
+                        {parkingData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill="#3B82F6" />
+                        ))}
+                      </Bar>
+                      <Bar dataKey="totali" stackId="a" fill="#E5E7EB">
+                        {parkingData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill="#E5E7EB" />
+                        ))}
+                      </Bar>
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+                <div className="mt-2 flex justify-between items-center text-xs sm:text-sm">
+                  <div><span className="font-bold">75%</span> occupazione media</div>
+                  <Badge className="bg-blue-100 text-blue-700">298 disponibili</Badge>
+                </div>
+              </CardContent>
+            </Card>
+            
+            {/* Lighting Monitoring */}
+            <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+              <CardHeader className="p-3 sm:p-4">
+                <CardTitle className="flex items-center text-base sm:text-lg">
+                  <Lightbulb className="h-5 w-5 mr-2 text-yellow-600" />
+                  Illuminazione
+                </CardTitle>
+                <CardDescription className="text-xs">
+                  Stato lampioni pubblici
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="p-3 sm:p-4 pt-0">
+                <div className="h-36 sm:h-44 w-full">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <Pie
+                        data={lightingData}
+                        cx="50%"
+                        cy="50%"
+                        innerRadius={40}
+                        outerRadius={60}
+                        fill="#8884d8"
+                        paddingAngle={5}
+                        dataKey="value"
+                        label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                        labelLine={false}
+                      >
+                        {lightingData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={entry.color} />
+                        ))}
+                      </Pie>
+                    </PieChart>
+                  </ResponsiveContainer>
+                </div>
+                <div className="mt-2 grid grid-cols-3 gap-1 text-center text-xs sm:text-sm">
+                  <div className="bg-green-50 p-1.5 rounded">
+                    <div className="text-green-600 font-bold">1245</div>
+                    <div className="text-xs text-gray-600">Attivi</div>
+                  </div>
+                  <div className="bg-red-50 p-1.5 rounded">
+                    <div className="text-red-600 font-bold">23</div>
+                    <div className="text-xs text-gray-600">Guasti</div>
+                  </div>
+                  <div className="bg-amber-50 p-1.5 rounded">
+                    <div className="text-amber-600 font-bold">12</div>
+                    <div className="text-xs text-gray-600">In manutenzione</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            
+            {/* Waste and Recycling */}
+            <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+              <CardHeader className="p-3 sm:p-4">
+                <CardTitle className="flex items-center text-base sm:text-lg">
+                  <Recycle className="h-5 w-5 mr-2 text-green-600" />
+                  Rifiuti e Riciclo
+                </CardTitle>
+                <CardDescription className="text-xs">
+                  Raccolta settimanale (kg)
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="p-3 sm:p-4 pt-0">
+                <div className="h-36 sm:h-44 w-full">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={wasteData}>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="giorno" tick={{ fontSize: 10 }} />
+                      <YAxis tick={{ fontSize: 10 }} />
+                      <Bar dataKey="raccolto" fill="#94A3B8" name="Totale raccolto">
+                        {wasteData.map((entry, index) => (
+                          <Cell key={`cell-raccolto-${index}`} fill="#94A3B8" />
+                        ))}
+                      </Bar>
+                      <Bar dataKey="riciclato" fill="#10B981" name="Riciclato">
+                        {wasteData.map((entry, index) => (
+                          <Cell key={`cell-riciclato-${index}`} fill="#10B981" />
+                        ))}
+                      </Bar>
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+                <div className="mt-2 flex justify-between items-center text-xs sm:text-sm">
+                  <div><span className="font-bold text-green-600">72%</span> tasso di riciclo</div>
+                  <Badge className="bg-green-100 text-green-700">+3% vs settimana scorsa</Badge>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
 
         <Tabs defaultValue="overview" className="space-y-6 sm:space-y-8">
-          {/* Improved mobile tabs */}
-          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 bg-white/80 backdrop-blur-sm shadow-md p-1 gap-1 sm:gap-0 sticky top-20 z-40">
+          {/* Navigation tabs now at the bottom */}
+          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 bg-white/80 backdrop-blur-sm shadow-md p-1 gap-1 sm:gap-0 sticky bottom-0 z-40">
             <TabsTrigger value="overview" className="px-1 py-3 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-blue-100 hover:to-indigo-100 hover:text-blue-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-400 data-[state=active]:to-indigo-500 data-[state=active]:text-white data-[state=active]:shadow-lg min-h-[44px]">
               Panoramica
             </TabsTrigger>
