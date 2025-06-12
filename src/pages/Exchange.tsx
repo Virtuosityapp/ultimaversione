@@ -2,103 +2,217 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Leaf, Gift, Star, ShoppingCart, ArrowLeft, Menu, ExternalLink, Calendar, MapPin } from "lucide-react";
+import { Leaf, Gift, Star, ShoppingCart, ArrowLeft, Menu, ExternalLink, Calendar, MapPin, Heart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useEffect } from "react";
 
 const Exchange = () => {
   const navigate = useNavigate();
-  const {
-    toast
-  } = useToast();
+  const { toast } = useToast();
+  
   useEffect(() => {
     document.title = "Exchange - Virtuosity";
   }, []);
+
   const rewards = [
     {
-    id: 1,
-    title: "Buono Pasto",
-    description: "Buono spendibile in mense aziendali partner",
-    cost: 250,
-    category: "corporate",
-    image: "🍽️",
-    availability: "Disponibile",
-    provider: "Corporate Benefits"
-  }, {
-    id: 2,
-    title: "Biglietto Metro Gratuito",
-    description: "Viaggio gratuito su tutta la rete ATM Milano",
-    cost: 80,
-    category: "transport",
-    image: "🚇",
-    availability: "Limitato",
-    provider: "ATM Milano"
-  }, {
-    id: 3,
-    title: "Ingresso Museo Gratuito",
-    description: "Accesso gratuito ai musei civici di Milano",
-    cost: 150,
-    category: "culture",
-    image: "🏛️",
-    availability: "Disponibile",
-    provider: "Comune di Milano"
-  }, {
-    id: 4,
-    title: "Visita Odontoiatrica",
-    description: "Visita dentistica completa presso cliniche convenzionate",
-    cost: 500,
-    category: "welfare",
-    image: "🦷",
-    availability: "Disponibile",
-    provider: "Cliniche Partner"
-  }, {
-    id: 5,
-    title: "Giorno di Permesso Extra",
-    description: "Un giorno di permesso aggiuntivo retribuito",
-    cost: 800,
-    category: "corporate",
-    image: "🏖️",
-    availability: "Limitato",
-    provider: "HR Department"
-  }, {
-    id: 6,
-    title: "Bike Sharing Premium",
-    description: "30 giorni di bike sharing illimitato",
-    cost: 300,
-    category: "transport",
-    image: "🚴",
-    availability: "Disponibile",
-    provider: "Mobike"
-  }, {
-    id: 7,
-    title: "Parchi a Tema Salta Fila",
-    description: "Ingresso con accesso prioritario alle attrazioni",
-    cost: 600,
-    category: "culture",
-    image: "🎢",
-    availability: "Disponibile",
-    provider: "Parchi Partner"
-  }, {
-    id: 8,
-    title: "Buoni Spesa Supermercato",
-    description: "Buoni spesa del valore di €25 per supermercati convenzionati",
-    cost: 400,
-    category: "welfare",
-    image: "🛍️",
-    availability: "Disponibile",
-    provider: "Supermercati Partner"
-  }, {
-    id: 9,
-    title: "Visita Oculistica",
-    description: "Controllo completo della vista presso ottici convenzionati",
-    cost: 120,
-    category: "welfare",
-    image: "👁️",
-    availability: "Disponibile",
-    provider: "Ottici Partner"
-  }];
+      id: 1,
+      title: "Buono Pasto",
+      description: "Buono spendibile in mense aziendali partner",
+      cost: 250,
+      category: "corporate",
+      image: "🍽️",
+      availability: "Disponibile",
+      provider: "Corporate Benefits"
+    },
+    {
+      id: 2,
+      title: "Biglietto Metro Gratuito",
+      description: "Viaggio gratuito su tutta la rete ATM Milano",
+      cost: 80,
+      category: "transport",
+      image: "🚇",
+      availability: "Limitato",
+      provider: "ATM Milano"
+    },
+    {
+      id: 3,
+      title: "Ingresso Museo Gratuito",
+      description: "Accesso gratuito ai musei civici di Milano",
+      cost: 150,
+      category: "culture",
+      image: "🏛️",
+      availability: "Disponibile",
+      provider: "Comune di Milano"
+    },
+    {
+      id: 4,
+      title: "Visita Odontoiatrica",
+      description: "Visita dentistica completa presso cliniche convenzionate",
+      cost: 500,
+      category: "welfare",
+      image: "🦷",
+      availability: "Disponibile",
+      provider: "Cliniche Partner"
+    },
+    {
+      id: 5,
+      title: "Giorno di Permesso Extra",
+      description: "Un giorno di permesso aggiuntivo retribuito",
+      cost: 800,
+      category: "corporate",
+      image: "🏖️",
+      availability: "Limitato",
+      provider: "HR Department"
+    },
+    {
+      id: 6,
+      title: "Bike Sharing Premium",
+      description: "30 giorni di bike sharing illimitato",
+      cost: 300,
+      category: "transport",
+      image: "🚴",
+      availability: "Disponibile",
+      provider: "Mobike"
+    },
+    {
+      id: 7,
+      title: "Parchi a Tema Salta Fila",
+      description: "Ingresso con accesso prioritario alle attrazioni",
+      cost: 600,
+      category: "culture",
+      image: "🎢",
+      availability: "Disponibile",
+      provider: "Parchi Partner"
+    },
+    {
+      id: 8,
+      title: "Buoni Spesa Supermercato",
+      description: "Buoni spesa del valore di €25 per supermercati convenzionati",
+      cost: 400,
+      category: "welfare",
+      image: "🛍️",
+      availability: "Disponibile",
+      provider: "Supermercati Partner"
+    },
+    {
+      id: 9,
+      title: "Visita Oculistica",
+      description: "Controllo completo della vista presso ottici convenzionati",
+      cost: 120,
+      category: "welfare",
+      image: "👁️",
+      availability: "Disponibile",
+      provider: "Ottici Partner"
+    }
+  ];
+
+  const socialProjects = [
+    {
+      id: 1,
+      title: "Riforestazione Urbana",
+      description: "Piantumazione di alberi nelle aree metropolitane per migliorare la qualità dell'aria",
+      certificatesNeeded: 15,
+      association: "Green City Milano",
+      image: "🌳",
+      category: "ambiente",
+      impact: "500 alberi piantati",
+      location: "Milano, Lombardia"
+    },
+    {
+      id: 2,
+      title: "Mensa per i Bisognosi",
+      description: "Fornitura di pasti caldi per persone in difficoltà economica",
+      certificatesNeeded: 25,
+      association: "Caritas Milano",
+      image: "🍲",
+      category: "sociale",
+      impact: "1000 pasti serviti",
+      location: "Milano Centro"
+    },
+    {
+      id: 3,
+      title: "Educazione Digitale Anziani",
+      description: "Corsi di alfabetizzazione digitale per persone over 65",
+      certificatesNeeded: 10,
+      association: "Senior Tech",
+      image: "💻",
+      category: "educazione",
+      impact: "50 anziani formati",
+      location: "Centri Sociali Milano"
+    },
+    {
+      id: 4,
+      title: "Pulizia Fiumi e Laghi",
+      description: "Rimozione di rifiuti plastici da corsi d'acqua e zone lacustri",
+      certificatesNeeded: 20,
+      association: "Plastic Free Lombardia",
+      image: "🌊",
+      category: "ambiente",
+      impact: "2 tonnellate di rifiuti rimossi",
+      location: "Navigli Milano"
+    },
+    {
+      id: 5,
+      title: "Centro Accoglienza Animali",
+      description: "Sostegno per cure veterinarie e mantenimento di animali abbandonati",
+      certificatesNeeded: 18,
+      association: "ENPA Milano",
+      image: "🐕",
+      category: "animali",
+      impact: "30 animali curati",
+      location: "Canile Municipale"
+    },
+    {
+      id: 6,
+      title: "Laboratori Creativi Bambini",
+      description: "Attività artistiche e ricreative per bambini in situazioni di disagio",
+      certificatesNeeded: 12,
+      association: "Arte per Tutti",
+      image: "🎨",
+      category: "infanzia",
+      impact: "100 bambini coinvolti",
+      location: "Quartieri Periferici"
+    },
+    {
+      id: 7,
+      title: "Assistenza Domiciliare Disabili",
+      description: "Supporto domiciliare per persone con disabilità motorie",
+      certificatesNeeded: 30,
+      association: "Insieme Onlus",
+      image: "♿",
+      category: "disabilità",
+      impact: "25 famiglie assistite",
+      location: "Provincia di Milano"
+    },
+    {
+      id: 8,
+      title: "Orti Urbani Comunitari",
+      description: "Creazione di spazi verdi condivisi per la coltivazione sostenibile",
+      certificatesNeeded: 22,
+      association: "Orti Milanesi",
+      image: "🥬",
+      category: "comunità",
+      impact: "5 orti realizzati",
+      location: "Periferia Milano"
+    },
+    {
+      id: 9,
+      title: "Biblioteca Mobile Borghi",
+      description: "Servizio di prestito libri itinerante per comunità rurali",
+      certificatesNeeded: 16,
+      association: "Libri in Movimento",
+      image: "📚",
+      category: "cultura",
+      impact: "15 borghi raggiunti",
+      location: "Provincia Lombarda"
+    }
+  ];
+
   const userPoints = 1275;
+  const userCertificates = 45;
+
   const handleRedeem = (reward: any) => {
     if (userPoints >= reward.cost) {
       toast({
@@ -113,6 +227,22 @@ const Exchange = () => {
       });
     }
   };
+
+  const handleDonate = (project: any) => {
+    if (userCertificates >= project.certificatesNeeded) {
+      toast({
+        title: "Donazione Completata! ❤️",
+        description: `Hai donato ${project.certificatesNeeded} certificati a: ${project.title}. Grazie per il tuo contributo!`
+      });
+    } else {
+      toast({
+        title: "Certificati Insufficienti",
+        description: `Ti servono ${project.certificatesNeeded - userCertificates} certificati in più per supportare questo progetto.`,
+        variant: "destructive"
+      });
+    }
+  };
+
   const getCategoryColor = (category: string) => {
     const colors = {
       corporate: "bg-blue-100 text-blue-800",
@@ -122,6 +252,7 @@ const Exchange = () => {
     };
     return colors[category as keyof typeof colors] || "bg-gray-100 text-gray-800";
   };
+
   const getCategoryName = (category: string) => {
     const names = {
       corporate: "Aziendale",
@@ -131,6 +262,21 @@ const Exchange = () => {
     };
     return names[category as keyof typeof names] || category;
   };
+
+  const getSocialCategoryColor = (category: string) => {
+    const colors = {
+      ambiente: "bg-green-100 text-green-800",
+      sociale: "bg-blue-100 text-blue-800",
+      educazione: "bg-purple-100 text-purple-800",
+      animali: "bg-orange-100 text-orange-800",
+      infanzia: "bg-pink-100 text-pink-800",
+      disabilità: "bg-cyan-100 text-cyan-800",
+      comunità: "bg-yellow-100 text-yellow-800",
+      cultura: "bg-indigo-100 text-indigo-800"
+    };
+    return colors[category as keyof typeof colors] || "bg-gray-100 text-gray-800";
+  };
+
   const partnerOffers = [
     {
       id: 1,
@@ -241,6 +387,7 @@ const Exchange = () => {
       benefits: ["Certificato digitale", "Aggiornamenti mensili", "Visita guidata"]
     }
   ];
+
   const getCategoryColorAd = (category: string) => {
     const colors = {
       energia: "bg-yellow-100 text-yellow-800",
@@ -255,6 +402,7 @@ const Exchange = () => {
     };
     return colors[category as keyof typeof colors] || "bg-gray-100 text-gray-800";
   };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
       {/* Header */}
@@ -275,6 +423,9 @@ const Exchange = () => {
               <div className="bg-gradient-to-r from-green-400 to-blue-500 text-white px-2 sm:px-4 py-1 sm:py-2 rounded-full font-bold text-sm sm:text-base">
                 💎 {userPoints}
               </div>
+              <div className="bg-gradient-to-r from-red-400 to-pink-500 text-white px-2 sm:px-4 py-1 sm:py-2 rounded-full font-bold text-sm sm:text-base">
+                🏆 {userCertificates}
+              </div>
             </div>
           </div>
         </div>
@@ -290,7 +441,7 @@ const Exchange = () => {
         </div>
 
         {/* Points Summary */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
           <Card className="border-0 shadow-lg bg-gradient-to-br from-green-400 to-emerald-500 text-white">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium text-green-100">Punti Disponibili</CardTitle>
@@ -298,6 +449,16 @@ const Exchange = () => {
             <CardContent>
               <div className="text-xl sm:text-2xl font-bold">{userPoints}</div>
               <p className="text-xs text-green-100">Guadagnati con 24 attività</p>
+            </CardContent>
+          </Card>
+
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-red-400 to-pink-500 text-white">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium text-red-100">Certificati Disponibili</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-xl sm:text-2xl font-bold">{userCertificates}</div>
+              <p className="text-xs text-red-100">Per donazioni sociali</p>
             </CardContent>
           </Card>
 
@@ -349,7 +510,8 @@ const Exchange = () => {
 
             <TabsContent value="all" className="space-y-4 sm:space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                {rewards.map(reward => <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+                {rewards.map(reward => (
+                  <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
                     <CardHeader className="pb-3">
                       <div className="flex justify-between items-start mb-2">
                         <div className="text-3xl sm:text-4xl">{reward.image}</div>
@@ -378,20 +540,27 @@ const Exchange = () => {
                           Partner: {reward.provider}
                         </div>
                         
-                        <Button className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white hover:from-green-700 hover:to-blue-700 text-sm sm:text-base" onClick={() => handleRedeem(reward)} disabled={userPoints < reward.cost} size="sm">
+                        <Button 
+                          className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white hover:from-green-700 hover:to-blue-700 text-sm sm:text-base" 
+                          onClick={() => handleRedeem(reward)} 
+                          disabled={userPoints < reward.cost} 
+                          size="sm"
+                        >
                           <ShoppingCart className="h-4 w-4 mr-2" />
                           {userPoints >= reward.cost ? "Riscatta Ora" : "Punti Insufficienti"}
                         </Button>
                       </div>
                     </CardContent>
-                  </Card>)}
+                  </Card>
+                ))}
               </div>
             </TabsContent>
 
-            {/* Category specific tabs */}
-            {["transport", "culture", "welfare"].map(category => <TabsContent key={category} value={category} className="space-y-4 sm:space-y-6">
+            {["transport", "culture", "welfare"].map(category => (
+              <TabsContent key={category} value={category} className="space-y-4 sm:space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                  {rewards.filter(reward => reward.category === category).map(reward => <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+                  {rewards.filter(reward => reward.category === category).map(reward => (
+                    <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
                       <CardHeader className="pb-3">
                         <div className="flex justify-between items-start mb-2">
                           <div className="text-3xl sm:text-4xl">{reward.image}</div>
@@ -420,16 +589,83 @@ const Exchange = () => {
                             Partner: {reward.provider}
                           </div>
                           
-                          <Button className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white hover:from-green-700 hover:to-blue-700 text-sm sm:text-base" onClick={() => handleRedeem(reward)} disabled={userPoints < reward.cost} size="sm">
+                          <Button 
+                            className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white hover:from-green-700 hover:to-blue-700 text-sm sm:text-base" 
+                            onClick={() => handleRedeem(reward)} 
+                            disabled={userPoints < reward.cost} 
+                            size="sm"
+                          >
                             <ShoppingCart className="h-4 w-4 mr-2" />
                             {userPoints >= reward.cost ? "Riscatta Ora" : "Punti Insufficienti"}
                           </Button>
                         </div>
                       </CardContent>
-                    </Card>)}
+                    </Card>
+                  ))}
                 </div>
-              </TabsContent>)}
+              </TabsContent>
+            ))}
           </Tabs>
+        </div>
+
+        {/* Social Projects Section */}
+        <div className="mb-8 sm:mb-12">
+          <div className="text-center mb-6 sm:mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Progetti Sociali ❤️</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base px-4">
+              Dona i tuoi certificati per supportare progetti sociali delle associazioni e fare la differenza nella comunità
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {socialProjects.map(project => (
+              <Card key={project.id} className="border-0 shadow-lg bg-white/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+                <CardHeader className="pb-3">
+                  <div className="flex justify-between items-start mb-2">
+                    <div className="text-3xl sm:text-4xl">{project.image}</div>
+                    <Badge className={getSocialCategoryColor(project.category)}>
+                      {project.category}
+                    </Badge>
+                  </div>
+                  <CardTitle className="text-base sm:text-lg">{project.title}</CardTitle>
+                  <CardDescription className="text-sm">{project.description}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-600">Certificati necessari</span>
+                      <span className="font-bold text-base sm:text-lg text-red-600">{project.certificatesNeeded}</span>
+                    </div>
+
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-gray-600">Associazione</span>
+                      <span className="font-semibold text-blue-600">{project.association}</span>
+                    </div>
+
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-gray-600">Impatto previsto</span>
+                      <span className="font-semibold text-green-600">{project.impact}</span>
+                    </div>
+
+                    <div className="flex items-center text-sm text-gray-600">
+                      <MapPin className="h-4 w-4 mr-1" />
+                      <span>{project.location}</span>
+                    </div>
+
+                    <Button 
+                      className="w-full bg-gradient-to-r from-red-600 to-pink-600 text-white hover:from-red-700 hover:to-pink-700 text-sm" 
+                      size="sm"
+                      onClick={() => handleDonate(project)}
+                      disabled={userCertificates < project.certificatesNeeded}
+                    >
+                      <Heart className="h-4 w-4 mr-2" />
+                      {userCertificates >= project.certificatesNeeded ? "Dona Ora" : "Certificati Insufficienti"}
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
 
         {/* Partner Offers Section */}
@@ -523,10 +759,14 @@ const Exchange = () => {
         {/* Bottom Info */}
         <div className="mt-8 sm:mt-12 bg-white/80 backdrop-blur-sm rounded-lg p-4 sm:p-6 border-l-4 border-green-500">
           <h3 className="font-bold text-gray-900 mb-2 text-sm sm:text-base">💡 Come Funziona</h3>
-          <p className="text-gray-600 text-xs sm:text-sm">
+          <p className="text-gray-600 text-xs sm:text-sm mb-2">
             I punti vengono guadagnati automaticamente attraverso le tue azioni sostenibili. 
             Ogni certificato blockchain validato ti dà diritto a premi esclusivi. 
             Più sei sostenibile, più premi puoi ottenere!
+          </p>
+          <p className="text-gray-600 text-xs sm:text-sm">
+            <strong>Progetti Sociali:</strong> Dona i tuoi certificati per supportare iniziative benefiche delle associazioni. 
+            I certificati rappresentano il valore sociale delle tue azioni sostenibili e possono essere convertiti in aiuti concreti per la comunità.
           </p>
         </div>
       </div>
