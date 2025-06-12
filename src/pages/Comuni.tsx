@@ -11,7 +11,6 @@ import { useToast } from "@/hooks/use-toast";
 import { useEffect, useRef, useState } from "react";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, ResponsiveContainer, AreaChart, Area } from "recharts";
-
 const Comuni = () => {
   const navigate = useNavigate();
   const {
@@ -23,49 +22,125 @@ const Comuni = () => {
   const [showAddReward, setShowAddReward] = useState(false);
 
   // Mock data for charts
-  const environmentalData = [
-    { month: "Gen", co2: 120, energia: 85, acqua: 90 },
-    { month: "Feb", co2: 115, energia: 82, acqua: 88 },
-    { month: "Mar", co2: 108, energia: 78, acqua: 85 },
-    { month: "Apr", co2: 102, energia: 75, acqua: 82 },
-    { month: "Mag", co2: 98, energia: 73, acqua: 80 },
-    { month: "Giu", co2: 95, energia: 70, acqua: 78 },
-  ];
-
-  const parkingData = [
-    { zone: "Centro", occupati: 340, totali: 400 },
-    { zone: "Nord", occupati: 280, totali: 350 },
-    { zone: "Sud", occupati: 220, totali: 300 },
-    { zone: "Est", occupati: 190, totali: 250 },
-    { zone: "Ovest", occupati: 160, totali: 200 },
-  ];
-
-  const waterSavingData = [
-    { ora: "06:00", risparmio: 15 },
-    { ora: "08:00", risparmio: 25 },
-    { ora: "10:00", risparmio: 35 },
-    { ora: "12:00", risparmio: 45 },
-    { ora: "14:00", risparmio: 40 },
-    { ora: "16:00", risparmio: 30 },
-    { ora: "18:00", risparmio: 20 },
-    { ora: "20:00", risparmio: 18 },
-  ];
-
-  const lightingData = [
-    { name: "Funzionanti", value: 1245, color: "#10B981" },
-    { name: "Guasti", value: 23, color: "#EF4444" },
-    { name: "Manutenzione", value: 12, color: "#F59E0B" },
-  ];
-
-  const wasteData = [
-    { giorno: "Lun", raccolto: 450, riciclato: 320 },
-    { giorno: "Mar", raccolto: 420, riciclato: 295 },
-    { giorno: "Mer", raccolto: 480, riciclato: 340 },
-    { giorno: "Gio", raccolto: 460, riciclato: 330 },
-    { giorno: "Ven", raccolto: 510, riciclato: 380 },
-    { giorno: "Sab", raccolto: 380, riciclato: 270 },
-    { giorno: "Dom", raccolto: 320, riciclato: 240 },
-  ];
+  const environmentalData = [{
+    month: "Gen",
+    co2: 120,
+    energia: 85,
+    acqua: 90
+  }, {
+    month: "Feb",
+    co2: 115,
+    energia: 82,
+    acqua: 88
+  }, {
+    month: "Mar",
+    co2: 108,
+    energia: 78,
+    acqua: 85
+  }, {
+    month: "Apr",
+    co2: 102,
+    energia: 75,
+    acqua: 82
+  }, {
+    month: "Mag",
+    co2: 98,
+    energia: 73,
+    acqua: 80
+  }, {
+    month: "Giu",
+    co2: 95,
+    energia: 70,
+    acqua: 78
+  }];
+  const parkingData = [{
+    zone: "Centro",
+    occupati: 340,
+    totali: 400
+  }, {
+    zone: "Nord",
+    occupati: 280,
+    totali: 350
+  }, {
+    zone: "Sud",
+    occupati: 220,
+    totali: 300
+  }, {
+    zone: "Est",
+    occupati: 190,
+    totali: 250
+  }, {
+    zone: "Ovest",
+    occupati: 160,
+    totali: 200
+  }];
+  const waterSavingData = [{
+    ora: "06:00",
+    risparmio: 15
+  }, {
+    ora: "08:00",
+    risparmio: 25
+  }, {
+    ora: "10:00",
+    risparmio: 35
+  }, {
+    ora: "12:00",
+    risparmio: 45
+  }, {
+    ora: "14:00",
+    risparmio: 40
+  }, {
+    ora: "16:00",
+    risparmio: 30
+  }, {
+    ora: "18:00",
+    risparmio: 20
+  }, {
+    ora: "20:00",
+    risparmio: 18
+  }];
+  const lightingData = [{
+    name: "Funzionanti",
+    value: 1245,
+    color: "#10B981"
+  }, {
+    name: "Guasti",
+    value: 23,
+    color: "#EF4444"
+  }, {
+    name: "Manutenzione",
+    value: 12,
+    color: "#F59E0B"
+  }];
+  const wasteData = [{
+    giorno: "Lun",
+    raccolto: 450,
+    riciclato: 320
+  }, {
+    giorno: "Mar",
+    raccolto: 420,
+    riciclato: 295
+  }, {
+    giorno: "Mer",
+    raccolto: 480,
+    riciclato: 340
+  }, {
+    giorno: "Gio",
+    raccolto: 460,
+    riciclato: 330
+  }, {
+    giorno: "Ven",
+    raccolto: 510,
+    riciclato: 380
+  }, {
+    giorno: "Sab",
+    raccolto: 380,
+    riciclato: 270
+  }, {
+    giorno: "Dom",
+    raccolto: 320,
+    riciclato: 240
+  }];
 
   // Mock data for rewards/incentives
   const communityRewards = [{
@@ -186,11 +261,7 @@ const Comuni = () => {
         // Add markers for alerts and resolved issues
         mapAlerts.forEach(item => {
           const el = document.createElement('div');
-          el.className = `w-6 h-6 rounded-full border-2 border-white shadow-lg cursor-pointer ${
-            item.type === 'alert' 
-              ? item.severity === 'high' ? 'bg-red-500' : 'bg-orange-500' 
-              : 'bg-green-500'
-          }`;
+          el.className = `w-6 h-6 rounded-full border-2 border-white shadow-lg cursor-pointer ${item.type === 'alert' ? item.severity === 'high' ? 'bg-red-500' : 'bg-orange-500' : 'bg-green-500'}`;
           const popup = new mapboxgl.default.Popup({
             offset: 25
           }).setHTML(`
@@ -200,10 +271,7 @@ const Comuni = () => {
                 <p class="text-xs text-gray-500">${item.timestamp}</p>
               </div>
             `);
-          new mapboxgl.default.Marker(el)
-            .setLngLat(item.coords)
-            .setPopup(popup)
-            .addTo(map.current);
+          new mapboxgl.default.Marker(el).setLngLat(item.coords).setPopup(popup).addTo(map.current);
         });
       } catch (error) {
         console.error('Error initializing map:', error);
@@ -463,50 +531,37 @@ const Comuni = () => {
               </CardHeader>
               <CardContent className="p-4 sm:p-6 pt-0">
                 <div className="h-64 w-full">
-                  <ChartContainer
-                    config={{
-                      co2: {
-                        label: "CO2 (ton)",
-                        theme: { light: "#EF4444", dark: "#EF4444" }
-                      },
-                      energia: { 
-                        label: "Energia (MWh)",
-                        theme: { light: "#F59E0B", dark: "#F59E0B" }
-                      },
-                      acqua: {
-                        label: "Acqua (m³x100)",
-                        theme: { light: "#3B82F6", dark: "#3B82F6" }
-                      }
-                    }}
-                  >
+                  <ChartContainer config={{
+                  co2: {
+                    label: "CO2 (ton)",
+                    theme: {
+                      light: "#EF4444",
+                      dark: "#EF4444"
+                    }
+                  },
+                  energia: {
+                    label: "Energia (MWh)",
+                    theme: {
+                      light: "#F59E0B",
+                      dark: "#F59E0B"
+                    }
+                  },
+                  acqua: {
+                    label: "Acqua (m³x100)",
+                    theme: {
+                      light: "#3B82F6",
+                      dark: "#3B82F6"
+                    }
+                  }
+                }}>
                     <LineChart data={environmentalData}>
                       <XAxis dataKey="month" />
                       <YAxis />
                       <CartesianGrid strokeDasharray="3 3" />
-                      <ChartTooltip 
-                        content={<ChartTooltipContent />}
-                      />
-                      <Line
-                        type="monotone"
-                        dataKey="co2"
-                        stroke="var(--color-co2, #EF4444)"
-                        strokeWidth={2}
-                        dot={true}
-                      />
-                      <Line
-                        type="monotone"
-                        dataKey="energia"
-                        stroke="var(--color-energia, #F59E0B)"
-                        strokeWidth={2}
-                        dot={true}
-                      />
-                      <Line
-                        type="monotone"
-                        dataKey="acqua"
-                        stroke="var(--color-acqua, #3B82F6)"
-                        strokeWidth={2}
-                        dot={true}
-                      />
+                      <ChartTooltip content={<ChartTooltipContent />} />
+                      <Line type="monotone" dataKey="co2" stroke="var(--color-co2, #EF4444)" strokeWidth={2} dot={true} />
+                      <Line type="monotone" dataKey="energia" stroke="var(--color-energia, #F59E0B)" strokeWidth={2} dot={true} />
+                      <Line type="monotone" dataKey="acqua" stroke="var(--color-acqua, #3B82F6)" strokeWidth={2} dot={true} />
                     </LineChart>
                   </ChartContainer>
                 </div>
@@ -553,19 +608,18 @@ const Comuni = () => {
                     <AreaChart data={waterSavingData}>
                       <defs>
                         <linearGradient id="waterGradient" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.8}/>
-                          <stop offset="95%" stopColor="#3B82F6" stopOpacity={0}/>
+                          <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.8} />
+                          <stop offset="95%" stopColor="#3B82F6" stopOpacity={0} />
                         </linearGradient>
                       </defs>
-                      <XAxis dataKey="ora" tick={{ fontSize: 10 }} />
-                      <YAxis tick={{ fontSize: 10 }} />
+                      <XAxis dataKey="ora" tick={{
+                      fontSize: 10
+                    }} />
+                      <YAxis tick={{
+                      fontSize: 10
+                    }} />
                       <CartesianGrid strokeDasharray="3 3" />
-                      <Area
-                        type="monotone"
-                        dataKey="risparmio"
-                        stroke="#3B82F6"
-                        fill="url(#waterGradient)"
-                      />
+                      <Area type="monotone" dataKey="risparmio" stroke="#3B82F6" fill="url(#waterGradient)" />
                     </AreaChart>
                   </ResponsiveContainer>
                 </div>
@@ -591,18 +645,18 @@ const Comuni = () => {
                 <div className="h-36 sm:h-44 w-full">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={parkingData}>
-                      <XAxis dataKey="zone" tick={{ fontSize: 10 }} />
-                      <YAxis tick={{ fontSize: 10 }} />
+                      <XAxis dataKey="zone" tick={{
+                      fontSize: 10
+                    }} />
+                      <YAxis tick={{
+                      fontSize: 10
+                    }} />
                       <CartesianGrid strokeDasharray="3 3" />
                       <Bar dataKey="occupati" stackId="a" fill="#3B82F6">
-                        {parkingData.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill="#3B82F6" />
-                        ))}
+                        {parkingData.map((entry, index) => <Cell key={`cell-${index}`} fill="#3B82F6" />)}
                       </Bar>
                       <Bar dataKey="totali" stackId="a" fill="#E5E7EB">
-                        {parkingData.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill="#E5E7EB" />
-                        ))}
+                        {parkingData.map((entry, index) => <Cell key={`cell-${index}`} fill="#E5E7EB" />)}
                       </Bar>
                     </BarChart>
                   </ResponsiveContainer>
@@ -629,21 +683,11 @@ const Comuni = () => {
                 <div className="h-36 sm:h-44 w-full">
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
-                      <Pie
-                        data={lightingData}
-                        cx="50%"
-                        cy="50%"
-                        innerRadius={40}
-                        outerRadius={60}
-                        fill="#8884d8"
-                        paddingAngle={5}
-                        dataKey="value"
-                        label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                        labelLine={false}
-                      >
-                        {lightingData.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={entry.color} />
-                        ))}
+                      <Pie data={lightingData} cx="50%" cy="50%" innerRadius={40} outerRadius={60} fill="#8884d8" paddingAngle={5} dataKey="value" label={({
+                      name,
+                      percent
+                    }) => `${name} ${(percent * 100).toFixed(0)}%`} labelLine={false}>
+                        {lightingData.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.color} />)}
                       </Pie>
                     </PieChart>
                   </ResponsiveContainer>
@@ -681,17 +725,17 @@ const Comuni = () => {
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={wasteData}>
                       <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="giorno" tick={{ fontSize: 10 }} />
-                      <YAxis tick={{ fontSize: 10 }} />
+                      <XAxis dataKey="giorno" tick={{
+                      fontSize: 10
+                    }} />
+                      <YAxis tick={{
+                      fontSize: 10
+                    }} />
                       <Bar dataKey="raccolto" fill="#94A3B8" name="Totale raccolto">
-                        {wasteData.map((entry, index) => (
-                          <Cell key={`cell-raccolto-${index}`} fill="#94A3B8" />
-                        ))}
+                        {wasteData.map((entry, index) => <Cell key={`cell-raccolto-${index}`} fill="#94A3B8" />)}
                       </Bar>
                       <Bar dataKey="riciclato" fill="#10B981" name="Riciclato">
-                        {wasteData.map((entry, index) => (
-                          <Cell key={`cell-riciclato-${index}`} fill="#10B981" />
-                        ))}
+                        {wasteData.map((entry, index) => <Cell key={`cell-riciclato-${index}`} fill="#10B981" />)}
                       </Bar>
                     </BarChart>
                   </ResponsiveContainer>
@@ -711,9 +755,7 @@ const Comuni = () => {
             <TabsTrigger value="overview" className="px-1 py-3 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-blue-100 hover:to-indigo-100 hover:text-blue-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-400 data-[state=active]:to-indigo-500 data-[state=active]:text-white data-[state=active]:shadow-lg min-h-[44px]">
               Panoramica
             </TabsTrigger>
-            <TabsTrigger value="rewards" className="px-1 py-3 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-purple-100 hover:to-pink-100 hover:text-purple-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-400 data-[state=active]:to-pink-500 data-[state=active]:text-white data-[state=active]:shadow-lg min-h-[44px]">
-              Incentivi
-            </TabsTrigger>
+            <TabsTrigger value="rewards" className="px-1 py-3 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-purple-100 hover:to-pink-100 hover:text-purple-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-400 data-[state=active]:to-pink-500 data-[state=active]:text-white data-[state=active]:shadow-lg min-h-[44px]">Incentivi al cittadino</TabsTrigger>
           </TabsList>
 
           <div className="mt-6 sm:mt-8">
