@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -38,20 +37,69 @@ const Index = () => {
               {t('heroDescription')}
             </p>
             
-            <div className="flex flex-col gap-4 justify-center mb-8 sm:mb-12 px-4 max-w-md mx-auto">
+            {/* Virtuosity Button - unchanged */}
+            <div className="flex justify-center mb-8 sm:mb-12 px-4 max-w-md mx-auto">
               <Button onClick={() => navigate("/about")} className="bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full">{t('buttonVirtusosity')}</Button>
-              <Button onClick={() => navigate("/dashboard")} className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full">
-                {t('buttonUser')}
-              </Button>
-              <Button onClick={() => navigate("/exchange")} className="bg-gradient-to-r from-green-500 to-green-600 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full">
-                {t('buttonExchange')}
-              </Button>
-              <Button onClick={() => navigate("/dashboard-aziende")} className="bg-gradient-to-r from-sky-500 to-cyan-500 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-sky-600 hover:to-cyan-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full">
-                {t('buttonCompanies')}
-              </Button>
-              <Button onClick={() => navigate("/comuni")} className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full">
-                {t('buttonMunicipalities')}
-              </Button>
+            </div>
+
+            {/* Four Dashboard Blocks */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 sm:mb-12 max-w-4xl mx-auto px-4">
+              
+              {/* User Dashboard Block */}
+              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-6 shadow-lg border border-green-200 hover:shadow-xl transition-all duration-300">
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Dashboard Utente</h3>
+                <p className="text-gray-600 mb-4 text-sm">
+                  Accedi alla tua dashboard personale per monitorare le tue attività sostenibili, visualizzare i certificati guadagnati e partecipare alle sfide della community.
+                </p>
+                <Button 
+                  onClick={() => navigate("/dashboard")} 
+                  className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-3 text-base hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
+                >
+                  {t('buttonUser')}
+                </Button>
+              </div>
+
+              {/* Exchange Dashboard Block */}
+              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-6 shadow-lg border border-green-200 hover:shadow-xl transition-all duration-300">
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Exchange</h3>
+                <p className="text-gray-600 mb-4 text-sm">
+                  Scopri il marketplace dove puoi scambiare i tuoi punti Virtuosity con premi reali, buoni sconto e vantaggi esclusivi offerti dai partner.
+                </p>
+                <Button 
+                  onClick={() => navigate("/exchange")} 
+                  className="bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-3 text-base hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
+                >
+                  {t('buttonExchange')}
+                </Button>
+              </div>
+
+              {/* Companies Dashboard Block */}
+              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-6 shadow-lg border border-sky-200 hover:shadow-xl transition-all duration-300">
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Dashboard Aziende</h3>
+                <p className="text-gray-600 mb-4 text-sm">
+                  Accedi al pannello di controllo aziendale per gestire i dipendenti, monitorare le performance di sostenibilità e configurare incentivi personalizzati.
+                </p>
+                <Button 
+                  onClick={() => navigate("/dashboard-aziende")} 
+                  className="bg-gradient-to-r from-sky-500 to-cyan-500 text-white px-6 py-3 text-base hover:from-sky-600 hover:to-cyan-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
+                >
+                  {t('buttonCompanies')}
+                </Button>
+              </div>
+
+              {/* Municipalities Dashboard Block */}
+              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-6 shadow-lg border border-blue-200 hover:shadow-xl transition-all duration-300">
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Dashboard Comuni</h3>
+                <p className="text-gray-600 mb-4 text-sm">
+                  Entra nel centro di controllo comunale per gestire le integrazioni smart city, monitorare le segnalazioni cittadine e configurare incentivi locali.
+                </p>
+                <Button 
+                  onClick={() => navigate("/comuni")} 
+                  className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 text-base hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
+                >
+                  {t('buttonMunicipalities')}
+                </Button>
+              </div>
             </div>
 
             {/* Video Section */}
