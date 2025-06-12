@@ -89,13 +89,13 @@ const Exchange = () => {
     provider: "Supermercati Partner"
   }, {
     id: 9,
-    title: "Aperitivo",
-    description: "Voucher per aperitivo gratuito presso locali convenzionati",
+    title: "Visita Oculistica",
+    description: "Controllo completo della vista presso ottici convenzionati",
     cost: 120,
     category: "welfare",
-    image: "🍸",
+    image: "👁️",
     availability: "Disponibile",
-    provider: "Locali Partner"
+    provider: "Ottici Partner"
   }];
   const userPoints = 1275;
   const handleRedeem = (reward: any) => {
