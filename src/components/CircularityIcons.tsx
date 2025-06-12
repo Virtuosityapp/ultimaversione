@@ -1,10 +1,7 @@
-
 import React from 'react';
 import { Building2, Users, Leaf, RefreshCw, ArrowRightLeft, Repeat } from 'lucide-react';
-
 const CircularityIcons = () => {
-  return (
-    <div className="max-w-6xl mx-auto px-4 py-12">
+  return <div className="max-w-6xl mx-auto px-4 py-12">
       <div className="text-center mb-8">
         <h2 className="text-3xl font-bold text-gray-900 mb-4">
           Il Ciclo della Sostenibilità
@@ -19,11 +16,13 @@ const CircularityIcons = () => {
         {/* Central Circle - Virtuosity Platform */}
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="bg-gradient-to-br from-green-500 to-blue-500 rounded-full p-8 shadow-2xl">
-            <RefreshCw className="w-12 h-12 text-white animate-spin" style={{animationDuration: '8s'}} />
+            <RefreshCw className="w-12 h-12 text-white animate-spin" style={{
+            animationDuration: '8s'
+          }} />
           </div>
           <div className="absolute top-full mt-4 text-center">
-            <h3 className="text-xl font-bold text-gray-900">Virtuosity</h3>
-            <p className="text-sm text-gray-600">Piattaforma Centrale</p>
+            
+            
           </div>
         </div>
 
@@ -132,8 +131,6 @@ const CircularityIcons = () => {
           </p>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default CircularityIcons;
