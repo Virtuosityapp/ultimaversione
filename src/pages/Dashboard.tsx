@@ -3,12 +3,14 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Calendar, Award, TrendingUp, MapPin, Clock, QrCode, Camera, Smartphone, Users, Trophy, Target, Zap } from "lucide-react";
+import { Calendar, Award, TrendingUp, MapPin, Clock, QrCode, Camera, Smartphone, Users, Trophy, Target, Zap, Wallet } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { DppVerification } from "@/components/DppVerification";
 import CitizenReporting from "@/components/CitizenReporting";
+
 const Dashboard = () => {
   const navigate = useNavigate();
+
   const activities = [{
     id: 1,
     type: "bike",
@@ -106,6 +108,21 @@ const Dashboard = () => {
     if (position <= 3) return 'bg-green-100 text-green-800 border-green-300';
     return 'bg-blue-100 text-blue-800 border-blue-300';
   };
+
+  const handleWalletClick = () => {
+    // Switch to DPP tab and scroll to wallet section
+    const tabsTrigger = document.querySelector('[value="dpp"]') as HTMLElement;
+    if (tabsTrigger) {
+      tabsTrigger.click();
+      setTimeout(() => {
+        const walletSection = document.getElementById('dpp-wallet-section');
+        if (walletSection) {
+          walletSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  };
+
   return <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
       {/* Header */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-green-100 sticky top-0 z-50">
@@ -235,6 +252,20 @@ const Dashboard = () => {
                         <div className="text-xs text-gray-600">{activity.co2Saved}</div>
                       </div>
                     </div>)}
+                </div>
+                
+                {/* Wallet Button */}
+                <div className="mt-4 sm:mt-6 pt-4 border-t border-gray-200">
+                  <Button 
+                    onClick={handleWalletClick}
+                    className="w-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200 text-sm sm:text-base py-2 sm:py-3"
+                  >
+                    <Wallet className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                    Il tuo Wallet
+                  </Button>
+                  <p className="text-xs text-gray-500 text-center mt-2">
+                    Visualizza i tuoi certificati digitali e garanzie prodotti
+                  </p>
                 </div>
               </CardContent>
             </Card>
@@ -394,7 +425,7 @@ const Dashboard = () => {
                   Scansiona il QR code per verificare l'origine e la sostenibilità del prodotto
                 </CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent id="dpp-wallet-section">
                 <DppVerification />
               </CardContent>
             </Card>
@@ -403,4 +434,5 @@ const Dashboard = () => {
       </div>
     </div>;
 };
+
 export default Dashboard;
