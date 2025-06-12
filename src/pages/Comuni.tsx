@@ -11,6 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useEffect, useRef, useState } from "react";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, ResponsiveContainer, AreaChart, Area } from "recharts";
+
 const Comuni = () => {
   const navigate = useNavigate();
   const {
@@ -499,8 +500,25 @@ const Comuni = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-4 sm:p-6 pt-0">
-                <div className="h-64 sm:h-80 w-full rounded-lg overflow-hidden bg-gray-50">
-                  <div ref={mapContainer} className="h-full w-full" />
+                <div className="h-64 sm:h-80 w-full rounded-lg overflow-hidden bg-gray-50 relative">
+                  <img 
+                    src="https://images.unsplash.com/photo-1431576901776-e539bd916ba2?w=800&h=600&fit=crop&auto=format"
+                    alt="Vista aerea della città"
+                    className="w-full h-full object-cover"
+                  />
+                  {/* Overlay con punti di interesse */}
+                  <div className="absolute top-4 left-4">
+                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                  </div>
+                  <div className="absolute top-8 right-6">
+                    <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+                  </div>
+                  <div className="absolute bottom-6 left-8">
+                    <div className="w-3 h-3 bg-orange-500 rounded-full animate-pulse"></div>
+                  </div>
+                  <div className="absolute bottom-4 right-4">
+                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                  </div>
                 </div>
                 <div className="mt-4 flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm">
                   <div className="flex items-center space-x-1">
