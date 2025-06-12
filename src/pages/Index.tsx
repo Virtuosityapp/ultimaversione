@@ -1,8 +1,10 @@
+
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import CircularityIcons from "@/components/CircularityIcons";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -41,6 +43,9 @@ const Index = () => {
             <div className="flex justify-center mb-8 sm:mb-12 px-4 max-w-md mx-auto">
               <Button onClick={() => navigate("/about")} className="bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full">{t('buttonVirtusosity')}</Button>
             </div>
+
+            {/* Circularity Icons Section */}
+            <CircularityIcons />
 
             {/* Four Dashboard Blocks */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 sm:mb-12 max-w-4xl mx-auto px-4">
