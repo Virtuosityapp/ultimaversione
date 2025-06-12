@@ -15,7 +15,8 @@ const Exchange = () => {
   useEffect(() => {
     document.title = "Exchange - Virtuosity";
   }, []);
-  const rewards = [{
+  const rewards = [
+    {
     id: 1,
     title: "Buono Pasto",
     description: "Buono spendibile in mense aziendali partner",
@@ -71,7 +72,7 @@ const Exchange = () => {
     provider: "Mobike"
   }, {
     id: 7,
-    title: "Parco Divertimenti Salta Fila",
+    title: "Parchi a Tema Salta Fila",
     description: "Ingresso con accesso prioritario alle attrazioni",
     cost: 600,
     category: "culture",
