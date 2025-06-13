@@ -1,10 +1,10 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { AlertDialog, AlertDialogAction, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
-import { Leaf, Gift, Star, ShoppingCart, ArrowLeft, Menu, ExternalLink, Calendar, MapPin, Heart } from "lucide-react";
+import { Leaf, Gift, Star, ShoppingCart, ArrowLeft, Menu, ExternalLink, Calendar, MapPin, Heart, Building2, HandHeart, Users } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useEffect, useState } from "react";
@@ -14,6 +14,7 @@ const Exchange = () => {
   const { toast } = useToast();
   const [showDonationDialog, setShowDonationDialog] = useState(false);
   const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [selectedExchangeType, setSelectedExchangeType] = useState("company-rewards");
 
   useEffect(() => {
     document.title = "Exchange - Virtuosity";
@@ -109,6 +110,27 @@ const Exchange = () => {
 
   const userPoints = 1275;
   const userCertificates = 45;
+
+  const exchangeTypes = [
+    { 
+      value: "company-rewards", 
+      label: "Premi Aziendali", 
+      icon: Building2,
+      description: "Utilizza i tuoi punti per vantaggi esclusivi"
+    },
+    { 
+      value: "social-projects", 
+      label: "Progetti Sociali", 
+      icon: HandHeart,
+      description: "Dona certificati per supportare la comunità"
+    },
+    { 
+      value: "partner-offers", 
+      label: "Offerte Partner", 
+      icon: Users,
+      description: "Scopri le proposte sostenibili dei partner"
+    }
+  ];
 
   const handleRedeem = (reward: any) => {
     if (userPoints >= reward.cost) {
@@ -280,7 +302,266 @@ const Exchange = () => {
     });
   };
 
-  return <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
+  const renderCompanyRewards = () => (
+    <div className="space-y-6 sm:space-y-8">
+      <div className="text-center">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Premi Aziendali 🏢</h2>
+        <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base px-4">
+          Utilizza i tuoi punti per ottenere vantaggi esclusivi offerti dalla tua azienda
+        </p>
+      </div>
+
+      <Tabs defaultValue="all" className="space-y-4 sm:space-y-6">
+        <TabsList className="grid w-full grid-cols-4 bg-white/80 backdrop-blur-sm text-xs sm:text-sm shadow-md">
+          <TabsTrigger value="all" className="px-2 sm:px-4 hover:bg-gradient-to-r hover:from-gray-100 hover:to-slate-100 hover:text-gray-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-gray-400 data-[state=active]:to-slate-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
+            Tutti
+          </TabsTrigger>
+          <TabsTrigger value="transport" className="px-1 sm:px-4 hover:bg-gradient-to-r hover:from-green-100 hover:to-emerald-100 hover:text-green-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-400 data-[state=active]:to-emerald-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
+            Trasporti
+          </TabsTrigger>
+          <TabsTrigger value="culture" className="px-1 sm:px-4 hover:bg-gradient-to-r hover:from-purple-100 hover:to-pink-100 hover:text-purple-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-400 data-[state=active]:to-pink-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
+            Cultura
+          </TabsTrigger>
+          <TabsTrigger value="welfare" className="px-1 sm:px-4 hover:bg-gradient-to-r hover:from-orange-100 hover:to-red-100 hover:text-orange-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-400 data-[state=active]:to-red-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
+            Welfare
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="all" className="space-y-4 sm:space-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {rewards.map((reward) => (
+              <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300 overflow-hidden">
+                <div className="relative">
+                  <img src={reward.image} alt={reward.title} className="w-full h-40 sm:h-48 object-cover" />
+                  <div className="absolute top-3 right-3">
+                    <Badge className={getCategoryColor(reward.category)}>
+                      {getCategoryName(reward.category)}
+                    </Badge>
+                  </div>
+                </div>
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-base sm:text-lg">{reward.title}</CardTitle>
+                  <CardDescription className="text-sm">{reward.description}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3 sm:space-y-4">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-600">Costo</span>
+                      <span className="font-bold text-base sm:text-lg text-blue-600">{reward.cost} punti</span>
+                    </div>
+                    
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-600">Disponibilità</span>
+                      <Badge variant={reward.availability === "Disponibile" ? "default" : "secondary"}>
+                        {reward.availability}
+                      </Badge>
+                    </div>
+                    
+                    <div className="text-xs text-gray-500">
+                      Partner: {reward.provider}
+                    </div>
+                    
+                    <Button className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white hover:from-green-700 hover:to-blue-700 text-sm sm:text-base" onClick={() => handleRedeem(reward)} disabled={userPoints < reward.cost} size="sm">
+                      <ShoppingCart className="h-4 w-4 mr-2" />
+                      {userPoints >= reward.cost ? "Riscatta Ora" : "Punti Insufficienti"}
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </TabsContent>
+
+        {["transport", "culture", "welfare"].map((category) => (
+          <TabsContent key={category} value={category} className="space-y-4 sm:space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+              {rewards
+                .filter((reward) => reward.category === category)
+                .map((reward) => (
+                  <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300 overflow-hidden">
+                    <div className="relative">
+                      <img src={reward.image} alt={reward.title} className="w-full h-40 sm:h-48 object-cover" />
+                      <div className="absolute top-3 right-3">
+                        <Badge className={getCategoryColor(reward.category)}>
+                          {getCategoryName(reward.category)}
+                        </Badge>
+                      </div>
+                    </div>
+                    <CardHeader className="pb-3">
+                      <CardTitle className="text-base sm:text-lg">{reward.title}</CardTitle>
+                      <CardDescription className="text-sm">{reward.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-3 sm:space-y-4">
+                        <div className="flex justify-between items-center">
+                          <span className="text-sm text-gray-600">Costo</span>
+                          <span className="font-bold text-base sm:text-lg text-blue-600">{reward.cost} punti</span>
+                        </div>
+                        
+                        <div className="flex justify-between items-center">
+                          <span className="text-sm text-gray-600">Disponibilità</span>
+                          <Badge variant={reward.availability === "Disponibile" ? "default" : "secondary"}>
+                            {reward.availability}
+                          </Badge>
+                        </div>
+                        
+                        <div className="text-xs text-gray-500">
+                          Partner: {reward.provider}
+                        </div>
+                        
+                        <Button className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white hover:from-green-700 hover:to-blue-700 text-sm sm:text-base" onClick={() => handleRedeem(reward)} disabled={userPoints < reward.cost} size="sm">
+                          <ShoppingCart className="h-4 w-4 mr-2" />
+                          {userPoints >= reward.cost ? "Riscatta Ora" : "Punti Insufficienti"}
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+            </div>
+          </TabsContent>
+        ))}
+      </Tabs>
+    </div>
+  );
+
+  const renderSocialProjects = () => (
+    <div className="space-y-6 sm:space-y-8">
+      <div className="text-center">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Progetti Sociali ❤️</h2>
+        <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base px-4">
+          Dona i tuoi certificati per supportare progetti sociali delle associazioni e fare la differenza nella comunità
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        {socialProjects.map((project) => (
+          <Card key={project.id} className="border-0 shadow-lg bg-white/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300 overflow-hidden">
+            <div className="relative">
+              <img src={project.image} alt={project.title} className="w-full h-40 sm:h-48 object-cover" />
+              <div className="absolute top-3 right-3">
+                <Badge className={getSocialCategoryColor(project.category)}>
+                  {project.category}
+                </Badge>
+              </div>
+            </div>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base sm:text-lg">{project.title}</CardTitle>
+              <CardDescription className="text-sm">{project.description}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-600">Certificati necessari</span>
+                  <span className="font-bold text-base sm:text-lg text-red-600">{project.certificatesNeeded}</span>
+                </div>
+
+                <div className="flex justify-between items-center text-sm">
+                  <span className="text-gray-600">Associazione</span>
+                  <span className="font-semibold text-blue-600">{project.association}</span>
+                </div>
+
+                <div className="flex justify-between items-center text-sm">
+                  <span className="text-gray-600">Impatto previsto</span>
+                  <span className="font-semibold text-green-600">{project.impact}</span>
+                </div>
+
+                <div className="flex items-center text-sm text-gray-600">
+                  <MapPin className="h-4 w-4 mr-1" />
+                  <span>{project.location}</span>
+                </div>
+
+                <Button className="w-full bg-gradient-to-r from-red-600 to-pink-600 text-white hover:from-red-700 hover:to-pink-700 text-sm" size="sm" onClick={() => handleDonate(project)} disabled={userCertificates < project.certificatesNeeded}>
+                  <Heart className="h-4 w-4 mr-2" />
+                  {userCertificates >= project.certificatesNeeded ? "Dona Ora" : "Certificati Insufficienti"}
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </div>
+  );
+
+  const renderPartnerOffers = () => (
+    <div className="space-y-6 sm:space-y-8">
+      <div className="text-center">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Offerte Partner Esclusive 🤝</h2>
+        <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base px-4">
+          Scopri le proposte sostenibili dei nostri partner e approfitta di sconti esclusivi per utenti Virtuosity
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        {partnerOffers.map((offer) => (
+          <Card key={offer.id} className="border-0 shadow-lg bg-white/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300 overflow-hidden">
+            <div className="relative">
+              <img src={offer.image} alt={offer.title} className="w-full h-40 sm:h-48 object-cover" />
+              <div className="absolute top-3 left-3">
+                <Badge className="bg-white/90 text-gray-800 font-bold">
+                  {offer.partner}
+                </Badge>
+              </div>
+              <div className="absolute top-3 right-3">
+                <Badge className={getCategoryColorAd(offer.category)}>
+                  {offer.discount}
+                </Badge>
+              </div>
+            </div>
+
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base sm:text-lg">{offer.title}</CardTitle>
+              <CardDescription className="text-sm">{offer.description}</CardDescription>
+            </CardHeader>
+
+            <CardContent>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center text-sm">
+                  <div className="flex items-center gap-1 text-gray-600">
+                    <Calendar className="h-4 w-4" />
+                    <span>Valido fino al</span>
+                  </div>
+                  <span className="font-semibold">{offer.validUntil}</span>
+                </div>
+
+                {offer.pointsRequired > 0 && (
+                  <div className="flex justify-between items-center text-sm">
+                    <span className="text-gray-600">Punti richiesti</span>
+                    <span className="font-bold text-blue-600">{offer.pointsRequired} punti</span>
+                  </div>
+                )}
+
+                <div>
+                  <p className="text-sm text-gray-600 mb-2">Benefici inclusi:</p>
+                  <div className="space-y-1">
+                    {offer.benefits.slice(0, 2).map((benefit, index) => (
+                      <div key={index} className="flex items-center text-xs text-gray-700">
+                        <Star className="h-3 w-3 text-yellow-500 mr-1 flex-shrink-0" />
+                        <span>{benefit}</span>
+                      </div>
+                    ))}
+                    {offer.benefits.length > 2 && (
+                      <div className="flex items-center text-xs text-gray-700">
+                        <Star className="h-3 w-3 text-yellow-500 mr-1 flex-shrink-0" />
+                        <span>+{offer.benefits.length - 2} altri vantaggi</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700 text-sm" size="sm" onClick={() => handlePartnerOfferClick(offer)}>
+                  <ExternalLink className="h-4 w-4 mr-2" />
+                  {offer.pointsRequired > userPoints && offer.pointsRequired > 0 ? "Punti Insufficienti" : "Scopri l'Offerta"}
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
       {/* Header */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-green-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -359,259 +640,38 @@ const Exchange = () => {
           </Card>
         </div>
 
-        {/* Company Rewards Section */}
+        {/* Exchange Type Selection */}
         <div className="mb-8 sm:mb-12">
-          <div className="text-center mb-6 sm:mb-8">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Premi Aziendali 🏢</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base px-4">
-              Utilizza i tuoi punti per ottenere vantaggi esclusivi offerti dalla tua azienda
-            </p>
-          </div>
-
-          <Tabs defaultValue="all" className="space-y-4 sm:space-y-6">
-            <TabsList className="grid w-full grid-cols-4 bg-white/80 backdrop-blur-sm text-xs sm:text-sm shadow-md">
-              <TabsTrigger value="all" className="px-2 sm:px-4 hover:bg-gradient-to-r hover:from-gray-100 hover:to-slate-100 hover:text-gray-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-gray-400 data-[state=active]:to-slate-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
-                Tutti
-              </TabsTrigger>
-              <TabsTrigger value="transport" className="px-1 sm:px-4 hover:bg-gradient-to-r hover:from-green-100 hover:to-emerald-100 hover:text-green-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-400 data-[state=active]:to-emerald-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
-                Trasporti
-              </TabsTrigger>
-              <TabsTrigger value="culture" className="px-1 sm:px-4 hover:bg-gradient-to-r hover:from-purple-100 hover:to-pink-100 hover:text-purple-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-400 data-[state=active]:to-pink-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
-                Cultura
-              </TabsTrigger>
-              <TabsTrigger value="welfare" className="px-1 sm:px-4 hover:bg-gradient-to-r hover:from-orange-100 hover:to-red-100 hover:text-orange-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-400 data-[state=active]:to-red-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
-                Welfare
-              </TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="all" className="space-y-4 sm:space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                {rewards.map((reward) => (
-                  <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300 overflow-hidden">
-                    <div className="relative">
-                      <img src={reward.image} alt={reward.title} className="w-full h-40 sm:h-48 object-cover" />
-                      <div className="absolute top-3 right-3">
-                        <Badge className={getCategoryColor(reward.category)}>
-                          {getCategoryName(reward.category)}
-                        </Badge>
+          <div className="max-w-md mx-auto">
+            <label className="block text-sm font-medium text-gray-700 mb-2 text-center">
+              Seleziona il tipo di scambio
+            </label>
+            <Select value={selectedExchangeType} onValueChange={setSelectedExchangeType}>
+              <SelectTrigger className="w-full bg-white/80 backdrop-blur-sm border-green-200 shadow-lg">
+                <SelectValue placeholder="Scegli cosa fare con i tuoi punti..." />
+              </SelectTrigger>
+              <SelectContent className="bg-white/95 backdrop-blur-sm border-green-200">
+                {exchangeTypes.map((type) => (
+                  <SelectItem key={type.value} value={type.value} className="focus:bg-green-50">
+                    <div className="flex items-center space-x-3">
+                      <type.icon className="h-5 w-5 text-green-600" />
+                      <div>
+                        <div className="font-medium">{type.label}</div>
+                        <div className="text-xs text-gray-500">{type.description}</div>
                       </div>
                     </div>
-                    <CardHeader className="pb-3">
-                      <CardTitle className="text-base sm:text-lg">{reward.title}</CardTitle>
-                      <CardDescription className="text-sm">{reward.description}</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-3 sm:space-y-4">
-                        <div className="flex justify-between items-center">
-                          <span className="text-sm text-gray-600">Costo</span>
-                          <span className="font-bold text-base sm:text-lg text-blue-600">{reward.cost} punti</span>
-                        </div>
-                        
-                        <div className="flex justify-between items-center">
-                          <span className="text-sm text-gray-600">Disponibilità</span>
-                          <Badge variant={reward.availability === "Disponibile" ? "default" : "secondary"}>
-                            {reward.availability}
-                          </Badge>
-                        </div>
-                        
-                        <div className="text-xs text-gray-500">
-                          Partner: {reward.provider}
-                        </div>
-                        
-                        <Button className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white hover:from-green-700 hover:to-blue-700 text-sm sm:text-base" onClick={() => handleRedeem(reward)} disabled={userPoints < reward.cost} size="sm">
-                          <ShoppingCart className="h-4 w-4 mr-2" />
-                          {userPoints >= reward.cost ? "Riscatta Ora" : "Punti Insufficienti"}
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
+                  </SelectItem>
                 ))}
-              </div>
-            </TabsContent>
-
-            {["transport", "culture", "welfare"].map((category) => (
-              <TabsContent key={category} value={category} className="space-y-4 sm:space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                  {rewards
-                    .filter((reward) => reward.category === category)
-                    .map((reward) => (
-                      <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300 overflow-hidden">
-                        <div className="relative">
-                          <img src={reward.image} alt={reward.title} className="w-full h-40 sm:h-48 object-cover" />
-                          <div className="absolute top-3 right-3">
-                            <Badge className={getCategoryColor(reward.category)}>
-                              {getCategoryName(reward.category)}
-                            </Badge>
-                          </div>
-                        </div>
-                        <CardHeader className="pb-3">
-                          <CardTitle className="text-base sm:text-lg">{reward.title}</CardTitle>
-                          <CardDescription className="text-sm">{reward.description}</CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                          <div className="space-y-3 sm:space-y-4">
-                            <div className="flex justify-between items-center">
-                              <span className="text-sm text-gray-600">Costo</span>
-                              <span className="font-bold text-base sm:text-lg text-blue-600">{reward.cost} punti</span>
-                            </div>
-                            
-                            <div className="flex justify-between items-center">
-                              <span className="text-sm text-gray-600">Disponibilità</span>
-                              <Badge variant={reward.availability === "Disponibile" ? "default" : "secondary"}>
-                                {reward.availability}
-                              </Badge>
-                            </div>
-                            
-                            <div className="text-xs text-gray-500">
-                              Partner: {reward.provider}
-                            </div>
-                            
-                            <Button className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white hover:from-green-700 hover:to-blue-700 text-sm sm:text-base" onClick={() => handleRedeem(reward)} disabled={userPoints < reward.cost} size="sm">
-                              <ShoppingCart className="h-4 w-4 mr-2" />
-                              {userPoints >= reward.cost ? "Riscatta Ora" : "Punti Insufficienti"}
-                            </Button>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
-                </div>
-              </TabsContent>
-            ))}
-          </Tabs>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
 
-        {/* Social Projects Section */}
+        {/* Dynamic Content Based on Selection */}
         <div className="mb-8 sm:mb-12">
-          <div className="text-center mb-6 sm:mb-8">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Progetti Sociali ❤️</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base px-4">
-              Dona i tuoi certificati per supportare progetti sociali delle associazioni e fare la differenza nella comunità
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {socialProjects.map((project) => (
-              <Card key={project.id} className="border-0 shadow-lg bg-white/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300 overflow-hidden">
-                <div className="relative">
-                  <img src={project.image} alt={project.title} className="w-full h-40 sm:h-48 object-cover" />
-                  <div className="absolute top-3 right-3">
-                    <Badge className={getSocialCategoryColor(project.category)}>
-                      {project.category}
-                    </Badge>
-                  </div>
-                </div>
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-base sm:text-lg">{project.title}</CardTitle>
-                  <CardDescription className="text-sm">{project.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-600">Certificati necessari</span>
-                      <span className="font-bold text-base sm:text-lg text-red-600">{project.certificatesNeeded}</span>
-                    </div>
-
-                    <div className="flex justify-between items-center text-sm">
-                      <span className="text-gray-600">Associazione</span>
-                      <span className="font-semibold text-blue-600">{project.association}</span>
-                    </div>
-
-                    <div className="flex justify-between items-center text-sm">
-                      <span className="text-gray-600">Impatto previsto</span>
-                      <span className="font-semibold text-green-600">{project.impact}</span>
-                    </div>
-
-                    <div className="flex items-center text-sm text-gray-600">
-                      <MapPin className="h-4 w-4 mr-1" />
-                      <span>{project.location}</span>
-                    </div>
-
-                    <Button className="w-full bg-gradient-to-r from-red-600 to-pink-600 text-white hover:from-red-700 hover:to-pink-700 text-sm" size="sm" onClick={() => handleDonate(project)} disabled={userCertificates < project.certificatesNeeded}>
-                      <Heart className="h-4 w-4 mr-2" />
-                      {userCertificates >= project.certificatesNeeded ? "Dona Ora" : "Certificati Insufficienti"}
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-
-        {/* Partner Offers Section */}
-        <div className="mt-12 sm:mt-16">
-          <div className="text-center mb-6 sm:mb-8">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Offerte Partner Esclusive 🤝</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base px-4">
-              Scopri le proposte sostenibili dei nostri partner e approfitta di sconti esclusivi per utenti Virtuosity
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {partnerOffers.map((offer) => (
-              <Card key={offer.id} className="border-0 shadow-lg bg-white/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300 overflow-hidden">
-                <div className="relative">
-                  <img src={offer.image} alt={offer.title} className="w-full h-40 sm:h-48 object-cover" />
-                  <div className="absolute top-3 left-3">
-                    <Badge className="bg-white/90 text-gray-800 font-bold">
-                      {offer.partner}
-                    </Badge>
-                  </div>
-                  <div className="absolute top-3 right-3">
-                    <Badge className={getCategoryColorAd(offer.category)}>
-                      {offer.discount}
-                    </Badge>
-                  </div>
-                </div>
-
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-base sm:text-lg">{offer.title}</CardTitle>
-                  <CardDescription className="text-sm">{offer.description}</CardDescription>
-                </CardHeader>
-
-                <CardContent>
-                  <div className="space-y-3">
-                    <div className="flex justify-between items-center text-sm">
-                      <div className="flex items-center gap-1 text-gray-600">
-                        <Calendar className="h-4 w-4" />
-                        <span>Valido fino al</span>
-                      </div>
-                      <span className="font-semibold">{offer.validUntil}</span>
-                    </div>
-
-                    {offer.pointsRequired > 0 && (
-                      <div className="flex justify-between items-center text-sm">
-                        <span className="text-gray-600">Punti richiesti</span>
-                        <span className="font-bold text-blue-600">{offer.pointsRequired} punti</span>
-                      </div>
-                    )}
-
-                    <div>
-                      <p className="text-sm text-gray-600 mb-2">Benefici inclusi:</p>
-                      <div className="space-y-1">
-                        {offer.benefits.slice(0, 2).map((benefit, index) => (
-                          <div key={index} className="flex items-center text-xs text-gray-700">
-                            <Star className="h-3 w-3 text-yellow-500 mr-1 flex-shrink-0" />
-                            <span>{benefit}</span>
-                          </div>
-                        ))}
-                        {offer.benefits.length > 2 && (
-                          <div className="flex items-center text-xs text-gray-700">
-                            <Star className="h-3 w-3 text-yellow-500 mr-1 flex-shrink-0" />
-                            <span>+{offer.benefits.length - 2} altri vantaggi</span>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-
-                    <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700 text-sm" size="sm" onClick={() => handlePartnerOfferClick(offer)}>
-                      <ExternalLink className="h-4 w-4 mr-2" />
-                      {offer.pointsRequired > userPoints && offer.pointsRequired > 0 ? "Punti Insufficienti" : "Scopri l'Offerta"}
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          {selectedExchangeType === "company-rewards" && renderCompanyRewards()}
+          {selectedExchangeType === "social-projects" && renderSocialProjects()}
+          {selectedExchangeType === "partner-offers" && renderPartnerOffers()}
         </div>
 
         {/* Bottom Info */}
@@ -656,7 +716,8 @@ const Exchange = () => {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </div>;
+    </div>
+  );
 };
 
 export default Exchange;
