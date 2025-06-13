@@ -104,36 +104,6 @@ const Exchange = () => {
     category: "educazione",
     impact: "50 anziani formati",
     location: "Centri Sociali Milano"
-  }, {
-    id: 4,
-    title: "Pulizia Fiumi e Laghi",
-    description: "Rimozione di rifiuti plastici da corsi d'acqua e zone lacustri",
-    certificatesNeeded: 20,
-    association: "Plastic Free Lombardia",
-    image: "https://images.unsplash.com/photo-1621451537084-482c73073a0f?w=400&h=300&fit=crop",
-    category: "ambiente",
-    impact: "2 tonnellate di rifiuti rimossi",
-    location: "Navigli Milano"
-  }, {
-    id: 5,
-    title: "Centro Accoglienza Animali",
-    description: "Sostegno per cure veterinarie e mantenimento di animali abbandonati",
-    certificatesNeeded: 18,
-    association: "ENPA Milano",
-    image: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&h=300&fit=crop",
-    category: "animali",
-    impact: "30 animali curati",
-    location: "Canile Municipale"
-  }, {
-    id: 6,
-    title: "Laboratori Creativi Bambini",
-    description: "Attività artistiche e ricreative per bambini in situazioni di disagio",
-    certificatesNeeded: 12,
-    association: "Arte per Tutti",
-    image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&h=300&fit=crop",
-    category: "infanzia",
-    impact: "100 bambini coinvolti",
-    location: "Quartieri Periferici"
   }];
 
   const userPoints = 1275;
@@ -237,42 +207,6 @@ const Exchange = () => {
     pointsRequired: 150,
     benefits: ["Audioguida inclusa", "Workshop gratuito", "Catalogo digitale"],
     websiteUrl: "https://www.triennale.org"
-  }, {
-    id: 4,
-    partner: "ATM",
-    title: "Nuova Linea Bus Elettrici",
-    description: "Prova la nuova tratta di autobus 100% elettrici che collegano i quartieri green di Milano",
-    discount: "Abbonamento speciale",
-    category: "trasporti",
-    image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&h=300&fit=crop",
-    validUntil: "31 Dicembre 2026",
-    pointsRequired: 300,
-    benefits: ["1 mese gratuito", "App premium", "Priority boarding"],
-    websiteUrl: "https://www.atm.it"
-  }, {
-    id: 5,
-    partner: "IKEA",
-    title: "Mobili da Materiali Riciclati",
-    description: "Nuova collezione di arredi realizzati al 100% con materiali riciclati e sostenibili",
-    discount: "Sconto 20%",
-    category: "casa",
-    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop",
-    validUntil: "30 Aprile 2026",
-    pointsRequired: 400,
-    benefits: ["Consegna gratuita", "Montaggio incluso", "Ritiro mobili usati"],
-    websiteUrl: "https://www.ikea.com/it/it/"
-  }, {
-    id: 6,
-    partner: "COOP",
-    title: "Prodotti Biologici Locali",
-    description: "Selezione esclusiva di prodotti bio a km zero dai migliori produttori lombardi",
-    discount: "Sconto 10%",
-    category: "alimentare",
-    image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop",
-    validUntil: "31 Maggio 2026",
-    pointsRequired: 100,
-    benefits: ["Spesa a domicilio", "Ricette esclusive", "Degustazioni gratuite"],
-    websiteUrl: "https://www.e-coop.it"
   }];
 
   const getCategoryColorAd = (category: string) => {
