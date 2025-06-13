@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -100,7 +101,7 @@ const Exchange = () => {
     description: "Rimozione di rifiuti plastici da corsi d'acqua e zone lacustri",
     certificatesNeeded: 20,
     association: "Plastic Free Lombardia",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
+    image: "/lovable-uploads/5ae239bd-f754-4970-9792-5591a5b6c34c.png",
     category: "ambiente",
     impact: "2 tonnellate di rifiuti rimossi",
     location: "Navigli Milano"
