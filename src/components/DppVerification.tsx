@@ -66,7 +66,7 @@ export const DppVerification = () => {
       name: "Borsa Saffiano",
       brand: "PRADA",
       model: "1BA274",
-      image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=300&h=300&fit=crop",
+      image: "/lovable-uploads/68f725b5-ee07-4329-b173-31ae580fbafd.png",
       purchaseDate: "2024-01-15",
       warranty: {
         period: "2 anni",
@@ -86,7 +86,7 @@ export const DppVerification = () => {
       name: "Submariner Date",
       brand: "ROLEX",
       model: "126610LN",
-      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=300&h=300&fit=crop",
+      image: "/lovable-uploads/7676b5a7-2456-4cc9-ae9c-3e50d71dd284.png",
       purchaseDate: "2023-11-20",
       warranty: {
         period: "5 anni",
