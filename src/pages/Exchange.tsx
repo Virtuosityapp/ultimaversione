@@ -51,7 +51,7 @@ const Exchange = () => {
     description: "Visita dentistica completa presso cliniche convenzionate",
     cost: 500,
     category: "welfare",
-    image: "/lovable-uploads/68f725b5-ee07-4329-b173-31ae580fbafd.png",
+    image: "/lovable-uploads/b5488416-c6e5-4aca-ad68-7812221c407e.png",
     availability: "Disponibile",
     provider: "Cliniche Partner"
   }, {
