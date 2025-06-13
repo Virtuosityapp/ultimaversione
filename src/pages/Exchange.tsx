@@ -232,7 +232,7 @@ const Exchange = () => {
     description: "Esposizione dedicata al design circolare e sostenibile alla Triennale di Milano",
     discount: "Ingresso gratuito",
     category: "cultura",
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
+    image: "/lovable-uploads/294ab6e8-9427-49e9-bd69-49a745aacda7.png",
     validUntil: "15 Maggio 2026",
     pointsRequired: 150,
     benefits: ["Audioguida inclusa", "Workshop gratuito", "Catalogo digitale"],
