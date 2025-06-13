@@ -41,7 +41,7 @@ const Dashboard = () => {
       name: "Borsa Saffiano",
       brand: "PRADA",
       model: "1BA274",
-      image: "/lovable-uploads/3481b0f8-728c-469a-88b5-11f47b0047a4.png",
+      image: "/lovable-uploads/68f725b5-ee07-4329-b173-31ae580fbafd.png",
       purchaseDate: "2024-01-15",
       warranty: {
         period: "2 anni",
@@ -61,7 +61,7 @@ const Dashboard = () => {
       name: "Submariner Date",
       brand: "ROLEX",
       model: "126610LN",
-      image: "/lovable-uploads/a51bd3a3-21bb-4cab-afc7-e651cac982e9.png",
+      image: "/lovable-uploads/7676b5a7-2456-4cc9-ae9c-3e50d71dd284.png",
       purchaseDate: "2023-11-20",
       warranty: {
         period: "5 anni",
