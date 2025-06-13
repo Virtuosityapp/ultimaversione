@@ -1,323 +1,515 @@
+
 import React, { useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { QrCode, Camera, MapPin, Leaf, Shield, Truck, Wallet, ShoppingBag, Calendar, Eye } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { QrCode, Camera, Shield, CheckCircle, AlertCircle, Leaf, Eye, EyeOff, Lock, Zap } from "lucide-react";
+
+interface DppData {
+  id: string;
+  name: string;
+  brand: string;
+  origin: {
+    country: string;
+    region: string;
+    coordinates: [number, number];
+  };
+  sustainability: {
+    score: number;
+    certifications: string[];
+    carbonFootprint: string;
+    recyclable: boolean;
+  };
+  supply_chain: {
+    manufacturer: string;
+    production_date: string;
+    batch_number: string;
+    transport_method: string;
+  };
+  verified: boolean;
+  verification_date: string;
+}
+
+interface WalletProduct {
+  id: string;
+  name: string;
+  brand: string;
+  model: string;
+  image: string;
+  purchaseDate: string;
+  warranty: {
+    period: string;
+    expires: string;
+    coverage: string[];
+  };
+  sustainability: {
+    score: number;
+    certifications: string[];
+  };
+  value: string;
+  category: string;
+  status: 'active' | 'expired' | 'claimed';
+}
 
 export const DppVerification = () => {
   const [isScanning, setIsScanning] = useState(false);
-  const [dppData, setDppData] = useState(null);
-  const [showDetails, setShowDetails] = useState(false);
-  const fileInputRef = useRef(null);
+  const [dppData, setDppData] = useState<DppData | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const { toast } = useToast();
 
-  const handleScan = () => {
+  // Mock wallet products
+  const [walletProducts] = useState<WalletProduct[]>([
+    {
+      id: "DPP-PRADA-001",
+      name: "Borsa Saffiano",
+      brand: "PRADA",
+      model: "1BA274",
+      image: "/lovable-uploads/68f725b5-ee07-4329-b173-31ae580fbafd.png",
+      purchaseDate: "2024-01-15",
+      warranty: {
+        period: "2 anni",
+        expires: "2026-01-15",
+        coverage: ["Difetti di fabbricazione", "Riparazione pelletteria", "Sostituzione hardware"]
+      },
+      sustainability: {
+        score: 92,
+        certifications: ["Made in Italy", "Pelle certificata", "Carbon Neutral"]
+      },
+      value: "€ 2.850",
+      category: "Pelletteria",
+      status: 'active'
+    },
+    {
+      id: "DPP-ROLEX-002",
+      name: "Submariner Date",
+      brand: "ROLEX",
+      model: "126610LN",
+      image: "/lovable-uploads/7676b5a7-2456-4cc9-ae9c-3e50d71dd284.png",
+      purchaseDate: "2023-11-20",
+      warranty: {
+        period: "5 anni",
+        expires: "2028-11-20",
+        coverage: ["Movimento", "Cassa e bracciale", "Impermeabilità"]
+      },
+      sustainability: {
+        score: 88,
+        certifications: ["Swiss Made", "Oro responsabile", "Packaging eco"]
+      },
+      value: "€ 9.150",
+      category: "Orologeria",
+      status: 'active'
+    },
+    {
+      id: "DPP-APPLE-003",
+      name: "iPhone 15 Pro",
+      brand: "APPLE",
+      model: "A3101",
+      image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=300&h=300&fit=crop",
+      purchaseDate: "2023-09-22",
+      warranty: {
+        period: "1 anno",
+        expires: "2024-09-22",
+        coverage: ["Hardware", "Batteria", "AppleCare+"]
+      },
+      sustainability: {
+        score: 85,
+      certifications: ["Carbon Neutral", "Materiali riciclati", "Packaging plastic-free"]
+      },
+      value: "€ 1.199",
+      category: "Tecnologia",
+      status: 'expired'
+    }
+  ]);
+
+  // Mock DPP data for demonstration
+  const mockDppData: DppData = {
+    id: "DPP-2024-001234",
+    name: "Scarpe da Corsa EcoRun",
+    brand: "GreenStep",
+    origin: {
+      country: "Italia",
+      region: "Toscana, Firenze",
+      coordinates: [11.2558, 43.7696]
+    },
+    sustainability: {
+      score: 85,
+      certifications: ["EU Ecolabel", "OEKO-TEX", "Carbon Neutral"],
+      carbonFootprint: "2.3 kg CO₂",
+      recyclable: true
+    },
+    supply_chain: {
+      manufacturer: "EcoFootwear S.r.l.",
+      production_date: "2024-01-15",
+      batch_number: "EF2024-A001",
+      transport_method: "Trasporto elettrico"
+    },
+    verified: true,
+    verification_date: "2024-01-15T10:30:00Z"
+  };
+
+  const handleScanQR = () => {
     setIsScanning(true);
+    // Simulate scanning process
+    setTimeout(() => {
+      setIsScanning(false);
+      setDppData(mockDppData);
+      toast({
+        title: "QR Code Scansionato!",
+        description: "Informazioni del prodotto caricate con successo.",
+      });
+    }, 2000);
   };
 
-  const simulateScan = () => {
-    const simulatedData = {
-      productName: "Scarpe da Corsa EcoRun",
-      manufacturer: "GreenStride Tech",
-      productId: "GS-ER2024-123",
-      manufacturingDate: "2024-01-15",
-      materials: [
-        { name: "Poliestere Riciclato", percentage: 60 },
-        { name: "Gomma Naturale", percentage: 30 },
-        { name: "Colla a Base d'Acqua", percentage: 10 },
-      ],
-      certifications: ["Global Recycled Standard", "Fair Rubber Association"],
-      carbonFootprint: "4.5 kg CO2e",
-    };
-    setDppData(simulatedData);
-    setIsScanning(false);
-  };
-
-  const toggleDetails = () => {
-    setShowDetails(!showDetails);
-  };
-
-  const handleFileUpload = (event) => {
-    const file = event.target.files[0];
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
     if (file) {
-      // Here you would typically process the file, e.g., read its contents
-      // and then parse the DPP data from it.
-      console.log("File uploaded:", file.name);
-      // For now, let's simulate setting some DPP data:
-      simulateScan();
+      setIsScanning(true);
+      // Simulate QR code reading from image
+      setTimeout(() => {
+        setIsScanning(false);
+        setDppData(mockDppData);
+        toast({
+          title: "QR Code Riconosciuto!",
+          description: "Informazioni del prodotto estratte dall'immagine.",
+        });
+      }, 1500);
     }
   };
 
-  const handleFileButtonClick = () => {
-    fileInputRef.current.click();
+  const getSustainabilityColor = (score: number) => {
+    if (score >= 80) return "text-green-600 bg-green-100";
+    if (score >= 60) return "text-yellow-600 bg-yellow-100";
+    return "text-red-600 bg-red-100";
+  };
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'active': return 'bg-green-100 text-green-800';
+      case 'expired': return 'bg-red-100 text-red-800';
+      case 'claimed': return 'bg-blue-100 text-blue-800';
+      default: return 'bg-gray-100 text-gray-800';
+    }
+  };
+
+  const getCategoryIcon = (category: string) => {
+    switch (category) {
+      case 'Pelletteria': return '👜';
+      case 'Orologeria': return '⌚';
+      case 'Tecnologia': return '📱';
+      default: return '📦';
+    }
   };
 
   return (
-    <div className="space-y-6">
-      <Tabs defaultValue="scan" className="w-full">
-        <TabsList className="grid w-full grid-cols-3 bg-white/80 backdrop-blur-sm">
-          <TabsTrigger value="scan" className="text-xs sm:text-sm">
-            <QrCode className="h-4 w-4 mr-2" />
-            Scansiona
-          </TabsTrigger>
-          <TabsTrigger value="zkp" className="text-xs sm:text-sm">
-            <Shield className="h-4 w-4 mr-2" />
-            ZKP
-          </TabsTrigger>
-          <TabsTrigger value="verification" className="text-xs sm:text-sm">
-            <CheckCircle className="h-4 w-4 mr-2" />
-            Verifica
-          </TabsTrigger>
-        </TabsList>
+    <Tabs defaultValue="scan" className="space-y-6">
+      <TabsList className="grid w-full grid-cols-2 bg-white/80 backdrop-blur-sm shadow-md">
+        <TabsTrigger value="scan" className="flex items-center gap-2">
+          <QrCode className="h-4 w-4" />
+          Scansiona Prodotto
+        </TabsTrigger>
+        <TabsTrigger value="wallet" className="flex items-center gap-2">
+          <Wallet className="h-4 w-4" />
+          Il Mio Wallet DPP
+        </TabsTrigger>
+      </TabsList>
 
-        <TabsContent value="scan" className="space-y-6">
-          {/* DPP Example Image */}
-          {!dppData && !isScanning && (
-            <Card className="border-0 shadow-lg bg-gradient-to-br from-green-50 to-blue-50 mb-6">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-lg">
-                  <Leaf className="h-5 w-5 text-green-600" />
-                  Esempio di Passaporto Digitale del Prodotto
-                </CardTitle>
-                <CardDescription>
-                  Ecco come appare un DPP verificato - scansiona un QR code per iniziare
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex justify-center">
-                  <img 
-                    src="/lovable-uploads/50118bf9-fb46-4bf5-9992-918acf87944d.png" 
-                    alt="Esempio DPP - Scarpe da Corsa EcoRun"
-                    className="max-w-full h-auto rounded-lg shadow-md border border-gray-200"
-                  />
+      <TabsContent value="scan" className="space-y-6">
+        {/* Scanning Interface */}
+        {!dppData && (
+          <div className="text-center space-y-4">
+            <div className="w-48 h-48 mx-auto bg-gray-100 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300">
+              {isScanning ? (
+                <div className="animate-pulse">
+                  <QrCode className="h-16 w-16 text-green-600" />
+                  <p className="text-sm text-gray-600 mt-2">Scansionando...</p>
                 </div>
-              </CardContent>
-            </Card>
-          )}
-
-          {/* Scanning Interface */}
-          {!dppData && (
-            <div className="text-center space-y-4">
-              {!isScanning ? (
-                <Button 
-                  onClick={handleScan}
-                  className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white px-8 py-3 text-lg"
-                >
-                  <Camera className="mr-2 h-5 w-5" />
-                  Avvia Scansione QR
-                </Button>
               ) : (
-                <div className="space-y-4">
-                  <div className="mx-auto w-64 h-64 bg-gray-100 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300">
-                    <div className="text-center">
-                      <Camera className="mx-auto h-12 w-12 text-gray-400 mb-2" />
-                      <p className="text-gray-500">Inquadra il QR code</p>
-                    </div>
-                  </div>
-                  <Button 
-                    onClick={simulateScan}
-                    variant="outline"
-                    className="mr-2"
-                  >
-                    Simula Scansione
-                  </Button>
-                  <Button 
-                    onClick={() => setIsScanning(false)}
-                    variant="outline"
-                  >
-                    Annulla
-                  </Button>
+                <div>
+                  <QrCode className="h-16 w-16 text-gray-400 mx-auto" />
+                  <p className="text-sm text-gray-500 mt-2">Inquadra il QR Code</p>
                 </div>
               )}
             </div>
-          )}
+            
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button 
+                onClick={handleScanQR} 
+                disabled={isScanning}
+                className="bg-green-600 hover:bg-green-700"
+              >
+                <Camera className="h-4 w-4 mr-2" />
+                {isScanning ? "Scansionando..." : "Scansiona QR Code"}
+              </Button>
+              
+              <Button 
+                variant="outline" 
+                onClick={() => fileInputRef.current?.click()}
+                disabled={isScanning}
+              >
+                <QrCode className="h-4 w-4 mr-2" />
+                Carica Immagine
+              </Button>
+            </div>
+            
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              onChange={handleFileUpload}
+              className="hidden"
+            />
+          </div>
+        )}
 
-          {/* DPP Data Display */}
-          {dppData && (
-            <div className="space-y-4">
-              <Card className="border-l-4 border-l-green-500">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <CheckCircle className="h-5 w-5 text-green-600" />
-                    Prodotto Verificato
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
+        {/* Product Information */}
+        {dppData && (
+          <div className="space-y-4">
+            {/* Product Header */}
+            <Card className="border-green-200 bg-green-50">
+              <CardHeader>
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start space-y-2 sm:space-y-0">
                   <div>
-                    <h3 className="font-semibold text-lg">{dppData.productName}</h3>
-                    <p className="text-gray-600">{dppData.manufacturer}</p>
+                    <CardTitle className="text-xl text-green-800">{dppData.name}</CardTitle>
+                    <CardDescription className="text-green-600">
+                      {dppData.brand} • ID: {dppData.id}
+                    </CardDescription>
+                  </div>
+                  <Badge className="bg-green-100 text-green-800 w-fit">
+                    {dppData.verified ? "✓ Verificato" : "⚠ Non Verificato"}
+                  </Badge>
+                </div>
+              </CardHeader>
+            </Card>
+
+            {/* Origin Information */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <MapPin className="h-5 w-5 text-blue-600" />
+                  Origine del Prodotto
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-sm text-gray-600">Paese di Origine</p>
+                    <p className="font-semibold">{dppData.origin.country}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-600">Regione</p>
+                    <p className="font-semibold">{dppData.origin.region}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-600">Produttore</p>
+                    <p className="font-semibold">{dppData.supply_chain.manufacturer}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-600">Data di Produzione</p>
+                    <p className="font-semibold">{new Date(dppData.supply_chain.production_date).toLocaleDateString('it-IT')}</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Sustainability Score */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Leaf className="h-5 w-5 text-green-600" />
+                  Punteggio Sostenibilità
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium">Punteggio Generale</span>
+                    <Badge className={getSustainabilityColor(dppData.sustainability.score)}>
+                      {dppData.sustainability.score}/100
+                    </Badge>
                   </div>
                   
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <p className="text-sm text-gray-600">ID Prodotto</p>
-                      <p className="font-mono text-sm">{dppData.productId}</p>
+                      <p className="text-sm text-gray-600">Impronta Carbonica</p>
+                      <p className="font-semibold">{dppData.sustainability.carbonFootprint}</p>
                     </div>
                     <div>
-                      <p className="text-sm text-gray-600">Data Produzione</p>
-                      <p className="text-sm">{dppData.manufacturingDate}</p>
+                      <p className="text-sm text-gray-600">Riciclabile</p>
+                      <p className="font-semibold">{dppData.sustainability.recyclable ? "Sì" : "No"}</p>
                     </div>
                   </div>
-
-                  <div>
-                    <p className="text-sm text-gray-600 mb-2">Materiali</p>
-                    <div className="space-y-1">
-                      {dppData.materials.map((material, index) => (
-                        <div key={index} className="flex justify-between text-sm">
-                          <span>{material.name}</span>
-                          <span className="text-gray-600">{material.percentage}%</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
+                  
                   <div>
                     <p className="text-sm text-gray-600 mb-2">Certificazioni</p>
                     <div className="flex flex-wrap gap-2">
-                      {dppData.certifications.map((cert, index) => (
-                        <Badge key={index} variant="secondary" className="text-xs">
+                      {dppData.sustainability.certifications.map((cert, index) => (
+                        <Badge key={index} variant="outline" className="text-xs">
                           {cert}
                         </Badge>
                       ))}
                     </div>
                   </div>
+                </div>
+              </CardContent>
+            </Card>
 
-                  <div className="bg-green-50 p-4 rounded-lg">
-                    <p className="text-sm text-green-800">
-                      <strong>Impatto Ambientale:</strong> {dppData.carbonFootprint}
-                    </p>
+            {/* Supply Chain */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Truck className="h-5 w-5 text-purple-600" />
+                  Filiera Produttiva
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-sm text-gray-600">Numero Lotto</p>
+                    <p className="font-semibold font-mono">{dppData.supply_chain.batch_number}</p>
                   </div>
-                </CardContent>
-              </Card>
+                  <div>
+                    <p className="text-sm text-gray-600">Metodo di Trasporto</p>
+                    <p className="font-semibold">{dppData.supply_chain.transport_method}</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
 
+            {/* Actions */}
+            <div className="flex flex-col sm:flex-row gap-3">
               <Button 
                 onClick={() => setDppData(null)}
                 variant="outline"
-                className="w-full"
+                className="w-full sm:w-auto"
               >
                 Scansiona Nuovo Prodotto
               </Button>
+              <Button 
+                className="bg-blue-600 hover:bg-blue-700 w-full sm:w-auto"
+              >
+                <Shield className="h-4 w-4 mr-2" />
+                Verifica su Blockchain
+              </Button>
             </div>
-          )}
-        </TabsContent>
+          </div>
+        )}
+      </TabsContent>
 
-        <TabsContent value="zkp" className="space-y-6">
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-purple-50 to-blue-50">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Shield className="h-5 w-5 text-purple-600" />
-                Zero-Knowledge Proof (ZKP)
-              </CardTitle>
-              <CardDescription>
-                Verifica la sostenibilità senza rivelare dati sensibili
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              {/* Dashboard Example Image */}
-              <div className="mb-6">
-                <h4 className="font-semibold mb-3 flex items-center gap-2">
-                  <Eye className="h-4 w-4 text-blue-600" />
-                  Esempio Dashboard Virtuosity
-                </h4>
-                <div className="bg-white p-4 rounded-lg border border-gray-200">
-                  <img 
-                    src="/lovable-uploads/2b99388d-261a-4949-bbbc-7406f21912ee.png" 
-                    alt="Dashboard Virtuosity - Esempio ZKP"
-                    className="w-full h-auto rounded-lg shadow-sm"
-                  />
-                  <p className="text-xs text-gray-600 mt-2 text-center">
-                    Esempio di come i dati vengono visualizzati preservando la privacy
-                  </p>
-                </div>
+      <TabsContent value="wallet" className="space-y-6">
+        <Card className="border-0 shadow-xl bg-gradient-to-br from-blue-50 to-purple-50">
+          <CardHeader className="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-t-lg">
+            <CardTitle className="flex items-center gap-2">
+              <Wallet className="h-6 w-6" />
+              Il Mio Wallet DPP
+            </CardTitle>
+            <CardDescription className="text-blue-100">
+              Conserva e gestisci le garanzie digitali dei tuoi prodotti di lusso
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="p-6">
+            <div className="mb-6 text-center">
+              <div className="text-3xl font-bold text-gray-900 mb-2">
+                {walletProducts.length} Prodotti
               </div>
+              <p className="text-gray-600">
+                Valore totale: {walletProducts.reduce((sum, product) => sum + parseFloat(product.value.replace(/[€\s.]/g, '').replace(',', '.')), 0).toLocaleString('it-IT', { style: 'currency', currency: 'EUR' })}
+              </p>
+            </div>
 
-              <div className="grid gap-4">
-                <div className="p-4 bg-white rounded-lg border border-purple-200">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Lock className="h-4 w-4 text-purple-600" />
-                    <h4 className="font-semibold">Verifica Privata</h4>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {walletProducts.map((product) => (
+                <Card key={product.id} className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+                  <div className="relative">
+                    <img 
+                      src={product.image} 
+                      alt={product.name}
+                      className="w-full h-48 object-cover"
+                    />
+                    <div className="absolute top-2 right-2">
+                      <Badge className={getStatusColor(product.status)}>
+                        {product.status === 'active' ? 'Attiva' : product.status === 'expired' ? 'Scaduta' : 'Utilizzata'}
+                      </Badge>
+                    </div>
+                    <div className="absolute top-2 left-2">
+                      <div className="bg-white/90 backdrop-blur-sm rounded-full p-1 text-2xl">
+                        {getCategoryIcon(product.category)}
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-sm text-gray-600">
-                    Dimostra che un prodotto rispetta gli standard di sostenibilità senza rivelare i dettagli specifici della produzione.
-                  </p>
-                </div>
 
-                <div className="p-4 bg-white rounded-lg border border-blue-200">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Zap className="h-4 w-4 text-blue-600" />
-                    <h4 className="font-semibold">Proof Generation</h4>
-                  </div>
-                  <p className="text-sm text-gray-600">
-                    Il sistema genera automaticamente prove crittografiche che certificano la conformità agli standard ambientali.
-                  </p>
-                </div>
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between mb-3">
+                      <div>
+                        <h3 className="font-bold text-lg text-gray-900">{product.brand}</h3>
+                        <p className="text-sm text-gray-600">{product.name}</p>
+                        <p className="text-xs text-gray-500">Modello: {product.model}</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="font-bold text-lg text-blue-600">{product.value}</p>
+                      </div>
+                    </div>
 
-                <div className="p-4 bg-white rounded-lg border border-green-200">
-                  <div className="flex items-center gap-2 mb-2">
-                    <CheckCircle className="h-4 w-4 text-green-600" />
-                    <h4 className="font-semibold">Verifica Istantanea</h4>
-                  </div>
-                  <p className="text-sm text-gray-600">
-                    Chiunque può verificare l'autenticità della certificazione senza accedere ai dati sensibili dell'azienda.
-                  </p>
-                </div>
-              </div>
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-gray-600">Garanzia:</span>
+                        <span className="font-semibold">{product.warranty.period}</span>
+                      </div>
+                      
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-gray-600">Scade:</span>
+                        <span className="font-semibold">{new Date(product.warranty.expires).toLocaleDateString('it-IT')}</span>
+                      </div>
 
-              <div className="bg-purple-50 p-4 rounded-lg">
-                <h4 className="font-semibold mb-2 text-purple-800">Come Funziona:</h4>
-                <ol className="text-sm text-purple-700 space-y-1">
-                  <li>1. L'azienda carica i dati di sostenibilità nel sistema</li>
-                  <li>2. Il sistema genera una prova ZKP che certifica la conformità</li>
-                  <li>3. La prova viene associata al DPP del prodotto</li>
-                  <li>4. I consumatori possono verificare la sostenibilità istantaneamente</li>
-                </ol>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-gray-600">Sostenibilità:</span>
+                        <Badge className={getSustainabilityColor(product.sustainability.score)}>
+                          {product.sustainability.score}/100
+                        </Badge>
+                      </div>
 
-        <TabsContent value="verification" className="space-y-6">
-          <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <CheckCircle className="h-5 w-5 text-green-600" />
-                Verifica Manuale
-              </CardTitle>
-              <CardDescription>
-                Carica un file per la verifica del passaporto digitale del prodotto
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="text-center">
-                <Button variant="outline" onClick={handleFileButtonClick}>
-                  Carica File
-                </Button>
-                <input
-                  type="file"
-                  accept=".json,.xml,.dpp"
-                  onChange={handleFileUpload}
-                  className="hidden"
-                  ref={fileInputRef}
-                />
-                <p className="text-gray-500 text-sm mt-2">
-                  Accetta file .json, .xml, .dpp
-                </p>
-              </div>
-              {dppData && (
-                <div className="space-y-4">
-                  <h3 className="text-lg font-semibold">
-                    Risultato della Verfica:
-                  </h3>
-                  <p>Prodotto: {dppData.productName}</p>
-                  <p>Produttore: {dppData.manufacturer}</p>
-                  <p>ID Prodotto: {dppData.productId}</p>
-                  <p>Data di Produzione: {dppData.manufacturingDate}</p>
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        </TabsContent>
-      </Tabs>
-    </div>
+                      <div>
+                        <p className="text-xs text-gray-600 mb-1">Certificazioni:</p>
+                        <div className="flex flex-wrap gap-1">
+                          {product.sustainability.certifications.slice(0, 2).map((cert, index) => (
+                            <Badge key={index} variant="outline" className="text-xs">
+                              {cert}
+                            </Badge>
+                          ))}
+                          {product.sustainability.certifications.length > 2 && (
+                            <Badge variant="outline" className="text-xs">
+                              +{product.sustainability.certifications.length - 2}
+                            </Badge>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-2 mt-4">
+                      <Button size="sm" variant="outline" className="flex-1">
+                        <Eye className="h-3 w-3 mr-1" />
+                        Dettagli
+                      </Button>
+                      <Button size="sm" className="flex-1 bg-blue-600 hover:bg-blue-700">
+                        <Shield className="h-3 w-3 mr-1" />
+                        Garanzia
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            <div className="mt-8 text-center">
+              <Button className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white shadow-lg">
+                <ShoppingBag className="mr-2 h-4 w-4" />
+                Aggiungi Nuovo Prodotto
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </TabsContent>
+    </Tabs>
   );
 };
