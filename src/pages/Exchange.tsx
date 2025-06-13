@@ -80,7 +80,7 @@ const Exchange = () => {
     description: "Piantumazione di alberi nelle aree metropolitane per migliorare la qualità dell'aria",
     certificatesNeeded: 15,
     association: "Green City Milano",
-    image: "/lovable-uploads/491544c4-c37d-4c3b-a368-e0c71002d237.png",
+    image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop",
     category: "ambiente",
     impact: "500 alberi piantati",
     location: "Milano, Lombardia"
@@ -90,50 +90,20 @@ const Exchange = () => {
     description: "Fornitura di pasti caldi per persone in difficoltà economica",
     certificatesNeeded: 25,
     association: "Caritas Milano",
-    image: "/lovable-uploads/020a2c14-0a7b-4f72-8b24-0f41ab720b95.png",
+    image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400&h=300&fit=crop",
     category: "sociale",
     impact: "1000 pasti serviti",
     location: "Milano Centro"
   }, {
     id: 3,
-    title: "Educazione Digitale Anziani",
-    description: "Corsi di alfabetizzazione digitale per persone over 65",
-    certificatesNeeded: 10,
-    association: "Senior Tech",
-    image: "/lovable-uploads/16190dbd-ebd1-4b29-968d-8c8f8d26066d.png",
-    category: "educazione",
-    impact: "50 anziani formati",
-    location: "Centri Sociali Milano"
-  }, {
-    id: 4,
     title: "Pulizia Fiumi e Laghi",
     description: "Rimozione di rifiuti plastici da corsi d'acqua e zone lacustri",
     certificatesNeeded: 20,
     association: "Plastic Free Lombardia",
-    image: "/lovable-uploads/7942f312-9a3e-4b02-9bdd-c96f9d500a13.png",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
     category: "ambiente",
     impact: "2 tonnellate di rifiuti rimossi",
     location: "Navigli Milano"
-  }, {
-    id: 5,
-    title: "Centro Accoglienza Animali",
-    description: "Sostegno per cure veterinarie e mantenimento di animali abbandonati",
-    certificatesNeeded: 18,
-    association: "ENPA Milano",
-    image: "/lovable-uploads/a51bd3a3-21bb-4cab-afc7-e651cac982e9.png",
-    category: "animali",
-    impact: "30 animali curati",
-    location: "Canile Municipale"
-  }, {
-    id: 6,
-    title: "Laboratori Creativi Bambini",
-    description: "Attività artistiche e ricreative per bambini in situazioni di disagio",
-    certificatesNeeded: 12,
-    association: "Arte per Tutti",
-    image: "/lovable-uploads/89a2a2c5-7071-4df2-8e73-c5e5b645b38b.png",
-    category: "infanzia",
-    impact: "100 bambini coinvolti",
-    location: "Quartieri Periferici"
   }];
 
   const userPoints = 1275;
