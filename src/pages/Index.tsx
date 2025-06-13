@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -39,9 +38,9 @@ const Index = () => {
               {t('heroDescription')}
             </p>
             
-            {/* Virtuosity Button - unchanged */}
+            {/* Virtuosity Button */}
             <div className="flex justify-center mb-8 sm:mb-12 px-4 max-w-md mx-auto">
-              <Button onClick={() => navigate("/about")} className="bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full">{t('buttonVirtusosity')}</Button>
+              <Button onClick={() => navigate("/about")} className="bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full">Virtuosity</Button>
             </div>
 
             {/* Four Dashboard Blocks */}
