@@ -68,7 +68,7 @@ const Index = () => {
                 </p>
                 <Button 
                   onClick={() => navigate("/exchange")} 
-                  className="bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-3 text-base hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
+                  className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-3 text-base hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
                 >
                   {t('buttonExchange')}
                 </Button>
