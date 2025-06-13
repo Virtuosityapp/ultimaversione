@@ -1,15 +1,17 @@
+
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import CircularityIcons from "@/components/CircularityIcons";
+
 const Index = () => {
   const navigate = useNavigate();
-  const {
-    t
-  } = useLanguage();
-  return <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
+  const { t } = useLanguage();
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
       <LanguageSwitcher />
       
       {/* Hero Section */}
@@ -19,7 +21,11 @@ const Index = () => {
             <div className="flex justify-center mb-4 sm:mb-6">
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-blue-500 rounded-full blur-xl opacity-30 animate-pulse"></div>
-                <img src="/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png" alt="Virtuosity Logo" className="relative h-20 sm:h-24 md:h-32 w-auto mx-auto" />
+                <img 
+                  src="/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png" 
+                  alt="Virtuosity Logo" 
+                  className="relative h-20 sm:h-24 md:h-32 w-auto mx-auto" 
+                />
               </div>
             </div>
             
@@ -33,11 +39,20 @@ const Index = () => {
               {t('heroSubtitle')}
             </p>
             
-            
-            
-            {/* Virtuosity Button */}
-            <div className="flex justify-center mb-8 sm:mb-12 px-4 max-w-md mx-auto">
-              <Button onClick={() => navigate("/about")} className="bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-6 sm:px-8 py-3 text-base sm:text-lg hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full">Virtuosity</Button>
+            {/* Virtuosity Info Block */}
+            <div className="mb-8 sm:mb-12 max-w-md mx-auto px-4">
+              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-6 shadow-lg border border-yellow-200 hover:shadow-xl transition-all duration-300">
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Virtuosity</h3>
+                <p className="text-gray-600 mb-4 text-sm">
+                  Scopri la piattaforma che trasforma le tue azioni sostenibili in valore. Con Virtuosity puoi guadagnare punti attraverso comportamenti eco-friendly e accedere a un ecosistema di ricompense e opportunità.
+                </p>
+                <Button 
+                  onClick={() => navigate("/about")} 
+                  className="bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-6 py-3 text-base hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
+                >
+                  Virtuosity
+                </Button>
+              </div>
             </div>
 
             {/* Four Dashboard Blocks */}
@@ -94,12 +109,20 @@ const Index = () => {
             {/* Video Section */}
             <div className="mb-8 sm:mb-12 max-w-4xl mx-auto px-4">
               <AspectRatio ratio={16 / 9}>
-                <iframe src="https://www.youtube.com/embed/rdCqQPQfogs" title="Virtuosity Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen className="w-full h-full rounded-lg shadow-lg" />
+                <iframe 
+                  src="https://www.youtube.com/embed/rdCqQPQfogs" 
+                  title="Virtuosity Video" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                  allowFullScreen 
+                  className="w-full h-full rounded-lg shadow-lg" 
+                />
               </AspectRatio>
             </div>
           </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default Index;
