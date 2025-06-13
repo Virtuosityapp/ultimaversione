@@ -35,7 +35,7 @@ const Index = () => {
               </span>
             </h1>
             
-            <p className="text-xl sm:text-2xl text-gray-700 mb-4 max-w-4xl mx-auto font-medium px-[16px]">
+            <p className="text-xl sm:text-2xl text-gray-700 mb-8 sm:mb-12 max-w-4xl mx-auto font-medium px-[16px]">
               {t('heroSubtitle')}
             </p>
             
