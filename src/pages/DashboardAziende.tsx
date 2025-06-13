@@ -11,8 +11,6 @@ import { Users, UserCheck, Upload, FileText, Award, Gift, Plane, ArrowLeft, Tren
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, PieChart, Pie, Cell, LineChart, Line } from "recharts";
 
 const DashboardAziende = () => {
   const navigate = useNavigate();
@@ -46,16 +44,6 @@ const DashboardAziende = () => {
         { tipo: 'Uso Consapevole Acqua', count: 145, trend: '+12%', action: 'Sensori smart per rubinetti' },
         { tipo: 'Raccolta Acqua Piovana', count: 89, trend: '+8%', action: 'Sistemi di recupero in ufficio' },
         { tipo: 'Riduzione Sprechi', count: 67, trend: '+15%', action: 'Monitoraggio consumi real-time' }
-      ],
-      chartData: [
-        { name: 'Uso Consapevole', value: 145, color: '#3b82f6' },
-        { name: 'Raccolta Piovana', value: 89, color: '#10b981' },
-        { name: 'Riduzione Sprechi', value: 67, color: '#f59e0b' }
-      ],
-      trendData: [
-        { month: 'Gen', count: 120 },
-        { month: 'Feb', count: 135 },
-        { month: 'Mar', count: 145 }
       ]
     },
     {
@@ -66,16 +54,6 @@ const DashboardAziende = () => {
         { tipo: 'Smart Working', count: 245, trend: '+18%', action: 'Incentivi lavoro da remoto' },
         { tipo: 'LED e Sensori', count: 134, trend: '+10%', action: 'Sostituzione illuminazione tradizionale' },
         { tipo: 'Elettrodomestici A+++', count: 78, trend: '+6%', action: 'Programma di rinnovo attrezzature' }
-      ],
-      chartData: [
-        { name: 'Smart Working', value: 245, color: '#8b5cf6' },
-        { name: 'LED e Sensori', value: 134, color: '#ef4444' },
-        { name: 'Elettrodomestici', value: 78, color: '#06b6d4' }
-      ],
-      trendData: [
-        { month: 'Gen', count: 200 },
-        { month: 'Feb', count: 220 },
-        { month: 'Mar', count: 245 }
       ]
     },
     {
@@ -86,16 +64,6 @@ const DashboardAziende = () => {
         { tipo: 'Raccolta Differenziata', count: 298, trend: '+22%', action: 'Contenitori smart in ufficio' },
         { tipo: 'Riuso Materiali', count: 156, trend: '+14%', action: 'Mercatino interno usato' },
         { tipo: 'Zero Waste', count: 89, trend: '+16%', action: 'Challenge rifiuti zero mensile' }
-      ],
-      chartData: [
-        { name: 'Raccolta Diff.', value: 298, color: '#10b981' },
-        { name: 'Riuso Materiali', value: 156, color: '#f59e0b' },
-        { name: 'Zero Waste', value: 89, color: '#8b5cf6' }
-      ],
-      trendData: [
-        { month: 'Gen', count: 250 },
-        { month: 'Feb', count: 275 },
-        { month: 'Mar', count: 298 }
       ]
     },
     {
@@ -106,16 +74,6 @@ const DashboardAziende = () => {
         { tipo: 'Trasporto Sostenibile', count: 167, trend: '+20%', action: 'Bike sharing aziendale' },
         { tipo: 'Compensazione CO2', count: 112, trend: '+12%', action: 'Progetti di riforestazione' },
         { tipo: 'Digital First', count: 89, trend: '+25%', action: 'Riduzione carta e stampe' }
-      ],
-      chartData: [
-        { name: 'Trasporto Sost.', value: 167, color: '#ef4444' },
-        { name: 'Compensazione', value: 112, color: '#3b82f6' },
-        { name: 'Digital First', value: 89, color: '#10b981' }
-      ],
-      trendData: [
-        { month: 'Gen', count: 140 },
-        { month: 'Feb', count: 155 },
-        { month: 'Mar', count: 167 }
       ]
     }
   ]);
@@ -129,16 +87,6 @@ const DashboardAziende = () => {
         { tipo: 'Sistemi Raccolta Acqua', count: 1456, trend: '+28%', action: 'Sconti su sistemi di recupero' },
         { tipo: 'Elettrodomestici Water-Saving', count: 892, trend: '+15%', action: 'Partnership produttori eco' },
         { tipo: 'Giardini Sostenibili', count: 634, trend: '+18%', action: 'Workshop giardinaggio sostenibile' }
-      ],
-      chartData: [
-        { name: 'Sistemi Raccolta', value: 1456, color: '#3b82f6' },
-        { name: 'Elettrodomestici', value: 892, color: '#10b981' },
-        { name: 'Giardini Sost.', value: 634, color: '#f59e0b' }
-      ],
-      trendData: [
-        { month: 'Gen', count: 1200 },
-        { month: 'Feb', count: 1350 },
-        { month: 'Mar', count: 1456 }
       ]
     },
     {
@@ -149,16 +97,6 @@ const DashboardAziende = () => {
         { tipo: 'Pannelli Solari', count: 2134, trend: '+32%', action: 'Finanziamenti agevolati installazione' },
         { tipo: 'Isolamento Termico', count: 1567, trend: '+22%', action: 'Incentivi ristrutturazione green' },
         { tipo: 'Smart Home', count: 987, trend: '+19%', action: 'Sconti dispositivi domotici' }
-      ],
-      chartData: [
-        { name: 'Pannelli Solari', value: 2134, color: '#8b5cf6' },
-        { name: 'Isolamento', value: 1567, color: '#ef4444' },
-        { name: 'Smart Home', value: 987, color: '#06b6d4' }
-      ],
-      trendData: [
-        { month: 'Gen', count: 1800 },
-        { month: 'Feb', count: 1950 },
-        { month: 'Mar', count: 2134 }
       ]
     },
     {
@@ -169,16 +107,6 @@ const DashboardAziende = () => {
         { tipo: 'Compostaggio Domestico', count: 1789, trend: '+25%', action: 'Distribuzione compostiere gratuite' },
         { tipo: 'Riparazione vs Sostituzione', count: 1234, trend: '+20%', action: 'Rete repair café locali' },
         { tipo: 'Upcycling Creativo', count: 856, trend: '+30%', action: 'Workshop creativi riutilizzo' }
-      ],
-      chartData: [
-        { name: 'Compostaggio', value: 1789, color: '#10b981' },
-        { name: 'Riparazione', value: 1234, color: '#f59e0b' },
-        { name: 'Upcycling', value: 856, color: '#8b5cf6' }
-      ],
-      trendData: [
-        { month: 'Gen', count: 1500 },
-        { month: 'Feb', count: 1650 },
-        { month: 'Mar', count: 1789 }
       ]
     },
     {
@@ -189,16 +117,6 @@ const DashboardAziende = () => {
         { tipo: 'Mobilità Elettrica', count: 2456, trend: '+35%', action: 'Incentivi acquisto e-bike/auto elettriche' },
         { tipo: 'Alimentazione Plant-Based', count: 1678, trend: '+28%', action: 'Ricettari e corsi cucina sostenibile' },
         { tipo: 'Turismo Sostenibile', count: 923, trend: '+22%', action: 'Partnership strutture eco-certificate' }
-      ],
-      chartData: [
-        { name: 'Mobilità Elettrica', value: 2456, color: '#ef4444' },
-        { name: 'Alimentazione', value: 1678, color: '#3b82f6' },
-        { name: 'Turismo Sost.', value: 923, color: '#10b981' }
-      ],
-      trendData: [
-        { month: 'Gen', count: 2000 },
-        { month: 'Feb', count: 2200 },
-        { month: 'Mar', count: 2456 }
       ]
     }
   ]);
@@ -218,21 +136,6 @@ const DashboardAziende = () => {
     certificatiRichiesti: '',
     quantitaCertificati: ''
   });
-
-  // Chart configurations
-  const chartConfig = {
-    value: {
-      label: "Certificati",
-      color: "#3b82f6",
-    },
-  };
-
-  const trendConfig = {
-    count: {
-      label: "Certificati",
-      color: "#10b981",
-    },
-  };
 
   const handleAddWelfareItem = () => {
     if (newWelfareItem.tipo && newWelfareItem.nome && newWelfareItem.valore && newWelfareItem.certificatiRichiesti && newWelfareItem.quantitaCertificati) {
@@ -330,7 +233,7 @@ const DashboardAziende = () => {
           </Card>
         </div>
 
-        {/* Monitoraggio Certificati - Side by Side con Grafici */}
+        {/* Monitoraggio Certificati - Side by Side */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           {/* Monitoraggio Certificati Dipendenti */}
           <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
@@ -359,56 +262,36 @@ const DashboardAziende = () => {
                       </div>
                     </AccordionTrigger>
                     <AccordionContent>
-                      <div className="space-y-6">
-                        {/* Pie Chart */}
-                        <div>
-                          <h4 className="text-sm font-medium mb-3">Distribuzione Certificati</h4>
-                          <ChartContainer config={chartConfig} className="h-64">
-                            <PieChart>
-                              <Pie
-                                data={category.chartData}
-                                dataKey="value"
-                                nameKey="name"
-                                cx="50%"
-                                cy="50%"
-                                outerRadius={80}
-                              >
-                                {category.chartData.map((entry, index) => (
-                                  <Cell key={`cell-${index}`} fill={entry.color} />
-                                ))}
-                              </Pie>
-                              <ChartTooltip content={<ChartTooltipContent />} />
-                            </PieChart>
-                          </ChartContainer>
-                        </div>
-
-                        {/* Trend Line Chart */}
-                        <div>
-                          <h4 className="text-sm font-medium mb-3">Trend Mensile</h4>
-                          <ChartContainer config={trendConfig} className="h-48">
-                            <LineChart data={category.trendData}>
-                              <CartesianGrid strokeDasharray="3 3" />
-                              <XAxis dataKey="month" />
-                              <YAxis />
-                              <ChartTooltip content={<ChartTooltipContent />} />
-                              <Line type="monotone" dataKey="count" stroke="var(--color-count)" strokeWidth={2} />
-                            </LineChart>
-                          </ChartContainer>
-                        </div>
-
-                        {/* Actions Summary */}
-                        <div className="grid gap-2">
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>Tipo Certificato</TableHead>
+                            <TableHead>Quantità</TableHead>
+                            <TableHead>Trend</TableHead>
+                            <TableHead>Azione Marketing</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
                           {category.data.map((item, index) => (
-                            <div key={index} className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                              <span className="text-xs font-medium">{item.tipo}</span>
-                              <Badge variant="outline" className="text-xs">
-                                <Target className="h-3 w-3 mr-1" />
-                                {item.action}
-                              </Badge>
-                            </div>
+                            <TableRow key={index}>
+                              <TableCell className="font-medium">{item.tipo}</TableCell>
+                              <TableCell className="text-center font-semibold">{item.count}</TableCell>
+                              <TableCell className={`text-center font-semibold ${getTrendColor(item.trend)}`}>
+                                <div className="flex items-center justify-center gap-1">
+                                  <TrendingUp className="h-4 w-4" />
+                                  {item.trend}
+                                </div>
+                              </TableCell>
+                              <TableCell>
+                                <Badge variant="outline" className="flex items-center gap-1 text-xs">
+                                  <Target className="h-3 w-3" />
+                                  {item.action}
+                                </Badge>
+                              </TableCell>
+                            </TableRow>
                           ))}
-                        </div>
-                      </div>
+                        </TableBody>
+                      </Table>
                     </AccordionContent>
                   </AccordionItem>
                 ))}
@@ -443,48 +326,36 @@ const DashboardAziende = () => {
                       </div>
                     </AccordionTrigger>
                     <AccordionContent>
-                      <div className="space-y-6">
-                        {/* Bar Chart */}
-                        <div>
-                          <h4 className="text-sm font-medium mb-3">Distribuzione Certificati</h4>
-                          <ChartContainer config={chartConfig} className="h-64">
-                            <BarChart data={category.chartData}>
-                              <CartesianGrid strokeDasharray="3 3" />
-                              <XAxis dataKey="name" />
-                              <YAxis />
-                              <ChartTooltip content={<ChartTooltipContent />} />
-                              <Bar dataKey="value" fill="#3b82f6" />
-                            </BarChart>
-                          </ChartContainer>
-                        </div>
-
-                        {/* Trend Line Chart */}
-                        <div>
-                          <h4 className="text-sm font-medium mb-3">Trend Mensile</h4>
-                          <ChartContainer config={trendConfig} className="h-48">
-                            <LineChart data={category.trendData}>
-                              <CartesianGrid strokeDasharray="3 3" />
-                              <XAxis dataKey="month" />
-                              <YAxis />
-                              <ChartTooltip content={<ChartTooltipContent />} />
-                              <Line type="monotone" dataKey="count" stroke="var(--color-count)" strokeWidth={2} />
-                            </LineChart>
-                          </ChartContainer>
-                        </div>
-
-                        {/* Actions Summary */}
-                        <div className="grid gap-2">
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>Tipo Certificato</TableHead>
+                            <TableHead>Quantità</TableHead>
+                            <TableHead>Trend</TableHead>
+                            <TableHead>Azione Marketing</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
                           {category.data.map((item, index) => (
-                            <div key={index} className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                              <span className="text-xs font-medium">{item.tipo}</span>
-                              <Badge variant="outline" className="text-xs">
-                                <Target className="h-3 w-3 mr-1" />
-                                {item.action}
-                              </Badge>
-                            </div>
+                            <TableRow key={index}>
+                              <TableCell className="font-medium">{item.tipo}</TableCell>
+                              <TableCell className="text-center font-semibold">{item.count}</TableCell>
+                              <TableCell className={`text-center font-semibold ${getTrendColor(item.trend)}`}>
+                                <div className="flex items-center justify-center gap-1">
+                                  <TrendingUp className="h-4 w-4" />
+                                  {item.trend}
+                                </div>
+                              </TableCell>
+                              <TableCell>
+                                <Badge variant="outline" className="flex items-center gap-1 text-xs">
+                                  <Target className="h-3 w-3" />
+                                  {item.action}
+                                </Badge>
+                              </TableCell>
+                            </TableRow>
                           ))}
-                        </div>
-                      </div>
+                        </TableBody>
+                      </Table>
                     </AccordionContent>
                   </AccordionItem>
                 ))}
