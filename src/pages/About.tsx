@@ -565,6 +565,23 @@ const About = () => {
                 </div>
               </div>
 
+              {/* DPP Example Image */}
+              <div className="mt-12 mb-8">
+                <h4 className="text-xl font-bold text-gray-900 mb-6 text-center">Esempio di Digital Product Passport</h4>
+                <div className="flex justify-center">
+                  <div className="max-w-2xl w-full">
+                    <img 
+                      src="/lovable-uploads/16d4e468-1979-4826-94e5-66f8266e787f.png" 
+                      alt="Esempio di Digital Product Passport - Scarpe da Corsa EcoRun" 
+                      className="w-full rounded-lg shadow-xl border border-gray-200"
+                    />
+                    <p className="text-sm text-gray-600 text-center mt-3">
+                      Esempio reale di DPP: ogni prodotto avrà informazioni dettagliate su origine, sostenibilità e filiera produttiva
+                    </p>
+                  </div>
+                </div>
+              </div>
+
               <div className="mt-12 p-6 bg-white/50 rounded-lg">
                 <h4 className="text-xl font-bold text-gray-900 mb-4 text-center">Il Flusso di Lavoro DPP in Virtuosity</h4>
                 <div className="grid md:grid-cols-4 gap-6">
