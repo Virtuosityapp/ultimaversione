@@ -7,152 +7,134 @@ import { Leaf, Gift, Star, ShoppingCart, ArrowLeft, Menu, ExternalLink, Calendar
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useEffect, useState } from "react";
-
 const Exchange = () => {
   const navigate = useNavigate();
-  const { toast } = useToast();
+  const {
+    toast
+  } = useToast();
   const [showDonationDialog, setShowDonationDialog] = useState(false);
   const [selectedProject, setSelectedProject] = useState<any>(null);
-  
   useEffect(() => {
     document.title = "Exchange - Virtuosity";
   }, []);
-
-  const rewards = [
-    {
-      id: 1,
-      title: "Buono Pasto",
-      description: "Buono spendibile in mense aziendali partner",
-      cost: 250,
-      category: "corporate",
-      image: "🍽️",
-      availability: "Disponibile",
-      provider: "Corporate Benefits"
-    },
-    {
-      id: 2,
-      title: "Biglietto Metro Gratuito",
-      description: "Viaggio gratuito su tutta la rete ATM Milano",
-      cost: 80,
-      category: "transport",
-      image: "🚇",
-      availability: "Limitato",
-      provider: "ATM Milano"
-    },
-    {
-      id: 3,
-      title: "Ingresso Museo Gratuito",
-      description: "Accesso gratuito ai musei civici di Milano",
-      cost: 150,
-      category: "culture",
-      image: "🏛️",
-      availability: "Disponibile",
-      provider: "Comune di Milano"
-    },
-    {
-      id: 4,
-      title: "Visita Odontoiatrica",
-      description: "Visita dentistica completa presso cliniche convenzionate",
-      cost: 500,
-      category: "welfare",
-      image: "🦷",
-      availability: "Disponibile",
-      provider: "Cliniche Partner"
-    },
-    {
-      id: 5,
-      title: "Giorno di Permesso Extra",
-      description: "Un giorno di permesso aggiuntivo retribuito",
-      cost: 800,
-      category: "corporate",
-      image: "🏖️",
-      availability: "Limitato",
-      provider: "HR Department"
-    },
-    {
-      id: 6,
-      title: "Bike Sharing Premium",
-      description: "30 giorni di bike sharing illimitato",
-      cost: 300,
-      category: "transport",
-      image: "🚴",
-      availability: "Disponibile",
-      provider: "Mobike"
-    }
-  ];
-
-  const socialProjects = [
-    {
-      id: 1,
-      title: "Riforestazione Urbana",
-      description: "Piantumazione di alberi nelle aree metropolitane per migliorare la qualità dell'aria",
-      certificatesNeeded: 15,
-      association: "Green City Milano",
-      image: "🌳",
-      category: "ambiente",
-      impact: "500 alberi piantati",
-      location: "Milano, Lombardia"
-    },
-    {
-      id: 2,
-      title: "Mensa per i Bisognosi",
-      description: "Fornitura di pasti caldi per persone in difficoltà economica",
-      certificatesNeeded: 25,
-      association: "Caritas Milano",
-      image: "🍲",
-      category: "sociale",
-      impact: "1000 pasti serviti",
-      location: "Milano Centro"
-    },
-    {
-      id: 3,
-      title: "Educazione Digitale Anziani",
-      description: "Corsi di alfabetizzazione digitale per persone over 65",
-      certificatesNeeded: 10,
-      association: "Senior Tech",
-      image: "💻",
-      category: "educazione",
-      impact: "50 anziani formati",
-      location: "Centri Sociali Milano"
-    },
-    {
-      id: 4,
-      title: "Pulizia Fiumi e Laghi",
-      description: "Rimozione di rifiuti plastici da corsi d'acqua e zone lacustri",
-      certificatesNeeded: 20,
-      association: "Plastic Free Lombardia",
-      image: "🌊",
-      category: "ambiente",
-      impact: "2 tonnellate di rifiuti rimossi",
-      location: "Navigli Milano"
-    },
-    {
-      id: 5,
-      title: "Centro Accoglienza Animali",
-      description: "Sostegno per cure veterinarie e mantenimento di animali abbandonati",
-      certificatesNeeded: 18,
-      association: "ENPA Milano",
-      image: "🐕",
-      category: "animali",
-      impact: "30 animali curati",
-      location: "Canile Municipale"
-    },
-    {
-      id: 6,
-      title: "Laboratori Creativi Bambini",
-      description: "Attività artistiche e ricreative per bambini in situazioni di disagio",
-      certificatesNeeded: 12,
-      association: "Arte per Tutti",
-      image: "🎨",
-      category: "infanzia",
-      impact: "100 bambini coinvolti",
-      location: "Quartieri Periferici"
-    }
-  ];
-
+  const rewards = [{
+    id: 1,
+    title: "Buono Pasto",
+    description: "Buono spendibile in mense aziendali partner",
+    cost: 250,
+    category: "corporate",
+    image: "🍽️",
+    availability: "Disponibile",
+    provider: "Corporate Benefits"
+  }, {
+    id: 2,
+    title: "Biglietto Metro Gratuito",
+    description: "Viaggio gratuito su tutta la rete ATM Milano",
+    cost: 80,
+    category: "transport",
+    image: "🚇",
+    availability: "Limitato",
+    provider: "ATM Milano"
+  }, {
+    id: 3,
+    title: "Ingresso Museo Gratuito",
+    description: "Accesso gratuito ai musei civici di Milano",
+    cost: 150,
+    category: "culture",
+    image: "🏛️",
+    availability: "Disponibile",
+    provider: "Comune di Milano"
+  }, {
+    id: 4,
+    title: "Visita Odontoiatrica",
+    description: "Visita dentistica completa presso cliniche convenzionate",
+    cost: 500,
+    category: "welfare",
+    image: "🦷",
+    availability: "Disponibile",
+    provider: "Cliniche Partner"
+  }, {
+    id: 5,
+    title: "Giorno di Permesso Extra",
+    description: "Un giorno di permesso aggiuntivo retribuito",
+    cost: 800,
+    category: "corporate",
+    image: "🏖️",
+    availability: "Limitato",
+    provider: "HR Department"
+  }, {
+    id: 6,
+    title: "Bike Sharing Premium",
+    description: "30 giorni di bike sharing illimitato",
+    cost: 300,
+    category: "transport",
+    image: "🚴",
+    availability: "Disponibile",
+    provider: "Mobike"
+  }];
+  const socialProjects = [{
+    id: 1,
+    title: "Riforestazione Urbana",
+    description: "Piantumazione di alberi nelle aree metropolitane per migliorare la qualità dell'aria",
+    certificatesNeeded: 15,
+    association: "Green City Milano",
+    image: "🌳",
+    category: "ambiente",
+    impact: "500 alberi piantati",
+    location: "Milano, Lombardia"
+  }, {
+    id: 2,
+    title: "Mensa per i Bisognosi",
+    description: "Fornitura di pasti caldi per persone in difficoltà economica",
+    certificatesNeeded: 25,
+    association: "Caritas Milano",
+    image: "🍲",
+    category: "sociale",
+    impact: "1000 pasti serviti",
+    location: "Milano Centro"
+  }, {
+    id: 3,
+    title: "Educazione Digitale Anziani",
+    description: "Corsi di alfabetizzazione digitale per persone over 65",
+    certificatesNeeded: 10,
+    association: "Senior Tech",
+    image: "💻",
+    category: "educazione",
+    impact: "50 anziani formati",
+    location: "Centri Sociali Milano"
+  }, {
+    id: 4,
+    title: "Pulizia Fiumi e Laghi",
+    description: "Rimozione di rifiuti plastici da corsi d'acqua e zone lacustri",
+    certificatesNeeded: 20,
+    association: "Plastic Free Lombardia",
+    image: "🌊",
+    category: "ambiente",
+    impact: "2 tonnellate di rifiuti rimossi",
+    location: "Navigli Milano"
+  }, {
+    id: 5,
+    title: "Centro Accoglienza Animali",
+    description: "Sostegno per cure veterinarie e mantenimento di animali abbandonati",
+    certificatesNeeded: 18,
+    association: "ENPA Milano",
+    image: "🐕",
+    category: "animali",
+    impact: "30 animali curati",
+    location: "Canile Municipale"
+  }, {
+    id: 6,
+    title: "Laboratori Creativi Bambini",
+    description: "Attività artistiche e ricreative per bambini in situazioni di disagio",
+    certificatesNeeded: 12,
+    association: "Arte per Tutti",
+    image: "🎨",
+    category: "infanzia",
+    impact: "100 bambini coinvolti",
+    location: "Quartieri Periferici"
+  }];
   const userPoints = 1275;
   const userCertificates = 45;
-
   const handleRedeem = (reward: any) => {
     if (userPoints >= reward.cost) {
       toast({
@@ -167,7 +149,6 @@ const Exchange = () => {
       });
     }
   };
-
   const handleDonate = (project: any) => {
     if (userCertificates >= project.certificatesNeeded) {
       setSelectedProject(project);
@@ -180,7 +161,6 @@ const Exchange = () => {
       });
     }
   };
-
   const getCategoryColor = (category: string) => {
     const colors = {
       corporate: "bg-blue-100 text-blue-800",
@@ -190,7 +170,6 @@ const Exchange = () => {
     };
     return colors[category as keyof typeof colors] || "bg-gray-100 text-gray-800";
   };
-
   const getCategoryName = (category: string) => {
     const names = {
       corporate: "Aziendale",
@@ -200,7 +179,6 @@ const Exchange = () => {
     };
     return names[category as keyof typeof names] || category;
   };
-
   const getSocialCategoryColor = (category: string) => {
     const colors = {
       ambiente: "bg-green-100 text-green-800",
@@ -214,88 +192,79 @@ const Exchange = () => {
     };
     return colors[category as keyof typeof colors] || "bg-gray-100 text-gray-800";
   };
-
-  const partnerOffers = [
-    {
-      id: 1,
-      partner: "ENEL",
-      title: "Fotovoltaico Residenziale",
-      description: "Installa pannelli solari a casa tua con incentivi esclusivi per utenti Virtuosity",
-      discount: "Sconto 15%",
-      category: "energia",
-      image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=300&fit=crop",
-      validUntil: "31 Marzo 2024",
-      pointsRequired: 0,
-      benefits: ["Consulenza gratuita", "Installazione inclusa", "10 anni di garanzia"],
-      websiteUrl: "https://www.enel.it/it/casa/fotovoltaico"
-    },
-    {
-      id: 2,
-      partner: "GARDALAND",
-      title: "Nuove Attrazioni Eco-Friendly",
-      description: "Scopri le nuove giostre alimentate da energia rinnovabile nel parco più green d'Italia",
-      discount: "Biglietto ridotto",
-      category: "intrattenimento",
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
-      validUntil: "30 Giugno 2024",
-      pointsRequired: 200,
-      benefits: ["Accesso prioritario", "Pranzo sostenibile incluso", "Gadget ecologico"],
-      websiteUrl: "https://www.gardaland.it"
-    },
-    {
-      id: 3,
-      partner: "COMUNE DI MILANO",
-      title: "Mostra Design Sostenibile",
-      description: "Esposizione dedicata al design circolare e sostenibile alla Triennale di Milano",
-      discount: "Ingresso gratuito",
-      category: "cultura",
-      image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
-      validUntil: "15 Maggio 2024",
-      pointsRequired: 150,
-      benefits: ["Audioguida inclusa", "Workshop gratuito", "Catalogo digitale"],
-      websiteUrl: "https://www.triennale.org"
-    },
-    {
-      id: 4,
-      partner: "ATM",
-      title: "Nuova Linea Bus Elettrici",
-      description: "Prova la nuova tratta di autobus 100% elettrici che collegano i quartieri green di Milano",
-      discount: "Abbonamento speciale",
-      category: "trasporti",
-      image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&h=300&fit=crop",
-      validUntil: "31 Dicembre 2024",
-      pointsRequired: 300,
-      benefits: ["1 mese gratuito", "App premium", "Priority boarding"],
-      websiteUrl: "https://www.atm.it"
-    },
-    {
-      id: 5,
-      partner: "IKEA",
-      title: "Mobili da Materiali Riciclati",
-      description: "Nuova collezione di arredi realizzati al 100% con materiali riciclati e sostenibili",
-      discount: "Sconto 20%",
-      category: "casa",
-      image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop",
-      validUntil: "30 Aprile 2024",
-      pointsRequired: 400,
-      benefits: ["Consegna gratuita", "Montaggio incluso", "Ritiro mobili usati"],
-      websiteUrl: "https://www.ikea.com/it/it/"
-    },
-    {
-      id: 6,
-      partner: "COOP",
-      title: "Prodotti Biologici Locali",
-      description: "Selezione esclusiva di prodotti bio a km zero dai migliori produttori lombardi",
-      discount: "Sconto 10%",
-      category: "alimentare",
-      image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop",
-      validUntil: "31 Maggio 2024",
-      pointsRequired: 100,
-      benefits: ["Spesa a domicilio", "Ricette esclusive", "Degustazioni gratuite"],
-      websiteUrl: "https://www.e-coop.it"
-    }
-  ];
-
+  const partnerOffers = [{
+    id: 1,
+    partner: "ENEL",
+    title: "Fotovoltaico Residenziale",
+    description: "Installa pannelli solari a casa tua con incentivi esclusivi per utenti Virtuosity",
+    discount: "Sconto 15%",
+    category: "energia",
+    image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=300&fit=crop",
+    validUntil: "31 Marzo 2024",
+    pointsRequired: 0,
+    benefits: ["Consulenza gratuita", "Installazione inclusa", "10 anni di garanzia"],
+    websiteUrl: "https://www.enel.it/it/casa/fotovoltaico"
+  }, {
+    id: 2,
+    partner: "GARDALAND",
+    title: "Nuove Attrazioni Eco-Friendly",
+    description: "Scopri le nuove giostre alimentate da energia rinnovabile nel parco più green d'Italia",
+    discount: "Biglietto ridotto",
+    category: "intrattenimento",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
+    validUntil: "30 Giugno 2024",
+    pointsRequired: 200,
+    benefits: ["Accesso prioritario", "Pranzo sostenibile incluso", "Gadget ecologico"],
+    websiteUrl: "https://www.gardaland.it"
+  }, {
+    id: 3,
+    partner: "COMUNE DI MILANO",
+    title: "Mostra Design Sostenibile",
+    description: "Esposizione dedicata al design circolare e sostenibile alla Triennale di Milano",
+    discount: "Ingresso gratuito",
+    category: "cultura",
+    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
+    validUntil: "15 Maggio 2024",
+    pointsRequired: 150,
+    benefits: ["Audioguida inclusa", "Workshop gratuito", "Catalogo digitale"],
+    websiteUrl: "https://www.triennale.org"
+  }, {
+    id: 4,
+    partner: "ATM",
+    title: "Nuova Linea Bus Elettrici",
+    description: "Prova la nuova tratta di autobus 100% elettrici che collegano i quartieri green di Milano",
+    discount: "Abbonamento speciale",
+    category: "trasporti",
+    image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&h=300&fit=crop",
+    validUntil: "31 Dicembre 2024",
+    pointsRequired: 300,
+    benefits: ["1 mese gratuito", "App premium", "Priority boarding"],
+    websiteUrl: "https://www.atm.it"
+  }, {
+    id: 5,
+    partner: "IKEA",
+    title: "Mobili da Materiali Riciclati",
+    description: "Nuova collezione di arredi realizzati al 100% con materiali riciclati e sostenibili",
+    discount: "Sconto 20%",
+    category: "casa",
+    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop",
+    validUntil: "30 Aprile 2024",
+    pointsRequired: 400,
+    benefits: ["Consegna gratuita", "Montaggio incluso", "Ritiro mobili usati"],
+    websiteUrl: "https://www.ikea.com/it/it/"
+  }, {
+    id: 6,
+    partner: "COOP",
+    title: "Prodotti Biologici Locali",
+    description: "Selezione esclusiva di prodotti bio a km zero dai migliori produttori lombardi",
+    discount: "Sconto 10%",
+    category: "alimentare",
+    image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop",
+    validUntil: "31 Maggio 2024",
+    pointsRequired: 100,
+    benefits: ["Spesa a domicilio", "Ricette esclusive", "Degustazioni gratuite"],
+    websiteUrl: "https://www.e-coop.it"
+  }];
   const getCategoryColorAd = (category: string) => {
     const colors = {
       energia: "bg-yellow-100 text-yellow-800",
@@ -310,7 +279,6 @@ const Exchange = () => {
     };
     return colors[category as keyof typeof colors] || "bg-gray-100 text-gray-800";
   };
-
   const handlePartnerOfferClick = (offer: any) => {
     if (offer.pointsRequired > userPoints && offer.pointsRequired > 0) {
       toast({
@@ -323,15 +291,12 @@ const Exchange = () => {
 
     // Open partner website in new tab
     window.open(offer.websiteUrl, '_blank', 'noopener,noreferrer');
-    
     toast({
       title: "Offerta Attivata! 🎉",
       description: `Ti abbiamo reindirizzato al sito di ${offer.partner}. Mostra questo messaggio per ottenere lo sconto.`
     });
   };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
+  return <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
       {/* Header */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-green-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -371,7 +336,7 @@ const Exchange = () => {
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
           <Card className="border-0 shadow-lg bg-gradient-to-br from-green-400 to-emerald-500 text-white">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-green-100">Punti Disponibili</CardTitle>
+              <CardTitle className="text-sm font-medium text-green-100">Certificati Disponibili</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-xl sm:text-2xl font-bold">{userPoints}</div>
@@ -437,8 +402,7 @@ const Exchange = () => {
 
             <TabsContent value="all" className="space-y-4 sm:space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                {rewards.map(reward => (
-                  <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+                {rewards.map(reward => <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
                     <CardHeader className="pb-3">
                       <div className="flex justify-between items-start mb-2">
                         <div className="text-3xl sm:text-4xl">{reward.image}</div>
@@ -467,27 +431,19 @@ const Exchange = () => {
                           Partner: {reward.provider}
                         </div>
                         
-                        <Button 
-                          className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white hover:from-green-700 hover:to-blue-700 text-sm sm:text-base" 
-                          onClick={() => handleRedeem(reward)} 
-                          disabled={userPoints < reward.cost} 
-                          size="sm"
-                        >
+                        <Button className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white hover:from-green-700 hover:to-blue-700 text-sm sm:text-base" onClick={() => handleRedeem(reward)} disabled={userPoints < reward.cost} size="sm">
                           <ShoppingCart className="h-4 w-4 mr-2" />
                           {userPoints >= reward.cost ? "Riscatta Ora" : "Punti Insufficienti"}
                         </Button>
                       </div>
                     </CardContent>
-                  </Card>
-                ))}
+                  </Card>)}
               </div>
             </TabsContent>
 
-            {["transport", "culture", "welfare"].map(category => (
-              <TabsContent key={category} value={category} className="space-y-4 sm:space-y-6">
+            {["transport", "culture", "welfare"].map(category => <TabsContent key={category} value={category} className="space-y-4 sm:space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                  {rewards.filter(reward => reward.category === category).map(reward => (
-                    <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+                  {rewards.filter(reward => reward.category === category).map(reward => <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
                       <CardHeader className="pb-3">
                         <div className="flex justify-between items-start mb-2">
                           <div className="text-3xl sm:text-4xl">{reward.image}</div>
@@ -516,22 +472,15 @@ const Exchange = () => {
                             Partner: {reward.provider}
                           </div>
                           
-                          <Button 
-                            className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white hover:from-green-700 hover:to-blue-700 text-sm sm:text-base" 
-                            onClick={() => handleRedeem(reward)} 
-                            disabled={userPoints < reward.cost} 
-                            size="sm"
-                          >
+                          <Button className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white hover:from-green-700 hover:to-blue-700 text-sm sm:text-base" onClick={() => handleRedeem(reward)} disabled={userPoints < reward.cost} size="sm">
                             <ShoppingCart className="h-4 w-4 mr-2" />
                             {userPoints >= reward.cost ? "Riscatta Ora" : "Punti Insufficienti"}
                           </Button>
                         </div>
                       </CardContent>
-                    </Card>
-                  ))}
+                    </Card>)}
                 </div>
-              </TabsContent>
-            ))}
+              </TabsContent>)}
           </Tabs>
         </div>
 
@@ -545,8 +494,7 @@ const Exchange = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {socialProjects.map(project => (
-              <Card key={project.id} className="border-0 shadow-lg bg-white/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+            {socialProjects.map(project => <Card key={project.id} className="border-0 shadow-lg bg-white/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
                 <CardHeader className="pb-3">
                   <div className="flex justify-between items-start mb-2">
                     <div className="text-3xl sm:text-4xl">{project.image}</div>
@@ -579,19 +527,13 @@ const Exchange = () => {
                       <span>{project.location}</span>
                     </div>
 
-                    <Button 
-                      className="w-full bg-gradient-to-r from-red-600 to-pink-600 text-white hover:from-red-700 hover:to-pink-700 text-sm" 
-                      size="sm"
-                      onClick={() => handleDonate(project)}
-                      disabled={userCertificates < project.certificatesNeeded}
-                    >
+                    <Button className="w-full bg-gradient-to-r from-red-600 to-pink-600 text-white hover:from-red-700 hover:to-pink-700 text-sm" size="sm" onClick={() => handleDonate(project)} disabled={userCertificates < project.certificatesNeeded}>
                       <Heart className="h-4 w-4 mr-2" />
                       {userCertificates >= project.certificatesNeeded ? "Dona Ora" : "Certificati Insufficienti"}
                     </Button>
                   </div>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
 
@@ -605,14 +547,9 @@ const Exchange = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {partnerOffers.map(offer => (
-              <Card key={offer.id} className="border-0 shadow-lg bg-white/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300 overflow-hidden">
+            {partnerOffers.map(offer => <Card key={offer.id} className="border-0 shadow-lg bg-white/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300 overflow-hidden">
                 <div className="relative">
-                  <img 
-                    src={offer.image} 
-                    alt={offer.title}
-                    className="w-full h-40 sm:h-48 object-cover"
-                  />
+                  <img src={offer.image} alt={offer.title} className="w-full h-40 sm:h-48 object-cover" />
                   <div className="absolute top-3 left-3">
                     <Badge className="bg-white/90 text-gray-800 font-bold">
                       {offer.partner}
@@ -640,46 +577,32 @@ const Exchange = () => {
                       <span className="font-semibold">{offer.validUntil}</span>
                     </div>
 
-                    {offer.pointsRequired > 0 && (
-                      <div className="flex justify-between items-center text-sm">
+                    {offer.pointsRequired > 0 && <div className="flex justify-between items-center text-sm">
                         <span className="text-gray-600">Punti richiesti</span>
                         <span className="font-bold text-blue-600">{offer.pointsRequired} punti</span>
-                      </div>
-                    )}
+                      </div>}
 
                     <div>
                       <p className="text-sm text-gray-600 mb-2">Benefici inclusi:</p>
                       <div className="space-y-1">
-                        {offer.benefits.slice(0, 2).map((benefit, index) => (
-                          <div key={index} className="flex items-center text-xs text-gray-700">
+                        {offer.benefits.slice(0, 2).map((benefit, index) => <div key={index} className="flex items-center text-xs text-gray-700">
                             <Star className="h-3 w-3 text-yellow-500 mr-1 flex-shrink-0" />
                             <span>{benefit}</span>
-                          </div>
-                        ))}
-                        {offer.benefits.length > 2 && (
-                          <div className="flex items-center text-xs text-gray-700">
+                          </div>)}
+                        {offer.benefits.length > 2 && <div className="flex items-center text-xs text-gray-700">
                             <Star className="h-3 w-3 text-yellow-500 mr-1 flex-shrink-0" />
                             <span>+{offer.benefits.length - 2} altri vantaggi</span>
-                          </div>
-                        )}
+                          </div>}
                       </div>
                     </div>
 
-                    <Button 
-                      className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700 text-sm" 
-                      size="sm"
-                      onClick={() => handlePartnerOfferClick(offer)}
-                    >
+                    <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700 text-sm" size="sm" onClick={() => handlePartnerOfferClick(offer)}>
                       <ExternalLink className="h-4 w-4 mr-2" />
-                      {offer.pointsRequired > userPoints && offer.pointsRequired > 0 
-                        ? "Punti Insufficienti" 
-                        : "Scopri l'Offerta"
-                      }
+                      {offer.pointsRequired > userPoints && offer.pointsRequired > 0 ? "Punti Insufficienti" : "Scopri l'Offerta"}
                     </Button>
                   </div>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
 
@@ -719,17 +642,12 @@ const Exchange = () => {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogAction 
-              className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-green-700 hover:to-emerald-700"
-              onClick={() => setShowDonationDialog(false)}
-            >
+            <AlertDialogAction className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-green-700 hover:to-emerald-700" onClick={() => setShowDonationDialog(false)}>
               Perfetto! 🚀
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </div>
-  );
+    </div>;
 };
-
 export default Exchange;
