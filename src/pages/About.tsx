@@ -506,7 +506,7 @@ const About = () => {
             <img 
               src="/lovable-uploads/d9ea4e8e-53a1-4a2e-be6c-a037e855fef7.png" 
               alt="Esempio DPP - Scarpe da Corsa EcoRun" 
-              className="mx-auto rounded-lg shadow-2xl max-w-full h-auto border border-gray-200"
+              className="mx-auto rounded-lg shadow-2xl max-w-[50%] h-auto border border-gray-200"
             />
             <p className="text-sm text-gray-600 mt-3 italic">
               Esempio di Digital Product Passport: ogni prodotto avrà informazioni complete su origine, sostenibilità e filiera produttiva
@@ -570,7 +570,7 @@ const About = () => {
                     <div className="flex items-start">
                       <TrendingUp className="w-5 h-5 text-orange-500 mr-3 mt-1" />
                       <div>
-                        <strong>Analytics Avanzate:</strong> Dashboard personalizzate mostrano l'impatto ambientale dei tuoi acquisti e suggeriscono alternative più sostenibili
+                        <strong>Analytics Avanzati:</strong> Dashboard personalizzate mostrano l'impatto ambientale dei tuoi acquisti e suggeriscono alternative più sostenibili
                       </div>
                     </div>
                   </div>
