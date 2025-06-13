@@ -310,17 +310,17 @@ const About = () => {
     points: ["Analytics mobilità urbana", "Monitoraggio obiettivi ambientali", "Citizen engagement", "Smart city integration"]
   }];
   const roadmap = [{
-    phase: "Q4 2025",
+    phase: "Gen-Mar 2026",
     title: "MVP & Pilot Cities",
     status: "upcoming",
     items: ["Lancio app mobile", "Prime 5 città pilota", "Integrazione bike sharing", "1000 utenti beta"]
   }, {
-    phase: "Q1-Q2 2026",
+    phase: "Apr-Giu 2026",
     title: "Espansione & Partnership",
     status: "upcoming",
     items: ["20 città partner", "Integrazione trasporti pubblici", "10.000 utenti attivi", "Prime aziende B2B"]
   }, {
-    phase: "Q3-Q4 2026",
+    phase: "Lug-Dic 2026",
     title: "Marketplace & Blockchain",
     status: "upcoming",
     items: ["Lancio marketplace", "Certificati blockchain", "Integrazione DPP", "100.000 utenti"]
