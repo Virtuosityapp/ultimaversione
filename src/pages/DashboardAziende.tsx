@@ -214,6 +214,48 @@ const DashboardAziende = () => {
     quantitaCertificati: ''
   });
 
+  const handleAddWelfareItem = () => {
+    if (newWelfareItem.tipo && newWelfareItem.nome && newWelfareItem.valore && newWelfareItem.certificatiRichiesti && newWelfareItem.quantitaCertificati) {
+      const newItem = {
+        id: Math.max(...welfareItems.map(item => item.id)) + 1,
+        tipo: newWelfareItem.tipo,
+        nome: newWelfareItem.nome,
+        valore: newWelfareItem.valore,
+        certificatiRichiesti: newWelfareItem.certificatiRichiesti,
+        quantitaCertificati: parseInt(newWelfareItem.quantitaCertificati)
+      };
+      setWelfareItems([...welfareItems, newItem]);
+      setNewWelfareItem({
+        tipo: '',
+        nome: '',
+        valore: '',
+        certificatiRichiesti: '',
+        quantitaCertificati: ''
+      });
+    }
+  };
+
+  const handleAddFollowersReward = () => {
+    if (newFollowersReward.tipo && newFollowersReward.nome && newFollowersReward.valore && newFollowersReward.certificatiRichiesti && newFollowersReward.quantitaCertificati) {
+      const newReward = {
+        id: Math.max(...followersRewards.map(item => item.id)) + 1,
+        tipo: newFollowersReward.tipo,
+        nome: newFollowersReward.nome,
+        valore: newFollowersReward.valore,
+        certificatiRichiesti: newFollowersReward.certificatiRichiesti,
+        quantitaCertificati: parseInt(newFollowersReward.quantitaCertificati)
+      };
+      setFollowersRewards([...followersRewards, newReward]);
+      setNewFollowersReward({
+        tipo: '',
+        nome: '',
+        valore: '',
+        certificatiRichiesti: '',
+        quantitaCertificati: ''
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-6">
       <LanguageSwitcher />
