@@ -116,19 +116,25 @@ const Exchange = () => {
       value: "company-rewards", 
       label: "Premi Aziendali", 
       icon: Building2,
-      description: "Utilizza i tuoi punti per vantaggi esclusivi"
+      description: "Utilizza i tuoi punti per vantaggi esclusivi",
+      color: "from-blue-500 to-cyan-500",
+      bgColor: "bg-gradient-to-br from-blue-50 to-cyan-50"
     },
     { 
       value: "social-projects", 
       label: "Progetti Sociali", 
       icon: HandHeart,
-      description: "Dona certificati per supportare la comunità"
+      description: "Dona certificati per supportare la comunità",
+      color: "from-red-500 to-pink-500",
+      bgColor: "bg-gradient-to-br from-red-50 to-pink-50"
     },
     { 
       value: "partner-offers", 
       label: "Offerte Partner", 
       icon: Users,
-      description: "Scopri le proposte sostenibili dei partner"
+      description: "Scopri le proposte sostenibili dei partner",
+      color: "from-purple-500 to-indigo-500",
+      bgColor: "bg-gradient-to-br from-purple-50 to-indigo-50"
     }
   ];
 
@@ -640,30 +646,64 @@ const Exchange = () => {
           </Card>
         </div>
 
-        {/* Exchange Type Selection */}
+        {/* Enhanced Exchange Type Selection */}
         <div className="mb-8 sm:mb-12">
-          <div className="max-w-md mx-auto">
-            <label className="block text-sm font-medium text-gray-700 mb-2 text-center">
-              Seleziona il tipo di scambio
-            </label>
-            <Select value={selectedExchangeType} onValueChange={setSelectedExchangeType}>
-              <SelectTrigger className="w-full bg-white/80 backdrop-blur-sm border-green-200 shadow-lg">
-                <SelectValue placeholder="Scegli cosa fare con i tuoi punti..." />
-              </SelectTrigger>
-              <SelectContent className="bg-white/95 backdrop-blur-sm border-green-200">
-                {exchangeTypes.map((type) => (
-                  <SelectItem key={type.value} value={type.value} className="focus:bg-green-50">
-                    <div className="flex items-center space-x-3">
-                      <type.icon className="h-5 w-5 text-green-600" />
-                      <div>
-                        <div className="font-medium">{type.label}</div>
-                        <div className="text-xs text-gray-500">{type.description}</div>
-                      </div>
+          <div className="text-center mb-6">
+            <h3 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent mb-2">
+              Scegli il Tipo di Scambio
+            </h3>
+            <p className="text-gray-600 text-sm sm:text-base">
+              Seleziona come utilizzare i tuoi punti e certificati
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 max-w-6xl mx-auto">
+            {exchangeTypes.map((type) => (
+              <Card 
+                key={type.value}
+                className={`cursor-pointer transition-all duration-300 hover:scale-105 border-2 shadow-lg backdrop-blur-sm ${
+                  selectedExchangeType === type.value 
+                    ? `border-transparent bg-gradient-to-br ${type.color.replace('from-', 'from-').replace('to-', 'to-')} text-white shadow-xl transform scale-105` 
+                    : `border-gray-200 bg-white/80 hover:border-green-300 ${type.bgColor}`
+                }`}
+                onClick={() => setSelectedExchangeType(type.value)}
+              >
+                <CardHeader className="text-center pb-3">
+                  <div className={`mx-auto w-16 h-16 rounded-full flex items-center justify-center mb-3 ${
+                    selectedExchangeType === type.value 
+                      ? 'bg-white/20 backdrop-blur-sm' 
+                      : `bg-gradient-to-br ${type.color}`
+                  }`}>
+                    <type.icon className={`h-8 w-8 ${
+                      selectedExchangeType === type.value ? 'text-white' : 'text-white'
+                    }`} />
+                  </div>
+                  <CardTitle className={`text-lg font-bold ${
+                    selectedExchangeType === type.value 
+                      ? 'text-white' 
+                      : 'text-gray-900'
+                  }`}>
+                    {type.label}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="text-center">
+                  <p className={`text-sm ${
+                    selectedExchangeType === type.value 
+                      ? 'text-white/90' 
+                      : 'text-gray-600'
+                  }`}>
+                    {type.description}
+                  </p>
+                  {selectedExchangeType === type.value && (
+                    <div className="mt-3">
+                      <Badge className="bg-white/20 text-white border-white/30">
+                        ✓ Selezionato
+                      </Badge>
                     </div>
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+                  )}
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
 
