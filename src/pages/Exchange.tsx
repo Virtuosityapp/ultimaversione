@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -60,7 +61,7 @@ const Exchange = () => {
     description: "Un giorno di permesso aggiuntivo retribuito",
     cost: 800,
     category: "corporate",
-    image: "/lovable-uploads/3481b0f8-728c-469a-88b5-11f47b0047a4.png",
+    image: "/lovable-uploads/6d33073c-cfa1-4bae-9825-e8418293e92d.png",
     availability: "Limitato",
     provider: "HR Department"
   }, {
