@@ -33,7 +33,7 @@ const Exchange = () => {
     description: "Viaggio gratuito su tutta la rete ATM Milano",
     cost: 80,
     category: "transport",
-    image: "/lovable-uploads/77ba3a56-4d7a-4241-b56e-08c75ca1dc37.png",
+    image: "/lovable-uploads/ac2feaf6-0c76-4bb7-ab58-1faf2c54536b.png",
     availability: "Limitato",
     provider: "ATM Milano"
   }, {
