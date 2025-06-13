@@ -24,7 +24,7 @@ const Exchange = () => {
     description: "Buono spendibile in mense aziendali partner",
     cost: 250,
     category: "corporate",
-    image: "https://images.unsplash.com/photo-1567521464027-f46c9cb5756c?w=400&h=300&fit=crop",
+    image: "/lovable-uploads/020a2c14-0a7b-4f72-8b24-0f41ab720b95.png",
     availability: "Disponibile",
     provider: "Corporate Benefits"
   }, {
@@ -33,7 +33,7 @@ const Exchange = () => {
     description: "Viaggio gratuito su tutta la rete ATM Milano",
     cost: 80,
     category: "transport",
-    image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&h=300&fit=crop",
+    image: "/lovable-uploads/77ba3a56-4d7a-4241-b56e-08c75ca1dc37.png",
     availability: "Limitato",
     provider: "ATM Milano"
   }, {
@@ -42,7 +42,7 @@ const Exchange = () => {
     description: "Accesso gratuito ai musei civici di Milano",
     cost: 150,
     category: "culture",
-    image: "https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=400&h=300&fit=crop",
+    image: "/lovable-uploads/d5ff17e5-6093-4bc7-8873-de37da2355ee.png",
     availability: "Disponibile",
     provider: "Comune di Milano"
   }, {
@@ -51,7 +51,7 @@ const Exchange = () => {
     description: "Visita dentistica completa presso cliniche convenzionate",
     cost: 500,
     category: "welfare",
-    image: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=400&h=300&fit=crop",
+    image: "/lovable-uploads/68f725b5-ee07-4329-b173-31ae580fbafd.png",
     availability: "Disponibile",
     provider: "Cliniche Partner"
   }, {
@@ -60,7 +60,7 @@ const Exchange = () => {
     description: "Un giorno di permesso aggiuntivo retribuito",
     cost: 800,
     category: "corporate",
-    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop",
+    image: "/lovable-uploads/3481b0f8-728c-469a-88b5-11f47b0047a4.png",
     availability: "Limitato",
     provider: "HR Department"
   }, {
@@ -69,7 +69,7 @@ const Exchange = () => {
     description: "30 giorni di bike sharing illimitato",
     cost: 300,
     category: "transport",
-    image: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=300&fit=crop",
+    image: "/lovable-uploads/9bea380e-98ea-4b94-a376-e7d9e45cc143.png",
     availability: "Disponibile",
     provider: "Mobike"
   }];
@@ -80,7 +80,7 @@ const Exchange = () => {
     description: "Piantumazione di alberi nelle aree metropolitane per migliorare la qualità dell'aria",
     certificatesNeeded: 15,
     association: "Green City Milano",
-    image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop",
+    image: "/lovable-uploads/491544c4-c37d-4c3b-a368-e0c71002d237.png",
     category: "ambiente",
     impact: "500 alberi piantati",
     location: "Milano, Lombardia"
@@ -90,7 +90,7 @@ const Exchange = () => {
     description: "Fornitura di pasti caldi per persone in difficoltà economica",
     certificatesNeeded: 25,
     association: "Caritas Milano",
-    image: "https://images.unsplash.com/photo-1593113630400-ea4288922497?w=400&h=300&fit=crop",
+    image: "/lovable-uploads/020a2c14-0a7b-4f72-8b24-0f41ab720b95.png",
     category: "sociale",
     impact: "1000 pasti serviti",
     location: "Milano Centro"
@@ -100,7 +100,7 @@ const Exchange = () => {
     description: "Corsi di alfabetizzazione digitale per persone over 65",
     certificatesNeeded: 10,
     association: "Senior Tech",
-    image: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=400&h=300&fit=crop",
+    image: "/lovable-uploads/16190dbd-ebd1-4b29-968d-8c8f8d26066d.png",
     category: "educazione",
     impact: "50 anziani formati",
     location: "Centri Sociali Milano"
@@ -110,7 +110,7 @@ const Exchange = () => {
     description: "Rimozione di rifiuti plastici da corsi d'acqua e zone lacustri",
     certificatesNeeded: 20,
     association: "Plastic Free Lombardia",
-    image: "https://images.unsplash.com/photo-1569163139394-de44cb5ac822?w=400&h=300&fit=crop",
+    image: "/lovable-uploads/7942f312-9a3e-4b02-9bdd-c96f9d500a13.png",
     category: "ambiente",
     impact: "2 tonnellate di rifiuti rimossi",
     location: "Navigli Milano"
@@ -120,7 +120,7 @@ const Exchange = () => {
     description: "Sostegno per cure veterinarie e mantenimento di animali abbandonati",
     certificatesNeeded: 18,
     association: "ENPA Milano",
-    image: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&h=300&fit=crop",
+    image: "/lovable-uploads/a51bd3a3-21bb-4cab-afc7-e651cac982e9.png",
     category: "animali",
     impact: "30 animali curati",
     location: "Canile Municipale"
@@ -130,7 +130,7 @@ const Exchange = () => {
     description: "Attività artistiche e ricreative per bambini in situazioni di disagio",
     certificatesNeeded: 12,
     association: "Arte per Tutti",
-    image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&h=300&fit=crop",
+    image: "/lovable-uploads/89a2a2c5-7071-4df2-8e73-c5e5b645b38b.png",
     category: "infanzia",
     impact: "100 bambini coinvolti",
     location: "Quartieri Periferici"
