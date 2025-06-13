@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -70,7 +69,7 @@ const Exchange = () => {
     description: "30 giorni di bike sharing illimitato",
     cost: 300,
     category: "transport",
-    image: "/lovable-uploads/9bea380e-98ea-4b94-a376-e7d9e45cc143.png",
+    image: "/lovable-uploads/234b99d5-8d1a-4a99-82be-7cc0cb1280fa.png",
     availability: "Disponibile",
     provider: "Mobike"
   }];
