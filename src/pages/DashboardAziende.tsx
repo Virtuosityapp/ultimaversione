@@ -1,18 +1,13 @@
 import React, { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Badge } from '@/components/ui/badge';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Users, UserCheck, Upload, FileText, Award, Gift, Plane, ArrowLeft, TrendingUp, Eye, Target, Globe, Droplet, Zap, Trash2, Percent } from 'lucide-react';
+import { ArrowLeft, Users, Globe, Eye, Droplet, Zap, Trash2, FileText } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, PieChart, Pie, Cell, LineChart, Line } from "recharts";
+import MetricsCards from '@/components/dashboard/MetricsCards';
+import MonitoringSection from '@/components/dashboard/MonitoringSection';
+import WelfareSection from '@/components/dashboard/WelfareSection';
+import ReportDialog from '@/components/dashboard/ReportDialog';
 
 const DashboardAziende = () => {
   const navigate = useNavigate();
@@ -219,67 +214,6 @@ const DashboardAziende = () => {
     quantitaCertificati: ''
   });
 
-  // Chart configurations
-  const chartConfig = {
-    value: {
-      label: "Certificati",
-      color: "#3b82f6",
-    },
-  };
-
-  const trendConfig = {
-    count: {
-      label: "Certificati",
-      color: "#10b981",
-    },
-  };
-
-  const handleAddWelfareItem = () => {
-    if (newWelfareItem.tipo && newWelfareItem.nome && newWelfareItem.valore && newWelfareItem.certificatiRichiesti && newWelfareItem.quantitaCertificati) {
-      setWelfareItems([...welfareItems, {
-        id: Date.now(),
-        ...newWelfareItem,
-        quantitaCertificati: parseInt(newWelfareItem.quantitaCertificati)
-      }]);
-      setNewWelfareItem({ tipo: '', nome: '', valore: '', certificatiRichiesti: '', quantitaCertificati: '' });
-    }
-  };
-
-  const handleAddFollowersReward = () => {
-    if (newFollowersReward.tipo && newFollowersReward.nome && newFollowersReward.valore && newFollowersReward.certificatiRichiesti && newFollowersReward.quantitaCertificati) {
-      setFollowersRewards([...followersRewards, {
-        id: Date.now(),
-        ...newFollowersReward,
-        quantitaCertificati: parseInt(newFollowersReward.quantitaCertificati)
-      }]);
-      setNewFollowersReward({ tipo: '', nome: '', valore: '', certificatiRichiesti: '', quantitaCertificati: '' });
-    }
-  };
-
-  const getIconForType = (tipo: string) => {
-    switch (tipo.toLowerCase()) {
-      case 'premio': return <Gift className="h-4 w-4" />;
-      case 'viaggio': return <Plane className="h-4 w-4" />;
-      case 'gadget': return <Award className="h-4 w-4" />;
-      case 'sconto': return <Percent className="h-4 w-4" />;
-      default: return <Gift className="h-4 w-4" />;
-    }
-  };
-
-  const getBadgeColor = (tipo: string) => {
-    switch (tipo.toLowerCase()) {
-      case 'premio': return 'bg-emerald-100 text-emerald-700 border-emerald-200';
-      case 'viaggio': return 'bg-blue-100 text-blue-700 border-blue-200';
-      case 'gadget': return 'bg-purple-100 text-purple-700 border-purple-200';
-      case 'sconto': return 'bg-orange-100 text-orange-700 border-orange-200';
-      default: return 'bg-gray-100 text-gray-700 border-gray-200';
-    }
-  };
-
-  const getTrendColor = (trend: string) => {
-    return trend.startsWith('+') ? 'text-green-600' : 'text-red-600';
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-6">
       <LanguageSwitcher />
@@ -298,510 +232,85 @@ const DashboardAziende = () => {
         </div>
 
         {/* Metriche Certificati */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-green-500 to-emerald-600 text-white">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-green-100">{t('employeeCertificates')}</CardTitle>
-              <div className="p-2 bg-white/20 rounded-lg">
-                <Users className="h-5 w-5 text-white" />
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-white">{certificatiDipendenti}</div>
-              <p className="text-xs text-green-100 mt-1">
-                Certificati scambiati con i dipendenti
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-500 to-cyan-600 text-white">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-blue-100">{t('externalCertificates')}</CardTitle>
-              <div className="p-2 bg-white/20 rounded-lg">
-                <UserCheck className="h-5 w-5 text-white" />
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-white">{certificatiEsterni}</div>
-              <p className="text-xs text-blue-100 mt-1">
-                Certificati ricevuti da followers
-              </p>
-            </CardContent>
-          </Card>
-        </div>
+        <MetricsCards 
+          certificatiDipendenti={certificatiDipendenti}
+          certificatiEsterni={certificatiEsterni}
+        />
 
         {/* Monitoraggio Certificati - Side by Side con Grafici */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          {/* Monitoraggio Certificati Dipendenti */}
-          <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
-            <CardHeader className="bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-t-lg">
-              <CardTitle className="flex items-center gap-2">
-                <Eye className="h-6 w-6" />
-                Monitoraggio Certificati Dipendenti
-              </CardTitle>
-              <CardDescription className="text-green-100">
-                Analisi dei comportamenti sostenibili per strategie di marketing mirate
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="p-6">
-              <Accordion type="single" collapsible className="w-full">
-                {certificateMonitoringCategories.map((category, categoryIndex) => (
-                  <AccordionItem key={categoryIndex} value={`item-${categoryIndex}`}>
-                    <AccordionTrigger className="flex items-center gap-3">
-                      <div className="flex items-center gap-3">
-                        <img 
-                          src={category.mascot} 
-                          alt={category.category}
-                          className="w-8 h-8 rounded-full object-cover"
-                        />
-                        {category.icon}
-                        <span>{category.category}</span>
-                      </div>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <div className="space-y-6">
-                        {/* Pie Chart */}
-                        <div>
-                          <h4 className="text-sm font-medium mb-3">Distribuzione Certificati</h4>
-                          <ChartContainer config={chartConfig} className="h-64">
-                            <PieChart>
-                              <Pie
-                                data={category.chartData}
-                                dataKey="value"
-                                nameKey="name"
-                                cx="50%"
-                                cy="50%"
-                                outerRadius={80}
-                              >
-                                {category.chartData.map((entry, index) => (
-                                  <Cell key={`cell-${index}`} fill={entry.color} />
-                                ))}
-                              </Pie>
-                              <ChartTooltip content={<ChartTooltipContent />} />
-                            </PieChart>
-                          </ChartContainer>
-                        </div>
+          <MonitoringSection
+            title="Monitoraggio Certificati Dipendenti"
+            description="Analisi dei comportamenti sostenibili per strategie di marketing mirate"
+            categories={certificateMonitoringCategories}
+            icon={<Eye className="h-6 w-6" />}
+            chartType="pie"
+            gradientFrom="from-green-500"
+            gradientTo="to-emerald-500"
+            prefix="employee"
+          />
 
-                        {/* Trend Line Chart */}
-                        <div>
-                          <h4 className="text-sm font-medium mb-3">Trend Mensile</h4>
-                          <ChartContainer config={trendConfig} className="h-48">
-                            <LineChart data={category.trendData}>
-                              <CartesianGrid strokeDasharray="3 3" />
-                              <XAxis dataKey="month" />
-                              <YAxis />
-                              <ChartTooltip content={<ChartTooltipContent />} />
-                              <Line type="monotone" dataKey="count" stroke="var(--color-count)" strokeWidth={2} />
-                            </LineChart>
-                          </ChartContainer>
-                        </div>
-
-                        {/* Actions Summary */}
-                        <div className="grid gap-2">
-                          {category.data.map((item, index) => (
-                            <div key={index} className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                              <span className="text-xs font-medium">{item.tipo}</span>
-                              <Badge variant="outline" className="text-xs">
-                                <Target className="h-3 w-3 mr-1" />
-                                {item.action}
-                              </Badge>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </CardContent>
-          </Card>
-
-          {/* Monitoraggio Certificati Esterni */}
-          <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
-            <CardHeader className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-t-lg">
-              <CardTitle className="flex items-center gap-2">
-                <Globe className="h-6 w-6" />
-                Monitoraggio Certificati Esterni
-              </CardTitle>
-              <CardDescription className="text-blue-100">
-                Analisi dei comportamenti sostenibili dei followers per strategie di engagement
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="p-6">
-              <Accordion type="single" collapsible className="w-full">
-                {externalCertificateCategories.map((category, categoryIndex) => (
-                  <AccordionItem key={categoryIndex} value={`external-item-${categoryIndex}`}>
-                    <AccordionTrigger className="flex items-center gap-3">
-                      <div className="flex items-center gap-3">
-                        <img 
-                          src={category.mascot} 
-                          alt={category.category}
-                          className="w-8 h-8 rounded-full object-cover"
-                        />
-                        {category.icon}
-                        <span>{category.category}</span>
-                      </div>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <div className="space-y-6">
-                        {/* Bar Chart */}
-                        <div>
-                          <h4 className="text-sm font-medium mb-3">Distribuzione Certificati</h4>
-                          <ChartContainer config={chartConfig} className="h-64">
-                            <BarChart data={category.chartData}>
-                              <CartesianGrid strokeDasharray="3 3" />
-                              <XAxis dataKey="name" />
-                              <YAxis />
-                              <ChartTooltip content={<ChartTooltipContent />} />
-                              <Bar dataKey="value" fill="#3b82f6" />
-                            </BarChart>
-                          </ChartContainer>
-                        </div>
-
-                        {/* Trend Line Chart */}
-                        <div>
-                          <h4 className="text-sm font-medium mb-3">Trend Mensile</h4>
-                          <ChartContainer config={trendConfig} className="h-48">
-                            <LineChart data={category.trendData}>
-                              <CartesianGrid strokeDasharray="3 3" />
-                              <XAxis dataKey="month" />
-                              <YAxis />
-                              <ChartTooltip content={<ChartTooltipContent />} />
-                              <Line type="monotone" dataKey="count" stroke="var(--color-count)" strokeWidth={2} />
-                            </LineChart>
-                          </ChartContainer>
-                        </div>
-
-                        {/* Actions Summary */}
-                        <div className="grid gap-2">
-                          {category.data.map((item, index) => (
-                            <div key={index} className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                              <span className="text-xs font-medium">{item.tipo}</span>
-                              <Badge variant="outline" className="text-xs">
-                                <Target className="h-3 w-3 mr-1" />
-                                {item.action}
-                              </Badge>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </CardContent>
-          </Card>
+          <MonitoringSection
+            title="Monitoraggio Certificati Esterni"
+            description="Analisi dei comportamenti sostenibili dei followers per strategie di engagement"
+            categories={externalCertificateCategories}
+            icon={<Globe className="h-6 w-6" />}
+            chartType="bar"
+            gradientFrom="from-blue-500"
+            gradientTo="to-cyan-500"
+            prefix="external"
+          />
         </div>
 
         {/* Sezioni Welfare e Premi - Side by Side */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          {/* Sezione Welfare Dipendenti */}
-          <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
-            <CardHeader className="bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-t-lg">
-              <CardTitle className="flex items-center gap-2">
-                <Users className="h-6 w-6" />
-                Welfare per Dipendenti
-              </CardTitle>
-              <CardDescription className="text-green-100">
-                Premi e benefit in cambio di comportamenti sostenibili certificati
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="p-6">
-              {/* Form per aggiungere nuovo item welfare */}
-              <div className="grid grid-cols-1 gap-4 mb-6 p-4 border-2 border-dashed border-green-200 rounded-xl bg-gradient-to-r from-green-50 to-emerald-50">
-                <div>
-                  <Label htmlFor="welfare-tipo" className="text-green-700 font-medium">{t('type')}</Label>
-                  <Input
-                    id="welfare-tipo"
-                    placeholder="Premio/Viaggio/Gadget"
-                    value={newWelfareItem.tipo}
-                    onChange={(e) => setNewWelfareItem({...newWelfareItem, tipo: e.target.value})}
-                    className="border-green-200 focus:border-green-400"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="welfare-nome" className="text-green-700 font-medium">{t('name')}</Label>
-                  <Input
-                    id="welfare-nome"
-                    placeholder="Nome del premio"
-                    value={newWelfareItem.nome}
-                    onChange={(e) => setNewWelfareItem({...newWelfareItem, nome: e.target.value})}
-                    className="border-green-200 focus:border-green-400"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="welfare-valore" className="text-green-700 font-medium">{t('value')}</Label>
-                  <Input
-                    id="welfare-valore"
-                    placeholder="€ 0"
-                    value={newWelfareItem.valore}
-                    onChange={(e) => setNewWelfareItem({...newWelfareItem, valore: e.target.value})}
-                    className="border-green-200 focus:border-green-400"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="welfare-certificati" className="text-green-700 font-medium">Tipo Certificati</Label>
-                  <Input
-                    id="welfare-certificati"
-                    placeholder="Es. Risparmio Energetico"
-                    value={newWelfareItem.certificatiRichiesti}
-                    onChange={(e) => setNewWelfareItem({...newWelfareItem, certificatiRichiesti: e.target.value})}
-                    className="border-green-200 focus:border-green-400"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="welfare-quantita" className="text-green-700 font-medium">Quantità Certificati</Label>
-                  <Input
-                    id="welfare-quantita"
-                    type="number"
-                    placeholder="0"
-                    value={newWelfareItem.quantitaCertificati}
-                    onChange={(e) => setNewWelfareItem({...newWelfareItem, quantitaCertificati: e.target.value})}
-                    className="border-green-200 focus:border-green-400"
-                  />
-                </div>
-                <Button 
-                  onClick={handleAddWelfareItem} 
-                  className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white shadow-lg"
-                >
-                  <Upload className="mr-2 h-4 w-4" />
-                  {t('add')}
-                </Button>
-              </div>
+          <WelfareSection
+            title="Welfare per Dipendenti"
+            description="Premi e benefit in cambio di comportamenti sostenibili certificati"
+            icon={<Users className="h-6 w-6" />}
+            items={welfareItems}
+            newItem={newWelfareItem}
+            setNewItem={setNewWelfareItem}
+            onAdd={handleAddWelfareItem}
+            gradientFrom="from-green-500"
+            gradientTo="to-emerald-500"
+            bgGradient="to-green-50"
+            borderColor="border-green-200"
+            focusColor="focus:border-green-400"
+            gradientFromHover="from-green-600"
+            gradientToHover="to-emerald-600"
+            textColor="text-green-700"
+            descriptionTextColor="text-green-100"
+          />
 
-              {/* Lista items welfare - 2x2 grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {welfareItems.map((item) => (
-                  <div key={item.id} className="p-4 border-0 rounded-xl shadow-lg bg-gradient-to-br from-white to-green-50 hover:shadow-xl transition-shadow">
-                    <div className="flex items-center justify-between mb-3">
-                      <Badge className={`flex items-center gap-1 ${getBadgeColor(item.tipo)}`}>
-                        {getIconForType(item.tipo)}
-                        {item.tipo}
-                      </Badge>
-                      <span className="font-bold text-lg text-gray-700">{item.valore}</span>
-                    </div>
-                    <h4 className="font-semibold text-gray-800 mb-2">{item.nome}</h4>
-                    <div className="text-sm text-gray-600 space-y-1">
-                      <p><span className="font-medium">Richiede:</span> {item.quantitaCertificati}x {item.certificatiRichiesti}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Sezione Premi per Followers */}
-          <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
-            <CardHeader className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-t-lg">
-              <CardTitle className="flex items-center gap-2">
-                <Globe className="h-6 w-6" />
-                Premi e Sconti per Followers
-              </CardTitle>
-              <CardDescription className="text-blue-100">
-                Offerte e sconti per followers in cambio di certificati sostenibili
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="p-6">
-              {/* Form per aggiungere nuovo premio followers */}
-              <div className="grid grid-cols-1 gap-4 mb-6 p-4 border-2 border-dashed border-blue-200 rounded-xl bg-gradient-to-r from-blue-50 to-cyan-50">
-                <div>
-                  <Label htmlFor="followers-tipo" className="text-blue-700 font-medium">Tipo</Label>
-                  <Input
-                    id="followers-tipo"
-                    placeholder="Sconto/Premio"
-                    value={newFollowersReward.tipo}
-                    onChange={(e) => setNewFollowersReward({...newFollowersReward, tipo: e.target.value})}
-                    className="border-blue-200 focus:border-blue-400"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="followers-nome" className="text-blue-700 font-medium">Nome</Label>
-                  <Input
-                    id="followers-nome"
-                    placeholder="Nome dell'offerta"
-                    value={newFollowersReward.nome}
-                    onChange={(e) => setNewFollowersReward({...newFollowersReward, nome: e.target.value})}
-                    className="border-blue-200 focus:border-blue-400"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="followers-valore" className="text-blue-700 font-medium">Valore</Label>
-                  <Input
-                    id="followers-valore"
-                    placeholder="€ 0 / %"
-                    value={newFollowersReward.valore}
-                    onChange={(e) => setNewFollowersReward({...newFollowersReward, valore: e.target.value})}
-                    className="border-blue-200 focus:border-blue-400"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="followers-certificati" className="text-blue-700 font-medium">Tipo Certificati</Label>
-                  <Input
-                    id="followers-certificati"
-                    placeholder="Es. Risparmio Idrico"
-                    value={newFollowersReward.certificatiRichiesti}
-                    onChange={(e) => setNewFollowersReward({...newFollowersReward, certificatiRichiesti: e.target.value})}
-                    className="border-blue-200 focus:border-blue-400"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="followers-quantita" className="text-blue-700 font-medium">Quantità Certificati</Label>
-                  <Input
-                    id="followers-quantita"
-                    type="number"
-                    placeholder="0"
-                    value={newFollowersReward.quantitaCertificati}
-                    onChange={(e) => setNewFollowersReward({...newFollowersReward, quantitaCertificati: e.target.value})}
-                    className="border-blue-200 focus:border-blue-400"
-                  />
-                </div>
-                <Button 
-                  onClick={handleAddFollowersReward} 
-                  className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white shadow-lg"
-                >
-                  <Upload className="mr-2 h-4 w-4" />
-                  Aggiungi
-                </Button>
-              </div>
-
-              {/* Lista premi followers - 2x2 grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {followersRewards.map((item) => (
-                  <div key={item.id} className="p-4 border-0 rounded-xl shadow-lg bg-gradient-to-br from-white to-blue-50 hover:shadow-xl transition-shadow">
-                    <div className="flex items-center justify-between mb-3">
-                      <Badge className={`flex items-center gap-1 ${getBadgeColor(item.tipo)}`}>
-                        {getIconForType(item.tipo)}
-                        {item.tipo}
-                      </Badge>
-                      <span className="font-bold text-lg text-gray-700">{item.valore}</span>
-                    </div>
-                    <h4 className="font-semibold text-gray-800 mb-2">{item.nome}</h4>
-                    <div className="text-sm text-gray-600 space-y-1">
-                      <p><span className="font-medium">Richiede:</span> {item.quantitaCertificati}x {item.certificatiRichiesti}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+          <WelfareSection
+            title="Premi e Sconti per Followers"
+            description="Offerte e sconti per followers in cambio di certificati sostenibili"
+            icon={<Globe className="h-6 w-6" />}
+            items={followersRewards}
+            newItem={newFollowersReward}
+            setNewItem={setNewFollowersReward}
+            onAdd={handleAddFollowersReward}
+            gradientFrom="from-blue-500"
+            gradientTo="to-cyan-500"
+            bgGradient="to-blue-50"
+            borderColor="border-blue-200"
+            focusColor="focus:border-blue-400"
+            gradientFromHover="from-blue-600"
+            gradientToHover="to-cyan-600"
+            textColor="text-blue-700"
+            descriptionTextColor="text-blue-100"
+          />
         </div>
 
         {/* Pulsante Report Sostenibilità */}
-        <Card className="border-0 shadow-xl bg-gradient-to-r from-orange-400 to-red-500 text-white">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-white">
-              <FileText className="h-6 w-6" />
-              {t('sustainabilityReport')}
-            </CardTitle>
-            <CardDescription className="text-orange-100">
-              {t('sustainabilityDescription')}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Dialog open={reportDialogOpen} onOpenChange={setReportDialogOpen}>
-              <DialogTrigger asChild>
-                <Button size="lg" className="w-full md:w-auto bg-white text-orange-600 hover:bg-gray-100 shadow-lg text-lg py-6 px-8">
-                  <FileText className="mr-2 h-6 w-6" />
-                  {t('certifyAndCompensate')}
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
-                <DialogHeader>
-                  <DialogTitle className="text-2xl bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
-                    {t('sustainabilityReport')}
-                  </DialogTitle>
-                  <DialogDescription>
-                    Dati ambientali e sociali per il bilancio di sostenibilità aziendale
-                  </DialogDescription>
-                </DialogHeader>
-
-                <div className="space-y-6">
-                  {/* Sezione Certificazioni DPP */}
-                  <div>
-                    <h3 className="text-lg font-semibold mb-3 text-green-700">Certificazioni DPP</h3>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border border-green-200">
-                        <p className="text-sm text-green-600 font-medium">Certificati Dipendenti</p>
-                        <p className="text-2xl font-bold text-green-700">{certificatiDipendenti}</p>
-                      </div>
-                      <div className="p-4 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg border border-blue-200">
-                        <p className="text-sm text-blue-600 font-medium">Certificati Esterni</p>
-                        <p className="text-2xl font-bold text-blue-700">{certificatiEsterni}</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Sezione Impatto Ambientale */}
-                  <div>
-                    <h3 className="text-lg font-semibold mb-3 text-blue-700">Impatto Ambientale</h3>
-                    <div className="space-y-3">
-                      <div className="flex justify-between items-center p-3 bg-gradient-to-r from-blue-50 to-cyan-50 rounded border border-blue-200">
-                        <span className="text-blue-700">CO2 evitata tramite digitalizzazione</span>
-                        <span className="font-semibold text-blue-800">2.8 tonnellate</span>
-                      </div>
-                      <div className="flex justify-between items-center p-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded border border-green-200">
-                        <span className="text-green-700">Riduzione uso carta</span>
-                        <span className="font-semibold text-green-800">89%</span>
-                      </div>
-                      <div className="flex justify-between items-center p-3 bg-gradient-to-r from-purple-50 to-pink-50 rounded border border-purple-200">
-                        <span className="text-purple-700">Trasparenza supply chain</span>
-                        <span className="font-semibold text-purple-800">78% prodotti tracciati</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Sezione Welfare e Benefit */}
-                  <div>
-                    <h3 className="text-lg font-semibold mb-3 text-purple-700">Welfare e Benefit</h3>
-                    <div className="space-y-3">
-                      <div className="flex justify-between items-center p-3 bg-gradient-to-r from-purple-50 to-pink-50 rounded border border-purple-200">
-                        <span className="text-purple-700">Valore welfare erogato</span>
-                        <span className="font-semibold text-purple-800">€ {welfareItems.reduce((acc, item) => acc + parseInt(item.valore.replace(/[€\s]/g, '') || '0'), 0).toLocaleString()}</span>
-                      </div>
-                      <div className="flex justify-between items-center p-3 bg-gradient-to-r from-orange-50 to-red-50 rounded border border-orange-200">
-                        <span className="text-orange-700">Dipendenti coinvolti</span>
-                        <span className="font-semibold text-orange-800">85%</span>
-                      </div>
-                      <div className="flex justify-between items-center p-3 bg-gradient-to-r from-yellow-50 to-orange-50 rounded border border-yellow-200">
-                        <span className="text-yellow-700">Soddisfazione media</span>
-                        <span className="font-semibold text-yellow-800">4.2/5</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Sezione Governance */}
-                  <div>
-                    <h3 className="text-lg font-semibold mb-3 text-indigo-700">Governance e Trasparenza</h3>
-                    <div className="space-y-3">
-                      <div className="flex justify-between items-center p-3 bg-gradient-to-r from-indigo-50 to-blue-50 rounded border border-indigo-200">
-                        <span className="text-indigo-700">Certificazioni di conformità</span>
-                        <span className="font-semibold text-indigo-800">100%</span>
-                      </div>
-                      <div className="flex justify-between items-center p-3 bg-gradient-to-r from-teal-50 to-cyan-50 rounded border border-teal-200">
-                        <span className="text-teal-700">Audit di sostenibilità</span>
-                        <span className="font-semibold text-teal-800">Completati</span>
-                      </div>
-                      <div className="flex justify-between items-center p-3 bg-gradient-to-r from-emerald-50 to-green-50 rounded border border-emerald-200">
-                        <span className="text-emerald-700">Obiettivi SDG raggiunti</span>
-                        <span className="font-semibold text-emerald-800">7/9</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <DialogFooter>
-                  <Button variant="outline" onClick={() => setReportDialogOpen(false)}>
-                    {t('close')}
-                  </Button>
-                  <Button className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600">
-                    <FileText className="mr-2 h-4 w-4" />
-                    {t('exportReport')}
-                  </Button>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
-          </CardContent>
-        </Card>
+        <ReportDialog
+          reportDialogOpen={reportDialogOpen}
+          setReportDialogOpen={setReportDialogOpen}
+          certificatiDipendenti={certificatiDipendenti}
+          certificatiEsterni={certificatiEsterni}
+          welfareItems={welfareItems}
+        />
       </div>
     </div>
   );
