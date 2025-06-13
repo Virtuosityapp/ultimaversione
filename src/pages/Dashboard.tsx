@@ -41,7 +41,7 @@ const Dashboard = () => {
       name: "Borsa Saffiano",
       brand: "PRADA",
       model: "1BA274",
-      image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=300&h=300&fit=crop",
+      image: "/lovable-uploads/3481b0f8-728c-469a-88b5-11f47b0047a4.png",
       purchaseDate: "2024-01-15",
       warranty: {
         period: "2 anni",
