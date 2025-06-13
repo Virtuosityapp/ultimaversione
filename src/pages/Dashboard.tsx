@@ -61,7 +61,7 @@ const Dashboard = () => {
       name: "Submariner Date",
       brand: "ROLEX",
       model: "126610LN",
-      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=300&h=300&fit=crop",
+      image: "/lovable-uploads/a51bd3a3-21bb-4cab-afc7-e651cac982e9.png",
       purchaseDate: "2023-11-20",
       warranty: {
         period: "5 anni",
@@ -352,7 +352,7 @@ const Dashboard = () => {
                     onClick={handleWalletClick}
                     className="w-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200 text-sm sm:text-base py-2 sm:py-3"
                   >
-                    <Wallet className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                    <Wallet className="mr-2 h-4 w-4" />
                     {showWallet ? 'Nascondi Wallet' : 'Il tuo Wallet'}
                   </Button>
                   <p className="text-xs text-gray-500 text-center mt-2">
