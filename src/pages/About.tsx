@@ -502,17 +502,6 @@ const About = () => {
 
         {/* 5. DPP Integration - Il futuro della tracciabilità */}
         <div className="mb-16">
-          <div className="mb-8 text-center">
-            <img 
-              src="/lovable-uploads/d9ea4e8e-53a1-4a2e-be6c-a037e855fef7.png" 
-              alt="Esempio DPP - Scarpe da Corsa EcoRun" 
-              className="mx-auto rounded-lg shadow-2xl max-w-[50%] h-auto border border-gray-200"
-            />
-            <p className="text-sm text-gray-600 mt-3 italic">
-              Esempio di Digital Product Passport: ogni prodotto avrà informazioni complete su origine, sostenibilità e filiera produttiva
-            </p>
-          </div>
-
           <Card className="border-0 shadow-lg bg-gradient-to-r from-blue-50 via-green-50 to-purple-50">
             <CardHeader className="text-center">
               <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white mb-4 mx-auto">
@@ -575,6 +564,17 @@ const About = () => {
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <div className="mb-8 text-center">
+                <img 
+                  src="/lovable-uploads/d9ea4e8e-53a1-4a2e-be6c-a037e855fef7.png" 
+                  alt="Esempio DPP - Scarpe da Corsa EcoRun" 
+                  className="mx-auto rounded-lg shadow-2xl max-w-[50%] h-auto border border-gray-200"
+                />
+                <p className="text-sm text-gray-600 mt-3 italic">
+                  Esempio di Digital Product Passport: ogni prodotto avrà informazioni complete su origine, sostenibilità e filiera produttiva
+                </p>
               </div>
 
               <div className="mt-12 p-6 bg-white/50 rounded-lg">
