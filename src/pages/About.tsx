@@ -773,6 +773,17 @@ const About = () => {
             </Card>
           </div>
 
+          <div className="mb-8 text-center">
+            <img 
+              src="/lovable-uploads/73f2527c-ddec-43b6-b9dd-4b6839cb7a23.png" 
+              alt="Premi Aziendali - Modello di Scambio Certificati" 
+              className="mx-auto rounded-lg shadow-2xl max-w-[80%] h-auto border border-gray-200"
+            />
+            <p className="text-sm text-gray-600 mt-3 italic">
+              Esempio pratico di marketplace aziendale: i dipendenti possono scambiare i loro certificati sostenibili con benefit welfare personalizzati
+            </p>
+          </div>
+
           <div className="bg-gradient-to-r from-blue-600 to-green-600 rounded-lg p-8 text-white text-center">
             <h4 className="text-2xl font-bold mb-2">Ecosistema Virtuosity: Win-Win per Tutti</h4>
             <p className="text-lg">
