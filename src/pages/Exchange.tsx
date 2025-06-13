@@ -24,7 +24,7 @@ const Exchange = () => {
     description: "Buono spendibile in mense aziendali partner",
     cost: 250,
     category: "corporate",
-    image: "/lovable-uploads/020a2c14-0a7b-4f72-8b24-0f41ab720b95.png",
+    image: "🍽️",
     availability: "Disponibile",
     provider: "Corporate Benefits"
   }, {
@@ -33,7 +33,7 @@ const Exchange = () => {
     description: "Viaggio gratuito su tutta la rete ATM Milano",
     cost: 80,
     category: "transport",
-    image: "/lovable-uploads/77ba3a56-4d7a-4241-b56e-08c75ca1dc37.png",
+    image: "🚇",
     availability: "Limitato",
     provider: "ATM Milano"
   }, {
@@ -42,7 +42,7 @@ const Exchange = () => {
     description: "Accesso gratuito ai musei civici di Milano",
     cost: 150,
     category: "culture",
-    image: "/lovable-uploads/d5ff17e5-6093-4bc7-8873-de37da2355ee.png",
+    image: "🏛️",
     availability: "Disponibile",
     provider: "Comune di Milano"
   }, {
@@ -51,7 +51,7 @@ const Exchange = () => {
     description: "Visita dentistica completa presso cliniche convenzionate",
     cost: 500,
     category: "welfare",
-    image: "/lovable-uploads/68f725b5-ee07-4329-b173-31ae580fbafd.png",
+    image: "🦷",
     availability: "Disponibile",
     provider: "Cliniche Partner"
   }, {
@@ -60,7 +60,7 @@ const Exchange = () => {
     description: "Un giorno di permesso aggiuntivo retribuito",
     cost: 800,
     category: "corporate",
-    image: "/lovable-uploads/3481b0f8-728c-469a-88b5-11f47b0047a4.png",
+    image: "🏖️",
     availability: "Limitato",
     provider: "HR Department"
   }, {
@@ -69,7 +69,7 @@ const Exchange = () => {
     description: "30 giorni di bike sharing illimitato",
     cost: 300,
     category: "transport",
-    image: "/lovable-uploads/9bea380e-98ea-4b94-a376-e7d9e45cc143.png",
+    image: "🚴",
     availability: "Disponibile",
     provider: "Mobike"
   }];
@@ -80,7 +80,7 @@ const Exchange = () => {
     description: "Piantumazione di alberi nelle aree metropolitane per migliorare la qualità dell'aria",
     certificatesNeeded: 15,
     association: "Green City Milano",
-    image: "/lovable-uploads/491544c4-c37d-4c3b-a368-e0c71002d237.png",
+    image: "🌳",
     category: "ambiente",
     impact: "500 alberi piantati",
     location: "Milano, Lombardia"
@@ -90,7 +90,7 @@ const Exchange = () => {
     description: "Fornitura di pasti caldi per persone in difficoltà economica",
     certificatesNeeded: 25,
     association: "Caritas Milano",
-    image: "/lovable-uploads/020a2c14-0a7b-4f72-8b24-0f41ab720b95.png",
+    image: "🍲",
     category: "sociale",
     impact: "1000 pasti serviti",
     location: "Milano Centro"
@@ -100,7 +100,7 @@ const Exchange = () => {
     description: "Corsi di alfabetizzazione digitale per persone over 65",
     certificatesNeeded: 10,
     association: "Senior Tech",
-    image: "/lovable-uploads/16190dbd-ebd1-4b29-968d-8c8f8d26066d.png",
+    image: "💻",
     category: "educazione",
     impact: "50 anziani formati",
     location: "Centri Sociali Milano"
@@ -110,7 +110,7 @@ const Exchange = () => {
     description: "Rimozione di rifiuti plastici da corsi d'acqua e zone lacustri",
     certificatesNeeded: 20,
     association: "Plastic Free Lombardia",
-    image: "/lovable-uploads/7942f312-9a3e-4b02-9bdd-c96f9d500a13.png",
+    image: "🌊",
     category: "ambiente",
     impact: "2 tonnellate di rifiuti rimossi",
     location: "Navigli Milano"
@@ -120,7 +120,7 @@ const Exchange = () => {
     description: "Sostegno per cure veterinarie e mantenimento di animali abbandonati",
     certificatesNeeded: 18,
     association: "ENPA Milano",
-    image: "/lovable-uploads/a51bd3a3-21bb-4cab-afc7-e651cac982e9.png",
+    image: "🐕",
     category: "animali",
     impact: "30 animali curati",
     location: "Canile Municipale"
@@ -130,7 +130,7 @@ const Exchange = () => {
     description: "Attività artistiche e ricreative per bambini in situazioni di disagio",
     certificatesNeeded: 12,
     association: "Arte per Tutti",
-    image: "/lovable-uploads/89a2a2c5-7071-4df2-8e73-c5e5b645b38b.png",
+    image: "🎨",
     category: "infanzia",
     impact: "100 bambini coinvolti",
     location: "Quartieri Periferici"
@@ -416,16 +416,14 @@ const Exchange = () => {
             <TabsContent value="all" className="space-y-4 sm:space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 {rewards.map((reward) => (
-                  <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300 overflow-hidden">
-                    <div className="relative">
-                      <img src={reward.image} alt={reward.title} className="w-full h-40 sm:h-48 object-cover" />
-                      <div className="absolute top-3 right-3">
+                  <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+                    <CardHeader className="pb-3">
+                      <div className="flex justify-between items-start mb-2">
+                        <div className="text-3xl sm:text-4xl">{reward.image}</div>
                         <Badge className={getCategoryColor(reward.category)}>
                           {getCategoryName(reward.category)}
                         </Badge>
                       </div>
-                    </div>
-                    <CardHeader className="pb-3">
                       <CardTitle className="text-base sm:text-lg">{reward.title}</CardTitle>
                       <CardDescription className="text-sm">{reward.description}</CardDescription>
                     </CardHeader>
@@ -464,16 +462,14 @@ const Exchange = () => {
                   {rewards
                     .filter((reward) => reward.category === category)
                     .map((reward) => (
-                      <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300 overflow-hidden">
-                        <div className="relative">
-                          <img src={reward.image} alt={reward.title} className="w-full h-40 sm:h-48 object-cover" />
-                          <div className="absolute top-3 right-3">
+                      <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+                        <CardHeader className="pb-3">
+                          <div className="flex justify-between items-start mb-2">
+                            <div className="text-3xl sm:text-4xl">{reward.image}</div>
                             <Badge className={getCategoryColor(reward.category)}>
                               {getCategoryName(reward.category)}
                             </Badge>
                           </div>
-                        </div>
-                        <CardHeader className="pb-3">
                           <CardTitle className="text-base sm:text-lg">{reward.title}</CardTitle>
                           <CardDescription className="text-sm">{reward.description}</CardDescription>
                         </CardHeader>
@@ -520,16 +516,14 @@ const Exchange = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {socialProjects.map((project) => (
-              <Card key={project.id} className="border-0 shadow-lg bg-white/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300 overflow-hidden">
-                <div className="relative">
-                  <img src={project.image} alt={project.title} className="w-full h-40 sm:h-48 object-cover" />
-                  <div className="absolute top-3 right-3">
+              <Card key={project.id} className="border-0 shadow-lg bg-white/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+                <CardHeader className="pb-3">
+                  <div className="flex justify-between items-start mb-2">
+                    <div className="text-3xl sm:text-4xl">{project.image}</div>
                     <Badge className={getSocialCategoryColor(project.category)}>
                       {project.category}
                     </Badge>
                   </div>
-                </div>
-                <CardHeader className="pb-3">
                   <CardTitle className="text-base sm:text-lg">{project.title}</CardTitle>
                   <CardDescription className="text-sm">{project.description}</CardDescription>
                 </CardHeader>
@@ -687,5 +681,4 @@ const Exchange = () => {
       </AlertDialog>
     </div>;
 };
-
 export default Exchange;
