@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -216,6 +215,30 @@ export const DppVerification = () => {
       </TabsList>
 
       <TabsContent value="scan" className="space-y-6">
+        {/* DPP Example Image */}
+        {!dppData && !isScanning && (
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-green-50 to-blue-50 mb-6">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-lg">
+                <Leaf className="h-5 w-5 text-green-600" />
+                Esempio di Passaporto Digitale del Prodotto
+              </CardTitle>
+              <CardDescription>
+                Ecco come appare un DPP verificato - scansiona un QR code per iniziare
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex justify-center">
+                <img 
+                  src="/lovable-uploads/50118bf9-fb46-4bf5-9992-918acf87944d.png" 
+                  alt="Esempio DPP - Scarpe da Corsa EcoRun"
+                  className="max-w-full h-auto rounded-lg shadow-md border border-gray-200"
+                />
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
         {/* Scanning Interface */}
         {!dppData && (
           <div className="text-center space-y-4">
