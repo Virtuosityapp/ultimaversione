@@ -7,16 +7,17 @@ import { Leaf, Gift, Star, ShoppingCart, ArrowLeft, Menu, ExternalLink, Calendar
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useEffect, useState } from "react";
+
 const Exchange = () => {
   const navigate = useNavigate();
-  const {
-    toast
-  } = useToast();
+  const { toast } = useToast();
   const [showDonationDialog, setShowDonationDialog] = useState(false);
   const [selectedProject, setSelectedProject] = useState<any>(null);
+
   useEffect(() => {
     document.title = "Exchange - Virtuosity";
   }, []);
+
   const rewards = [{
     id: 1,
     title: "Buono Pasto",
@@ -72,6 +73,7 @@ const Exchange = () => {
     availability: "Disponibile",
     provider: "Mobike"
   }];
+
   const socialProjects = [{
     id: 1,
     title: "Riforestazione Urbana",
@@ -133,8 +135,10 @@ const Exchange = () => {
     impact: "100 bambini coinvolti",
     location: "Quartieri Periferici"
   }];
+
   const userPoints = 1275;
   const userCertificates = 45;
+
   const handleRedeem = (reward: any) => {
     if (userPoints >= reward.cost) {
       toast({
@@ -149,6 +153,7 @@ const Exchange = () => {
       });
     }
   };
+
   const handleDonate = (project: any) => {
     if (userCertificates >= project.certificatesNeeded) {
       setSelectedProject(project);
@@ -161,6 +166,7 @@ const Exchange = () => {
       });
     }
   };
+
   const getCategoryColor = (category: string) => {
     const colors = {
       corporate: "bg-blue-100 text-blue-800",
@@ -170,6 +176,7 @@ const Exchange = () => {
     };
     return colors[category as keyof typeof colors] || "bg-gray-100 text-gray-800";
   };
+
   const getCategoryName = (category: string) => {
     const names = {
       corporate: "Aziendale",
@@ -179,6 +186,7 @@ const Exchange = () => {
     };
     return names[category as keyof typeof names] || category;
   };
+
   const getSocialCategoryColor = (category: string) => {
     const colors = {
       ambiente: "bg-green-100 text-green-800",
@@ -192,6 +200,7 @@ const Exchange = () => {
     };
     return colors[category as keyof typeof colors] || "bg-gray-100 text-gray-800";
   };
+
   const partnerOffers = [{
     id: 1,
     partner: "ENEL",
@@ -200,7 +209,7 @@ const Exchange = () => {
     discount: "Sconto 15%",
     category: "energia",
     image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=300&fit=crop",
-    validUntil: "31 Marzo 2024",
+    validUntil: "31 Marzo 2026",
     pointsRequired: 0,
     benefits: ["Consulenza gratuita", "Installazione inclusa", "10 anni di garanzia"],
     websiteUrl: "https://www.enel.it/it/casa/fotovoltaico"
@@ -211,8 +220,8 @@ const Exchange = () => {
     description: "Scopri le nuove giostre alimentate da energia rinnovabile nel parco più green d'Italia",
     discount: "Biglietto ridotto",
     category: "intrattenimento",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
-    validUntil: "30 Giugno 2024",
+    image: "/lovable-uploads/77ba3a56-4d7a-4241-b56e-08c75ca1dc37.png",
+    validUntil: "30 Giugno 2026",
     pointsRequired: 200,
     benefits: ["Accesso prioritario", "Pranzo sostenibile incluso", "Gadget ecologico"],
     websiteUrl: "https://www.gardaland.it"
@@ -224,7 +233,7 @@ const Exchange = () => {
     discount: "Ingresso gratuito",
     category: "cultura",
     image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
-    validUntil: "15 Maggio 2024",
+    validUntil: "15 Maggio 2026",
     pointsRequired: 150,
     benefits: ["Audioguida inclusa", "Workshop gratuito", "Catalogo digitale"],
     websiteUrl: "https://www.triennale.org"
@@ -236,7 +245,7 @@ const Exchange = () => {
     discount: "Abbonamento speciale",
     category: "trasporti",
     image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&h=300&fit=crop",
-    validUntil: "31 Dicembre 2024",
+    validUntil: "31 Dicembre 2026",
     pointsRequired: 300,
     benefits: ["1 mese gratuito", "App premium", "Priority boarding"],
     websiteUrl: "https://www.atm.it"
@@ -248,7 +257,7 @@ const Exchange = () => {
     discount: "Sconto 20%",
     category: "casa",
     image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop",
-    validUntil: "30 Aprile 2024",
+    validUntil: "30 Aprile 2026",
     pointsRequired: 400,
     benefits: ["Consegna gratuita", "Montaggio incluso", "Ritiro mobili usati"],
     websiteUrl: "https://www.ikea.com/it/it/"
@@ -260,11 +269,12 @@ const Exchange = () => {
     discount: "Sconto 10%",
     category: "alimentare",
     image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop",
-    validUntil: "31 Maggio 2024",
+    validUntil: "31 Maggio 2026",
     pointsRequired: 100,
     benefits: ["Spesa a domicilio", "Ricette esclusive", "Degustazioni gratuite"],
     websiteUrl: "https://www.e-coop.it"
   }];
+
   const getCategoryColorAd = (category: string) => {
     const colors = {
       energia: "bg-yellow-100 text-yellow-800",
@@ -279,6 +289,7 @@ const Exchange = () => {
     };
     return colors[category as keyof typeof colors] || "bg-gray-100 text-gray-800";
   };
+
   const handlePartnerOfferClick = (offer: any) => {
     if (offer.pointsRequired > userPoints && offer.pointsRequired > 0) {
       toast({
@@ -291,11 +302,13 @@ const Exchange = () => {
 
     // Open partner website in new tab
     window.open(offer.websiteUrl, '_blank', 'noopener,noreferrer');
+
     toast({
       title: "Offerta Attivata! 🎉",
       description: `Ti abbiamo reindirizzato al sito di ${offer.partner}. Mostra questo messaggio per ottenere lo sconto.`
     });
   };
+
   return <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
       {/* Header */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-green-100 sticky top-0 z-50">
@@ -402,7 +415,8 @@ const Exchange = () => {
 
             <TabsContent value="all" className="space-y-4 sm:space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                {rewards.map(reward => <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+                {rewards.map((reward) => (
+                  <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
                     <CardHeader className="pb-3">
                       <div className="flex justify-between items-start mb-2">
                         <div className="text-3xl sm:text-4xl">{reward.image}</div>
@@ -437,50 +451,57 @@ const Exchange = () => {
                         </Button>
                       </div>
                     </CardContent>
-                  </Card>)}
+                  </Card>
+                ))}
               </div>
             </TabsContent>
 
-            {["transport", "culture", "welfare"].map(category => <TabsContent key={category} value={category} className="space-y-4 sm:space-y-6">
+            {["transport", "culture", "welfare"].map((category) => (
+              <TabsContent key={category} value={category} className="space-y-4 sm:space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                  {rewards.filter(reward => reward.category === category).map(reward => <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
-                      <CardHeader className="pb-3">
-                        <div className="flex justify-between items-start mb-2">
-                          <div className="text-3xl sm:text-4xl">{reward.image}</div>
-                          <Badge className={getCategoryColor(reward.category)}>
-                            {getCategoryName(reward.category)}
-                          </Badge>
-                        </div>
-                        <CardTitle className="text-base sm:text-lg">{reward.title}</CardTitle>
-                        <CardDescription className="text-sm">{reward.description}</CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="space-y-3 sm:space-y-4">
-                          <div className="flex justify-between items-center">
-                            <span className="text-sm text-gray-600">Costo</span>
-                            <span className="font-bold text-base sm:text-lg text-blue-600">{reward.cost} punti</span>
-                          </div>
-                          
-                          <div className="flex justify-between items-center">
-                            <span className="text-sm text-gray-600">Disponibilità</span>
-                            <Badge variant={reward.availability === "Disponibile" ? "default" : "secondary"}>
-                              {reward.availability}
+                  {rewards
+                    .filter((reward) => reward.category === category)
+                    .map((reward) => (
+                      <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+                        <CardHeader className="pb-3">
+                          <div className="flex justify-between items-start mb-2">
+                            <div className="text-3xl sm:text-4xl">{reward.image}</div>
+                            <Badge className={getCategoryColor(reward.category)}>
+                              {getCategoryName(reward.category)}
                             </Badge>
                           </div>
-                          
-                          <div className="text-xs text-gray-500">
-                            Partner: {reward.provider}
+                          <CardTitle className="text-base sm:text-lg">{reward.title}</CardTitle>
+                          <CardDescription className="text-sm">{reward.description}</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="space-y-3 sm:space-y-4">
+                            <div className="flex justify-between items-center">
+                              <span className="text-sm text-gray-600">Costo</span>
+                              <span className="font-bold text-base sm:text-lg text-blue-600">{reward.cost} punti</span>
+                            </div>
+                            
+                            <div className="flex justify-between items-center">
+                              <span className="text-sm text-gray-600">Disponibilità</span>
+                              <Badge variant={reward.availability === "Disponibile" ? "default" : "secondary"}>
+                                {reward.availability}
+                              </Badge>
+                            </div>
+                            
+                            <div className="text-xs text-gray-500">
+                              Partner: {reward.provider}
+                            </div>
+                            
+                            <Button className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white hover:from-green-700 hover:to-blue-700 text-sm sm:text-base" onClick={() => handleRedeem(reward)} disabled={userPoints < reward.cost} size="sm">
+                              <ShoppingCart className="h-4 w-4 mr-2" />
+                              {userPoints >= reward.cost ? "Riscatta Ora" : "Punti Insufficienti"}
+                            </Button>
                           </div>
-                          
-                          <Button className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white hover:from-green-700 hover:to-blue-700 text-sm sm:text-base" onClick={() => handleRedeem(reward)} disabled={userPoints < reward.cost} size="sm">
-                            <ShoppingCart className="h-4 w-4 mr-2" />
-                            {userPoints >= reward.cost ? "Riscatta Ora" : "Punti Insufficienti"}
-                          </Button>
-                        </div>
-                      </CardContent>
-                    </Card>)}
+                        </CardContent>
+                      </Card>
+                    ))}
                 </div>
-              </TabsContent>)}
+              </TabsContent>
+            ))}
           </Tabs>
         </div>
 
@@ -494,7 +515,8 @@ const Exchange = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {socialProjects.map(project => <Card key={project.id} className="border-0 shadow-lg bg-white/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+            {socialProjects.map((project) => (
+              <Card key={project.id} className="border-0 shadow-lg bg-white/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
                 <CardHeader className="pb-3">
                   <div className="flex justify-between items-start mb-2">
                     <div className="text-3xl sm:text-4xl">{project.image}</div>
@@ -533,7 +555,8 @@ const Exchange = () => {
                     </Button>
                   </div>
                 </CardContent>
-              </Card>)}
+              </Card>
+            ))}
           </div>
         </div>
 
@@ -547,7 +570,8 @@ const Exchange = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {partnerOffers.map(offer => <Card key={offer.id} className="border-0 shadow-lg bg-white/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300 overflow-hidden">
+            {partnerOffers.map((offer) => (
+              <Card key={offer.id} className="border-0 shadow-lg bg-white/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300 overflow-hidden">
                 <div className="relative">
                   <img src={offer.image} alt={offer.title} className="w-full h-40 sm:h-48 object-cover" />
                   <div className="absolute top-3 left-3">
@@ -577,22 +601,28 @@ const Exchange = () => {
                       <span className="font-semibold">{offer.validUntil}</span>
                     </div>
 
-                    {offer.pointsRequired > 0 && <div className="flex justify-between items-center text-sm">
+                    {offer.pointsRequired > 0 && (
+                      <div className="flex justify-between items-center text-sm">
                         <span className="text-gray-600">Punti richiesti</span>
                         <span className="font-bold text-blue-600">{offer.pointsRequired} punti</span>
-                      </div>}
+                      </div>
+                    )}
 
                     <div>
                       <p className="text-sm text-gray-600 mb-2">Benefici inclusi:</p>
                       <div className="space-y-1">
-                        {offer.benefits.slice(0, 2).map((benefit, index) => <div key={index} className="flex items-center text-xs text-gray-700">
+                        {offer.benefits.slice(0, 2).map((benefit, index) => (
+                          <div key={index} className="flex items-center text-xs text-gray-700">
                             <Star className="h-3 w-3 text-yellow-500 mr-1 flex-shrink-0" />
                             <span>{benefit}</span>
-                          </div>)}
-                        {offer.benefits.length > 2 && <div className="flex items-center text-xs text-gray-700">
+                          </div>
+                        ))}
+                        {offer.benefits.length > 2 && (
+                          <div className="flex items-center text-xs text-gray-700">
                             <Star className="h-3 w-3 text-yellow-500 mr-1 flex-shrink-0" />
                             <span>+{offer.benefits.length - 2} altri vantaggi</span>
-                          </div>}
+                          </div>
+                        )}
                       </div>
                     </div>
 
@@ -602,7 +632,8 @@ const Exchange = () => {
                     </Button>
                   </div>
                 </CardContent>
-              </Card>)}
+              </Card>
+            ))}
           </div>
         </div>
 
