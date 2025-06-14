@@ -32,7 +32,7 @@ const Exchange = () => {
     provider: "Corporate Benefits"
   }, {
     id: 2,
-    title: "Biglietto Metro Gratuito",
+    title: "Abbonamento Metro Gratuito",
     description: "Viaggio gratuito su tutta la rete ATM Milano",
     cost: 80,
     category: "transport",
