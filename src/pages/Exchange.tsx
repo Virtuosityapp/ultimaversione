@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -238,7 +239,7 @@ const Exchange = () => {
     websiteUrl: "https://www.triennale.org"
   }, {
     id: 4,
-    partner: "INTESA SANPAOLO",
+    partner: "BANCA GREEN",
     title: "Conto Corrente Green Zero Spese",
     description: "Azzeramento del canone mensile del conto corrente per i clienti che dimostrano comportamenti sostenibili",
     discount: "Canone gratuito",
