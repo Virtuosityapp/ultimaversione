@@ -824,6 +824,18 @@ const About = () => {
           </div>
         </div>
 
+        {/* Report Screenshot - Above Technology Stack */}
+        <div className="mb-16 text-center">
+          <img 
+            src="/lovable-uploads/73fd355d-6dd7-4294-b693-b245772935e6.png" 
+            alt="Report Virtuosity - Interfaccia di Monitoraggio Sostenibilità" 
+            className="mx-auto rounded-lg shadow-2xl max-w-[90%] sm:max-w-[80%] md:max-w-[70%] h-auto border border-gray-200"
+          />
+          <p className="text-sm text-gray-600 mt-3 italic">
+            Interfaccia di reporting dettagliato: monitora le tue attività sostenibili e i certificati blockchain generati
+          </p>
+        </div>
+
         {/* 10. Technology Stack - Su cosa si basa */}
         <Card className="border-0 shadow-lg bg-gradient-to-r from-blue-50 to-green-50 mb-16">
           <CardHeader className="text-center">
