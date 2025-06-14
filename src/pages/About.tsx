@@ -457,7 +457,7 @@ const About = () => {
           
           {/* Marketplace Screenshot - Single Image */}
           <div className="mb-8">
-            <img src="/lovable-uploads/f68e2d05-2991-4af9-a328-4b8b0b3e6728.png" alt="Virtuosity Marketplace Screenshot" className="mx-auto rounded-lg shadow-2xl max-w-[50%] h-auto" />
+            <img src="/lovable-uploads/f68e2d05-2991-4af9-a328-4b8b0b3e6728.png" alt="Virtuosity Marketplace Screenshot" className="mx-auto rounded-lg shadow-2xl max-w-[80%] sm:max-w-[70%] md:max-w-[60%] h-auto" />
           </div>
           
           <p className="text-xl text-gray-600 max-w-4xl mx-auto mb-8">Virtuosity è la prima piattaforma europea che trasforma automaticamente i comportamenti sostenibili in certificati verificabili, creando un ecosistema di incentivi concreti per cittadini, aziende e pubbliche amministrazioni.</p>
@@ -570,7 +570,7 @@ const About = () => {
                 <img 
                   src="/lovable-uploads/d9ea4e8e-53a1-4a2e-be6c-a037e855fef7.png" 
                   alt="Esempio DPP - Scarpe da Corsa EcoRun" 
-                  className="mx-auto rounded-lg shadow-2xl max-w-[50%] h-auto border border-gray-200"
+                  className="mx-auto rounded-lg shadow-2xl max-w-[80%] sm:max-w-[70%] md:max-w-[60%] h-auto border border-gray-200"
                 />
                 <p className="text-sm text-gray-600 mt-3 italic">
                   Esempio di Digital Product Passport: ogni prodotto avrà informazioni complete su origine, sostenibilità e filiera produttiva
