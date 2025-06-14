@@ -117,7 +117,7 @@ const Exchange = () => {
       value: "company-rewards", 
       label: "Premi Aziendali", 
       icon: Building2,
-      description: "Utilizza i tuoi punti per vantaggi esclusivi",
+      description: "Scambia i tuoi certificati con welfare aziendale",
       color: "from-blue-500 to-cyan-500",
       bgColor: "bg-gradient-to-br from-blue-50 to-cyan-50"
     },
