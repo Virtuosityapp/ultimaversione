@@ -274,7 +274,6 @@ const AdvisorCard = ({
   advisor
 }) => <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm text-center">
     <CardHeader>
-      <div className="text-4xl mb-4">{advisor.image}</div>
       <CardTitle className="text-lg">{advisor.name}</CardTitle>
       <Badge variant="secondary" className="text-xs">{advisor.role}</Badge>
     </CardHeader>
@@ -440,6 +439,10 @@ const About = () => {
     name: "Paola Vinci",
     role: "Sustainability Reporting Expert",
     bio: "Imprenditrice e consulente esperta in bilanci di sostenibilità. Fondatrice di The Sustainable Mag"
+  }, {
+    name: "Angela Chiara Mollace",
+    role: "Legal Compliance Expert",
+    bio: "Avvocato e consulente esperta in compliance aziendale & privacy, modello organizzativo 231/01"
   }];
   return <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
       {/* Header */}
