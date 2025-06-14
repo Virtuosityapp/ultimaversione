@@ -1121,3 +1121,10 @@ const About = () => {
             <Button variant="outline" onClick={() => navigate("/")} className="border-white text-white hover:bg-white hover:text-green-600 px-8 py-3 text-lg">
               Torna alla Home
             </Button>
+          </div>
+        </div>
+      </div>
+    </div>;
+};
+
+export default About;
