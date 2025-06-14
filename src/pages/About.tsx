@@ -440,6 +440,10 @@ const About = () => {
     name: "Paola Vinci",
     role: "Sustainability Reporting Expert",
     bio: "Imprenditrice e consulente esperta in bilanci di sostenibilità. Fondatrice di The Sustainable Mag"
+  }, {
+    name: "Angela Chiara Mollace",
+    role: "Legal Compliance Expert",
+    bio: "Avvocato e consulente esperta in compliance aziendale & privacy, modello organizzativo 231/01"
   }];
   return <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
       {/* Header */}
@@ -922,7 +926,7 @@ const About = () => {
                 <CardContent className="text-center">
                   <p className="text-sm text-gray-600 text-center">{advisor.bio}</p>
                 </CardContent>
-              </Card>)}
+              </Card)}}
           </div>
         </div>
 
