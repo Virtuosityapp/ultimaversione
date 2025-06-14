@@ -1,15 +1,17 @@
+
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import CircularityIcons from "@/components/CircularityIcons";
+
 const Index = () => {
   const navigate = useNavigate();
-  const {
-    t
-  } = useLanguage();
-  return <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
+  const { t } = useLanguage();
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
       <LanguageSwitcher />
       
       {/* Hero Section */}
@@ -19,7 +21,11 @@ const Index = () => {
             <div className="flex justify-center mb-4 sm:mb-6">
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-blue-500 rounded-full blur-xl opacity-30 animate-pulse"></div>
-                <img src="/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png" alt="Virtuosity Logo" className="relative h-20 sm:h-24 md:h-32 w-auto mx-auto" />
+                <img 
+                  src="/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png" 
+                  alt="Virtuosity Logo" 
+                  className="relative h-20 sm:h-24 md:h-32 w-auto mx-auto" 
+                />
               </div>
             </div>
             
@@ -38,10 +44,25 @@ const Index = () => {
               <div className="bg-white/80 backdrop-blur-sm rounded-lg p-6 shadow-lg border border-yellow-200 hover:shadow-xl transition-all duration-300">
                 <h3 className="text-xl font-bold text-gray-900 mb-3">Virtuosity</h3>
                 <p className="text-gray-600 mb-4 text-sm">Scopri i dettagli del progetto</p>
-                <Button onClick={() => navigate("/about")} className="bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-6 py-3 text-base hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full">
+                <Button 
+                  onClick={() => navigate("/about")} 
+                  className="bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-6 py-3 text-base hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
+                >
                   Virtuosity
                 </Button>
               </div>
+            </div>
+
+            {/* Dashboard Preview Image */}
+            <div className="mb-8 sm:mb-12 max-w-4xl mx-auto px-4">
+              <img 
+                src="/lovable-uploads/9bdea811-99c2-4458-baa2-1a26eb956318.png" 
+                alt="Dashboard Virtuosity - Anteprima dell'interfaccia utente" 
+                className="mx-auto rounded-lg shadow-2xl max-w-[90%] sm:max-w-[80%] md:max-w-[70%] h-auto border border-gray-200"
+              />
+              <p className="text-sm text-gray-600 mt-3 italic">
+                Anteprima della dashboard utente: monitora le tue attività sostenibili e guadagna certificati blockchain
+              </p>
             </div>
 
             {/* Four Dashboard Blocks */}
@@ -53,7 +74,10 @@ const Index = () => {
                 <p className="text-gray-600 mb-4 text-sm">
                   Accedi alla tua dashboard personale per monitorare le tue attività sostenibili, visualizzare i certificati guadagnati e partecipare alle sfide della community.
                 </p>
-                <Button onClick={() => navigate("/dashboard")} className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-3 text-base hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full">
+                <Button 
+                  onClick={() => navigate("/dashboard")} 
+                  className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-3 text-base hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
+                >
                   {t('buttonUser')}
                 </Button>
               </div>
@@ -64,7 +88,10 @@ const Index = () => {
                 <p className="text-gray-600 mb-4 text-sm">
                   Scopri il marketplace dove puoi scambiare i tuoi punti Virtuosity con premi reali, buoni sconto e vantaggi esclusivi offerti dai partner.
                 </p>
-                <Button onClick={() => navigate("/exchange")} className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-3 text-base hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full">
+                <Button 
+                  onClick={() => navigate("/exchange")} 
+                  className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-3 text-base hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
+                >
                   {t('buttonExchange')}
                 </Button>
               </div>
@@ -75,7 +102,10 @@ const Index = () => {
                 <p className="text-gray-600 mb-4 text-sm">
                   Accedi al pannello di controllo aziendale per gestire i dipendenti, monitorare le performance di sostenibilità e configurare incentivi personalizzati.
                 </p>
-                <Button onClick={() => navigate("/dashboard-aziende")} className="bg-gradient-to-r from-sky-500 to-cyan-500 text-white px-6 py-3 text-base hover:from-sky-600 hover:to-cyan-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full">
+                <Button 
+                  onClick={() => navigate("/dashboard-aziende")} 
+                  className="bg-gradient-to-r from-sky-500 to-cyan-500 text-white px-6 py-3 text-base hover:from-sky-600 hover:to-cyan-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
+                >
                   {t('buttonCompanies')}
                 </Button>
               </div>
@@ -86,7 +116,10 @@ const Index = () => {
                 <p className="text-gray-600 mb-4 text-sm">
                   Entra nel centro di controllo comunale per gestire le integrazioni smart city, monitorare le segnalazioni cittadine e configurare incentivi locali.
                 </p>
-                <Button onClick={() => navigate("/comuni")} className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 text-base hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full">
+                <Button 
+                  onClick={() => navigate("/comuni")} 
+                  className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 text-base hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
+                >
                   {t('buttonMunicipalities')}
                 </Button>
               </div>
@@ -98,12 +131,20 @@ const Index = () => {
             {/* Video Section */}
             <div className="mb-8 sm:mb-12 max-w-4xl mx-auto px-4">
               <AspectRatio ratio={16 / 9}>
-                <iframe src="https://www.youtube.com/embed/rdCqQPQfogs" title="Virtuosity Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen className="w-full h-full rounded-lg shadow-lg" />
+                <iframe 
+                  src="https://www.youtube.com/embed/rdCqQPQfogs" 
+                  title="Virtuosity Video" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                  allowFullScreen 
+                  className="w-full h-full rounded-lg shadow-lg" 
+                />
               </AspectRatio>
             </div>
           </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default Index;
