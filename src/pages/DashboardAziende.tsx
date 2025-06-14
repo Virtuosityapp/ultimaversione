@@ -200,6 +200,17 @@ const DashboardAziende = () => {
           </Button>
         </div>
 
+        {/* Header Section */}
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent mb-4">
+            Dashboard Aziendale
+          </h1>
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            Gestisci i certificati di sostenibilità dei tuoi dipendenti e followers, configura premi e benefit, 
+            e monitora l'impatto ambientale della tua azienda attraverso dati real-time e analytics avanzati.
+          </p>
+        </div>
+
         {/* Metriche Certificati */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <Card className="border-0 shadow-lg bg-gradient-to-br from-green-500 to-emerald-600 text-white">
