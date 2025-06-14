@@ -238,16 +238,16 @@ const Exchange = () => {
     websiteUrl: "https://www.triennale.org"
   }, {
     id: 4,
-    partner: "ATM",
-    title: "Nuova Linea Bus Elettrici",
-    description: "Prova la nuova tratta di autobus 100% elettrici che collegano i quartieri green di Milano",
-    discount: "Abbonamento speciale",
-    category: "trasporti",
-    image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&h=300&fit=crop",
+    partner: "INTESA SANPAOLO",
+    title: "Conto Corrente Green Zero Spese",
+    description: "Azzeramento del canone mensile del conto corrente per i clienti che dimostrano comportamenti sostenibili",
+    discount: "Canone gratuito",
+    category: "bancario",
+    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=300&fit=crop",
     validUntil: "31 Dicembre 2026",
-    pointsRequired: 300,
-    benefits: ["1 mese gratuito", "App premium", "Priority boarding"],
-    websiteUrl: "https://www.atm.it"
+    pointsRequired: 500,
+    benefits: ["Canone azzerato per 12 mesi", "Carte di debito gratuite", "Consulenza finanziaria ESG"],
+    websiteUrl: "https://www.intesasanpaolo.com"
   }, {
     id: 5,
     partner: "IKEA",
@@ -284,7 +284,8 @@ const Exchange = () => {
       alimentare: "bg-orange-100 text-orange-800",
       automotive: "bg-red-100 text-red-800",
       sport: "bg-cyan-100 text-cyan-800",
-      ambiente: "bg-emerald-100 text-emerald-800"
+      ambiente: "bg-emerald-100 text-emerald-800",
+      bancario: "bg-indigo-100 text-indigo-800"
     };
     return colors[category as keyof typeof colors] || "bg-gray-100 text-gray-800";
   };
