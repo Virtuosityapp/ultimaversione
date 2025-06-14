@@ -119,6 +119,17 @@ const PrivacySecurityCard = () => <Card className="border-0 shadow-lg bg-gradien
         La tua privacy è al sicuro grazie alle Zero-Knowledge Proofs (ZKP), 
         che permettono di verificare i tuoi comportamenti sostenibili senza rivelare dati personali sensibili
       </CardDescription>
+      
+      <div className="mt-8 mb-8">
+        <img 
+          src="/lovable-uploads/1f080e10-6708-4c0d-9a31-f5a28b124922.png" 
+          alt="Segnala Problema al Comune - Citizen Reporting Interface" 
+          className="mx-auto rounded-lg shadow-2xl max-w-[80%] sm:max-w-[70%] md:max-w-[60%] h-auto border border-gray-200"
+        />
+        <p className="text-sm text-gray-600 mt-3 italic">
+          Interfaccia di segnalazione cittadina: contribuisci al miglioramento della tua città segnalando problemi urbani
+        </p>
+      </div>
     </CardHeader>
     <CardContent className="p-8">
       <div className="grid md:grid-cols-2 gap-12 mb-12">
@@ -1110,9 +1121,3 @@ const About = () => {
             <Button variant="outline" onClick={() => navigate("/")} className="border-white text-white hover:bg-white hover:text-green-600 px-8 py-3 text-lg">
               Torna alla Home
             </Button>
-          </div>
-        </div>
-      </div>
-    </div>;
-};
-export default About;
