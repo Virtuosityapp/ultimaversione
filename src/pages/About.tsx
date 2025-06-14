@@ -436,6 +436,10 @@ const About = () => {
     name: "Stefano Capaccioli",
     role: "CSRD & ESRS Expert",
     bio: "Dottore Commercialista esperto della normativa CSRD e degli standard ESRS"
+  }, {
+    name: "Paola Vinci",
+    role: "Sustainability Reporting Expert",
+    bio: "Imprenditrice e consulente esperta in bilanci di sostenibilità. Fondatrice di The Sustainable Mag"
   }];
   return <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
       {/* Header */}
