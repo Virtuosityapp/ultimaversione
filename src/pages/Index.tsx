@@ -56,12 +56,12 @@ const Index = () => {
             {/* Dashboard Preview Image */}
             <div className="mb-8 sm:mb-12 max-w-4xl mx-auto px-4">
               <img 
-                src="/lovable-uploads/9bdea811-99c2-4458-baa2-1a26eb956318.png" 
-                alt="Dashboard Virtuosity - Anteprima dell'interfaccia utente" 
+                src="/lovable-uploads/f44eca30-010b-414a-88c3-59c8a2115de9.png" 
+                alt="Dashboard Comuni - Monitoraggio città con mappe e analytics" 
                 className="mx-auto rounded-lg shadow-2xl max-w-[90%] sm:max-w-[80%] md:max-w-[70%] h-auto border border-gray-200"
               />
               <p className="text-sm text-gray-600 mt-3 italic">
-                Anteprima della dashboard utente: monitora le tue attività sostenibili e guadagna certificati blockchain
+                Dashboard Comuni: monitora in tempo reale sensori urbani, qualità ambientale e infrastrutture smart city
               </p>
             </div>
 
