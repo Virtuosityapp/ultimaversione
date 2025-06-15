@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -48,7 +47,7 @@ const Index = () => {
                   onClick={() => navigate("/about")} 
                   className="bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-6 py-3 text-base hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
                 >
-                  Virtuosity
+                  Clicca qui
                 </Button>
               </div>
             </div>
