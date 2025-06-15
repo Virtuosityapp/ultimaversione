@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { 
   Camera, 
   Scan, 
@@ -36,6 +37,7 @@ const CitizenReporting = () => {
     location: ''
   });
   const [detectedObject, setDetectedObject] = useState<string | null>(null);
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -149,10 +151,8 @@ const CitizenReporting = () => {
     // Mock submission
     console.log('Submitting report:', reportData);
     
-    toast({
-      title: "Segnalazione Inviata",
-      description: "La tua segnalazione è stata inviata al comune",
-    });
+    // Show success dialog instead of toast
+    setShowSuccessDialog(true);
 
     // Reset form
     setReportData({ type: '', description: '', location: '' });
@@ -319,6 +319,43 @@ const CitizenReporting = () => {
           </Button>
         </CardContent>
       </Card>
+
+      {/* Success Dialog */}
+      <Dialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-center text-2xl font-bold text-green-600">
+              Grazie per la segnalazione!
+            </DialogTitle>
+          </DialogHeader>
+          <div className="flex flex-col items-center space-y-6 py-6">
+            <p className="text-center text-gray-700">
+              Questo è il tuo badge premio:
+            </p>
+            
+            <div className="flex flex-col items-center space-y-4">
+              <div className="w-32 h-32 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center shadow-xl">
+                <img 
+                  src="/lovable-uploads/photo-1500673922987-e212871fec22" 
+                  alt="Cittadino Virtuoso Badge" 
+                  className="w-24 h-24 rounded-full object-cover border-4 border-white shadow-lg"
+                />
+              </div>
+              
+              <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-4 py-2 text-lg font-bold">
+                Cittadino Virtuoso
+              </Badge>
+            </div>
+            
+            <Button 
+              onClick={() => setShowSuccessDialog(false)}
+              className="bg-green-600 hover:bg-green-700 text-white px-8"
+            >
+              Chiudi
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
