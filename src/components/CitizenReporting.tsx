@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -139,6 +138,8 @@ const CitizenReporting = () => {
   };
 
   const submitReport = () => {
+    console.log('Submit button clicked');
+    
     if (!reportData.type || !reportData.description) {
       toast({
         title: "Campi Mancanti",
@@ -151,7 +152,8 @@ const CitizenReporting = () => {
     // Mock submission
     console.log('Submitting report:', reportData);
     
-    // Show success dialog instead of toast
+    // Show success dialog
+    console.log('Opening success dialog');
     setShowSuccessDialog(true);
 
     // Reset form
