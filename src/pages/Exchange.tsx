@@ -26,7 +26,7 @@ const Exchange = () => {
     title: "Buono Pasto",
     description: "Buono spendibile in mense aziendali partner",
     cost: 250,
-    category: "corporate",
+    category: "welfare",
     image: "/lovable-uploads/020a2c14-0a7b-4f72-8b24-0f41ab720b95.png",
     availability: "Disponibile",
     provider: "Corporate Benefits"
@@ -62,7 +62,7 @@ const Exchange = () => {
     title: "Giorno di Permesso Extra",
     description: "Un giorno di permesso aggiuntivo retribuito",
     cost: 800,
-    category: "corporate",
+    category: "welfare",
     image: "/lovable-uploads/6d33073c-cfa1-4bae-9825-e8418293e92d.png",
     availability: "Limitato",
     provider: "HR Department"
