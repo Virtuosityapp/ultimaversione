@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { 
   Camera, 
   Scan, 
@@ -153,7 +153,7 @@ const CitizenReporting = () => {
     console.log('Submitting report:', reportData);
     
     // Show success dialog
-    console.log('Opening success dialog');
+    console.log('Setting showSuccessDialog to true');
     setShowSuccessDialog(true);
 
     // Reset form
@@ -163,164 +163,166 @@ const CitizenReporting = () => {
   };
 
   return (
-    <div className="space-y-6">
-      <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-        <CardHeader>
-          <CardTitle className="flex items-center space-x-2">
-            <Camera className="h-5 w-5" />
-            <span>Segnala Problema al Comune</span>
-          </CardTitle>
-          <CardDescription>
-            Scatta una foto o scansiona l'oggetto da segnalare
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          {/* Camera Section */}
-          <div className="space-y-4">
-            {!isCapturing && !capturedPhoto && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <Button 
-                  onClick={startCamera}
-                  className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700"
-                  size="lg"
-                >
-                  <Camera className="h-5 w-5 mr-2" />
-                  Scatta Foto
-                </Button>
-                <Button 
-                  onClick={getCurrentLocation}
-                  variant="outline"
-                  size="lg"
-                >
-                  <MapPin className="h-5 w-5 mr-2" />
-                  Rileva Posizione
-                </Button>
-              </div>
-            )}
-
-            {isCapturing && (
-              <div className="space-y-4">
-                <div className="relative bg-black rounded-lg overflow-hidden">
-                  <video 
-                    ref={videoRef}
-                    className="w-full max-h-64 object-cover"
-                    autoPlay
-                    playsInline
-                  />
-                  <div className="absolute inset-0 border-2 border-dashed border-white/50 m-4 rounded-lg flex items-center justify-center">
-                    <Scan className="h-12 w-12 text-white/70" />
-                  </div>
-                </div>
-                <div className="flex justify-center space-x-4">
-                  <Button onClick={capturePhoto} size="lg">
+    <>
+      <div className="space-y-6">
+        <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2">
+              <Camera className="h-5 w-5" />
+              <span>Segnala Problema al Comune</span>
+            </CardTitle>
+            <CardDescription>
+              Scatta una foto o scansiona l'oggetto da segnalare
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {/* Camera Section */}
+            <div className="space-y-4">
+              {!isCapturing && !capturedPhoto && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <Button 
+                    onClick={startCamera}
+                    className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700"
+                    size="lg"
+                  >
                     <Camera className="h-5 w-5 mr-2" />
-                    Cattura
+                    Scatta Foto
                   </Button>
                   <Button 
+                    onClick={getCurrentLocation}
+                    variant="outline"
+                    size="lg"
+                  >
+                    <MapPin className="h-5 w-5 mr-2" />
+                    Rileva Posizione
+                  </Button>
+                </div>
+              )}
+
+              {isCapturing && (
+                <div className="space-y-4">
+                  <div className="relative bg-black rounded-lg overflow-hidden">
+                    <video 
+                      ref={videoRef}
+                      className="w-full max-h-64 object-cover"
+                      autoPlay
+                      playsInline
+                    />
+                    <div className="absolute inset-0 border-2 border-dashed border-white/50 m-4 rounded-lg flex items-center justify-center">
+                      <Scan className="h-12 w-12 text-white/70" />
+                    </div>
+                  </div>
+                  <div className="flex justify-center space-x-4">
+                    <Button onClick={capturePhoto} size="lg">
+                      <Camera className="h-5 w-5 mr-2" />
+                      Cattura
+                    </Button>
+                    <Button 
+                      variant="outline" 
+                      onClick={() => {
+                        setIsCapturing(false);
+                        if (videoRef.current?.srcObject) {
+                          const stream = videoRef.current.srcObject as MediaStream;
+                          stream.getTracks().forEach(track => track.stop());
+                        }
+                      }}
+                    >
+                      Annulla
+                    </Button>
+                  </div>
+                </div>
+              )}
+
+              {capturedPhoto && (
+                <div className="space-y-4">
+                  <div className="relative">
+                    <img 
+                      src={capturedPhoto} 
+                      alt="Foto catturata" 
+                      className="w-full max-h-64 object-cover rounded-lg"
+                    />
+                    {detectedObject && (
+                      <div className="absolute top-2 right-2">
+                        <Badge className="bg-green-500 text-white">
+                          <CheckCircle className="h-3 w-3 mr-1" />
+                          Rilevato
+                        </Badge>
+                      </div>
+                    )}
+                  </div>
+                  <Button 
                     variant="outline" 
+                    size="sm"
                     onClick={() => {
-                      setIsCapturing(false);
-                      if (videoRef.current?.srcObject) {
-                        const stream = videoRef.current.srcObject as MediaStream;
-                        stream.getTracks().forEach(track => track.stop());
-                      }
+                      setCapturedPhoto(null);
+                      setDetectedObject(null);
                     }}
                   >
-                    Annulla
+                    <Image className="h-4 w-4 mr-2" />
+                    Scatta Nuova Foto
                   </Button>
                 </div>
-              </div>
-            )}
+              )}
 
-            {capturedPhoto && (
-              <div className="space-y-4">
-                <div className="relative">
-                  <img 
-                    src={capturedPhoto} 
-                    alt="Foto catturata" 
-                    className="w-full max-h-64 object-cover rounded-lg"
-                  />
-                  {detectedObject && (
-                    <div className="absolute top-2 right-2">
-                      <Badge className="bg-green-500 text-white">
-                        <CheckCircle className="h-3 w-3 mr-1" />
-                        Rilevato
-                      </Badge>
-                    </div>
-                  )}
-                </div>
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  onClick={() => {
-                    setCapturedPhoto(null);
-                    setDetectedObject(null);
-                  }}
-                >
-                  <Image className="h-4 w-4 mr-2" />
-                  Scatta Nuova Foto
-                </Button>
-              </div>
-            )}
-
-            <canvas ref={canvasRef} className="hidden" />
-          </div>
-
-          {/* Report Type Selection */}
-          <div className="space-y-3">
-            <label className="text-sm font-medium">Tipo di Segnalazione *</label>
-            <div className="grid grid-cols-2 gap-3">
-              {reportTypes.map((type) => {
-                const IconComponent = type.icon;
-                return (
-                  <Button
-                    key={type.id}
-                    variant={reportData.type === type.id ? "default" : "outline"}
-                    className={`h-auto p-3 ${reportData.type === type.id ? 'bg-blue-600 text-white' : ''}`}
-                    onClick={() => setReportData(prev => ({ ...prev, type: type.id }))}
-                  >
-                    <div className="flex flex-col items-center space-y-1">
-                      <IconComponent className="h-5 w-5" />
-                      <span className="text-xs">{type.label}</span>
-                    </div>
-                  </Button>
-                );
-              })}
+              <canvas ref={canvasRef} className="hidden" />
             </div>
-          </div>
 
-          {/* Location Input */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Indirizzo/Località</label>
-            <Input
-              placeholder="es. Via Roma 123, Piazza Duomo..."
-              value={reportData.location}
-              onChange={(e) => setReportData(prev => ({ ...prev, location: e.target.value }))}
-            />
-          </div>
+            {/* Report Type Selection */}
+            <div className="space-y-3">
+              <label className="text-sm font-medium">Tipo di Segnalazione *</label>
+              <div className="grid grid-cols-2 gap-3">
+                {reportTypes.map((type) => {
+                  const IconComponent = type.icon;
+                  return (
+                    <Button
+                      key={type.id}
+                      variant={reportData.type === type.id ? "default" : "outline"}
+                      className={`h-auto p-3 ${reportData.type === type.id ? 'bg-blue-600 text-white' : ''}`}
+                      onClick={() => setReportData(prev => ({ ...prev, type: type.id }))}
+                    >
+                      <div className="flex flex-col items-center space-y-1">
+                        <IconComponent className="h-5 w-5" />
+                        <span className="text-xs">{type.label}</span>
+                      </div>
+                    </Button>
+                  );
+                })}
+              </div>
+            </div>
 
-          {/* Description */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Descrizione Problema *</label>
-            <Textarea
-              placeholder="Descrivi il problema in dettaglio..."
-              value={reportData.description}
-              onChange={(e) => setReportData(prev => ({ ...prev, description: e.target.value }))}
-              rows={4}
-            />
-          </div>
+            {/* Location Input */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Indirizzo/Località</label>
+              <Input
+                placeholder="es. Via Roma 123, Piazza Duomo..."
+                value={reportData.location}
+                onChange={(e) => setReportData(prev => ({ ...prev, location: e.target.value }))}
+              />
+            </div>
 
-          {/* Submit Button */}
-          <Button 
-            onClick={submitReport}
-            className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-green-700 hover:to-emerald-700"
-            size="lg"
-          >
-            <Send className="h-5 w-5 mr-2" />
-            Invia Segnalazione
-          </Button>
-        </CardContent>
-      </Card>
+            {/* Description */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Descrizione Problema *</label>
+              <Textarea
+                placeholder="Descrivi il problema in dettaglio..."
+                value={reportData.description}
+                onChange={(e) => setReportData(prev => ({ ...prev, description: e.target.value }))}
+                rows={4}
+              />
+            </div>
+
+            {/* Submit Button */}
+            <Button 
+              onClick={submitReport}
+              className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-green-700 hover:to-emerald-700"
+              size="lg"
+            >
+              <Send className="h-5 w-5 mr-2" />
+              Invia Segnalazione
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
 
       {/* Success Dialog */}
       <Dialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
@@ -358,7 +360,7 @@ const CitizenReporting = () => {
           </div>
         </DialogContent>
       </Dialog>
-    </div>
+    </>
   );
 };
 
