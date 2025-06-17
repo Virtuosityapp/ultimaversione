@@ -475,7 +475,7 @@ const About = () => {
           
           {/* Marketplace Screenshot - Single Image */}
           <div className="mb-8">
-            <img src="/lovable-uploads/f68e2d05-2991-4af9-a328-4b8b0b3e6728.png" alt="Virtuosity Marketplace Screenshot" className="mx-auto rounded-lg shadow-2xl max-w-[80%] sm:max-w-[70%] md:max-w-[60%] h-auto" />
+            <img src="/lovable-uploads/18f0b57d-7531-4d1b-a40b-7f45d52793aa.png" alt="Virtuosity Marketplace Screenshot" className="mx-auto rounded-lg shadow-2xl max-w-[80%] sm:max-w-[70%] md:max-w-[60%] h-auto" />
           </div>
           
           <p className="text-xl text-gray-600 max-w-4xl mx-auto mb-8">Virtuosity è la prima piattaforma europea che trasforma automaticamente i comportamenti sostenibili in certificati verificabili, creando un ecosistema di incentivi concreti per cittadini, aziende e pubbliche amministrazioni.</p>
