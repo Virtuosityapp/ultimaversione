@@ -243,7 +243,7 @@ const Dashboard = () => {
               </CardContent>
             </Card>
 
-            {/* New Gamification Section */}
+            {/* New Gamification Section - Horizontal Layout */}
             <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
               <CardHeader className="pb-3 sm:pb-6">
                 <CardTitle className="flex items-center gap-2 text-base sm:text-xl">
@@ -256,55 +256,60 @@ const Dashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3 sm:space-y-4">
-                  {challenges.map(challenge => <div key={challenge.id} className={`p-3 sm:p-4 rounded-lg border-2 hover:shadow-lg hover:scale-[1.01] transition-all duration-200 cursor-pointer ${getStatusColor(challenge.status)}`}>
-                      <div className="flex justify-between items-start mb-2 sm:mb-3">
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2 mb-1">
-                            <h3 className="font-bold text-sm sm:text-base truncate">{challenge.title}</h3>
-                            <Badge className={`text-xs ${getPositionBadge(challenge.yourPosition)}`}>
-                              #{challenge.yourPosition}
-                            </Badge>
+                  {/* Horizontal grid for challenges */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+                    {challenges.map(challenge => (
+                      <div key={challenge.id} className={`p-3 sm:p-4 rounded-lg border-2 hover:shadow-lg hover:scale-[1.01] transition-all duration-200 cursor-pointer ${getStatusColor(challenge.status)}`}>
+                        <div className="flex justify-between items-start mb-2 sm:mb-3">
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2 mb-1">
+                              <h3 className="font-bold text-sm sm:text-base truncate">{challenge.title}</h3>
+                              <Badge className={`text-xs ${getPositionBadge(challenge.yourPosition)}`}>
+                                #{challenge.yourPosition}
+                              </Badge>
+                            </div>
+                            <p className="text-xs opacity-90">{challenge.description}</p>
                           </div>
-                          <p className="text-xs opacity-90">{challenge.description}</p>
+                          <div className="flex items-center gap-1 ml-2 flex-shrink-0">
+                            <Users className="h-3 w-3" />
+                            <span className="text-xs">{challenge.participants}</span>
+                          </div>
                         </div>
-                        <div className="flex items-center gap-1 ml-2 flex-shrink-0">
-                          <Users className="h-3 w-3" />
-                          <span className="text-xs">{challenge.participants}</span>
+                        
+                        <div className="grid grid-cols-2 gap-2 sm:gap-4 mb-2 sm:mb-3">
+                          <div>
+                            <p className="text-xs opacity-75">🥇 In testa</p>
+                            <p className="font-semibold text-xs sm:text-sm">{challenge.leadingUser}</p>
+                            <p className="text-xs opacity-90">{challenge.leadingScore}</p>
+                          </div>
+                          <div>
+                            <p className="text-xs opacity-75">🎯 Il tuo punteggio</p>
+                            <p className="font-semibold text-xs sm:text-sm">{challenge.yourScore}</p>
+                            <p className="text-xs opacity-90">Categoria: {challenge.category}</p>
+                          </div>
                         </div>
-                      </div>
-                      
-                      <div className="grid grid-cols-2 gap-2 sm:gap-4 mb-2 sm:mb-3">
-                        <div>
-                          <p className="text-xs opacity-75">🥇 In testa</p>
-                          <p className="font-semibold text-xs sm:text-sm">{challenge.leadingUser}</p>
-                          <p className="text-xs opacity-90">{challenge.leadingScore}</p>
-                        </div>
-                        <div>
-                          <p className="text-xs opacity-75">🎯 Il tuo punteggio</p>
-                          <p className="font-semibold text-xs sm:text-sm">{challenge.yourScore}</p>
-                          <p className="text-xs opacity-90">Categoria: {challenge.category}</p>
-                        </div>
-                      </div>
 
-                      <div className="mb-2 sm:mb-3">
-                        <div className="flex justify-between text-xs mb-1">
-                          <span>Progresso</span>
-                          <span>{challenge.progress}%</span>
+                        <div className="mb-2 sm:mb-3">
+                          <div className="flex justify-between text-xs mb-1">
+                            <span>Progresso</span>
+                            <span>{challenge.progress}%</span>
+                          </div>
+                          <Progress value={challenge.progress} className="h-1.5 sm:h-2 bg-white/20 [&>div]:bg-white" />
                         </div>
-                        <Progress value={challenge.progress} className="h-1.5 sm:h-2 bg-white/20 [&>div]:bg-white" />
+                        
+                        <div className="flex justify-between items-center text-xs">
+                          <div className="flex items-center gap-1">
+                            <Clock className="h-3 w-3" />
+                            <span>Tempo rimanente: {challenge.timeLeft}</span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Trophy className="h-3 w-3" />
+                            <span>{challenge.prize}</span>
+                          </div>
+                        </div>
                       </div>
-                      
-                      <div className="flex justify-between items-center text-xs">
-                        <div className="flex items-center gap-1">
-                          <Clock className="h-3 w-3" />
-                          <span>Tempo rimanente: {challenge.timeLeft}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Trophy className="h-3 w-3" />
-                          
-                        </div>
-                      </div>
-                    </div>)}
+                    ))}
+                  </div>
                   
                   <div className="pt-2">
                     <Button className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg text-xs sm:text-sm py-2 sm:py-3">
