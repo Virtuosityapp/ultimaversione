@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Calendar, Award, TrendingUp, MapPin, Clock, QrCode, Camera, Smartphone, Users, Trophy, Target, Zap } from "lucide-react";
+import { Calendar, Award, TrendingUp, MapPin, Clock, QrCode, Camera, Smartphone, Users, Trophy, Target, Zap, Wallet, Eye, Shield } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { DppVerification } from "@/components/DppVerification";
 import CitizenReporting from "@/components/CitizenReporting";
@@ -131,6 +131,46 @@ const Dashboard = () => {
       label: "Rimanente",
     },
   };
+
+  // Mock DPP products for conservation
+  const conservedDpps = [
+    {
+      id: "DPP-PRADA-001",
+      name: "Borsa Saffiano",
+      brand: "PRADA",
+      model: "1BA274",
+      image: "/lovable-uploads/68f725b5-ee07-4329-b173-31ae580fbafd.png",
+      purchaseDate: "2024-01-15",
+      warranty: {
+        period: "2 anni",
+        expires: "2026-01-15"
+      },
+      sustainability: {
+        score: 92,
+        certifications: ["Made in Italy", "Pelle certificata"]
+      },
+      value: "€ 2.850",
+      category: "Pelletteria"
+    },
+    {
+      id: "DPP-ROLEX-002",
+      name: "Submariner Date",
+      brand: "ROLEX",
+      model: "126610LN",
+      image: "/lovable-uploads/7676b5a7-2456-4cc9-ae9c-3e50d71dd284.png",
+      purchaseDate: "2023-11-20",
+      warranty: {
+        period: "5 anni",
+        expires: "2028-11-20"
+      },
+      sustainability: {
+        score: 88,
+        certifications: ["Swiss Made", "Oro responsabile"]
+      },
+      value: "€ 9.150",
+      category: "Orologeria"
+    }
+  ];
 
   return <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
       {/* Header */}
@@ -469,19 +509,57 @@ const Dashboard = () => {
                 </CardContent>
               </Card>
 
-              {/* DPP Verification - Right Column */}
+              {/* DPP Conservation - Right Column */}
               <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
                 <CardHeader className="pb-3 sm:pb-6">
                   <CardTitle className="flex items-center gap-2 text-base sm:text-xl">
-                    <QrCode className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
-                    Verifica DPP
+                    <Wallet className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
+                    I Miei DPP
                   </CardTitle>
                   <CardDescription className="text-xs sm:text-sm">
-                    Verifica passaporti digitali dei prodotti per tracking e garanzie
+                    Conserva e gestisci i passaporti digitali dei tuoi prodotti
                   </CardDescription>
                 </CardHeader>
-                <CardContent id="dpp-wallet-section">
-                  <DppVerification />
+                <CardContent>
+                  <div className="space-y-3">
+                    {conservedDpps.map(dpp => (
+                      <div key={dpp.id} className="p-3 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg border border-green-200 hover:shadow-lg hover:scale-[1.02] transition-all duration-200 cursor-pointer">
+                        <div className="flex items-start space-x-3">
+                          <img 
+                            src={dpp.image} 
+                            alt={dpp.name}
+                            className="w-12 h-12 object-cover rounded-lg flex-shrink-0"
+                          />
+                          <div className="flex-1 min-w-0">
+                            <h3 className="font-bold text-sm text-gray-900 truncate">{dpp.brand}</h3>
+                            <p className="text-xs text-gray-600 truncate">{dpp.name}</p>
+                            <div className="flex items-center justify-between mt-1">
+                              <span className="text-xs font-semibold text-green-600">{dpp.value}</span>
+                              <Badge className="text-xs bg-green-100 text-green-800">
+                                Score: {dpp.sustainability.score}
+                              </Badge>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="flex gap-2 mt-3">
+                          <Button size="sm" variant="outline" className="flex-1 text-xs hover:bg-green-50 hover:border-green-300">
+                            <Eye className="h-3 w-3 mr-1" />
+                            Dettagli
+                          </Button>
+                          <Button size="sm" className="flex-1 text-xs bg-green-600 hover:bg-green-700">
+                            <Shield className="h-3 w-3 mr-1" />
+                            Garanzia
+                          </Button>
+                        </div>
+                      </div>
+                    ))}
+                    
+                    <Button className="w-full mt-4 bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white text-xs">
+                      <QrCode className="mr-2 h-3 w-3" />
+                      Aggiungi Nuovo DPP
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             </div>
