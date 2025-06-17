@@ -7,6 +7,8 @@ import { Calendar, Award, TrendingUp, MapPin, Clock, QrCode, Camera, Smartphone,
 import { useNavigate } from "react-router-dom";
 import { DppVerification } from "@/components/DppVerification";
 import CitizenReporting from "@/components/CitizenReporting";
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -110,6 +112,25 @@ const Dashboard = () => {
     return 'bg-blue-100 text-blue-800 border-blue-300';
   };
 
+  // Monthly CO2 goal data
+  const monthlyGoal = 50; // kg CO2
+  const currentSaved = 24.3; // kg CO2
+  const progressPercentage = (currentSaved / monthlyGoal) * 100;
+  
+  const chartData = [
+    { name: "Risparmiata", value: currentSaved, fill: "#22c55e" },
+    { name: "Rimanente", value: monthlyGoal - currentSaved, fill: "#e5e7eb" }
+  ];
+
+  const chartConfig = {
+    risparmiata: {
+      label: "CO₂ Risparmiata",
+    },
+    rimanente: {
+      label: "Rimanente",
+    },
+  };
+
   return <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
       {/* Header */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-green-100 sticky top-0 z-50">
@@ -201,49 +222,120 @@ const Dashboard = () => {
           </TabsList>
 
           <TabsContent value="activities" className="space-y-3 sm:space-y-6">
-            <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-              <CardHeader className="pb-3 sm:pb-6">
-                <CardTitle className="flex items-center gap-2 text-base sm:text-xl">
-                  <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
-                  Attività Recenti
-                </CardTitle>
-                <CardDescription className="text-xs sm:text-sm">
-                  Tracciamento automatico delle tue azioni sostenibili
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2 sm:space-y-4">
-                  {activities.map(activity => <div key={activity.id} className="flex items-center justify-between p-2 sm:p-4 bg-gray-50 rounded-lg hover:bg-green-50 hover:shadow-md hover:scale-[1.02] transition-all duration-200 cursor-pointer active:scale-[0.98]">
-                      <div className="flex items-center space-x-2 sm:space-x-4 flex-1 min-w-0">
-                        <div className="w-8 h-8 sm:w-12 sm:h-12 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center text-sm sm:text-xl flex-shrink-0">
-                          {activity.type === 'bike' && '🚴'}
-                          {activity.type === 'public_transport' && '🚌'}
-                          {activity.type === 'walk' && '🚶'}
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <h3 className="font-semibold text-gray-900 text-xs sm:text-base truncate">{activity.action}</h3>
-                          <div className="flex items-center space-x-2 text-xs text-gray-600">
-                            <span className="flex items-center gap-1">
-                              <Smartphone className="h-3 w-3 flex-shrink-0" />
-                              <span className="truncate max-w-20 sm:max-w-none">{activity.source}</span>
-                            </span>
-                            <span className="flex items-center gap-1">
-                              <Clock className="h-3 w-3 flex-shrink-0" />
-                              {activity.time}
-                            </span>
+            {/* Activities and Goal Section */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-6">
+              {/* Recent Activities - Takes 2 columns */}
+              <div className="lg:col-span-2">
+                <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm h-full">
+                  <CardHeader className="pb-3 sm:pb-6">
+                    <CardTitle className="flex items-center gap-2 text-base sm:text-xl">
+                      <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
+                      Attività Recenti
+                    </CardTitle>
+                    <CardDescription className="text-xs sm:text-sm">
+                      Tracciamento automatico delle tue azioni sostenibili
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-2 sm:space-y-4">
+                      {activities.map(activity => <div key={activity.id} className="flex items-center justify-between p-2 sm:p-4 bg-gray-50 rounded-lg hover:bg-green-50 hover:shadow-md hover:scale-[1.02] transition-all duration-200 cursor-pointer active:scale-[0.98]">
+                          <div className="flex items-center space-x-2 sm:space-x-4 flex-1 min-w-0">
+                            <div className="w-8 h-8 sm:w-12 sm:h-12 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center text-sm sm:text-xl flex-shrink-0">
+                              {activity.type === 'bike' && '🚴'}
+                              {activity.type === 'public_transport' && '🚌'}
+                              {activity.type === 'walk' && '🚶'}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <h3 className="font-semibold text-gray-900 text-xs sm:text-base truncate">{activity.action}</h3>
+                              <div className="flex items-center space-x-2 text-xs text-gray-600">
+                                <span className="flex items-center gap-1">
+                                  <Smartphone className="h-3 w-3 flex-shrink-0" />
+                                  <span className="truncate max-w-20 sm:max-w-none">{activity.source}</span>
+                                </span>
+                                <span className="flex items-center gap-1">
+                                  <Clock className="h-3 w-3 flex-shrink-0" />
+                                  {activity.time}
+                                </span>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                      </div>
-                      <div className="text-right flex-shrink-0 ml-2">
-                        <div className="font-bold text-green-600 text-xs sm:text-base">+{activity.points}</div>
-                        <div className="text-xs text-gray-600">{activity.co2Saved}</div>
-                      </div>
-                    </div>)}
-                </div>
-              </CardContent>
-            </Card>
+                          <div className="text-right flex-shrink-0 ml-2">
+                            <div className="font-bold text-green-600 text-xs sm:text-base">+{activity.points}</div>
+                            <div className="text-xs text-gray-600">{activity.co2Saved}</div>
+                          </div>
+                        </div>)}
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
 
-            {/* New Gamification Section - Horizontal Layout */}
+              {/* Monthly Goal Chart - Takes 1 column */}
+              <div className="lg:col-span-1">
+                <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm h-full">
+                  <CardHeader className="pb-3 sm:pb-6">
+                    <CardTitle className="flex items-center gap-2 text-base sm:text-xl">
+                      <Target className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />
+                      Obiettivo Mensile
+                    </CardTitle>
+                    <CardDescription className="text-xs sm:text-sm">
+                      La tua sfida personale di gennaio
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="flex flex-col items-center">
+                    <div className="relative w-32 h-32 sm:w-40 sm:h-40 mb-4">
+                      <ChartContainer config={chartConfig} className="w-full h-full">
+                        <PieChart>
+                          <Pie
+                            data={chartData}
+                            cx="50%"
+                            cy="50%"
+                            innerRadius={45}
+                            outerRadius={65}
+                            startAngle={90}
+                            endAngle={450}
+                            dataKey="value"
+                          >
+                            {chartData.map((entry, index) => (
+                              <Cell key={`cell-${index}`} fill={entry.fill} />
+                            ))}
+                          </Pie>
+                          <ChartTooltip content={<ChartTooltipContent />} />
+                        </PieChart>
+                      </ChartContainer>
+                      <div className="absolute inset-0 flex flex-col items-center justify-center">
+                        <div className="text-xl sm:text-2xl font-bold text-green-600">
+                          {Math.round(progressPercentage)}%
+                        </div>
+                        <div className="text-xs text-gray-500">completato</div>
+                      </div>
+                    </div>
+                    
+                    <div className="text-center space-y-2 w-full">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">Risparmiata:</span>
+                        <span className="font-semibold text-green-600">{currentSaved} kg</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">Obiettivo:</span>
+                        <span className="font-semibold text-blue-600">{monthlyGoal} kg</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">Mancano:</span>
+                        <span className="font-semibold text-orange-600">{(monthlyGoal - currentSaved).toFixed(1)} kg</span>
+                      </div>
+                      
+                      <Progress value={progressPercentage} className="h-2 bg-gray-200 [&>div]:bg-gradient-to-r [&>div]:from-green-400 [&>div]:to-green-500" />
+                      
+                      <p className="text-xs text-gray-500 mt-2">
+                        Hai {31 - new Date().getDate()} giorni per raggiungere l'obiettivo! 🌱
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+
+            {/* Gamification Section */}
             <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
               <CardHeader className="pb-3 sm:pb-6">
                 <CardTitle className="flex items-center gap-2 text-base sm:text-xl">
