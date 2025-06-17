@@ -64,6 +64,14 @@ const Dashboard = () => {
     validatedAt: "2024-01-10",
     blockchainHash: "0x4d5e6f...",
     status: "verified"
+  }, {
+    id: "CERT-003",
+    title: "Riciclo e Smaltimento",
+    co2Saved: "12.4 kg",
+    points: 620,
+    validatedAt: "2024-01-12",
+    blockchainHash: "0x7g8h9i...",
+    status: "verified"
   }];
   const challenges = [{
     id: 1,
