@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -132,7 +131,7 @@ const Dashboard = () => {
     },
   };
 
-  // Mock DPP products for conservation
+  // Mock DPP products for conservation - Updated with new examples
   const conservedDpps = [
     {
       id: "DPP-PRADA-001",
@@ -169,8 +168,55 @@ const Dashboard = () => {
       },
       value: "€ 9.150",
       category: "Orologeria"
+    },
+    {
+      id: "DPP-BAROLO-003",
+      name: "Barolo Riserva 2015",
+      brand: "ANTINORI",
+      model: "Pian delle Vigne",
+      image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=300&h=300&fit=crop",
+      purchaseDate: "2024-02-10",
+      warranty: {
+        period: "Garanzia autenticità",
+        expires: "Permanente"
+      },
+      sustainability: {
+        score: 85,
+        certifications: ["Biologico", "DOC Barolo", "Carbon Neutral"]
+      },
+      value: "€ 125",
+      category: "Enologia"
+    },
+    {
+      id: "DPP-DIOR-004",
+      name: "Crema Anti-Età Premium",
+      brand: "DIOR",
+      model: "Capture Totale",
+      image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=300&h=300&fit=crop",
+      purchaseDate: "2024-03-05",
+      warranty: {
+        period: "6 mesi",
+        expires: "2024-09-05"
+      },
+      sustainability: {
+        score: 78,
+        certifications: ["Cruelty Free", "Packaging sostenibile"]
+      },
+      value: "€ 189",
+      category: "Cosmetica"
     }
   ];
+
+  const getCategoryIcon = (category: string) => {
+    switch (category) {
+      case 'Pelletteria': return '👜';
+      case 'Orologeria': return '⌚';
+      case 'Tecnologia': return '📱';
+      case 'Enologia': return '🍷';
+      case 'Cosmetica': return '💄';
+      default: return '📦';
+    }
+  };
 
   return <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
       {/* Header */}
