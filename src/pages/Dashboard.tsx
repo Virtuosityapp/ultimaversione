@@ -229,7 +229,9 @@ const Dashboard = () => {
         return '📦';
     }
   };
-  return <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
       {/* Header */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-green-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
@@ -241,7 +243,6 @@ const Dashboard = () => {
               </h1>
             </div>
             <div className={`flex items-center ${isMobile ? 'justify-center' : ''} space-x-2`}>
-              
               <Button variant="outline" onClick={() => navigate("/marketplace")} className={`border-green-300 text-green-700 hover:bg-green-50 hover:border-green-400 hover:scale-105 transition-all duration-200 ${isMobile ? 'text-xs px-3 py-1' : 'text-xs px-2 py-1.5 sm:text-sm sm:px-4 sm:py-2'} active:scale-95 bg-gradient-to-r from-green-500 to-green-600 text-white border-green-500 hover:from-green-600 hover:to-green-700`}>
                 Exchange
               </Button>
@@ -639,6 +640,8 @@ const Dashboard = () => {
           </TabsContent>
         </Tabs>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default Dashboard;
