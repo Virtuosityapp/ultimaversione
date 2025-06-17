@@ -9,10 +9,8 @@ import { DppVerification } from "@/components/DppVerification";
 import CitizenReporting from "@/components/CitizenReporting";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
-
 const Dashboard = () => {
   const navigate = useNavigate();
-
   const activities = [{
     id: 1,
     type: "bike",
@@ -47,7 +45,6 @@ const Dashboard = () => {
     location: "Parco Sempione",
     source: "Samsung Health"
   }];
-  
   const certificates = [{
     id: "CERT-001",
     title: "Mobilità Sostenibile",
@@ -123,109 +120,111 @@ const Dashboard = () => {
   // Monthly CO2 goal data
   const monthlyGoal = 50; // kg CO2
   const currentSaved = 24.3; // kg CO2
-  const progressPercentage = (currentSaved / monthlyGoal) * 100;
-  
-  const chartData = [
-    { name: "Risparmiata", value: currentSaved, fill: "#22c55e" },
-    { name: "Rimanente", value: monthlyGoal - currentSaved, fill: "#e5e7eb" }
-  ];
-
+  const progressPercentage = currentSaved / monthlyGoal * 100;
+  const chartData = [{
+    name: "Risparmiata",
+    value: currentSaved,
+    fill: "#22c55e"
+  }, {
+    name: "Rimanente",
+    value: monthlyGoal - currentSaved,
+    fill: "#e5e7eb"
+  }];
   const chartConfig = {
     risparmiata: {
-      label: "CO₂ Risparmiata",
+      label: "CO₂ Risparmiata"
     },
     rimanente: {
-      label: "Rimanente",
-    },
+      label: "Rimanente"
+    }
   };
 
   // Mock DPP products for conservation - Updated with new names
-  const conservedDpps = [
-    {
-      id: "DPP-PRADA-001",
-      name: "Borsa Saffiano",
-      brand: "PRADA",
-      model: "1BA274",
-      image: "/lovable-uploads/68f725b5-ee07-4329-b173-31ae580fbafd.png",
-      purchaseDate: "2024-01-15",
-      warranty: {
-        period: "2 anni",
-        expires: "2026-01-15"
-      },
-      sustainability: {
-        score: 92,
-        certifications: ["Made in Italy", "Pelle certificata"]
-      },
-      value: "€ 2.850",
-      category: "Pelletteria"
+  const conservedDpps = [{
+    id: "DPP-PRADA-001",
+    name: "Borsa Saffiano",
+    brand: "PRADA",
+    model: "1BA274",
+    image: "/lovable-uploads/68f725b5-ee07-4329-b173-31ae580fbafd.png",
+    purchaseDate: "2024-01-15",
+    warranty: {
+      period: "2 anni",
+      expires: "2026-01-15"
     },
-    {
-      id: "DPP-ROLEX-002",
-      name: "Submariner Date",
-      brand: "ROLEX",
-      model: "126610LN",
-      image: "/lovable-uploads/7676b5a7-2456-4cc9-ae9c-3e50d71dd284.png",
-      purchaseDate: "2023-11-20",
-      warranty: {
-        period: "5 anni",
-        expires: "2028-11-20"
-      },
-      sustainability: {
-        score: 88,
-        certifications: ["Swiss Made", "Oro responsabile"]
-      },
-      value: "€ 9.150",
-      category: "Orologeria"
+    sustainability: {
+      score: 92,
+      certifications: ["Made in Italy", "Pelle certificata"]
     },
-    {
-      id: "DPP-ANTINORI-003",
-      name: "Vino premium 1976",
-      brand: "ANTINORI",
-      model: "Annata Storica",
-      image: "/lovable-uploads/e6e197da-58a6-4031-8816-149b1b1c4009.png",
-      purchaseDate: "2024-02-10",
-      warranty: {
-        period: "Garanzia autenticità",
-        expires: "Permanente"
-      },
-      sustainability: {
-        score: 85,
-        certifications: ["Biologico", "DOC", "Carbon Neutral"]
-      },
-      value: "€ 850",
-      category: "Enologia"
+    value: "€ 2.850",
+    category: "Pelletteria"
+  }, {
+    id: "DPP-ROLEX-002",
+    name: "Submariner Date",
+    brand: "ROLEX",
+    model: "126610LN",
+    image: "/lovable-uploads/7676b5a7-2456-4cc9-ae9c-3e50d71dd284.png",
+    purchaseDate: "2023-11-20",
+    warranty: {
+      period: "5 anni",
+      expires: "2028-11-20"
     },
-    {
-      id: "DPP-DIOR-004",
-      name: "Crema luxury",
-      brand: "DIOR",
-      model: "Orchidée Impériale",
-      image: "/lovable-uploads/eb509000-2638-4dc3-a12a-7e665a749f1e.png",
-      purchaseDate: "2024-03-05",
-      warranty: {
-        period: "6 mesi",
-        expires: "2024-09-05"
-      },
-      sustainability: {
-        score: 78,
-        certifications: ["Cruelty Free", "Packaging sostenibile"]
-      },
-      value: "€ 350",
-      category: "Cosmetica"
-    }
-  ];
-
+    sustainability: {
+      score: 88,
+      certifications: ["Swiss Made", "Oro responsabile"]
+    },
+    value: "€ 9.150",
+    category: "Orologeria"
+  }, {
+    id: "DPP-ANTINORI-003",
+    name: "Vino premium 1976",
+    brand: "ANTINORI",
+    model: "Annata Storica",
+    image: "/lovable-uploads/e6e197da-58a6-4031-8816-149b1b1c4009.png",
+    purchaseDate: "2024-02-10",
+    warranty: {
+      period: "Garanzia autenticità",
+      expires: "Permanente"
+    },
+    sustainability: {
+      score: 85,
+      certifications: ["Biologico", "DOC", "Carbon Neutral"]
+    },
+    value: "€ 850",
+    category: "Enologia"
+  }, {
+    id: "DPP-DIOR-004",
+    name: "Crema luxury",
+    brand: "DIOR",
+    model: "Orchidée Impériale",
+    image: "/lovable-uploads/eb509000-2638-4dc3-a12a-7e665a749f1e.png",
+    purchaseDate: "2024-03-05",
+    warranty: {
+      period: "6 mesi",
+      expires: "2024-09-05"
+    },
+    sustainability: {
+      score: 78,
+      certifications: ["Cruelty Free", "Packaging sostenibile"]
+    },
+    value: "€ 350",
+    category: "Cosmetica"
+  }];
   const getCategoryIcon = (category: string) => {
     switch (category) {
-      case 'Pelletteria': return '👜';
-      case 'Orologeria': return '⌚';
-      case 'Tecnologia': return '📱';
-      case 'Enologia': return '🍷';
-      case 'Cosmetica': return '💄';
-      default: return '📦';
+      case 'Pelletteria':
+        return '👜';
+      case 'Orologeria':
+        return '⌚';
+      case 'Tecnologia':
+        return '📱';
+      case 'Enologia':
+        return '🍷';
+      case 'Cosmetica':
+        return '💄';
+      default:
+        return '📦';
     }
   };
-
   return <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
       {/* Header */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-green-100 sticky top-0 z-50">
@@ -311,9 +310,7 @@ const Dashboard = () => {
             <TabsTrigger value="reporting" className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-orange-100 hover:to-red-100 hover:text-orange-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-400 data-[state=active]:to-red-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
               Segnala
             </TabsTrigger>
-            <TabsTrigger value="dpp" className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-cyan-100 hover:to-teal-100 hover:text-cyan-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-400 data-[state=active]:to-teal-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
-              DPP
-            </TabsTrigger>
+            <TabsTrigger value="dpp" className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-cyan-100 hover:to-teal-100 hover:text-cyan-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-400 data-[state=active]:to-teal-500 data-[state=active]:text-white data-[state=active]:shadow-lg">Ottieni Digital Product Pasport</TabsTrigger>
           </TabsList>
 
           <TabsContent value="activities" className="space-y-3 sm:space-y-6">
@@ -380,19 +377,8 @@ const Dashboard = () => {
                     <div className="relative w-32 h-32 sm:w-40 sm:h-40 mb-4">
                       <ChartContainer config={chartConfig} className="w-full h-full">
                         <PieChart>
-                          <Pie
-                            data={chartData}
-                            cx="50%"
-                            cy="50%"
-                            innerRadius={45}
-                            outerRadius={65}
-                            startAngle={90}
-                            endAngle={450}
-                            dataKey="value"
-                          >
-                            {chartData.map((entry, index) => (
-                              <Cell key={`cell-${index}`} fill={entry.fill} />
-                            ))}
+                          <Pie data={chartData} cx="50%" cy="50%" innerRadius={45} outerRadius={65} startAngle={90} endAngle={450} dataKey="value">
+                            {chartData.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.fill} />)}
                           </Pie>
                           <ChartTooltip content={<ChartTooltipContent />} />
                         </PieChart>
@@ -445,8 +431,7 @@ const Dashboard = () => {
                 <div className="space-y-3 sm:space-y-4">
                   {/* Horizontal grid for challenges */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
-                    {challenges.map(challenge => (
-                      <div key={challenge.id} className={`p-3 sm:p-4 rounded-lg border-2 hover:shadow-lg hover:scale-[1.01] transition-all duration-200 cursor-pointer ${getStatusColor(challenge.status)}`}>
+                    {challenges.map(challenge => <div key={challenge.id} className={`p-3 sm:p-4 rounded-lg border-2 hover:shadow-lg hover:scale-[1.01] transition-all duration-200 cursor-pointer ${getStatusColor(challenge.status)}`}>
                         <div className="flex justify-between items-start mb-2 sm:mb-3">
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 mb-1">
@@ -494,8 +479,7 @@ const Dashboard = () => {
                             <span>{challenge.prize}</span>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      </div>)}
                   </div>
                   
                   <div className="pt-2">
@@ -576,14 +560,9 @@ const Dashboard = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
-                    {conservedDpps.map(dpp => (
-                      <div key={dpp.id} className="p-3 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg border border-green-200 hover:shadow-lg hover:scale-[1.02] transition-all duration-200 cursor-pointer">
+                    {conservedDpps.map(dpp => <div key={dpp.id} className="p-3 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg border border-green-200 hover:shadow-lg hover:scale-[1.02] transition-all duration-200 cursor-pointer">
                         <div className="flex items-start space-x-3">
-                          <img 
-                            src={dpp.image} 
-                            alt={dpp.name}
-                            className="w-12 h-12 object-cover rounded-lg flex-shrink-0"
-                          />
+                          <img src={dpp.image} alt={dpp.name} className="w-12 h-12 object-cover rounded-lg flex-shrink-0" />
                           <div className="flex-1 min-w-0">
                             <h3 className="font-bold text-sm text-gray-900 truncate">{dpp.brand}</h3>
                             <p className="text-xs text-gray-600 truncate">{dpp.name}</p>
@@ -606,8 +585,7 @@ const Dashboard = () => {
                             Garanzia
                           </Button>
                         </div>
-                      </div>
-                    ))}
+                      </div>)}
                     
                     <Button className="w-full mt-4 bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white text-xs">
                       <QrCode className="mr-2 h-3 w-3" />
@@ -656,5 +634,4 @@ const Dashboard = () => {
       </div>
     </div>;
 };
-
 export default Dashboard;
