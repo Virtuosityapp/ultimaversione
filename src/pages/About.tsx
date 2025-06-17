@@ -793,7 +793,7 @@ const About = () => {
 
           <div className="mb-8 text-center">
             <img 
-              src="/lovable-uploads/73f2527c-ddec-43b6-b9dd-4b6839cb7a23.png" 
+              src="/lovable-uploads/8a0c9e20-1588-4e72-b5e4-de09478bb593.png" 
               alt="Premi Aziendali - Modello di Scambio Certificati" 
               className="mx-auto rounded-lg shadow-2xl max-w-[80%] h-auto border border-gray-200"
             />
