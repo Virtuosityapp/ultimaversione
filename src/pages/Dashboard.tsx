@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -170,11 +171,11 @@ const Dashboard = () => {
       category: "Orologeria"
     },
     {
-      id: "DPP-BAROLO-003",
-      name: "Barolo Riserva 2015",
+      id: "DPP-ANTINORI-003",
+      name: "Vino 1956",
       brand: "ANTINORI",
-      model: "Pian delle Vigne",
-      image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=300&h=300&fit=crop",
+      model: "Annata Storica",
+      image: "/lovable-uploads/e6e197da-58a6-4031-8816-149b1b1c4009.png",
       purchaseDate: "2024-02-10",
       warranty: {
         period: "Garanzia autenticità",
@@ -182,17 +183,17 @@ const Dashboard = () => {
       },
       sustainability: {
         score: 85,
-        certifications: ["Biologico", "DOC Barolo", "Carbon Neutral"]
+        certifications: ["Biologico", "DOC", "Carbon Neutral"]
       },
-      value: "€ 125",
+      value: "€ 850",
       category: "Enologia"
     },
     {
       id: "DPP-DIOR-004",
-      name: "Crema Anti-Età Premium",
+      name: "Crema Luxury",
       brand: "DIOR",
-      model: "Capture Totale",
-      image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=300&h=300&fit=crop",
+      model: "Orchidée Impériale",
+      image: "/lovable-uploads/eb509000-2638-4dc3-a12a-7e665a749f1e.png",
       purchaseDate: "2024-03-05",
       warranty: {
         period: "6 mesi",
@@ -202,7 +203,7 @@ const Dashboard = () => {
         score: 78,
         certifications: ["Cruelty Free", "Packaging sostenibile"]
       },
-      value: "€ 189",
+      value: "€ 350",
       category: "Cosmetica"
     }
   ];
