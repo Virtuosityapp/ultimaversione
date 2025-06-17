@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -415,56 +416,75 @@ const Dashboard = () => {
           </TabsContent>
 
           <TabsContent value="certificates" className="space-y-3 sm:space-y-6">
-            <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-              <CardHeader className="pb-3 sm:pb-6">
-                <CardTitle className="flex items-center gap-2 text-base sm:text-xl">
-                  <Award className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />
-                  Certificati Blockchain
-                </CardTitle>
-                <CardDescription className="text-xs sm:text-sm">
-                  I tuoi certificati digitali verificati e tracciabili
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3 sm:space-y-4">
-                  {certificates.map(cert => <div key={cert.id} className="p-3 sm:p-6 bg-gradient-to-r from-blue-50 to-green-50 rounded-lg border border-blue-200 hover:shadow-lg hover:scale-[1.02] transition-all duration-200 cursor-pointer">
-                      <div className="flex justify-between items-start mb-2 sm:mb-4">
-                        <div className="flex-1 min-w-0">
-                          <h3 className="font-bold text-sm sm:text-lg text-gray-900 truncate">{cert.title}</h3>
-                          <p className="text-xs text-gray-600">ID: {cert.id}</p>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-6">
+              {/* Blockchain Certificates - Left Column */}
+              <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+                <CardHeader className="pb-3 sm:pb-6">
+                  <CardTitle className="flex items-center gap-2 text-base sm:text-xl">
+                    <Award className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />
+                    Certificati Blockchain
+                  </CardTitle>
+                  <CardDescription className="text-xs sm:text-sm">
+                    I tuoi certificati digitali verificati e tracciabili
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3 sm:space-y-4">
+                    {certificates.map(cert => <div key={cert.id} className="p-3 sm:p-6 bg-gradient-to-r from-blue-50 to-green-50 rounded-lg border border-blue-200 hover:shadow-lg hover:scale-[1.02] transition-all duration-200 cursor-pointer">
+                        <div className="flex justify-between items-start mb-2 sm:mb-4">
+                          <div className="flex-1 min-w-0">
+                            <h3 className="font-bold text-sm sm:text-lg text-gray-900 truncate">{cert.title}</h3>
+                            <p className="text-xs text-gray-600">ID: {cert.id}</p>
+                          </div>
+                          <Badge className="bg-green-100 text-green-800 text-xs ml-2 flex-shrink-0">
+                            {cert.status === 'verified' ? 'Verificato' : 'In verifica'}
+                          </Badge>
                         </div>
-                        <Badge className="bg-green-100 text-green-800 text-xs ml-2 flex-shrink-0">
-                          {cert.status === 'verified' ? 'Verificato' : 'In verifica'}
-                        </Badge>
-                      </div>
-                      
-                      <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-3 sm:mb-4">
-                        <div>
-                          <p className="text-xs text-gray-600">CO₂ Risparmiata</p>
-                          <p className="font-bold text-green-600 text-sm">{cert.co2Saved}</p>
+                        
+                        <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-3 sm:mb-4">
+                          <div>
+                            <p className="text-xs text-gray-600">CO₂ Risparmiata</p>
+                            <p className="font-bold text-green-600 text-sm">{cert.co2Saved}</p>
+                          </div>
+                          <div>
+                            <p className="text-xs text-gray-600">Punti</p>
+                            <p className="font-bold text-blue-600 text-sm">{cert.points}</p>
+                          </div>
+                          <div>
+                            <p className="text-xs text-gray-600">Data</p>
+                            <p className="font-bold text-gray-900 text-sm">{cert.validatedAt}</p>
+                          </div>
                         </div>
-                        <div>
-                          <p className="text-xs text-gray-600">Punti</p>
-                          <p className="font-bold text-blue-600 text-sm">{cert.points}</p>
+                        
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
+                          <p className="text-xs text-gray-500 font-mono truncate">
+                            Hash: {cert.blockchainHash}
+                          </p>
+                          <Button size="sm" variant="outline" className="text-xs self-start sm:self-auto hover:bg-blue-50 hover:border-blue-300 hover:scale-105 active:scale-95 transition-all duration-200">
+                            Visualizza in Blockchain
+                          </Button>
                         </div>
-                        <div>
-                          <p className="text-xs text-gray-600">Data</p>
-                          <p className="font-bold text-gray-900 text-sm">{cert.validatedAt}</p>
-                        </div>
-                      </div>
-                      
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
-                        <p className="text-xs text-gray-500 font-mono truncate">
-                          Hash: {cert.blockchainHash}
-                        </p>
-                        <Button size="sm" variant="outline" className="text-xs self-start sm:self-auto hover:bg-blue-50 hover:border-blue-300 hover:scale-105 active:scale-95 transition-all duration-200">
-                          Visualizza
-                        </Button>
-                      </div>
-                    </div>)}
-                </div>
-              </CardContent>
-            </Card>
+                      </div>)}
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* DPP Verification - Right Column */}
+              <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+                <CardHeader className="pb-3 sm:pb-6">
+                  <CardTitle className="flex items-center gap-2 text-base sm:text-xl">
+                    <QrCode className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
+                    Verifica DPP
+                  </CardTitle>
+                  <CardDescription className="text-xs sm:text-sm">
+                    Verifica passaporti digitali dei prodotti per tracking e garanzie
+                  </CardDescription>
+                </CardHeader>
+                <CardContent id="dpp-wallet-section">
+                  <DppVerification />
+                </CardContent>
+              </Card>
+            </div>
           </TabsContent>
 
           <TabsContent value="reporting" className="space-y-3 sm:space-y-6">
