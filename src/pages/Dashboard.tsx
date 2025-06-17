@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -132,7 +131,7 @@ const Dashboard = () => {
     },
   };
 
-  // Mock DPP products for conservation - Updated with new examples
+  // Mock DPP products for conservation - Updated with new names
   const conservedDpps = [
     {
       id: "DPP-PRADA-001",
@@ -172,7 +171,7 @@ const Dashboard = () => {
     },
     {
       id: "DPP-ANTINORI-003",
-      name: "Vino 1956",
+      name: "Vino premium 1976",
       brand: "ANTINORI",
       model: "Annata Storica",
       image: "/lovable-uploads/e6e197da-58a6-4031-8816-149b1b1c4009.png",
@@ -190,7 +189,7 @@ const Dashboard = () => {
     },
     {
       id: "DPP-DIOR-004",
-      name: "Crema Luxury",
+      name: "Crema luxury",
       brand: "DIOR",
       model: "Orchidée Impériale",
       image: "/lovable-uploads/eb509000-2638-4dc3-a12a-7e665a749f1e.png",
