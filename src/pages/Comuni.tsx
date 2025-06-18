@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -14,9 +15,7 @@ import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Cart
 
 const Comuni = () => {
   const navigate = useNavigate();
-  const {
-    toast
-  } = useToast();
+  const { toast } = useToast();
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<any>(null);
   const [selectedReward, setSelectedReward] = useState<any>(null);
@@ -54,6 +53,7 @@ const Comuni = () => {
     energia: 70,
     acqua: 78
   }];
+
   const parkingData = [{
     zone: "Centro",
     occupati: 340,
@@ -75,6 +75,7 @@ const Comuni = () => {
     occupati: 160,
     totali: 200
   }];
+
   const waterSavingData = [{
     ora: "06:00",
     risparmio: 15
@@ -100,6 +101,7 @@ const Comuni = () => {
     ora: "20:00",
     risparmio: 18
   }];
+
   const lightingData = [{
     name: "Funzionanti",
     value: 1245,
@@ -113,6 +115,7 @@ const Comuni = () => {
     value: 12,
     color: "#F59E0B"
   }];
+
   const wasteData = [{
     giorno: "Lun",
     raccolto: 450,
@@ -143,7 +146,6 @@ const Comuni = () => {
     riciclato: 240
   }];
 
-  // Mock data for rewards/incentives
   const communityRewards = [{
     id: 1,
     title: "Sconto Trasporto Pubblico",
@@ -206,7 +208,6 @@ const Comuni = () => {
     validUntil: "30/09/2024"
   }];
 
-  // Mock data for map alerts and resolved issues
   const mapAlerts = [{
     id: 1,
     type: "alert",
@@ -238,28 +239,23 @@ const Comuni = () => {
     coords: [9.2050, 45.4780] as [number, number],
     timestamp: "4 ore fa"
   }];
+
   useEffect(() => {
     if (!mapContainer.current || map.current) return;
 
-    // Initialize map with a placeholder (users should add their Mapbox token)
     const initializeMap = async () => {
       try {
         const mapboxgl = await import('mapbox-gl');
-
-        // Placeholder token - users need to replace with their own
         mapboxgl.default.accessToken = 'pk.eyJ1IjoiZXhhbXBsZSIsImEiOiJjbGV4YW1wbGUifQ.example';
         map.current = new mapboxgl.default.Map({
           container: mapContainer.current!,
           style: 'mapbox://styles/mapbox/light-v11',
           center: [9.1900, 45.4642],
-          // Milan coordinates
           zoom: 13
         });
 
-        // Add navigation controls
         map.current.addControl(new mapboxgl.default.NavigationControl(), 'top-right');
 
-        // Add markers for alerts and resolved issues
         mapAlerts.forEach(item => {
           const el = document.createElement('div');
           el.className = `w-6 h-6 rounded-full border-2 border-white shadow-lg cursor-pointer ${item.type === 'alert' ? item.severity === 'high' ? 'bg-red-500' : 'bg-orange-500' : 'bg-green-500'}`;
@@ -285,6 +281,7 @@ const Comuni = () => {
       }
     };
   }, []);
+
   const integrations = [{
     id: 1,
     name: "Smart Parking",
@@ -342,20 +339,22 @@ const Comuni = () => {
       citizens: 0
     }
   }];
+
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "active":
-        return <Badge className="bg-green-100 text-green-800"><CheckCircle className="w-3 h-3 mr-1" />Attivo</Badge>;
+        return <Badge className="bg-green-100 text-green-800 text-xs"><CheckCircle className="w-2 h-2 mr-1" />Attivo</Badge>;
       case "warning":
-        return <Badge className="bg-orange-100 text-orange-800"><AlertCircle className="w-3 h-3 mr-1" />Attenzione</Badge>;
+        return <Badge className="bg-orange-100 text-orange-800 text-xs"><AlertCircle className="w-2 h-2 mr-1" />Attenzione</Badge>;
       case "inactive":
-        return <Badge className="bg-gray-100 text-gray-800"><Clock className="w-3 h-3 mr-1" />Inattivo</Badge>;
+        return <Badge className="bg-gray-100 text-gray-800 text-xs"><Clock className="w-2 h-2 mr-1" />Inattivo</Badge>;
       case "draft":
-        return <Badge className="bg-blue-100 text-blue-800"><Edit className="w-3 h-3 mr-1" />Bozza</Badge>;
+        return <Badge className="bg-blue-100 text-blue-800 text-xs"><Edit className="w-2 h-2 mr-1" />Bozza</Badge>;
       default:
         return <Badge variant="secondary">Sconosciuto</Badge>;
     }
   };
+
   const getCategoryColor = (category: string) => {
     switch (category) {
       case "transport":
@@ -372,12 +371,14 @@ const Comuni = () => {
         return "bg-gray-100 text-gray-800";
     }
   };
+
   const handleManageIntegration = (integration: any) => {
     toast({
       title: "Gestione Integrazione",
       description: `Apertura pannello di controllo per ${integration.name}`
     });
   };
+
   const handleEditReward = (reward: any) => {
     setSelectedReward(reward);
     toast({
@@ -385,39 +386,54 @@ const Comuni = () => {
       description: `Modifica di ${reward.title}`
     });
   };
+
   const handleDeleteReward = (rewardId: number) => {
     toast({
       title: "Incentivo Eliminato",
       description: "L'incentivo è stato rimosso con successo"
     });
   };
+
   const totalDataPoints = integrations.reduce((sum, int) => sum + int.dataPoints, 0);
   const activeIntegrations = integrations.filter(int => int.status === "active").length;
   const totalRewards = communityRewards.length;
   const activeRewards = communityRewards.filter(r => r.status === "active").length;
-  return <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-cyan-50">
-      {/* Header - Improved mobile spacing */}
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-cyan-50">
+      {/* Header - Compact for mobile */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-blue-100 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-3 sm:py-4">
-            <div className="flex items-center space-x-2 sm:space-x-3">
-              <Button variant="ghost" onClick={() => navigate("/dashboard")} className="mr-1 sm:mr-2 p-2 sm:p-3 min-h-[44px] min-w-[44px]" size="sm">
-                <ArrowLeft className="h-4 w-4 sm:mr-2" />
-                <span className="hidden sm:inline">Dashboard</span>
+        <div className="max-w-7xl mx-auto px-2 sm:px-4">
+          <div className="flex justify-between items-center py-2 sm:py-3">
+            <div className="flex items-center space-x-2">
+              <Button 
+                variant="ghost" 
+                onClick={() => navigate("/dashboard")} 
+                className="p-2 min-h-[36px] min-w-[36px]" 
+                size="sm"
+              >
+                <ArrowLeft className="h-3 w-3" />
               </Button>
-              <img src="/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png" alt="Virtuosity Logo" className="relative h-8 w-8 sm:h-12 sm:w-12 lg:h-16 lg:w-16 object-contain" />
-              <h1 className="text-sm sm:text-xl lg:text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+              <img 
+                src="/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png" 
+                alt="Virtuosity Logo" 
+                className="h-6 w-6 sm:h-8 sm:w-8 object-contain" 
+              />
+              <h1 className="text-xs sm:text-lg font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                 Dashboard Comuni
               </h1>
             </div>
-            <div className="flex items-center space-x-2 sm:space-x-4">
-              <Button variant="outline" onClick={() => navigate("/report")} className="border-green-300 text-green-700 hover:bg-green-50 hover:border-green-400 hover:scale-105 transition-all duration-200 text-xs px-2 py-2 sm:text-sm sm:px-4 active:scale-95 min-h-[44px]">
-                <FileText className="h-4 w-4 mr-1 sm:mr-2" />
-                <span className="hidden sm:inline">Genera Report</span>
-                <span className="sm:hidden">Report</span>
+            <div className="flex items-center space-x-2">
+              <Button 
+                variant="outline" 
+                onClick={() => navigate("/report")} 
+                className="border-green-300 text-green-700 hover:bg-green-50 text-xs px-2 py-1 min-h-[36px]"
+              >
+                <FileText className="h-3 w-3 mr-1" />
+                Report
               </Button>
-              <div className="bg-gradient-to-r from-blue-400 to-indigo-500 text-white px-2 sm:px-4 py-2 sm:py-2 rounded-full font-bold text-xs sm:text-base min-h-[36px] flex items-center">
-                <Activity className="h-3 w-3 mr-1" />
+              <div className="bg-gradient-to-r from-blue-400 to-indigo-500 text-white px-2 py-1 rounded-full font-bold text-xs min-h-[28px] flex items-center">
+                <Activity className="h-2 w-2 mr-1" />
                 {totalDataPoints}
               </div>
             </div>
@@ -425,208 +441,199 @@ const Comuni = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8">
-        {/* Welcome Section - Better mobile spacing */}
-        <div className="mb-6 sm:mb-8 text-center px-2">
-          <h2 className="text-xl sm:text-3xl font-bold text-gray-900 mb-2">Centro di Controllo Integrazioni 🏛️</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 py-3 sm:py-6">
+        {/* Welcome Section - Compact */}
+        <div className="mb-4 sm:mb-6 text-center px-2">
+          <h2 className="text-lg sm:text-2xl font-bold text-gray-900 mb-1">Centro di Controllo Integrazioni 🏛️</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto text-xs sm:text-sm">
             Monitora tutte le integrazioni del comune con Virtuosity. Controlla lo stato dei servizi smart della città.
           </p>
         </div>
 
-        {/* Overview Cards - Better mobile grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-6 sm:mb-8">
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-400 to-indigo-500 text-white">
-            <CardHeader className="pb-2 p-3 sm:p-6">
-              <CardTitle className="text-xs sm:text-sm font-medium text-blue-100">Integrazioni Attive</CardTitle>
+        {/* Overview Cards - Smaller for mobile */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 mb-4 sm:mb-6">
+          <Card className="border-0 shadow-sm bg-gradient-to-br from-blue-400 to-indigo-500 text-white">
+            <CardHeader className="pb-1 p-2 sm:p-4">
+              <CardTitle className="text-xs font-medium text-blue-100">Integrazioni Attive</CardTitle>
             </CardHeader>
-            <CardContent className="p-3 sm:p-6 pt-0">
-              <div className="text-lg sm:text-2xl font-bold">{activeIntegrations}</div>
+            <CardContent className="p-2 sm:p-4 pt-0">
+              <div className="text-sm sm:text-xl font-bold">{activeIntegrations}</div>
               <p className="text-xs text-blue-100">di {integrations.length} totali</p>
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-green-400 to-emerald-500 text-white">
-            <CardHeader className="pb-2 p-3 sm:p-6">
-              <CardTitle className="text-xs sm:text-sm font-medium text-green-100">Certificati ricevuti dai cittadini</CardTitle>
+          <Card className="border-0 shadow-sm bg-gradient-to-br from-green-400 to-emerald-500 text-white">
+            <CardHeader className="pb-1 p-2 sm:p-4">
+              <CardTitle className="text-xs font-medium text-green-100">Certificati ricevuti</CardTitle>
             </CardHeader>
-            <CardContent className="p-3 sm:p-6 pt-0">
-              <div className="text-lg sm:text-2xl font-bold">{totalDataPoints.toLocaleString()}</div>
+            <CardContent className="p-2 sm:p-4 pt-0">
+              <div className="text-sm sm:text-xl font-bold">{totalDataPoints.toLocaleString()}</div>
               <p className="text-xs text-green-100">Oggi</p>
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-purple-400 to-pink-500 text-white">
-            <CardHeader className="pb-2 p-3 sm:p-6">
-              <CardTitle className="text-xs sm:text-sm font-medium text-purple-100">Incentivi Attivi</CardTitle>
+          <Card className="border-0 shadow-sm bg-gradient-to-br from-purple-400 to-pink-500 text-white">
+            <CardHeader className="pb-1 p-2 sm:p-4">
+              <CardTitle className="text-xs font-medium text-purple-100">Incentivi Attivi</CardTitle>
             </CardHeader>
-            <CardContent className="p-3 sm:p-6 pt-0">
-              <div className="text-lg sm:text-2xl font-bold">{activeRewards}</div>
+            <CardContent className="p-2 sm:p-4 pt-0">
+              <div className="text-sm sm:text-xl font-bold">{activeRewards}</div>
               <p className="text-xs text-purple-100">di {totalRewards} totali</p>
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-orange-400 to-red-500 text-white">
-            <CardHeader className="pb-2 p-3 sm:p-6">
-              <CardTitle className="text-xs sm:text-sm font-medium text-orange-100">Segnalazioni Cittadini</CardTitle>
+          <Card className="border-0 shadow-sm bg-gradient-to-br from-orange-400 to-red-500 text-white">
+            <CardHeader className="pb-1 p-2 sm:p-4">
+              <CardTitle className="text-xs font-medium text-orange-100">Segnalazioni</CardTitle>
             </CardHeader>
-            <CardContent className="p-3 sm:p-6 pt-0">
-              <div className="text-lg sm:text-2xl font-bold">2</div>
+            <CardContent className="p-2 sm:p-4 pt-0">
+              <div className="text-sm sm:text-xl font-bold">2</div>
               <p className="text-xs text-orange-100">Richiedono attenzione</p>
             </CardContent>
           </Card>
         </div>
         
-        {/* Dashboard Monitoring Section */}
-        <div className="mb-8 space-y-6">
+        {/* Dashboard Monitoring Section - Smaller blocks */}
+        <div className="mb-6 space-y-4">
           <div className="flex justify-between items-center">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Dashboard di Monitoraggio 📊</h2>
-            <Badge className="bg-blue-100 text-blue-800 py-1.5">
-              <Activity className="w-3 h-3 mr-1" />
-              <span>Aggiornamento ogni 5 minuti</span>
+            <h2 className="text-sm sm:text-xl font-bold text-gray-900">Dashboard di Monitoraggio 📊</h2>
+            <Badge className="bg-blue-100 text-blue-800 py-1 text-xs">
+              <Activity className="w-2 h-2 mr-1" />
+              <span>Aggiornamento ogni 5 min</span>
             </Badge>
           </div>
           
-          {/* Map and Environmental Impact */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
-            <Card className="lg:col-span-2 border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-              <CardHeader className="p-4 sm:p-6">
-                <CardTitle className="flex items-center text-lg">
-                  <MapPin className="h-5 w-5 mr-2 text-blue-600" />
+          {/* Map and Environmental Impact - Reduced height */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-4">
+            <Card className="lg:col-span-2 border-0 shadow-sm bg-white/80 backdrop-blur-sm">
+              <CardHeader className="p-3 sm:p-4">
+                <CardTitle className="flex items-center text-sm sm:text-base">
+                  <MapPin className="h-3 w-3 sm:h-4 sm:w-4 mr-2 text-blue-600" />
                   Mappa Città
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className="text-xs">
                   Visualizzazione in tempo reale di sensori e infrastrutture
                 </CardDescription>
               </CardHeader>
-              <CardContent className="p-4 sm:p-6 pt-0">
-                <div className="h-64 sm:h-80 w-full rounded-lg overflow-hidden bg-gray-50 relative">
+              <CardContent className="p-3 sm:p-4 pt-0">
+                <div className="h-40 sm:h-64 w-full rounded-lg overflow-hidden bg-gray-50 relative">
                   <img 
                     src="/lovable-uploads/9bea380e-98ea-4b94-a376-e7d9e45cc143.png"
                     alt="Mappa della città con strade e località"
                     className="w-full h-full object-cover"
                   />
-                  {/* Sensori distribuiti in modo sparso sulla mappa */}
-                  
-                  {/* Cassonetto pieno - rosso */}
-                  <div className="absolute top-6 left-8 group">
-                    <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse cursor-pointer"></div>
+                  {/* Sensori - Smaller for mobile */}
+                  <div className="absolute top-4 left-6 group">
+                    <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full animate-pulse cursor-pointer"></div>
                     <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                       Cassonetto pieno - Via Roma
                     </div>
                   </div>
 
-                  {/* Lampione non funzionante - arancione */}
-                  <div className="absolute top-12 right-12 group">
-                    <div className="w-3 h-3 bg-orange-500 rounded-full animate-pulse cursor-pointer"></div>
+                  <div className="absolute top-8 right-8 group">
+                    <div className="w-2 h-2 sm:w-3 sm:h-3 bg-orange-500 rounded-full animate-pulse cursor-pointer"></div>
                     <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                      Lampione non funzionante - Piazza Centro
+                      Lampione non funzionante
                     </div>
                   </div>
 
-                  {/* Fontana rotta - rosso */}
                   <div className="absolute top-1/3 left-1/4 group">
-                    <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse cursor-pointer"></div>
+                    <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full animate-pulse cursor-pointer"></div>
                     <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                      Fontana rotta - Parco Centrale
+                      Fontana rotta
                     </div>
                   </div>
 
-                  {/* Parcheggio libero - verde */}
-                  <div className="absolute bottom-8 right-8 group">
-                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse cursor-pointer"></div>
+                  <div className="absolute bottom-6 right-6 group">
+                    <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full animate-pulse cursor-pointer"></div>
                     <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                      Parcheggio libero - Via Manzoni
+                      Parcheggio libero
                     </div>
                   </div>
 
-                  {/* Sensore aria attivo - verde */}
                   <div className="absolute top-1/2 right-1/4 group">
-                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse cursor-pointer"></div>
+                    <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full animate-pulse cursor-pointer"></div>
                     <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                      Qualità aria OK - Stazione Meteo
+                      Qualità aria OK
                     </div>
                   </div>
 
-                  {/* Traffico intenso - arancione */}
-                  <div className="absolute bottom-1/4 left-6 group">
-                    <div className="w-3 h-3 bg-orange-500 rounded-full animate-pulse cursor-pointer"></div>
+                  <div className="absolute bottom-1/4 left-4 group">
+                    <div className="w-2 h-2 sm:w-3 sm:h-3 bg-orange-500 rounded-full animate-pulse cursor-pointer"></div>
                     <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                      Traffico intenso - Corso Italia
+                      Traffico intenso
                     </div>
                   </div>
 
-                  {/* Raccolta rifiuti completata - verde */}
                   <div className="absolute top-3/4 right-1/3 group">
-                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse cursor-pointer"></div>
+                    <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full animate-pulse cursor-pointer"></div>
                     <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                      Raccolta completata - Via Verdi
+                      Raccolta completata
                     </div>
                   </div>
 
-                  {/* Semaforo malfunzionante - rosso */}
-                  <div className="absolute top-1/4 right-6 group">
-                    <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse cursor-pointer"></div>
+                  <div className="absolute top-1/4 right-4 group">
+                    <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full animate-pulse cursor-pointer"></div>
                     <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                      Semaforo guasto - Incrocio Nord
+                      Semaforo guasto
                     </div>
                   </div>
                 </div>
-                <div className="mt-4 flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm">
+                <div className="mt-2 flex flex-wrap items-center gap-1 sm:gap-2 text-xs">
                   <div className="flex items-center space-x-1">
-                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                     <span>Tutto OK</span>
                   </div>
                   <div className="flex items-center space-x-1">
-                    <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+                    <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
                     <span>Attenzione</span>
                   </div>
                   <div className="flex items-center space-x-1">
-                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full"></div>
                     <span>Critico</span>
                   </div>
                 </div>
               </CardContent>
             </Card>
             
-            <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-              <CardHeader className="p-4 sm:p-6">
-                <CardTitle className="flex items-center text-lg">
-                  <Leaf className="h-5 w-5 mr-2 text-green-600" />
+            <Card className="border-0 shadow-sm bg-white/80 backdrop-blur-sm">
+              <CardHeader className="p-3 sm:p-4">
+                <CardTitle className="flex items-center text-sm sm:text-base">
+                  <Leaf className="h-3 w-3 sm:h-4 sm:w-4 mr-2 text-green-600" />
                   Impatto Ambientale
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className="text-xs">
                   Trend mensile di sostenibilità
                 </CardDescription>
               </CardHeader>
-              <CardContent className="p-4 sm:p-6 pt-0">
-                <div className="h-64 w-full">
+              <CardContent className="p-3 sm:p-4 pt-0">
+                <div className="h-40 sm:h-48 w-full">
                   <ChartContainer config={{
-                  co2: {
-                    label: "CO2 (ton)",
-                    theme: {
-                      light: "#EF4444",
-                      dark: "#EF4444"
+                    co2: {
+                      label: "CO2 (ton)",
+                      theme: {
+                        light: "#EF4444",
+                        dark: "#EF4444"
+                      }
+                    },
+                    energia: {
+                      label: "Energia (MWh)",
+                      theme: {
+                        light: "#F59E0B",
+                        dark: "#F59E0B"
+                      }
+                    },
+                    acqua: {
+                      label: "Acqua (m³x100)",
+                      theme: {
+                        light: "#3B82F6",
+                        dark: "#3B82F6"
+                      }
                     }
-                  },
-                  energia: {
-                    label: "Energia (MWh)",
-                    theme: {
-                      light: "#F59E0B",
-                      dark: "#F59E0B"
-                    }
-                  },
-                  acqua: {
-                    label: "Acqua (m³x100)",
-                    theme: {
-                      light: "#3B82F6",
-                      dark: "#3B82F6"
-                    }
-                  }
-                }}>
+                  }}>
                     <LineChart data={environmentalData}>
-                      <XAxis dataKey="month" />
-                      <YAxis />
+                      <XAxis dataKey="month" tick={{ fontSize: 10 }} />
+                      <YAxis tick={{ fontSize: 10 }} />
                       <CartesianGrid strokeDasharray="3 3" />
                       <ChartTooltip content={<ChartTooltipContent />} />
                       <Line type="monotone" dataKey="co2" stroke="var(--color-co2, #EF4444)" strokeWidth={2} dot={true} />
@@ -635,22 +642,22 @@ const Comuni = () => {
                     </LineChart>
                   </ChartContainer>
                 </div>
-                <div className="mt-4 grid grid-cols-3 gap-2 text-center">
-                  <div className="bg-red-50 p-1.5 rounded">
-                    <div className="text-red-600 font-bold text-sm sm:text-base flex items-center justify-center">
-                      <TrendingDown className="h-3 w-3 mr-1" />-12%
+                <div className="mt-2 grid grid-cols-3 gap-1 text-center">
+                  <div className="bg-red-50 p-1 rounded">
+                    <div className="text-red-600 font-bold text-xs flex items-center justify-center">
+                      <TrendingDown className="h-2 w-2 mr-1" />-12%
                     </div>
                     <div className="text-xs text-gray-600">CO2</div>
                   </div>
-                  <div className="bg-amber-50 p-1.5 rounded">
-                    <div className="text-amber-600 font-bold text-sm sm:text-base flex items-center justify-center">
-                      <TrendingDown className="h-3 w-3 mr-1" />-9%
+                  <div className="bg-amber-50 p-1 rounded">
+                    <div className="text-amber-600 font-bold text-xs flex items-center justify-center">
+                      <TrendingDown className="h-2 w-2 mr-1" />-9%
                     </div>
                     <div className="text-xs text-gray-600">Energia</div>
                   </div>
-                  <div className="bg-blue-50 p-1.5 rounded">
-                    <div className="text-blue-600 font-bold text-sm sm:text-base flex items-center justify-center">
-                      <TrendingDown className="h-3 w-3 mr-1" />-5%
+                  <div className="bg-blue-50 p-1 rounded">
+                    <div className="text-blue-600 font-bold text-xs flex items-center justify-center">
+                      <TrendingDown className="h-2 w-2 mr-1" />-5%
                     </div>
                     <div className="text-xs text-gray-600">Acqua</div>
                   </div>
@@ -659,21 +666,21 @@ const Comuni = () => {
             </Card>
           </div>
           
-          {/* Water Saving, Parking, Lighting, and Waste/Recycling */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {/* Water Saving Monitoring */}
-            <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-              <CardHeader className="p-3 sm:p-4">
-                <CardTitle className="flex items-center text-base sm:text-lg">
-                  <Droplets className="h-5 w-5 mr-2 text-blue-600" />
+          {/* Monitoring Charts - Smaller blocks */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
+            {/* Water Saving */}
+            <Card className="border-0 shadow-sm bg-white/80 backdrop-blur-sm">
+              <CardHeader className="p-2 sm:p-3">
+                <CardTitle className="flex items-center text-xs sm:text-sm">
+                  <Droplets className="h-3 w-3 sm:h-4 sm:w-4 mr-1 text-blue-600" />
                   Risparmio Acqua
                 </CardTitle>
                 <CardDescription className="text-xs">
-                  Percentuale risparmio - Oggi
+                  % risparmio - Oggi
                 </CardDescription>
               </CardHeader>
-              <CardContent className="p-3 sm:p-4 pt-0">
-                <div className="h-36 sm:h-44 w-full">
+              <CardContent className="p-2 sm:p-3 pt-0">
+                <div className="h-24 sm:h-32 w-full">
                   <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={waterSavingData}>
                       <defs>
@@ -682,300 +689,303 @@ const Comuni = () => {
                           <stop offset="95%" stopColor="#3B82F6" stopOpacity={0} />
                         </linearGradient>
                       </defs>
-                      <XAxis dataKey="ora" tick={{
-                      fontSize: 10
-                    }} />
-                      <YAxis tick={{
-                      fontSize: 10
-                    }} />
-                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="ora" tick={{ fontSize: 8 }} />
+                      <YAxis tick={{ fontSize: 8 }} />
                       <Area type="monotone" dataKey="risparmio" stroke="#3B82F6" fill="url(#waterGradient)" />
                     </AreaChart>
                   </ResponsiveContainer>
                 </div>
-                <div className="mt-2 flex justify-between items-center text-xs sm:text-sm">
+                <div className="mt-1 flex justify-between items-center text-xs">
                   <div>Picco: <span className="font-bold">12:00</span></div>
-                  <Badge className="bg-blue-100 text-blue-700">+8% vs ieri</Badge>
+                  <Badge className="bg-blue-100 text-blue-700 text-xs">+8%</Badge>
                 </div>
               </CardContent>
             </Card>
             
-            {/* Parking Monitoring */}
-            <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-              <CardHeader className="p-3 sm:p-4">
-                <CardTitle className="flex items-center text-base sm:text-lg">
-                  <Car className="h-5 w-5 mr-2 text-blue-600" />
+            {/* Parking */}
+            <Card className="border-0 shadow-sm bg-white/80 backdrop-blur-sm">
+              <CardHeader className="p-2 sm:p-3">
+                <CardTitle className="flex items-center text-xs sm:text-sm">
+                  <Car className="h-3 w-3 sm:h-4 sm:w-4 mr-1 text-blue-600" />
                   Parcheggi
                 </CardTitle>
                 <CardDescription className="text-xs">
                   Occupazione per zone
                 </CardDescription>
               </CardHeader>
-              <CardContent className="p-3 sm:p-4 pt-0">
-                <div className="h-36 sm:h-44 w-full">
+              <CardContent className="p-2 sm:p-3 pt-0">
+                <div className="h-24 sm:h-32 w-full">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={parkingData}>
-                      <XAxis dataKey="zone" tick={{
-                      fontSize: 10
-                    }} />
-                      <YAxis tick={{
-                      fontSize: 10
-                    }} />
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <Bar dataKey="occupati" stackId="a" fill="#3B82F6">
-                        {parkingData.map((entry, index) => <Cell key={`cell-${index}`} fill="#3B82F6" />)}
-                      </Bar>
-                      <Bar dataKey="totali" stackId="a" fill="#E5E7EB">
-                        {parkingData.map((entry, index) => <Cell key={`cell-${index}`} fill="#E5E7EB" />)}
-                      </Bar>
+                      <XAxis dataKey="zone" tick={{ fontSize: 8 }} />
+                      <YAxis tick={{ fontSize: 8 }} />
+                      <Bar dataKey="occupati" fill="#3B82F6" />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
-                <div className="mt-2 flex justify-between items-center text-xs sm:text-sm">
-                  <div><span className="font-bold">75%</span> occupazione media</div>
-                  <Badge className="bg-blue-100 text-blue-700">298 disponibili</Badge>
+                <div className="mt-1 flex justify-between items-center text-xs">
+                  <div><span className="font-bold">75%</span> occupazione</div>
+                  <Badge className="bg-blue-100 text-blue-700 text-xs">298 liberi</Badge>
                 </div>
               </CardContent>
             </Card>
             
-            {/* Lighting Monitoring */}
-            <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-              <CardHeader className="p-3 sm:p-4">
-                <CardTitle className="flex items-center text-base sm:text-lg">
-                  <Lightbulb className="h-5 w-5 mr-2 text-yellow-600" />
+            {/* Lighting */}
+            <Card className="border-0 shadow-sm bg-white/80 backdrop-blur-sm">
+              <CardHeader className="p-2 sm:p-3">
+                <CardTitle className="flex items-center text-xs sm:text-sm">
+                  <Lightbulb className="h-3 w-3 sm:h-4 sm:w-4 mr-1 text-yellow-600" />
                   Illuminazione
                 </CardTitle>
                 <CardDescription className="text-xs">
-                  Stato lampioni pubblici
+                  Stato lampioni
                 </CardDescription>
               </CardHeader>
-              <CardContent className="p-3 sm:p-4 pt-0">
-                <div className="h-36 sm:h-44 w-full">
+              <CardContent className="p-2 sm:p-3 pt-0">
+                <div className="h-24 sm:h-32 w-full">
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
-                      <Pie data={lightingData} cx="50%" cy="50%" innerRadius={40} outerRadius={60} fill="#8884d8" paddingAngle={5} dataKey="value" label={({
-                      name,
-                      percent
-                    }) => `${name} ${(percent * 100).toFixed(0)}%`} labelLine={false}>
-                        {lightingData.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.color} />)}
+                      <Pie 
+                        data={lightingData} 
+                        cx="50%" 
+                        cy="50%" 
+                        innerRadius={20} 
+                        outerRadius={40} 
+                        paddingAngle={5} 
+                        dataKey="value"
+                      >
+                        {lightingData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={entry.color} />
+                        ))}
                       </Pie>
                     </PieChart>
                   </ResponsiveContainer>
                 </div>
-                <div className="mt-2 grid grid-cols-3 gap-1 text-center text-xs sm:text-sm">
-                  <div className="bg-green-50 p-1.5 rounded">
-                    <div className="text-green-600 font-bold">1245</div>
-                    <div className="text-xs text-gray-600">Attivi</div>
+                <div className="mt-1 grid grid-cols-3 gap-1 text-center text-xs">
+                  <div className="bg-green-50 p-1 rounded">
+                    <div className="text-green-600 font-bold text-xs">1245</div>
+                    <div className="text-xs text-gray-600">OK</div>
                   </div>
-                  <div className="bg-red-50 p-1.5 rounded">
-                    <div className="text-red-600 font-bold">23</div>
+                  <div className="bg-red-50 p-1 rounded">
+                    <div className="text-red-600 font-bold text-xs">23</div>
                     <div className="text-xs text-gray-600">Guasti</div>
                   </div>
-                  <div className="bg-amber-50 p-1.5 rounded">
-                    <div className="text-amber-600 font-bold">12</div>
-                    <div className="text-xs text-gray-600">In manutenzione</div>
+                  <div className="bg-amber-50 p-1 rounded">
+                    <div className="text-amber-600 font-bold text-xs">12</div>
+                    <div className="text-xs text-gray-600">Manutenzione</div>
                   </div>
                 </div>
               </CardContent>
             </Card>
             
-            {/* Waste and Recycling */}
-            <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-              <CardHeader className="p-3 sm:p-4">
-                <CardTitle className="flex items-center text-base sm:text-lg">
-                  <Recycle className="h-5 w-5 mr-2 text-green-600" />
+            {/* Waste */}
+            <Card className="border-0 shadow-sm bg-white/80 backdrop-blur-sm">
+              <CardHeader className="p-2 sm:p-3">
+                <CardTitle className="flex items-center text-xs sm:text-sm">
+                  <Recycle className="h-3 w-3 sm:h-4 sm:w-4 mr-1 text-green-600" />
                   Rifiuti e Riciclo
                 </CardTitle>
                 <CardDescription className="text-xs">
-                  Raccolta settimanale (kg)
+                  Raccolta settimanale
                 </CardDescription>
               </CardHeader>
-              <CardContent className="p-3 sm:p-4 pt-0">
-                <div className="h-36 sm:h-44 w-full">
+              <CardContent className="p-2 sm:p-3 pt-0">
+                <div className="h-24 sm:h-32 w-full">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={wasteData}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="giorno" tick={{
-                      fontSize: 10
-                    }} />
-                      <YAxis tick={{
-                      fontSize: 10
-                    }} />
-                      <Bar dataKey="raccolto" fill="#94A3B8" name="Totale raccolto">
-                        {wasteData.map((entry, index) => <Cell key={`cell-raccolto-${index}`} fill="#94A3B8" />)}
-                      </Bar>
-                      <Bar dataKey="riciclato" fill="#10B981" name="Riciclato">
-                        {wasteData.map((entry, index) => <Cell key={`cell-riciclato-${index}`} fill="#10B981" />)}
-                      </Bar>
+                      <XAxis dataKey="giorno" tick={{ fontSize: 8 }} />
+                      <YAxis tick={{ fontSize: 8 }} />
+                      <Bar dataKey="raccolto" fill="#94A3B8" />
+                      <Bar dataKey="riciclato" fill="#10B981" />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
-                <div className="mt-2 flex justify-between items-center text-xs sm:text-sm">
-                  <div><span className="font-bold text-green-600">72%</span> tasso di riciclo</div>
-                  <Badge className="bg-green-100 text-green-700">+3% vs settimana scorsa</Badge>
+                <div className="mt-1 flex justify-between items-center text-xs">
+                  <div><span className="font-bold text-green-600">72%</span> riciclo</div>
+                  <Badge className="bg-green-100 text-green-700 text-xs">+3%</Badge>
                 </div>
               </CardContent>
             </Card>
           </div>
         </div>
 
-        <Tabs defaultValue="overview" className="space-y-6 sm:space-y-8">
-          {/* Navigation tabs - Only "Panoramica" and "Incentivi" */}
-          <TabsList className="grid w-full grid-cols-2 bg-white/80 backdrop-blur-sm shadow-md p-1 gap-1 sm:gap-0 sticky bottom-0 z-40">
-            <TabsTrigger value="overview" className="px-1 py-3 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-blue-100 hover:to-indigo-100 hover:text-blue-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-400 data-[state=active]:to-indigo-500 data-[state=active]:text-white data-[state=active]:shadow-lg min-h-[44px]">
+        <Tabs defaultValue="overview" className="space-y-4 sm:space-y-6">
+          {/* Compact tabs */}
+          <TabsList className="grid w-full grid-cols-2 bg-white/80 backdrop-blur-sm shadow-md p-1 sticky bottom-0 z-40">
+            <TabsTrigger 
+              value="overview" 
+              className="px-1 py-2 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-blue-100 hover:to-indigo-100 hover:text-blue-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-400 data-[state=active]:to-indigo-500 data-[state=active]:text-white data-[state=active]:shadow-lg min-h-[36px]"
+            >
               Panoramica
             </TabsTrigger>
-            <TabsTrigger value="rewards" className="px-1 py-3 sm:px-4 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-purple-100 hover:to-pink-100 hover:text-purple-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-400 data-[state=active]:to-pink-500 data-[state=active]:text-white data-[state=active]:shadow-lg min-h-[44px]">Incentivi al cittadino</TabsTrigger>
+            <TabsTrigger 
+              value="rewards" 
+              className="px-1 py-2 text-xs sm:text-sm hover:bg-gradient-to-r hover:from-purple-100 hover:to-pink-100 hover:text-purple-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-400 data-[state=active]:to-pink-500 data-[state=active]:text-white data-[state=active]:shadow-lg min-h-[36px]"
+            >
+              Incentivi al cittadino
+            </TabsTrigger>
           </TabsList>
 
-          <div className="mt-6 sm:mt-8">
-            <TabsContent value="overview" className="space-y-4 sm:space-y-6 mt-0">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+          <div className="mt-4 sm:mt-6">
+            <TabsContent value="overview" className="space-y-3 sm:space-y-4 mt-0">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
                 {integrations.map(integration => {
-                const IconComponent = integration.icon;
-                return <Card key={integration.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
-                      <CardHeader className="pb-3 p-4 sm:p-6">
-                        <div className="flex justify-between items-start mb-2">
-                          <div className="flex items-center space-x-3">
-                            <div className={`p-2 rounded-lg ${integration.color}`}>
-                              <IconComponent className="h-5 w-5" />
+                  const IconComponent = integration.icon;
+                  return (
+                    <Card key={integration.id} className="border-0 shadow-sm bg-white/80 backdrop-blur-sm hover:shadow-md transition-all duration-300">
+                      <CardHeader className="pb-2 p-3 sm:p-4">
+                        <div className="flex justify-between items-start mb-1">
+                          <div className="flex items-center space-x-2">
+                            <div className={`p-1.5 rounded-lg ${integration.color}`}>
+                              <IconComponent className="h-3 w-3 sm:h-4 sm:w-4" />
                             </div>
                             <div>
-                              <CardTitle className="text-sm sm:text-lg">{integration.name}</CardTitle>
-                              <CardDescription className="text-xs sm:text-sm">{integration.description}</CardDescription>
+                              <CardTitle className="text-xs sm:text-sm">{integration.name}</CardTitle>
+                              <CardDescription className="text-xs">{integration.description}</CardDescription>
                             </div>
                           </div>
                           {getStatusBadge(integration.status)}
                         </div>
                       </CardHeader>
-                      <CardContent className="p-4 sm:p-6 pt-0">
-                        <div className="space-y-3 sm:space-y-4">
-                          <div className="flex justify-between items-center text-xs sm:text-sm">
+                      <CardContent className="p-3 sm:p-4 pt-0">
+                        <div className="space-y-2">
+                          <div className="flex justify-between items-center text-xs">
                             <span className="text-gray-600">Ultimo aggiornamento:</span>
                             <span className="font-medium">{integration.lastSync}</span>
                           </div>
                           
-                          <div className="flex justify-between items-center text-xs sm:text-sm">
+                          <div className="flex justify-between items-center text-xs">
                             <span className="text-gray-600">Punti dati:</span>
                             <span className="font-medium">{integration.dataPoints}</span>
                           </div>
                           
-                          <div className="grid grid-cols-3 gap-2 text-xs">
-                            {Object.entries(integration.metrics).map(([key, value]) => <div key={key} className="text-center p-2 bg-gray-50 rounded">
-                                <div className="font-bold text-gray-900 text-xs sm:text-sm">{value}</div>
+                          <div className="grid grid-cols-3 gap-1 text-xs">
+                            {Object.entries(integration.metrics).map(([key, value]) => (
+                              <div key={key} className="text-center p-1.5 bg-gray-50 rounded">
+                                <div className="font-bold text-gray-900 text-xs">{value}</div>
                                 <div className="text-gray-600 capitalize text-xs">{key}</div>
-                              </div>)}
+                              </div>
+                            ))}
                           </div>
                           
-                          <Button className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 text-sm min-h-[44px]" onClick={() => handleManageIntegration(integration)} size="sm">
-                            <Settings className="h-4 w-4 mr-2" />
+                          <Button 
+                            className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 text-xs min-h-[36px]" 
+                            onClick={() => handleManageIntegration(integration)} 
+                            size="sm"
+                          >
+                            <Settings className="h-3 w-3 mr-1" />
                             Gestisci
                           </Button>
                         </div>
                       </CardContent>
-                    </Card>;
-              })}
+                    </Card>
+                  );
+                })}
               </div>
             </TabsContent>
 
-            <TabsContent value="rewards" className="space-y-4 sm:space-y-6 mt-0">
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 space-y-3 sm:space-y-0">
+            <TabsContent value="rewards" className="space-y-3 sm:space-y-4 mt-0">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 space-y-2 sm:space-y-0">
                 <div>
-                  <h3 className="text-lg sm:text-xl font-bold text-gray-900">Gestione Incentivi Cittadini 🎁</h3>
-                  <p className="text-gray-600 text-sm">Configura i servizi e vantaggi offerti in cambio di certificati ambientali</p>
+                  <h3 className="text-sm sm:text-lg font-bold text-gray-900">Gestione Incentivi Cittadini 🎁</h3>
+                  <p className="text-gray-600 text-xs">Configura i servizi e vantaggi offerti in cambio di certificati ambientali</p>
                 </div>
-                <Button onClick={() => setShowAddReward(true)} className="bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 w-full sm:w-auto min-h-[44px]">
-                  <Plus className="h-4 w-4 mr-2" />
+                <Button 
+                  onClick={() => setShowAddReward(true)} 
+                  className="bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 w-full sm:w-auto min-h-[36px] text-xs"
+                >
+                  <Plus className="h-3 w-3 mr-1" />
                   Nuovo Incentivo
                 </Button>
               </div>
 
-              {/* Rewards Stats - Better mobile grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6">
-                <Card className="border-0 shadow-lg bg-gradient-to-br from-purple-400 to-pink-500 text-white">
-                  <CardContent className="p-3 sm:p-4">
-                    <div className="flex items-center space-x-2">
-                      <Gift className="h-4 w-4 sm:h-5 sm:w-5" />
+              {/* Rewards Stats - Smaller blocks */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mb-4">
+                <Card className="border-0 shadow-sm bg-gradient-to-br from-purple-400 to-pink-500 text-white">
+                  <CardContent className="p-2 sm:p-3">
+                    <div className="flex items-center space-x-1">
+                      <Gift className="h-3 w-3" />
                       <div>
-                        <div className="text-lg sm:text-2xl font-bold">{totalRewards}</div>
-                        <div className="text-xs text-purple-100">Incentivi Totali</div>
+                        <div className="text-sm sm:text-lg font-bold">{totalRewards}</div>
+                        <div className="text-xs text-purple-100">Totali</div>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
                 
-                <Card className="border-0 shadow-lg bg-gradient-to-br from-green-400 to-emerald-500 text-white">
-                  <CardContent className="p-3 sm:p-4">
-                    <div className="flex items-center space-x-2">
-                      <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5" />
+                <Card className="border-0 shadow-sm bg-gradient-to-br from-green-400 to-emerald-500 text-white">
+                  <CardContent className="p-2 sm:p-3">
+                    <div className="flex items-center space-x-1">
+                      <CheckCircle className="h-3 w-3" />
                       <div>
-                        <div className="text-lg sm:text-2xl font-bold">{activeRewards}</div>
+                        <div className="text-sm sm:text-lg font-bold">{activeRewards}</div>
                         <div className="text-xs text-green-100">Attivi</div>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-400 to-cyan-500 text-white">
-                  <CardContent className="p-3 sm:p-4">
-                    <div className="flex items-center space-x-2">
-                      <Users className="h-4 w-4 sm:h-5 sm:w-5" />
+                <Card className="border-0 shadow-sm bg-gradient-to-br from-blue-400 to-cyan-500 text-white">
+                  <CardContent className="p-2 sm:p-3">
+                    <div className="flex items-center space-x-1">
+                      <Users className="h-3 w-3" />
                       <div>
-                        <div className="text-lg sm:text-2xl font-bold">{communityRewards.reduce((sum, r) => sum + r.currentUsers, 0)}</div>
-                        <div className="text-xs text-blue-100">Utenti Coinvolti</div>
+                        <div className="text-sm sm:text-lg font-bold">{communityRewards.reduce((sum, r) => sum + r.currentUsers, 0)}</div>
+                        <div className="text-xs text-blue-100">Utenti</div>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card className="border-0 shadow-lg bg-gradient-to-br from-orange-400 to-red-500 text-white">
-                  <CardContent className="p-3 sm:p-4">
-                    <div className="flex items-center space-x-2">
-                      <Award className="h-4 w-4 sm:h-5 sm:w-5" />
+                <Card className="border-0 shadow-sm bg-gradient-to-br from-orange-400 to-red-500 text-white">
+                  <CardContent className="p-2 sm:p-3">
+                    <div className="flex items-center space-x-1">
+                      <Award className="h-3 w-3" />
                       <div>
-                        <div className="text-lg sm:text-2xl font-bold">{communityRewards.reduce((sum, r) => sum + r.certificatesRequired, 0)}</div>
-                        <div className="text-xs text-orange-100">Certificati Target</div>
+                        <div className="text-sm sm:text-lg font-bold">{communityRewards.reduce((sum, r) => sum + r.certificatesRequired, 0)}</div>
+                        <div className="text-xs text-orange-100">Certificati</div>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
               </div>
 
-              {/* Rewards List - Better mobile layout */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+              {/* Rewards List - Compact cards */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
                 {communityRewards.map(reward => {
-                const IconComponent = reward.icon;
-                const usagePercentage = reward.currentUsers / reward.maxUsers * 100;
-                return <Card key={reward.id} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
-                      <CardHeader className="pb-3 p-4 sm:p-6">
+                  const IconComponent = reward.icon;
+                  const usagePercentage = (reward.currentUsers / reward.maxUsers) * 100;
+                  return (
+                    <Card key={reward.id} className="border-0 shadow-sm bg-white/80 backdrop-blur-sm hover:shadow-md transition-all duration-300">
+                      <CardHeader className="pb-2 p-3 sm:p-4">
                         <div className="flex justify-between items-start">
-                          <div className="flex items-center space-x-3">
-                            <div className={`p-2 rounded-lg ${getCategoryColor(reward.category)}`}>
-                              <IconComponent className="h-4 w-4 sm:h-5 sm:w-5" />
+                          <div className="flex items-center space-x-2">
+                            <div className={`p-1.5 rounded-lg ${getCategoryColor(reward.category)}`}>
+                              <IconComponent className="h-3 w-3 sm:h-4 sm:w-4" />
                             </div>
                             <div>
-                              <CardTitle className="text-sm sm:text-lg">{reward.title}</CardTitle>
-                              <CardDescription className="text-xs sm:text-sm">{reward.description}</CardDescription>
+                              <CardTitle className="text-xs sm:text-sm">{reward.title}</CardTitle>
+                              <CardDescription className="text-xs">{reward.description}</CardDescription>
                             </div>
                           </div>
                           {getStatusBadge(reward.status)}
                         </div>
                       </CardHeader>
-                      <CardContent className="p-4 sm:p-6 pt-0">
-                        <div className="space-y-4">
-                          {/* Requirement and Value - Mobile optimized */}
-                          <div className="grid grid-cols-2 gap-3 sm:gap-4 text-sm">
-                            <div className="flex items-center space-x-2">
-                              <Target className="h-3 w-3 sm:h-4 sm:w-4 text-blue-600" />
+                      <CardContent className="p-3 sm:p-4 pt-0">
+                        <div className="space-y-3">
+                          {/* Requirement and Value */}
+                          <div className="grid grid-cols-2 gap-2 text-xs">
+                            <div className="flex items-center space-x-1">
+                              <Target className="h-2 w-2 sm:h-3 sm:w-3 text-blue-600" />
                               <div>
-                                <div className="font-medium text-xs sm:text-sm">{reward.certificatesRequired} certificati</div>
+                                <div className="font-medium text-xs">{reward.certificatesRequired} cert.</div>
                                 <div className="text-gray-500 text-xs">Richiesti</div>
                               </div>
                             </div>
-                            <div className="flex items-center space-x-2">
-                              <Euro className="h-3 w-3 sm:h-4 sm:w-4 text-green-600" />
+                            <div className="flex items-center space-x-1">
+                              <Euro className="h-2 w-2 sm:h-3 sm:w-3 text-green-600" />
                               <div>
-                                <div className="font-medium text-xs sm:text-sm">{reward.value}</div>
+                                <div className="font-medium text-xs">{reward.value}</div>
                                 <div className="text-gray-500 text-xs">Valore</div>
                               </div>
                             </div>
@@ -983,14 +993,15 @@ const Comuni = () => {
 
                           {/* Usage Progress */}
                           <div>
-                            <div className="flex justify-between text-xs sm:text-sm mb-1">
+                            <div className="flex justify-between text-xs mb-1">
                               <span className="text-gray-600">Utilizzo</span>
                               <span className="font-medium">{reward.currentUsers}/{reward.maxUsers}</span>
                             </div>
-                            <div className="w-full bg-gray-200 rounded-full h-2">
-                              <div className="bg-gradient-to-r from-blue-400 to-purple-500 h-2 rounded-full transition-all duration-300" style={{
-                            width: `${Math.min(usagePercentage, 100)}%`
-                          }}></div>
+                            <div className="w-full bg-gray-200 rounded-full h-1.5">
+                              <div 
+                                className="bg-gradient-to-r from-blue-400 to-purple-500 h-1.5 rounded-full transition-all duration-300" 
+                                style={{ width: `${Math.min(usagePercentage, 100)}%` }}
+                              ></div>
                             </div>
                             <div className="text-xs text-gray-500 mt-1">
                               {usagePercentage.toFixed(1)}% utilizzato
@@ -1003,94 +1014,116 @@ const Comuni = () => {
                             <span className="font-medium">{reward.validUntil}</span>
                           </div>
 
-                          {/* Actions - Better mobile buttons */}
+                          {/* Actions */}
                           <div className="flex space-x-2">
-                            <Button variant="outline" size="sm" className="flex-1 min-h-[40px]" onClick={() => handleEditReward(reward)}>
-                              <Edit className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
-                              <span className="text-xs sm:text-sm">Modifica</span>
+                            <Button 
+                              variant="outline" 
+                              size="sm" 
+                              className="flex-1 min-h-[32px] text-xs" 
+                              onClick={() => handleEditReward(reward)}
+                            >
+                              <Edit className="h-2 w-2 sm:h-3 sm:w-3 mr-1" />
+                              Modifica
                             </Button>
-                            <Button variant="outline" size="sm" className="text-red-600 border-red-300 hover:bg-red-50 min-h-[40px] min-w-[40px]" onClick={() => handleDeleteReward(reward.id)}>
-                              <Trash className="h-3 w-3 sm:h-4 sm:w-4" />
+                            <Button 
+                              variant="outline" 
+                              size="sm" 
+                              className="text-red-600 border-red-300 hover:bg-red-50 min-h-[32px] min-w-[32px]" 
+                              onClick={() => handleDeleteReward(reward.id)}
+                            >
+                              <Trash className="h-2 w-2 sm:h-3 sm:w-3" />
                             </Button>
                           </div>
                         </div>
                       </CardContent>
-                    </Card>;
-              })}
+                    </Card>
+                  );
+                })}
               </div>
 
-              {/* Add New Reward Form - Better mobile layout */}
-              {showAddReward && <Card className="border-0 shadow-lg bg-white/90 backdrop-blur-sm border-purple-200">
-                  <CardHeader className="p-4 sm:p-6">
-                    <CardTitle className="flex items-center space-x-2">
-                      <Plus className="h-5 w-5 text-purple-600" />
+              {/* Add New Reward Form - Compact */}
+              {showAddReward && (
+                <Card className="border-0 shadow-sm bg-white/90 backdrop-blur-sm border-purple-200">
+                  <CardHeader className="p-3 sm:p-4">
+                    <CardTitle className="flex items-center space-x-2 text-sm">
+                      <Plus className="h-4 w-4 text-purple-600" />
                       <span>Crea Nuovo Incentivo</span>
                     </CardTitle>
-                    <CardDescription>
+                    <CardDescription className="text-xs">
                       Configura un nuovo servizio o vantaggio da offrire ai cittadini
                     </CardDescription>
                   </CardHeader>
-                  <CardContent className="space-y-4 p-4 sm:p-6 pt-0">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <CardContent className="space-y-3 p-3 sm:p-4 pt-0">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
-                        <Label htmlFor="title">Titolo Incentivo</Label>
-                        <Input id="title" placeholder="es. Sconto Trasporto Pubblico" className="min-h-[44px]" />
+                        <Label htmlFor="title" className="text-xs">Titolo Incentivo</Label>
+                        <Input id="title" placeholder="es. Sconto Trasporto Pubblico" className="min-h-[36px] text-xs" />
                       </div>
                       <div>
-                        <Label htmlFor="category">Categoria</Label>
-                        <Input id="category" placeholder="transport, parking, waste..." className="min-h-[44px]" />
+                        <Label htmlFor="category" className="text-xs">Categoria</Label>
+                        <Input id="category" placeholder="transport, parking, waste..." className="min-h-[36px] text-xs" />
                       </div>
                     </div>
                     
                     <div>
-                      <Label htmlFor="description">Descrizione</Label>
-                      <Input id="description" placeholder="Descrizione dettagliata del vantaggio offerto" className="min-h-[44px]" />
+                      <Label htmlFor="description" className="text-xs">Descrizione</Label>
+                      <Input id="description" placeholder="Descrizione dettagliata del vantaggio offerto" className="min-h-[36px] text-xs" />
                     </div>
                     
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                       <div>
-                        <Label htmlFor="certificates">Certificati Richiesti</Label>
-                        <Input id="certificates" type="number" placeholder="50" className="min-h-[44px]" />
+                        <Label htmlFor="certificates" className="text-xs">Certificati Richiesti</Label>
+                        <Input id="certificates" type="number" placeholder="50" className="min-h-[36px] text-xs" />
                       </div>
                       <div>
-                        <Label htmlFor="value">Valore</Label>
-                        <Input id="value" placeholder="€15" className="min-h-[44px]" />
+                        <Label htmlFor="value" className="text-xs">Valore</Label>
+                        <Input id="value" placeholder="€15" className="min-h-[36px] text-xs" />
                       </div>
                       <div>
-                        <Label htmlFor="maxUsers">Utenti Max</Label>
-                        <Input id="maxUsers" type="number" placeholder="500" className="min-h-[44px]" />
+                        <Label htmlFor="maxUsers" className="text-xs">Utenti Max</Label>
+                        <Input id="maxUsers" type="number" placeholder="500" className="min-h-[36px] text-xs" />
                       </div>
                     </div>
                     
                     <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
-                      <Button className="bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 flex-1 min-h-[44px]" onClick={() => {
-                    toast({
-                      title: "Incentivo Creato",
-                      description: "Il nuovo incentivo è stato aggiunto con successo"
-                    });
-                    setShowAddReward(false);
-                  }}>
+                      <Button 
+                        className="bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 flex-1 min-h-[36px] text-xs" 
+                        onClick={() => {
+                          toast({
+                            title: "Incentivo Creato",
+                            description: "Il nuovo incentivo è stato aggiunto con successo"
+                          });
+                          setShowAddReward(false);
+                        }}
+                      >
                         Crea Incentivo
                       </Button>
-                      <Button variant="outline" onClick={() => setShowAddReward(false)} className="min-h-[44px]">
+                      <Button 
+                        variant="outline" 
+                        onClick={() => setShowAddReward(false)} 
+                        className="min-h-[36px] text-xs"
+                      >
                         Annulla
                       </Button>
                     </div>
                   </CardContent>
-                </Card>}
+                </Card>
+              )}
             </TabsContent>
           </div>
         </Tabs>
 
-        {/* Bottom Info - Better mobile spacing */}
-        <div className="mt-8 sm:mt-12 bg-white/80 backdrop-blur-sm rounded-lg p-4 sm:p-6 border-l-4 border-blue-500">
-          <h3 className="font-bold text-gray-900 mb-2 text-sm sm:text-base">🏛️ Centro di Controllo Virtuosity</h3>
-          <p className="text-gray-600 text-xs sm:text-sm">
+        {/* Bottom Info - Compact */}
+        <div className="mt-6 sm:mt-8 bg-white/80 backdrop-blur-sm rounded-lg p-3 sm:p-4 border-l-4 border-blue-500">
+          <h3 className="font-bold text-gray-900 mb-1 text-xs sm:text-sm">🏛️ Centro di Controllo Virtuosity</h3>
+          <p className="text-gray-600 text-xs">
             Virtuosity funge da collettore centrale per tutte le applicazioni smart del comune. 
             Monitora in tempo reale parking, illuminazione, rifiuti e riciclo per una gestione urbana più efficiente.
           </p>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default Comuni;
