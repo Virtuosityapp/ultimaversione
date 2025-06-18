@@ -6,7 +6,8 @@ import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { Users, UserCheck, Upload, FileText, Award, Gift, Plane, ArrowLeft, TrendingUp, Eye, Target, Globe, Droplet, Zap, Trash2, Percent, QrCode, Package, Shield, Link } from 'lucide-react';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { Users, UserCheck, Upload, FileText, Award, Gift, Plane, ArrowLeft, TrendingUp, Eye, Target, Globe, Droplet, Zap, Trash2, Percent, QrCode, Package, Shield, Link, Menu, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
@@ -18,6 +19,8 @@ const DashboardAziende = () => {
   const [certificatiEsterni] = useState(14568);
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
   const [dppDialogOpen, setDppDialogOpen] = useState(false);
+  const [showWelfareSection, setShowWelfareSection] = useState(false);
+  const [showFollowersSection, setShowFollowersSection] = useState(false);
   
   // Welfare per Dipendenti - Limited to 4 items
   const [welfareItems, setWelfareItems] = useState([
@@ -433,198 +436,252 @@ const DashboardAziende = () => {
           </Card>
         </div>
 
-        {/* Sezioni Welfare e Premi - Side by Side */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          {/* Sezione Welfare Dipendenti */}
-          <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
-            <CardHeader className="bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-t-lg">
-              <CardTitle className="flex items-center gap-2">
-                <Users className="h-6 w-6" />
-                Welfare per Dipendenti
-              </CardTitle>
-              <CardDescription className="text-green-100">
-                Premi e benefit in cambio di comportamenti sostenibili certificati
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="p-6">
-              {/* Form per aggiungere nuovo item welfare */}
-              <div className="grid grid-cols-1 gap-4 mb-6 p-4 border-2 border-dashed border-green-200 rounded-xl bg-gradient-to-r from-green-50 to-emerald-50">
-                <div>
-                  <Label htmlFor="welfare-tipo" className="text-green-700 font-medium">{t('type')}</Label>
-                  <Input
-                    id="welfare-tipo"
-                    placeholder="Premio/Viaggio/Gadget"
-                    value={newWelfareItem.tipo}
-                    onChange={(e) => setNewWelfareItem({...newWelfareItem, tipo: e.target.value})}
-                    className="border-green-200 focus:border-green-400"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="welfare-nome" className="text-green-700 font-medium">{t('name')}</Label>
-                  <Input
-                    id="welfare-nome"
-                    placeholder="Nome del premio"
-                    value={newWelfareItem.nome}
-                    onChange={(e) => setNewWelfareItem({...newWelfareItem, nome: e.target.value})}
-                    className="border-green-200 focus:border-green-400"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="welfare-valore" className="text-green-700 font-medium">{t('value')}</Label>
-                  <Input
-                    id="welfare-valore"
-                    placeholder="€ 0"
-                    value={newWelfareItem.valore}
-                    onChange={(e) => setNewWelfareItem({...newWelfareItem, valore: e.target.value})}
-                    className="border-green-200 focus:border-green-400"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="welfare-certificati" className="text-green-700 font-medium">Tipo Certificati</Label>
-                  <Input
-                    id="welfare-certificati"
-                    placeholder="Es. Risparmio Energetico"
-                    value={newWelfareItem.certificatiRichiesti}
-                    onChange={(e) => setNewWelfareItem({...newWelfareItem, certificatiRichiesti: e.target.value})}
-                    className="border-green-200 focus:border-green-400"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="welfare-quantita" className="text-green-700 font-medium">Quantità Certificati</Label>
-                  <Input
-                    id="welfare-quantita"
-                    type="number"
-                    placeholder="0"
-                    value={newWelfareItem.quantitaCertificati}
-                    onChange={(e) => setNewWelfareItem({...newWelfareItem, quantitaCertificati: e.target.value})}
-                    className="border-green-200 focus:border-green-400"
-                  />
-                </div>
-                <Button 
-                  onClick={handleAddWelfareItem} 
-                  className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white shadow-lg"
-                >
-                  <Upload className="mr-2 h-4 w-4" />
-                  {t('add')}
-                </Button>
-              </div>
+        {/* Menu Welfare e Premi */}
+        <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm mb-8">
+          <CardHeader className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-t-lg">
+            <CardTitle className="flex items-center gap-2">
+              <Menu className="h-6 w-6" />
+              Gestione Welfare e Premi
+            </CardTitle>
+            <CardDescription className="text-purple-100">
+              Configura benefit per dipendenti e offerte per followers
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="p-6">
+            <div className="flex flex-wrap gap-4">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button size="lg" className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white shadow-lg">
+                    <Users className="mr-2 h-5 w-5" />
+                    Welfare Dipendenti
+                    <ChevronDown className="ml-2 h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56 bg-white shadow-lg border z-50">
+                  <DropdownMenuItem onClick={() => setShowWelfareSection(!showWelfareSection)}>
+                    <Gift className="mr-2 h-4 w-4" />
+                    {showWelfareSection ? 'Nascondi Welfare' : 'Mostra Welfare'}
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
 
-              {/* Lista items welfare - 2x2 grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {welfareItems.map((item) => (
-                  <div key={item.id} className="p-4 border-0 rounded-xl shadow-lg bg-gradient-to-br from-white to-green-50 hover:shadow-xl transition-shadow">
-                    <div className="flex items-center justify-between mb-3">
-                      <Badge className={`flex items-center gap-1 ${getBadgeColor(item.tipo)}`}>
-                        {getIconForType(item.tipo)}
-                        {item.tipo}
-                      </Badge>
-                      <span className="font-bold text-lg text-gray-700">{item.valore}</span>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button size="lg" className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white shadow-lg">
+                    <Globe className="mr-2 h-5 w-5" />
+                    Premi Followers
+                    <ChevronDown className="ml-2 h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56 bg-white shadow-lg border z-50">
+                  <DropdownMenuItem onClick={() => setShowFollowersSection(!showFollowersSection)}>
+                    <Percent className="mr-2 h-4 w-4" />
+                    {showFollowersSection ? 'Nascondi Premi' : 'Mostra Premi'}
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Sezioni Welfare e Premi - Condizionalmente visibili */}
+        {(showWelfareSection || showFollowersSection) && (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            {/* Sezione Welfare Dipendenti */}
+            {showWelfareSection && (
+              <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
+                <CardHeader className="bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-t-lg">
+                  <CardTitle className="flex items-center gap-2">
+                    <Users className="h-6 w-6" />
+                    Welfare per Dipendenti
+                  </CardTitle>
+                  <CardDescription className="text-green-100">
+                    Premi e benefit in cambio di comportamenti sostenibili certificati
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="p-6">
+                  {/* Form per aggiungere nuovo item welfare */}
+                  <div className="grid grid-cols-1 gap-4 mb-6 p-4 border-2 border-dashed border-green-200 rounded-xl bg-gradient-to-r from-green-50 to-emerald-50">
+                    <div>
+                      <Label htmlFor="welfare-tipo" className="text-green-700 font-medium">{t('type')}</Label>
+                      <Input
+                        id="welfare-tipo"
+                        placeholder="Premio/Viaggio/Gadget"
+                        value={newWelfareItem.tipo}
+                        onChange={(e) => setNewWelfareItem({...newWelfareItem, tipo: e.target.value})}
+                        className="border-green-200 focus:border-green-400"
+                      />
                     </div>
-                    <h4 className="font-semibold text-gray-800 mb-2">{item.nome}</h4>
-                    <div className="text-sm text-gray-600 space-y-1">
-                      <p><span className="font-medium">Richiede:</span> {item.quantitaCertificati}x {item.certificatiRichiesti}</p>
+                    <div>
+                      <Label htmlFor="welfare-nome" className="text-green-700 font-medium">{t('name')}</Label>
+                      <Input
+                        id="welfare-nome"
+                        placeholder="Nome del premio"
+                        value={newWelfareItem.nome}
+                        onChange={(e) => setNewWelfareItem({...newWelfareItem, nome: e.target.value})}
+                        className="border-green-200 focus:border-green-400"
+                      />
                     </div>
+                    <div>
+                      <Label htmlFor="welfare-valore" className="text-green-700 font-medium">{t('value')}</Label>
+                      <Input
+                        id="welfare-valore"
+                        placeholder="€ 0"
+                        value={newWelfareItem.valore}
+                        onChange={(e) => setNewWelfareItem({...newWelfareItem, valore: e.target.value})}
+                        className="border-green-200 focus:border-green-400"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="welfare-certificati" className="text-green-700 font-medium">Tipo Certificati</Label>
+                      <Input
+                        id="welfare-certificati"
+                        placeholder="Es. Risparmio Energetico"
+                        value={newWelfareItem.certificatiRichiesti}
+                        onChange={(e) => setNewWelfareItem({...newWelfareItem, certificatiRichiesti: e.target.value})}
+                        className="border-green-200 focus:border-green-400"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="welfare-quantita" className="text-green-700 font-medium">Quantità Certificati</Label>
+                      <Input
+                        id="welfare-quantita"
+                        type="number"
+                        placeholder="0"
+                        value={newWelfareItem.quantitaCertificati}
+                        onChange={(e) => setNewWelfareItem({...newWelfareItem, quantitaCertificati: e.target.value})}
+                        className="border-green-200 focus:border-green-400"
+                      />
+                    </div>
+                    <Button 
+                      onClick={handleAddWelfareItem} 
+                      className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white shadow-lg"
+                    >
+                      <Upload className="mr-2 h-4 w-4" />
+                      {t('add')}
+                    </Button>
                   </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
 
-          {/* Sezione Premi per Followers */}
-          <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
-            <CardHeader className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-t-lg">
-              <CardTitle className="flex items-center gap-2">
-                <Globe className="h-6 w-6" />
-                Premi e Sconti per Followers
-              </CardTitle>
-              <CardDescription className="text-blue-100">
-                Offerte e sconti per followers in cambio di certificati sostenibili
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="p-6">
-              {/* Form per aggiungere nuovo premio followers */}
-              <div className="grid grid-cols-1 gap-4 mb-6 p-4 border-2 border-dashed border-blue-200 rounded-xl bg-gradient-to-r from-blue-50 to-cyan-50">
-                <div>
-                  <Label htmlFor="followers-tipo" className="text-blue-700 font-medium">Tipo</Label>
-                  <Input
-                    id="followers-tipo"
-                    placeholder="Sconto/Premio"
-                    value={newFollowersReward.tipo}
-                    onChange={(e) => setNewFollowersReward({...newFollowersReward, tipo: e.target.value})}
-                    className="border-blue-200 focus:border-blue-400"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="followers-nome" className="text-blue-700 font-medium">Nome</Label>
-                  <Input
-                    id="followers-nome"
-                    placeholder="Nome dell'offerta"
-                    value={newFollowersReward.nome}
-                    onChange={(e) => setNewFollowersReward({...newFollowersReward, nome: e.target.value})}
-                    className="border-blue-200 focus:border-blue-400"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="followers-valore" className="text-blue-700 font-medium">Valore</Label>
-                  <Input
-                    id="followers-valore"
-                    placeholder="€ 0 / %"
-                    value={newFollowersReward.valore}
-                    onChange={(e) => setNewFollowersReward({...newFollowersReward, valore: e.target.value})}
-                    className="border-blue-200 focus:border-blue-400"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="followers-certificati" className="text-blue-700 font-medium">Tipo Certificati</Label>
-                  <Input
-                    id="followers-certificati"
-                    placeholder="Es. Risparmio Idrico"
-                    value={newFollowersReward.certificatiRichiesti}
-                    onChange={(e) => setNewFollowersReward({...newFollowersReward, certificatiRichiesti: e.target.value})}
-                    className="border-blue-200 focus:border-blue-400"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="followers-quantita" className="text-blue-700 font-medium">Quantità Certificati</Label>
-                  <Input
-                    id="followers-quantita"
-                    type="number"
-                    placeholder="0"
-                    value={newFollowersReward.quantitaCertificati}
-                    onChange={(e) => setNewFollowersReward({...newFollowersReward, quantitaCertificati: e.target.value})}
-                    className="border-blue-200 focus:border-blue-400"
-                  />
-                </div>
-                <Button 
-                  onClick={handleAddFollowersReward} 
-                  className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white shadow-lg"
-                >
-                  <Upload className="mr-2 h-4 w-4" />
-                  Aggiungi
-                </Button>
-              </div>
-
-              {/* Lista premi followers - 2x2 grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {followersRewards.map((item) => (
-                  <div key={item.id} className="p-4 border-0 rounded-xl shadow-lg bg-gradient-to-br from-white to-blue-50 hover:shadow-xl transition-shadow">
-                    <div className="flex items-center justify-between mb-3">
-                      <Badge className={`flex items-center gap-1 ${getBadgeColor(item.tipo)}`}>
-                        {getIconForType(item.tipo)}
-                        {item.tipo}
-                      </Badge>
-                      <span className="font-bold text-lg text-gray-700">{item.valore}</span>
-                    </div>
-                    <h4 className="font-semibold text-gray-800 mb-2">{item.nome}</h4>
-                    <div className="text-sm text-gray-600 space-y-1">
-                      <p><span className="font-medium">Richiede:</span> {item.quantitaCertificati}x {item.certificatiRichiesti}</p>
-                    </div>
+                  {/* Lista items welfare - 2x2 grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {welfareItems.map((item) => (
+                      <div key={item.id} className="p-4 border-0 rounded-xl shadow-lg bg-gradient-to-br from-white to-green-50 hover:shadow-xl transition-shadow">
+                        <div className="flex items-center justify-between mb-3">
+                          <Badge className={`flex items-center gap-1 ${getBadgeColor(item.tipo)}`}>
+                            {getIconForType(item.tipo)}
+                            {item.tipo}
+                          </Badge>
+                          <span className="font-bold text-lg text-gray-700">{item.valore}</span>
+                        </div>
+                        <h4 className="font-semibold text-gray-800 mb-2">{item.nome}</h4>
+                        <div className="text-sm text-gray-600 space-y-1">
+                          <p><span className="font-medium">Richiede:</span> {item.quantitaCertificati}x {item.certificatiRichiesti}</p>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {/* Sezione Premi per Followers */}
+            {showFollowersSection && (
+              <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
+                <CardHeader className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-t-lg">
+                  <CardTitle className="flex items-center gap-2">
+                    <Globe className="h-6 w-6" />
+                    Premi e Sconti per Followers
+                  </CardTitle>
+                  <CardDescription className="text-blue-100">
+                    Offerte e sconti per followers in cambio di certificati sostenibili
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="p-6">
+                  {/* Form per aggiungere nuovo premio followers */}
+                  <div className="grid grid-cols-1 gap-4 mb-6 p-4 border-2 border-dashed border-blue-200 rounded-xl bg-gradient-to-r from-blue-50 to-cyan-50">
+                    <div>
+                      <Label htmlFor="followers-tipo" className="text-blue-700 font-medium">Tipo</Label>
+                      <Input
+                        id="followers-tipo"
+                        placeholder="Sconto/Premio"
+                        value={newFollowersReward.tipo}
+                        onChange={(e) => setNewFollowersReward({...newFollowersReward, tipo: e.target.value})}
+                        className="border-blue-200 focus:border-blue-400"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="followers-nome" className="text-blue-700 font-medium">Nome</Label>
+                      <Input
+                        id="followers-nome"
+                        placeholder="Nome dell'offerta"
+                        value={newFollowersReward.nome}
+                        onChange={(e) => setNewFollowersReward({...newFollowersReward, nome: e.target.value})}
+                        className="border-blue-200 focus:border-blue-400"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="followers-valore" className="text-blue-700 font-medium">Valore</Label>
+                      <Input
+                        id="followers-valore"
+                        placeholder="€ 0 / %"
+                        value={newFollowersReward.valore}
+                        onChange={(e) => setNewFollowersReward({...newFollowersReward, valore: e.target.value})}
+                        className="border-blue-200 focus:border-blue-400"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="followers-certificati" className="text-blue-700 font-medium">Tipo Certificati</Label>
+                      <Input
+                        id="followers-certificati"
+                        placeholder="Es. Risparmio Idrico"
+                        value={newFollowersReward.certificatiRichiesti}
+                        onChange={(e) => setNewFollowersReward({...newFollowersReward, certificatiRichiesti: e.target.value})}
+                        className="border-blue-200 focus:border-blue-400"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="followers-quantita" className="text-blue-700 font-medium">Quantità Certificati</Label>
+                      <Input
+                        id="followers-quantita"
+                        type="number"
+                        placeholder="0"
+                        value={newFollowersReward.quantitaCertificati}
+                        onChange={(e) => setNewFollowersReward({...newFollowersReward, quantitaCertificati: e.target.value})}
+                        className="border-blue-200 focus:border-blue-400"
+                      />
+                    </div>
+                    <Button 
+                      onClick={handleAddFollowersReward} 
+                      className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white shadow-lg"
+                    >
+                      <Upload className="mr-2 h-4 w-4" />
+                      Aggiungi
+                    </Button>
+                  </div>
+
+                  {/* Lista premi followers - 2x2 grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {followersRewards.map((item) => (
+                      <div key={item.id} className="p-4 border-0 rounded-xl shadow-lg bg-gradient-to-br from-white to-blue-50 hover:shadow-xl transition-shadow">
+                        <div className="flex items-center justify-between mb-3">
+                          <Badge className={`flex items-center gap-1 ${getBadgeColor(item.tipo)}`}>
+                            {getIconForType(item.tipo)}
+                            {item.tipo}
+                          </Badge>
+                          <span className="font-bold text-lg text-gray-700">{item.valore}</span>
+                        </div>
+                        <h4 className="font-semibold text-gray-800 mb-2">{item.nome}</h4>
+                        <div className="text-sm text-gray-600 space-y-1">
+                          <p><span className="font-medium">Richiede:</span> {item.quantitaCertificati}x {item.certificatiRichiesti}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+          </div>
+        )}
 
         {/* Sezione DPP Prodotti */}
         <Card className="border-0 shadow-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white mb-8">
