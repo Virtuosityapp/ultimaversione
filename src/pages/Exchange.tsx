@@ -138,68 +138,6 @@ const Exchange = () => {
     }
   ];
 
-  const handleRedeem = (reward: any) => {
-    if (userPoints >= reward.cost) {
-      toast({
-        title: "Riscatto Completato! 🎉",
-        description: `Hai riscattato: ${reward.title}. Riceverai istruzioni via email.`
-      });
-    } else {
-      toast({
-        title: "Punti Insufficienti",
-        description: `Ti servono ${reward.cost - userPoints} punti in più per questo premio.`,
-        variant: "destructive"
-      });
-    }
-  };
-
-  const handleDonate = (project: any) => {
-    if (userCertificates >= project.certificatesNeeded) {
-      setSelectedProject(project);
-      setShowDonationDialog(true);
-    } else {
-      toast({
-        title: "Certificati Insufficienti",
-        description: `Ti servono ${project.certificatesNeeded - userCertificates} certificati in più per supportare questo progetto.`,
-        variant: "destructive"
-      });
-    }
-  };
-
-  const getCategoryColor = (category: string) => {
-    const colors = {
-      corporate: "bg-blue-100 text-blue-800",
-      transport: "bg-green-100 text-green-800",
-      culture: "bg-purple-100 text-purple-800",
-      welfare: "bg-orange-100 text-orange-800"
-    };
-    return colors[category as keyof typeof colors] || "bg-gray-100 text-gray-800";
-  };
-
-  const getCategoryName = (category: string) => {
-    const names = {
-      corporate: "Aziendale",
-      transport: "Trasporti",
-      culture: "Cultura",
-      welfare: "Welfare"
-    };
-    return names[category as keyof typeof names] || category;
-  };
-
-  const getSocialCategoryColor = (category: string) => {
-    const colors = {
-      ambiente: "bg-green-100 text-green-800",
-      sociale: "bg-blue-100 text-blue-800",
-      educazione: "bg-purple-100 text-purple-800",
-      animali: "bg-orange-100 text-orange-800",
-      infanzia: "bg-pink-100 text-pink-800",
-      disabilità: "bg-cyan-100 text-cyan-800",
-      comunità: "bg-yellow-100 text-yellow-800",
-      cultura: "bg-indigo-100 text-indigo-800"
-    };
-    return colors[category as keyof typeof colors] || "bg-gray-100 text-gray-800";
-  };
-
   const partnerOffers = [{
     id: 1,
     partner: "ENEL",
@@ -226,16 +164,16 @@ const Exchange = () => {
     websiteUrl: "https://www.gardaland.it"
   }, {
     id: 3,
-    partner: "COMUNE DI MILANO",
-    title: "Mostra Design Sostenibile",
-    description: "Esposizione dedicata al design circolare e sostenibile alla Triennale di Milano",
-    discount: "Ingresso gratuito",
-    category: "cultura",
-    image: "/lovable-uploads/d5ff17e5-6093-4bc7-8873-de37da2355ee.png",
-    validUntil: "15 Maggio 2026",
-    pointsRequired: 150,
-    benefits: ["Audioguida inclusa", "Workshop gratuito", "Catalogo digitale"],
-    websiteUrl: "https://www.triennale.org"
+    partner: "PAX ITALIA",
+    title: "Smartpos per Attività Commerciali",
+    description: "Sistema di pagamento intelligente che permette di scambiare certificati Virtuosity con sconti per i clienti",
+    discount: "Sconto 25% sul canone",
+    category: "tecnologia",
+    image: "/lovable-uploads/b44d1b25-28ac-494c-bc31-d3345aa72c88.png",
+    validUntil: "31 Dicembre 2026",
+    pointsRequired: 300,
+    benefits: ["Integrazione certificati Virtuosity", "Dashboard analytics inclusa", "Supporto tecnico dedicato"],
+    websiteUrl: "https://www.pax.it"
   }, {
     id: 4,
     partner: "BANCA GREEN",
@@ -274,6 +212,40 @@ const Exchange = () => {
     websiteUrl: "https://www.e-coop.it"
   }];
 
+  const getCategoryColor = (category: string) => {
+    const colors = {
+      corporate: "bg-blue-100 text-blue-800",
+      transport: "bg-green-100 text-green-800",
+      culture: "bg-purple-100 text-purple-800",
+      welfare: "bg-orange-100 text-orange-800"
+    };
+    return colors[category as keyof typeof colors] || "bg-gray-100 text-gray-800";
+  };
+
+  const getCategoryName = (category: string) => {
+    const names = {
+      corporate: "Aziendale",
+      transport: "Trasporti",
+      culture: "Cultura",
+      welfare: "Welfare"
+    };
+    return names[category as keyof typeof names] || category;
+  };
+
+  const getSocialCategoryColor = (category: string) => {
+    const colors = {
+      ambiente: "bg-green-100 text-green-800",
+      sociale: "bg-blue-100 text-blue-800",
+      educazione: "bg-purple-100 text-purple-800",
+      animali: "bg-orange-100 text-orange-800",
+      infanzia: "bg-pink-100 text-pink-800",
+      disabilità: "bg-cyan-100 text-cyan-800",
+      comunità: "bg-yellow-100 text-yellow-800",
+      cultura: "bg-indigo-100 text-indigo-800"
+    };
+    return colors[category as keyof typeof colors] || "bg-gray-100 text-gray-800";
+  };
+
   const getCategoryColorAd = (category: string) => {
     const colors = {
       energia: "bg-yellow-100 text-yellow-800",
@@ -289,6 +261,34 @@ const Exchange = () => {
       tecnologia: "bg-slate-100 text-slate-800"
     };
     return colors[category as keyof typeof colors] || "bg-gray-100 text-gray-800";
+  };
+
+  const handleRedeem = (reward: any) => {
+    if (userPoints >= reward.cost) {
+      toast({
+        title: "Riscatto Completato! 🎉",
+        description: `Hai riscattato: ${reward.title}. Riceverai istruzioni via email.`
+      });
+    } else {
+      toast({
+        title: "Punti Insufficienti",
+        description: `Ti servono ${reward.cost - userPoints} punti in più per questo premio.`,
+        variant: "destructive"
+      });
+    }
+  };
+
+  const handleDonate = (project: any) => {
+    if (userCertificates >= project.certificatesNeeded) {
+      setSelectedProject(project);
+      setShowDonationDialog(true);
+    } else {
+      toast({
+        title: "Certificati Insufficienti",
+        description: `Ti servono ${project.certificatesNeeded - userCertificates} certificati in più per supportare questo progetto.`,
+        variant: "destructive"
+      });
+    }
   };
 
   const handlePartnerOfferClick = (offer: any) => {
