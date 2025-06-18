@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -286,7 +287,7 @@ const Dashboard = () => {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-6 mb-4 sm:mb-8">
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-green-400 to-emerald-500 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-green-500 to-green-600 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
             <CardHeader className="pb-1 sm:pb-2">
               <CardTitle className="text-xs sm:text-sm font-medium text-green-100">CO₂ Risparmiata</CardTitle>
             </CardHeader>
@@ -296,33 +297,33 @@ const Dashboard = () => {
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-400 to-cyan-500 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-yellow-500 to-yellow-600 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
             <CardHeader className="pb-1 sm:pb-2">
-              <CardTitle className="text-xs sm:text-sm font-medium text-blue-100">Punti Totali</CardTitle>
+              <CardTitle className="text-xs sm:text-sm font-medium text-yellow-100">Punti Totali</CardTitle>
             </CardHeader>
             <CardContent className="pt-0">
               <div className="text-lg sm:text-2xl font-bold">1,275</div>
-              <p className="text-xs text-blue-100 hidden sm:block">+85 punti oggi</p>
+              <p className="text-xs text-yellow-100 hidden sm:block">+85 punti oggi</p>
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-purple-400 to-pink-500 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-500 to-blue-600 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
             <CardHeader className="pb-1 sm:pb-2">
-              <CardTitle className="text-xs sm:text-sm font-medium text-purple-100">Certificati</CardTitle>
+              <CardTitle className="text-xs sm:text-sm font-medium text-blue-100">Certificati</CardTitle>
             </CardHeader>
             <CardContent className="pt-0">
               <div className="text-lg sm:text-2xl font-bold">12</div>
-              <p className="text-xs text-purple-100 hidden sm:block">2 nuovi certificati</p>
+              <p className="text-xs text-blue-100 hidden sm:block">2 nuovi certificati</p>
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-orange-400 to-red-500 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-cyan-500 to-cyan-600 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
             <CardHeader className="pb-1 sm:pb-2">
-              <CardTitle className="text-xs sm:text-sm font-medium text-orange-100">Livello</CardTitle>
+              <CardTitle className="text-xs sm:text-sm font-medium text-cyan-100">Livello</CardTitle>
             </CardHeader>
             <CardContent className="pt-0">
               <div className="text-sm sm:text-2xl font-bold">ECO EXPERT</div>
-              <Progress value={75} className="h-1.5 sm:h-2 bg-orange-200 [&>div]:bg-green-500" />
+              <Progress value={75} className="h-1.5 sm:h-2 bg-cyan-200 [&>div]:bg-green-500" />
             </CardContent>
           </Card>
         </div>
