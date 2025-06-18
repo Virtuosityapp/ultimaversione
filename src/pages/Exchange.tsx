@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -129,14 +130,6 @@ const Exchange = () => {
       bgColor: "bg-gradient-to-br from-yellow-50 to-yellow-100"
     },
     { 
-      value: "company-licenses", 
-      label: "Licenze Aziendali", 
-      icon: Star,
-      description: "Ottieni certificazioni e licenze professionali",
-      color: "from-green-500 to-emerald-500",
-      bgColor: "bg-gradient-to-br from-green-50 to-emerald-50"
-    },
-    { 
       value: "partner-offers", 
       label: "Offerte Partner", 
       icon: Users,
@@ -145,74 +138,6 @@ const Exchange = () => {
       bgColor: "bg-gradient-to-br from-purple-50 to-indigo-50"
     }
   ];
-
-  const companyLicenses = [{
-    id: 1,
-    title: "Certificazione ISO 14001",
-    description: "Certificazione ambientale per la gestione sostenibile delle risorse",
-    cost: 1200,
-    duration: "2 anni",
-    category: "ambiente",
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop",
-    availability: "Disponibile",
-    provider: "Bureau Veritas",
-    benefits: ["Riconoscimento internazionale", "Crediti formativi", "Upgrade professionale"]
-  }, {
-    id: 2,
-    title: "Patente Europea Computer ECDL",
-    description: "Certificazione informatica riconosciuta a livello europeo",
-    cost: 800,
-    duration: "3 anni",
-    category: "informatica",
-    image: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=400&h=300&fit=crop",
-    availability: "Disponibile",
-    provider: "ECDL Foundation",
-    benefits: ["Competenze digitali certificate", "Valido per concorsi", "Riconoscimento UE"]
-  }, {
-    id: 3,
-    title: "Certificazione PMP Project Management",
-    description: "Certificazione per la gestione professionale di progetti",
-    cost: 1500,
-    duration: "3 anni",
-    category: "management",
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
-    availability: "Limitato",
-    provider: "PMI Institute",
-    benefits: ["Standard internazionale", "Aumento stipendiale", "Career advancement"]
-  }, {
-    id: 4,
-    title: "Corso di Inglese Business",
-    description: "Corso intensivo di inglese commerciale con certificazione",
-    cost: 600,
-    duration: "6 mesi",
-    category: "lingue",
-    image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400&h=300&fit=crop",
-    availability: "Disponibile",
-    provider: "Wall Street English",
-    benefits: ["Certificato B2/C1", "Lezioni individuali", "Accesso piattaforma online"]
-  }, {
-    id: 5,
-    title: "Certificazione GDPR Privacy Officer",
-    description: "Formazione specialistica sulla protezione dei dati personali",
-    cost: 900,
-    duration: "1 anno",
-    category: "privacy",
-    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=300&fit=crop",
-    availability: "Disponibile",
-    provider: "Privacy Academy",
-    benefits: ["Conformità GDPR", "Ruolo strategico", "Aggiornamenti normativi"]
-  }, {
-    id: 6,
-    title: "Patente di Guida Categoria C",
-    description: "Licenza per condurre veicoli commerciali e mezzi pesanti",
-    cost: 2000,
-    duration: "5 anni",
-    category: "trasporti",
-    image: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=400&h=300&fit=crop",
-    availability: "Limitato",
-    provider: "Autoscuola Centrale",
-    benefits: ["Opportunità lavorative", "Patente professionale", "Corso CQC incluso"]
-  }];
 
   const handleRedeem = (reward: any) => {
     if (userPoints >= reward.cost) {
@@ -237,21 +162,6 @@ const Exchange = () => {
       toast({
         title: "Certificati Insufficienti",
         description: `Ti servono ${project.certificatesNeeded - userCertificates} certificati in più per supportare questo progetto.`,
-        variant: "destructive"
-      });
-    }
-  };
-
-  const handleLicenseRedeem = (license: any) => {
-    if (userPoints >= license.cost) {
-      toast({
-        title: "Licenza Richiesta! 🎓",
-        description: `Hai richiesto: ${license.title}. L'HR ti contatterà per i dettagli.`
-      });
-    } else {
-      toast({
-        title: "Punti Insufficiente",
-        description: `Ti servono ${license.cost - userPoints} punti in più per questa licenza.`,
         variant: "destructive"
       });
     }
@@ -287,18 +197,6 @@ const Exchange = () => {
       disabilità: "bg-cyan-100 text-cyan-800",
       comunità: "bg-yellow-100 text-yellow-800",
       cultura: "bg-indigo-100 text-indigo-800"
-    };
-    return colors[category as keyof typeof colors] || "bg-gray-100 text-gray-800";
-  };
-
-  const getLicenseCategoryColor = (category: string) => {
-    const colors = {
-      ambiente: "bg-green-100 text-green-800",
-      informatica: "bg-blue-100 text-blue-800",
-      management: "bg-purple-100 text-purple-800",
-      lingue: "bg-orange-100 text-orange-800",
-      privacy: "bg-red-100 text-red-800",
-      trasporti: "bg-cyan-100 text-cyan-800"
     };
     return colors[category as keyof typeof colors] || "bg-gray-100 text-gray-800";
   };
@@ -592,83 +490,6 @@ const Exchange = () => {
     </div>
   );
 
-  const renderCompanyLicenses = () => (
-    <div className="space-y-6 sm:space-y-8">
-      <div className="text-center">
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Licenze Aziendali 🎓</h2>
-        <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base px-4">
-          Investi nei tuoi punti per ottenere certificazioni e licenze professionali finanziate dall'azienda
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-        {companyLicenses.map((license) => (
-          <Card key={license.id} className="border-0 shadow-lg bg-white/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300 overflow-hidden">
-            <div className="relative">
-              <img src={license.image} alt={license.title} className="w-full h-40 sm:h-48 object-cover" />
-              <div className="absolute top-3 right-3">
-                <Badge className={getLicenseCategoryColor(license.category)}>
-                  {license.category}
-                </Badge>
-              </div>
-              <div className="absolute top-3 left-3">
-                <Badge className="bg-white/90 text-gray-800 font-bold">
-                  {license.duration}
-                </Badge>
-              </div>
-            </div>
-            <CardHeader className="pb-3">
-              <CardTitle className="text-base sm:text-lg">{license.title}</CardTitle>
-              <CardDescription className="text-sm">{license.description}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Costo</span>
-                  <span className="font-bold text-base sm:text-lg text-green-600">{license.cost} punti</span>
-                </div>
-                
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Disponibilità</span>
-                  <Badge variant={license.availability === "Disponibile" ? "default" : "secondary"}>
-                    {license.availability}
-                  </Badge>
-                </div>
-                
-                <div className="text-xs text-gray-500">
-                  Ente: {license.provider}
-                </div>
-
-                <div>
-                  <p className="text-sm text-gray-600 mb-2">Benefici inclusi:</p>
-                  <div className="space-y-1">
-                    {license.benefits.slice(0, 2).map((benefit, index) => (
-                      <div key={index} className="flex items-center text-xs text-gray-700">
-                        <Star className="h-3 w-3 text-yellow-500 mr-1 flex-shrink-0" />
-                        <span>{benefit}</span>
-                      </div>
-                    ))}
-                    {license.benefits.length > 2 && (
-                      <div className="flex items-center text-xs text-gray-700">
-                        <Star className="h-3 w-3 text-yellow-500 mr-1 flex-shrink-0" />
-                        <span>+{license.benefits.length - 2} altri vantaggi</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-                
-                <Button className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-green-700 hover:to-emerald-700 text-sm" size="sm" onClick={() => handleLicenseRedeem(license)} disabled={userPoints < license.cost}>
-                  <Star className="h-4 w-4 mr-2" />
-                  {userPoints >= license.cost ? "Richiedi Licenza" : "Punti Insufficienti"}
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-    </div>
-  );
-
   const renderPartnerOffers = () => (
     <div className="space-y-6 sm:space-y-8">
       <div className="text-center">
@@ -892,7 +713,6 @@ const Exchange = () => {
         <div className="mb-8 sm:mb-12">
           {selectedExchangeType === "company-rewards" && renderCompanyRewards()}
           {selectedExchangeType === "social-projects" && renderSocialProjects()}
-          {selectedExchangeType === "company-licenses" && renderCompanyLicenses()}
           {selectedExchangeType === "partner-offers" && renderPartnerOffers()}
         </div>
 

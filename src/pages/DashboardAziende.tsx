@@ -7,7 +7,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Users, UserCheck, Upload, FileText, Award, Gift, Plane, ArrowLeft, TrendingUp, Eye, Target, Globe, Droplet, Zap, Trash2, Percent, Star, GraduationCap } from 'lucide-react';
+import { Users, UserCheck, Upload, FileText, Award, Gift, Plane, ArrowLeft, TrendingUp, Eye, Target, Globe, Droplet, Zap, Trash2, Percent } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
@@ -181,94 +181,6 @@ const DashboardAziende = () => {
 
   const getTrendColor = (trend: string) => {
     return trend.startsWith('+') ? 'text-green-600' : 'text-red-600';
-  };
-
-  // Licenze Aziendali disponibili
-  const [companyLicenses] = useState([
-    {
-      id: 1,
-      title: "Certificazione ISO 14001",
-      description: "Certificazione ambientale per la gestione sostenibile delle risorse",
-      cost: 1200,
-      duration: "2 anni",
-      category: "ambiente",
-      availability: "Disponibile",
-      provider: "Bureau Veritas",
-      benefits: ["Riconoscimento internazionale", "Crediti formativi", "Upgrade professionale"],
-      richieste: 3
-    },
-    {
-      id: 2,
-      title: "Patente Europea Computer ECDL",
-      description: "Certificazione informatica riconosciuta a livello europeo",
-      cost: 800,
-      duration: "3 anni", 
-      category: "informatica",
-      availability: "Disponibile",
-      provider: "ECDL Foundation",
-      benefits: ["Competenze digitali certificate", "Valido per concorsi", "Riconoscimento UE"],
-      richieste: 7
-    },
-    {
-      id: 3,
-      title: "Certificazione PMP Project Management",
-      description: "Certificazione per la gestione professionale di progetti",
-      cost: 1500,
-      duration: "3 anni",
-      category: "management", 
-      availability: "Limitato",
-      provider: "PMI Institute",
-      benefits: ["Standard internazionale", "Aumento stipendiale", "Career advancement"],
-      richieste: 2
-    },
-    {
-      id: 4,
-      title: "Corso di Inglese Business",
-      description: "Corso intensivo di inglese commerciale con certificazione",
-      cost: 600,
-      duration: "6 mesi",
-      category: "lingue",
-      availability: "Disponibile", 
-      provider: "Wall Street English",
-      benefits: ["Certificato B2/C1", "Lezioni individuali", "Accesso piattaforma online"],
-      richieste: 12
-    },
-    {
-      id: 5,
-      title: "Certificazione GDPR Privacy Officer",
-      description: "Formazione specialistica sulla protezione dei dati personali",
-      cost: 900,
-      duration: "1 anno",
-      category: "privacy",
-      availability: "Disponibile",
-      provider: "Privacy Academy", 
-      benefits: ["Conformità GDPR", "Ruolo strategico", "Aggiornamenti normativi"],
-      richieste: 4
-    },
-    {
-      id: 6,
-      title: "Patente di Guida Categoria C",
-      description: "Licenza per condurre veicoli commerciali e mezzi pesanti",
-      cost: 2000,
-      duration: "5 anni",
-      category: "trasporti",
-      availability: "Limitato",
-      provider: "Autoscuola Centrale",
-      benefits: ["Opportunità lavorative", "Patente professionale", "Corso CQC incluso"],
-      richieste: 1
-    }
-  ]);
-
-  const getLicenseCategoryColor = (category: string) => {
-    const colors = {
-      ambiente: "bg-green-100 text-green-800",
-      informatica: "bg-blue-100 text-blue-800", 
-      management: "bg-purple-100 text-purple-800",
-      lingue: "bg-orange-100 text-orange-800",
-      privacy: "bg-red-100 text-red-800",
-      trasporti: "bg-cyan-100 text-cyan-800"
-    };
-    return colors[category as keyof typeof colors] || "bg-gray-100 text-gray-800";
   };
 
   return (
@@ -462,83 +374,6 @@ const DashboardAziende = () => {
             </CardContent>
           </Card>
         </div>
-
-        {/* Sezione Licenze Aziendali */}
-        <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm mb-8">
-          <CardHeader className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-t-lg">
-            <CardTitle className="flex items-center gap-2">
-              <GraduationCap className="h-6 w-6" />
-              Licenze Aziendali Disponibili
-            </CardTitle>
-            <CardDescription className="text-purple-100">
-              Gestisci le licenze e certificazioni professionali richieste dai dipendenti
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="p-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {companyLicenses.map((license) => (
-                <div key={license.id} className="p-4 border-0 rounded-xl shadow-lg bg-gradient-to-br from-white to-purple-50 hover:shadow-xl transition-shadow">
-                  <div className="flex items-center justify-between mb-3">
-                    <Badge className={`flex items-center gap-1 ${getLicenseCategoryColor(license.category)}`}>
-                      <Star className="h-3 w-3" />
-                      {license.category}
-                    </Badge>
-                    <Badge className="bg-white/90 text-gray-800 font-bold">
-                      {license.duration}
-                    </Badge>
-                  </div>
-                  
-                  <h4 className="font-semibold text-gray-800 mb-2">{license.title}</h4>
-                  <p className="text-sm text-gray-600 mb-3">{license.description}</p>
-                  
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Costo:</span>
-                      <span className="font-bold text-purple-600">{license.cost} punti</span>
-                    </div>
-                    
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Provider:</span>
-                      <span className="font-semibold text-gray-800">{license.provider}</span>
-                    </div>
-                    
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Richieste:</span>
-                      <Badge variant="outline" className="font-bold">
-                        {license.richieste} dipendenti
-                      </Badge>
-                    </div>
-                    
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Disponibilità:</span>
-                      <Badge variant={license.availability === "Disponibile" ? "default" : "secondary"}>
-                        {license.availability}
-                      </Badge>
-                    </div>
-                  </div>
-                  
-                  <div className="mt-3 pt-3 border-t border-gray-200">
-                    <p className="text-xs text-gray-600 mb-2">Benefici principali:</p>
-                    <div className="space-y-1">
-                      {license.benefits.slice(0, 2).map((benefit, index) => (
-                        <div key={index} className="flex items-center text-xs text-gray-700">
-                          <Star className="h-3 w-3 text-yellow-500 mr-1 flex-shrink-0" />
-                          <span>{benefit}</span>
-                        </div>
-                      ))}
-                      {license.benefits.length > 2 && (
-                        <div className="flex items-center text-xs text-gray-700">
-                          <Star className="h-3 w-3 text-yellow-500 mr-1 flex-shrink-0" />
-                          <span>+{license.benefits.length - 2} altri vantaggi</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
 
         {/* Sezioni Welfare e Premi - Side by Side */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
