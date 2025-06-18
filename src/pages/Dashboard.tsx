@@ -3,15 +3,23 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Calendar, Award, TrendingUp, MapPin, Clock, QrCode, Camera, Smartphone, Users, Trophy, Target, Zap, Wallet, Eye, Shield } from "lucide-react";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Calendar, Award, TrendingUp, MapPin, Clock, QrCode, Camera, Smartphone, Users, Trophy, Target, Zap, Wallet, Eye, Shield, Send, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { DppVerification } from "@/components/DppVerification";
 import CitizenReporting from "@/components/CitizenReporting";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
+  const [transferEmail, setTransferEmail] = useState("");
+
   const activities = [{
     id: 1,
     type: "bike",
@@ -226,7 +234,26 @@ const Dashboard = () => {
         return '📦';
     }
   };
-  return <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
+
+  const handleTransferWarranty = (productId: string) => {
+    if (!transferEmail) {
+      toast({
+        title: "Email richiesta",
+        description: "Inserisci l'email del destinatario",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    toast({
+      title: "Garanzia trasferita!",
+      description: `La garanzia è stata inviata a ${transferEmail}`,
+    });
+    setTransferEmail("");
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
       {/* Header */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-green-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
@@ -590,10 +617,105 @@ const Dashboard = () => {
                             <Eye className="h-3 w-3 mr-1" />
                             Dettagli
                           </Button>
-                          <Button size="sm" className="flex-1 text-xs bg-green-600 hover:bg-green-700">
-                            <Shield className="h-3 w-3 mr-1" />
-                            Garanzia
-                          </Button>
+                          
+                          <Dialog>
+                            <DialogTrigger asChild>
+                              <Button size="sm" className="flex-1 text-xs bg-green-600 hover:bg-green-700">
+                                <Shield className="h-3 w-3 mr-1" />
+                                Garanzia
+                              </Button>
+                            </DialogTrigger>
+                            <DialogContent className="sm:max-w-md">
+                              <DialogHeader>
+                                <DialogTitle className="flex items-center gap-2">
+                                  <Shield className="h-5 w-5 text-green-600" />
+                                  Garanzia Digitale
+                                </DialogTitle>
+                                <DialogDescription>
+                                  Passaporto digitale e garanzia del prodotto
+                                </DialogDescription>
+                              </DialogHeader>
+                              
+                              <div className="space-y-4">
+                                {/* Product Info */}
+                                <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                                  <img src={dpp.image} alt={dpp.name} className="w-16 h-16 object-cover rounded-lg" />
+                                  <div className="flex-1">
+                                    <h3 className="font-bold text-gray-900">{dpp.brand}</h3>
+                                    <p className="text-sm text-gray-600">{dpp.name}</p>
+                                    <p className="text-xs text-gray-500">Modello: {dpp.model}</p>
+                                    <Badge className="mt-1 text-xs bg-green-100 text-green-800">
+                                      {dpp.category}
+                                    </Badge>
+                                  </div>
+                                </div>
+
+                                {/* Warranty Details */}
+                                <div className="grid grid-cols-2 gap-4">
+                                  <div>
+                                    <Label className="text-xs text-gray-600">Acquisto</Label>
+                                    <p className="font-semibold text-sm">{new Date(dpp.purchaseDate).toLocaleDateString('it-IT')}</p>
+                                  </div>
+                                  <div>
+                                    <Label className="text-xs text-gray-600">Valore</Label>
+                                    <p className="font-semibold text-sm text-green-600">{dpp.value}</p>
+                                  </div>
+                                  <div>
+                                    <Label className="text-xs text-gray-600">Garanzia</Label>
+                                    <p className="font-semibold text-sm">{dpp.warranty.period}</p>
+                                  </div>
+                                  <div>
+                                    <Label className="text-xs text-gray-600">Scadenza</Label>
+                                    <p className="font-semibold text-sm text-orange-600">{new Date(dpp.warranty.expires).toLocaleDateString('it-IT')}</p>
+                                  </div>
+                                </div>
+
+                                {/* Transfer Section */}
+                                <div className="border-t pt-4">
+                                  <Label className="text-sm font-medium mb-2 block">Trasferisci Garanzia</Label>
+                                  <div className="flex gap-2">
+                                    <div className="flex-1">
+                                      <Input
+                                        type="email"
+                                        placeholder="Email destinatario"
+                                        value={transferEmail}
+                                        onChange={(e) => setTransferEmail(e.target.value)}
+                                        className="text-sm"
+                                      />
+                                    </div>
+                                    <Button 
+                                      size="sm" 
+                                      onClick={() => handleTransferWarranty(dpp.id)}
+                                      className="bg-blue-600 hover:bg-blue-700"
+                                    >
+                                      <Send className="h-4 w-4 mr-1" />
+                                      Invia
+                                    </Button>
+                                  </div>
+                                  <p className="text-xs text-gray-500 mt-1">
+                                    La garanzia sarà trasferita al nuovo proprietario
+                                  </p>
+                                </div>
+
+                                {/* Sustainability Score */}
+                                <div className="bg-green-50 p-3 rounded-lg">
+                                  <div className="flex items-center justify-between mb-2">
+                                    <Label className="text-sm font-medium">Punteggio Sostenibilità</Label>
+                                    <Badge className="bg-green-100 text-green-800">
+                                      {dpp.sustainability.score}/100
+                                    </Badge>
+                                  </div>
+                                  <div className="flex flex-wrap gap-1">
+                                    {dpp.sustainability.certifications.map((cert, index) => (
+                                      <Badge key={index} variant="outline" className="text-xs">
+                                        {cert}
+                                      </Badge>
+                                    ))}
+                                  </div>
+                                </div>
+                              </div>
+                            </DialogContent>
+                          </Dialog>
                         </div>
                       </div>
                     ))}
@@ -643,6 +765,8 @@ const Dashboard = () => {
           </TabsContent>
         </Tabs>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default Dashboard;
