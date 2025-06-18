@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -262,7 +261,7 @@ const DashboardAziende = () => {
       
       <div className="max-w-7xl mx-auto">
         {/* Navigation Button */}
-        <div className="mb-6">
+        <div className="mb-4">
           <Button 
             onClick={() => navigate('/')} 
             variant="outline" 
@@ -273,95 +272,95 @@ const DashboardAziende = () => {
           </Button>
         </div>
 
-        {/* Header Section */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent mb-4">
+        {/* Header Section - Made more compact */}
+        <div className="text-center mb-6">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent mb-3">
             Dashboard Aziendale
           </h1>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className="text-base text-gray-600 max-w-2xl mx-auto">
             Gestisci i certificati di sostenibilità dei tuoi dipendenti e followers, configura premi e benefit, 
-            e monitora l'impatto ambientale della tua azienda attraverso dati real-time e analytics avanzati.
+            e monitora l'impatto ambientale della tua azienda.
           </p>
         </div>
 
-        {/* Metriche Certificati */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-green-500 to-emerald-600 text-white">
+        {/* Metriche Certificati - Made more compact with brighter colors */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          <Card className="border-0 shadow-md bg-gradient-to-br from-emerald-400 to-green-500 text-white">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-green-100">{t('employeeCertificates')}</CardTitle>
-              <div className="p-2 bg-white/20 rounded-lg">
-                <Users className="h-5 w-5 text-white" />
+              <CardTitle className="text-sm font-medium text-emerald-100">{t('employeeCertificates')}</CardTitle>
+              <div className="p-1.5 bg-white/25 rounded-md">
+                <Users className="h-4 w-4 text-white" />
               </div>
             </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-white">{certificatiDipendenti}</div>
-              <p className="text-xs text-green-100 mt-1">
+            <CardContent className="pb-3">
+              <div className="text-2xl font-bold text-white">{certificatiDipendenti}</div>
+              <p className="text-xs text-emerald-100 mt-1">
                 Certificati scambiati con i dipendenti
               </p>
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-500 to-cyan-600 text-white">
+          <Card className="border-0 shadow-md bg-gradient-to-br from-cyan-400 to-blue-500 text-white">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-blue-100">{t('externalCertificates')}</CardTitle>
-              <div className="p-2 bg-white/20 rounded-lg">
-                <UserCheck className="h-5 w-5 text-white" />
+              <CardTitle className="text-sm font-medium text-cyan-100">{t('externalCertificates')}</CardTitle>
+              <div className="p-1.5 bg-white/25 rounded-md">
+                <UserCheck className="h-4 w-4 text-white" />
               </div>
             </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-white">{certificatiEsterni}</div>
-              <p className="text-xs text-blue-100 mt-1">
+            <CardContent className="pb-3">
+              <div className="text-2xl font-bold text-white">{certificatiEsterni}</div>
+              <p className="text-xs text-cyan-100 mt-1">
                 Certificati ricevuti da followers
               </p>
             </CardContent>
           </Card>
         </div>
 
-        {/* Monitoraggio Certificati - Visual Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        {/* Monitoraggio Certificati - Visual Cards with brighter colors */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
           {/* Monitoraggio Certificati Dipendenti */}
-          <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
-            <CardHeader className="bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-t-lg">
-              <CardTitle className="flex items-center gap-2">
-                <Eye className="h-6 w-6" />
+          <Card className="border-0 shadow-lg bg-white/90 backdrop-blur-sm">
+            <CardHeader className="bg-gradient-to-r from-emerald-400 to-green-500 text-white rounded-t-lg pb-3">
+              <CardTitle className="flex items-center gap-2 text-lg">
+                <Eye className="h-5 w-5" />
                 Monitoraggio Certificati Dipendenti
               </CardTitle>
-              <CardDescription className="text-green-100">
+              <CardDescription className="text-emerald-100 text-sm">
                 Analisi dei comportamenti sostenibili per strategie di marketing mirate
               </CardDescription>
             </CardHeader>
-            <CardContent className="p-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <CardContent className="p-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {certificateMonitoringCategories.map((category, index) => (
-                  <Card key={index} className={`border-2 ${category.borderColor} ${category.bgColor} hover:shadow-lg transition-all duration-300`}>
-                    <CardContent className="p-4">
-                      <div className="flex items-center justify-between mb-3">
-                        <div className="flex items-center gap-3">
+                  <Card key={index} className={`border-2 ${category.borderColor} ${category.bgColor} hover:shadow-md transition-all duration-300`}>
+                    <CardContent className="p-3">
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-2">
                           <img 
                             src={category.mascot} 
                             alt={category.category}
-                            className="w-10 h-10 rounded-full object-cover"
+                            className="w-8 h-8 rounded-full object-cover"
                           />
-                          <div className={`p-2 rounded-lg bg-gradient-to-r ${category.color} text-white`}>
-                            {category.icon}
+                          <div className={`p-1.5 rounded-md bg-gradient-to-r ${category.color} text-white`}>
+                            {React.cloneElement(category.icon, { className: "h-4 w-4" })}
                           </div>
                         </div>
                         <div className="text-right">
-                          <div className="text-2xl font-bold">{category.totalCount}</div>
-                          <div className={`text-sm font-semibold ${getTrendColor(category.trend)} flex items-center gap-1`}>
+                          <div className="text-xl font-bold">{category.totalCount}</div>
+                          <div className={`text-xs font-semibold ${getTrendColor(category.trend)} flex items-center gap-1`}>
                             <TrendingUp className="h-3 w-3" />
                             {category.trend}
                           </div>
                         </div>
                       </div>
-                      <h3 className="font-semibold text-gray-800 mb-3">{category.category}</h3>
-                      <div className="space-y-2">
+                      <h3 className="font-semibold text-gray-800 mb-2 text-sm">{category.category}</h3>
+                      <div className="space-y-1.5">
                         {category.data.map((item, itemIndex) => (
-                          <div key={itemIndex} className="flex items-center justify-between text-sm">
+                          <div key={itemIndex} className="flex items-center justify-between text-xs">
                             <span className="text-gray-600">{item.tipo}</span>
                             <div className="flex items-center gap-2">
                               <span className="font-semibold">{item.count}</span>
-                              <div className="w-16 h-2 bg-gray-200 rounded-full overflow-hidden">
+                              <div className="w-12 h-1.5 bg-gray-200 rounded-full overflow-hidden">
                                 <div 
                                   className={`h-full bg-gradient-to-r ${category.color} transition-all duration-500`}
                                   style={{ width: `${item.percentage}%` }}
@@ -379,48 +378,48 @@ const DashboardAziende = () => {
           </Card>
 
           {/* Monitoraggio Certificati Esterni */}
-          <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
-            <CardHeader className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-t-lg">
-              <CardTitle className="flex items-center gap-2">
-                <Globe className="h-6 w-6" />
+          <Card className="border-0 shadow-lg bg-white/90 backdrop-blur-sm">
+            <CardHeader className="bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-t-lg pb-3">
+              <CardTitle className="flex items-center gap-2 text-lg">
+                <Globe className="h-5 w-5" />
                 Monitoraggio Certificati Esterni
               </CardTitle>
-              <CardDescription className="text-blue-100">
+              <CardDescription className="text-cyan-100 text-sm">
                 Analisi dei comportamenti sostenibili dei followers per strategie di engagement
               </CardDescription>
             </CardHeader>
-            <CardContent className="p-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <CardContent className="p-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {externalCertificateCategories.map((category, index) => (
-                  <Card key={index} className={`border-2 ${category.borderColor} ${category.bgColor} hover:shadow-lg transition-all duration-300`}>
-                    <CardContent className="p-4">
-                      <div className="flex items-center justify-between mb-3">
-                        <div className="flex items-center gap-3">
+                  <Card key={index} className={`border-2 ${category.borderColor} ${category.bgColor} hover:shadow-md transition-all duration-300`}>
+                    <CardContent className="p-3">
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-2">
                           <img 
                             src={category.mascot} 
                             alt={category.category}
-                            className="w-10 h-10 rounded-full object-cover"
+                            className="w-8 h-8 rounded-full object-cover"
                           />
-                          <div className={`p-2 rounded-lg bg-gradient-to-r ${category.color} text-white`}>
-                            {category.icon}
+                          <div className={`p-1.5 rounded-md bg-gradient-to-r ${category.color} text-white`}>
+                            {React.cloneElement(category.icon, { className: "h-4 w-4" })}
                           </div>
                         </div>
                         <div className="text-right">
-                          <div className="text-2xl font-bold">{category.totalCount}</div>
-                          <div className={`text-sm font-semibold ${getTrendColor(category.trend)} flex items-center gap-1`}>
+                          <div className="text-xl font-bold">{category.totalCount}</div>
+                          <div className={`text-xs font-semibold ${getTrendColor(category.trend)} flex items-center gap-1`}>
                             <TrendingUp className="h-3 w-3" />
                             {category.trend}
                           </div>
                         </div>
                       </div>
-                      <h3 className="font-semibold text-gray-800 mb-3">{category.category}</h3>
-                      <div className="space-y-2">
+                      <h3 className="font-semibold text-gray-800 mb-2 text-sm">{category.category}</h3>
+                      <div className="space-y-1.5">
                         {category.data.map((item, itemIndex) => (
-                          <div key={itemIndex} className="flex items-center justify-between text-sm">
+                          <div key={itemIndex} className="flex items-center justify-between text-xs">
                             <span className="text-gray-600">{item.tipo}</span>
                             <div className="flex items-center gap-2">
                               <span className="font-semibold">{item.count}</span>
-                              <div className="w-16 h-2 bg-gray-200 rounded-full overflow-hidden">
+                              <div className="w-12 h-1.5 bg-gray-200 rounded-full overflow-hidden">
                                 <div 
                                   className={`h-full bg-gradient-to-r ${category.color} transition-all duration-500`}
                                   style={{ width: `${item.percentage}%` }}
@@ -438,23 +437,23 @@ const DashboardAziende = () => {
           </Card>
         </div>
 
-        {/* Menu Gestione - Include DPP */}
-        <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm mb-8">
-          <CardHeader className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-t-lg">
-            <CardTitle className="flex items-center gap-2">
-              <Menu className="h-6 w-6" />
+        {/* Menu Gestione - Include DPP with brighter colors */}
+        <Card className="border-0 shadow-lg bg-white/90 backdrop-blur-sm mb-6">
+          <CardHeader className="bg-gradient-to-r from-violet-400 to-purple-500 text-white rounded-t-lg pb-3">
+            <CardTitle className="flex items-center gap-2 text-lg">
+              <Menu className="h-5 w-5" />
               Gestione Welfare, Premi e Prodotti
             </CardTitle>
-            <CardDescription className="text-purple-100">
+            <CardDescription className="text-violet-100 text-sm">
               Configura benefit per dipendenti, offerte per followers e passaporti digitali prodotti
             </CardDescription>
           </CardHeader>
-          <CardContent className="p-6">
-            <div className="flex flex-wrap gap-4">
+          <CardContent className="p-4">
+            <div className="flex flex-wrap gap-3">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button size="lg" className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white shadow-lg">
-                    <Users className="mr-2 h-5 w-5" />
+                  <Button size="default" className="bg-gradient-to-r from-emerald-400 to-green-500 hover:from-emerald-500 hover:to-green-600 text-white shadow-md">
+                    <Users className="mr-2 h-4 w-4" />
                     Welfare Dipendenti
                     <ChevronDown className="ml-2 h-4 w-4" />
                   </Button>
@@ -469,8 +468,8 @@ const DashboardAziende = () => {
 
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button size="lg" className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white shadow-lg">
-                    <Globe className="mr-2 h-5 w-5" />
+                  <Button size="default" className="bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white shadow-md">
+                    <Globe className="mr-2 h-4 w-4" />
                     Premi Followers
                     <ChevronDown className="ml-2 h-4 w-4" />
                   </Button>
@@ -485,8 +484,8 @@ const DashboardAziende = () => {
 
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button size="lg" className="bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white shadow-lg">
-                    <QrCode className="mr-2 h-5 w-5" />
+                  <Button size="default" className="bg-gradient-to-r from-violet-400 to-purple-500 hover:from-violet-500 hover:to-purple-600 text-white shadow-md">
+                    <QrCode className="mr-2 h-4 w-4" />
                     DPP Prodotti
                     <ChevronDown className="ml-2 h-4 w-4" />
                   </Button>
@@ -841,22 +840,22 @@ const DashboardAziende = () => {
           </div>
         )}
 
-        {/* Pulsante Report Sostenibilità */}
-        <Card className="border-0 shadow-xl bg-gradient-to-r from-orange-400 to-red-500 text-white">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-white">
-              <FileText className="h-6 w-6" />
+        {/* Pulsante Report Sostenibilità with brighter colors */}
+        <Card className="border-0 shadow-lg bg-gradient-to-r from-orange-400 to-red-500 text-white">
+          <CardHeader className="pb-3">
+            <CardTitle className="flex items-center gap-2 text-white text-lg">
+              <FileText className="h-5 w-5" />
               {t('sustainabilityReport')}
             </CardTitle>
-            <CardDescription className="text-orange-100">
+            <CardDescription className="text-orange-100 text-sm">
               {t('sustainabilityDescription')}
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pt-0">
             <Dialog open={reportDialogOpen} onOpenChange={setReportDialogOpen}>
               <DialogTrigger asChild>
-                <Button size="lg" className="w-full md:w-auto bg-white text-orange-600 hover:bg-gray-100 shadow-lg text-lg py-6 px-8">
-                  <FileText className="mr-2 h-6 w-6" />
+                <Button size="default" className="w-full md:w-auto bg-white text-orange-600 hover:bg-gray-100 shadow-md py-3 px-6">
+                  <FileText className="mr-2 h-5 w-5" />
                   {t('certifyAndCompensate')}
                 </Button>
               </DialogTrigger>
