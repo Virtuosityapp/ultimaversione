@@ -282,44 +282,44 @@ const Dashboard = () => {
           <p className="text-gray-600 text-xs sm:text-base">Ecco il tuo impatto ambientale di oggi</p>
         </div>
 
-        {/* Stats Cards */}
+        {/* Stats Cards - Reduced sizes for mobile */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-6 mb-4 sm:mb-8">
           <Card className="border-0 shadow-lg bg-gradient-to-br from-yellow-300 to-yellow-500 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
-            <CardHeader className="pb-1 sm:pb-2">
+            <CardHeader className="pb-1 sm:pb-2 px-2 pt-2 sm:px-6 sm:pt-6">
               <CardTitle className="text-xs sm:text-sm font-medium text-yellow-100">CO₂ Risparmiata</CardTitle>
             </CardHeader>
-            <CardContent className="pt-0">
-              <div className="text-lg sm:text-2xl font-bold">24.3 kg</div>
+            <CardContent className="pt-0 px-2 pb-2 sm:px-6 sm:pb-6">
+              <div className="text-base sm:text-2xl font-bold">24.3 kg</div>
               <p className="text-xs text-yellow-100 hidden sm:block">+12% questa settimana</p>
             </CardContent>
           </Card>
 
           <Card className="border-0 shadow-lg bg-gradient-to-br from-green-400 to-green-600 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
-            <CardHeader className="pb-1 sm:pb-2">
+            <CardHeader className="pb-1 sm:pb-2 px-2 pt-2 sm:px-6 sm:pt-6">
               <CardTitle className="text-xs sm:text-sm font-medium text-green-100">Punti Totali</CardTitle>
             </CardHeader>
-            <CardContent className="pt-0">
-              <div className="text-lg sm:text-2xl font-bold">1,275</div>
+            <CardContent className="pt-0 px-2 pb-2 sm:px-6 sm:pb-6">
+              <div className="text-base sm:text-2xl font-bold">1,275</div>
               <p className="text-xs text-green-100 hidden sm:block">+85 punti oggi</p>
             </CardContent>
           </Card>
 
           <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-400 to-blue-600 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
-            <CardHeader className="pb-1 sm:pb-2">
+            <CardHeader className="pb-1 sm:pb-2 px-2 pt-2 sm:px-6 sm:pt-6">
               <CardTitle className="text-xs sm:text-sm font-medium text-blue-100">Certificati</CardTitle>
             </CardHeader>
-            <CardContent className="pt-0">
-              <div className="text-lg sm:text-2xl font-bold">12</div>
+            <CardContent className="pt-0 px-2 pb-2 sm:px-6 sm:pb-6">
+              <div className="text-base sm:text-2xl font-bold">12</div>
               <p className="text-xs text-blue-100 hidden sm:block">2 nuovi certificati</p>
             </CardContent>
           </Card>
 
           <Card className="border-0 shadow-lg bg-gradient-to-br from-purple-300 to-purple-500 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
-            <CardHeader className="pb-1 sm:pb-2">
+            <CardHeader className="pb-1 sm:pb-2 px-2 pt-2 sm:px-6 sm:pt-6">
               <CardTitle className="text-xs sm:text-sm font-medium text-purple-100">Livello</CardTitle>
             </CardHeader>
-            <CardContent className="pt-0">
-              <div className="text-sm sm:text-2xl font-bold">ECO EXPERT</div>
+            <CardContent className="pt-0 px-2 pb-2 sm:px-6 sm:pb-6">
+              <div className="text-xs sm:text-2xl font-bold">ECO EXPERT</div>
               <Progress value={75} className="h-1.5 sm:h-2 bg-purple-200 [&>div]:bg-green-500" />
             </CardContent>
           </Card>

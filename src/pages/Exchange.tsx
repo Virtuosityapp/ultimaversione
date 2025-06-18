@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -604,53 +605,53 @@ const Exchange = () => {
           </p>
         </div>
 
-        {/* Points Summary - Updated with brighter colors */}
-        <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
+        {/* Points Summary - Reduced sizes for mobile */}
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 sm:gap-6 mb-6 sm:mb-8">
           <Card className="border-0 shadow-lg bg-gradient-to-br from-yellow-300 to-yellow-500 text-white">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-yellow-100">Punti Disponibili</CardTitle>
+            <CardHeader className="pb-1 sm:pb-2 px-3 pt-3 sm:px-6 sm:pt-6">
+              <CardTitle className="text-xs sm:text-sm font-medium text-yellow-100">Punti Disponibili</CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="text-xl sm:text-2xl font-bold">{userPoints}</div>
+            <CardContent className="px-3 pb-3 sm:px-6 sm:pb-6">
+              <div className="text-lg sm:text-2xl font-bold">{userPoints}</div>
               <p className="text-xs text-yellow-100">Guadagnati con 24 attività</p>
             </CardContent>
           </Card>
 
           <Card className="border-0 shadow-lg bg-gradient-to-br from-green-400 to-green-600 text-white">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-green-100">Certificati Disponibili</CardTitle>
+            <CardHeader className="pb-1 sm:pb-2 px-3 pt-3 sm:px-6 sm:pt-6">
+              <CardTitle className="text-xs sm:text-sm font-medium text-green-100">Certificati Disponibili</CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="text-xl sm:text-2xl font-bold">{userCertificates}</div>
+            <CardContent className="px-3 pb-3 sm:px-6 sm:pb-6">
+              <div className="text-lg sm:text-2xl font-bold">{userCertificates}</div>
               <p className="text-xs text-green-100">Per donazioni sociali</p>
             </CardContent>
           </Card>
 
           <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-400 to-blue-600 text-white">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-blue-100">Premi Riscattati</CardTitle>
+            <CardHeader className="pb-1 sm:pb-2 px-3 pt-3 sm:px-6 sm:pt-6">
+              <CardTitle className="text-xs sm:text-sm font-medium text-blue-100">Premi Riscattati</CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="text-xl sm:text-2xl font-bold">8</div>
+            <CardContent className="px-3 pb-3 sm:px-6 sm:pb-6">
+              <div className="text-lg sm:text-2xl font-bold">8</div>
               <p className="text-xs text-blue-100">Questo mese</p>
             </CardContent>
           </Card>
 
           <Card className="border-0 shadow-lg bg-gradient-to-br from-purple-300 to-purple-500 text-white">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-purple-100">Livello VIP</CardTitle>
+            <CardHeader className="pb-1 sm:pb-2 px-3 pt-3 sm:px-6 sm:pt-6">
+              <CardTitle className="text-xs sm:text-sm font-medium text-purple-100">Livello VIP</CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="text-lg sm:text-2xl font-bold">ECO EXPERT</div>
+            <CardContent className="px-3 pb-3 sm:px-6 sm:pb-6">
+              <div className="text-base sm:text-2xl font-bold">ECO EXPERT</div>
               <p className="text-xs text-purple-100">Bonus del 15%</p>
             </CardContent>
           </Card>
         </div>
 
-        {/* Enhanced Exchange Type Selection */}
+        {/* Enhanced Exchange Type Selection - Reduced sizes for mobile */}
         <div className="mb-8 sm:mb-12">
-          <div className="text-center mb-6">
-            <h3 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent mb-2">
+          <div className="text-center mb-4 sm:mb-6">
+            <h3 className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent mb-2">
               Scegli il Tipo di Scambio
             </h3>
             <p className="text-gray-600 text-sm sm:text-base">
@@ -658,7 +659,7 @@ const Exchange = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-6 max-w-6xl mx-auto">
             {exchangeTypes.map((type) => (
               <Card 
                 key={type.value}
@@ -669,17 +670,17 @@ const Exchange = () => {
                 }`}
                 onClick={() => setSelectedExchangeType(type.value)}
               >
-                <CardHeader className="text-center pb-3">
-                  <div className={`mx-auto w-16 h-16 rounded-full flex items-center justify-center mb-3 ${
+                <CardHeader className="text-center pb-2 sm:pb-3 px-3 pt-3 sm:px-6 sm:pt-6">
+                  <div className={`mx-auto w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mb-2 sm:mb-3 ${
                     selectedExchangeType === type.value 
                       ? 'bg-white/20 backdrop-blur-sm' 
                       : `bg-gradient-to-br ${type.color}`
                   }`}>
-                    <type.icon className={`h-8 w-8 ${
+                    <type.icon className={`h-6 w-6 sm:h-8 sm:w-8 ${
                       selectedExchangeType === type.value ? 'text-white' : 'text-white'
                     }`} />
                   </div>
-                  <CardTitle className={`text-lg font-bold ${
+                  <CardTitle className={`text-base sm:text-lg font-bold ${
                     selectedExchangeType === type.value 
                       ? 'text-white' 
                       : 'text-gray-900'
@@ -687,8 +688,8 @@ const Exchange = () => {
                     {type.label}
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="text-center">
-                  <p className={`text-sm ${
+                <CardContent className="text-center px-3 pb-3 sm:px-6 sm:pb-6">
+                  <p className={`text-xs sm:text-sm ${
                     selectedExchangeType === type.value 
                       ? 'text-white/90' 
                       : 'text-gray-600'
@@ -696,8 +697,8 @@ const Exchange = () => {
                     {type.description}
                   </p>
                   {selectedExchangeType === type.value && (
-                    <div className="mt-3">
-                      <Badge className="bg-white/20 text-white border-white/30">
+                    <div className="mt-2 sm:mt-3">
+                      <Badge className="bg-white/20 text-white border-white/30 text-xs">
                         ✓ Selezionato
                       </Badge>
                     </div>
