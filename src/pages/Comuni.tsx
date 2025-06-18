@@ -451,17 +451,17 @@ const Comuni = () => {
 
         {/* Overview Cards - Smaller for mobile */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 mb-4 sm:mb-6">
-          <Card className="border-0 shadow-sm bg-gradient-to-br from-emerald-400 to-green-500 text-white">
+          <Card className="border-0 shadow-sm bg-gradient-to-br from-green-400 to-green-600 text-white">
             <CardHeader className="pb-1 p-2 sm:p-4">
-              <CardTitle className="text-xs font-medium text-emerald-100">Integrazioni Attive</CardTitle>
+              <CardTitle className="text-xs font-medium text-green-100">Integrazioni Attive</CardTitle>
             </CardHeader>
             <CardContent className="p-2 sm:p-4 pt-0">
               <div className="text-sm sm:text-xl font-bold">{activeIntegrations}</div>
-              <p className="text-xs text-emerald-100">di {integrations.length} totali</p>
+              <p className="text-xs text-green-100">di {integrations.length} totali</p>
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-sm bg-gradient-to-br from-violet-400 to-purple-500 text-white">
+          <Card className="border-0 shadow-sm bg-gradient-to-br from-violet-400 to-purple-600 text-white">
             <CardHeader className="pb-1 p-2 sm:p-4">
               <CardTitle className="text-xs font-medium text-violet-100">Certificati ricevuti</CardTitle>
             </CardHeader>
@@ -471,23 +471,23 @@ const Comuni = () => {
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-sm bg-gradient-to-br from-cyan-400 to-blue-500 text-white">
+          <Card className="border-0 shadow-sm bg-gradient-to-br from-blue-400 to-blue-600 text-white">
             <CardHeader className="pb-1 p-2 sm:p-4">
-              <CardTitle className="text-xs font-medium text-cyan-100">Incentivi Attivi</CardTitle>
+              <CardTitle className="text-xs font-medium text-blue-100">Incentivi Attivi</CardTitle>
             </CardHeader>
             <CardContent className="p-2 sm:p-4 pt-0">
               <div className="text-sm sm:text-xl font-bold">{activeRewards}</div>
-              <p className="text-xs text-cyan-100">di {totalRewards} totali</p>
+              <p className="text-xs text-blue-100">di {totalRewards} totali</p>
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-sm bg-gradient-to-br from-amber-400 to-orange-500 text-white">
+          <Card className="border-0 shadow-sm bg-gradient-to-br from-yellow-400 to-yellow-600 text-white">
             <CardHeader className="pb-1 p-2 sm:p-4">
-              <CardTitle className="text-xs font-medium text-amber-100">Segnalazioni</CardTitle>
+              <CardTitle className="text-xs font-medium text-yellow-100">Segnalazioni</CardTitle>
             </CardHeader>
             <CardContent className="p-2 sm:p-4 pt-0">
               <div className="text-sm sm:text-xl font-bold">2</div>
-              <p className="text-xs text-amber-100">Richiedono attenzione</p>
+              <p className="text-xs text-yellow-100">Richiedono attenzione</p>
             </CardContent>
           </Card>
         </div>
