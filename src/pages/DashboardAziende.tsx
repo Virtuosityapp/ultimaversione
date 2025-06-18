@@ -977,7 +977,8 @@ const DashboardAziende = () => {
                         <div key={product.id} className="bg-white rounded-lg p-3 shadow-sm border border-indigo-100">
                           <div className="flex items-center justify-between mb-2">
                             <Badge className={`text-xs ${product.stato === 'Attivo' ? 'bg-green-100 text-green-700 border-green-200' : 'bg-yellow-100 text-yellow-700 border-yellow-200'}`}>
-                              {product.stato === 'Attivo' ? <Shield className="h-3 w-3 mr-1" /> : <Eye className="h-3 w-3 mr-1" />}
+                              {product.stato === 'Attivo' ? <Shield className="h-3 w-3 mr-1" /> : <Eye className="h-3 w-3 mr-1" />
+                              }
                               {product.stato}
                             </Badge>
                             <Button size="sm" variant="outline" className="h-6 w-6 p-0 border-indigo-200">
