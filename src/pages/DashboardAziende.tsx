@@ -1,322 +1,1454 @@
 import React, { useState } from 'react';
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Building2, Upload, Gift, FileText, TrendingUp, Users, Award, CheckCircle } from 'lucide-react';
-import { toast } from "sonner";
-import { DialogTrigger } from '@radix-ui/react-dialog';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { Users, UserCheck, Upload, FileText, Award, Gift, Plane, ArrowLeft, TrendingUp, Eye, Target, Globe, Droplet, Zap, Trash2, Percent, QrCode, Package, Shield, Link, Menu, ChevronDown, BarChart3 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useIsMobile } from '@/hooks/use-mobile';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
+import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const DashboardAziende = () => {
-  const [isDppDialogOpen, setIsDppDialogOpen] = useState(false);
-  const [isRewardsDialogOpen, setIsRewardsDialogOpen] = useState(false);
+  const navigate = useNavigate();
+  const { t } = useLanguage();
+  const isMobile = useIsMobile();
+  const [certificatiDipendenti] = useState(1589);
+  const [certificatiEsterni] = useState(14568);
+  const [reportDialogOpen, setReportDialogOpen] = useState(false);
+  const [dppDialogOpen, setDppDialogOpen] = useState(false);
+  const [dppUploadDialogOpen, setDppUploadDialogOpen] = useState(false);
+  const [rewardsUploadDialogOpen, setRewardsUploadDialogOpen] = useState(false);
+  const [showWelfareSection, setShowWelfareSection] = useState(false);
+  const [showFollowersSection, setShowFollowersSection] = useState(false);
+  const [showDppSection, setShowDppSection] = useState(false);
+  const [showMonitoringSection, setShowMonitoringSection] = useState(false);
+  
+  // Welfare per Dipendenti - Limited to 4 items
+  const [welfareItems, setWelfareItems] = useState([
+    { id: 1, tipo: 'Premio', nome: 'Voucher Cena Ristorante', valore: '€ 50', certificatiRichiesti: 'Risparmio Energetico', quantitaCertificati: 5 },
+    { id: 2, tipo: 'Viaggio', nome: 'Weekend Spa Toscana', valore: '€ 300', certificatiRichiesti: 'Mobilità Sostenibile', quantitaCertificati: 20 },
+    { id: 3, tipo: 'Gadget', nome: 'Smartwatch Aziendale', valore: '€ 150', certificatiRichiesti: 'Riciclo Rifiuti', quantitaCertificati: 10 },
+    { id: 4, tipo: 'Premio', nome: 'Buono Acquisto Shopping', valore: '€ 100', certificatiRichiesti: 'Risparmio Idrico', quantitaCertificati: 8 }
+  ]);
 
-  const handleDppSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast.success("DPP aziendale caricato con successo!");
-    setIsDppDialogOpen(false);
+  // Premi per Followers (Sconti e Offerte) - Limited to 4 items
+  const [followersRewards, setFollowersRewards] = useState([
+    { id: 1, tipo: 'Sconto', nome: 'Sconto Prodotti Bio', valore: '15%', certificatiRichiesti: 'Risparmio Energetico', quantitaCertificati: 3 },
+    { id: 2, tipo: 'Premio', nome: 'Borraccia Ecologica Gratis', valore: '€ 25', certificatiRichiesti: 'Risparmio Idrico', quantitaCertificati: 2 },
+    { id: 3, tipo: 'Sconto', nome: 'Pannelli Solari Casa', valore: '20%', certificatiRichiesti: 'Riduzione CO2', quantitaCertificati: 15 },
+    { id: 4, tipo: 'Premio', nome: 'Kit Compostaggio Domestico', valore: '€ 45', certificatiRichiesti: 'Riciclo Rifiuti', quantitaCertificati: 5 }
+  ]);
+
+  const [certificateMonitoringCategories] = useState([
+    {
+      category: 'Risparmio Idrico',
+      mascot: '/lovable-uploads/0a948061-d9ea-4555-839e-59bc31cd4c9a.png',
+      icon: <Droplet className="h-6 w-6" />,
+      color: 'from-blue-400 to-cyan-600',
+      bgColor: 'bg-blue-50',
+      borderColor: 'border-blue-200',
+      totalCount: 301,
+      trend: '+12%',
+      data: [
+        { tipo: 'Uso Consapevole Acqua', count: 145, percentage: 48 },
+        { tipo: 'Raccolta Acqua Piovana', count: 89, percentage: 30 },
+        { tipo: 'Riduzione Sprechi', count: 67, percentage: 22 }
+      ]
+    },
+    {
+      category: 'Risparmio Energetico',
+      mascot: '/lovable-uploads/89a2a2c5-7071-4df2-8e73-c5e5b645b38b.png',
+      icon: <Zap className="h-6 w-6" />,
+      color: 'from-yellow-400 to-orange-600',
+      bgColor: 'bg-yellow-50',
+      borderColor: 'border-yellow-200',
+      totalCount: 457,
+      trend: '+18%',
+      data: [
+        { tipo: 'Smart Working', count: 245, percentage: 54 },
+        { tipo: 'LED e Sensori', count: 134, percentage: 29 },
+        { tipo: 'Elettrodomestici A+++', count: 78, percentage: 17 }
+      ]
+    },
+    {
+      category: 'Riciclo e Rifiuti',
+      mascot: '/lovable-uploads/491544c4-c37d-4c3b-a368-e0c71002d237.png',
+      icon: <Trash2 className="h-6 w-6" />,
+      color: 'from-green-400 to-emerald-600',
+      bgColor: 'bg-green-50',
+      borderColor: 'border-green-200',
+      totalCount: 543,
+      trend: '+22%',
+      data: [
+        { tipo: 'Raccolta Differenziata', count: 298, percentage: 55 },
+        { tipo: 'Riuso Materiali', count: 156, percentage: 29 },
+        { tipo: 'Zero Waste', count: 89, percentage: 16 }
+      ]
+    },
+    {
+      category: 'Riduzione CO2',
+      mascot: '/lovable-uploads/f7195bbc-9cea-4e2a-93c5-b33349aed6ac.png',
+      icon: <FileText className="h-6 w-6" />,
+      color: 'from-purple-400 to-indigo-600',
+      bgColor: 'bg-purple-50',
+      borderColor: 'border-purple-200',
+      totalCount: 368,
+      trend: '+20%',
+      data: [
+        { tipo: 'Trasporto Sostenibile', count: 167, percentage: 45 },
+        { tipo: 'Compensazione CO2', count: 112, percentage: 30 },
+        { tipo: 'Digital First', count: 89, percentage: 25 }
+      ]
+    }
+  ]);
+
+  const [externalCertificateCategories] = useState([
+    {
+      category: 'Risparmio Idrico',
+      mascot: '/lovable-uploads/0a948061-d9ea-4555-839e-59bc31cd4c9a.png',
+      icon: <Droplet className="h-6 w-6" />,
+      color: 'from-blue-400 to-cyan-600',
+      bgColor: 'bg-blue-50',
+      borderColor: 'border-blue-200',
+      totalCount: 2982,
+      trend: '+28%',
+      data: [
+        { tipo: 'Sistemi Raccolta Acqua', count: 1456, percentage: 49 },
+        { tipo: 'Elettrodomestici Water-Saving', count: 892, percentage: 30 },
+        { tipo: 'Giardini Sostenibili', count: 634, percentage: 21 }
+      ]
+    },
+    {
+      category: 'Risparmio Energetico',
+      mascot: '/lovable-uploads/89a2a2c5-7071-4df2-8e73-c5e5b645b38b.png',
+      icon: <Zap className="h-6 w-6" />,
+      color: 'from-yellow-400 to-orange-600',
+      bgColor: 'bg-yellow-50',
+      borderColor: 'border-yellow-200',
+      totalCount: 4688,
+      trend: '+32%',
+      data: [
+        { tipo: 'Pannelli Solari', count: 2134, percentage: 46 },
+        { tipo: 'Isolamento Termico', count: 1567, percentage: 33 },
+        { tipo: 'Smart Home', count: 987, percentage: 21 }
+      ]
+    },
+    {
+      category: 'Riciclo e Rifiuti',
+      mascot: '/lovable-uploads/491544c4-c37d-4c3b-a368-e0c71002d237.png',
+      icon: <Trash2 className="h-6 w-6" />,
+      color: 'from-green-400 to-emerald-600',
+      bgColor: 'bg-green-50',
+      borderColor: 'border-green-200',
+      totalCount: 3879,
+      trend: '+25%',
+      data: [
+        { tipo: 'Compostaggio Domestico', count: 1789, percentage: 46 },
+        { tipo: 'Riparazione vs Sostituzione', count: 1234, percentage: 32 },
+        { tipo: 'Upcycling Creativo', count: 856, percentage: 22 }
+      ]
+    },
+    {
+      category: 'Riduzione CO2',
+      mascot: '/lovable-uploads/f7195bbc-9cea-4e2a-93c5-b33349aed6ac.png',
+      icon: <FileText className="h-6 w-6" />,
+      color: 'from-purple-400 to-indigo-600',
+      bgColor: 'bg-purple-50',
+      borderColor: 'border-purple-200',
+      totalCount: 5057,
+      trend: '+35%',
+      data: [
+        { tipo: 'Mobilità Elettrica', count: 2456, percentage: 49 },
+        { tipo: 'Alimentazione Plant-Based', count: 1678, percentage: 33 },
+        { tipo: 'Turismo Sostenibile', count: 923, percentage: 18 }
+      ]
+    }
+  ]);
+
+  // DPP Products state
+  const [dppProducts, setDppProducts] = useState([
+    { id: 1, nome: 'Borraccia Termica Eco', codice: 'BTE-001', qrCode: 'DPP-BTE001-2024', stato: 'Attivo', garanzia: '2 anni', materiali: 'Acciaio Inox Riciclato' },
+    { id: 2, nome: 'Zaino Sostenibile', codice: 'ZS-002', qrCode: 'DPP-ZS002-2024', stato: 'Attivo', garanzia: '3 anni', materiali: 'Tessuto PET Riciclato' },
+    { id: 3, nome: 'Notebook Bambù', codice: 'NB-003', qrCode: 'DPP-NB003-2024', stato: 'In Verifica', garanzia: '1 anno', materiali: 'Bambù Certificato FSC' }
+  ]);
+
+  const [newDppProduct, setNewDppProduct] = useState({
+    nome: '',
+    codice: '',
+    materiali: '',
+    garanzia: ''
+  });
+
+  const [newWelfareItem, setNewWelfareItem] = useState({
+    tipo: '',
+    nome: '',
+    valore: '',
+    certificatiRichiesti: '',
+    quantitaCertificati: ''
+  });
+
+  const [newFollowersReward, setNewFollowersReward] = useState({
+    tipo: '',
+    nome: '',
+    valore: '',
+    certificatiRichiesti: '',
+    quantitaCertificati: ''
+  });
+
+  const [newDppUpload, setNewDppUpload] = useState({
+    nomeProdotto: '',
+    codiceProdotto: '',
+    categoria: '',
+    materiali: '',
+    fornitore: '',
+    certificazioni: '',
+    garanzia: '',
+    istruzioniUso: '',
+    riciclabilita: ''
+  });
+
+  const [newRewardUpload, setNewRewardUpload] = useState({
+    categoria: '', // 'dipendenti' o 'followers'
+    tipo: '', // 'premio', 'sconto', 'viaggio', 'gadget'
+    nome: '',
+    descrizione: '',
+    valore: '',
+    certificatiRichiesti: '',
+    quantitaCertificati: '',
+    validita: '',
+    terminiCondizioni: ''
+  });
+
+  // Chart data for pie charts
+  const employeeChartData = certificateMonitoringCategories.map(cat => ({
+    name: cat.category,
+    value: cat.totalCount,
+    fill: `hsl(${cat.category === 'Risparmio Idrico' ? '200, 70%, 50%' : 
+                cat.category === 'Risparmio Energetico' ? '45, 80%, 60%' :
+                cat.category === 'Riciclo e Rifiuti' ? '140, 70%, 50%' : '260, 70%, 50%'})`
+  }));
+
+  const externalChartData = externalCertificateCategories.map(cat => ({
+    name: cat.category,
+    value: cat.totalCount,
+    fill: `hsl(${cat.category === 'Risparmio Idrico' ? '200, 70%, 50%' : 
+                cat.category === 'Risparmio Energetico' ? '45, 80%, 60%' :
+                cat.category === 'Riciclo e Rifiuti' ? '140, 70%, 50%' : '260, 70%, 50%'})`
+  }));
+
+  const chartConfig = {
+    value: {
+      label: "Certificati",
+    },
   };
 
-  const handleRewardsSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast.success("Premio/Sconto caricato con successo!");
-    setIsRewardsDialogOpen(false);
+  const handleAddWelfareItem = () => {
+    if (newWelfareItem.tipo && newWelfareItem.nome && newWelfareItem.valore && newWelfareItem.certificatiRichiesti && newWelfareItem.quantitaCertificati) {
+      setWelfareItems([...welfareItems, {
+        id: Date.now(),
+        ...newWelfareItem,
+        quantitaCertificati: parseInt(newWelfareItem.quantitaCertificati)
+      }]);
+      setNewWelfareItem({ tipo: '', nome: '', valore: '', certificatiRichiesti: '', quantitaCertificati: '' });
+    }
+  };
+
+  const handleAddFollowersReward = () => {
+    if (newFollowersReward.tipo && newFollowersReward.nome && newFollowersReward.valore && newFollowersReward.certificatiRichiesti && newFollowersReward.quantitaCertificati) {
+      setFollowersRewards([...followersRewards, {
+        id: Date.now(),
+        ...newFollowersReward,
+        quantitaCertificati: parseInt(newFollowersReward.quantitaCertificati)
+      }]);
+      setNewFollowersReward({ tipo: '', nome: '', valore: '', certificatiRichiesti: '', quantitaCertificati: '' });
+    }
+  };
+
+  const handleAddDppProduct = () => {
+    if (newDppProduct.nome && newDppProduct.codice && newDppProduct.materiali && newDppProduct.garanzia) {
+      const qrCode = `DPP-${newDppProduct.codice}-2024`;
+      setDppProducts([...dppProducts, {
+        id: Date.now(),
+        ...newDppProduct,
+        qrCode,
+        stato: 'In Verifica'
+      }]);
+      setNewDppProduct({ nome: '', codice: '', materiali: '', garanzia: '' });
+      setDppDialogOpen(false);
+    }
+  };
+
+  const handleAddDppUpload = () => {
+    if (newDppUpload.nomeProdotto && newDppUpload.codiceProdotto && newDppUpload.categoria && newDppUpload.materiali) {
+      // Here you would typically upload to backend
+      console.log('Uploading DPP:', newDppUpload);
+      setNewDppUpload({
+        nomeProdotto: '',
+        codiceProdotto: '',
+        categoria: '',
+        materiali: '',
+        fornitore: '',
+        certificazioni: '',
+        garanzia: '',
+        istruzioniUso: '',
+        riciclabilita: ''
+      });
+      setDppUploadDialogOpen(false);
+    }
+  };
+
+  const handleAddRewardUpload = () => {
+    if (newRewardUpload.categoria && newRewardUpload.tipo && newRewardUpload.nome && newRewardUpload.valore && newRewardUpload.certificatiRichiesti && newRewardUpload.quantitaCertificati) {
+      // Here you would typically upload to backend
+      console.log('Uploading Reward:', newRewardUpload);
+      setNewRewardUpload({
+        categoria: '',
+        tipo: '',
+        nome: '',
+        descrizione: '',
+        valore: '',
+        certificatiRichiesti: '',
+        quantitaCertificati: '',
+        validita: '',
+        terminiCondizioni: ''
+      });
+      setRewardsUploadDialogOpen(false);
+    }
+  };
+
+  const getIconForType = (tipo: string) => {
+    switch (tipo.toLowerCase()) {
+      case 'premio': return <Gift className="h-4 w-4" />;
+      case 'viaggio': return <Plane className="h-4 w-4" />;
+      case 'gadget': return <Award className="h-4 w-4" />;
+      case 'sconto': return <Percent className="h-4 w-4" />;
+      default: return <Gift className="h-4 w-4" />;
+    }
+  };
+
+  const getBadgeColor = (tipo: string) => {
+    switch (tipo.toLowerCase()) {
+      case 'premio': return 'bg-emerald-100 text-emerald-700 border-emerald-200';
+      case 'viaggio': return 'bg-blue-100 text-blue-700 border-blue-200';
+      case 'gadget': return 'bg-purple-100 text-purple-700 border-purple-200';
+      case 'sconto': return 'bg-orange-100 text-orange-700 border-orange-200';
+      default: return 'bg-gray-100 text-gray-700 border-gray-200';
+    }
+  };
+
+  const getTrendColor = (trend: string) => {
+    return trend.startsWith('+') ? 'text-green-600' : 'text-red-600';
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-2 md:p-4">
+      <LanguageSwitcher />
+      
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Dashboard Aziende</h1>
-          <p className="text-gray-600">Gestisci i tuoi prodotti sostenibili e monitora le performance</p>
+        {/* Navigation Button */}
+        <div className="mb-2">
+          <Button 
+            onClick={() => navigate('/')} 
+            variant="outline" 
+            size={isMobile ? "sm" : "default"}
+            className="flex items-center gap-2 hover:bg-white/80 border-blue-200 text-blue-700 hover:text-blue-800"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            {t('backToMenu')}
+          </Button>
         </div>
 
-        {/* Upload Blocks - Side by Side */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-          {/* DPP Upload Block */}
-          <Card className="border border-green-200">
-            <CardHeader className="pb-3">
-              <CardTitle className="text-lg flex items-center gap-2">
-                <FileText className="h-5 w-5 text-green-600" />
-                DPP Aziendali
+        {/* Header Section */}
+        <div className="text-center mb-3">
+          <h1 className={`${isMobile ? 'text-xl' : 'text-2xl'} font-bold bg-gradient-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent mb-1`}>
+            Dashboard Aziendale
+          </h1>
+          <p className={`${isMobile ? 'text-xs' : 'text-sm'} text-gray-600 max-w-2xl mx-auto px-2`}>
+            Gestisci i certificati di sostenibilità dei tuoi dipendenti e followers, configura premi e benefit, 
+            e monitora l'impatto ambientale della tua azienda.
+          </p>
+        </div>
+
+        {/* Metriche Certificati */}
+        <div className="grid grid-cols-2 gap-2 md:gap-3 mb-3">
+          <Card className="border-0 shadow-md bg-gradient-to-br from-emerald-400 to-green-500 text-white">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 p-2 md:p-3">
+              <CardTitle className="text-xs md:text-sm font-medium text-emerald-100">{t('employeeCertificates')}</CardTitle>
+              <div className="p-1 bg-white/25 rounded-md">
+                <Users className="h-3 w-3 text-white" />
+              </div>
+            </CardHeader>
+            <CardContent className="pb-1 p-2 md:p-3 pt-0">
+              <div className="text-base md:text-xl font-bold text-white">{certificatiDipendenti}</div>
+              <p className="text-xs text-emerald-100 mt-1">
+                Certificati scambiati con i dipendenti
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="border-0 shadow-md bg-gradient-to-br from-cyan-400 to-blue-500 text-white">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 p-2 md:p-3">
+              <CardTitle className="text-xs md:text-sm font-medium text-cyan-100">{t('externalCertificates')}</CardTitle>
+              <div className="p-1 bg-white/25 rounded-md">
+                <UserCheck className="h-3 w-3 text-white" />
+              </div>
+            </CardHeader>
+            <CardContent className="pb-1 p-2 md:p-3 pt-0">
+              <div className="text-base md:text-xl font-bold text-white">{certificatiEsterni}</div>
+              <p className="text-xs text-cyan-100 mt-1">
+                Certificati ricevuti da followers
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Target e Grafici a Torta per Monitoraggio */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 mb-3">
+          {/* Target e Grafico Dipendenti */}
+          <Card className="border-0 shadow-md bg-white/90 backdrop-blur-sm">
+            <CardHeader className="bg-gradient-to-r from-emerald-400 to-green-500 text-white rounded-t-lg pb-1">
+              <CardTitle className={`flex items-center gap-2 ${isMobile ? 'text-sm' : 'text-base'}`}>
+                <Target className="h-4 w-4" />
+                Target Dipendenti
               </CardTitle>
-              <CardDescription className="text-sm">
-                Carica i Digital Product Passport collegati ai prodotti fisici
+              <CardDescription className={`text-emerald-100 ${isMobile ? 'text-xs' : 'text-sm'}`}>
+                Obiettivi e distribuzione certificati per categoria
               </CardDescription>
             </CardHeader>
-            <CardContent className="pt-0">
-              <Dialog open={isDppDialogOpen} onOpenChange={setIsDppDialogOpen}>
-                <DialogTrigger asChild>
-                  <Button className="w-full bg-green-600 hover:bg-green-700" size="sm">
-                    <Upload className="mr-2 h-4 w-4" />
-                    Carica DPP
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="max-w-2xl">
-                  <DialogHeader>
-                    <DialogTitle>Carica DPP Aziendale</DialogTitle>
-                    <DialogDescription>
-                      Inserisci le informazioni del Digital Product Passport per i tuoi prodotti fisici
-                    </DialogDescription>
-                  </DialogHeader>
-                  <form onSubmit={handleDppSubmit} className="space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <Label htmlFor="product-name">Nome Prodotto</Label>
-                        <Input id="product-name" placeholder="Es. Maglietta Bio Cotton" required />
-                      </div>
-                      <div>
-                        <Label htmlFor="product-code">Codice Prodotto</Label>
-                        <Input id="product-code" placeholder="Es. BCT001" required />
-                      </div>
+            <CardContent className="p-2">
+              <div className="flex flex-col lg:flex-row gap-3">
+                <div className="flex-1">
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-xs font-medium text-gray-600">Target Annuale</span>
+                      <span className="text-sm font-bold text-emerald-600">2,000</span>
                     </div>
-                    <div>
-                      <Label htmlFor="description">Descrizione</Label>
-                      <Textarea id="description" placeholder="Descrizione dettagliata del prodotto..." />
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <Label htmlFor="sustainability-score">Punteggio Sostenibilità</Label>
-                        <Select>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Seleziona punteggio" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="A">A - Eccellente</SelectItem>
-                            <SelectItem value="B">B - Buono</SelectItem>
-                            <SelectItem value="C">C - Discreto</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      <div>
-                        <Label htmlFor="carbon-footprint">Carbon Footprint (kg CO2)</Label>
-                        <Input id="carbon-footprint" type="number" placeholder="Es. 2.5" />
-                      </div>
-                    </div>
-                    <div>
-                      <Label htmlFor="certifications">Certificazioni</Label>
-                      <Input id="certifications" placeholder="Es. GOTS, Cradle to Cradle" />
-                    </div>
-                    <div className="flex justify-end space-x-2">
-                      <Button type="button" variant="outline" onClick={() => setIsDppDialogOpen(false)}>
-                        Annulla
-                      </Button>
-                      <Button type="submit">Carica DPP</Button>
-                    </div>
-                  </form>
-                </DialogContent>
-              </Dialog>
-            </CardContent>
-          </Card>
-
-          {/* Rewards Upload Block */}
-          <Card className="border border-blue-200">
-            <CardHeader className="pb-3">
-              <CardTitle className="text-lg flex items-center gap-2">
-                <Gift className="h-5 w-5 text-blue-600" />
-                Premi e Sconti
-              </CardTitle>
-              <CardDescription className="text-sm">
-                Offri incentivi in cambio di certificati sostenibili
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="pt-0">
-              <Dialog open={isRewardsDialogOpen} onOpenChange={setIsRewardsDialogOpen}>
-                <DialogTrigger asChild>
-                  <Button className="w-full bg-blue-600 hover:bg-blue-700" size="sm">
-                    <Gift className="mr-2 h-4 w-4" />
-                    Aggiungi Premio
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="max-w-2xl">
-                  <DialogHeader>
-                    <DialogTitle>Carica Premio o Sconto</DialogTitle>
-                    <DialogDescription>
-                      Crea incentivi per dipendenti e followers in cambio di certificati di sostenibilità
-                    </DialogDescription>
-                  </DialogHeader>
-                  <form onSubmit={handleRewardsSubmit} className="space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <Label htmlFor="reward-type">Tipo</Label>
-                        <Select>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Seleziona tipo" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="discount">Sconto</SelectItem>
-                            <SelectItem value="voucher">Voucher</SelectItem>
-                            <SelectItem value="gift">Regalo</SelectItem>
-                            <SelectItem value="experience">Esperienza</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      <div>
-                        <Label htmlFor="target-audience">Destinatari</Label>
-                        <Select>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Seleziona destinatari" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="employees">Dipendenti</SelectItem>
-                            <SelectItem value="followers">Followers</SelectItem>
-                            <SelectItem value="both">Entrambi</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </div>
-                    <div>
-                      <Label htmlFor="reward-title">Titolo Premio</Label>
-                      <Input id="reward-title" placeholder="Es. Sconto 20% su prodotti eco-friendly" required />
-                    </div>
-                    <div>
-                      <Label htmlFor="reward-description">Descrizione</Label>
-                      <Textarea id="reward-description" placeholder="Descrizione dettagliata del premio..." />
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <Label htmlFor="certificates-required">Certificati Richiesti</Label>
-                        <Input id="certificates-required" type="number" placeholder="Es. 5" min="1" required />
-                      </div>
-                      <div>
-                        <Label htmlFor="reward-value">Valore</Label>
-                        <Input id="reward-value" placeholder="Es. €50, 20%" />
-                      </div>
-                    </div>
-                    <div>
-                      <Label htmlFor="validity-period">Periodo di Validità</Label>
-                      <Input id="validity-period" type="date" />
-                    </div>
-                    <div className="flex justify-end space-x-2">
-                      <Button type="button" variant="outline" onClick={() => setIsRewardsDialogOpen(false)}>
-                        Annulla
-                      </Button>
-                      <Button type="submit">Carica Premio</Button>
-                    </div>
-                  </form>
-                </DialogContent>
-              </Dialog>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* KPI Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Prodotti Certificati</CardTitle>
-              <CheckCircle className="h-4 w-4 text-green-600" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-green-600">247</div>
-              <p className="text-xs text-muted-foreground">+12% dal mese scorso</p>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">CO2 Risparmiata</CardTitle>
-              <TrendingUp className="h-4 w-4 text-blue-600" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-blue-600">1,234 kg</div>
-              <p className="text-xs text-muted-foreground">+8% dal mese scorso</p>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Dipendenti Attivi</CardTitle>
-              <Users className="h-4 w-4 text-purple-600" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-purple-600">89</div>
-              <p className="text-xs text-muted-foreground">+15% dal mese scorso</p>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Punteggio ESG</CardTitle>
-              <Award className="h-4 w-4 text-orange-600" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-orange-600">8.7/10</div>
-              <p className="text-xs text-muted-foreground">+0.3 dal mese scorso</p>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Recent Activity and Sustainability Report */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Attività Recenti</CardTitle>
-              <CardDescription>Ultime azioni dei tuoi dipendenti</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {[
-                  { user: "Marco Rossi", action: "ha caricato certificato riciclo", time: "2 ore fa", badge: "Riciclo" },
-                  { user: "Anna Verdi", action: "ha completato corso sostenibilità", time: "4 ore fa", badge: "Formazione" },
-                  { user: "Luca Bianchi", action: "ha utilizzato mezzi pubblici", time: "6 ore fa", badge: "Mobilità" },
-                  { user: "Sara Neri", action: "ha partecipato a evento green", time: "1 giorno fa", badge: "Evento" },
-                ].map((activity, index) => (
-                  <div key={index} className="flex items-center justify-between p-3 rounded-lg border">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                        <Building2 className="h-4 w-4 text-green-600" />
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium">{activity.user}</p>
-                        <p className="text-xs text-gray-500">{activity.action}</p>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <Badge variant="secondary" className="text-xs">{activity.badge}</Badge>
-                      <p className="text-xs text-gray-500 mt-1">{activity.time}</p>
+                    <Progress value={(certificatiDipendenti / 2000) * 100} className="h-2" />
+                    <div className="text-xs text-gray-500">
+                      {certificatiDipendenti} / 2,000 ({Math.round((certificatiDipendenti / 2000) * 100)}%)
                     </div>
                   </div>
-                ))}
+                  <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
+                    {certificateMonitoringCategories.map((cat, index) => (
+                      <div key={index} className="flex items-center gap-1">
+                        <div 
+                          className="w-2 h-2 rounded-full" 
+                          style={{ backgroundColor: employeeChartData[index]?.fill }}
+                        />
+                        <span className="text-gray-600 truncate">{cat.category}</span>
+                        <span className="font-semibold ml-auto">{cat.totalCount}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="w-full lg:w-32 h-32">
+                  <ChartContainer config={chartConfig} className="w-full h-full">
+                    <PieChart>
+                      <Pie
+                        data={employeeChartData}
+                        cx="50%"
+                        cy="50%"
+                        innerRadius={20}
+                        outerRadius={45}
+                        paddingAngle={2}
+                        dataKey="value"
+                      >
+                        {employeeChartData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={entry.fill} />
+                        ))}
+                      </Pie>
+                      <ChartTooltip content={<ChartTooltipContent />} />
+                    </PieChart>
+                  </ChartContainer>
+                </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Report di Sostenibilità</CardTitle>
-              <CardDescription>Panoramica delle performance ambientali</CardDescription>
+          {/* Target e Grafico Esterni */}
+          <Card className="border-0 shadow-md bg-white/90 backdrop-blur-sm">
+            <CardHeader className="bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-t-lg pb-1">
+              <CardTitle className={`flex items-center gap-2 ${isMobile ? 'text-sm' : 'text-base'}`}>
+                <Target className="h-4 w-4" />
+                Target Followers
+              </CardTitle>
+              <CardDescription className={`text-cyan-100 ${isMobile ? 'text-xs' : 'text-sm'}`}>
+                Obiettivi e distribuzione certificati esterni
+              </CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center p-3 bg-green-50 rounded-lg">
-                  <span className="text-sm font-medium">Emissioni CO2</span>
-                  <span className="text-sm text-green-600 font-bold">-15% vs 2023</span>
+            <CardContent className="p-2">
+              <div className="flex flex-col lg:flex-row gap-3">
+                <div className="flex-1">
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-xs font-medium text-gray-600">Target Annuale</span>
+                      <span className="text-sm font-bold text-cyan-600">20,000</span>
+                    </div>
+                    <Progress value={(certificatiEsterni / 20000) * 100} className="h-2" />
+                    <div className="text-xs text-gray-500">
+                      {certificatiEsterni} / 20,000 ({Math.round((certificatiEsterni / 20000) * 100)}%)
+                    </div>
+                  </div>
+                  <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
+                    {externalCertificateCategories.map((cat, index) => (
+                      <div key={index} className="flex items-center gap-1">
+                        <div 
+                          className="w-2 h-2 rounded-full" 
+                          style={{ backgroundColor: externalChartData[index]?.fill }}
+                        />
+                        <span className="text-gray-600 truncate">{cat.category}</span>
+                        <span className="font-semibold ml-auto">{cat.totalCount}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
-                  <span className="text-sm font-medium">Energia Rinnovabile</span>
-                  <span className="text-sm text-blue-600 font-bold">85%</span>
-                </div>
-                <div className="flex justify-between items-center p-3 bg-purple-50 rounded-lg">
-                  <span className="text-sm font-medium">Rifiuti Riciclati</span>
-                  <span className="text-sm text-purple-600 font-bold">92%</span>
-                </div>
-                <div className="flex justify-between items-center p-3 bg-orange-50 rounded-lg">
-                  <span className="text-sm font-medium">Acqua Risparmiata</span>
-                  <span className="text-sm text-orange-600 font-bold">2,340L</span>
+                <div className="w-full lg:w-32 h-32">
+                  <ChartContainer config={chartConfig} className="w-full h-full">
+                    <PieChart>
+                      <Pie
+                        data={externalChartData}
+                        cx="50%"
+                        cy="50%"
+                        innerRadius={20}
+                        outerRadius={45}
+                        paddingAngle={2}
+                        dataKey="value"
+                      >
+                        {externalChartData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={entry.fill} />
+                        ))}
+                      </Pie>
+                      <ChartTooltip content={<ChartTooltipContent />} />
+                    </PieChart>
+                  </ChartContainer>
                 </div>
               </div>
-              <Button className="w-full mt-4" variant="outline">
-                Visualizza Report Completo
-              </Button>
             </CardContent>
           </Card>
         </div>
+
+        {/* Monitoraggio Certificati - Condizionalmente visibile */}
+        {showMonitoringSection && (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 mb-3">
+            {/* Monitoraggio Certificati Dipendenti */}
+            <Card className="border-0 shadow-md bg-white/90 backdrop-blur-sm">
+              <CardHeader className="bg-gradient-to-r from-emerald-400 to-green-500 text-white rounded-t-lg pb-1">
+                <CardTitle className={`flex items-center gap-2 ${isMobile ? 'text-sm' : 'text-base'}`}>
+                  <Eye className="h-4 w-4" />
+                  Monitoraggio Certificati Dipendenti
+                </CardTitle>
+                <CardDescription className={`text-emerald-100 ${isMobile ? 'text-xs' : 'text-sm'}`}>
+                  Analisi dei comportamenti sostenibili per strategie di marketing mirate
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="p-2">
+                <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2'} gap-2`}>
+                  {certificateMonitoringCategories.map((category, index) => (
+                    <Card key={index} className={`border ${category.borderColor} ${category.bgColor} hover:shadow-sm transition-all duration-300`}>
+                      <CardContent className="p-2">
+                        <div className="flex items-center justify-between mb-1">
+                          <div className="flex items-center gap-1.5">
+                            <img 
+                              src={category.mascot} 
+                              alt={category.category}
+                              className="w-6 h-6 rounded-full object-cover"
+                            />
+                            <div className={`p-1 rounded-md bg-gradient-to-r ${category.color} text-white`}>
+                              {React.cloneElement(category.icon, { className: "h-3 w-3" })}
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <div className={`${isMobile ? 'text-lg' : 'text-xl'} font-bold`}>{category.totalCount}</div>
+                            <div className={`${isMobile ? 'text-xs' : 'text-xs'} font-semibold ${getTrendColor(category.trend)} flex items-center gap-1`}>
+                              <TrendingUp className="h-2 w-2" />
+                              {category.trend}
+                            </div>
+                          </div>
+                        </div>
+                        <h3 className={`font-semibold text-gray-800 mb-1 ${isMobile ? 'text-xs' : 'text-sm'}`}>{category.category}</h3>
+                        <div className="space-y-1">
+                          {category.data.map((item, itemIndex) => (
+                            <div key={itemIndex} className={`flex items-center justify-between ${isMobile ? 'text-xs' : 'text-xs'}`}>
+                              <span className="text-gray-600 truncate mr-2">{item.tipo}</span>
+                              <div className="flex items-center gap-1 flex-shrink-0">
+                                <span className="font-semibold">{item.count}</span>
+                                <div className="w-8 h-1 bg-gray-200 rounded-full overflow-hidden">
+                                  <div 
+                                    className={`h-full bg-gradient-to-r ${category.color} transition-all duration-500`}
+                                    style={{ width: `${item.percentage}%` }}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Monitoraggio Certificati Esterni */}
+            <Card className="border-0 shadow-md bg-white/90 backdrop-blur-sm">
+              <CardHeader className="bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-t-lg pb-1">
+                <CardTitle className={`flex items-center gap-2 ${isMobile ? 'text-sm' : 'text-base'}`}>
+                  <Globe className="h-4 w-4" />
+                  Monitoraggio Certificati Esterni
+                </CardTitle>
+                <CardDescription className={`text-cyan-100 ${isMobile ? 'text-xs' : 'text-sm'}`}>
+                  Analisi dei comportamenti sostenibili dei followers per strategie di engagement
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="p-2">
+                <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2'} gap-2`}>
+                  {externalCertificateCategories.map((category, index) => (
+                    <Card key={index} className={`border ${category.borderColor} ${category.bgColor} hover:shadow-sm transition-all duration-300`}>
+                      <CardContent className="p-2">
+                        <div className="flex items-center justify-between mb-1">
+                          <div className="flex items-center gap-1.5">
+                            <img 
+                              src={category.mascot} 
+                              alt={category.category}
+                              className="w-6 h-6 rounded-full object-cover"
+                            />
+                            <div className={`p-1 rounded-md bg-gradient-to-r ${category.color} text-white`}>
+                              {React.cloneElement(category.icon, { className: "h-3 w-3" })}
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <div className={`${isMobile ? 'text-lg' : 'text-xl'} font-bold`}>{category.totalCount}</div>
+                            <div className={`${isMobile ? 'text-xs' : 'text-xs'} font-semibold ${getTrendColor(category.trend)} flex items-center gap-1`}>
+                              <TrendingUp className="h-2 w-2" />
+                              {category.trend}
+                            </div>
+                          </div>
+                        </div>
+                        <h3 className={`font-semibold text-gray-800 mb-1 ${isMobile ? 'text-xs' : 'text-sm'}`}>{category.category}</h3>
+                        <div className="space-y-1">
+                          {category.data.map((item, itemIndex) => (
+                            <div key={itemIndex} className={`flex items-center justify-between ${isMobile ? 'text-xs' : 'text-xs'}`}>
+                              <span className="text-gray-600 truncate mr-2">{item.tipo}</span>
+                              <div className="flex items-center gap-1 flex-shrink-0">
+                                <span className="font-semibold">{item.count}</span>
+                                <div className="w-8 h-1 bg-gray-200 rounded-full overflow-hidden">
+                                  <div 
+                                    className={`h-full bg-gradient-to-r ${category.color} transition-all duration-500`}
+                                    style={{ width: `${item.percentage}%` }}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
+        {/* Sezioni Welfare, Premi e DPP - Condizionalmente visibili */}
+        {(showWelfareSection || showFollowersSection || showDppSection) && (
+          <div className="space-y-6 mb-8">
+            {/* Sezione Welfare e Premi */}
+            {(showWelfareSection || showFollowersSection) && (
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Sezione Welfare Dipendenti */}
+                {showWelfareSection && (
+                  <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
+                    <CardHeader className="bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-t-lg">
+                      <CardTitle className="flex items-center gap-2">
+                        <Users className="h-6 w-6" />
+                        Welfare per Dipendenti
+                      </CardTitle>
+                      <CardDescription className="text-green-100">
+                        Premi e benefit in cambio di comportamenti sostenibili certificati
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="p-6">
+                      {/* Form per aggiungere nuovo item welfare */}
+                      <div className="grid grid-cols-1 gap-4 mb-6 p-4 border-2 border-dashed border-green-200 rounded-xl bg-gradient-to-r from-green-50 to-emerald-50">
+                        <div>
+                          <Label htmlFor="welfare-tipo" className="text-green-700 font-medium">{t('type')}</Label>
+                          <Input
+                            id="welfare-tipo"
+                            placeholder="Premio/Viaggio/Gadget"
+                            value={newWelfareItem.tipo}
+                            onChange={(e) => setNewWelfareItem({...newWelfareItem, tipo: e.target.value})}
+                            className="border-green-200 focus:border-green-400"
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="welfare-nome" className="text-green-700 font-medium">{t('name')}</Label>
+                          <Input
+                            id="welfare-nome"
+                            placeholder="Nome del premio"
+                            value={newWelfareItem.nome}
+                            onChange={(e) => setNewWelfareItem({...newWelfareItem, nome: e.target.value})}
+                            className="border-green-200 focus:border-green-400"
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="welfare-valore" className="text-green-700 font-medium">{t('value')}</Label>
+                          <Input
+                            id="welfare-valore"
+                            placeholder="€ 0"
+                            value={newWelfareItem.valore}
+                            onChange={(e) => setNewWelfareItem({...newWelfareItem, valore: e.target.value})}
+                            className="border-green-200 focus:border-green-400"
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="welfare-certificati" className="text-green-700 font-medium">Tipo Certificati</Label>
+                          <Input
+                            id="welfare-certificati"
+                            placeholder="Es. Risparmio Energetico"
+                            value={newWelfareItem.certificatiRichiesti}
+                            onChange={(e) => setNewWelfareItem({...newWelfareItem, certificatiRichiesti: e.target.value})}
+                            className="border-green-200 focus:border-green-400"
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="welfare-quantita" className="text-green-700 font-medium">Quantità Certificati</Label>
+                          <Input
+                            id="welfare-quantita"
+                            type="number"
+                            placeholder="0"
+                            value={newWelfareItem.quantitaCertificati}
+                            onChange={(e) => setNewWelfareItem({...newWelfareItem, quantitaCertificati: e.target.value})}
+                            className="border-green-200 focus:border-green-400"
+                          />
+                        </div>
+                        <Button 
+                          onClick={handleAddWelfareItem} 
+                          className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white shadow-lg"
+                        >
+                          <Upload className="mr-2 h-4 w-4" />
+                          {t('add')}
+                        </Button>
+                      </div>
+
+                      {/* Lista items welfare - 2x2 grid */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {welfareItems.map((item) => (
+                          <div key={item.id} className="p-4 border-0 rounded-xl shadow-lg bg-gradient-to-br from-white to-green-50 hover:shadow-xl transition-shadow">
+                            <div className="flex items-center justify-between mb-3">
+                              <Badge className={`flex items-center gap-1 ${getBadgeColor(item.tipo)}`}>
+                                {getIconForType(item.tipo)}
+                                {item.tipo}
+                              </Badge>
+                              <span className="font-bold text-lg text-gray-700">{item.valore}</span>
+                            </div>
+                            <h4 className="font-semibold text-gray-800 mb-2">{item.nome}</h4>
+                            <div className="text-sm text-gray-600 space-y-1">
+                              <p><span className="font-medium">Richiede:</span> {item.quantitaCertificati}x {item.certificatiRichiesti}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* Sezione Premi per Followers */}
+                {showFollowersSection && (
+                  <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
+                    <CardHeader className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-t-lg">
+                      <CardTitle className="flex items-center gap-2">
+                        <Globe className="h-6 w-6" />
+                        Premi e Sconti per Followers
+                      </CardTitle>
+                      <CardDescription className="text-blue-100">
+                        Offerte e sconti per followers in cambio di certificati sostenibili
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="p-6">
+                      {/* Form per aggiungere nuovo premio followers */}
+                      <div className="grid grid-cols-1 gap-4 mb-6 p-4 border-2 border-dashed border-blue-200 rounded-xl bg-gradient-to-r from-blue-50 to-cyan-50">
+                        <div>
+                          <Label htmlFor="followers-tipo" className="text-blue-700 font-medium">Tipo</Label>
+                          <Input
+                            id="followers-tipo"
+                            placeholder="Sconto/Premio"
+                            value={newFollowersReward.tipo}
+                            onChange={(e) => setNewFollowersReward({...newFollowersReward, tipo: e.target.value})}
+                            className="border-blue-200 focus:border-blue-400"
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="followers-nome" className="text-blue-700 font-medium">Nome</Label>
+                          <Input
+                            id="followers-nome"
+                            placeholder="Nome dell'offerta"
+                            value={newFollowersReward.nome}
+                            onChange={(e) => setNewFollowersReward({...newFollowersReward, nome: e.target.value})}
+                            className="border-blue-200 focus:border-blue-400"
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="followers-valore" className="text-blue-700 font-medium">Valore</Label>
+                          <Input
+                            id="followers-valore"
+                            placeholder="€ 0 / %"
+                            value={newFollowersReward.valore}
+                            onChange={(e) => setNewFollowersReward({...newFollowersReward, valore: e.target.value})}
+                            className="border-blue-200 focus:border-blue-400"
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="followers-certificati" className="text-blue-700 font-medium">Tipo Certificati</Label>
+                          <Input
+                            id="followers-certificati"
+                            placeholder="Es. Risparmio Idrico"
+                            value={newFollowersReward.certificatiRichiesti}
+                            onChange={(e) => setNewFollowersReward({...newFollowersReward, certificatiRichiesti: e.target.value})}
+                            className="border-blue-200 focus:border-blue-400"
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="followers-quantita" className="text-blue-700 font-medium">Quantità Certificati</Label>
+                          <Input
+                            id="followers-quantita"
+                            type="number"
+                            placeholder="0"
+                            value={newFollowersReward.quantitaCertificati}
+                            onChange={(e) => setNewFollowersReward({...newFollowersReward, quantitaCertificati: e.target.value})}
+                            className="border-blue-200 focus:border-blue-400"
+                          />
+                        </div>
+                        <Button 
+                          onClick={handleAddFollowersReward} 
+                          className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white shadow-lg"
+                        >
+                          <Upload className="mr-2 h-4 w-4" />
+                          Aggiungi
+                        </Button>
+                      </div>
+
+                      {/* Lista premi followers - 2x2 grid */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {followersRewards.map((item) => (
+                          <div key={item.id} className="p-4 border-0 rounded-xl shadow-lg bg-gradient-to-br from-white to-blue-50 hover:shadow-xl transition-shadow">
+                            <div className="flex items-center justify-between mb-3">
+                              <Badge className={`flex items-center gap-1 ${getBadgeColor(item.tipo)}`}>
+                                {getIconForType(item.tipo)}
+                                {item.tipo}
+                              </Badge>
+                              <span className="font-bold text-lg text-gray-700">{item.valore}</span>
+                            </div>
+                            <h4 className="font-semibold text-gray-800 mb-2">{item.nome}</h4>
+                            <div className="text-sm text-gray-600 space-y-1">
+                              <p><span className="font-medium">Richiede:</span> {item.quantitaCertificati}x {item.certificatiRichiesti}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+              </div>
+            )}
+
+            {/* Sezione DPP Prodotti - Più leggera */}
+            {showDppSection && (
+              <Card className="border-0 shadow-md bg-white/90 backdrop-blur-sm">
+                <CardHeader className="bg-gradient-to-r from-indigo-400 to-purple-400 text-white rounded-t-lg">
+                  <CardTitle className="flex items-center gap-2 text-lg">
+                    <QrCode className="h-5 w-5" />
+                    Digital Product Passport (DPP)
+                  </CardTitle>
+                  <CardDescription className="text-indigo-100">
+                    Gestisci i passaporti digitali dei tuoi prodotti
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="p-4">
+                  <div className="flex flex-wrap gap-3 mb-4">
+                    <Dialog open={dppDialogOpen} onOpenChange={setDppDialogOpen}>
+                      <DialogTrigger asChild>
+                        <Button className="bg-indigo-600 hover:bg-indigo-700 text-white">
+                          <Package className="mr-2 h-4 w-4" />
+                          Nuovo DPP
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className="max-w-md">
+                        <DialogHeader>
+                          <DialogTitle className="text-lg text-indigo-700">Nuovo Digital Product Passport</DialogTitle>
+                          <DialogDescription>
+                            Compila i dati del prodotto per generare il DPP
+                          </DialogDescription>
+                        </DialogHeader>
+                        
+                        <div className="space-y-3">
+                          <div>
+                            <Label htmlFor="dpp-nome" className="text-indigo-700 text-sm">Nome Prodotto</Label>
+                            <Input
+                              id="dpp-nome"
+                              placeholder="Es. Borraccia Termica Eco"
+                              value={newDppProduct.nome}
+                              onChange={(e) => setNewDppProduct({...newDppProduct, nome: e.target.value})}
+                              className="border-indigo-200 focus:border-indigo-400"
+                            />
+                          </div>
+                          <div>
+                            <Label htmlFor="dpp-codice" className="text-indigo-700 text-sm">Codice Prodotto</Label>
+                            <Input
+                              id="dpp-codice"
+                              placeholder="Es. BTE-001"
+                              value={newDppProduct.codice}
+                              onChange={(e) => setNewDppProduct({...newDppProduct, codice: e.target.value})}
+                              className="border-indigo-200 focus:border-indigo-400"
+                            />
+                          </div>
+                          <div>
+                            <Label htmlFor="dpp-materiali" className="text-indigo-700 text-sm">Materiali</Label>
+                            <Input
+                              id="dpp-materiali"
+                              placeholder="Es. Acciaio Inox Riciclato"
+                              value={newDppProduct.materiali}
+                              onChange={(e) => setNewDppProduct({...newDppProduct, materiali: e.target.value})}
+                              className="border-indigo-200 focus:border-indigo-400"
+                            />
+                          </div>
+                          <div>
+                            <Label htmlFor="dpp-garanzia" className="text-indigo-700 text-sm">Garanzia</Label>
+                            <Input
+                              id="dpp-garanzia"
+                              placeholder="Es. 2 anni"
+                              value={newDppProduct.garanzia}
+                              onChange={(e) => setNewDppProduct({...newDppProduct, garanzia: e.target.value})}
+                              className="border-indigo-200 focus:border-indigo-400"
+                            />
+                          </div>
+                        </div>
+
+                        <DialogFooter>
+                          <Button variant="outline" onClick={() => setDppDialogOpen(false)} className="text-sm">
+                            Annulla
+                          </Button>
+                          <Button onClick={handleAddDppProduct} className="bg-indigo-600 hover:bg-indigo-700 text-sm">
+                            <QrCode className="mr-2 h-3 w-3" />
+                            Genera DPP
+                          </Button>
+                        </DialogFooter>
+                      </DialogContent>
+                    </Dialog>
+
+                    <Button variant="outline" className="border-indigo-200 text-indigo-700 hover:bg-indigo-50">
+                      <Upload className="mr-2 h-4 w-4" />
+                      Importa CSV
+                    </Button>
+                  </div>
+
+                  {/* Lista DPP Products - Utilizza tutto lo spazio disponibile */}
+                  <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg p-4">
+                    <h3 className="text-sm font-semibold text-indigo-700 mb-3 flex items-center gap-2">
+                      <Package className="h-4 w-4" />
+                      Prodotti con DPP ({dppProducts.length})
+                    </h3>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+                      {dppProducts.map((product) => (
+                        <div key={product.id} className="bg-white rounded-lg p-3 shadow-sm border border-indigo-100">
+                          <div className="flex items-center justify-between mb-2">
+                            <Badge className={`text-xs ${product.stato === 'Attivo' ? 'bg-green-100 text-green-700 border-green-200' : 'bg-yellow-100 text-yellow-700 border-yellow-200'}`}>
+                              {product.stato === 'Attivo' ? <Shield className="h-3 w-3 mr-1" /> : <Eye className="h-3 w-3 mr-1" />
+                              }
+                              {product.stato}
+                            </Badge>
+                            <Button size="sm" variant="outline" className="h-6 w-6 p-0 border-indigo-200">
+                              <QrCode className="h-3 w-3" />
+                            </Button>
+                          </div>
+                          
+                          <h4 className="font-medium text-gray-800 mb-2 text-sm">{product.nome}</h4>
+                          <div className="text-xs text-gray-600 space-y-1">
+                            <p><span className="font-medium">Codice:</span> {product.codice}</p>
+                            <p><span className="font-medium">Materiali:</span> {product.materiali}</p>
+                            <p><span className="font-medium">Garanzia:</span> {product.garanzia}</p>
+                          </div>
+                          
+                          <div className="mt-2 flex gap-1">
+                            <Button size="sm" variant="outline" className="flex-1 text-xs h-6 border-indigo-200 text-indigo-700 hover:bg-indigo-50">
+                              <Link className="h-3 w-3 mr-1" />
+                              Associa
+                            </Button>
+                            <Button size="sm" variant="outline" className="flex-1 text-xs h-6 border-indigo-200 text-indigo-700 hover:bg-indigo-50">
+                              <Eye className="h-3 w-3 mr-1" />
+                              Dettagli
+                            </Button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+          </div>
+        )}
+
+        {/* Pulsante Caricamento Premi e Sconti */}
+        <Card className="border-0 shadow-md bg-gradient-to-r from-emerald-400 to-green-500 text-white mb-3">
+          <CardHeader className="pb-2">
+            <CardTitle className={`flex items-center gap-2 text-white ${isMobile ? 'text-base' : 'text-lg'}`}>
+              <Gift className="h-4 w-4" />
+              Caricamento Premi e Sconti
+            </CardTitle>
+            <CardDescription className={`text-emerald-100 ${isMobile ? 'text-xs' : 'text-sm'}`}>
+              Configura premi, sconti e benefit da offrire in cambio di certificati di sostenibilità
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="pt-0">
+            <Dialog open={rewardsUploadDialogOpen} onOpenChange={setRewardsUploadDialogOpen}>
+              <DialogTrigger asChild>
+                <Button size={isMobile ? "sm" : "default"} className="w-full md:w-auto bg-white text-emerald-600 hover:bg-gray-100 shadow-md">
+                  <Upload className="mr-2 h-4 w-4" />
+                  Carica Premi e Sconti
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle className="text-2xl bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">
+                    Caricamento Premi e Sconti
+                  </DialogTitle>
+                  <DialogDescription>
+                    Configura premi, sconti e benefit da offrire a dipendenti e followers in cambio di certificati di sostenibilità
+                  </DialogDescription>
+                </DialogHeader>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Informazioni Base */}
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold text-emerald-700">Informazioni Base</h3>
+                    
+                    <div>
+                      <Label htmlFor="reward-categoria" className="text-emerald-700 font-medium">Categoria Destinatario *</Label>
+                      <Select value={newRewardUpload.categoria} onValueChange={(value) => setNewRewardUpload({...newRewardUpload, categoria: value})}>
+                        <SelectTrigger className="border-emerald-200 focus:border-emerald-400">
+                          <SelectValue placeholder="Seleziona categoria" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="dipendenti">Dipendenti</SelectItem>
+                          <SelectItem value="followers">Followers</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="reward-tipo" className="text-emerald-700 font-medium">Tipo Premio *</Label>
+                      <Select value={newRewardUpload.tipo} onValueChange={(value) => setNewRewardUpload({...newRewardUpload, tipo: value})}>
+                        <SelectTrigger className="border-emerald-200 focus:border-emerald-400">
+                          <SelectValue placeholder="Seleziona tipo" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="premio">Premio</SelectItem>
+                          <SelectItem value="sconto">Sconto</SelectItem>
+                          <SelectItem value="viaggio">Viaggio</SelectItem>
+                          <SelectItem value="gadget">Gadget</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="reward-nome" className="text-emerald-700 font-medium">Nome Premio *</Label>
+                      <Input
+                        id="reward-nome"
+                        placeholder="Es. Voucher Cena Ristorante"
+                        value={newRewardUpload.nome}
+                        onChange={(e) => setNewRewardUpload({...newRewardUpload, nome: e.target.value})}
+                        className="border-emerald-200 focus:border-emerald-400"
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="reward-descrizione" className="text-emerald-700 font-medium">Descrizione</Label>
+                      <Input
+                        id="reward-descrizione"
+                        placeholder="Breve descrizione del premio"
+                        value={newRewardUpload.descrizione}
+                        onChange={(e) => setNewRewardUpload({...newRewardUpload, descrizione: e.target.value})}
+                        className="border-emerald-200 focus:border-emerald-400"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Valore e Certificati */}
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold text-emerald-700">Valore e Requisiti</h3>
+                    
+                    <div>
+                      <Label htmlFor="reward-valore" className="text-emerald-700 font-medium">Valore *</Label>
+                      <Input
+                        id="reward-valore"
+                        placeholder="Es. € 50 oppure 15%"
+                        value={newRewardUpload.valore}
+                        onChange={(e) => setNewRewardUpload({...newRewardUpload, valore: e.target.value})}
+                        className="border-emerald-200 focus:border-emerald-400"
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="reward-certificati-tipo" className="text-emerald-700 font-medium">Tipo Certificati Richiesti *</Label>
+                      <Select value={newRewardUpload.certificatiRichiesti} onValueChange={(value) => setNewRewardUpload({...newRewardUpload, certificatiRichiesti: value})}>
+                        <SelectTrigger className="border-emerald-200 focus:border-emerald-400">
+                          <SelectValue placeholder="Seleziona tipo certificati" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="Risparmio Energetico">Risparmio Energetico</SelectItem>
+                          <SelectItem value="Risparmio Idrico">Risparmio Idrico</SelectItem>
+                          <SelectItem value="Riciclo Rifiuti">Riciclo Rifiuti</SelectItem>
+                          <SelectItem value="Riduzione CO2">Riduzione CO2</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="reward-quantita" className="text-emerald-700 font-medium">Quantità Certificati *</Label>
+                      <Input
+                        id="reward-quantita"
+                        type="number"
+                        placeholder="Es. 5"
+                        value={newRewardUpload.quantitaCertificati}
+                        onChange={(e) => setNewRewardUpload({...newRewardUpload, quantitaCertificati: e.target.value})}
+                        className="border-emerald-200 focus:border-emerald-400"
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="reward-validita" className="text-emerald-700 font-medium">Validità</Label>
+                      <Input
+                        id="reward-validita"
+                        placeholder="Es. 30 giorni, 1 anno"
+                        value={newRewardUpload.validita}
+                        onChange={(e) => setNewRewardUpload({...newRewardUpload, validita: e.target.value})}
+                        className="border-emerald-200 focus:border-emerald-400"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Termini e Condizioni - Full width */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-emerald-700">Termini e Condizioni</h3>
+                  <div>
+                    <Label htmlFor="reward-termini" className="text-emerald-700 font-medium">Termini e Condizioni</Label>
+                    <Input
+                      id="reward-termini"
+                      placeholder="Breve descrizione dei termini e condizioni"
+                      value={newRewardUpload.terminiCondizioni}
+                      onChange={(e) => setNewRewardUpload({...newRewardUpload, terminiCondizioni: e.target.value})}
+                      className="border-emerald-200 focus:border-emerald-400"
+                    />
+                  </div>
+                </div>
+
+                <DialogFooter>
+                  <Button variant="outline" onClick={() => setRewardsUploadDialogOpen(false)}>
+                    Annulla
+                  </Button>
+                  <Button 
+                    onClick={handleAddRewardUpload} 
+                    className="bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600"
+                    disabled={!newRewardUpload.categoria || !newRewardUpload.tipo || !newRewardUpload.nome || !newRewardUpload.valore || !newRewardUpload.certificatiRichiesti || !newRewardUpload.quantitaCertificati}
+                  >
+                    <Gift className="mr-2 h-4 w-4" />
+                    Carica Premio
+                  </Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+          </CardContent>
+        </Card>
+
+        {/* Pulsante Caricamento DPP Aziendali */}
+        <Card className="border-0 shadow-md bg-gradient-to-r from-indigo-400 to-purple-500 text-white mb-3">
+          <CardHeader className="pb-2">
+            <CardTitle className={`flex items-center gap-2 text-white ${isMobile ? 'text-base' : 'text-lg'}`}>
+              <Package className="h-4 w-4" />
+              Caricamento DPP Aziendali
+            </CardTitle>
+            <CardDescription className={`text-indigo-100 ${isMobile ? 'text-xs' : 'text-sm'}`}>
+              Carica i Digital Product Passport per i prodotti fisici della tua azienda
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="pt-0">
+            <Dialog open={dppUploadDialogOpen} onOpenChange={setDppUploadDialogOpen}>
+              <DialogTrigger asChild>
+                <Button size={isMobile ? "sm" : "default"} className="w-full md:w-auto bg-white text-indigo-600 hover:bg-gray-100 shadow-md">
+                  <Upload className="mr-2 h-4 w-4" />
+                  Carica DPP Prodotti
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle className="text-2xl bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                    Caricamento Digital Product Passport
+                  </DialogTitle>
+                  <DialogDescription>
+                    Inserisci le informazioni dettagliate del prodotto per generare il DPP aziendale
+                  </DialogDescription>
+                </DialogHeader>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Informazioni Base */}
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold text-indigo-700">Informazioni Base</h3>
+                    
+                    <div>
+                      <Label htmlFor="dpp-nome-prodotto" className="text-indigo-700 font-medium">Nome Prodotto *</Label>
+                      <Input
+                        id="dpp-nome-prodotto"
+                        placeholder="Es. Smartphone Eco-Friendly"
+                        value={newDppUpload.nomeProdotto}
+                        onChange={(e) => setNewDppUpload({...newDppUpload, nomeProdotto: e.target.value})}
+                        className="border-indigo-200 focus:border-indigo-400"
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="dpp-codice-prodotto" className="text-indigo-700 font-medium">Codice Prodotto *</Label>
+                      <Input
+                        id="dpp-codice-prodotto"
+                        placeholder="Es. SPH-ECO-001"
+                        value={newDppUpload.codiceProdotto}
+                        onChange={(e) => setNewDppUpload({...newDppUpload, codiceProdotto: e.target.value})}
+                        className="border-indigo-200 focus:border-indigo-400"
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="dpp-categoria" className="text-indigo-700 font-medium">Categoria *</Label>
+                      <Input
+                        id="dpp-categoria"
+                        placeholder="Es. Elettronica, Abbigliamento, Casa"
+                        value={newDppUpload.categoria}
+                        onChange={(e) => setNewDppUpload({...newDppUpload, categoria: e.target.value})}
+                        className="border-indigo-200 focus:border-indigo-400"
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="dpp-fornitore" className="text-indigo-700 font-medium">Fornitore</Label>
+                      <Input
+                        id="dpp-fornitore"
+                        placeholder="Nome del fornitore"
+                        value={newDppUpload.fornitore}
+                        onChange={(e) => setNewDppUpload({...newDppUpload, fornitore: e.target.value})}
+                        className="border-indigo-200 focus:border-indigo-400"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Sostenibilità e Specifiche */}
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold text-indigo-700">Sostenibilità e Specifiche</h3>
+                    
+                    <div>
+                      <Label htmlFor="dpp-materiali" className="text-indigo-700 font-medium">Materiali *</Label>
+                      <Input
+                        id="dpp-materiali"
+                        placeholder="Es. Plastica riciclata 70%, Metalli rari 20%"
+                        value={newDppUpload.materiali}
+                        onChange={(e) => setNewDppUpload({...newDppUpload, materiali: e.target.value})}
+                        className="border-indigo-200 focus:border-indigo-400"
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="dpp-certificazioni" className="text-indigo-700 font-medium">Certificazioni</Label>
+                      <Input
+                        id="dpp-certificazioni"
+                        placeholder="Es. ISO 14001, EPEAT Gold, Energy Star"
+                        value={newDppUpload.certificazioni}
+                        onChange={(e) => setNewDppUpload({...newDppUpload, certificazioni: e.target.value})}
+                        className="border-indigo-200 focus:border-indigo-400"
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="dpp-garanzia" className="text-indigo-700 font-medium">Garanzia</Label>
+                      <Input
+                        id="dpp-garanzia"
+                        placeholder="Es. 2 anni, Estendibile a 5 anni"
+                        value={newDppUpload.garanzia}
+                        onChange={(e) => setNewDppUpload({...newDppUpload, garanzia: e.target.value})}
+                        className="border-indigo-200 focus:border-indigo-400"
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="dpp-riciclabilita" className="text-indigo-700 font-medium">Riciclabilità</Label>
+                      <Input
+                        id="dpp-riciclabilita"
+                        placeholder="Es. 95% riciclabile, Programma take-back"
+                        value={newDppUpload.riciclabilita}
+                        onChange={(e) => setNewDppUpload({...newDppUpload, riciclabilita: e.target.value})}
+                        className="border-indigo-200 focus:border-indigo-400"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Istruzioni d'uso - Full width */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-indigo-700">Informazioni Aggiuntive</h3>
+                  <div>
+                    <Label htmlFor="dpp-istruzioni" className="text-indigo-700 font-medium">Istruzioni d'Uso</Label>
+                    <Input
+                      id="dpp-istruzioni"
+                      placeholder="Breve descrizione delle istruzioni d'uso principali"
+                      value={newDppUpload.istruzioniUso}
+                      onChange={(e) => setNewDppUpload({...newDppUpload, istruzioniUso: e.target.value})}
+                      className="border-indigo-200 focus:border-indigo-400"
+                    />
+                  </div>
+                </div>
+
+                <DialogFooter>
+                  <Button variant="outline" onClick={() => setDppUploadDialogOpen(false)}>
+                    Annulla
+                  </Button>
+                  <Button 
+                    onClick={handleAddDppUpload} 
+                    className="bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600"
+                    disabled={!newDppUpload.nomeProdotto || !newDppUpload.codiceProdotto || !newDppUpload.categoria || !newDppUpload.materiali}
+                  >
+                    <Package className="mr-2 h-4 w-4" />
+                    Carica DPP
+                  </Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+          </CardContent>
+        </Card>
+
+        {/* Pulsante Report Sostenibilità with brighter colors */}
+        <Card className="border-0 shadow-md bg-gradient-to-r from-orange-400 to-red-500 text-white">
+          <CardHeader className="pb-2">
+            <CardTitle className={`flex items-center gap-2 text-white ${isMobile ? 'text-base' : 'text-lg'}`}>
+              <FileText className="h-4 w-4" />
+              {t('sustainabilityReport')}
+            </CardTitle>
+            <CardDescription className={`text-orange-100 ${isMobile ? 'text-xs' : 'text-sm'}`}>
+              {t('sustainabilityDescription')}
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="pt-0">
+            <Dialog open={reportDialogOpen} onOpenChange={setReportDialogOpen}>
+              <DialogTrigger asChild>
+                <Button size={isMobile ? "sm" : "default"} className="w-full md:w-auto bg-white text-orange-600 hover:bg-gray-100 shadow-md">
+                  <FileText className="mr-2 h-4 w-4" />
+                  {t('certifyAndCompensate')}
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle className="text-2xl bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
+                    {t('sustainabilityReport')}
+                  </DialogTitle>
+                  <DialogDescription>
+                    Dati ambientali e sociali per il bilancio di sostenibilità aziendale
+                  </DialogDescription>
+                </DialogHeader>
+
+                <div className="space-y-6">
+                  {/* Sezione Certificazioni DPP */}
+                  <div>
+                    <h3 className="text-lg font-semibold mb-3 text-green-700">Certificazioni DPP</h3>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border border-green-200">
+                        <p className="text-sm text-green-600 font-medium">Certificati Dipendenti</p>
+                        <p className="text-2xl font-bold text-green-700">{certificatiDipendenti}</p>
+                      </div>
+                      <div className="p-4 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg border border-blue-200">
+                        <p className="text-sm text-blue-600 font-medium">Certificati Esterni</p>
+                        <p className="text-2xl font-bold text-blue-700">{certificatiEsterni}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Sezione Impatto Ambientale */}
+                  <div>
+                    <h3 className="text-lg font-semibold mb-3 text-blue-700">Impatto Ambientale</h3>
+                    <div className="space-y-3">
+                      <div className="flex justify-between items-center p-3 bg-gradient-to-r from-blue-50 to-cyan-50 rounded border border-blue-200">
+                        <span className="text-blue-700">CO2 evitata tramite digitalizzazione</span>
+                        <span className="font-semibold text-blue-800">2.8 tonnellate</span>
+                      </div>
+                      <div className="flex justify-between items-center p-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded border border-green-200">
+                        <span className="text-green-700">Riduzione uso carta</span>
+                        <span className="font-semibold text-green-800">89%</span>
+                      </div>
+                      <div className="flex justify-between items-center p-3 bg-gradient-to-r from-purple-50 to-pink-50 rounded border border-purple-200">
+                        <span className="text-purple-700">Trasparenza supply chain</span>
+                        <span className="font-semibold text-purple-800">78% prodotti tracciati</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Sezione Welfare e Benefit */}
+                  <div>
+                    <h3 className="text-lg font-semibold mb-3 text-purple-700">Welfare e Benefit</h3>
+                    <div className="space-y-3">
+                      <div className="flex justify-between items-center p-3 bg-gradient-to-r from-purple-50 to-pink-50 rounded border border-purple-200">
+                        <span className="text-purple-700">Valore welfare erogato</span>
+                        <span className="font-semibold text-purple-800">€ {welfareItems.reduce((acc, item) => acc + parseInt(item.valore.replace(/[€\s]/g, '') || '0'), 0).toLocaleString()}</span>
+                      </div>
+                      <div className="flex justify-between items-center p-3 bg-gradient-to-r from-orange-50 to-red-50 rounded border border-orange-200">
+                        <span className="text-orange-700">Dipendenti coinvolti</span>
+                        <span className="font-semibold text-orange-800">85%</span>
+                      </div>
+                      <div className="flex justify-between items-center p-3 bg-gradient-to-r from-yellow-50 to-orange-50 rounded border border-yellow-200">
+                        <span className="text-yellow-700">Soddisfazione media</span>
+                        <span className="font-semibold text-yellow-800">4.2/5</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Sezione Governance */}
+                  <div>
+                    <h3 className="text-lg font-semibold mb-3 text-indigo-700">Governance e Trasparenza</h3>
+                    <div className="space-y-3">
+                      <div className="flex justify-between items-center p-3 bg-gradient-to-r from-indigo-50 to-blue-50 rounded border border-indigo-200">
+                        <span className="text-indigo-700">Certificazioni di conformità</span>
+                        <span className="font-semibold text-indigo-800">100%</span>
+                      </div>
+                      <div className="flex justify-between items-center p-3 bg-gradient-to-r from-teal-50 to-cyan-50 rounded border border-teal-200">
+                        <span className="text-teal-700">Audit di sostenibilità</span>
+                        <span className="font-semibold text-teal-800">Completati</span>
+                      </div>
+                      <div className="flex justify-between items-center p-3 bg-gradient-to-r from-emerald-50 to-green-50 rounded border border-emerald-200">
+                        <span className="text-emerald-700">Obiettivi SDG raggiunti</span>
+                        <span className="font-semibold text-emerald-800">7/9</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <DialogFooter>
+                  <Button variant="outline" onClick={() => setReportDialogOpen(false)}>
+                    {t('close')}
+                  </Button>
+                  <Button className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600">
+                    <FileText className="mr-2 h-4 w-4" />
+                    {t('exportReport')}
+                  </Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
