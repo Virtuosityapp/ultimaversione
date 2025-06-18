@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -793,14 +794,14 @@ const DashboardAziende = () => {
                     </Button>
                   </div>
 
-                  {/* Lista DPP Products - Compatta */}
+                  {/* Lista DPP Products - Utilizza tutto lo spazio disponibile */}
                   <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg p-4">
                     <h3 className="text-sm font-semibold text-indigo-700 mb-3 flex items-center gap-2">
                       <Package className="h-4 w-4" />
                       Prodotti con DPP ({dppProducts.length})
                     </h3>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
                       {dppProducts.map((product) => (
                         <div key={product.id} className="bg-white rounded-lg p-3 shadow-sm border border-indigo-100">
                           <div className="flex items-center justify-between mb-2">
