@@ -32,7 +32,7 @@ const Dashboard = () => {
         {/* Stats Cards */}
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
           {/* Punti Totali */}
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-yellow-400 to-yellow-500 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-yellow-300 to-yellow-400 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
             <CardHeader className="pb-1 sm:pb-2">
               <CardTitle className="text-xs sm:text-sm font-medium text-yellow-100">
                 {language === 'it' ? 'Punti Totali' : 'Total Points'}
@@ -62,7 +62,7 @@ const Dashboard = () => {
           </Card>
 
           {/* Certificati */}
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-yellow-400 to-yellow-500 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-yellow-300 to-yellow-400 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
             <CardHeader className="pb-1 sm:pb-2">
               <CardTitle className="text-xs sm:text-sm font-medium text-yellow-100">
                 {language === 'it' ? 'Certificati' : 'Certificates'}
