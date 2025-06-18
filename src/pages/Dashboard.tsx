@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -304,13 +305,13 @@ const Dashboard = () => {
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-500 to-blue-600 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-yellow-400 to-yellow-500 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
             <CardHeader className="pb-1 sm:pb-2">
-              <CardTitle className="text-xs sm:text-sm font-medium text-blue-100">Certificati</CardTitle>
+              <CardTitle className="text-xs sm:text-sm font-medium text-yellow-100">Certificati</CardTitle>
             </CardHeader>
             <CardContent className="pt-0">
               <div className="text-lg sm:text-2xl font-bold">12</div>
-              <p className="text-xs text-blue-100 hidden sm:block">2 nuovi certificati</p>
+              <p className="text-xs text-yellow-100 hidden sm:block">2 nuovi certificati</p>
             </CardContent>
           </Card>
 
