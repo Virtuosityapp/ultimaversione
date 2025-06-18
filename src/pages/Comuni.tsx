@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -493,7 +492,7 @@ const Comuni = () => {
           </Card>
         </div>
         
-        {/* Dashboard Monitoring Section - Smaller blocks */}
+        {/* Dashboard Monitoring Section - Much smaller blocks */}
         <div className="mb-6 space-y-4">
           <div className="flex justify-between items-center">
             <h2 className="text-sm sm:text-xl font-bold text-gray-900">Dashboard di Monitoraggio 📊</h2>
@@ -666,21 +665,21 @@ const Comuni = () => {
             </Card>
           </div>
           
-          {/* Monitoring Charts - Smaller blocks */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
+          {/* Monitoring Charts - Ultra compact blocks */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-1 sm:gap-2">
             {/* Water Saving */}
             <Card className="border-0 shadow-sm bg-white/80 backdrop-blur-sm">
-              <CardHeader className="p-2 sm:p-3">
-                <CardTitle className="flex items-center text-xs sm:text-sm">
-                  <Droplets className="h-3 w-3 sm:h-4 sm:w-4 mr-1 text-blue-600" />
-                  Risparmio Acqua
+              <CardHeader className="p-1 sm:p-2">
+                <CardTitle className="flex items-center text-xs">
+                  <Droplets className="h-2 w-2 sm:h-3 sm:w-3 mr-1 text-blue-600" />
+                  Acqua
                 </CardTitle>
                 <CardDescription className="text-xs">
-                  % risparmio - Oggi
+                  Risparmio giornaliero
                 </CardDescription>
               </CardHeader>
-              <CardContent className="p-2 sm:p-3 pt-0">
-                <div className="h-24 sm:h-32 w-full">
+              <CardContent className="p-1 sm:p-2 pt-0">
+                <div className="h-16 sm:h-20 w-full">
                   <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={waterSavingData}>
                       <defs>
@@ -689,14 +688,11 @@ const Comuni = () => {
                           <stop offset="95%" stopColor="#3B82F6" stopOpacity={0} />
                         </linearGradient>
                       </defs>
-                      <XAxis dataKey="ora" tick={{ fontSize: 8 }} />
-                      <YAxis tick={{ fontSize: 8 }} />
                       <Area type="monotone" dataKey="risparmio" stroke="#3B82F6" fill="url(#waterGradient)" />
                     </AreaChart>
                   </ResponsiveContainer>
                 </div>
-                <div className="mt-1 flex justify-between items-center text-xs">
-                  <div>Picco: <span className="font-bold">12:00</span></div>
+                <div className="mt-1 text-center">
                   <Badge className="bg-blue-100 text-blue-700 text-xs">+8%</Badge>
                 </div>
               </CardContent>
@@ -704,53 +700,50 @@ const Comuni = () => {
             
             {/* Parking */}
             <Card className="border-0 shadow-sm bg-white/80 backdrop-blur-sm">
-              <CardHeader className="p-2 sm:p-3">
-                <CardTitle className="flex items-center text-xs sm:text-sm">
-                  <Car className="h-3 w-3 sm:h-4 sm:w-4 mr-1 text-blue-600" />
+              <CardHeader className="p-1 sm:p-2">
+                <CardTitle className="flex items-center text-xs">
+                  <Car className="h-2 w-2 sm:h-3 sm:w-3 mr-1 text-blue-600" />
                   Parcheggi
                 </CardTitle>
                 <CardDescription className="text-xs">
-                  Occupazione per zone
+                  Occupazione zone
                 </CardDescription>
               </CardHeader>
-              <CardContent className="p-2 sm:p-3 pt-0">
-                <div className="h-24 sm:h-32 w-full">
+              <CardContent className="p-1 sm:p-2 pt-0">
+                <div className="h-16 sm:h-20 w-full">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={parkingData}>
-                      <XAxis dataKey="zone" tick={{ fontSize: 8 }} />
-                      <YAxis tick={{ fontSize: 8 }} />
                       <Bar dataKey="occupati" fill="#3B82F6" />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
-                <div className="mt-1 flex justify-between items-center text-xs">
-                  <div><span className="font-bold">75%</span> occupazione</div>
-                  <Badge className="bg-blue-100 text-blue-700 text-xs">298 liberi</Badge>
+                <div className="mt-1 text-center">
+                  <Badge className="bg-blue-100 text-blue-700 text-xs">75%</Badge>
                 </div>
               </CardContent>
             </Card>
             
             {/* Lighting */}
             <Card className="border-0 shadow-sm bg-white/80 backdrop-blur-sm">
-              <CardHeader className="p-2 sm:p-3">
-                <CardTitle className="flex items-center text-xs sm:text-sm">
-                  <Lightbulb className="h-3 w-3 sm:h-4 sm:w-4 mr-1 text-yellow-600" />
+              <CardHeader className="p-1 sm:p-2">
+                <CardTitle className="flex items-center text-xs">
+                  <Lightbulb className="h-2 w-2 sm:h-3 sm:w-3 mr-1 text-yellow-600" />
                   Illuminazione
                 </CardTitle>
                 <CardDescription className="text-xs">
                   Stato lampioni
                 </CardDescription>
               </CardHeader>
-              <CardContent className="p-2 sm:p-3 pt-0">
-                <div className="h-24 sm:h-32 w-full">
+              <CardContent className="p-1 sm:p-2 pt-0">
+                <div className="h-16 sm:h-20 w-full">
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
                       <Pie 
                         data={lightingData} 
                         cx="50%" 
                         cy="50%" 
-                        innerRadius={20} 
-                        outerRadius={40} 
+                        innerRadius={15} 
+                        outerRadius={25} 
                         paddingAngle={5} 
                         dataKey="value"
                       >
@@ -761,48 +754,34 @@ const Comuni = () => {
                     </PieChart>
                   </ResponsiveContainer>
                 </div>
-                <div className="mt-1 grid grid-cols-3 gap-1 text-center text-xs">
-                  <div className="bg-green-50 p-1 rounded">
-                    <div className="text-green-600 font-bold text-xs">1245</div>
-                    <div className="text-xs text-gray-600">OK</div>
-                  </div>
-                  <div className="bg-red-50 p-1 rounded">
-                    <div className="text-red-600 font-bold text-xs">23</div>
-                    <div className="text-xs text-gray-600">Guasti</div>
-                  </div>
-                  <div className="bg-amber-50 p-1 rounded">
-                    <div className="text-amber-600 font-bold text-xs">12</div>
-                    <div className="text-xs text-gray-600">Manutenzione</div>
-                  </div>
+                <div className="mt-1 text-center">
+                  <Badge className="bg-green-100 text-green-700 text-xs">97%</Badge>
                 </div>
               </CardContent>
             </Card>
             
             {/* Waste */}
             <Card className="border-0 shadow-sm bg-white/80 backdrop-blur-sm">
-              <CardHeader className="p-2 sm:p-3">
-                <CardTitle className="flex items-center text-xs sm:text-sm">
-                  <Recycle className="h-3 w-3 sm:h-4 sm:w-4 mr-1 text-green-600" />
-                  Rifiuti e Riciclo
+              <CardHeader className="p-1 sm:p-2">
+                <CardTitle className="flex items-center text-xs">
+                  <Recycle className="h-2 w-2 sm:h-3 sm:w-3 mr-1 text-green-600" />
+                  Rifiuti
                 </CardTitle>
                 <CardDescription className="text-xs">
-                  Raccolta settimanale
+                  Raccolta/Riciclo
                 </CardDescription>
               </CardHeader>
-              <CardContent className="p-2 sm:p-3 pt-0">
-                <div className="h-24 sm:h-32 w-full">
+              <CardContent className="p-1 sm:p-2 pt-0">
+                <div className="h-16 sm:h-20 w-full">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={wasteData}>
-                      <XAxis dataKey="giorno" tick={{ fontSize: 8 }} />
-                      <YAxis tick={{ fontSize: 8 }} />
                       <Bar dataKey="raccolto" fill="#94A3B8" />
                       <Bar dataKey="riciclato" fill="#10B981" />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
-                <div className="mt-1 flex justify-between items-center text-xs">
-                  <div><span className="font-bold text-green-600">72%</span> riciclo</div>
-                  <Badge className="bg-green-100 text-green-700 text-xs">+3%</Badge>
+                <div className="mt-1 text-center">
+                  <Badge className="bg-green-100 text-green-700 text-xs">72%</Badge>
                 </div>
               </CardContent>
             </Card>
