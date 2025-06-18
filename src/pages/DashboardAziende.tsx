@@ -21,6 +21,7 @@ const DashboardAziende = () => {
   const [dppDialogOpen, setDppDialogOpen] = useState(false);
   const [showWelfareSection, setShowWelfareSection] = useState(false);
   const [showFollowersSection, setShowFollowersSection] = useState(false);
+  const [showDppSection, setShowDppSection] = useState(false);
   
   // Welfare per Dipendenti - Limited to 4 items
   const [welfareItems, setWelfareItems] = useState([
@@ -436,15 +437,15 @@ const DashboardAziende = () => {
           </Card>
         </div>
 
-        {/* Menu Welfare e Premi */}
+        {/* Menu Gestione - Include DPP */}
         <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm mb-8">
           <CardHeader className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-t-lg">
             <CardTitle className="flex items-center gap-2">
               <Menu className="h-6 w-6" />
-              Gestione Welfare e Premi
+              Gestione Welfare, Premi e Prodotti
             </CardTitle>
             <CardDescription className="text-purple-100">
-              Configura benefit per dipendenti e offerte per followers
+              Configura benefit per dipendenti, offerte per followers e passaporti digitali prodotti
             </CardDescription>
           </CardHeader>
           <CardContent className="p-6">
@@ -480,342 +481,364 @@ const DashboardAziende = () => {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
+
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button size="lg" className="bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white shadow-lg">
+                    <QrCode className="mr-2 h-5 w-5" />
+                    DPP Prodotti
+                    <ChevronDown className="ml-2 h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56 bg-white shadow-lg border z-50">
+                  <DropdownMenuItem onClick={() => setShowDppSection(!showDppSection)}>
+                    <Package className="mr-2 h-4 w-4" />
+                    {showDppSection ? 'Nascondi DPP' : 'Mostra DPP'}
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </CardContent>
         </Card>
 
-        {/* Sezioni Welfare e Premi - Condizionalmente visibili */}
-        {(showWelfareSection || showFollowersSection) && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-            {/* Sezione Welfare Dipendenti */}
-            {showWelfareSection && (
-              <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
-                <CardHeader className="bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-t-lg">
-                  <CardTitle className="flex items-center gap-2">
-                    <Users className="h-6 w-6" />
-                    Welfare per Dipendenti
-                  </CardTitle>
-                  <CardDescription className="text-green-100">
-                    Premi e benefit in cambio di comportamenti sostenibili certificati
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="p-6">
-                  {/* Form per aggiungere nuovo item welfare */}
-                  <div className="grid grid-cols-1 gap-4 mb-6 p-4 border-2 border-dashed border-green-200 rounded-xl bg-gradient-to-r from-green-50 to-emerald-50">
-                    <div>
-                      <Label htmlFor="welfare-tipo" className="text-green-700 font-medium">{t('type')}</Label>
-                      <Input
-                        id="welfare-tipo"
-                        placeholder="Premio/Viaggio/Gadget"
-                        value={newWelfareItem.tipo}
-                        onChange={(e) => setNewWelfareItem({...newWelfareItem, tipo: e.target.value})}
-                        className="border-green-200 focus:border-green-400"
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="welfare-nome" className="text-green-700 font-medium">{t('name')}</Label>
-                      <Input
-                        id="welfare-nome"
-                        placeholder="Nome del premio"
-                        value={newWelfareItem.nome}
-                        onChange={(e) => setNewWelfareItem({...newWelfareItem, nome: e.target.value})}
-                        className="border-green-200 focus:border-green-400"
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="welfare-valore" className="text-green-700 font-medium">{t('value')}</Label>
-                      <Input
-                        id="welfare-valore"
-                        placeholder="€ 0"
-                        value={newWelfareItem.valore}
-                        onChange={(e) => setNewWelfareItem({...newWelfareItem, valore: e.target.value})}
-                        className="border-green-200 focus:border-green-400"
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="welfare-certificati" className="text-green-700 font-medium">Tipo Certificati</Label>
-                      <Input
-                        id="welfare-certificati"
-                        placeholder="Es. Risparmio Energetico"
-                        value={newWelfareItem.certificatiRichiesti}
-                        onChange={(e) => setNewWelfareItem({...newWelfareItem, certificatiRichiesti: e.target.value})}
-                        className="border-green-200 focus:border-green-400"
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="welfare-quantita" className="text-green-700 font-medium">Quantità Certificati</Label>
-                      <Input
-                        id="welfare-quantita"
-                        type="number"
-                        placeholder="0"
-                        value={newWelfareItem.quantitaCertificati}
-                        onChange={(e) => setNewWelfareItem({...newWelfareItem, quantitaCertificati: e.target.value})}
-                        className="border-green-200 focus:border-green-400"
-                      />
-                    </div>
-                    <Button 
-                      onClick={handleAddWelfareItem} 
-                      className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white shadow-lg"
-                    >
-                      <Upload className="mr-2 h-4 w-4" />
-                      {t('add')}
-                    </Button>
-                  </div>
-
-                  {/* Lista items welfare - 2x2 grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {welfareItems.map((item) => (
-                      <div key={item.id} className="p-4 border-0 rounded-xl shadow-lg bg-gradient-to-br from-white to-green-50 hover:shadow-xl transition-shadow">
-                        <div className="flex items-center justify-between mb-3">
-                          <Badge className={`flex items-center gap-1 ${getBadgeColor(item.tipo)}`}>
-                            {getIconForType(item.tipo)}
-                            {item.tipo}
-                          </Badge>
-                          <span className="font-bold text-lg text-gray-700">{item.valore}</span>
+        {/* Sezioni Welfare, Premi e DPP - Condizionalmente visibili */}
+        {(showWelfareSection || showFollowersSection || showDppSection) && (
+          <div className="space-y-6 mb-8">
+            {/* Sezione Welfare e Premi */}
+            {(showWelfareSection || showFollowersSection) && (
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Sezione Welfare Dipendenti */}
+                {showWelfareSection && (
+                  <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
+                    <CardHeader className="bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-t-lg">
+                      <CardTitle className="flex items-center gap-2">
+                        <Users className="h-6 w-6" />
+                        Welfare per Dipendenti
+                      </CardTitle>
+                      <CardDescription className="text-green-100">
+                        Premi e benefit in cambio di comportamenti sostenibili certificati
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="p-6">
+                      {/* Form per aggiungere nuovo item welfare */}
+                      <div className="grid grid-cols-1 gap-4 mb-6 p-4 border-2 border-dashed border-green-200 rounded-xl bg-gradient-to-r from-green-50 to-emerald-50">
+                        <div>
+                          <Label htmlFor="welfare-tipo" className="text-green-700 font-medium">{t('type')}</Label>
+                          <Input
+                            id="welfare-tipo"
+                            placeholder="Premio/Viaggio/Gadget"
+                            value={newWelfareItem.tipo}
+                            onChange={(e) => setNewWelfareItem({...newWelfareItem, tipo: e.target.value})}
+                            className="border-green-200 focus:border-green-400"
+                          />
                         </div>
-                        <h4 className="font-semibold text-gray-800 mb-2">{item.nome}</h4>
-                        <div className="text-sm text-gray-600 space-y-1">
-                          <p><span className="font-medium">Richiede:</span> {item.quantitaCertificati}x {item.certificatiRichiesti}</p>
+                        <div>
+                          <Label htmlFor="welfare-nome" className="text-green-700 font-medium">{t('name')}</Label>
+                          <Input
+                            id="welfare-nome"
+                            placeholder="Nome del premio"
+                            value={newWelfareItem.nome}
+                            onChange={(e) => setNewWelfareItem({...newWelfareItem, nome: e.target.value})}
+                            className="border-green-200 focus:border-green-400"
+                          />
                         </div>
+                        <div>
+                          <Label htmlFor="welfare-valore" className="text-green-700 font-medium">{t('value')}</Label>
+                          <Input
+                            id="welfare-valore"
+                            placeholder="€ 0"
+                            value={newWelfareItem.valore}
+                            onChange={(e) => setNewWelfareItem({...newWelfareItem, valore: e.target.value})}
+                            className="border-green-200 focus:border-green-400"
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="welfare-certificati" className="text-green-700 font-medium">Tipo Certificati</Label>
+                          <Input
+                            id="welfare-certificati"
+                            placeholder="Es. Risparmio Energetico"
+                            value={newWelfareItem.certificatiRichiesti}
+                            onChange={(e) => setNewWelfareItem({...newWelfareItem, certificatiRichiesti: e.target.value})}
+                            className="border-green-200 focus:border-green-400"
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="welfare-quantita" className="text-green-700 font-medium">Quantità Certificati</Label>
+                          <Input
+                            id="welfare-quantita"
+                            type="number"
+                            placeholder="0"
+                            value={newWelfareItem.quantitaCertificati}
+                            onChange={(e) => setNewWelfareItem({...newWelfareItem, quantitaCertificati: e.target.value})}
+                            className="border-green-200 focus:border-green-400"
+                          />
+                        </div>
+                        <Button 
+                          onClick={handleAddWelfareItem} 
+                          className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white shadow-lg"
+                        >
+                          <Upload className="mr-2 h-4 w-4" />
+                          {t('add')}
+                        </Button>
                       </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+
+                      {/* Lista items welfare - 2x2 grid */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {welfareItems.map((item) => (
+                          <div key={item.id} className="p-4 border-0 rounded-xl shadow-lg bg-gradient-to-br from-white to-green-50 hover:shadow-xl transition-shadow">
+                            <div className="flex items-center justify-between mb-3">
+                              <Badge className={`flex items-center gap-1 ${getBadgeColor(item.tipo)}`}>
+                                {getIconForType(item.tipo)}
+                                {item.tipo}
+                              </Badge>
+                              <span className="font-bold text-lg text-gray-700">{item.valore}</span>
+                            </div>
+                            <h4 className="font-semibold text-gray-800 mb-2">{item.nome}</h4>
+                            <div className="text-sm text-gray-600 space-y-1">
+                              <p><span className="font-medium">Richiede:</span> {item.quantitaCertificati}x {item.certificatiRichiesti}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* Sezione Premi per Followers */}
+                {showFollowersSection && (
+                  <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
+                    <CardHeader className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-t-lg">
+                      <CardTitle className="flex items-center gap-2">
+                        <Globe className="h-6 w-6" />
+                        Premi e Sconti per Followers
+                      </CardTitle>
+                      <CardDescription className="text-blue-100">
+                        Offerte e sconti per followers in cambio di certificati sostenibili
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="p-6">
+                      {/* Form per aggiungere nuovo premio followers */}
+                      <div className="grid grid-cols-1 gap-4 mb-6 p-4 border-2 border-dashed border-blue-200 rounded-xl bg-gradient-to-r from-blue-50 to-cyan-50">
+                        <div>
+                          <Label htmlFor="followers-tipo" className="text-blue-700 font-medium">Tipo</Label>
+                          <Input
+                            id="followers-tipo"
+                            placeholder="Sconto/Premio"
+                            value={newFollowersReward.tipo}
+                            onChange={(e) => setNewFollowersReward({...newFollowersReward, tipo: e.target.value})}
+                            className="border-blue-200 focus:border-blue-400"
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="followers-nome" className="text-blue-700 font-medium">Nome</Label>
+                          <Input
+                            id="followers-nome"
+                            placeholder="Nome dell'offerta"
+                            value={newFollowersReward.nome}
+                            onChange={(e) => setNewFollowersReward({...newFollowersReward, nome: e.target.value})}
+                            className="border-blue-200 focus:border-blue-400"
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="followers-valore" className="text-blue-700 font-medium">Valore</Label>
+                          <Input
+                            id="followers-valore"
+                            placeholder="€ 0 / %"
+                            value={newFollowersReward.valore}
+                            onChange={(e) => setNewFollowersReward({...newFollowersReward, valore: e.target.value})}
+                            className="border-blue-200 focus:border-blue-400"
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="followers-certificati" className="text-blue-700 font-medium">Tipo Certificati</Label>
+                          <Input
+                            id="followers-certificati"
+                            placeholder="Es. Risparmio Idrico"
+                            value={newFollowersReward.certificatiRichiesti}
+                            onChange={(e) => setNewFollowersReward({...newFollowersReward, certificatiRichiesti: e.target.value})}
+                            className="border-blue-200 focus:border-blue-400"
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="followers-quantita" className="text-blue-700 font-medium">Quantità Certificati</Label>
+                          <Input
+                            id="followers-quantita"
+                            type="number"
+                            placeholder="0"
+                            value={newFollowersReward.quantitaCertificati}
+                            onChange={(e) => setNewFollowersReward({...newFollowersReward, quantitaCertificati: e.target.value})}
+                            className="border-blue-200 focus:border-blue-400"
+                          />
+                        </div>
+                        <Button 
+                          onClick={handleAddFollowersReward} 
+                          className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white shadow-lg"
+                        >
+                          <Upload className="mr-2 h-4 w-4" />
+                          Aggiungi
+                        </Button>
+                      </div>
+
+                      {/* Lista premi followers - 2x2 grid */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {followersRewards.map((item) => (
+                          <div key={item.id} className="p-4 border-0 rounded-xl shadow-lg bg-gradient-to-br from-white to-blue-50 hover:shadow-xl transition-shadow">
+                            <div className="flex items-center justify-between mb-3">
+                              <Badge className={`flex items-center gap-1 ${getBadgeColor(item.tipo)}`}>
+                                {getIconForType(item.tipo)}
+                                {item.tipo}
+                              </Badge>
+                              <span className="font-bold text-lg text-gray-700">{item.valore}</span>
+                            </div>
+                            <h4 className="font-semibold text-gray-800 mb-2">{item.nome}</h4>
+                            <div className="text-sm text-gray-600 space-y-1">
+                              <p><span className="font-medium">Richiede:</span> {item.quantitaCertificati}x {item.certificatiRichiesti}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+              </div>
             )}
 
-            {/* Sezione Premi per Followers */}
-            {showFollowersSection && (
-              <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
-                <CardHeader className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-t-lg">
-                  <CardTitle className="flex items-center gap-2">
-                    <Globe className="h-6 w-6" />
-                    Premi e Sconti per Followers
+            {/* Sezione DPP Prodotti - Più leggera */}
+            {showDppSection && (
+              <Card className="border-0 shadow-lg bg-white/90 backdrop-blur-sm">
+                <CardHeader className="bg-gradient-to-r from-indigo-400 to-purple-400 text-white rounded-t-lg">
+                  <CardTitle className="flex items-center gap-2 text-lg">
+                    <QrCode className="h-5 w-5" />
+                    Digital Product Passport (DPP)
                   </CardTitle>
-                  <CardDescription className="text-blue-100">
-                    Offerte e sconti per followers in cambio di certificati sostenibili
+                  <CardDescription className="text-indigo-100">
+                    Gestisci i passaporti digitali dei tuoi prodotti
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="p-6">
-                  {/* Form per aggiungere nuovo premio followers */}
-                  <div className="grid grid-cols-1 gap-4 mb-6 p-4 border-2 border-dashed border-blue-200 rounded-xl bg-gradient-to-r from-blue-50 to-cyan-50">
-                    <div>
-                      <Label htmlFor="followers-tipo" className="text-blue-700 font-medium">Tipo</Label>
-                      <Input
-                        id="followers-tipo"
-                        placeholder="Sconto/Premio"
-                        value={newFollowersReward.tipo}
-                        onChange={(e) => setNewFollowersReward({...newFollowersReward, tipo: e.target.value})}
-                        className="border-blue-200 focus:border-blue-400"
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="followers-nome" className="text-blue-700 font-medium">Nome</Label>
-                      <Input
-                        id="followers-nome"
-                        placeholder="Nome dell'offerta"
-                        value={newFollowersReward.nome}
-                        onChange={(e) => setNewFollowersReward({...newFollowersReward, nome: e.target.value})}
-                        className="border-blue-200 focus:border-blue-400"
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="followers-valore" className="text-blue-700 font-medium">Valore</Label>
-                      <Input
-                        id="followers-valore"
-                        placeholder="€ 0 / %"
-                        value={newFollowersReward.valore}
-                        onChange={(e) => setNewFollowersReward({...newFollowersReward, valore: e.target.value})}
-                        className="border-blue-200 focus:border-blue-400"
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="followers-certificati" className="text-blue-700 font-medium">Tipo Certificati</Label>
-                      <Input
-                        id="followers-certificati"
-                        placeholder="Es. Risparmio Idrico"
-                        value={newFollowersReward.certificatiRichiesti}
-                        onChange={(e) => setNewFollowersReward({...newFollowersReward, certificatiRichiesti: e.target.value})}
-                        className="border-blue-200 focus:border-blue-400"
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="followers-quantita" className="text-blue-700 font-medium">Quantità Certificati</Label>
-                      <Input
-                        id="followers-quantita"
-                        type="number"
-                        placeholder="0"
-                        value={newFollowersReward.quantitaCertificati}
-                        onChange={(e) => setNewFollowersReward({...newFollowersReward, quantitaCertificati: e.target.value})}
-                        className="border-blue-200 focus:border-blue-400"
-                      />
-                    </div>
-                    <Button 
-                      onClick={handleAddFollowersReward} 
-                      className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white shadow-lg"
-                    >
+                <CardContent className="p-4">
+                  <div className="flex flex-wrap gap-3 mb-4">
+                    <Dialog open={dppDialogOpen} onOpenChange={setDppDialogOpen}>
+                      <DialogTrigger asChild>
+                        <Button className="bg-indigo-600 hover:bg-indigo-700 text-white">
+                          <Package className="mr-2 h-4 w-4" />
+                          Nuovo DPP
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className="max-w-md">
+                        <DialogHeader>
+                          <DialogTitle className="text-lg text-indigo-700">Nuovo Digital Product Passport</DialogTitle>
+                          <DialogDescription>
+                            Compila i dati del prodotto per generare il DPP
+                          </DialogDescription>
+                        </DialogHeader>
+                        
+                        <div className="space-y-3">
+                          <div>
+                            <Label htmlFor="dpp-nome" className="text-indigo-700 text-sm">Nome Prodotto</Label>
+                            <Input
+                              id="dpp-nome"
+                              placeholder="Es. Borraccia Termica Eco"
+                              value={newDppProduct.nome}
+                              onChange={(e) => setNewDppProduct({...newDppProduct, nome: e.target.value})}
+                              className="border-indigo-200 focus:border-indigo-400"
+                            />
+                          </div>
+                          <div>
+                            <Label htmlFor="dpp-codice" className="text-indigo-700 text-sm">Codice Prodotto</Label>
+                            <Input
+                              id="dpp-codice"
+                              placeholder="Es. BTE-001"
+                              value={newDppProduct.codice}
+                              onChange={(e) => setNewDppProduct({...newDppProduct, codice: e.target.value})}
+                              className="border-indigo-200 focus:border-indigo-400"
+                            />
+                          </div>
+                          <div>
+                            <Label htmlFor="dpp-materiali" className="text-indigo-700 text-sm">Materiali</Label>
+                            <Input
+                              id="dpp-materiali"
+                              placeholder="Es. Acciaio Inox Riciclato"
+                              value={newDppProduct.materiali}
+                              onChange={(e) => setNewDppProduct({...newDppProduct, materiali: e.target.value})}
+                              className="border-indigo-200 focus:border-indigo-400"
+                            />
+                          </div>
+                          <div>
+                            <Label htmlFor="dpp-garanzia" className="text-indigo-700 text-sm">Garanzia</Label>
+                            <Input
+                              id="dpp-garanzia"
+                              placeholder="Es. 2 anni"
+                              value={newDppProduct.garanzia}
+                              onChange={(e) => setNewDppProduct({...newDppProduct, garanzia: e.target.value})}
+                              className="border-indigo-200 focus:border-indigo-400"
+                            />
+                          </div>
+                        </div>
+
+                        <DialogFooter>
+                          <Button variant="outline" onClick={() => setDppDialogOpen(false)} className="text-sm">
+                            Annulla
+                          </Button>
+                          <Button onClick={handleAddDppProduct} className="bg-indigo-600 hover:bg-indigo-700 text-sm">
+                            <QrCode className="mr-2 h-3 w-3" />
+                            Genera DPP
+                          </Button>
+                        </DialogFooter>
+                      </DialogContent>
+                    </Dialog>
+
+                    <Button variant="outline" className="border-indigo-200 text-indigo-700 hover:bg-indigo-50">
                       <Upload className="mr-2 h-4 w-4" />
-                      Aggiungi
+                      Importa CSV
                     </Button>
                   </div>
 
-                  {/* Lista premi followers - 2x2 grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {followersRewards.map((item) => (
-                      <div key={item.id} className="p-4 border-0 rounded-xl shadow-lg bg-gradient-to-br from-white to-blue-50 hover:shadow-xl transition-shadow">
-                        <div className="flex items-center justify-between mb-3">
-                          <Badge className={`flex items-center gap-1 ${getBadgeColor(item.tipo)}`}>
-                            {getIconForType(item.tipo)}
-                            {item.tipo}
-                          </Badge>
-                          <span className="font-bold text-lg text-gray-700">{item.valore}</span>
+                  {/* Lista DPP Products - Compatta */}
+                  <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg p-4">
+                    <h3 className="text-sm font-semibold text-indigo-700 mb-3 flex items-center gap-2">
+                      <Package className="h-4 w-4" />
+                      Prodotti con DPP ({dppProducts.length})
+                    </h3>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                      {dppProducts.map((product) => (
+                        <div key={product.id} className="bg-white rounded-lg p-3 shadow-sm border border-indigo-100">
+                          <div className="flex items-center justify-between mb-2">
+                            <Badge className={`text-xs ${product.stato === 'Attivo' ? 'bg-green-100 text-green-700 border-green-200' : 'bg-yellow-100 text-yellow-700 border-yellow-200'}`}>
+                              {product.stato === 'Attivo' ? <Shield className="h-3 w-3 mr-1" /> : <Eye className="h-3 w-3 mr-1" />}
+                              {product.stato}
+                            </Badge>
+                            <Button size="sm" variant="outline" className="h-6 w-6 p-0 border-indigo-200">
+                              <QrCode className="h-3 w-3" />
+                            </Button>
+                          </div>
+                          
+                          <h4 className="font-medium text-gray-800 mb-2 text-sm">{product.nome}</h4>
+                          <div className="text-xs text-gray-600 space-y-1">
+                            <p><span className="font-medium">Codice:</span> {product.codice}</p>
+                            <p><span className="font-medium">Materiali:</span> {product.materiali}</p>
+                            <p><span className="font-medium">Garanzia:</span> {product.garanzia}</p>
+                          </div>
+                          
+                          <div className="mt-2 flex gap-1">
+                            <Button size="sm" variant="outline" className="flex-1 text-xs h-6 border-indigo-200 text-indigo-700 hover:bg-indigo-50">
+                              <Link className="h-3 w-3 mr-1" />
+                              Associa
+                            </Button>
+                            <Button size="sm" variant="outline" className="flex-1 text-xs h-6 border-indigo-200 text-indigo-700 hover:bg-indigo-50">
+                              <Eye className="h-3 w-3 mr-1" />
+                              Dettagli
+                            </Button>
+                          </div>
                         </div>
-                        <h4 className="font-semibold text-gray-800 mb-2">{item.nome}</h4>
-                        <div className="text-sm text-gray-600 space-y-1">
-                          <p><span className="font-medium">Richiede:</span> {item.quantitaCertificati}x {item.certificatiRichiesti}</p>
-                        </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 </CardContent>
               </Card>
             )}
           </div>
         )}
-
-        {/* Sezione DPP Prodotti */}
-        <Card className="border-0 shadow-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white mb-8">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-white text-2xl">
-              <QrCode className="h-8 w-8" />
-              Digital Product Passport (DPP)
-            </CardTitle>
-            <CardDescription className="text-cyan-100 text-lg">
-              Crea e gestisci i passaporti digitali dei tuoi prodotti per garantire tracciabilità e sostenibilità
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="flex flex-wrap gap-4 mb-6">
-              <Dialog open={dppDialogOpen} onOpenChange={setDppDialogOpen}>
-                <DialogTrigger asChild>
-                  <Button size="lg" className="bg-white text-cyan-600 hover:bg-gray-100 shadow-lg">
-                    <Package className="mr-2 h-5 w-5" />
-                    Crea Nuovo DPP
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="max-w-md">
-                  <DialogHeader>
-                    <DialogTitle className="text-xl text-cyan-700">Nuovo Digital Product Passport</DialogTitle>
-                    <DialogDescription>
-                      Compila i dati del prodotto per generare il DPP e il QR code associato
-                    </DialogDescription>
-                  </DialogHeader>
-                  
-                  <div className="space-y-4">
-                    <div>
-                      <Label htmlFor="dpp-nome" className="text-cyan-700 font-medium">Nome Prodotto</Label>
-                      <Input
-                        id="dpp-nome"
-                        placeholder="Es. Borraccia Termica Eco"
-                        value={newDppProduct.nome}
-                        onChange={(e) => setNewDppProduct({...newDppProduct, nome: e.target.value})}
-                        className="border-cyan-200 focus:border-cyan-400"
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="dpp-codice" className="text-cyan-700 font-medium">Codice Prodotto</Label>
-                      <Input
-                        id="dpp-codice"
-                        placeholder="Es. BTE-001"
-                        value={newDppProduct.codice}
-                        onChange={(e) => setNewDppProduct({...newDppProduct, codice: e.target.value})}
-                        className="border-cyan-200 focus:border-cyan-400"
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="dpp-materiali" className="text-cyan-700 font-medium">Materiali</Label>
-                      <Input
-                        id="dpp-materiali"
-                        placeholder="Es. Acciaio Inox Riciclato"
-                        value={newDppProduct.materiali}
-                        onChange={(e) => setNewDppProduct({...newDppProduct, materiali: e.target.value})}
-                        className="border-cyan-200 focus:border-cyan-400"
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="dpp-garanzia" className="text-cyan-700 font-medium">Garanzia</Label>
-                      <Input
-                        id="dpp-garanzia"
-                        placeholder="Es. 2 anni"
-                        value={newDppProduct.garanzia}
-                        onChange={(e) => setNewDppProduct({...newDppProduct, garanzia: e.target.value})}
-                        className="border-cyan-200 focus:border-cyan-400"
-                      />
-                    </div>
-                  </div>
-
-                  <DialogFooter>
-                    <Button variant="outline" onClick={() => setDppDialogOpen(false)}>
-                      Annulla
-                    </Button>
-                    <Button onClick={handleAddDppProduct} className="bg-cyan-600 hover:bg-cyan-700">
-                      <QrCode className="mr-2 h-4 w-4" />
-                      Genera DPP
-                    </Button>
-                  </DialogFooter>
-                </DialogContent>
-              </Dialog>
-
-              <Button size="lg" variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white/20">
-                <Upload className="mr-2 h-5 w-5" />
-                Importa da CSV
-              </Button>
-            </div>
-
-            {/* Lista DPP Products */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-              <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-                <Package className="h-6 w-6" />
-                Prodotti con DPP ({dppProducts.length})
-              </h3>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {dppProducts.map((product) => (
-                  <div key={product.id} className="bg-white rounded-lg p-4 shadow-lg">
-                    <div className="flex items-center justify-between mb-3">
-                      <Badge className={`${product.stato === 'Attivo' ? 'bg-green-100 text-green-700 border-green-200' : 'bg-yellow-100 text-yellow-700 border-yellow-200'}`}>
-                        {product.stato === 'Attivo' ? <Shield className="h-3 w-3 mr-1" /> : <Eye className="h-3 w-3 mr-1" />}
-                        {product.stato}
-                      </Badge>
-                      <Button size="sm" variant="outline" className="h-8 w-8 p-0">
-                        <QrCode className="h-4 w-4" />
-                      </Button>
-                    </div>
-                    
-                    <h4 className="font-semibold text-gray-800 mb-2">{product.nome}</h4>
-                    <div className="text-sm text-gray-600 space-y-1">
-                      <p><span className="font-medium">Codice:</span> {product.codice}</p>
-                      <p><span className="font-medium">QR:</span> {product.qrCode}</p>
-                      <p><span className="font-medium">Materiali:</span> {product.materiali}</p>
-                      <p><span className="font-medium">Garanzia:</span> {product.garanzia}</p>
-                    </div>
-                    
-                    <div className="mt-3 flex gap-2">
-                      <Button size="sm" variant="outline" className="flex-1 text-xs">
-                        <Link className="h-3 w-3 mr-1" />
-                        Associa
-                      </Button>
-                      <Button size="sm" variant="outline" className="flex-1 text-xs">
-                        <Eye className="h-3 w-3 mr-1" />
-                        Dettagli
-                      </Button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </CardContent>
-        </Card>
 
         {/* Pulsante Report Sostenibilità */}
         <Card className="border-0 shadow-xl bg-gradient-to-r from-orange-400 to-red-500 text-white">
