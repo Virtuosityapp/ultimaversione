@@ -606,23 +606,23 @@ const Exchange = () => {
 
         {/* Points Summary - Updated with brighter colors */}
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-emerald-400 to-emerald-600 text-white">
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-yellow-300 to-yellow-500 text-white">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-emerald-100">Punti Disponibili</CardTitle>
+              <CardTitle className="text-sm font-medium text-yellow-100">Punti Disponibili</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-xl sm:text-2xl font-bold">{userPoints}</div>
-              <p className="text-xs text-emerald-100">Guadagnati con 24 attività</p>
+              <p className="text-xs text-yellow-100">Guadagnati con 24 attività</p>
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-yellow-300 to-yellow-400 text-white">
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-green-400 to-green-600 text-white">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-yellow-100">Certificati Disponibili</CardTitle>
+              <CardTitle className="text-sm font-medium text-green-100">Certificati Disponibili</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-xl sm:text-2xl font-bold">{userCertificates}</div>
-              <p className="text-xs text-yellow-100">Per donazioni sociali</p>
+              <p className="text-xs text-green-100">Per donazioni sociali</p>
             </CardContent>
           </Card>
 
@@ -636,13 +636,13 @@ const Exchange = () => {
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-cyan-300 to-cyan-400 text-white">
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-purple-300 to-purple-500 text-white">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-cyan-100">Livello VIP</CardTitle>
+              <CardTitle className="text-sm font-medium text-purple-100">Livello VIP</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-lg sm:text-2xl font-bold">ECO EXPERT</div>
-              <p className="text-xs text-cyan-100">Bonus del 15%</p>
+              <p className="text-xs text-purple-100">Bonus del 15%</p>
             </CardContent>
           </Card>
         </div>
