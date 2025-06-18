@@ -616,13 +616,13 @@ const Exchange = () => {
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-amber-400 to-amber-600 text-white">
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-yellow-300 to-yellow-400 text-white">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-amber-100">Certificati Disponibili</CardTitle>
+              <CardTitle className="text-sm font-medium text-yellow-100">Certificati Disponibili</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-xl sm:text-2xl font-bold">{userCertificates}</div>
-              <p className="text-xs text-amber-100">Per donazioni sociali</p>
+              <p className="text-xs text-yellow-100">Per donazioni sociali</p>
             </CardContent>
           </Card>
 
@@ -636,13 +636,13 @@ const Exchange = () => {
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-purple-400 to-purple-600 text-white">
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-cyan-300 to-cyan-400 text-white">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-purple-100">Livello VIP</CardTitle>
+              <CardTitle className="text-sm font-medium text-cyan-100">Livello VIP</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-lg sm:text-2xl font-bold">ECO EXPERT</div>
-              <p className="text-xs text-purple-100">Bonus del 15%</p>
+              <p className="text-xs text-cyan-100">Bonus del 15%</p>
             </CardContent>
           </Card>
         </div>
