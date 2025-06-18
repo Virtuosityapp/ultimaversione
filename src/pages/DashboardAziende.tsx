@@ -7,7 +7,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Users, UserCheck, Upload, FileText, Award, Gift, Plane, ArrowLeft, TrendingUp, Eye, Target, Globe, Droplet, Zap, Trash2, Percent, QrCode, Package, Shield, Link, Menu, ChevronDown } from 'lucide-react';
+import { Users, UserCheck, Upload, FileText, Award, Gift, Plane, ArrowLeft, TrendingUp, Eye, Target, Globe, Droplet, Zap, Trash2, Percent, QrCode, Package, Shield, Link, Menu, ChevronDown, BarChart3 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -24,6 +24,7 @@ const DashboardAziende = () => {
   const [showWelfareSection, setShowWelfareSection] = useState(false);
   const [showFollowersSection, setShowFollowersSection] = useState(false);
   const [showDppSection, setShowDppSection] = useState(false);
+  const [showMonitoringSection, setShowMonitoringSection] = useState(false);
   
   // Welfare per Dipendenti - Limited to 4 items
   const [welfareItems, setWelfareItems] = useState([
@@ -258,12 +259,12 @@ const DashboardAziende = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-3 md:p-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-2 md:p-4">
       <LanguageSwitcher />
       
       <div className="max-w-7xl mx-auto">
         {/* Navigation Button */}
-        <div className="mb-3">
+        <div className="mb-2">
           <Button 
             onClick={() => navigate('/')} 
             variant="outline" 
@@ -275,28 +276,28 @@ const DashboardAziende = () => {
           </Button>
         </div>
 
-        {/* Header Section - Made more compact */}
-        <div className="text-center mb-4">
-          <h1 className={`${isMobile ? 'text-2xl' : 'text-3xl'} font-bold bg-gradient-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent mb-2`}>
+        {/* Header Section */}
+        <div className="text-center mb-3">
+          <h1 className={`${isMobile ? 'text-xl' : 'text-2xl'} font-bold bg-gradient-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent mb-1`}>
             Dashboard Aziendale
           </h1>
-          <p className={`${isMobile ? 'text-sm' : 'text-base'} text-gray-600 max-w-2xl mx-auto px-2`}>
+          <p className={`${isMobile ? 'text-xs' : 'text-sm'} text-gray-600 max-w-2xl mx-auto px-2`}>
             Gestisci i certificati di sostenibilità dei tuoi dipendenti e followers, configura premi e benefit, 
             e monitora l'impatto ambientale della tua azienda.
           </p>
         </div>
 
-        {/* Metriche Certificati - Fixed to always show 2 columns side by side */}
-        <div className="grid grid-cols-2 gap-2 md:gap-4 mb-4">
+        {/* Metriche Certificati */}
+        <div className="grid grid-cols-2 gap-2 md:gap-3 mb-3">
           <Card className="border-0 shadow-md bg-gradient-to-br from-emerald-400 to-green-500 text-white">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 p-2 md:p-4">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 p-2 md:p-3">
               <CardTitle className="text-xs md:text-sm font-medium text-emerald-100">{t('employeeCertificates')}</CardTitle>
               <div className="p-1 bg-white/25 rounded-md">
                 <Users className="h-3 w-3 text-white" />
               </div>
             </CardHeader>
-            <CardContent className="pb-2 p-2 md:p-4 pt-0">
-              <div className="text-lg md:text-2xl font-bold text-white">{certificatiDipendenti}</div>
+            <CardContent className="pb-1 p-2 md:p-3 pt-0">
+              <div className="text-base md:text-xl font-bold text-white">{certificatiDipendenti}</div>
               <p className="text-xs text-emerald-100 mt-1">
                 Certificati scambiati con i dipendenti
               </p>
@@ -304,14 +305,14 @@ const DashboardAziende = () => {
           </Card>
 
           <Card className="border-0 shadow-md bg-gradient-to-br from-cyan-400 to-blue-500 text-white">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 p-2 md:p-4">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 p-2 md:p-3">
               <CardTitle className="text-xs md:text-sm font-medium text-cyan-100">{t('externalCertificates')}</CardTitle>
               <div className="p-1 bg-white/25 rounded-md">
                 <UserCheck className="h-3 w-3 text-white" />
               </div>
             </CardHeader>
-            <CardContent className="pb-2 p-2 md:p-4 pt-0">
-              <div className="text-lg md:text-2xl font-bold text-white">{certificatiEsterni}</div>
+            <CardContent className="pb-1 p-2 md:p-3 pt-0">
+              <div className="text-base md:text-xl font-bold text-white">{certificatiEsterni}</div>
               <p className="text-xs text-cyan-100 mt-1">
                 Certificati ricevuti da followers
               </p>
@@ -319,140 +320,35 @@ const DashboardAziende = () => {
           </Card>
         </div>
 
-        {/* Monitoraggio Certificati - Visual Cards with brighter colors */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-4">
-          {/* Monitoraggio Certificati Dipendenti */}
-          <Card className="border-0 shadow-md bg-white/90 backdrop-blur-sm">
-            <CardHeader className="bg-gradient-to-r from-emerald-400 to-green-500 text-white rounded-t-lg pb-2">
-              <CardTitle className={`flex items-center gap-2 ${isMobile ? 'text-base' : 'text-lg'}`}>
-                <Eye className="h-4 w-4" />
-                Monitoraggio Certificati Dipendenti
-              </CardTitle>
-              <CardDescription className={`text-emerald-100 ${isMobile ? 'text-xs' : 'text-sm'}`}>
-                Analisi dei comportamenti sostenibili per strategie di marketing mirate
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="p-3">
-              <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2'} gap-2`}>
-                {certificateMonitoringCategories.map((category, index) => (
-                  <Card key={index} className={`border ${category.borderColor} ${category.bgColor} hover:shadow-sm transition-all duration-300`}>
-                    <CardContent className="p-2">
-                      <div className="flex items-center justify-between mb-1">
-                        <div className="flex items-center gap-1.5">
-                          <img 
-                            src={category.mascot} 
-                            alt={category.category}
-                            className="w-6 h-6 rounded-full object-cover"
-                          />
-                          <div className={`p-1 rounded-md bg-gradient-to-r ${category.color} text-white`}>
-                            {React.cloneElement(category.icon, { className: "h-3 w-3" })}
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <div className={`${isMobile ? 'text-lg' : 'text-xl'} font-bold`}>{category.totalCount}</div>
-                          <div className={`${isMobile ? 'text-xs' : 'text-xs'} font-semibold ${getTrendColor(category.trend)} flex items-center gap-1`}>
-                            <TrendingUp className="h-2 w-2" />
-                            {category.trend}
-                          </div>
-                        </div>
-                      </div>
-                      <h3 className={`font-semibold text-gray-800 mb-1 ${isMobile ? 'text-xs' : 'text-sm'}`}>{category.category}</h3>
-                      <div className="space-y-1">
-                        {category.data.map((item, itemIndex) => (
-                          <div key={itemIndex} className={`flex items-center justify-between ${isMobile ? 'text-xs' : 'text-xs'}`}>
-                            <span className="text-gray-600 truncate mr-2">{item.tipo}</span>
-                            <div className="flex items-center gap-1 flex-shrink-0">
-                              <span className="font-semibold">{item.count}</span>
-                              <div className="w-8 h-1 bg-gray-200 rounded-full overflow-hidden">
-                                <div 
-                                  className={`h-full bg-gradient-to-r ${category.color} transition-all duration-500`}
-                                  style={{ width: `${item.percentage}%` }}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Monitoraggio Certificati Esterni */}
-          <Card className="border-0 shadow-md bg-white/90 backdrop-blur-sm">
-            <CardHeader className="bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-t-lg pb-2">
-              <CardTitle className={`flex items-center gap-2 ${isMobile ? 'text-base' : 'text-lg'}`}>
-                <Globe className="h-4 w-4" />
-                Monitoraggio Certificati Esterni
-              </CardTitle>
-              <CardDescription className={`text-cyan-100 ${isMobile ? 'text-xs' : 'text-sm'}`}>
-                Analisi dei comportamenti sostenibili dei followers per strategie di engagement
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="p-3">
-              <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2'} gap-2`}>
-                {externalCertificateCategories.map((category, index) => (
-                  <Card key={index} className={`border ${category.borderColor} ${category.bgColor} hover:shadow-sm transition-all duration-300`}>
-                    <CardContent className="p-2">
-                      <div className="flex items-center justify-between mb-1">
-                        <div className="flex items-center gap-1.5">
-                          <img 
-                            src={category.mascot} 
-                            alt={category.category}
-                            className="w-6 h-6 rounded-full object-cover"
-                          />
-                          <div className={`p-1 rounded-md bg-gradient-to-r ${category.color} text-white`}>
-                            {React.cloneElement(category.icon, { className: "h-3 w-3" })}
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <div className={`${isMobile ? 'text-lg' : 'text-xl'} font-bold`}>{category.totalCount}</div>
-                          <div className={`${isMobile ? 'text-xs' : 'text-xs'} font-semibold ${getTrendColor(category.trend)} flex items-center gap-1`}>
-                            <TrendingUp className="h-2 w-2" />
-                            {category.trend}
-                          </div>
-                        </div>
-                      </div>
-                      <h3 className={`font-semibold text-gray-800 mb-1 ${isMobile ? 'text-xs' : 'text-sm'}`}>{category.category}</h3>
-                      <div className="space-y-1">
-                        {category.data.map((item, itemIndex) => (
-                          <div key={itemIndex} className={`flex items-center justify-between ${isMobile ? 'text-xs' : 'text-xs'}`}>
-                            <span className="text-gray-600 truncate mr-2">{item.tipo}</span>
-                            <div className="flex items-center gap-1 flex-shrink-0">
-                              <span className="font-semibold">{item.count}</span>
-                              <div className="w-8 h-1 bg-gray-200 rounded-full overflow-hidden">
-                                <div 
-                                  className={`h-full bg-gradient-to-r ${category.color} transition-all duration-500`}
-                                  style={{ width: `${item.percentage}%` }}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Menu Gestione - Include DPP with brighter colors */}
-        <Card className="border-0 shadow-md bg-white/90 backdrop-blur-sm mb-4">
+        {/* Menu Gestione - Include Monitoraggio */}
+        <Card className="border-0 shadow-md bg-white/90 backdrop-blur-sm mb-3">
           <CardHeader className="bg-gradient-to-r from-violet-400 to-purple-500 text-white rounded-t-lg pb-2">
-            <CardTitle className={`flex items-center gap-2 ${isMobile ? 'text-base' : 'text-lg'}`}>
+            <CardTitle className={`flex items-center gap-2 ${isMobile ? 'text-sm' : 'text-base'}`}>
               <Menu className="h-4 w-4" />
-              Gestione Welfare, Premi e Prodotti
+              Menu Gestione
             </CardTitle>
             <CardDescription className={`text-violet-100 ${isMobile ? 'text-xs' : 'text-sm'}`}>
-              Configura benefit per dipendenti, offerte per followers e passaporti digitali prodotti
+              Gestisci welfare, premi, prodotti e monitoraggio certificati
             </CardDescription>
           </CardHeader>
-          <CardContent className="p-3">
+          <CardContent className="p-2">
             <div className={`flex ${isMobile ? 'flex-col' : 'flex-wrap'} gap-2`}>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button size={isMobile ? "sm" : "default"} className="bg-gradient-to-r from-indigo-400 to-purple-500 hover:from-indigo-500 hover:to-purple-600 text-white shadow-md">
+                    <BarChart3 className="mr-2 h-4 w-4" />
+                    Monitoraggio
+                    <ChevronDown className="ml-2 h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56 bg-white shadow-lg border z-50">
+                  <DropdownMenuItem onClick={() => setShowMonitoringSection(!showMonitoringSection)}>
+                    <Eye className="mr-2 h-4 w-4" />
+                    {showMonitoringSection ? 'Nascondi Monitoraggio' : 'Mostra Monitoraggio'}
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button size={isMobile ? "sm" : "default"} className="bg-gradient-to-r from-emerald-400 to-green-500 hover:from-emerald-500 hover:to-green-600 text-white shadow-md">
@@ -503,6 +399,129 @@ const DashboardAziende = () => {
             </div>
           </CardContent>
         </Card>
+
+        {/* Monitoraggio Certificati - Condizionalmente visibile */}
+        {showMonitoringSection && (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 mb-3">
+            {/* Monitoraggio Certificati Dipendenti */}
+            <Card className="border-0 shadow-md bg-white/90 backdrop-blur-sm">
+              <CardHeader className="bg-gradient-to-r from-emerald-400 to-green-500 text-white rounded-t-lg pb-1">
+                <CardTitle className={`flex items-center gap-2 ${isMobile ? 'text-sm' : 'text-base'}`}>
+                  <Eye className="h-4 w-4" />
+                  Monitoraggio Certificati Dipendenti
+                </CardTitle>
+                <CardDescription className={`text-emerald-100 ${isMobile ? 'text-xs' : 'text-sm'}`}>
+                  Analisi dei comportamenti sostenibili per strategie di marketing mirate
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="p-2">
+                <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2'} gap-2`}>
+                  {certificateMonitoringCategories.map((category, index) => (
+                    <Card key={index} className={`border ${category.borderColor} ${category.bgColor} hover:shadow-sm transition-all duration-300`}>
+                      <CardContent className="p-2">
+                        <div className="flex items-center justify-between mb-1">
+                          <div className="flex items-center gap-1.5">
+                            <img 
+                              src={category.mascot} 
+                              alt={category.category}
+                              className="w-6 h-6 rounded-full object-cover"
+                            />
+                            <div className={`p-1 rounded-md bg-gradient-to-r ${category.color} text-white`}>
+                              {React.cloneElement(category.icon, { className: "h-3 w-3" })}
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <div className={`${isMobile ? 'text-lg' : 'text-xl'} font-bold`}>{category.totalCount}</div>
+                            <div className={`${isMobile ? 'text-xs' : 'text-xs'} font-semibold ${getTrendColor(category.trend)} flex items-center gap-1`}>
+                              <TrendingUp className="h-2 w-2" />
+                              {category.trend}
+                            </div>
+                          </div>
+                        </div>
+                        <h3 className={`font-semibold text-gray-800 mb-1 ${isMobile ? 'text-xs' : 'text-sm'}`}>{category.category}</h3>
+                        <div className="space-y-1">
+                          {category.data.map((item, itemIndex) => (
+                            <div key={itemIndex} className={`flex items-center justify-between ${isMobile ? 'text-xs' : 'text-xs'}`}>
+                              <span className="text-gray-600 truncate mr-2">{item.tipo}</span>
+                              <div className="flex items-center gap-1 flex-shrink-0">
+                                <span className="font-semibold">{item.count}</span>
+                                <div className="w-8 h-1 bg-gray-200 rounded-full overflow-hidden">
+                                  <div 
+                                    className={`h-full bg-gradient-to-r ${category.color} transition-all duration-500`}
+                                    style={{ width: `${item.percentage}%` }}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Monitoraggio Certificati Esterni */}
+            <Card className="border-0 shadow-md bg-white/90 backdrop-blur-sm">
+              <CardHeader className="bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-t-lg pb-1">
+                <CardTitle className={`flex items-center gap-2 ${isMobile ? 'text-sm' : 'text-base'}`}>
+                  <Globe className="h-4 w-4" />
+                  Monitoraggio Certificati Esterni
+                </CardTitle>
+                <CardDescription className={`text-cyan-100 ${isMobile ? 'text-xs' : 'text-sm'}`}>
+                  Analisi dei comportamenti sostenibili dei followers per strategie di engagement
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="p-2">
+                <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2'} gap-2`}>
+                  {externalCertificateCategories.map((category, index) => (
+                    <Card key={index} className={`border ${category.borderColor} ${category.bgColor} hover:shadow-sm transition-all duration-300`}>
+                      <CardContent className="p-2">
+                        <div className="flex items-center justify-between mb-1">
+                          <div className="flex items-center gap-1.5">
+                            <img 
+                              src={category.mascot} 
+                              alt={category.category}
+                              className="w-6 h-6 rounded-full object-cover"
+                            />
+                            <div className={`p-1 rounded-md bg-gradient-to-r ${category.color} text-white`}>
+                              {React.cloneElement(category.icon, { className: "h-3 w-3" })}
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <div className={`${isMobile ? 'text-lg' : 'text-xl'} font-bold`}>{category.totalCount}</div>
+                            <div className={`${isMobile ? 'text-xs' : 'text-xs'} font-semibold ${getTrendColor(category.trend)} flex items-center gap-1`}>
+                              <TrendingUp className="h-2 w-2" />
+                              {category.trend}
+                            </div>
+                          </div>
+                        </div>
+                        <h3 className={`font-semibold text-gray-800 mb-1 ${isMobile ? 'text-xs' : 'text-sm'}`}>{category.category}</h3>
+                        <div className="space-y-1">
+                          {category.data.map((item, itemIndex) => (
+                            <div key={itemIndex} className={`flex items-center justify-between ${isMobile ? 'text-xs' : 'text-xs'}`}>
+                              <span className="text-gray-600 truncate mr-2">{item.tipo}</span>
+                              <div className="flex items-center gap-1 flex-shrink-0">
+                                <span className="font-semibold">{item.count}</span>
+                                <div className="w-8 h-1 bg-gray-200 rounded-full overflow-hidden">
+                                  <div 
+                                    className={`h-full bg-gradient-to-r ${category.color} transition-all duration-500`}
+                                    style={{ width: `${item.percentage}%` }}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
 
         {/* Sezioni Welfare, Premi e DPP - Condizionalmente visibili */}
         {(showWelfareSection || showFollowersSection || showDppSection) && (
