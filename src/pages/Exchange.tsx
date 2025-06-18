@@ -250,16 +250,16 @@ const Exchange = () => {
     websiteUrl: "https://www.intesasanpaolo.com"
   }, {
     id: 5,
-    partner: "IKEA",
-    title: "Mobili da Materiali Riciclati",
-    description: "Nuova collezione di arredi realizzati al 100% con materiali riciclati e sostenibili",
+    partner: "SAMSUNG",
+    title: "Galaxy Watch Virtuosity Edition",
+    description: "L'ultimo smartwatch Samsung ottimizzato per registrare meglio i dati di sostenibilità di Virtuosity rispetto ad altri dispositivi",
     discount: "Sconto 20%",
-    category: "casa",
-    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop",
+    category: "tecnologia",
+    image: "/lovable-uploads/5bd78591-1131-4fe0-be3f-1f508608b667.png",
     validUntil: "30 Aprile 2026",
     pointsRequired: 400,
-    benefits: ["Consegna gratuita", "Montaggio incluso", "Ritiro mobili usati"],
-    websiteUrl: "https://www.ikea.com/it/it/"
+    benefits: ["Sensori avanzati per eco-tracking", "App Virtuosity preinstallata", "Cinturino ecologico incluso"],
+    websiteUrl: "https://www.samsung.com/it/watches/"
   }, {
     id: 6,
     partner: "COOP",
@@ -285,7 +285,8 @@ const Exchange = () => {
       automotive: "bg-red-100 text-red-800",
       sport: "bg-cyan-100 text-cyan-800",
       ambiente: "bg-emerald-100 text-emerald-800",
-      bancario: "bg-indigo-100 text-indigo-800"
+      bancario: "bg-indigo-100 text-indigo-800",
+      tecnologia: "bg-slate-100 text-slate-800"
     };
     return colors[category as keyof typeof colors] || "bg-gray-100 text-gray-800";
   };
