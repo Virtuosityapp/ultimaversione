@@ -32,22 +32,22 @@ const Dashboard = () => {
         {/* Stats Cards */}
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
           {/* Punti Totali */}
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-yellow-300 to-yellow-400 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-yellow-200 to-yellow-300 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
             <CardHeader className="pb-1 sm:pb-2">
-              <CardTitle className="text-xs sm:text-sm font-medium text-yellow-100">
+              <CardTitle className="text-xs sm:text-sm font-medium text-yellow-800">
                 {language === 'it' ? 'Punti Totali' : 'Total Points'}
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-0">
-              <div className="text-lg sm:text-2xl font-bold">2,847</div>
-              <p className="text-xs text-yellow-100 hidden sm:block">
+              <div className="text-lg sm:text-2xl font-bold text-yellow-900">2,847</div>
+              <p className="text-xs text-yellow-700 hidden sm:block">
                 {language === 'it' ? '+245 questo mese' : '+245 this month'}
               </p>
             </CardContent>
           </Card>
 
           {/* Progetti Partecipati */}
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-green-500 to-green-600 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-green-400 to-green-500 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
             <CardHeader className="pb-1 sm:pb-2">
               <CardTitle className="text-xs sm:text-sm font-medium text-green-100">
                 {language === 'it' ? 'Progetti' : 'Projects'}
@@ -62,22 +62,22 @@ const Dashboard = () => {
           </Card>
 
           {/* Certificati */}
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-yellow-300 to-yellow-400 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-orange-300 to-orange-400 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
             <CardHeader className="pb-1 sm:pb-2">
-              <CardTitle className="text-xs sm:text-sm font-medium text-yellow-100">
+              <CardTitle className="text-xs sm:text-sm font-medium text-orange-100">
                 {language === 'it' ? 'Certificati' : 'Certificates'}
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-0">
               <div className="text-lg sm:text-2xl font-bold">12</div>
-              <p className="text-xs text-yellow-100 hidden sm:block">
+              <p className="text-xs text-orange-100 hidden sm:block">
                 {language === 'it' ? '2 nuovi certificati' : '2 new certificates'}
               </p>
             </CardContent>
           </Card>
 
           {/* Ranking */}
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-purple-500 to-purple-600 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-purple-400 to-purple-500 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
             <CardHeader className="pb-1 sm:pb-2">
               <CardTitle className="text-xs sm:text-sm font-medium text-purple-100">
                 {language === 'it' ? 'Ranking' : 'Ranking'}
