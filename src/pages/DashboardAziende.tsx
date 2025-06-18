@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -5,8 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Progress } from '@/components/ui/progress';
 import { Users, UserCheck, Upload, FileText, Award, Gift, Plane, ArrowLeft, TrendingUp, Eye, Target, Globe, Droplet, Zap, Trash2, Percent } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -35,45 +35,73 @@ const DashboardAziende = () => {
     { id: 4, tipo: 'Premio', nome: 'Kit Compostaggio Domestico', valore: '€ 45', certificatiRichiesti: 'Riciclo Rifiuti', quantitaCertificati: 5 }
   ]);
 
+  // Licenze Aziendali disponibili per dipendenti
+  const [licenzeAziendali] = useState([
+    { id: 1, nome: 'Microsoft Office 365', descrizione: 'Suite completa per produttività', valore: '€ 149/anno', certificatiRichiesti: 'Risparmio Energetico', quantitaCertificati: 15 },
+    { id: 2, nome: 'Adobe Creative Cloud', descrizione: 'Strumenti professionali per creativi', valore: '€ 299/anno', certificatiRichiesti: 'Riciclo Rifiuti', quantitaCertificati: 25 },
+    { id: 3, nome: 'Coursera Business', descrizione: 'Piattaforma per formazione continua', valore: '€ 399/anno', certificatiRichiesti: 'Riduzione CO2', quantitaCertificati: 30 },
+    { id: 4, nome: 'Slack Pro', descrizione: 'Comunicazione team avanzata', valore: '€ 89/anno', certificatiRichiesti: 'Risparmio Idrico', quantitaCertificati: 12 }
+  ]);
+
   const [certificateMonitoringCategories] = useState([
     {
       category: 'Risparmio Idrico',
       mascot: '/lovable-uploads/0a948061-d9ea-4555-839e-59bc31cd4c9a.png',
-      icon: <Droplet className="h-5 w-5" />,
+      icon: <Droplet className="h-8 w-8" />,
+      color: 'from-blue-400 to-cyan-600',
+      bgColor: 'bg-blue-50',
+      borderColor: 'border-blue-200',
+      totalCount: 301,
+      trend: '+12%',
       data: [
-        { tipo: 'Uso Consapevole Acqua', count: 145, trend: '+12%', action: 'Sensori smart per rubinetti' },
-        { tipo: 'Raccolta Acqua Piovana', count: 89, trend: '+8%', action: 'Sistemi di recupero in ufficio' },
-        { tipo: 'Riduzione Sprechi', count: 67, trend: '+15%', action: 'Monitoraggio consumi real-time' }
+        { tipo: 'Uso Consapevole Acqua', count: 145, percentage: 48 },
+        { tipo: 'Raccolta Acqua Piovana', count: 89, percentage: 30 },
+        { tipo: 'Riduzione Sprechi', count: 67, percentage: 22 }
       ]
     },
     {
       category: 'Risparmio Energetico',
       mascot: '/lovable-uploads/89a2a2c5-7071-4df2-8e73-c5e5b645b38b.png',
-      icon: <Zap className="h-5 w-5" />,
+      icon: <Zap className="h-8 w-8" />,
+      color: 'from-yellow-400 to-orange-600',
+      bgColor: 'bg-yellow-50',
+      borderColor: 'border-yellow-200',
+      totalCount: 457,
+      trend: '+18%',
       data: [
-        { tipo: 'Smart Working', count: 245, trend: '+18%', action: 'Incentivi lavoro da remoto' },
-        { tipo: 'LED e Sensori', count: 134, trend: '+10%', action: 'Sostituzione illuminazione tradizionale' },
-        { tipo: 'Elettrodomestici A+++', count: 78, trend: '+6%', action: 'Programma di rinnovo attrezzature' }
+        { tipo: 'Smart Working', count: 245, percentage: 54 },
+        { tipo: 'LED e Sensori', count: 134, percentage: 29 },
+        { tipo: 'Elettrodomestici A+++', count: 78, percentage: 17 }
       ]
     },
     {
       category: 'Riciclo e Rifiuti',
       mascot: '/lovable-uploads/491544c4-c37d-4c3b-a368-e0c71002d237.png',
-      icon: <Trash2 className="h-5 w-5" />,
+      icon: <Trash2 className="h-8 w-8" />,
+      color: 'from-green-400 to-emerald-600',
+      bgColor: 'bg-green-50',
+      borderColor: 'border-green-200',
+      totalCount: 543,
+      trend: '+22%',
       data: [
-        { tipo: 'Raccolta Differenziata', count: 298, trend: '+22%', action: 'Contenitori smart in ufficio' },
-        { tipo: 'Riuso Materiali', count: 156, trend: '+14%', action: 'Mercatino interno usato' },
-        { tipo: 'Zero Waste', count: 89, trend: '+16%', action: 'Challenge rifiuti zero mensile' }
+        { tipo: 'Raccolta Differenziata', count: 298, percentage: 55 },
+        { tipo: 'Riuso Materiali', count: 156, percentage: 29 },
+        { tipo: 'Zero Waste', count: 89, percentage: 16 }
       ]
     },
     {
       category: 'Riduzione CO2',
       mascot: '/lovable-uploads/f7195bbc-9cea-4e2a-93c5-b33349aed6ac.png',
-      icon: <FileText className="h-5 w-5" />,
+      icon: <FileText className="h-8 w-8" />,
+      color: 'from-purple-400 to-indigo-600',
+      bgColor: 'bg-purple-50',
+      borderColor: 'border-purple-200',
+      totalCount: 368,
+      trend: '+20%',
       data: [
-        { tipo: 'Trasporto Sostenibile', count: 167, trend: '+20%', action: 'Bike sharing aziendale' },
-        { tipo: 'Compensazione CO2', count: 112, trend: '+12%', action: 'Progetti di riforestazione' },
-        { tipo: 'Digital First', count: 89, trend: '+25%', action: 'Riduzione carta e stampe' }
+        { tipo: 'Trasporto Sostenibile', count: 167, percentage: 45 },
+        { tipo: 'Compensazione CO2', count: 112, percentage: 30 },
+        { tipo: 'Digital First', count: 89, percentage: 25 }
       ]
     }
   ]);
@@ -82,41 +110,61 @@ const DashboardAziende = () => {
     {
       category: 'Risparmio Idrico',
       mascot: '/lovable-uploads/0a948061-d9ea-4555-839e-59bc31cd4c9a.png',
-      icon: <Droplet className="h-5 w-5" />,
+      icon: <Droplet className="h-8 w-8" />,
+      color: 'from-blue-400 to-cyan-600',
+      bgColor: 'bg-blue-50',
+      borderColor: 'border-blue-200',
+      totalCount: 2982,
+      trend: '+28%',
       data: [
-        { tipo: 'Sistemi Raccolta Acqua', count: 1456, trend: '+28%', action: 'Sconti su sistemi di recupero' },
-        { tipo: 'Elettrodomestici Water-Saving', count: 892, trend: '+15%', action: 'Partnership produttori eco' },
-        { tipo: 'Giardini Sostenibili', count: 634, trend: '+18%', action: 'Workshop giardinaggio sostenibile' }
+        { tipo: 'Sistemi Raccolta Acqua', count: 1456, percentage: 49 },
+        { tipo: 'Elettrodomestici Water-Saving', count: 892, percentage: 30 },
+        { tipo: 'Giardini Sostenibili', count: 634, percentage: 21 }
       ]
     },
     {
       category: 'Risparmio Energetico',
       mascot: '/lovable-uploads/89a2a2c5-7071-4df2-8e73-c5e5b645b38b.png',
-      icon: <Zap className="h-5 w-5" />,
+      icon: <Zap className="h-8 w-8" />,
+      color: 'from-yellow-400 to-orange-600',
+      bgColor: 'bg-yellow-50',
+      borderColor: 'border-yellow-200',
+      totalCount: 4688,
+      trend: '+32%',
       data: [
-        { tipo: 'Pannelli Solari', count: 2134, trend: '+32%', action: 'Finanziamenti agevolati installazione' },
-        { tipo: 'Isolamento Termico', count: 1567, trend: '+22%', action: 'Incentivi ristrutturazione green' },
-        { tipo: 'Smart Home', count: 987, trend: '+19%', action: 'Sconti dispositivi domotici' }
+        { tipo: 'Pannelli Solari', count: 2134, percentage: 46 },
+        { tipo: 'Isolamento Termico', count: 1567, percentage: 33 },
+        { tipo: 'Smart Home', count: 987, percentage: 21 }
       ]
     },
     {
       category: 'Riciclo e Rifiuti',
       mascot: '/lovable-uploads/491544c4-c37d-4c3b-a368-e0c71002d237.png',
-      icon: <Trash2 className="h-5 w-5" />,
+      icon: <Trash2 className="h-8 w-8" />,
+      color: 'from-green-400 to-emerald-600',
+      bgColor: 'bg-green-50',
+      borderColor: 'border-green-200',
+      totalCount: 3879,
+      trend: '+25%',
       data: [
-        { tipo: 'Compostaggio Domestico', count: 1789, trend: '+25%', action: 'Distribuzione compostiere gratuite' },
-        { tipo: 'Riparazione vs Sostituzione', count: 1234, trend: '+20%', action: 'Rete repair café locali' },
-        { tipo: 'Upcycling Creativo', count: 856, trend: '+30%', action: 'Workshop creativi riutilizzo' }
+        { tipo: 'Compostaggio Domestico', count: 1789, percentage: 46 },
+        { tipo: 'Riparazione vs Sostituzione', count: 1234, percentage: 32 },
+        { tipo: 'Upcycling Creativo', count: 856, percentage: 22 }
       ]
     },
     {
       category: 'Riduzione CO2',
       mascot: '/lovable-uploads/f7195bbc-9cea-4e2a-93c5-b33349aed6ac.png',
-      icon: <FileText className="h-5 w-5" />,
+      icon: <FileText className="h-8 w-8" />,
+      color: 'from-purple-400 to-indigo-600',
+      bgColor: 'bg-purple-50',
+      borderColor: 'border-purple-200',
+      totalCount: 5057,
+      trend: '+35%',
       data: [
-        { tipo: 'Mobilità Elettrica', count: 2456, trend: '+35%', action: 'Incentivi acquisto e-bike/auto elettriche' },
-        { tipo: 'Alimentazione Plant-Based', count: 1678, trend: '+28%', action: 'Ricettari e corsi cucina sostenibile' },
-        { tipo: 'Turismo Sostenibile', count: 923, trend: '+22%', action: 'Partnership strutture eco-certificate' }
+        { tipo: 'Mobilità Elettrica', count: 2456, percentage: 49 },
+        { tipo: 'Alimentazione Plant-Based', count: 1678, percentage: 33 },
+        { tipo: 'Turismo Sostenibile', count: 923, percentage: 18 }
       ]
     }
   ]);
@@ -244,7 +292,7 @@ const DashboardAziende = () => {
           </Card>
         </div>
 
-        {/* Monitoraggio Certificati - Side by Side */}
+        {/* Monitoraggio Certificati - Visual Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           {/* Monitoraggio Certificati Dipendenti */}
           <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
@@ -258,55 +306,50 @@ const DashboardAziende = () => {
               </CardDescription>
             </CardHeader>
             <CardContent className="p-6">
-              <Accordion type="single" collapsible className="w-full">
-                {certificateMonitoringCategories.map((category, categoryIndex) => (
-                  <AccordionItem key={categoryIndex} value={`item-${categoryIndex}`}>
-                    <AccordionTrigger className="flex items-center gap-3">
-                      <div className="flex items-center gap-3">
-                        <img 
-                          src={category.mascot} 
-                          alt={category.category}
-                          className="w-8 h-8 rounded-full object-cover"
-                        />
-                        {category.icon}
-                        <span>{category.category}</span>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {certificateMonitoringCategories.map((category, index) => (
+                  <Card key={index} className={`border-2 ${category.borderColor} ${category.bgColor} hover:shadow-lg transition-all duration-300`}>
+                    <CardContent className="p-4">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center gap-3">
+                          <img 
+                            src={category.mascot} 
+                            alt={category.category}
+                            className="w-10 h-10 rounded-full object-cover"
+                          />
+                          <div className={`p-2 rounded-lg bg-gradient-to-r ${category.color} text-white`}>
+                            {category.icon}
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-2xl font-bold">{category.totalCount}</div>
+                          <div className={`text-sm font-semibold ${getTrendColor(category.trend)} flex items-center gap-1`}>
+                            <TrendingUp className="h-3 w-3" />
+                            {category.trend}
+                          </div>
+                        </div>
                       </div>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <Table>
-                        <TableHeader>
-                          <TableRow>
-                            <TableHead>Tipo Certificato</TableHead>
-                            <TableHead>Quantità</TableHead>
-                            <TableHead>Trend</TableHead>
-                            <TableHead>Azione Marketing</TableHead>
-                          </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                          {category.data.map((item, index) => (
-                            <TableRow key={index}>
-                              <TableCell className="font-medium">{item.tipo}</TableCell>
-                              <TableCell className="text-center font-semibold">{item.count}</TableCell>
-                              <TableCell className={`text-center font-semibold ${getTrendColor(item.trend)}`}>
-                                <div className="flex items-center justify-center gap-1">
-                                  <TrendingUp className="h-4 w-4" />
-                                  {item.trend}
-                                </div>
-                              </TableCell>
-                              <TableCell>
-                                <Badge variant="outline" className="flex items-center gap-1 text-xs">
-                                  <Target className="h-3 w-3" />
-                                  {item.action}
-                                </Badge>
-                              </TableCell>
-                            </TableRow>
-                          ))}
-                        </TableBody>
-                      </Table>
-                    </AccordionContent>
-                  </AccordionItem>
+                      <h3 className="font-semibold text-gray-800 mb-3">{category.category}</h3>
+                      <div className="space-y-2">
+                        {category.data.map((item, itemIndex) => (
+                          <div key={itemIndex} className="flex items-center justify-between text-sm">
+                            <span className="text-gray-600">{item.tipo}</span>
+                            <div className="flex items-center gap-2">
+                              <span className="font-semibold">{item.count}</span>
+                              <div className="w-16 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                <div 
+                                  className={`h-full bg-gradient-to-r ${category.color} transition-all duration-500`}
+                                  style={{ width: `${item.percentage}%` }}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
                 ))}
-              </Accordion>
+              </div>
             </CardContent>
           </Card>
 
@@ -322,58 +365,86 @@ const DashboardAziende = () => {
               </CardDescription>
             </CardHeader>
             <CardContent className="p-6">
-              <Accordion type="single" collapsible className="w-full">
-                {externalCertificateCategories.map((category, categoryIndex) => (
-                  <AccordionItem key={categoryIndex} value={`external-item-${categoryIndex}`}>
-                    <AccordionTrigger className="flex items-center gap-3">
-                      <div className="flex items-center gap-3">
-                        <img 
-                          src={category.mascot} 
-                          alt={category.category}
-                          className="w-8 h-8 rounded-full object-cover"
-                        />
-                        {category.icon}
-                        <span>{category.category}</span>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {externalCertificateCategories.map((category, index) => (
+                  <Card key={index} className={`border-2 ${category.borderColor} ${category.bgColor} hover:shadow-lg transition-all duration-300`}>
+                    <CardContent className="p-4">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center gap-3">
+                          <img 
+                            src={category.mascot} 
+                            alt={category.category}
+                            className="w-10 h-10 rounded-full object-cover"
+                          />
+                          <div className={`p-2 rounded-lg bg-gradient-to-r ${category.color} text-white`}>
+                            {category.icon}
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-2xl font-bold">{category.totalCount}</div>
+                          <div className={`text-sm font-semibold ${getTrendColor(category.trend)} flex items-center gap-1`}>
+                            <TrendingUp className="h-3 w-3" />
+                            {category.trend}
+                          </div>
+                        </div>
                       </div>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <Table>
-                        <TableHeader>
-                          <TableRow>
-                            <TableHead>Tipo Certificato</TableHead>
-                            <TableHead>Quantità</TableHead>
-                            <TableHead>Trend</TableHead>
-                            <TableHead>Azione Marketing</TableHead>
-                          </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                          {category.data.map((item, index) => (
-                            <TableRow key={index}>
-                              <TableCell className="font-medium">{item.tipo}</TableCell>
-                              <TableCell className="text-center font-semibold">{item.count}</TableCell>
-                              <TableCell className={`text-center font-semibold ${getTrendColor(item.trend)}`}>
-                                <div className="flex items-center justify-center gap-1">
-                                  <TrendingUp className="h-4 w-4" />
-                                  {item.trend}
-                                </div>
-                              </TableCell>
-                              <TableCell>
-                                <Badge variant="outline" className="flex items-center gap-1 text-xs">
-                                  <Target className="h-3 w-3" />
-                                  {item.action}
-                                </Badge>
-                              </TableCell>
-                            </TableRow>
-                          ))}
-                        </TableBody>
-                      </Table>
-                    </AccordionContent>
-                  </AccordionItem>
+                      <h3 className="font-semibold text-gray-800 mb-3">{category.category}</h3>
+                      <div className="space-y-2">
+                        {category.data.map((item, itemIndex) => (
+                          <div key={itemIndex} className="flex items-center justify-between text-sm">
+                            <span className="text-gray-600">{item.tipo}</span>
+                            <div className="flex items-center gap-2">
+                              <span className="font-semibold">{item.count}</span>
+                              <div className="w-16 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                <div 
+                                  className={`h-full bg-gradient-to-r ${category.color} transition-all duration-500`}
+                                  style={{ width: `${item.percentage}%` }}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
                 ))}
-              </Accordion>
+              </div>
             </CardContent>
           </Card>
         </div>
+
+        {/* Sezione Licenze Aziendali */}
+        <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm mb-8">
+          <CardHeader className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-t-lg">
+            <CardTitle className="flex items-center gap-2">
+              <Award className="h-6 w-6" />
+              Licenze Aziendali per Dipendenti
+            </CardTitle>
+            <CardDescription className="text-indigo-100">
+              Software e servizi premium disponibili in cambio di certificati sostenibili
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="p-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {licenzeAziendali.map((licenza) => (
+                <div key={licenza.id} className="p-4 border-0 rounded-xl shadow-lg bg-gradient-to-br from-white to-indigo-50 hover:shadow-xl transition-shadow">
+                  <div className="flex items-center justify-between mb-3">
+                    <Badge className="flex items-center gap-1 bg-indigo-100 text-indigo-700 border-indigo-200">
+                      <Award className="h-4 w-4" />
+                      Licenza
+                    </Badge>
+                    <span className="font-bold text-lg text-gray-700">{licenza.valore}</span>
+                  </div>
+                  <h4 className="font-semibold text-gray-800 mb-2">{licenza.nome}</h4>
+                  <p className="text-sm text-gray-600 mb-3">{licenza.descrizione}</p>
+                  <div className="text-sm text-gray-600">
+                    <p><span className="font-medium">Richiede:</span> {licenza.quantitaCertificati}x {licenza.certificatiRichiesti}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Sezioni Welfare e Premi - Side by Side */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
