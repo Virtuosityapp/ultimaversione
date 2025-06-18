@@ -126,8 +126,8 @@ const Exchange = () => {
       label: "Progetti Sociali", 
       icon: HandHeart,
       description: "Dona certificati per supportare la comunità",
-      color: "from-red-500 to-pink-500",
-      bgColor: "bg-gradient-to-br from-red-50 to-pink-50"
+      color: "from-yellow-500 to-yellow-600",
+      bgColor: "bg-gradient-to-br from-yellow-50 to-yellow-100"
     },
     { 
       value: "partner-offers", 
