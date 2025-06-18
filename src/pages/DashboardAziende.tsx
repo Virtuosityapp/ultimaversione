@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -33,14 +32,6 @@ const DashboardAziende = () => {
     { id: 2, tipo: 'Premio', nome: 'Borraccia Ecologica Gratis', valore: '€ 25', certificatiRichiesti: 'Risparmio Idrico', quantitaCertificati: 2 },
     { id: 3, tipo: 'Sconto', nome: 'Pannelli Solari Casa', valore: '20%', certificatiRichiesti: 'Riduzione CO2', quantitaCertificati: 15 },
     { id: 4, tipo: 'Premio', nome: 'Kit Compostaggio Domestico', valore: '€ 45', certificatiRichiesti: 'Riciclo Rifiuti', quantitaCertificati: 5 }
-  ]);
-
-  // Licenze Aziendali disponibili per dipendenti
-  const [licenzeAziendali] = useState([
-    { id: 1, nome: 'Microsoft Office 365', descrizione: 'Suite completa per produttività', valore: '€ 149/anno', certificatiRichiesti: 'Risparmio Energetico', quantitaCertificati: 15 },
-    { id: 2, nome: 'Adobe Creative Cloud', descrizione: 'Strumenti professionali per creativi', valore: '€ 299/anno', certificatiRichiesti: 'Riciclo Rifiuti', quantitaCertificati: 25 },
-    { id: 3, nome: 'Coursera Business', descrizione: 'Piattaforma per formazione continua', valore: '€ 399/anno', certificatiRichiesti: 'Riduzione CO2', quantitaCertificati: 30 },
-    { id: 4, nome: 'Slack Pro', descrizione: 'Comunicazione team avanzata', valore: '€ 89/anno', certificatiRichiesti: 'Risparmio Idrico', quantitaCertificati: 12 }
   ]);
 
   const [certificateMonitoringCategories] = useState([
@@ -412,39 +403,6 @@ const DashboardAziende = () => {
             </CardContent>
           </Card>
         </div>
-
-        {/* Sezione Licenze Aziendali */}
-        <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm mb-8">
-          <CardHeader className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-t-lg">
-            <CardTitle className="flex items-center gap-2">
-              <Award className="h-6 w-6" />
-              Licenze Aziendali per Dipendenti
-            </CardTitle>
-            <CardDescription className="text-indigo-100">
-              Software e servizi premium disponibili in cambio di certificati sostenibili
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="p-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {licenzeAziendali.map((licenza) => (
-                <div key={licenza.id} className="p-4 border-0 rounded-xl shadow-lg bg-gradient-to-br from-white to-indigo-50 hover:shadow-xl transition-shadow">
-                  <div className="flex items-center justify-between mb-3">
-                    <Badge className="flex items-center gap-1 bg-indigo-100 text-indigo-700 border-indigo-200">
-                      <Award className="h-4 w-4" />
-                      Licenza
-                    </Badge>
-                    <span className="font-bold text-lg text-gray-700">{licenza.valore}</span>
-                  </div>
-                  <h4 className="font-semibold text-gray-800 mb-2">{licenza.nome}</h4>
-                  <p className="text-sm text-gray-600 mb-3">{licenza.descrizione}</p>
-                  <div className="text-sm text-gray-600">
-                    <p><span className="font-medium">Richiede:</span> {licenza.quantitaCertificati}x {licenza.certificatiRichiesti}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
 
         {/* Sezioni Welfare e Premi - Side by Side */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
