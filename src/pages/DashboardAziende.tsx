@@ -23,6 +23,7 @@ const DashboardAziende = () => {
   const [certificatiEsterni] = useState(14568);
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
   const [dppDialogOpen, setDppDialogOpen] = useState(false);
+  const [dppUploadDialogOpen, setDppUploadDialogOpen] = useState(false);
   const [showWelfareSection, setShowWelfareSection] = useState(false);
   const [showFollowersSection, setShowFollowersSection] = useState(false);
   const [showDppSection, setShowDppSection] = useState(false);
@@ -200,6 +201,18 @@ const DashboardAziende = () => {
     quantitaCertificati: ''
   });
 
+  const [newDppUpload, setNewDppUpload] = useState({
+    nomeProdotto: '',
+    codiceProdotto: '',
+    categoria: '',
+    materiali: '',
+    fornitore: '',
+    certificazioni: '',
+    garanzia: '',
+    istruzioniUso: '',
+    riciclabilita: ''
+  });
+
   // Chart data for pie charts
   const employeeChartData = certificateMonitoringCategories.map(cat => ({
     name: cat.category,
@@ -256,6 +269,25 @@ const DashboardAziende = () => {
       }]);
       setNewDppProduct({ nome: '', codice: '', materiali: '', garanzia: '' });
       setDppDialogOpen(false);
+    }
+  };
+
+  const handleAddDppUpload = () => {
+    if (newDppUpload.nomeProdotto && newDppUpload.codiceProdotto && newDppUpload.categoria && newDppUpload.materiali) {
+      // Here you would typically upload to backend
+      console.log('Uploading DPP:', newDppUpload);
+      setNewDppUpload({
+        nomeProdotto: '',
+        codiceProdotto: '',
+        categoria: '',
+        materiali: '',
+        fornitore: '',
+        certificazioni: '',
+        garanzia: '',
+        istruzioniUso: '',
+        riciclabilita: ''
+      });
+      setDppUploadDialogOpen(false);
     }
   };
 
@@ -932,6 +964,168 @@ const DashboardAziende = () => {
             )}
           </div>
         )}
+
+        {/* Pulsante Caricamento DPP Aziendali */}
+        <Card className="border-0 shadow-md bg-gradient-to-r from-indigo-400 to-purple-500 text-white mb-3">
+          <CardHeader className="pb-2">
+            <CardTitle className={`flex items-center gap-2 text-white ${isMobile ? 'text-base' : 'text-lg'}`}>
+              <Package className="h-4 w-4" />
+              Caricamento DPP Aziendali
+            </CardTitle>
+            <CardDescription className={`text-indigo-100 ${isMobile ? 'text-xs' : 'text-sm'}`}>
+              Carica i Digital Product Passport per i prodotti fisici della tua azienda
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="pt-0">
+            <Dialog open={dppUploadDialogOpen} onOpenChange={setDppUploadDialogOpen}>
+              <DialogTrigger asChild>
+                <Button size={isMobile ? "sm" : "default"} className="w-full md:w-auto bg-white text-indigo-600 hover:bg-gray-100 shadow-md">
+                  <Upload className="mr-2 h-4 w-4" />
+                  Carica DPP Prodotti
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle className="text-2xl bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                    Caricamento Digital Product Passport
+                  </DialogTitle>
+                  <DialogDescription>
+                    Inserisci le informazioni dettagliate del prodotto per generare il DPP aziendale
+                  </DialogDescription>
+                </DialogHeader>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Informazioni Base */}
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold text-indigo-700">Informazioni Base</h3>
+                    
+                    <div>
+                      <Label htmlFor="dpp-nome-prodotto" className="text-indigo-700 font-medium">Nome Prodotto *</Label>
+                      <Input
+                        id="dpp-nome-prodotto"
+                        placeholder="Es. Smartphone Eco-Friendly"
+                        value={newDppUpload.nomeProdotto}
+                        onChange={(e) => setNewDppUpload({...newDppUpload, nomeProdotto: e.target.value})}
+                        className="border-indigo-200 focus:border-indigo-400"
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="dpp-codice-prodotto" className="text-indigo-700 font-medium">Codice Prodotto *</Label>
+                      <Input
+                        id="dpp-codice-prodotto"
+                        placeholder="Es. SPH-ECO-001"
+                        value={newDppUpload.codiceProdotto}
+                        onChange={(e) => setNewDppUpload({...newDppUpload, codiceProdotto: e.target.value})}
+                        className="border-indigo-200 focus:border-indigo-400"
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="dpp-categoria" className="text-indigo-700 font-medium">Categoria *</Label>
+                      <Input
+                        id="dpp-categoria"
+                        placeholder="Es. Elettronica, Abbigliamento, Casa"
+                        value={newDppUpload.categoria}
+                        onChange={(e) => setNewDppUpload({...newDppUpload, categoria: e.target.value})}
+                        className="border-indigo-200 focus:border-indigo-400"
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="dpp-fornitore" className="text-indigo-700 font-medium">Fornitore</Label>
+                      <Input
+                        id="dpp-fornitore"
+                        placeholder="Nome del fornitore"
+                        value={newDppUpload.fornitore}
+                        onChange={(e) => setNewDppUpload({...newDppUpload, fornitore: e.target.value})}
+                        className="border-indigo-200 focus:border-indigo-400"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Sostenibilità e Specifiche */}
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold text-indigo-700">Sostenibilità e Specifiche</h3>
+                    
+                    <div>
+                      <Label htmlFor="dpp-materiali" className="text-indigo-700 font-medium">Materiali *</Label>
+                      <Input
+                        id="dpp-materiali"
+                        placeholder="Es. Plastica riciclata 70%, Metalli rari 20%"
+                        value={newDppUpload.materiali}
+                        onChange={(e) => setNewDppUpload({...newDppUpload, materiali: e.target.value})}
+                        className="border-indigo-200 focus:border-indigo-400"
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="dpp-certificazioni" className="text-indigo-700 font-medium">Certificazioni</Label>
+                      <Input
+                        id="dpp-certificazioni"
+                        placeholder="Es. ISO 14001, EPEAT Gold, Energy Star"
+                        value={newDppUpload.certificazioni}
+                        onChange={(e) => setNewDppUpload({...newDppUpload, certificazioni: e.target.value})}
+                        className="border-indigo-200 focus:border-indigo-400"
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="dpp-garanzia" className="text-indigo-700 font-medium">Garanzia</Label>
+                      <Input
+                        id="dpp-garanzia"
+                        placeholder="Es. 2 anni, Estendibile a 5 anni"
+                        value={newDppUpload.garanzia}
+                        onChange={(e) => setNewDppUpload({...newDppUpload, garanzia: e.target.value})}
+                        className="border-indigo-200 focus:border-indigo-400"
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="dpp-riciclabilita" className="text-indigo-700 font-medium">Riciclabilità</Label>
+                      <Input
+                        id="dpp-riciclabilita"
+                        placeholder="Es. 95% riciclabile, Programma take-back"
+                        value={newDppUpload.riciclabilita}
+                        onChange={(e) => setNewDppUpload({...newDppUpload, riciclabilita: e.target.value})}
+                        className="border-indigo-200 focus:border-indigo-400"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Istruzioni d'uso - Full width */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-indigo-700">Informazioni Aggiuntive</h3>
+                  <div>
+                    <Label htmlFor="dpp-istruzioni" className="text-indigo-700 font-medium">Istruzioni d'Uso</Label>
+                    <Input
+                      id="dpp-istruzioni"
+                      placeholder="Breve descrizione delle istruzioni d'uso principali"
+                      value={newDppUpload.istruzioniUso}
+                      onChange={(e) => setNewDppUpload({...newDppUpload, istruzioniUso: e.target.value})}
+                      className="border-indigo-200 focus:border-indigo-400"
+                    />
+                  </div>
+                </div>
+
+                <DialogFooter>
+                  <Button variant="outline" onClick={() => setDppUploadDialogOpen(false)}>
+                    Annulla
+                  </Button>
+                  <Button 
+                    onClick={handleAddDppUpload} 
+                    className="bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600"
+                    disabled={!newDppUpload.nomeProdotto || !newDppUpload.codiceProdotto || !newDppUpload.categoria || !newDppUpload.materiali}
+                  >
+                    <Package className="mr-2 h-4 w-4" />
+                    Carica DPP
+                  </Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+          </CardContent>
+        </Card>
 
         {/* Pulsante Report Sostenibilità with brighter colors */}
         <Card className="border-0 shadow-md bg-gradient-to-r from-orange-400 to-red-500 text-white">
