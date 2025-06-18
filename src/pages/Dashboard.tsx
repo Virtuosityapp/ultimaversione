@@ -14,12 +14,14 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+
 const Dashboard = () => {
   const navigate = useNavigate();
   const {
     toast
   } = useToast();
   const [transferEmail, setTransferEmail] = useState("");
+
   const activities = [{
     id: 1,
     type: "bike",
@@ -292,7 +294,7 @@ const Dashboard = () => {
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-yellow-500 to-yellow-600 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-yellow-400 to-yellow-500 text-white hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
             <CardHeader className="pb-1 sm:pb-2">
               <CardTitle className="text-xs sm:text-sm font-medium text-yellow-100">Punti Totali</CardTitle>
             </CardHeader>
@@ -735,4 +737,5 @@ const Dashboard = () => {
       </div>
     </div>;
 };
+
 export default Dashboard;
