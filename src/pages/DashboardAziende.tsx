@@ -12,6 +12,8 @@ import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useIsMobile } from '@/hooks/use-mobile';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
+import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 
 const DashboardAziende = () => {
   const navigate = useNavigate();
@@ -198,6 +200,29 @@ const DashboardAziende = () => {
     quantitaCertificati: ''
   });
 
+  // Chart data for pie charts
+  const employeeChartData = certificateMonitoringCategories.map(cat => ({
+    name: cat.category,
+    value: cat.totalCount,
+    fill: `hsl(${cat.category === 'Risparmio Idrico' ? '200, 70%, 50%' : 
+                cat.category === 'Risparmio Energetico' ? '45, 80%, 60%' :
+                cat.category === 'Riciclo e Rifiuti' ? '140, 70%, 50%' : '260, 70%, 50%'})`
+  }));
+
+  const externalChartData = externalCertificateCategories.map(cat => ({
+    name: cat.category,
+    value: cat.totalCount,
+    fill: `hsl(${cat.category === 'Risparmio Idrico' ? '200, 70%, 50%' : 
+                cat.category === 'Risparmio Energetico' ? '45, 80%, 60%' :
+                cat.category === 'Riciclo e Rifiuti' ? '140, 70%, 50%' : '260, 70%, 50%'})`
+  }));
+
+  const chartConfig = {
+    value: {
+      label: "Certificati",
+    },
+  };
+
   const handleAddWelfareItem = () => {
     if (newWelfareItem.tipo && newWelfareItem.nome && newWelfareItem.valore && newWelfareItem.certificatiRichiesti && newWelfareItem.quantitaCertificati) {
       setWelfareItems([...welfareItems, {
@@ -316,6 +341,131 @@ const DashboardAziende = () => {
               <p className="text-xs text-cyan-100 mt-1">
                 Certificati ricevuti da followers
               </p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Target e Grafici a Torta per Monitoraggio */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 mb-3">
+          {/* Target e Grafico Dipendenti */}
+          <Card className="border-0 shadow-md bg-white/90 backdrop-blur-sm">
+            <CardHeader className="bg-gradient-to-r from-emerald-400 to-green-500 text-white rounded-t-lg pb-1">
+              <CardTitle className={`flex items-center gap-2 ${isMobile ? 'text-sm' : 'text-base'}`}>
+                <Target className="h-4 w-4" />
+                Target Dipendenti
+              </CardTitle>
+              <CardDescription className={`text-emerald-100 ${isMobile ? 'text-xs' : 'text-sm'}`}>
+                Obiettivi e distribuzione certificati per categoria
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="p-2">
+              <div className="flex flex-col lg:flex-row gap-3">
+                <div className="flex-1">
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-xs font-medium text-gray-600">Target Annuale</span>
+                      <span className="text-sm font-bold text-emerald-600">2,000</span>
+                    </div>
+                    <Progress value={(certificatiDipendenti / 2000) * 100} className="h-2" />
+                    <div className="text-xs text-gray-500">
+                      {certificatiDipendenti} / 2,000 ({Math.round((certificatiDipendenti / 2000) * 100)}%)
+                    </div>
+                  </div>
+                  <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
+                    {certificateMonitoringCategories.map((cat, index) => (
+                      <div key={index} className="flex items-center gap-1">
+                        <div 
+                          className="w-2 h-2 rounded-full" 
+                          style={{ backgroundColor: employeeChartData[index]?.fill }}
+                        />
+                        <span className="text-gray-600 truncate">{cat.category}</span>
+                        <span className="font-semibold ml-auto">{cat.totalCount}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="w-full lg:w-32 h-32">
+                  <ChartContainer config={chartConfig} className="w-full h-full">
+                    <PieChart>
+                      <Pie
+                        data={employeeChartData}
+                        cx="50%"
+                        cy="50%"
+                        innerRadius={20}
+                        outerRadius={45}
+                        paddingAngle={2}
+                        dataKey="value"
+                      >
+                        {employeeChartData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={entry.fill} />
+                        ))}
+                      </Pie>
+                      <ChartTooltip content={<ChartTooltipContent />} />
+                    </PieChart>
+                  </ChartContainer>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Target e Grafico Esterni */}
+          <Card className="border-0 shadow-md bg-white/90 backdrop-blur-sm">
+            <CardHeader className="bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-t-lg pb-1">
+              <CardTitle className={`flex items-center gap-2 ${isMobile ? 'text-sm' : 'text-base'}`}>
+                <Target className="h-4 w-4" />
+                Target Followers
+              </CardTitle>
+              <CardDescription className={`text-cyan-100 ${isMobile ? 'text-xs' : 'text-sm'}`}>
+                Obiettivi e distribuzione certificati esterni
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="p-2">
+              <div className="flex flex-col lg:flex-row gap-3">
+                <div className="flex-1">
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-xs font-medium text-gray-600">Target Annuale</span>
+                      <span className="text-sm font-bold text-cyan-600">20,000</span>
+                    </div>
+                    <Progress value={(certificatiEsterni / 20000) * 100} className="h-2" />
+                    <div className="text-xs text-gray-500">
+                      {certificatiEsterni} / 20,000 ({Math.round((certificatiEsterni / 20000) * 100)}%)
+                    </div>
+                  </div>
+                  <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
+                    {externalCertificateCategories.map((cat, index) => (
+                      <div key={index} className="flex items-center gap-1">
+                        <div 
+                          className="w-2 h-2 rounded-full" 
+                          style={{ backgroundColor: externalChartData[index]?.fill }}
+                        />
+                        <span className="text-gray-600 truncate">{cat.category}</span>
+                        <span className="font-semibold ml-auto">{cat.totalCount}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="w-full lg:w-32 h-32">
+                  <ChartContainer config={chartConfig} className="w-full h-full">
+                    <PieChart>
+                      <Pie
+                        data={externalChartData}
+                        cx="50%"
+                        cy="50%"
+                        innerRadius={20}
+                        outerRadius={45}
+                        paddingAngle={2}
+                        dataKey="value"
+                      >
+                        {externalChartData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={entry.fill} />
+                        ))}
+                      </Pie>
+                      <ChartTooltip content={<ChartTooltipContent />} />
+                    </PieChart>
+                  </ChartContainer>
+                </div>
+              </div>
             </CardContent>
           </Card>
         </div>
