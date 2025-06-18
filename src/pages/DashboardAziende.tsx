@@ -6,7 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { Users, UserCheck, Upload, FileText, Award, Gift, Plane, ArrowLeft, TrendingUp, Eye, Target, Globe, Droplet, Zap, Trash2, Percent } from 'lucide-react';
+import { Users, UserCheck, Upload, FileText, Award, Gift, Plane, ArrowLeft, TrendingUp, Eye, Target, Globe, Droplet, Zap, Trash2, Percent, QrCode, Package, Shield, Link } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
@@ -17,6 +17,7 @@ const DashboardAziende = () => {
   const [certificatiDipendenti] = useState(1589);
   const [certificatiEsterni] = useState(14568);
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
+  const [dppDialogOpen, setDppDialogOpen] = useState(false);
   
   // Welfare per Dipendenti - Limited to 4 items
   const [welfareItems, setWelfareItems] = useState([
@@ -160,6 +161,20 @@ const DashboardAziende = () => {
     }
   ]);
 
+  // DPP Products state
+  const [dppProducts, setDppProducts] = useState([
+    { id: 1, nome: 'Borraccia Termica Eco', codice: 'BTE-001', qrCode: 'DPP-BTE001-2024', stato: 'Attivo', garanzia: '2 anni', materiali: 'Acciaio Inox Riciclato' },
+    { id: 2, nome: 'Zaino Sostenibile', codice: 'ZS-002', qrCode: 'DPP-ZS002-2024', stato: 'Attivo', garanzia: '3 anni', materiali: 'Tessuto PET Riciclato' },
+    { id: 3, nome: 'Notebook Bambù', codice: 'NB-003', qrCode: 'DPP-NB003-2024', stato: 'In Verifica', garanzia: '1 anno', materiali: 'Bambù Certificato FSC' }
+  ]);
+
+  const [newDppProduct, setNewDppProduct] = useState({
+    nome: '',
+    codice: '',
+    materiali: '',
+    garanzia: ''
+  });
+
   const [newWelfareItem, setNewWelfareItem] = useState({
     tipo: '',
     nome: '',
@@ -195,6 +210,20 @@ const DashboardAziende = () => {
         quantitaCertificati: parseInt(newFollowersReward.quantitaCertificati)
       }]);
       setNewFollowersReward({ tipo: '', nome: '', valore: '', certificatiRichiesti: '', quantitaCertificati: '' });
+    }
+  };
+
+  const handleAddDppProduct = () => {
+    if (newDppProduct.nome && newDppProduct.codice && newDppProduct.materiali && newDppProduct.garanzia) {
+      const qrCode = `DPP-${newDppProduct.codice}-2024`;
+      setDppProducts([...dppProducts, {
+        id: Date.now(),
+        ...newDppProduct,
+        qrCode,
+        stato: 'In Verifica'
+      }]);
+      setNewDppProduct({ nome: '', codice: '', materiali: '', garanzia: '' });
+      setDppDialogOpen(false);
     }
   };
 
@@ -596,6 +625,140 @@ const DashboardAziende = () => {
             </CardContent>
           </Card>
         </div>
+
+        {/* Sezione DPP Prodotti */}
+        <Card className="border-0 shadow-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white mb-8">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-white text-2xl">
+              <QrCode className="h-8 w-8" />
+              Digital Product Passport (DPP)
+            </CardTitle>
+            <CardDescription className="text-cyan-100 text-lg">
+              Crea e gestisci i passaporti digitali dei tuoi prodotti per garantire tracciabilità e sostenibilità
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="flex flex-wrap gap-4 mb-6">
+              <Dialog open={dppDialogOpen} onOpenChange={setDppDialogOpen}>
+                <DialogTrigger asChild>
+                  <Button size="lg" className="bg-white text-cyan-600 hover:bg-gray-100 shadow-lg">
+                    <Package className="mr-2 h-5 w-5" />
+                    Crea Nuovo DPP
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-md">
+                  <DialogHeader>
+                    <DialogTitle className="text-xl text-cyan-700">Nuovo Digital Product Passport</DialogTitle>
+                    <DialogDescription>
+                      Compila i dati del prodotto per generare il DPP e il QR code associato
+                    </DialogDescription>
+                  </DialogHeader>
+                  
+                  <div className="space-y-4">
+                    <div>
+                      <Label htmlFor="dpp-nome" className="text-cyan-700 font-medium">Nome Prodotto</Label>
+                      <Input
+                        id="dpp-nome"
+                        placeholder="Es. Borraccia Termica Eco"
+                        value={newDppProduct.nome}
+                        onChange={(e) => setNewDppProduct({...newDppProduct, nome: e.target.value})}
+                        className="border-cyan-200 focus:border-cyan-400"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="dpp-codice" className="text-cyan-700 font-medium">Codice Prodotto</Label>
+                      <Input
+                        id="dpp-codice"
+                        placeholder="Es. BTE-001"
+                        value={newDppProduct.codice}
+                        onChange={(e) => setNewDppProduct({...newDppProduct, codice: e.target.value})}
+                        className="border-cyan-200 focus:border-cyan-400"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="dpp-materiali" className="text-cyan-700 font-medium">Materiali</Label>
+                      <Input
+                        id="dpp-materiali"
+                        placeholder="Es. Acciaio Inox Riciclato"
+                        value={newDppProduct.materiali}
+                        onChange={(e) => setNewDppProduct({...newDppProduct, materiali: e.target.value})}
+                        className="border-cyan-200 focus:border-cyan-400"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="dpp-garanzia" className="text-cyan-700 font-medium">Garanzia</Label>
+                      <Input
+                        id="dpp-garanzia"
+                        placeholder="Es. 2 anni"
+                        value={newDppProduct.garanzia}
+                        onChange={(e) => setNewDppProduct({...newDppProduct, garanzia: e.target.value})}
+                        className="border-cyan-200 focus:border-cyan-400"
+                      />
+                    </div>
+                  </div>
+
+                  <DialogFooter>
+                    <Button variant="outline" onClick={() => setDppDialogOpen(false)}>
+                      Annulla
+                    </Button>
+                    <Button onClick={handleAddDppProduct} className="bg-cyan-600 hover:bg-cyan-700">
+                      <QrCode className="mr-2 h-4 w-4" />
+                      Genera DPP
+                    </Button>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
+
+              <Button size="lg" variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white/20">
+                <Upload className="mr-2 h-5 w-5" />
+                Importa da CSV
+              </Button>
+            </div>
+
+            {/* Lista DPP Products */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+              <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                <Package className="h-6 w-6" />
+                Prodotti con DPP ({dppProducts.length})
+              </h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {dppProducts.map((product) => (
+                  <div key={product.id} className="bg-white rounded-lg p-4 shadow-lg">
+                    <div className="flex items-center justify-between mb-3">
+                      <Badge className={`${product.stato === 'Attivo' ? 'bg-green-100 text-green-700 border-green-200' : 'bg-yellow-100 text-yellow-700 border-yellow-200'}`}>
+                        {product.stato === 'Attivo' ? <Shield className="h-3 w-3 mr-1" /> : <Eye className="h-3 w-3 mr-1" />}
+                        {product.stato}
+                      </Badge>
+                      <Button size="sm" variant="outline" className="h-8 w-8 p-0">
+                        <QrCode className="h-4 w-4" />
+                      </Button>
+                    </div>
+                    
+                    <h4 className="font-semibold text-gray-800 mb-2">{product.nome}</h4>
+                    <div className="text-sm text-gray-600 space-y-1">
+                      <p><span className="font-medium">Codice:</span> {product.codice}</p>
+                      <p><span className="font-medium">QR:</span> {product.qrCode}</p>
+                      <p><span className="font-medium">Materiali:</span> {product.materiali}</p>
+                      <p><span className="font-medium">Garanzia:</span> {product.garanzia}</p>
+                    </div>
+                    
+                    <div className="mt-3 flex gap-2">
+                      <Button size="sm" variant="outline" className="flex-1 text-xs">
+                        <Link className="h-3 w-3 mr-1" />
+                        Associa
+                      </Button>
+                      <Button size="sm" variant="outline" className="flex-1 text-xs">
+                        <Eye className="h-3 w-3 mr-1" />
+                        Dettagli
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Pulsante Report Sostenibilità */}
         <Card className="border-0 shadow-xl bg-gradient-to-r from-orange-400 to-red-500 text-white">
