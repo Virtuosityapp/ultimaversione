@@ -1,3 +1,4 @@
+
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -13,111 +14,111 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
       <LanguageSwitcher />
       
-      {/* Hero Section */}
+      {/* Hero Section - Reduced by 30% */}
       <div className="relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 py-8 sm:py-11 lg:py-14">
           <div className="text-center">
-            <div className="flex justify-center mb-4 sm:mb-6">
+            <div className="flex justify-center mb-3 sm:mb-4">
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-blue-500 rounded-full blur-xl opacity-30 animate-pulse"></div>
                 <img 
                   src="/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png" 
                   alt="Virtuosity Logo" 
-                  className="relative h-20 sm:h-24 md:h-32 w-auto mx-auto" 
+                  className="relative h-14 sm:h-17 md:h-22 w-auto mx-auto" 
                 />
               </div>
             </div>
             
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
               <span className="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
                 {t('heroTitle')}
               </span>
             </h1>
             
-            <p className="text-xl sm:text-2xl text-gray-700 mb-8 sm:mb-12 max-w-4xl mx-auto font-medium px-[16px]">
+            <p className="text-lg sm:text-xl text-gray-700 mb-6 sm:mb-8 max-w-4xl mx-auto font-medium px-3">
               {t('heroSubtitle')}
             </p>
             
-            {/* Virtuosity Info Block */}
-            <div className="mb-8 sm:mb-12 max-w-md mx-auto px-4">
-              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-6 shadow-lg border border-yellow-200 hover:shadow-xl transition-all duration-300">
-                <h3 className="text-xl font-bold text-gray-900 mb-3">Virtuosity</h3>
-                <p className="text-gray-600 mb-4 text-sm">Scopri i dettagli del progetto</p>
+            {/* Virtuosity Info Block - Reduced by 30% */}
+            <div className="mb-6 sm:mb-8 max-w-xs mx-auto px-3">
+              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-lg border border-yellow-200 hover:shadow-xl transition-all duration-300">
+                <h3 className="text-lg font-bold text-gray-900 mb-2">Virtuosity</h3>
+                <p className="text-gray-600 mb-3 text-xs">Scopri i dettagli del progetto</p>
                 <Button 
                   onClick={() => navigate("/about")} 
-                  className="bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-6 py-3 text-base hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
+                  className="bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-4 py-2 text-sm hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
                 >
                   Clicca qui
                 </Button>
               </div>
             </div>
 
-            {/* Dashboard Preview Image */}
-            <div className="mb-8 sm:mb-12 max-w-4xl mx-auto px-4">
+            {/* Dashboard Preview Image - Reduced by 30% */}
+            <div className="mb-6 sm:mb-8 max-w-3xl mx-auto px-3">
               <img 
                 src="/lovable-uploads/c54d6a41-92cd-4a58-b3aa-3686de1b7c51.png" 
                 alt="Exchange Virtuosity - Marketplace sostenibile con premi e incentivi" 
-                className="mx-auto rounded-lg shadow-2xl max-w-[90%] sm:max-w-[80%] md:max-w-[70%] h-auto border border-gray-200"
+                className="mx-auto rounded-lg shadow-2xl max-w-[80%] sm:max-w-[70%] md:max-w-[60%] h-auto border border-gray-200"
               />
-              <p className="text-sm text-gray-600 mt-3 italic">
+              <p className="text-xs text-gray-600 mt-2 italic">
                 Exchange Virtuosity: trasforma i tuoi comportamenti sostenibili in premi concreti tramite il marketplace integrato
               </p>
             </div>
 
-            {/* Four Dashboard Blocks */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 sm:mb-12 max-w-4xl mx-auto px-4">
+            {/* Four Dashboard Blocks - Reduced by 30% */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 sm:mb-8 max-w-3xl mx-auto px-3">
               
               {/* User Dashboard Block */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-6 shadow-lg border border-green-200 hover:shadow-xl transition-all duration-300">
-                <h3 className="text-xl font-bold text-gray-900 mb-3">Dashboard Utente</h3>
-                <p className="text-gray-600 mb-4 text-sm">
+              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-lg border border-green-200 hover:shadow-xl transition-all duration-300">
+                <h3 className="text-lg font-bold text-gray-900 mb-2">Dashboard Utente</h3>
+                <p className="text-gray-600 mb-3 text-xs">
                   Accedi alla tua dashboard personale per monitorare le tue attività sostenibili, visualizzare i certificati guadagnati e partecipare alle sfide della community.
                 </p>
                 <Button 
                   onClick={() => navigate("/dashboard")} 
-                  className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-3 text-base hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
+                  className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-4 py-2 text-sm hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
                 >
                   {t('buttonUser')}
                 </Button>
               </div>
 
               {/* Exchange Dashboard Block */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-6 shadow-lg border border-green-200 hover:shadow-xl transition-all duration-300">
-                <h3 className="text-xl font-bold text-gray-900 mb-3">Exchange</h3>
-                <p className="text-gray-600 mb-4 text-sm">
+              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-lg border border-green-200 hover:shadow-xl transition-all duration-300">
+                <h3 className="text-lg font-bold text-gray-900 mb-2">Exchange</h3>
+                <p className="text-gray-600 mb-3 text-xs">
                   Scopri il marketplace dove puoi scambiare i tuoi punti Virtuosity con premi reali, buoni sconto e vantaggi esclusivi offerti dai partner.
                 </p>
                 <Button 
                   onClick={() => navigate("/exchange")} 
-                  className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-3 text-base hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
+                  className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-4 py-2 text-sm hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
                 >
                   {t('buttonExchange')}
                 </Button>
               </div>
 
               {/* Companies Dashboard Block */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-6 shadow-lg border border-sky-200 hover:shadow-xl transition-all duration-300">
-                <h3 className="text-xl font-bold text-gray-900 mb-3">Dashboard Aziende</h3>
-                <p className="text-gray-600 mb-4 text-sm">
+              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-lg border border-sky-200 hover:shadow-xl transition-all duration-300">
+                <h3 className="text-lg font-bold text-gray-900 mb-2">Dashboard Aziende</h3>
+                <p className="text-gray-600 mb-3 text-xs">
                   Accedi al pannello di controllo aziendale per gestire i dipendenti, monitorare le performance di sostenibilità e configurare incentivi personalizzati.
                 </p>
                 <Button 
                   onClick={() => navigate("/dashboard-aziende")} 
-                  className="bg-gradient-to-r from-sky-500 to-cyan-500 text-white px-6 py-3 text-base hover:from-sky-600 hover:to-cyan-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
+                  className="bg-gradient-to-r from-sky-500 to-cyan-500 text-white px-4 py-2 text-sm hover:from-sky-600 hover:to-cyan-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
                 >
                   {t('buttonCompanies')}
                 </Button>
               </div>
 
               {/* Municipalities Dashboard Block */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-6 shadow-lg border border-blue-200 hover:shadow-xl transition-all duration-300">
-                <h3 className="text-xl font-bold text-gray-900 mb-3">Dashboard Comuni</h3>
-                <p className="text-gray-600 mb-4 text-sm">
+              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-lg border border-blue-200 hover:shadow-xl transition-all duration-300">
+                <h3 className="text-lg font-bold text-gray-900 mb-2">Dashboard Comuni</h3>
+                <p className="text-gray-600 mb-3 text-xs">
                   Entra nel centro di controllo comunale per gestire le integrazioni smart city, monitorare le segnalazioni cittadine e configurare incentivi locali.
                 </p>
                 <Button 
                   onClick={() => navigate("/comuni")} 
-                  className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 text-base hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
+                  className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-2 text-sm hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
                 >
                   {t('buttonMunicipalities')}
                 </Button>
@@ -127,8 +128,8 @@ const Index = () => {
             {/* Circularity Icons Section - moved to bottom */}
             <CircularityIcons />
 
-            {/* Video Section */}
-            <div className="mb-8 sm:mb-12 max-w-4xl mx-auto px-4">
+            {/* Video Section - Reduced by 30% */}
+            <div className="mb-6 sm:mb-8 max-w-3xl mx-auto px-3">
               <AspectRatio ratio={16 / 9}>
                 <iframe 
                   src="https://www.youtube.com/embed/rdCqQPQfogs" 
