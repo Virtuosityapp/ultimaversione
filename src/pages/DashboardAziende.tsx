@@ -14,6 +14,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const DashboardAziende = () => {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ const DashboardAziende = () => {
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
   const [dppDialogOpen, setDppDialogOpen] = useState(false);
   const [dppUploadDialogOpen, setDppUploadDialogOpen] = useState(false);
+  const [rewardsUploadDialogOpen, setRewardsUploadDialogOpen] = useState(false);
   const [showWelfareSection, setShowWelfareSection] = useState(false);
   const [showFollowersSection, setShowFollowersSection] = useState(false);
   const [showDppSection, setShowDppSection] = useState(false);
@@ -213,6 +215,18 @@ const DashboardAziende = () => {
     riciclabilita: ''
   });
 
+  const [newRewardUpload, setNewRewardUpload] = useState({
+    categoria: '', // 'dipendenti' o 'followers'
+    tipo: '', // 'premio', 'sconto', 'viaggio', 'gadget'
+    nome: '',
+    descrizione: '',
+    valore: '',
+    certificatiRichiesti: '',
+    quantitaCertificati: '',
+    validita: '',
+    terminiCondizioni: ''
+  });
+
   // Chart data for pie charts
   const employeeChartData = certificateMonitoringCategories.map(cat => ({
     name: cat.category,
@@ -288,6 +302,25 @@ const DashboardAziende = () => {
         riciclabilita: ''
       });
       setDppUploadDialogOpen(false);
+    }
+  };
+
+  const handleAddRewardUpload = () => {
+    if (newRewardUpload.categoria && newRewardUpload.tipo && newRewardUpload.nome && newRewardUpload.valore && newRewardUpload.certificatiRichiesti && newRewardUpload.quantitaCertificati) {
+      // Here you would typically upload to backend
+      console.log('Uploading Reward:', newRewardUpload);
+      setNewRewardUpload({
+        categoria: '',
+        tipo: '',
+        nome: '',
+        descrizione: '',
+        valore: '',
+        certificatiRichiesti: '',
+        quantitaCertificati: '',
+        validita: '',
+        terminiCondizioni: ''
+      });
+      setRewardsUploadDialogOpen(false);
     }
   };
 
@@ -964,6 +997,179 @@ const DashboardAziende = () => {
             )}
           </div>
         )}
+
+        {/* Pulsante Caricamento Premi e Sconti */}
+        <Card className="border-0 shadow-md bg-gradient-to-r from-emerald-400 to-green-500 text-white mb-3">
+          <CardHeader className="pb-2">
+            <CardTitle className={`flex items-center gap-2 text-white ${isMobile ? 'text-base' : 'text-lg'}`}>
+              <Gift className="h-4 w-4" />
+              Caricamento Premi e Sconti
+            </CardTitle>
+            <CardDescription className={`text-emerald-100 ${isMobile ? 'text-xs' : 'text-sm'}`}>
+              Configura premi, sconti e benefit da offrire in cambio di certificati di sostenibilità
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="pt-0">
+            <Dialog open={rewardsUploadDialogOpen} onOpenChange={setRewardsUploadDialogOpen}>
+              <DialogTrigger asChild>
+                <Button size={isMobile ? "sm" : "default"} className="w-full md:w-auto bg-white text-emerald-600 hover:bg-gray-100 shadow-md">
+                  <Upload className="mr-2 h-4 w-4" />
+                  Carica Premi e Sconti
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle className="text-2xl bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">
+                    Caricamento Premi e Sconti
+                  </DialogTitle>
+                  <DialogDescription>
+                    Configura premi, sconti e benefit da offrire a dipendenti e followers in cambio di certificati di sostenibilità
+                  </DialogDescription>
+                </DialogHeader>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Informazioni Base */}
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold text-emerald-700">Informazioni Base</h3>
+                    
+                    <div>
+                      <Label htmlFor="reward-categoria" className="text-emerald-700 font-medium">Categoria Destinatario *</Label>
+                      <Select value={newRewardUpload.categoria} onValueChange={(value) => setNewRewardUpload({...newRewardUpload, categoria: value})}>
+                        <SelectTrigger className="border-emerald-200 focus:border-emerald-400">
+                          <SelectValue placeholder="Seleziona categoria" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="dipendenti">Dipendenti</SelectItem>
+                          <SelectItem value="followers">Followers</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="reward-tipo" className="text-emerald-700 font-medium">Tipo Premio *</Label>
+                      <Select value={newRewardUpload.tipo} onValueChange={(value) => setNewRewardUpload({...newRewardUpload, tipo: value})}>
+                        <SelectTrigger className="border-emerald-200 focus:border-emerald-400">
+                          <SelectValue placeholder="Seleziona tipo" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="premio">Premio</SelectItem>
+                          <SelectItem value="sconto">Sconto</SelectItem>
+                          <SelectItem value="viaggio">Viaggio</SelectItem>
+                          <SelectItem value="gadget">Gadget</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="reward-nome" className="text-emerald-700 font-medium">Nome Premio *</Label>
+                      <Input
+                        id="reward-nome"
+                        placeholder="Es. Voucher Cena Ristorante"
+                        value={newRewardUpload.nome}
+                        onChange={(e) => setNewRewardUpload({...newRewardUpload, nome: e.target.value})}
+                        className="border-emerald-200 focus:border-emerald-400"
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="reward-descrizione" className="text-emerald-700 font-medium">Descrizione</Label>
+                      <Input
+                        id="reward-descrizione"
+                        placeholder="Breve descrizione del premio"
+                        value={newRewardUpload.descrizione}
+                        onChange={(e) => setNewRewardUpload({...newRewardUpload, descrizione: e.target.value})}
+                        className="border-emerald-200 focus:border-emerald-400"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Valore e Certificati */}
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold text-emerald-700">Valore e Requisiti</h3>
+                    
+                    <div>
+                      <Label htmlFor="reward-valore" className="text-emerald-700 font-medium">Valore *</Label>
+                      <Input
+                        id="reward-valore"
+                        placeholder="Es. € 50 oppure 15%"
+                        value={newRewardUpload.valore}
+                        onChange={(e) => setNewRewardUpload({...newRewardUpload, valore: e.target.value})}
+                        className="border-emerald-200 focus:border-emerald-400"
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="reward-certificati-tipo" className="text-emerald-700 font-medium">Tipo Certificati Richiesti *</Label>
+                      <Select value={newRewardUpload.certificatiRichiesti} onValueChange={(value) => setNewRewardUpload({...newRewardUpload, certificatiRichiesti: value})}>
+                        <SelectTrigger className="border-emerald-200 focus:border-emerald-400">
+                          <SelectValue placeholder="Seleziona tipo certificati" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="Risparmio Energetico">Risparmio Energetico</SelectItem>
+                          <SelectItem value="Risparmio Idrico">Risparmio Idrico</SelectItem>
+                          <SelectItem value="Riciclo Rifiuti">Riciclo Rifiuti</SelectItem>
+                          <SelectItem value="Riduzione CO2">Riduzione CO2</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="reward-quantita" className="text-emerald-700 font-medium">Quantità Certificati *</Label>
+                      <Input
+                        id="reward-quantita"
+                        type="number"
+                        placeholder="Es. 5"
+                        value={newRewardUpload.quantitaCertificati}
+                        onChange={(e) => setNewRewardUpload({...newRewardUpload, quantitaCertificati: e.target.value})}
+                        className="border-emerald-200 focus:border-emerald-400"
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="reward-validita" className="text-emerald-700 font-medium">Validità</Label>
+                      <Input
+                        id="reward-validita"
+                        placeholder="Es. 30 giorni, 1 anno"
+                        value={newRewardUpload.validita}
+                        onChange={(e) => setNewRewardUpload({...newRewardUpload, validita: e.target.value})}
+                        className="border-emerald-200 focus:border-emerald-400"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Termini e Condizioni - Full width */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-emerald-700">Termini e Condizioni</h3>
+                  <div>
+                    <Label htmlFor="reward-termini" className="text-emerald-700 font-medium">Termini e Condizioni</Label>
+                    <Input
+                      id="reward-termini"
+                      placeholder="Breve descrizione dei termini e condizioni"
+                      value={newRewardUpload.terminiCondizioni}
+                      onChange={(e) => setNewRewardUpload({...newRewardUpload, terminiCondizioni: e.target.value})}
+                      className="border-emerald-200 focus:border-emerald-400"
+                    />
+                  </div>
+                </div>
+
+                <DialogFooter>
+                  <Button variant="outline" onClick={() => setRewardsUploadDialogOpen(false)}>
+                    Annulla
+                  </Button>
+                  <Button 
+                    onClick={handleAddRewardUpload} 
+                    className="bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600"
+                    disabled={!newRewardUpload.categoria || !newRewardUpload.tipo || !newRewardUpload.nome || !newRewardUpload.valore || !newRewardUpload.certificatiRichiesti || !newRewardUpload.quantitaCertificati}
+                  >
+                    <Gift className="mr-2 h-4 w-4" />
+                    Carica Premio
+                  </Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+          </CardContent>
+        </Card>
 
         {/* Pulsante Caricamento DPP Aziendali */}
         <Card className="border-0 shadow-md bg-gradient-to-r from-indigo-400 to-purple-500 text-white mb-3">
