@@ -169,7 +169,7 @@ const Exchange = () => {
     description: "Sistema di pagamento intelligente che permette di scambiare certificati Virtuosity con sconti per i clienti",
     discount: "Sconto 25% sul canone",
     category: "tecnologia",
-    image: "/lovable-uploads/c483c807-c855-4d40-aa0f-c8f3dc2db2cc.png",
+    image: "/lovable-uploads/8bceb592-fe5b-4d95-a7f0-50b9d1e5cf08.png",
     validUntil: "31 Dicembre 2026",
     pointsRequired: 300,
     benefits: ["Integrazione certificati Virtuosity", "Dashboard analytics inclusa", "Supporto tecnico dedicato"],
