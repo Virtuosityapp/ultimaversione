@@ -45,7 +45,7 @@ const Exchange = () => {
     description: "Accesso gratuito ai musei civici di Milano",
     cost: 150,
     category: "culture",
-    image: "/lovable-uploads/d5ff17e5-6093-4bc7-8873-de37da2355ee.png",
+    image: "/lovable-uploads/e4a99bff-4999-4a87-ad15-5840490e22cc.png",
     availability: "Disponibile",
     provider: "Comune di Milano"
   }, {
