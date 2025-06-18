@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -15,12 +14,12 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { toast } = useToast();
+  const {
+    toast
+  } = useToast();
   const [transferEmail, setTransferEmail] = useState("");
-
   const activities = [{
     id: 1,
     type: "bike",
@@ -235,7 +234,6 @@ const Dashboard = () => {
         return '📦';
     }
   };
-
   const handleTransferWarranty = (productId: string) => {
     if (!transferEmail) {
       toast({
@@ -245,16 +243,13 @@ const Dashboard = () => {
       });
       return;
     }
-
     toast({
       title: "Garanzia trasferita!",
-      description: `La garanzia è stata inviata a ${transferEmail}`,
+      description: `La garanzia è stata inviata a ${transferEmail}`
     });
     setTransferEmail("");
   };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
+  return <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
       {/* Header */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-green-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
@@ -330,15 +325,9 @@ const Dashboard = () => {
 
         <Tabs defaultValue="activities" className="space-y-3 sm:space-y-6">
           <TabsList className="grid w-full grid-cols-4 bg-white/80 backdrop-blur-sm h-auto p-1 shadow-md">
-            <TabsTrigger value="activities" className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-green-100 hover:to-emerald-100 hover:text-green-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-400 data-[state=active]:to-emerald-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
-              Attività
-            </TabsTrigger>
-            <TabsTrigger value="certificates" className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-blue-100 hover:to-cyan-100 hover:text-blue-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-400 data-[state=active]:to-cyan-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
-              Certificati
-            </TabsTrigger>
-            <TabsTrigger value="reporting" className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-orange-100 hover:to-red-100 hover:text-orange-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-400 data-[state=active]:to-red-500 data-[state=active]:text-white data-[state=active]:shadow-lg">
-              Segnala
-            </TabsTrigger>
+            <TabsTrigger value="activities" className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-green-100 hover:to-emerald-100 hover:text-green-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-400 data-[state=active]:to-emerald-500 data-[state=active]:text-white data-[state=active]:shadow-lg">Le Tue Ultime Attività</TabsTrigger>
+            <TabsTrigger value="certificates" className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-blue-100 hover:to-cyan-100 hover:text-blue-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-400 data-[state=active]:to-cyan-500 data-[state=active]:text-white data-[state=active]:shadow-lg">Il Tuo Wallet</TabsTrigger>
+            <TabsTrigger value="reporting" className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-orange-100 hover:to-red-100 hover:text-orange-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-400 data-[state=active]:to-red-500 data-[state=active]:text-white data-[state=active]:shadow-lg">Segnala al Comune</TabsTrigger>
             <TabsTrigger value="dpp" className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-cyan-100 hover:to-teal-100 hover:text-cyan-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-400 data-[state=active]:to-teal-500 data-[state=active]:text-white data-[state=active]:shadow-lg">Riscatta DPP</TabsTrigger>
           </TabsList>
 
@@ -359,8 +348,7 @@ const Dashboard = () => {
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-2 sm:space-y-4">
-                      {activities.map(activity => (
-                        <div key={activity.id} className="flex items-center justify-between p-2 sm:p-4 bg-gray-50 rounded-lg hover:bg-green-50 hover:shadow-md hover:scale-[1.02] transition-all duration-200 cursor-pointer active:scale-[0.98]">
+                      {activities.map(activity => <div key={activity.id} className="flex items-center justify-between p-2 sm:p-4 bg-gray-50 rounded-lg hover:bg-green-50 hover:shadow-md hover:scale-[1.02] transition-all duration-200 cursor-pointer active:scale-[0.98]">
                           <div className="flex items-center space-x-2 sm:space-x-4 flex-1 min-w-0">
                             <div className="w-8 h-8 sm:w-12 sm:h-12 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center text-sm sm:text-xl flex-shrink-0">
                               {activity.type === 'bike' && '🚴'}
@@ -385,8 +373,7 @@ const Dashboard = () => {
                             <div className="font-bold text-green-600 text-xs sm:text-base">+{activity.points}</div>
                             <div className="text-xs text-gray-600">{activity.co2Saved}</div>
                           </div>
-                        </div>
-                      ))}
+                        </div>)}
                     </div>
                   </CardContent>
                 </Card>
@@ -409,9 +396,7 @@ const Dashboard = () => {
                       <ChartContainer config={chartConfig} className="w-full h-full">
                         <PieChart>
                           <Pie data={chartData} cx="50%" cy="50%" innerRadius={45} outerRadius={65} startAngle={90} endAngle={450} dataKey="value">
-                            {chartData.map((entry, index) => (
-                              <Cell key={`cell-${index}`} fill={entry.fill} />
-                            ))}
+                            {chartData.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.fill} />)}
                           </Pie>
                           <ChartTooltip content={<ChartTooltipContent />} />
                         </PieChart>
@@ -464,8 +449,7 @@ const Dashboard = () => {
                 <div className="space-y-3 sm:space-y-4">
                   {/* Horizontal grid for challenges */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
-                    {challenges.map(challenge => (
-                      <div key={challenge.id} className={`p-3 sm:p-4 rounded-lg border-2 hover:shadow-lg hover:scale-[1.01] transition-all duration-200 cursor-pointer ${getStatusColor(challenge.status)}`}>
+                    {challenges.map(challenge => <div key={challenge.id} className={`p-3 sm:p-4 rounded-lg border-2 hover:shadow-lg hover:scale-[1.01] transition-all duration-200 cursor-pointer ${getStatusColor(challenge.status)}`}>
                         <div className="flex justify-between items-start mb-2 sm:mb-3">
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 mb-1">
@@ -513,8 +497,7 @@ const Dashboard = () => {
                             <span>{challenge.prize}</span>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      </div>)}
                   </div>
                   
                   <div className="pt-2">
@@ -543,8 +526,7 @@ const Dashboard = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3 sm:space-y-4">
-                    {certificates.map(cert => (
-                      <div key={cert.id} className="p-3 sm:p-6 bg-gradient-to-r from-blue-50 to-green-50 rounded-lg border border-blue-200 hover:shadow-lg hover:scale-[1.02] transition-all duration-200 cursor-pointer">
+                    {certificates.map(cert => <div key={cert.id} className="p-3 sm:p-6 bg-gradient-to-r from-blue-50 to-green-50 rounded-lg border border-blue-200 hover:shadow-lg hover:scale-[1.02] transition-all duration-200 cursor-pointer">
                         <div className="flex justify-between items-start mb-2 sm:mb-4">
                           <div className="flex-1 min-w-0">
                             <h3 className="font-bold text-sm sm:text-lg text-gray-900 truncate">{cert.title}</h3>
@@ -578,8 +560,7 @@ const Dashboard = () => {
                             Visualizza in Blockchain
                           </Button>
                         </div>
-                      </div>
-                    ))}
+                      </div>)}
                   </div>
                 </CardContent>
               </Card>
@@ -597,8 +578,7 @@ const Dashboard = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
-                    {conservedDpps.map(dpp => (
-                      <div key={dpp.id} className="p-3 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg border border-green-200 hover:shadow-lg hover:scale-[1.02] transition-all duration-200 cursor-pointer">
+                    {conservedDpps.map(dpp => <div key={dpp.id} className="p-3 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg border border-green-200 hover:shadow-lg hover:scale-[1.02] transition-all duration-200 cursor-pointer">
                         <div className="flex items-start space-x-3">
                           <img src={dpp.image} alt={dpp.name} className="w-12 h-12 object-cover rounded-lg flex-shrink-0" />
                           <div className="flex-1 min-w-0">
@@ -676,19 +656,9 @@ const Dashboard = () => {
                                   <Label className="text-sm font-medium mb-2 block">Trasferisci Garanzia</Label>
                                   <div className="flex gap-2">
                                     <div className="flex-1">
-                                      <Input
-                                        type="email"
-                                        placeholder="Email destinatario"
-                                        value={transferEmail}
-                                        onChange={(e) => setTransferEmail(e.target.value)}
-                                        className="text-sm"
-                                      />
+                                      <Input type="email" placeholder="Email destinatario" value={transferEmail} onChange={e => setTransferEmail(e.target.value)} className="text-sm" />
                                     </div>
-                                    <Button 
-                                      size="sm" 
-                                      onClick={() => handleTransferWarranty(dpp.id)}
-                                      className="bg-blue-600 hover:bg-blue-700"
-                                    >
+                                    <Button size="sm" onClick={() => handleTransferWarranty(dpp.id)} className="bg-blue-600 hover:bg-blue-700">
                                       <Send className="h-4 w-4 mr-1" />
                                       Invia
                                     </Button>
@@ -707,19 +677,16 @@ const Dashboard = () => {
                                     </Badge>
                                   </div>
                                   <div className="flex flex-wrap gap-1">
-                                    {dpp.sustainability.certifications.map((cert, index) => (
-                                      <Badge key={index} variant="outline" className="text-xs">
+                                    {dpp.sustainability.certifications.map((cert, index) => <Badge key={index} variant="outline" className="text-xs">
                                         {cert}
-                                      </Badge>
-                                    ))}
+                                      </Badge>)}
                                   </div>
                                 </div>
                               </div>
                             </DialogContent>
                           </Dialog>
                         </div>
-                      </div>
-                    ))}
+                      </div>)}
                     
                     <Button className="w-full mt-4 bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white text-xs">
                       <QrCode className="mr-2 h-3 w-3" />
@@ -766,8 +733,6 @@ const Dashboard = () => {
           </TabsContent>
         </Tabs>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Dashboard;
