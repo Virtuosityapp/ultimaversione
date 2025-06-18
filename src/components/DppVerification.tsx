@@ -211,7 +211,7 @@ export const DppVerification = () => {
         </TabsTrigger>
         <TabsTrigger value="wallet" className="flex items-center gap-2">
           <Wallet className="h-4 w-4" />
-          Il Mio Wallet DPP
+          Le Mie Garanzie
         </TabsTrigger>
       </TabsList>
 
