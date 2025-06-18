@@ -286,33 +286,33 @@ const DashboardAziende = () => {
           </p>
         </div>
 
-        {/* Metriche Certificati - Made more compact with brighter colors */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+        {/* Metriche Certificati - Fixed to always show 2 columns side by side */}
+        <div className="grid grid-cols-2 gap-2 md:gap-4 mb-4">
           <Card className="border-0 shadow-md bg-gradient-to-br from-emerald-400 to-green-500 text-white">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
-              <CardTitle className={`${isMobile ? 'text-xs' : 'text-sm'} font-medium text-emerald-100`}>{t('employeeCertificates')}</CardTitle>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 p-2 md:p-4">
+              <CardTitle className="text-xs md:text-sm font-medium text-emerald-100">{t('employeeCertificates')}</CardTitle>
               <div className="p-1 bg-white/25 rounded-md">
                 <Users className="h-3 w-3 text-white" />
               </div>
             </CardHeader>
-            <CardContent className="pb-2">
-              <div className={`${isMobile ? 'text-xl' : 'text-2xl'} font-bold text-white`}>{certificatiDipendenti}</div>
-              <p className={`${isMobile ? 'text-xs' : 'text-xs'} text-emerald-100 mt-1`}>
+            <CardContent className="pb-2 p-2 md:p-4 pt-0">
+              <div className="text-lg md:text-2xl font-bold text-white">{certificatiDipendenti}</div>
+              <p className="text-xs text-emerald-100 mt-1">
                 Certificati scambiati con i dipendenti
               </p>
             </CardContent>
           </Card>
 
           <Card className="border-0 shadow-md bg-gradient-to-br from-cyan-400 to-blue-500 text-white">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
-              <CardTitle className={`${isMobile ? 'text-xs' : 'text-sm'} font-medium text-cyan-100`}>{t('externalCertificates')}</CardTitle>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 p-2 md:p-4">
+              <CardTitle className="text-xs md:text-sm font-medium text-cyan-100">{t('externalCertificates')}</CardTitle>
               <div className="p-1 bg-white/25 rounded-md">
                 <UserCheck className="h-3 w-3 text-white" />
               </div>
             </CardHeader>
-            <CardContent className="pb-2">
-              <div className={`${isMobile ? 'text-xl' : 'text-2xl'} font-bold text-white`}>{certificatiEsterni}</div>
-              <p className={`${isMobile ? 'text-xs' : 'text-xs'} text-cyan-100 mt-1`}>
+            <CardContent className="pb-2 p-2 md:p-4 pt-0">
+              <div className="text-lg md:text-2xl font-bold text-white">{certificatiEsterni}</div>
+              <p className="text-xs text-cyan-100 mt-1">
                 Certificati ricevuti da followers
               </p>
             </CardContent>
