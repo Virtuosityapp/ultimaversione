@@ -352,7 +352,7 @@ const DashboardAziende = () => {
                   />
                   <Legend />
                   <Line 
-                    type="cardinal" 
+                    type="monotone" 
                     dataKey="co2" 
                     stroke="#22c55e" 
                     strokeWidth={4} 
@@ -361,7 +361,7 @@ const DashboardAziende = () => {
                     name="CO₂ Ridotta (t)" 
                   />
                   <Line 
-                    type="cardinal" 
+                    type="monotone" 
                     dataKey="waste" 
                     stroke="#3b82f6" 
                     strokeWidth={4} 
@@ -371,7 +371,7 @@ const DashboardAziende = () => {
                     name="Rifiuti Riciclati (%)" 
                   />
                   <Line 
-                    type="cardinal" 
+                    type="monotone" 
                     dataKey="energy" 
                     stroke="#f59e0b" 
                     strokeWidth={4} 
@@ -381,7 +381,7 @@ const DashboardAziende = () => {
                     name="Energia Rinnovabile (%)" 
                   />
                   <Line 
-                    type="cardinal" 
+                    type="monotone" 
                     dataKey="water" 
                     stroke="#06b6d4" 
                     strokeWidth={4} 
