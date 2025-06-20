@@ -493,7 +493,7 @@ const DashboardAziende = () => {
                   </div>
                   <input type="file" onChange={handleFileUpload} className="hidden" accept=".json,.xml,.pdf" id="dpp-upload" />
                   <label htmlFor="dpp-upload">
-                    <Button className="mt-4 bg-purple-600 hover:bg-purple-700" asChild>
+                    <Button className="mt-4 bg-purple-600 hover:bg-purple-700" onClick={() => navigate('/digital-warranty-upload')}>
                       <span>Seleziona DPP</span>
                     </Button>
                   </label>

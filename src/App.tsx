@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -13,6 +12,7 @@ import About from "./pages/About";
 import Comuni from "./pages/Comuni";
 import Report from "./pages/Report";
 import NotFound from "./pages/NotFound";
+import DigitalWarrantyUpload from "./pages/DigitalWarrantyUpload";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +32,7 @@ const App = () => (
             <Route path="/comuni" element={<Comuni />} />
             <Route path="/about" element={<About />} />
             <Route path="/report" element={<Report />} />
+            <Route path="/digital-warranty-upload" element={<DigitalWarrantyUpload />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
