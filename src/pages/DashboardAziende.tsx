@@ -9,7 +9,6 @@ import { Upload, FileText, BarChart3, TrendingUp, Award, Shield, DollarSign, Use
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useNavigate } from 'react-router-dom';
 import { PieChart, Pie, Cell, ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-
 const DashboardAziende = () => {
   const {
     t
@@ -165,10 +164,7 @@ const DashboardAziende = () => {
               <Home className="w-4 h-4 mr-1" />
               Dashboard Home
             </Button>
-            <Button className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700">
-              <Plus className="w-4 h-4 mr-2" />
-              Nuovo Progetto ESG
-            </Button>
+            
           </div>
         </div>
 
