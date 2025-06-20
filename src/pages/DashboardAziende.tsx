@@ -9,14 +9,14 @@ import { Upload, FileText, BarChart3, TrendingUp, Award, Shield, DollarSign, Use
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useNavigate } from 'react-router-dom';
 import { PieChart, Pie, Cell, ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-
 const DashboardAziende = () => {
-  const { t } = useLanguage();
+  const {
+    t
+  } = useLanguage();
   const navigate = useNavigate();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [timeFilter, setTimeFilter] = useState('month');
   const [showReportDialog, setShowReportDialog] = useState(false);
-
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -160,11 +160,7 @@ const DashboardAziende = () => {
           </div>
           
           <div className="flex items-center gap-3">
-            <Button 
-              variant="outline" 
-              onClick={() => navigate("/")}
-              className="px-3 py-1 border-green-200 text-green-700 hover:bg-green-50"
-            >
+            <Button variant="outline" onClick={() => navigate("/")} className="px-3 py-1 border-green-200 text-green-700 hover:bg-green-50">
               <Home className="w-4 h-4 mr-1" />
               Dashboard Home
             </Button>
@@ -428,10 +424,7 @@ const DashboardAziende = () => {
                     <Gift className="w-4 h-4 mr-2" />
                     Gift Card & Voucher
                   </Button>
-                  <Button className="w-full bg-yellow-500/80 hover:bg-yellow-500/90 text-white border-yellow-400/30">
-                    <Calendar className="w-4 h-4 mr-2" />
-                    Permessi & Tempo Libero
-                  </Button>
+                  
                   <Button className="w-full bg-pink-500/80 hover:bg-pink-500/90 text-white border-pink-400/30">
                     <DollarSign className="w-4 h-4 mr-2" />
                     Benefit Fiscali
@@ -622,5 +615,4 @@ const DashboardAziende = () => {
       </div>
     </div>;
 };
-
 export default DashboardAziende;
