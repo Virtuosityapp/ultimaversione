@@ -408,19 +408,23 @@ const DashboardAziende = () => {
 
           {/* Welfare Management */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-500 to-purple-600 text-white">
+            <Card className="border-0 shadow-lg bg-gradient-to-br from-purple-100 to-purple-200 text-slate-800">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Plus className="w-5 h-5" />
                   Carica Nuovi Premi
                 </CardTitle>
-                <CardDescription className="text-blue-100">
+                <CardDescription className="text-purple-700">
                   Aggiungi gift card, benefit fiscali e tempo libero
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
+                <Button className="w-full mb-3 bg-purple-600 hover:bg-purple-700 text-white">
+                  <Gift className="w-4 h-4 mr-2" />
+                  Welfare
+                </Button>
                 <div className="space-y-2">
-                  <Button className="w-full bg-white/20 hover:bg-white/30 text-white border-white/30">
+                  <Button className="w-full bg-white/70 hover:bg-white/80 text-purple-800 border-purple-300">
                     <Gift className="w-4 h-4 mr-2" />
                     Gift Card & Voucher
                   </Button>
