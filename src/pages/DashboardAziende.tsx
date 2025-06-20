@@ -9,6 +9,7 @@ import { Upload, FileText, BarChart3, TrendingUp, Award, Shield, DollarSign, Use
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useNavigate } from 'react-router-dom';
 import { PieChart, Pie, Cell, ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+
 const DashboardAziende = () => {
   const {
     t
@@ -17,12 +18,6 @@ const DashboardAziende = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [timeFilter, setTimeFilter] = useState('month');
   const [showReportDialog, setShowReportDialog] = useState(false);
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      setSelectedFile(file);
-    }
-  };
 
   // ESG Data for charts
   const co2Data = [{
@@ -146,7 +141,16 @@ const DashboardAziende = () => {
         {`${(percent * 100).toFixed(0)}%`}
       </text>;
   };
-  return <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-green-50 p-4 md:p-6">
+
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setSelectedFile(file);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-green-50 p-4 md:p-6">
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Header Section */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -653,39 +657,126 @@ const DashboardAziende = () => {
                     Genera Report ESG
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="max-w-md">
+                <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
                   <DialogHeader>
-                    <DialogTitle>Generazione Report ESG</DialogTitle>
-                    <DialogDescription>
-                      Il report sarà generato con tutti i dati ESG aggiornati e firmato digitalmente.
+                    <DialogTitle className="flex items-center gap-2 text-xl">
+                      <FileCheck className="w-6 h-6 text-orange-600" />
+                      Generazione Report ESG & DPP Certificato
+                    </DialogTitle>
+                    <DialogDescription className="text-base">
+                      Genera un report dettagliato certificato con tutti i dati ESG e Digital Product Passport, conforme alle normative CSRD, ESRS e ESPR.
                     </DialogDescription>
                   </DialogHeader>
-                  <div className="space-y-4 py-4">
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">Periodo di riferimento</label>
-                      <select className="w-full border border-slate-200 rounded-lg px-3 py-2">
-                        <option>Ultimo trimestre</option>
-                        <option>Ultimo semestre</option>
-                        <option>Ultimo anno</option>
-                        <option>Personalizzato</option>
-                      </select>
+                  <div className="space-y-6 py-4">
+                    {/* Report Configuration */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <label className="text-sm font-semibold text-gray-700">Periodo di riferimento</label>
+                        <select className="w-full border border-slate-300 rounded-lg px-3 py-2 bg-white">
+                          <option>Ultimo trimestre (Gen-Mar 2024)</option>
+                          <option>Ultimo semestre (Set 2023 - Mar 2024)</option>
+                          <option>Ultimo anno (Mar 2023 - Mar 2024)</option>
+                          <option>Anno solare 2024</option>
+                          <option>Personalizzato</option>
+                        </select>
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-sm font-semibold text-gray-700">Formato output</label>
+                        <select className="w-full border border-slate-300 rounded-lg px-3 py-2 bg-white">
+                          <option>PDF Certificato + Blockchain</option>
+                          <option>PDF + Excel + JSON</option>
+                          <option>Report Completo Multi-formato</option>
+                        </select>
+                      </div>
                     </div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">Formato output</label>
-                      <select className="w-full border border-slate-200 rounded-lg px-3 py-2">
-                        <option>PDF Certificato</option>
-                        <option>Excel + PDF</option>
-                        <option>JSON + PDF</option>
-                      </select>
+
+                    {/* Report Content Selection */}
+                    <div className="space-y-4">
+                      <h4 className="font-semibold text-gray-800">Contenuti del Report</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div className="space-y-3">
+                          <label className="flex items-center gap-2 text-sm">
+                            <input type="checkbox" defaultChecked className="rounded" />
+                            <span className="font-medium">Riduzione CO₂ (2.4t/4.0t)</span>
+                          </label>
+                          <label className="flex items-center gap-2 text-sm">
+                            <input type="checkbox" defaultChecked className="rounded" />
+                            <span className="font-medium">Gestione Rifiuti (85% sostenibile)</span>
+                          </label>
+                          <label className="flex items-center gap-2 text-sm">
+                            <input type="checkbox" defaultChecked className="rounded" />
+                            <span className="font-medium">Consumo Energia (45% rinnovabile)</span>
+                          </label>
+                          <label className="flex items-center gap-2 text-sm">
+                            <input type="checkbox" defaultChecked className="rounded" />
+                            <span className="font-medium">Risparmio Idrico (1,200L)</span>
+                          </label>
+                        </div>
+                        <div className="space-y-3">
+                          <label className="flex items-center gap-2 text-sm">
+                            <input type="checkbox" defaultChecked className="rounded" />
+                            <span className="font-medium">Certificati ESG (156 emessi)</span>
+                          </label>
+                          <label className="flex items-center gap-2 text-sm">
+                            <input type="checkbox" defaultChecked className="rounded" />
+                            <span className="font-medium">DPP Registrati (89 prodotti)</span>
+                          </label>
+                          <label className="flex items-center gap-2 text-sm">
+                            <input type="checkbox" defaultChecked className="rounded" />
+                            <span className="font-medium">Analisi Trend Mensili</span>
+                          </label>
+                          <label className="flex items-center gap-2 text-sm">
+                            <input type="checkbox" defaultChecked className="rounded" />
+                            <span className="font-medium">Conformità Normative</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Certification Details */}
+                    <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                      <h4 className="font-semibold text-green-800 mb-2">Certificazione e Conformità</h4>
+                      <div className="text-sm text-green-700 space-y-1">
+                        <p>✓ Conforme CSRD (Corporate Sustainability Reporting Directive)</p>
+                        <p>✓ Standard ESRS (European Sustainability Reporting Standards)</p>
+                        <p>✓ Regolamento ESPR (Ecodesign for Sustainable Products)</p>
+                        <p>✓ Digital Product Passport EU compliant</p>
+                        <p>✓ Firma digitale e timestamp blockchain</p>
+                      </div>
+                    </div>
+
+                    {/* Report Preview */}
+                    <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                      <h4 className="font-semibold text-gray-800 mb-3">Anteprima Contenuti Report</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                        <div>
+                          <p className="font-medium text-gray-700 mb-1">Sezione ESG:</p>
+                          <ul className="text-gray-600 space-y-0.5 ml-2">
+                            <li>• Executive Summary</li>
+                            <li>• Obiettivi vs Risultati</li>
+                            <li>• Grafici e Trend Analysis</li>
+                            <li>• Certificazioni Ottenute</li>
+                          </ul>
+                        </div>
+                        <div>
+                          <p className="font-medium text-gray-700 mb-1">Sezione DPP:</p>
+                          <ul className="text-gray-600 space-y-0.5 ml-2">
+                            <li>• Registro Prodotti Digitali</li>
+                            <li>• Tracciabilità Supply Chain</li>
+                            <li>• Impatto Ambientale Prodotti</li>
+                            <li>• Conformità Normative EU</li>
+                          </ul>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex gap-3 pt-4 border-t">
                     <Button variant="outline" className="flex-1" onClick={() => setShowReportDialog(false)}>
                       Annulla
                     </Button>
-                    <Button className="flex-1 bg-orange-600 hover:bg-orange-700">
+                    <Button className="flex-1 bg-orange-600 hover:bg-orange-700 text-white">
                       <Download className="w-4 h-4 mr-2" />
-                      Genera Report
+                      Genera Report Certificato
                     </Button>
                   </div>
                 </DialogContent>
@@ -696,6 +787,8 @@ const DashboardAziende = () => {
           </CardContent>
         </Card>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default DashboardAziende;
