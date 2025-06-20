@@ -793,12 +793,12 @@ const About = () => {
 
           <div className="mb-8 text-center">
             <img 
-              src="/lovable-uploads/8a0c9e20-1588-4e72-b5e4-de09478bb593.png" 
-              alt="Premi Aziendali - Modello di Scambio Certificati" 
+              src="/lovable-uploads/2d7821bc-1566-4343-b88c-a65247d9b8be.png" 
+              alt="Spazio Welfare & Premi - Interfaccia di Gestione Aziendale" 
               className="mx-auto rounded-lg shadow-2xl max-w-[80%] h-auto border border-gray-200"
             />
             <p className="text-sm text-gray-600 mt-3 italic">
-              Esempio pratico di marketplace aziendale: i dipendenti possono scambiare i loro certificati sostenibili con benefit welfare personalizzati
+              Interfaccia di gestione aziendale: le aziende possono configurare criteri di assegnazione automatica e gestire il welfare per i dipendenti
             </p>
           </div>
 
