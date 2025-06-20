@@ -5,16 +5,18 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Upload, FileText, BarChart3, TrendingUp, Award, Shield, DollarSign, Users, Package, Recycle, Eye, Download, Plus, Calendar, Activity, Filter, Gift, Zap, Droplets, Leaf, QrCode, FileCheck, Target, ChevronDown } from 'lucide-react';
+import { Upload, FileText, BarChart3, TrendingUp, Award, Shield, DollarSign, Users, Package, Recycle, Eye, Download, Plus, Calendar, Activity, Filter, Gift, Zap, Droplets, Leaf, QrCode, FileCheck, Target, ChevronDown, Home } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useNavigate } from 'react-router-dom';
 import { PieChart, Pie, Cell, ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+
 const DashboardAziende = () => {
-  const {
-    t
-  } = useLanguage();
+  const { t } = useLanguage();
+  const navigate = useNavigate();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [timeFilter, setTimeFilter] = useState('month');
   const [showReportDialog, setShowReportDialog] = useState(false);
+
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -158,10 +160,14 @@ const DashboardAziende = () => {
           </div>
           
           <div className="flex items-center gap-3">
-            <Badge variant="outline" className="px-3 py-1 border-green-200 text-green-700">
-              <Calendar className="w-4 h-4 mr-1" />
-              Aggiornato: Oggi
-            </Badge>
+            <Button 
+              variant="outline" 
+              onClick={() => navigate("/")}
+              className="px-3 py-1 border-green-200 text-green-700 hover:bg-green-50"
+            >
+              <Home className="w-4 h-4 mr-1" />
+              Dashboard Home
+            </Button>
             <Button className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700">
               <Plus className="w-4 h-4 mr-2" />
               Nuovo Progetto ESG
@@ -612,4 +618,5 @@ const DashboardAziende = () => {
       </div>
     </div>;
 };
+
 export default DashboardAziende;
