@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -19,7 +18,7 @@ import {
   Plus, 
   ArrowLeft,
   Stethoscope,
-  Spa,
+  Sparkles,
   Car,
   ShoppingBag,
   Coffee,
@@ -42,7 +41,7 @@ const WelfareManagement = () => {
     { id: 'medical', name: 'Visite Mediche', icon: Stethoscope, color: 'bg-red-100 text-red-700' },
     { id: 'eye', name: 'Visite Oculistiche', icon: Eye, color: 'bg-blue-100 text-blue-700' },
     { id: 'dental', name: 'Visite Odontoiatriche', icon: Smile, color: 'bg-green-100 text-green-700' },
-    { id: 'spa', name: 'Soggiorni Spa', icon: Spa, color: 'bg-purple-100 text-purple-700' },
+    { id: 'spa', name: 'Soggiorni Spa', icon: Sparkles, color: 'bg-purple-100 text-purple-700' },
     { id: 'time', name: 'Permessi Extra', icon: Calendar, color: 'bg-orange-100 text-orange-700' },
     { id: 'food', name: 'Buoni Pasto', icon: UtensilsCrossed, color: 'bg-yellow-100 text-yellow-700' },
     { id: 'transport', name: 'Trasporti', icon: Car, color: 'bg-indigo-100 text-indigo-700' },
