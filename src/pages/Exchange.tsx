@@ -26,7 +26,7 @@ const Exchange = () => {
     description: "Buono spendibile in mense aziendali partner",
     cost: 250,
     category: "welfare",
-    image: "/lovable-uploads/58286297-f6c7-4200-a8a0-ac39ced00eac.png",
+    image: "/lovable-uploads/459d53b2-6725-4ac2-b105-ef9ec469b6ee.png",
     availability: "Disponibile",
     provider: "Corporate Benefits"
   }, {
