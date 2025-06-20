@@ -151,9 +151,7 @@ const DashboardAziende = () => {
         {/* Header Section */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div className="space-y-2">
-            <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-800 to-blue-600 bg-clip-text text-transparent">
-              Dashboard ESG Virtuosity
-            </h1>
+            <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-800 to-blue-600 bg-clip-text text-transparent">Dashboard Aziendale</h1>
             <p className="text-slate-600 text-lg">
               Gestione aziendale ESG e sostenibilità digitale
             </p>
