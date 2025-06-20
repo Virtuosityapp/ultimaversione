@@ -413,7 +413,7 @@ const DashboardAziende = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <Button className="w-full mb-3 bg-purple-600 hover:bg-purple-700 text-white">
+                <Button className="w-full mb-3 bg-purple-600 hover:bg-purple-700 text-white" onClick={() => navigate('/welfare-management')}>
                   <Gift className="w-4 h-4 mr-2" />
                   Welfare
                 </Button>
