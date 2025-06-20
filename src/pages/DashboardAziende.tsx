@@ -1,322 +1,385 @@
 import React, { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Building2, Upload, Gift, FileText, TrendingUp, Users, Award, CheckCircle } from 'lucide-react';
-import { toast } from "sonner";
-import { DialogTrigger } from '@radix-ui/react-dialog';
+import { Badge } from "@/components/ui/badge";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { Building2, Users, Coins, TrendingUp, Gift, Upload, Award, Heart } from 'lucide-react';
+import { useToast } from "@/hooks/use-toast";
 
 const DashboardAziende = () => {
-  const [isDppDialogOpen, setIsDppDialogOpen] = useState(false);
+  const { toast } = useToast();
   const [isRewardsDialogOpen, setIsRewardsDialogOpen] = useState(false);
+  const [isDppDialogOpen, setIsDppDialogOpen] = useState(false);
+  const [isWelfareDialogOpen, setIsWelfareDialogOpen] = useState(false);
 
-  const handleDppSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast.success("DPP aziendale caricato con successo!");
-    setIsDppDialogOpen(false);
-  };
+  const data = [
+    { name: 'Gennaio', valore: 4000 },
+    { name: 'Febbraio', valore: 3000 },
+    { name: 'Marzo', valore: 2000 },
+    { name: 'Aprile', valore: 2780 },
+    { name: 'Maggio', valore: 1890 },
+    { name: 'Giugno', valore: 2390 },
+    { name: 'Luglio', valore: 3490 },
+  ];
+
+  const pieData = [
+    { name: 'Gruppo A', value: 400 },
+    { name: 'Gruppo B', value: 300 },
+    { name: 'Gruppo C', value: 300 },
+    { name: 'Gruppo D', value: 200 },
+  ];
+
+  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
   const handleRewardsSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Premio/Sconto caricato con successo!");
+    toast({
+      title: "Premi e Sconti Caricati",
+      description: "I premi e sconti sono stati caricati con successo.",
+    });
     setIsRewardsDialogOpen(false);
+  };
+
+  const handleDppSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    toast({
+      title: "DPP Caricato",
+      description: "Il Digital Product Passport è stato caricato con successo.",
+    });
+    setIsDppDialogOpen(false);
+  };
+
+  const handleWelfareSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    toast({
+      title: "Benefit Welfare Caricato",
+      description: "Il benefit welfare è stato caricato con successo.",
+    });
+    setIsWelfareDialogOpen(false);
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-6">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto space-y-6">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Dashboard Aziende</h1>
-          <p className="text-gray-600">Gestisci i tuoi prodotti sostenibili e monitora le performance</p>
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-gray-800 mb-4">Dashboard Aziendale</h1>
+          <p className="text-lg text-gray-600">Monitora la sostenibilità e l'impatto ambientale della tua azienda</p>
         </div>
 
-        {/* Upload Blocks - Side by Side */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-          {/* DPP Upload Block */}
-          <Card className="border border-green-200">
-            <CardHeader className="pb-3">
-              <CardTitle className="text-lg flex items-center gap-2">
-                <FileText className="h-5 w-5 text-green-600" />
-                DPP Aziendali
-              </CardTitle>
-              <CardDescription className="text-sm">
-                Carica i Digital Product Passport collegati ai prodotti fisici
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="pt-0">
-              <Dialog open={isDppDialogOpen} onOpenChange={setIsDppDialogOpen}>
-                <DialogTrigger asChild>
-                  <Button className="w-full bg-green-600 hover:bg-green-700" size="sm">
-                    <Upload className="mr-2 h-4 w-4" />
+        {/* Action Buttons */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          {/* Welfare Benefits Button */}
+          <Dialog open={isWelfareDialogOpen} onOpenChange={setIsWelfareDialogOpen}>
+            <DialogTrigger asChild>
+              <Button className="h-16 bg-purple-600 hover:bg-purple-700 text-white">
+                <Heart className="mr-2 h-5 w-5" />
+                Carica Benefit Welfare
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-2xl">
+              <DialogHeader>
+                <DialogTitle>Carica Benefit Welfare</DialogTitle>
+              </DialogHeader>
+              <form onSubmit={handleWelfareSubmit} className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="benefit-name">Nome Benefit</Label>
+                    <Input id="benefit-name" placeholder="es. Visita medica gratuita" required />
+                  </div>
+                  <div>
+                    <Label htmlFor="benefit-type">Tipo Benefit</Label>
+                    <Select required>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Seleziona tipo" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="medical">Assistenza Sanitaria</SelectItem>
+                        <SelectItem value="time-off">Permessi Extra</SelectItem>
+                        <SelectItem value="wellness">Benessere</SelectItem>
+                        <SelectItem value="education">Formazione</SelectItem>
+                        <SelectItem value="transport">Trasporti</SelectItem>
+                        <SelectItem value="food">Buoni Pasto</SelectItem>
+                        <SelectItem value="other">Altro</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+                
+                <div>
+                  <Label htmlFor="benefit-description">Descrizione</Label>
+                  <Textarea 
+                    id="benefit-description" 
+                    placeholder="Descrivi il benefit offerto..."
+                    className="min-h-[100px]"
+                    required 
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="certificates-required">Certificati Richiesti</Label>
+                    <Input 
+                      id="certificates-required" 
+                      type="number" 
+                      placeholder="es. 5" 
+                      min="1"
+                      required 
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="benefit-value">Valore Benefit (€)</Label>
+                    <Input 
+                      id="benefit-value" 
+                      type="number" 
+                      placeholder="es. 150" 
+                      min="0"
+                      step="0.01"
+                      required 
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="target-audience">Destinatari</Label>
+                    <Select required>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Seleziona destinatari" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="employees">Solo Dipendenti</SelectItem>
+                        <SelectItem value="followers">Solo Followers</SelectItem>
+                        <SelectItem value="both">Dipendenti e Followers</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div>
+                    <Label htmlFor="validity-period">Validità (giorni)</Label>
+                    <Input 
+                      id="validity-period" 
+                      type="number" 
+                      placeholder="es. 30" 
+                      min="1"
+                      required 
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <Label htmlFor="terms-conditions">Termini e Condizioni</Label>
+                  <Textarea 
+                    id="terms-conditions" 
+                    placeholder="Inserisci eventuali condizioni o limitazioni..."
+                    className="min-h-[80px]"
+                  />
+                </div>
+
+                <div className="flex justify-end space-x-2 pt-4">
+                  <Button type="button" variant="outline" onClick={() => setIsWelfareDialogOpen(false)}>
+                    Annulla
+                  </Button>
+                  <Button type="submit" className="bg-purple-600 hover:bg-purple-700">
+                    Carica Benefit
+                  </Button>
+                </div>
+              </form>
+            </DialogContent>
+          </Dialog>
+
+          {/* Rewards and Discounts Button */}
+          <Dialog open={isRewardsDialogOpen} onOpenChange={setIsRewardsDialogOpen}>
+            <DialogTrigger asChild>
+              <Button className="h-16 bg-orange-600 hover:bg-orange-700 text-white">
+                <Gift className="mr-2 h-5 w-5" />
+                Carica Premi e Sconti
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-2xl">
+              <DialogHeader>
+                <DialogTitle>Carica Premi e Sconti</DialogTitle>
+              </DialogHeader>
+              <form onSubmit={handleRewardsSubmit} className="space-y-4">
+                <div>
+                  <Label htmlFor="reward-name">Nome Premio/Sconto</Label>
+                  <Input id="reward-name" placeholder="es. Sconto 10% su..." required />
+                </div>
+                <div>
+                  <Label htmlFor="reward-description">Descrizione</Label>
+                  <Textarea id="reward-description" placeholder="Descrivi il premio o lo sconto..." className="min-h-[80px]" required />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="certificates-needed">Certificati Necessari</Label>
+                    <Input type="number" id="certificates-needed" placeholder="es. 3" min="1" required />
+                  </div>
+                  <div>
+                    <Label htmlFor="discount-code">Codice Sconto (opzionale)</Label>
+                    <Input type="text" id="discount-code" placeholder="es. SCONTO10" />
+                  </div>
+                </div>
+                <div className="flex justify-end space-x-2 pt-4">
+                  <Button type="button" variant="outline" onClick={() => setIsRewardsDialogOpen(false)}>
+                    Annulla
+                  </Button>
+                  <Button type="submit" className="bg-orange-600 hover:bg-orange-700">
+                    Carica Premio/Sconto
+                  </Button>
+                </div>
+              </form>
+            </DialogContent>
+          </Dialog>
+
+          {/* DPP Upload Button */}
+          <Dialog open={isDppDialogOpen} onOpenChange={setIsDppDialogOpen}>
+            <DialogTrigger asChild>
+              <Button className="h-16 bg-blue-600 hover:bg-blue-700 text-white">
+                <Upload className="mr-2 h-5 w-5" />
+                Carica DPP Aziendali
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-2xl">
+              <DialogHeader>
+                <DialogTitle>Carica Digital Product Passport</DialogTitle>
+              </DialogHeader>
+              <form onSubmit={handleDppSubmit} className="space-y-4">
+                <div>
+                  <Label htmlFor="dpp-name">Nome DPP</Label>
+                  <Input id="dpp-name" placeholder="es. Prodotto X - DPP" required />
+                </div>
+                <div>
+                  <Label htmlFor="dpp-description">Descrizione</Label>
+                  <Textarea id="dpp-description" placeholder="Descrivi il Digital Product Passport..." className="min-h-[80px]" required />
+                </div>
+                <div>
+                  <Label htmlFor="dpp-file">File DPP</Label>
+                  <Input type="file" id="dpp-file" />
+                </div>
+                <div className="flex justify-end space-x-2 pt-4">
+                  <Button type="button" variant="outline" onClick={() => setIsDppDialogOpen(false)}>
+                    Annulla
+                  </Button>
+                  <Button type="submit" className="bg-blue-600 hover:bg-blue-700">
                     Carica DPP
                   </Button>
-                </DialogTrigger>
-                <DialogContent className="max-w-2xl">
-                  <DialogHeader>
-                    <DialogTitle>Carica DPP Aziendale</DialogTitle>
-                    <DialogDescription>
-                      Inserisci le informazioni del Digital Product Passport per i tuoi prodotti fisici
-                    </DialogDescription>
-                  </DialogHeader>
-                  <form onSubmit={handleDppSubmit} className="space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <Label htmlFor="product-name">Nome Prodotto</Label>
-                        <Input id="product-name" placeholder="Es. Maglietta Bio Cotton" required />
-                      </div>
-                      <div>
-                        <Label htmlFor="product-code">Codice Prodotto</Label>
-                        <Input id="product-code" placeholder="Es. BCT001" required />
-                      </div>
-                    </div>
-                    <div>
-                      <Label htmlFor="description">Descrizione</Label>
-                      <Textarea id="description" placeholder="Descrizione dettagliata del prodotto..." />
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <Label htmlFor="sustainability-score">Punteggio Sostenibilità</Label>
-                        <Select>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Seleziona punteggio" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="A">A - Eccellente</SelectItem>
-                            <SelectItem value="B">B - Buono</SelectItem>
-                            <SelectItem value="C">C - Discreto</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      <div>
-                        <Label htmlFor="carbon-footprint">Carbon Footprint (kg CO2)</Label>
-                        <Input id="carbon-footprint" type="number" placeholder="Es. 2.5" />
-                      </div>
-                    </div>
-                    <div>
-                      <Label htmlFor="certifications">Certificazioni</Label>
-                      <Input id="certifications" placeholder="Es. GOTS, Cradle to Cradle" />
-                    </div>
-                    <div className="flex justify-end space-x-2">
-                      <Button type="button" variant="outline" onClick={() => setIsDppDialogOpen(false)}>
-                        Annulla
-                      </Button>
-                      <Button type="submit">Carica DPP</Button>
-                    </div>
-                  </form>
-                </DialogContent>
-              </Dialog>
-            </CardContent>
-          </Card>
-
-          {/* Rewards Upload Block */}
-          <Card className="border border-blue-200">
-            <CardHeader className="pb-3">
-              <CardTitle className="text-lg flex items-center gap-2">
-                <Gift className="h-5 w-5 text-blue-600" />
-                Premi e Sconti
-              </CardTitle>
-              <CardDescription className="text-sm">
-                Offri incentivi in cambio di certificati sostenibili
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="pt-0">
-              <Dialog open={isRewardsDialogOpen} onOpenChange={setIsRewardsDialogOpen}>
-                <DialogTrigger asChild>
-                  <Button className="w-full bg-blue-600 hover:bg-blue-700" size="sm">
-                    <Gift className="mr-2 h-4 w-4" />
-                    Aggiungi Premio
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="max-w-2xl">
-                  <DialogHeader>
-                    <DialogTitle>Carica Premio o Sconto</DialogTitle>
-                    <DialogDescription>
-                      Crea incentivi per dipendenti e followers in cambio di certificati di sostenibilità
-                    </DialogDescription>
-                  </DialogHeader>
-                  <form onSubmit={handleRewardsSubmit} className="space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <Label htmlFor="reward-type">Tipo</Label>
-                        <Select>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Seleziona tipo" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="discount">Sconto</SelectItem>
-                            <SelectItem value="voucher">Voucher</SelectItem>
-                            <SelectItem value="gift">Regalo</SelectItem>
-                            <SelectItem value="experience">Esperienza</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      <div>
-                        <Label htmlFor="target-audience">Destinatari</Label>
-                        <Select>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Seleziona destinatari" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="employees">Dipendenti</SelectItem>
-                            <SelectItem value="followers">Followers</SelectItem>
-                            <SelectItem value="both">Entrambi</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </div>
-                    <div>
-                      <Label htmlFor="reward-title">Titolo Premio</Label>
-                      <Input id="reward-title" placeholder="Es. Sconto 20% su prodotti eco-friendly" required />
-                    </div>
-                    <div>
-                      <Label htmlFor="reward-description">Descrizione</Label>
-                      <Textarea id="reward-description" placeholder="Descrizione dettagliata del premio..." />
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <Label htmlFor="certificates-required">Certificati Richiesti</Label>
-                        <Input id="certificates-required" type="number" placeholder="Es. 5" min="1" required />
-                      </div>
-                      <div>
-                        <Label htmlFor="reward-value">Valore</Label>
-                        <Input id="reward-value" placeholder="Es. €50, 20%" />
-                      </div>
-                    </div>
-                    <div>
-                      <Label htmlFor="validity-period">Periodo di Validità</Label>
-                      <Input id="validity-period" type="date" />
-                    </div>
-                    <div className="flex justify-end space-x-2">
-                      <Button type="button" variant="outline" onClick={() => setIsRewardsDialogOpen(false)}>
-                        Annulla
-                      </Button>
-                      <Button type="submit">Carica Premio</Button>
-                    </div>
-                  </form>
-                </DialogContent>
-              </Dialog>
-            </CardContent>
-          </Card>
+                </div>
+              </form>
+            </DialogContent>
+          </Dialog>
         </div>
 
         {/* KPI Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Prodotti Certificati</CardTitle>
-              <CheckCircle className="h-4 w-4 text-green-600" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-green-600">247</div>
-              <p className="text-xs text-muted-foreground">+12% dal mese scorso</p>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">CO2 Risparmiata</CardTitle>
-              <TrendingUp className="h-4 w-4 text-blue-600" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-blue-600">1,234 kg</div>
-              <p className="text-xs text-muted-foreground">+8% dal mese scorso</p>
-            </CardContent>
-          </Card>
-          
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Dipendenti Attivi</CardTitle>
-              <Users className="h-4 w-4 text-purple-600" />
+              <Building2 className="h-4 w-4 text-gray-500" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-purple-600">89</div>
-              <p className="text-xs text-muted-foreground">+15% dal mese scorso</p>
+              <div className="text-2xl font-bold">120</div>
+              <p className="text-sm text-gray-500">Rispetto al mese scorso +5</p>
             </CardContent>
           </Card>
-          
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Punteggio ESG</CardTitle>
-              <Award className="h-4 w-4 text-orange-600" />
+              <CardTitle className="text-sm font-medium">Followers</CardTitle>
+              <Users className="h-4 w-4 text-gray-500" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-orange-600">8.7/10</div>
-              <p className="text-xs text-muted-foreground">+0.3 dal mese scorso</p>
+              <div className="text-2xl font-bold">4,524</div>
+              <p className="text-sm text-gray-500">Rispetto al mese scorso +120</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Certificati Emessi</CardTitle>
+              <Award className="h-4 w-4 text-gray-500" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">2,350</div>
+              <p className="text-sm text-gray-500">Rispetto al mese scorso +350</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Punteggio di Sostenibilità</CardTitle>
+              <TrendingUp className="h-4 w-4 text-gray-500" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">85/100</div>
+              <p className="text-sm text-gray-500">Migliora il tuo impatto ambientale</p>
             </CardContent>
           </Card>
         </div>
 
-        {/* Recent Activity and Sustainability Report */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Charts */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <Card>
             <CardHeader>
-              <CardTitle>Attività Recenti</CardTitle>
-              <CardDescription>Ultime azioni dei tuoi dipendenti</CardDescription>
+              <CardTitle>Emissioni di CO2 (kg) - Ultimi 7 Mesi</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
-                {[
-                  { user: "Marco Rossi", action: "ha caricato certificato riciclo", time: "2 ore fa", badge: "Riciclo" },
-                  { user: "Anna Verdi", action: "ha completato corso sostenibilità", time: "4 ore fa", badge: "Formazione" },
-                  { user: "Luca Bianchi", action: "ha utilizzato mezzi pubblici", time: "6 ore fa", badge: "Mobilità" },
-                  { user: "Sara Neri", action: "ha partecipato a evento green", time: "1 giorno fa", badge: "Evento" },
-                ].map((activity, index) => (
-                  <div key={index} className="flex items-center justify-between p-3 rounded-lg border">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                        <Building2 className="h-4 w-4 text-green-600" />
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium">{activity.user}</p>
-                        <p className="text-xs text-gray-500">{activity.action}</p>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <Badge variant="secondary" className="text-xs">{activity.badge}</Badge>
-                      <p className="text-xs text-gray-500 mt-1">{activity.time}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={data}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="valore" fill="#82ca9d" />
+                </BarChart>
+              </ResponsiveContainer>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle>Report di Sostenibilità</CardTitle>
-              <CardDescription>Panoramica delle performance ambientali</CardDescription>
+              <CardTitle>Distribuzione Certificati per Area</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center p-3 bg-green-50 rounded-lg">
-                  <span className="text-sm font-medium">Emissioni CO2</span>
-                  <span className="text-sm text-green-600 font-bold">-15% vs 2023</span>
-                </div>
-                <div className="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
-                  <span className="text-sm font-medium">Energia Rinnovabile</span>
-                  <span className="text-sm text-blue-600 font-bold">85%</span>
-                </div>
-                <div className="flex justify-between items-center p-3 bg-purple-50 rounded-lg">
-                  <span className="text-sm font-medium">Rifiuti Riciclati</span>
-                  <span className="text-sm text-purple-600 font-bold">92%</span>
-                </div>
-                <div className="flex justify-between items-center p-3 bg-orange-50 rounded-lg">
-                  <span className="text-sm font-medium">Acqua Risparmiata</span>
-                  <span className="text-sm text-orange-600 font-bold">2,340L</span>
-                </div>
-              </div>
-              <Button className="w-full mt-4" variant="outline">
-                Visualizza Report Completo
-              </Button>
+              <ResponsiveContainer width="100%" height={300}>
+                <PieChart>
+                  <Pie
+                    data={pieData}
+                    cx="50%"
+                    cy="50%"
+                    labelLine={false}
+                    label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                    outerRadius={80}
+                    fill="#8884d8"
+                    dataKey="value"
+                  >
+                    {pieData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                  <Legend />
+                </PieChart>
+              </ResponsiveContainer>
             </CardContent>
           </Card>
         </div>
+
+        {/* Sustainability Report */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Report di Sostenibilità</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <p><strong>Obiettivi di Sostenibilità:</strong> Riduzione del 15% delle emissioni di CO2 entro il 2025.</p>
+              <p><strong>Azioni Intraprese:</strong> Implementazione di un sistema di gestione energetica, utilizzo di energia rinnovabile, e programmi di sensibilizzazione per i dipendenti.</p>
+              <p><strong>Risultati:</strong> Riduzione del 8% delle emissioni nel 2023. Aumento del 20% nell'utilizzo di energia rinnovabile.</p>
+              <Badge className="bg-green-500 text-white">In linea con gli obiettivi</Badge>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
