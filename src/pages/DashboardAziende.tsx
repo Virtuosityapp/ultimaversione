@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -84,10 +83,10 @@ const DashboardAziende = () => {
   ];
 
   const welfareStats = [
-    { title: "Premi Disponibili", value: "24", icon: Gift, color: "text-green-600" },
-    { title: "Premi Assegnati", value: "156", icon: Award, color: "text-blue-600" },
-    { title: "Dipendenti Attivi", value: "89", icon: Users, color: "text-purple-600" },
-    { title: "Utilizzo Benefit", value: "67%", icon: TrendingUp, color: "text-orange-600" }
+    { title: "Premi Disponibili", value: "24", icon: Gift, color: "text-green-600", bgColor: "bg-gradient-to-br from-green-100 to-green-200" },
+    { title: "Premi Assegnati", value: "156", icon: Award, color: "text-yellow-600", bgColor: "bg-gradient-to-br from-yellow-100 to-yellow-200" },
+    { title: "Dipendenti Attivi", value: "89", icon: Users, color: "text-pink-600", bgColor: "bg-gradient-to-br from-pink-100 to-pink-200" },
+    { title: "Utilizzo Benefit", value: "67%", icon: TrendingUp, color: "text-sky-600", bgColor: "bg-gradient-to-br from-sky-100 to-sky-200" }
   ];
 
   const COLORS = ['#22c55e', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6'];
@@ -365,14 +364,14 @@ const DashboardAziende = () => {
           {/* Welfare Stats */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {welfareStats.map((stat, index) => (
-              <Card key={index} className="border-0 shadow-lg bg-white/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+              <Card key={index} className={`border-0 shadow-lg ${stat.bgColor} hover:shadow-xl transition-all duration-300`}>
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between">
                     <div className="space-y-2">
-                      <p className="text-sm font-medium text-slate-600">{stat.title}</p>
+                      <p className="text-sm font-medium text-slate-700">{stat.title}</p>
                       <p className="text-2xl font-bold text-slate-900">{stat.value}</p>
                     </div>
-                    <div className={`p-3 rounded-xl bg-slate-50 ${stat.color}`}>
+                    <div className={`p-3 rounded-xl bg-white/70 ${stat.color}`}>
                       <stat.icon className="w-6 h-6" />
                     </div>
                   </div>
@@ -383,13 +382,13 @@ const DashboardAziende = () => {
 
           {/* Welfare Management */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="border-0 shadow-lg bg-gradient-to-br from-green-500 to-green-600 text-white">
+            <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-500 to-purple-600 text-white">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Plus className="w-5 h-5" />
                   Carica Nuovi Premi
                 </CardTitle>
-                <CardDescription className="text-green-100">
+                <CardDescription className="text-blue-100">
                   Aggiungi gift card, benefit fiscali e tempo libero
                 </CardDescription>
               </CardHeader>
@@ -399,11 +398,11 @@ const DashboardAziende = () => {
                     <Gift className="w-4 h-4 mr-2" />
                     Gift Card & Voucher
                   </Button>
-                  <Button className="w-full bg-white/20 hover:bg-white/30 text-white border-white/30">
+                  <Button className="w-full bg-yellow-500/80 hover:bg-yellow-500/90 text-white border-yellow-400/30">
                     <Calendar className="w-4 h-4 mr-2" />
                     Permessi & Tempo Libero
                   </Button>
-                  <Button className="w-full bg-white/20 hover:bg-white/30 text-white border-white/30">
+                  <Button className="w-full bg-pink-500/80 hover:bg-pink-500/90 text-white border-pink-400/30">
                     <DollarSign className="w-4 h-4 mr-2" />
                     Benefit Fiscali
                   </Button>
@@ -411,7 +410,7 @@ const DashboardAziende = () => {
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg bg-white/90 backdrop-blur-sm">
+            <Card className="border-0 shadow-lg bg-gradient-to-br from-slate-50 to-blue-50">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Target className="w-5 h-5 text-blue-600" />
@@ -423,11 +422,11 @@ const DashboardAziende = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-3">
-                  <div className="p-3 bg-blue-50 rounded-lg">
+                  <div className="p-3 bg-blue-50 rounded-lg border border-blue-200">
                     <p className="text-sm font-medium text-blue-900">10 Certificati = Buono Mensile €50</p>
                     <p className="text-xs text-blue-600">Attivo • 67 dipendenti qualificati</p>
                   </div>
-                  <div className="p-3 bg-green-50 rounded-lg">
+                  <div className="p-3 bg-green-50 rounded-lg border border-green-200">
                     <p className="text-sm font-medium text-green-900">25 Certificati = Giorno Libero Extra</p>
                     <p className="text-xs text-green-600">Attivo • 23 dipendenti qualificati</p>
                   </div>
