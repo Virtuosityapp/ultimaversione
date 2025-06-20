@@ -122,12 +122,12 @@ const PrivacySecurityCard = () => <Card className="border-0 shadow-lg bg-gradien
       
       <div className="mt-8 mb-8">
         <img 
-          src="/lovable-uploads/1f080e10-6708-4c0d-9a31-f5a28b124922.png" 
-          alt="Segnala Problema al Comune - Citizen Reporting Interface" 
+          src="/lovable-uploads/56496a06-43af-4808-b63c-de4e8104341d.png" 
+          alt="Dashboard Utente Virtuosity - Tracciamento Sostenibilità Personale" 
           className="mx-auto rounded-lg shadow-2xl max-w-[80%] sm:max-w-[70%] md:max-w-[60%] h-auto border border-gray-200"
         />
         <p className="text-sm text-gray-600 mt-3 italic">
-          Interfaccia di segnalazione cittadina: contribuisci al miglioramento della tua città segnalando problemi urbani
+          Dashboard utente: monitora le tue attività sostenibili quotidiane e i certificati blockchain generati
         </p>
       </div>
     </CardHeader>
