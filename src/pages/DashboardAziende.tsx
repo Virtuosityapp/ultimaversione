@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -5,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Upload, FileText, BarChart3, TrendingUp, Award, Shield, DollarSign, Users, Package, Recycle, Eye, Download, Plus, Calendar, Activity, Filter, Gift, Zap, Droplets, Leaf, QrCode, FileCheck, Target, ChevronDown, Home, ShoppingBag, Wallet, Heart, Sparkles } from 'lucide-react';
+import { Upload, FileText, BarChart3, TrendingUp, Award, Shield, DollarSign, Users, Package, Recycle, Eye, Download, Plus, Calendar, Activity, Filter, Gift, Zap, Droplets, Leaf, QrCode, FileCheck, Target, ChevronDown, Home, ShoppingBag, Wallet, Heart, Sparkles, Star } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useNavigate } from 'react-router-dom';
 import { PieChart, Pie, Cell, ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
@@ -416,6 +417,11 @@ const DashboardAziende = () => {
                 <Button className="w-full mb-4 bg-purple-600 hover:bg-purple-700 text-white h-12 text-base font-semibold" onClick={() => navigate('/welfare-management')}>
                   <Heart className="w-5 h-5 mr-3" />
                   Gestione Welfare
+                </Button>
+                
+                <Button className="w-full mb-4 bg-amber-600 hover:bg-amber-700 text-white h-12 text-base font-semibold">
+                  <Star className="w-5 h-5 mr-3" />
+                  Premi e Sconti
                 </Button>
                 
                 <div className="grid grid-cols-1 gap-4">
