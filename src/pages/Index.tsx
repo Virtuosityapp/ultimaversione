@@ -65,60 +65,60 @@ const Index = () => {
               </p>
             </div>
 
-            {/* Four Dashboard Blocks - Reduced and positioned horizontally */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 mb-6 sm:mb-8 max-w-4xl mx-auto px-3">
+            {/* Four Dashboard Blocks - Reduced by 30% */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 sm:mb-8 max-w-3xl mx-auto px-3">
               
               {/* User Dashboard Block */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-3 shadow-lg border border-green-200 hover:shadow-xl transition-all duration-300">
-                <h3 className="text-sm font-bold text-gray-900 mb-1">Dashboard Utente</h3>
-                <p className="text-gray-600 mb-2 text-xs">
-                  Accedi alla tua dashboard personale per monitorare le tue attività sostenibili.
+              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-lg border border-green-200 hover:shadow-xl transition-all duration-300">
+                <h3 className="text-lg font-bold text-gray-900 mb-2">Dashboard Utente</h3>
+                <p className="text-gray-600 mb-3 text-xs">
+                  Accedi alla tua dashboard personale per monitorare le tue attività sostenibili, visualizzare i certificati guadagnati e partecipare alle sfide della community.
                 </p>
                 <Button 
                   onClick={() => navigate("/dashboard")} 
-                  className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-2 py-1 text-xs hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
+                  className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-4 py-2 text-sm hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
                 >
                   {t('buttonUser')}
                 </Button>
               </div>
 
               {/* Exchange Dashboard Block */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-3 shadow-lg border border-green-200 hover:shadow-xl transition-all duration-300">
-                <h3 className="text-sm font-bold text-gray-900 mb-1">Exchange</h3>
-                <p className="text-gray-600 mb-2 text-xs">
-                  Scopri il marketplace per scambiare i tuoi punti Virtuosity con premi reali.
+              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-lg border border-green-200 hover:shadow-xl transition-all duration-300">
+                <h3 className="text-lg font-bold text-gray-900 mb-2">Exchange</h3>
+                <p className="text-gray-600 mb-3 text-xs">
+                  Scopri il marketplace dove puoi scambiare i tuoi punti Virtuosity con premi reali, buoni sconto e vantaggi esclusivi offerti dai partner.
                 </p>
                 <Button 
                   onClick={() => navigate("/exchange")} 
-                  className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-2 py-1 text-xs hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
+                  className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-4 py-2 text-sm hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
                 >
                   {t('buttonExchange')}
                 </Button>
               </div>
 
               {/* Companies Dashboard Block */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-3 shadow-lg border border-sky-200 hover:shadow-xl transition-all duration-300">
-                <h3 className="text-sm font-bold text-gray-900 mb-1">Dashboard Aziende</h3>
-                <p className="text-gray-600 mb-2 text-xs">
-                  Accedi al pannello aziendale per gestire dipendenti e performance di sostenibilità.
+              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-lg border border-sky-200 hover:shadow-xl transition-all duration-300">
+                <h3 className="text-lg font-bold text-gray-900 mb-2">Dashboard Aziende</h3>
+                <p className="text-gray-600 mb-3 text-xs">
+                  Accedi al pannello di controllo aziendale per gestire i dipendenti, monitorare le performance di sostenibilità e configurare incentivi personalizzati.
                 </p>
                 <Button 
                   onClick={() => navigate("/dashboard-aziende")} 
-                  className="bg-gradient-to-r from-sky-500 to-cyan-500 text-white px-2 py-1 text-xs hover:from-sky-600 hover:to-cyan-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
+                  className="bg-gradient-to-r from-sky-500 to-cyan-500 text-white px-4 py-2 text-sm hover:from-sky-600 hover:to-cyan-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
                 >
                   {t('buttonCompanies')}
                 </Button>
               </div>
 
               {/* Municipalities Dashboard Block */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-3 shadow-lg border border-blue-200 hover:shadow-xl transition-all duration-300">
-                <h3 className="text-sm font-bold text-gray-900 mb-1">Dashboard Comuni</h3>
-                <p className="text-gray-600 mb-2 text-xs">
-                  Centro di controllo comunale per smart city e segnalazioni cittadine.
+              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-lg border border-blue-200 hover:shadow-xl transition-all duration-300">
+                <h3 className="text-lg font-bold text-gray-900 mb-2">Dashboard Comuni</h3>
+                <p className="text-gray-600 mb-3 text-xs">
+                  Entra nel centro di controllo comunale per gestire le integrazioni smart city, monitorare le segnalazioni cittadine e configurare incentivi locali.
                 </p>
                 <Button 
                   onClick={() => navigate("/comuni")} 
-                  className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-2 py-1 text-xs hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
+                  className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-2 text-sm hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
                 >
                   {t('buttonMunicipalities')}
                 </Button>
