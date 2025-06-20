@@ -834,12 +834,12 @@ const About = () => {
         {/* Report Screenshot - Above Technology Stack */}
         <div className="mb-16 text-center">
           <img 
-            src="/lovable-uploads/73fd355d-6dd7-4294-b693-b245772935e6.png" 
-            alt="Report Virtuosity - Interfaccia di Monitoraggio Sostenibilità" 
+            src="/lovable-uploads/a1086a5d-1f93-4234-bdfe-f9f0b69b4d0d.png" 
+            alt="Exchange Virtuosity - Interfaccia Premi Aziendali" 
             className="mx-auto rounded-lg shadow-2xl max-w-[90%] sm:max-w-[80%] md:max-w-[70%] h-auto border border-gray-200"
           />
           <p className="text-sm text-gray-600 mt-3 italic">
-            Interfaccia di reporting dettagliato: monitora le tue attività sostenibili e i certificati blockchain generati
+            Interfaccia Exchange: scopri come riscattare i tuoi punti sostenibili con premi aziendali esclusivi
           </p>
         </div>
 
@@ -1110,40 +1110,4 @@ const About = () => {
                 <Card className="border border-blue-200 bg-white/50">
                   <CardHeader className="text-center">
                     <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-green-500 rounded-full flex items-center justify-center text-white mb-4 mx-auto">
-                      <MapPin className="h-6 w-6" />
-                    </div>
-                    <CardTitle className="text-xl">Contact Info</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-center space-y-2">
-                      <p className="text-sm text-gray-600">Via per Avertana, 23</p>
-                      <p className="text-sm text-gray-600">Manduria (TA) 74024</p>
-                      <p className="text-sm text-gray-600">gianfranco.leone@virtuosity.it</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* 16. CTA Section - Call to action finale */}
-        <div className="text-center bg-gradient-to-r from-green-600 to-blue-600 rounded-lg p-12 text-white">
-          <h3 className="text-3xl font-bold mb-4">Pronto a Iniziare il Tuo Viaggio Sostenibile?</h3>
-          <p className="text-xl mb-8 text-green-100">
-            Unisciti a migliaia di cittadini che stanno già facendo la differenza per il pianeta
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button onClick={() => navigate("/dashboard")} className="bg-white text-green-600 hover:bg-gray-100 px-8 py-3 text-lg font-semibold">
-              Inizia Subito
-            </Button>
-            <Button variant="outline" onClick={() => navigate("/")} className="border-white text-white hover:bg-white hover:text-green-600 px-8 py-3 text-lg">
-              Torna alla Home
-            </Button>
-          </div>
-        </div>
-      </div>
-    </div>;
-};
-
-export default About;
+                      <MapPin
