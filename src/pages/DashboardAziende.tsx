@@ -5,10 +5,11 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Upload, FileText, BarChart3, TrendingUp, Award, Shield, DollarSign, Users, Package, Recycle, Eye, Download, Plus, Calendar, Activity, Filter, Gift, Zap, Droplets, Leaf, QrCode, FileCheck, Target, ChevronDown, Home, ShoppingBag } from 'lucide-react';
+import { Upload, FileText, BarChart3, TrendingUp, Award, Shield, DollarSign, Users, Package, Recycle, Eye, Download, Plus, Calendar, Activity, Filter, Gift, Zap, Droplets, Leaf, QrCode, FileCheck, Target, ChevronDown, Home, ShoppingBag, Wallet } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useNavigate } from 'react-router-dom';
 import { PieChart, Pie, Cell, ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+
 const DashboardAziende = () => {
   const {
     t
@@ -162,7 +163,6 @@ const DashboardAziende = () => {
               <Home className="w-4 h-4 mr-1" />
               Dashboard Home
             </Button>
-            
           </div>
         </div>
 
@@ -399,7 +399,7 @@ const DashboardAziende = () => {
 
           {/* Welfare Management */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="border-0 shadow-lg bg-gradient-to-br from-purple-100 to-purple-200 text-slate-800">
+            <Card className="border-0 shadow-lg bg-gradient-to-br from-purple-50 to-violet-100 text-slate-800">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Plus className="w-5 h-5" />
@@ -498,41 +498,96 @@ const DashboardAziende = () => {
               </CardContent>
             </Card>
 
-            {/* DPP Management */}
-            <Card className="border-0 shadow-lg bg-white/90 backdrop-blur-sm">
+            {/* Wallet Aziendale */}
+            <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-50 to-indigo-100">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <QrCode className="w-5 h-5 text-blue-600" />
-                  Prodotti Registrati
+                  <Wallet className="w-5 h-5 text-indigo-600" />
+                  Wallet Aziendale
                 </CardTitle>
-                <CardDescription>
-                  Gestisci i prodotti e i relativi certificati ESG
+                <CardDescription className="text-indigo-700">
+                  Tutti i certificati digitali ESG e DPP dell'azienda
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
+                <div className="grid grid-cols-2 gap-3 mb-4">
+                  <div className="text-center p-3 bg-green-100 rounded-lg">
+                    <p className="text-2xl font-bold text-green-800">156</p>
+                    <p className="text-sm text-green-600">Certificati ESG</p>
+                  </div>
+                  <div className="text-center p-3 bg-purple-100 rounded-lg">
+                    <p className="text-2xl font-bold text-purple-800">89</p>
+                    <p className="text-sm text-purple-600">DPP Registrati</p>
+                  </div>
+                </div>
+
                 <div className="space-y-3">
-                  <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
-                    <div>
-                      <p className="font-medium text-blue-900">Smartphone Eco-Friendly</p>
-                      <p className="text-sm text-blue-600">ID: SPH-2024-001 • 5 certificati collegati</p>
+                  {/* ESG Certificate Example */}
+                  <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg border border-green-200">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-green-200 rounded-full">
+                        <Leaf className="w-4 h-4 text-green-700" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-green-900">Certificato CO₂ Reduction</p>
+                        <p className="text-sm text-green-600">ESG-2024-001 • Emesso: 15/06/2024</p>
+                      </div>
                     </div>
-                    <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
-                      <Eye className="w-4 h-4" />
+                    <Badge className="bg-green-600">Attivo</Badge>
+                  </div>
+
+                  {/* DPP Certificate Example */}
+                  <div className="flex items-center justify-between p-3 bg-purple-50 rounded-lg border border-purple-200">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-purple-200 rounded-full">
+                        <Shield className="w-4 h-4 text-purple-700" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-purple-900">DPP Smartphone Eco-Friendly</p>
+                        <p className="text-sm text-purple-600">DPP-SPH-2024-001 • 5 certificati collegati</p>
+                      </div>
+                    </div>
+                    <Badge className="bg-purple-600">Verificato</Badge>
+                  </div>
+
+                  {/* Water Saving Certificate */}
+                  <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg border border-blue-200">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-blue-200 rounded-full">
+                        <Droplets className="w-4 h-4 text-blue-700" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-blue-900">Certificato Risparmio Idrico</p>
+                        <p className="text-sm text-blue-600">ESG-2024-015 • 1,200L risparmiati</p>
+                      </div>
+                    </div>
+                    <Badge className="bg-blue-600">Attivo</Badge>
+                  </div>
+
+                  {/* Energy Certificate */}
+                  <div className="flex items-center justify-between p-3 bg-yellow-50 rounded-lg border border-yellow-200">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-yellow-200 rounded-full">
+                        <Zap className="w-4 h-4 text-yellow-700" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-yellow-900">Certificato Energia Rinnovabile</p>
+                        <p className="text-sm text-yellow-600">ESG-2024-008 • 45% energia green</p>
+                      </div>
+                    </div>
+                    <Badge className="bg-yellow-600">Attivo</Badge>
+                  </div>
+
+                  <div className="flex gap-2 pt-2">
+                    <Button className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white" size="sm">
+                      <Eye className="w-4 h-4 mr-2" />
+                      Visualizza Tutti
+                    </Button>
+                    <Button variant="outline" size="sm" className="border-indigo-300 text-indigo-700 hover:bg-indigo-50">
+                      <Download className="w-4 h-4 mr-2" />
+                      Esporta Wallet
                     </Button>
                   </div>
-                  <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
-                    <div>
-                      <p className="font-medium text-green-900">Laptop Ricondizionato</p>
-                      <p className="text-sm text-green-600">ID: LPT-2024-002 • 8 certificati collegati</p>
-                    </div>
-                    <Button size="sm" className="bg-green-600 hover:bg-green-700">
-                      <Eye className="w-4 h-4" />
-                    </Button>
-                  </div>
-                  <Button className="w-full" variant="outline">
-                    <Shield className="w-4 h-4 mr-2" />
-                    Associa Certificati ESG
-                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -610,4 +665,5 @@ const DashboardAziende = () => {
       </div>
     </div>;
 };
+
 export default DashboardAziende;
