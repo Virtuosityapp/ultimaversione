@@ -409,12 +409,12 @@ const DashboardAziende = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                <Button className="w-full mb-4 bg-purple-600 hover:bg-purple-700 text-white h-12 text-base font-semibold" onClick={() => navigate('/welfare-management')}>
+                <Button className="w-full mb-4 bg-purple-600 hover:bg-purple-700 text-white h-12 text-base font-semibold" onClick={() => navigate('/rewards-management')}>
                   <Heart className="w-5 h-5 mr-3" />
                   Gestione Welfare
                 </Button>
                 
-                <Button className="w-full mb-4 bg-amber-600 hover:bg-amber-700 text-white h-12 text-base font-semibold">
+                <Button className="w-full mb-4 bg-amber-600 hover:bg-amber-700 text-white h-12 text-base font-semibold" onClick={() => navigate('/rewards-management')}>
                   <Star className="w-5 h-5 mr-3" />
                   Premi e Sconti
                 </Button>
