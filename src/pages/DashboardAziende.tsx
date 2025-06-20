@@ -75,11 +75,11 @@ const DashboardAziende = () => {
   ];
 
   const monthlyTrend = [
-    { month: 'Gen', co2: 0.3, waste: 12, energy: 8, water: 200 },
-    { month: 'Feb', co2: 0.5, waste: 15, energy: 12, water: 180 },
-    { month: 'Mar', co2: 0.4, waste: 18, energy: 15, water: 220 },
-    { month: 'Apr', co2: 0.6, waste: 22, energy: 18, water: 190 },
-    { month: 'Mag', co2: 0.8, waste: 25, energy: 20, water: 210 }
+    { month: 'Gen', co2: 0.8, waste: 45, energy: 35, water: 200 },
+    { month: 'Feb', co2: 1.2, waste: 58, energy: 48, water: 180 },
+    { month: 'Mar', co2: 0.9, waste: 72, energy: 62, water: 220 },
+    { month: 'Apr', co2: 1.8, waste: 68, energy: 75, water: 190 },
+    { month: 'Mag', co2: 2.1, waste: 85, energy: 82, water: 210 }
   ];
 
   const welfareStats = [
@@ -365,7 +365,6 @@ const DashboardAziende = () => {
                     dataKey="waste" 
                     stroke="#3b82f6" 
                     strokeWidth={4} 
-                    strokeDasharray="8 4"
                     dot={{ fill: '#3b82f6', strokeWidth: 3, r: 6 }}
                     activeDot={{ r: 8, stroke: '#3b82f6', strokeWidth: 2, fill: '#ffffff' }}
                     name="Rifiuti Riciclati (%)" 
@@ -375,7 +374,6 @@ const DashboardAziende = () => {
                     dataKey="energy" 
                     stroke="#f59e0b" 
                     strokeWidth={4} 
-                    strokeDasharray="12 6"
                     dot={{ fill: '#f59e0b', strokeWidth: 3, r: 6 }}
                     activeDot={{ r: 8, stroke: '#f59e0b', strokeWidth: 2, fill: '#ffffff' }}
                     name="Energia Rinnovabile (%)" 
@@ -385,7 +383,6 @@ const DashboardAziende = () => {
                     dataKey="water" 
                     stroke="#06b6d4" 
                     strokeWidth={4} 
-                    strokeDasharray="4 8"
                     dot={{ fill: '#06b6d4', strokeWidth: 3, r: 6 }}
                     activeDot={{ r: 8, stroke: '#06b6d4', strokeWidth: 2, fill: '#ffffff' }}
                     name="Acqua Risparmiata (L)" 
