@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -10,7 +9,6 @@ import { Upload, FileText, BarChart3, TrendingUp, Award, Shield, DollarSign, Use
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useNavigate } from 'react-router-dom';
 import { PieChart, Pie, Cell, ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-
 const DashboardAziende = () => {
   const {
     t
@@ -142,16 +140,13 @@ const DashboardAziende = () => {
         {`${(percent * 100).toFixed(0)}%`}
       </text>;
   };
-
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       setSelectedFile(file);
     }
   };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-green-50 p-4 md:p-6">
+  return <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-green-50 p-4 md:p-6">
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Header Section */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -425,20 +420,11 @@ const DashboardAziende = () => {
                 </Button>
                 
                 <div className="grid grid-cols-1 gap-4">
-                  <Button className="w-full bg-white/80 hover:bg-white/90 text-purple-800 border-purple-300 h-11 justify-start">
-                    <Gift className="w-4 h-4 mr-3" />
-                    Gift Card & Voucher
-                  </Button>
                   
-                  <Button className="w-full bg-pink-500/80 hover:bg-pink-500/90 text-white border-pink-400/30 h-11 justify-start">
-                    <ShoppingBag className="w-4 h-4 mr-3" />
-                    Gadget Aziendali
-                  </Button>
                   
-                  <Button className="w-full bg-violet-500/80 hover:bg-violet-500/90 text-white border-violet-400/30 h-11 justify-start">
-                    <Sparkles className="w-4 h-4 mr-3" />
-                    Benessere & Spa
-                  </Button>
+                  
+                  
+                  
                 </div>
               </CardContent>
             </Card>
@@ -799,8 +785,6 @@ const DashboardAziende = () => {
           </CardContent>
         </Card>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default DashboardAziende;
