@@ -5,41 +5,16 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { 
-  Upload, 
-  FileText, 
-  BarChart3, 
-  TrendingUp, 
-  Award, 
-  Shield, 
-  DollarSign,
-  Users,
-  Package,
-  Recycle,
-  Eye,
-  Download,
-  Plus,
-  Calendar,
-  Activity,
-  Filter,
-  Gift,
-  Zap,
-  Droplets,
-  Leaf,
-  QrCode,
-  FileCheck,
-  Target,
-  ChevronDown
-} from 'lucide-react';
+import { Upload, FileText, BarChart3, TrendingUp, Award, Shield, DollarSign, Users, Package, Recycle, Eye, Download, Plus, Calendar, Activity, Filter, Gift, Zap, Droplets, Leaf, QrCode, FileCheck, Target, ChevronDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { PieChart, Pie, Cell, ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-
 const DashboardAziende = () => {
-  const { t } = useLanguage();
+  const {
+    t
+  } = useLanguage();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [timeFilter, setTimeFilter] = useState('month');
   const [showReportDialog, setShowReportDialog] = useState(false);
-
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -48,63 +23,128 @@ const DashboardAziende = () => {
   };
 
   // ESG Data for charts
-  const co2Data = [
-    { name: 'Riduzione Ottenuta', value: 2.4, color: '#22c55e' },
-    { name: 'Obiettivo Rimanente', value: 1.6, color: '#e5e7eb' }
-  ];
-
-  const wasteData = [
-    { name: 'Riciclato', value: 65, color: '#3b82f6' },
-    { name: 'Compostato', value: 20, color: '#10b981' },
-    { name: 'Smaltito', value: 15, color: '#f59e0b' }
-  ];
-
-  const energyData = [
-    { name: 'Rinnovabile', value: 45, color: '#22c55e' },
-    { name: 'Tradizionale', value: 55, color: '#ef4444' }
-  ];
-
-  const waterData = [
-    { name: 'Risparmiata', value: 1200, color: '#06b6d4' },
-    { name: 'Consumata', value: 2800, color: '#94a3b8' }
-  ];
-
-  const certificatesData = [
-    { name: 'Emessi', value: 156, color: '#8b5cf6' },
-    { name: 'In Elaborazione', value: 24, color: '#e5e7eb' }
-  ];
-
-  const monthlyTrend = [
-    { month: 'Gen', co2: 0.8, waste: 45, energy: 35, water: 200 },
-    { month: 'Feb', co2: 1.2, waste: 58, energy: 48, water: 180 },
-    { month: 'Mar', co2: 0.9, waste: 72, energy: 62, water: 220 },
-    { month: 'Apr', co2: 1.8, waste: 68, energy: 75, water: 190 },
-    { month: 'Mag', co2: 2.1, waste: 85, energy: 82, water: 210 }
-  ];
-
-  const welfareStats = [
-    { title: "Premi Disponibili", value: "24", icon: Gift, color: "text-green-600", bgColor: "bg-gradient-to-br from-green-100 to-green-200" },
-    { title: "Premi Assegnati", value: "156", icon: Award, color: "text-yellow-600", bgColor: "bg-gradient-to-br from-yellow-100 to-yellow-200" },
-    { title: "Dipendenti Attivi", value: "89", icon: Users, color: "text-pink-600", bgColor: "bg-gradient-to-br from-pink-100 to-pink-200" },
-    { title: "Utilizzo Benefit", value: "67%", icon: TrendingUp, color: "text-sky-600", bgColor: "bg-gradient-to-br from-sky-100 to-sky-200" }
-  ];
-
+  const co2Data = [{
+    name: 'Riduzione Ottenuta',
+    value: 2.4,
+    color: '#22c55e'
+  }, {
+    name: 'Obiettivo Rimanente',
+    value: 1.6,
+    color: '#e5e7eb'
+  }];
+  const wasteData = [{
+    name: 'Riciclato',
+    value: 65,
+    color: '#3b82f6'
+  }, {
+    name: 'Compostato',
+    value: 20,
+    color: '#10b981'
+  }, {
+    name: 'Smaltito',
+    value: 15,
+    color: '#f59e0b'
+  }];
+  const energyData = [{
+    name: 'Rinnovabile',
+    value: 45,
+    color: '#22c55e'
+  }, {
+    name: 'Tradizionale',
+    value: 55,
+    color: '#ef4444'
+  }];
+  const waterData = [{
+    name: 'Risparmiata',
+    value: 1200,
+    color: '#06b6d4'
+  }, {
+    name: 'Consumata',
+    value: 2800,
+    color: '#94a3b8'
+  }];
+  const certificatesData = [{
+    name: 'Emessi',
+    value: 156,
+    color: '#8b5cf6'
+  }, {
+    name: 'In Elaborazione',
+    value: 24,
+    color: '#e5e7eb'
+  }];
+  const monthlyTrend = [{
+    month: 'Gen',
+    co2: 0.8,
+    waste: 45,
+    energy: 35,
+    water: 200
+  }, {
+    month: 'Feb',
+    co2: 1.2,
+    waste: 58,
+    energy: 48,
+    water: 180
+  }, {
+    month: 'Mar',
+    co2: 0.9,
+    waste: 72,
+    energy: 62,
+    water: 220
+  }, {
+    month: 'Apr',
+    co2: 1.8,
+    waste: 68,
+    energy: 75,
+    water: 190
+  }, {
+    month: 'Mag',
+    co2: 2.1,
+    waste: 85,
+    energy: 82,
+    water: 210
+  }];
+  const welfareStats = [{
+    title: "Premi Disponibili",
+    value: "24",
+    icon: Gift,
+    color: "text-green-600",
+    bgColor: "bg-gradient-to-br from-green-100 to-green-200"
+  }, {
+    title: "Premi Assegnati",
+    value: "156",
+    icon: Award,
+    color: "text-yellow-600",
+    bgColor: "bg-gradient-to-br from-yellow-100 to-yellow-200"
+  }, {
+    title: "Dipendenti Attivi",
+    value: "89",
+    icon: Users,
+    color: "text-pink-600",
+    bgColor: "bg-gradient-to-br from-pink-100 to-pink-200"
+  }, {
+    title: "Utilizzo Benefit",
+    value: "67%",
+    icon: TrendingUp,
+    color: "text-sky-600",
+    bgColor: "bg-gradient-to-br from-sky-100 to-sky-200"
+  }];
   const COLORS = ['#22c55e', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6'];
-
-  const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }) => {
+  const renderCustomizedLabel = ({
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    percent
+  }) => {
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
     const x = cx + radius * Math.cos(-midAngle * Math.PI / 180);
     const y = cy + radius * Math.sin(-midAngle * Math.PI / 180);
-
-    return (
-      <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central" className="text-sm font-semibold">
+    return <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central" className="text-sm font-semibold">
         {`${(percent * 100).toFixed(0)}%`}
-      </text>
-    );
+      </text>;
   };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-green-50 p-4 md:p-6">
+  return <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-green-50 p-4 md:p-6">
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Header Section */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -138,11 +178,7 @@ const DashboardAziende = () => {
             </div>
             <div className="flex items-center gap-2">
               <Filter className="w-4 h-4 text-slate-500" />
-              <select 
-                value={timeFilter} 
-                onChange={(e) => setTimeFilter(e.target.value)}
-                className="border border-slate-200 rounded-lg px-3 py-1 text-sm"
-              >
+              <select value={timeFilter} onChange={e => setTimeFilter(e.target.value)} className="border border-slate-200 rounded-lg px-3 py-1 text-sm">
                 <option value="day">Giorno</option>
                 <option value="month">Mese</option>
                 <option value="quarter">Trimestre</option>
@@ -165,19 +201,8 @@ const DashboardAziende = () => {
               <CardContent>
                 <ResponsiveContainer width="100%" height={180}>
                   <PieChart>
-                    <Pie
-                      data={co2Data}
-                      cx="50%"
-                      cy="50%"
-                      labelLine={false}
-                      label={renderCustomizedLabel}
-                      outerRadius={70}
-                      fill="#8884d8"
-                      dataKey="value"
-                    >
-                      {co2Data.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.color} />
-                      ))}
+                    <Pie data={co2Data} cx="50%" cy="50%" labelLine={false} label={renderCustomizedLabel} outerRadius={70} fill="#8884d8" dataKey="value">
+                      {co2Data.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.color} />)}
                     </Pie>
                     <Tooltip />
                   </PieChart>
@@ -199,19 +224,8 @@ const DashboardAziende = () => {
               <CardContent>
                 <ResponsiveContainer width="100%" height={180}>
                   <PieChart>
-                    <Pie
-                      data={wasteData}
-                      cx="50%"
-                      cy="50%"
-                      labelLine={false}
-                      label={renderCustomizedLabel}
-                      outerRadius={70}
-                      fill="#8884d8"
-                      dataKey="value"
-                    >
-                      {wasteData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.color} />
-                      ))}
+                    <Pie data={wasteData} cx="50%" cy="50%" labelLine={false} label={renderCustomizedLabel} outerRadius={70} fill="#8884d8" dataKey="value">
+                      {wasteData.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.color} />)}
                     </Pie>
                     <Tooltip />
                   </PieChart>
@@ -234,19 +248,8 @@ const DashboardAziende = () => {
               <CardContent>
                 <ResponsiveContainer width="100%" height={180}>
                   <PieChart>
-                    <Pie
-                      data={energyData}
-                      cx="50%"
-                      cy="50%"
-                      labelLine={false}
-                      label={renderCustomizedLabel}
-                      outerRadius={70}
-                      fill="#8884d8"
-                      dataKey="value"
-                    >
-                      {energyData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.color} />
-                      ))}
+                    <Pie data={energyData} cx="50%" cy="50%" labelLine={false} label={renderCustomizedLabel} outerRadius={70} fill="#8884d8" dataKey="value">
+                      {energyData.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.color} />)}
                     </Pie>
                     <Tooltip />
                   </PieChart>
@@ -269,19 +272,8 @@ const DashboardAziende = () => {
               <CardContent>
                 <ResponsiveContainer width="100%" height={180}>
                   <PieChart>
-                    <Pie
-                      data={waterData}
-                      cx="50%"
-                      cy="50%"
-                      labelLine={false}
-                      label={renderCustomizedLabel}
-                      outerRadius={70}
-                      fill="#8884d8"
-                      dataKey="value"
-                    >
-                      {waterData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.color} />
-                      ))}
+                    <Pie data={waterData} cx="50%" cy="50%" labelLine={false} label={renderCustomizedLabel} outerRadius={70} fill="#8884d8" dataKey="value">
+                      {waterData.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.color} />)}
                     </Pie>
                     <Tooltip />
                   </PieChart>
@@ -304,19 +296,8 @@ const DashboardAziende = () => {
               <CardContent>
                 <ResponsiveContainer width="100%" height={180}>
                   <PieChart>
-                    <Pie
-                      data={certificatesData}
-                      cx="50%"
-                      cy="50%"
-                      labelLine={false}
-                      label={renderCustomizedLabel}
-                      outerRadius={70}
-                      fill="#8884d8"
-                      dataKey="value"
-                    >
-                      {certificatesData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.color} />
-                      ))}
+                    <Pie data={certificatesData} cx="50%" cy="50%" labelLine={false} label={renderCustomizedLabel} outerRadius={70} fill="#8884d8" dataKey="value">
+                      {certificatesData.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.color} />)}
                     </Pie>
                     <Tooltip />
                   </PieChart>
@@ -342,51 +323,53 @@ const DashboardAziende = () => {
                   <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
                   <XAxis dataKey="month" stroke="#64748b" />
                   <YAxis stroke="#64748b" />
-                  <Tooltip 
-                    contentStyle={{ 
-                      backgroundColor: 'rgba(255, 255, 255, 0.95)', 
-                      border: '1px solid #e2e8f0',
-                      borderRadius: '8px',
-                      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'
-                    }} 
-                  />
+                  <Tooltip contentStyle={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                  border: '1px solid #e2e8f0',
+                  borderRadius: '8px',
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'
+                }} />
                   <Legend />
-                  <Line 
-                    type="monotone" 
-                    dataKey="co2" 
-                    stroke="#22c55e" 
-                    strokeWidth={4} 
-                    dot={{ fill: '#22c55e', strokeWidth: 3, r: 6 }}
-                    activeDot={{ r: 8, stroke: '#22c55e', strokeWidth: 2, fill: '#ffffff' }}
-                    name="CO₂ Ridotta (t)" 
-                  />
-                  <Line 
-                    type="monotone" 
-                    dataKey="waste" 
-                    stroke="#3b82f6" 
-                    strokeWidth={4} 
-                    dot={{ fill: '#3b82f6', strokeWidth: 3, r: 6 }}
-                    activeDot={{ r: 8, stroke: '#3b82f6', strokeWidth: 2, fill: '#ffffff' }}
-                    name="Rifiuti Riciclati (%)" 
-                  />
-                  <Line 
-                    type="monotone" 
-                    dataKey="energy" 
-                    stroke="#f59e0b" 
-                    strokeWidth={4} 
-                    dot={{ fill: '#f59e0b', strokeWidth: 3, r: 6 }}
-                    activeDot={{ r: 8, stroke: '#f59e0b', strokeWidth: 2, fill: '#ffffff' }}
-                    name="Energia Rinnovabile (%)" 
-                  />
-                  <Line 
-                    type="monotone" 
-                    dataKey="water" 
-                    stroke="#06b6d4" 
-                    strokeWidth={4} 
-                    dot={{ fill: '#06b6d4', strokeWidth: 3, r: 6 }}
-                    activeDot={{ r: 8, stroke: '#06b6d4', strokeWidth: 2, fill: '#ffffff' }}
-                    name="Acqua Risparmiata (L)" 
-                  />
+                  <Line type="monotone" dataKey="co2" stroke="#22c55e" strokeWidth={4} dot={{
+                  fill: '#22c55e',
+                  strokeWidth: 3,
+                  r: 6
+                }} activeDot={{
+                  r: 8,
+                  stroke: '#22c55e',
+                  strokeWidth: 2,
+                  fill: '#ffffff'
+                }} name="CO₂ Ridotta (t)" />
+                  <Line type="monotone" dataKey="waste" stroke="#3b82f6" strokeWidth={4} dot={{
+                  fill: '#3b82f6',
+                  strokeWidth: 3,
+                  r: 6
+                }} activeDot={{
+                  r: 8,
+                  stroke: '#3b82f6',
+                  strokeWidth: 2,
+                  fill: '#ffffff'
+                }} name="Rifiuti Riciclati (%)" />
+                  <Line type="monotone" dataKey="energy" stroke="#f59e0b" strokeWidth={4} dot={{
+                  fill: '#f59e0b',
+                  strokeWidth: 3,
+                  r: 6
+                }} activeDot={{
+                  r: 8,
+                  stroke: '#f59e0b',
+                  strokeWidth: 2,
+                  fill: '#ffffff'
+                }} name="Energia Rinnovabile (%)" />
+                  <Line type="monotone" dataKey="water" stroke="#06b6d4" strokeWidth={4} dot={{
+                  fill: '#06b6d4',
+                  strokeWidth: 3,
+                  r: 6
+                }} activeDot={{
+                  r: 8,
+                  stroke: '#06b6d4',
+                  strokeWidth: 2,
+                  fill: '#ffffff'
+                }} name="Acqua Risparmiata (L)" />
                 </LineChart>
               </ResponsiveContainer>
             </CardContent>
@@ -402,8 +385,7 @@ const DashboardAziende = () => {
 
           {/* Welfare Stats */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {welfareStats.map((stat, index) => (
-              <Card key={index} className={`border-0 shadow-lg ${stat.bgColor} hover:shadow-xl transition-all duration-300`}>
+            {welfareStats.map((stat, index) => <Card key={index} className={`border-0 shadow-lg ${stat.bgColor} hover:shadow-xl transition-all duration-300`}>
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between">
                     <div className="space-y-2">
@@ -415,8 +397,7 @@ const DashboardAziende = () => {
                     </div>
                   </div>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
 
           {/* Welfare Management */}
@@ -509,13 +490,7 @@ const DashboardAziende = () => {
                       Supportati: JSON, XML, PDF (max 10MB)
                     </p>
                   </div>
-                  <input
-                    type="file"
-                    onChange={handleFileUpload}
-                    className="hidden"
-                    accept=".json,.xml,.pdf"
-                    id="dpp-upload"
-                  />
+                  <input type="file" onChange={handleFileUpload} className="hidden" accept=".json,.xml,.pdf" id="dpp-upload" />
                   <label htmlFor="dpp-upload">
                     <Button className="mt-4 bg-purple-600 hover:bg-purple-700" asChild>
                       <span>Seleziona DPP</span>
@@ -579,27 +554,9 @@ const DashboardAziende = () => {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-              <div className="text-center space-y-2">
-                <div className="w-12 h-12 bg-orange-200/50 rounded-full flex items-center justify-center mx-auto">
-                  <Shield className="w-6 h-6 text-orange-700" />
-                </div>
-                <h3 className="font-medium text-sm text-orange-800">Firma Digitale</h3>
-                <p className="text-xs text-orange-600">Certificazione blockchain</p>
-              </div>
-              <div className="text-center space-y-2">
-                <div className="w-12 h-12 bg-orange-200/50 rounded-full flex items-center justify-center mx-auto">
-                  <FileText className="w-6 h-6 text-orange-700" />
-                </div>
-                <h3 className="font-medium text-sm text-orange-800">Conformità CSRD</h3>
-                <p className="text-xs text-orange-600">Standard europei</p>
-              </div>
-              <div className="text-center space-y-2">
-                <div className="w-12 h-12 bg-orange-200/50 rounded-full flex items-center justify-center mx-auto">
-                  <Download className="w-6 h-6 text-orange-700" />
-                </div>
-                <h3 className="font-medium text-sm text-orange-800">Export Automatico</h3>
-                <p className="text-xs text-orange-600">Integrazione CRM</p>
-              </div>
+              
+              
+              
             </div>
             
             <div className="flex flex-col sm:flex-row gap-3">
@@ -648,16 +605,11 @@ const DashboardAziende = () => {
                 </DialogContent>
               </Dialog>
               
-              <Button className="bg-orange-300 hover:bg-orange-400 text-orange-800 border-orange-300">
-                <Eye className="w-4 h-4 mr-2" />
-                Anteprima
-              </Button>
+              
             </div>
           </CardContent>
         </Card>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default DashboardAziende;
