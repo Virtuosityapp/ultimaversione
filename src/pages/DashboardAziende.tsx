@@ -328,7 +328,7 @@ const DashboardAziende = () => {
             </Card>
           </div>
 
-          {/* Trend Analysis */}
+          {/* Trend Analysis with more dynamic lines */}
           <Card className="border-0 shadow-lg bg-white/90 backdrop-blur-sm">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -339,15 +339,57 @@ const DashboardAziende = () => {
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
                 <LineChart data={monthlyTrend}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="month" />
-                  <YAxis />
-                  <Tooltip />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                  <XAxis dataKey="month" stroke="#64748b" />
+                  <YAxis stroke="#64748b" />
+                  <Tooltip 
+                    contentStyle={{ 
+                      backgroundColor: 'rgba(255, 255, 255, 0.95)', 
+                      border: '1px solid #e2e8f0',
+                      borderRadius: '8px',
+                      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'
+                    }} 
+                  />
                   <Legend />
-                  <Line type="monotone" dataKey="co2" stroke="#22c55e" strokeWidth={3} name="CO₂ Ridotta (t)" />
-                  <Line type="monotone" dataKey="waste" stroke="#3b82f6" strokeWidth={3} name="Rifiuti Riciclati (%)" />
-                  <Line type="monotone" dataKey="energy" stroke="#f59e0b" strokeWidth={3} name="Energia Rinnovabile (%)" />
-                  <Line type="monotone" dataKey="water" stroke="#06b6d4" strokeWidth={3} name="Acqua Risparmiata (L)" />
+                  <Line 
+                    type="cardinal" 
+                    dataKey="co2" 
+                    stroke="#22c55e" 
+                    strokeWidth={4} 
+                    dot={{ fill: '#22c55e', strokeWidth: 3, r: 6 }}
+                    activeDot={{ r: 8, stroke: '#22c55e', strokeWidth: 2, fill: '#ffffff' }}
+                    name="CO₂ Ridotta (t)" 
+                  />
+                  <Line 
+                    type="cardinal" 
+                    dataKey="waste" 
+                    stroke="#3b82f6" 
+                    strokeWidth={4} 
+                    strokeDasharray="8 4"
+                    dot={{ fill: '#3b82f6', strokeWidth: 3, r: 6 }}
+                    activeDot={{ r: 8, stroke: '#3b82f6', strokeWidth: 2, fill: '#ffffff' }}
+                    name="Rifiuti Riciclati (%)" 
+                  />
+                  <Line 
+                    type="cardinal" 
+                    dataKey="energy" 
+                    stroke="#f59e0b" 
+                    strokeWidth={4} 
+                    strokeDasharray="12 6"
+                    dot={{ fill: '#f59e0b', strokeWidth: 3, r: 6 }}
+                    activeDot={{ r: 8, stroke: '#f59e0b', strokeWidth: 2, fill: '#ffffff' }}
+                    name="Energia Rinnovabile (%)" 
+                  />
+                  <Line 
+                    type="cardinal" 
+                    dataKey="water" 
+                    stroke="#06b6d4" 
+                    strokeWidth={4} 
+                    strokeDasharray="4 8"
+                    dot={{ fill: '#06b6d4', strokeWidth: 3, r: 6 }}
+                    activeDot={{ r: 8, stroke: '#06b6d4', strokeWidth: 2, fill: '#ffffff' }}
+                    name="Acqua Risparmiata (L)" 
+                  />
                 </LineChart>
               </ResponsiveContainer>
             </CardContent>
