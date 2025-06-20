@@ -475,7 +475,7 @@ const About = () => {
           
           {/* Marketplace Screenshot - Single Image */}
           <div className="mb-8">
-            <img src="/lovable-uploads/4dd40d40-f54f-4465-92d8-ed7fa3cc8e60.png" alt="Spazio Welfare & Premi - Gestione Aziendale" className="mx-auto rounded-lg shadow-2xl max-w-[80%] sm:max-w-[70%] md:max-w-[60%] h-auto" />
+            <img src="/lovable-uploads/d0eb56b6-be3f-4087-974f-575b93e35f0f.png" alt="Premi Aziendali - Marketplace Virtuosity" className="mx-auto rounded-lg shadow-2xl max-w-[80%] sm:max-w-[70%] md:max-w-[60%] h-auto" />
           </div>
           
           <p className="text-xl text-gray-600 max-w-4xl mx-auto mb-8">Virtuosity è la prima piattaforma europea che trasforma automaticamente i comportamenti sostenibili in certificati verificabili, creando un ecosistema di incentivi concreti per cittadini, aziende e pubbliche amministrazioni.</p>
