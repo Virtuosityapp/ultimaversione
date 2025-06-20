@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Upload, FileText, BarChart3, TrendingUp, Award, Shield, DollarSign, Users, Package, Recycle, Eye, Download, Plus, Calendar, Activity, Filter, Gift, Zap, Droplets, Leaf, QrCode, FileCheck, Target, ChevronDown, Home, ShoppingBag, Wallet } from 'lucide-react';
+import { Upload, FileText, BarChart3, TrendingUp, Award, Shield, DollarSign, Users, Package, Recycle, Eye, Download, Plus, Calendar, Activity, Filter, Gift, Zap, Droplets, Leaf, QrCode, FileCheck, Target, ChevronDown, Home, ShoppingBag, Wallet, Heart, Sparkles } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useNavigate } from 'react-router-dom';
 import { PieChart, Pie, Cell, ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
@@ -412,20 +412,26 @@ const DashboardAziende = () => {
                   Aggiungi gift card, benefit fiscali e tempo libero
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <Button className="w-full mb-3 bg-purple-600 hover:bg-purple-700 text-white" onClick={() => navigate('/welfare-management')}>
-                  <Gift className="w-4 h-4 mr-2" />
-                  Welfare
+              <CardContent className="space-y-6">
+                <Button className="w-full mb-4 bg-purple-600 hover:bg-purple-700 text-white h-12 text-base font-semibold" onClick={() => navigate('/welfare-management')}>
+                  <Heart className="w-5 h-5 mr-3" />
+                  Gestione Welfare
                 </Button>
-                <div className="space-y-2">
-                  <Button className="w-full bg-white/70 hover:bg-white/80 text-purple-800 border-purple-300">
-                    <Gift className="w-4 h-4 mr-2" />
+                
+                <div className="grid grid-cols-1 gap-4">
+                  <Button className="w-full bg-white/80 hover:bg-white/90 text-purple-800 border-purple-300 h-11 justify-start">
+                    <Gift className="w-4 h-4 mr-3" />
                     Gift Card & Voucher
                   </Button>
                   
-                  <Button className="w-full bg-pink-500/80 hover:bg-pink-500/90 text-white border-pink-400/30">
-                    <ShoppingBag className="w-4 h-4 mr-2" />
+                  <Button className="w-full bg-pink-500/80 hover:bg-pink-500/90 text-white border-pink-400/30 h-11 justify-start">
+                    <ShoppingBag className="w-4 h-4 mr-3" />
                     Gadget Aziendali
+                  </Button>
+                  
+                  <Button className="w-full bg-violet-500/80 hover:bg-violet-500/90 text-white border-violet-400/30 h-11 justify-start">
+                    <Sparkles className="w-4 h-4 mr-3" />
+                    Benessere & Spa
                   </Button>
                 </div>
               </CardContent>
