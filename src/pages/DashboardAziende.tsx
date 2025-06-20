@@ -18,6 +18,7 @@ const DashboardAziende = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [timeFilter, setTimeFilter] = useState('month');
   const [showReportDialog, setShowReportDialog] = useState(false);
+
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -494,6 +495,61 @@ const DashboardAziende = () => {
                       <span>Seleziona DPP</span>
                     </Button>
                   </label>
+                </div>
+
+                {/* Recently Uploaded DPPs */}
+                <div className="mt-6 space-y-4">
+                  <h4 className="text-sm font-semibold text-slate-700 mb-3">DPP Caricati di Recente</h4>
+                  
+                  <div className="grid grid-cols-1 gap-3">
+                    {/* DPP Example 1 - Smartphone */}
+                    <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg border border-blue-200">
+                      <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center">
+                        <img 
+                          src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=48&h=48&fit=crop&auto=format" 
+                          alt="Smartphone DPP" 
+                          className="w-8 h-8 rounded object-cover"
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <p className="font-medium text-blue-900 text-sm">Smartphone Eco-Friendly</p>
+                        <p className="text-xs text-blue-600">DPP-SPH-2024-001 • Caricato: 2 ore fa</p>
+                      </div>
+                      <Badge className="bg-green-100 text-green-800 text-xs">Verificato</Badge>
+                    </div>
+
+                    {/* DPP Example 2 - Laptop */}
+                    <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-purple-50 to-purple-100 rounded-lg border border-purple-200">
+                      <div className="w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg flex items-center justify-center">
+                        <img 
+                          src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=48&h=48&fit=crop&auto=format" 
+                          alt="Laptop DPP" 
+                          className="w-8 h-8 rounded object-cover"
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <p className="font-medium text-purple-900 text-sm">Laptop Sostenibile</p>
+                        <p className="text-xs text-purple-600">DPP-LPT-2024-002 • Caricato: 5 ore fa</p>
+                      </div>
+                      <Badge className="bg-yellow-100 text-yellow-800 text-xs">In Processo</Badge>
+                    </div>
+
+                    {/* DPP Example 3 - Drone */}
+                    <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-green-50 to-green-100 rounded-lg border border-green-200">
+                      <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center">
+                        <img 
+                          src="https://images.unsplash.com/photo-1487887235947-a955ef187fcc?w=48&h=48&fit=crop&auto=format" 
+                          alt="Drone DPP" 
+                          className="w-8 h-8 rounded object-cover"
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <p className="font-medium text-green-900 text-sm">Drone Ricondizionato</p>
+                        <p className="text-xs text-green-600">DPP-DRN-2024-003 • Caricato: 1 giorno fa</p>
+                      </div>
+                      <Badge className="bg-green-100 text-green-800 text-xs">Verificato</Badge>
+                    </div>
+                  </div>
                 </div>
               </CardContent>
             </Card>
