@@ -528,47 +528,47 @@ const DashboardAziende = () => {
         </div>
 
         {/* Section 4: ESG Report Generation */}
-        <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-600 to-purple-600 text-white">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-3 text-2xl">
-              <FileCheck className="w-8 h-8" />
+        <Card className="border-0 shadow-lg bg-gradient-to-br from-orange-100 to-orange-200">
+          <CardHeader className="pb-4">
+            <CardTitle className="flex items-center gap-2 text-lg md:text-xl text-orange-800">
+              <FileCheck className="w-6 h-6" />
               Generazione Report ESG Certificato
             </CardTitle>
-            <CardDescription className="text-blue-100 text-lg">
+            <CardDescription className="text-orange-600 text-sm md:text-base">
               Report PDF certificato, conforme CSRD, ESRS, ESPR e Digital Product Passport
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <CardContent className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
               <div className="text-center space-y-2">
-                <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto">
-                  <Shield className="w-8 h-8" />
+                <div className="w-12 h-12 bg-orange-200/50 rounded-full flex items-center justify-center mx-auto">
+                  <Shield className="w-6 h-6 text-orange-700" />
                 </div>
-                <h3 className="font-semibold">Firma Digitale</h3>
-                <p className="text-sm text-blue-100">Certificazione blockchain</p>
+                <h3 className="font-medium text-sm text-orange-800">Firma Digitale</h3>
+                <p className="text-xs text-orange-600">Certificazione blockchain</p>
               </div>
               <div className="text-center space-y-2">
-                <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto">
-                  <FileText className="w-8 h-8" />
+                <div className="w-12 h-12 bg-orange-200/50 rounded-full flex items-center justify-center mx-auto">
+                  <FileText className="w-6 h-6 text-orange-700" />
                 </div>
-                <h3 className="font-semibold">Conformità CSRD</h3>
-                <p className="text-sm text-blue-100">Standard europei</p>
+                <h3 className="font-medium text-sm text-orange-800">Conformità CSRD</h3>
+                <p className="text-xs text-orange-600">Standard europei</p>
               </div>
               <div className="text-center space-y-2">
-                <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto">
-                  <Download className="w-8 h-8" />
+                <div className="w-12 h-12 bg-orange-200/50 rounded-full flex items-center justify-center mx-auto">
+                  <Download className="w-6 h-6 text-orange-700" />
                 </div>
-                <h3 className="font-semibold">Export Automatico</h3>
-                <p className="text-sm text-blue-100">Integrazione CRM</p>
+                <h3 className="font-medium text-sm text-orange-800">Export Automatico</h3>
+                <p className="text-xs text-orange-600">Integrazione CRM</p>
               </div>
             </div>
             
-            <div className="flex flex-col md:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-3">
               <Dialog open={showReportDialog} onOpenChange={setShowReportDialog}>
                 <DialogTrigger asChild>
-                  <Button className="flex-1 bg-white text-blue-600 hover:bg-blue-50 text-lg py-6">
-                    <FileCheck className="w-6 h-6 mr-3" />
-                    Genera Report ESG Certificato
+                  <Button className="flex-1 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white text-sm py-3">
+                    <FileCheck className="w-4 h-4 mr-2" />
+                    Genera Report ESG
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="max-w-md">
@@ -601,7 +601,7 @@ const DashboardAziende = () => {
                     <Button variant="outline" className="flex-1" onClick={() => setShowReportDialog(false)}>
                       Annulla
                     </Button>
-                    <Button className="flex-1 bg-blue-600 hover:bg-blue-700">
+                    <Button className="flex-1 bg-orange-600 hover:bg-orange-700">
                       <Download className="w-4 h-4 mr-2" />
                       Genera Report
                     </Button>
@@ -609,8 +609,8 @@ const DashboardAziende = () => {
                 </DialogContent>
               </Dialog>
               
-              <Button className="bg-white/20 hover:bg-white/30 text-white border-white/30">
-                <Eye className="w-5 h-5 mr-2" />
+              <Button className="bg-orange-300 hover:bg-orange-400 text-orange-800 border-orange-300">
+                <Eye className="w-4 h-4 mr-2" />
                 Anteprima
               </Button>
             </div>
