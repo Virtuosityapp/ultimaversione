@@ -56,12 +56,12 @@ const Index = () => {
             {/* Dashboard Preview Image - Reduced by 30% */}
             <div className="mb-6 sm:mb-8 max-w-3xl mx-auto px-3">
               <img 
-                src="/lovable-uploads/c54d6a41-92cd-4a58-b3aa-3686de1b7c51.png" 
-                alt="Exchange Virtuosity - Marketplace sostenibile con premi e incentivi" 
+                src="/lovable-uploads/7b0c0502-55c5-4791-8d97-70e557c8daae.png" 
+                alt="Dashboard Aziendale - Gestione ESG e sostenibilità digitale" 
                 className="mx-auto rounded-lg shadow-2xl max-w-[80%] sm:max-w-[70%] md:max-w-[60%] h-auto border border-gray-200"
               />
               <p className="text-xs text-gray-600 mt-2 italic">
-                Exchange Virtuosity: trasforma i tuoi comportamenti sostenibili in premi concreti tramite il marketplace integrato
+                Dashboard Aziendale: monitora i tuoi indicatori ESG, gestisci sostenibilità e ottieni certificazioni tramite analisi avanzate
               </p>
             </div>
 
