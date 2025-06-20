@@ -1,11 +1,8 @@
+
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BarChart3, Download, FileText, Gift, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  CircularProgress,
-  CircularProgressLabel,
-} from "@chakra-ui/react";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Calendar } from "@/components/ui/calendar";
@@ -18,6 +15,43 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 interface DashboardAziendeProps {
 }
+
+const CircularProgress = ({ value, children }: { value: number; children: React.ReactNode }) => {
+  const circumference = 2 * Math.PI * 45;
+  const strokeDasharray = circumference;
+  const strokeDashoffset = circumference - (value / 100) * circumference;
+
+  return (
+    <div className="relative w-24 h-24">
+      <svg className="w-24 h-24 transform -rotate-90" viewBox="0 0 100 100">
+        <circle
+          cx="50"
+          cy="50"
+          r="45"
+          stroke="currentColor"
+          strokeWidth="8"
+          fill="transparent"
+          className="text-gray-200"
+        />
+        <circle
+          cx="50"
+          cy="50"
+          r="45"
+          stroke="currentColor"
+          strokeWidth="8"
+          fill="transparent"
+          strokeDasharray={strokeDasharray}
+          strokeDashoffset={strokeDashoffset}
+          className="text-green-400"
+          strokeLinecap="round"
+        />
+      </svg>
+      <div className="absolute inset-0 flex items-center justify-center">
+        {children}
+      </div>
+    </div>
+  );
+};
 
 const DashboardAziende: React.FC<DashboardAziendeProps> = () => {
   const { toast } = useToast()
@@ -166,8 +200,8 @@ const DashboardAziende: React.FC<DashboardAziendeProps> = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <CircularProgress value={70} color='green.400'>
-              <CircularProgressLabel>70%</CircularProgressLabel>
+            <CircularProgress value={70}>
+              <span className="text-sm font-semibold">70%</span>
             </CircularProgress>
           </CardContent>
         </Card>
@@ -181,8 +215,8 @@ const DashboardAziende: React.FC<DashboardAziendeProps> = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <CircularProgress value={30} color='green.400'>
-              <CircularProgressLabel>30%</CircularProgressLabel>
+            <CircularProgress value={30}>
+              <span className="text-sm font-semibold">30%</span>
             </CircularProgress>
           </CardContent>
         </Card>
@@ -196,8 +230,8 @@ const DashboardAziende: React.FC<DashboardAziendeProps> = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <CircularProgress value={50} color='green.400'>
-              <CircularProgressLabel>50%</CircularProgressLabel>
+            <CircularProgress value={50}>
+              <span className="text-sm font-semibold">50%</span>
             </CircularProgress>
           </CardContent>
         </Card>
@@ -211,8 +245,8 @@ const DashboardAziende: React.FC<DashboardAziendeProps> = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <CircularProgress value={90} color='green.400'>
-              <CircularProgressLabel>90%</CircularProgressLabel>
+            <CircularProgress value={90}>
+              <span className="text-sm font-semibold">90%</span>
             </CircularProgress>
           </CardContent>
         </Card>
