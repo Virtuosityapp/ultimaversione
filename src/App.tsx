@@ -16,6 +16,7 @@ import NotFound from "./pages/NotFound";
 import DigitalWarrantyUpload from "./pages/DigitalWarrantyUpload";
 import WelfareManagement from "./pages/WelfareManagement";
 import RewardsManagement from "./pages/RewardsManagement";
+import WelfareUpload from "./pages/WelfareUpload";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +39,7 @@ const App = () => (
             <Route path="/digital-warranty-upload" element={<DigitalWarrantyUpload />} />
             <Route path="/welfare-management" element={<WelfareManagement />} />
             <Route path="/rewards-management" element={<RewardsManagement />} />
+            <Route path="/welfare-upload" element={<WelfareUpload />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
