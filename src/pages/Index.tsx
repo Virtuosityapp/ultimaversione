@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -19,7 +18,7 @@ const Index = () => {
         <div 
           className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 py-8 sm:py-11 lg:py-14 relative"
           style={{
-            backgroundImage: `url('/lovable-uploads/84bdcc65-8dce-4b40-9dc0-35ccc0de1e9e.png')`,
+            backgroundImage: `url('/lovable-uploads/6127d0da-221e-4ff4-9de2-abf903c51ff6.png')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat'
