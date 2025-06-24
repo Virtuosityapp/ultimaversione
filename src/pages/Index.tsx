@@ -4,6 +4,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import CircularityIcons from "@/components/CircularityIcons";
+
 const Index = () => {
   const navigate = useNavigate();
   const {
@@ -14,8 +15,19 @@ const Index = () => {
       
       {/* Hero Section - Reduced by 30% */}
       <div className="relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 py-8 sm:py-11 lg:py-14">
-          <div className="text-center">
+        <div 
+          className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 py-8 sm:py-11 lg:py-14 relative"
+          style={{
+            backgroundImage: `url('/lovable-uploads/0bb6c06f-0b8e-47f1-9546-a0df245a750c.png')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          }}
+        >
+          {/* Overlay for better text readability */}
+          <div className="absolute inset-0 bg-white/70 backdrop-blur-sm"></div>
+          
+          <div className="text-center relative z-10">
             <div className="flex justify-center mb-3 sm:mb-4">
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-blue-500 rounded-full blur-xl opacity-30 animate-pulse"></div>
@@ -112,4 +124,5 @@ const Index = () => {
       </div>
     </div>;
 };
+
 export default Index;
