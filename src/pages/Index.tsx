@@ -47,9 +47,7 @@ const Index = () => {
             {/* Dashboard Preview Image - Reduced by 30% */}
             <div className="mb-6 sm:mb-8 max-w-3xl mx-auto px-3">
               
-              <p className="text-xs text-gray-600 mt-2 italic">
-                Dashboard Aziendale: monitora i tuoi indicatori ESG, gestisci sostenibilità e ottieni certificazioni tramite analisi avanzate
-              </p>
+              
             </div>
 
             {/* Four Dashboard Blocks - Reduced by 30% */}
