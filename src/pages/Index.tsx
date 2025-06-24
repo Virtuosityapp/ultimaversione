@@ -1,3 +1,4 @@
+
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -7,31 +8,24 @@ import CircularityIcons from "@/components/CircularityIcons";
 
 const Index = () => {
   const navigate = useNavigate();
-  const {
-    t
-  } = useLanguage();
-  return <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
+  const { t } = useLanguage();
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50">
       <LanguageSwitcher />
       
       {/* Hero Section - Reduced by 30% */}
       <div className="relative overflow-hidden">
-        <div 
-          className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 py-8 sm:py-11 lg:py-14 relative"
-          style={{
-            backgroundImage: `url('/lovable-uploads/6127d0da-221e-4ff4-9de2-abf903c51ff6.png')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat'
-          }}
-        >
-          {/* Overlay for better text readability */}
-          <div className="absolute inset-0 bg-white/70 backdrop-blur-sm"></div>
-          
-          <div className="text-center relative z-10">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 py-8 sm:py-11 lg:py-14">
+          <div className="text-center">
             <div className="flex justify-center mb-3 sm:mb-4">
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-blue-500 rounded-full blur-xl opacity-30 animate-pulse"></div>
-                <img src="/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png" alt="Virtuosity Logo" className="relative h-14 sm:h-17 md:h-22 w-auto mx-auto" />
+                <img 
+                  src="/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png" 
+                  alt="Virtuosity Logo" 
+                  className="relative h-14 sm:h-17 md:h-22 w-auto mx-auto" 
+                />
               </div>
             </div>
             
@@ -50,7 +44,10 @@ const Index = () => {
               <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-lg border border-yellow-200 hover:shadow-xl transition-all duration-300">
                 <h3 className="text-lg font-bold text-gray-900 mb-2">Virtuosity</h3>
                 <p className="text-gray-600 mb-3 text-xs">Scopri i dettagli del progetto</p>
-                <Button onClick={() => navigate("/about")} className="bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-4 py-2 text-sm hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full">
+                <Button 
+                  onClick={() => navigate("/about")} 
+                  className="bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-4 py-2 text-sm hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
+                >
                   Clicca qui
                 </Button>
               </div>
@@ -58,8 +55,14 @@ const Index = () => {
 
             {/* Dashboard Preview Image - Reduced by 30% */}
             <div className="mb-6 sm:mb-8 max-w-3xl mx-auto px-3">
-              
-              
+              <img 
+                src="/lovable-uploads/7b0c0502-55c5-4791-8d97-70e557c8daae.png" 
+                alt="Dashboard Aziendale - Gestione ESG e sostenibilità digitale" 
+                className="mx-auto rounded-lg shadow-2xl max-w-[80%] sm:max-w-[70%] md:max-w-[60%] h-auto border border-gray-200"
+              />
+              <p className="text-xs text-gray-600 mt-2 italic">
+                Dashboard Aziendale: monitora i tuoi indicatori ESG, gestisci sostenibilità e ottieni certificazioni tramite analisi avanzate
+              </p>
             </div>
 
             {/* Four Dashboard Blocks - Reduced by 30% */}
@@ -71,7 +74,10 @@ const Index = () => {
                 <p className="text-gray-600 mb-3 text-xs">
                   Accedi alla tua dashboard personale per monitorare le tue attività sostenibili, visualizzare i certificati guadagnati e partecipare alle sfide della community.
                 </p>
-                <Button onClick={() => navigate("/dashboard")} className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-4 py-2 text-sm hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full">
+                <Button 
+                  onClick={() => navigate("/dashboard")} 
+                  className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-4 py-2 text-sm hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
+                >
                   {t('buttonUser')}
                 </Button>
               </div>
@@ -82,7 +88,10 @@ const Index = () => {
                 <p className="text-gray-600 mb-3 text-xs">
                   Scopri il marketplace dove puoi scambiare i tuoi punti Virtuosity con premi reali, buoni sconto e vantaggi esclusivi offerti dai partner.
                 </p>
-                <Button onClick={() => navigate("/exchange")} className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-4 py-2 text-sm hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full">
+                <Button 
+                  onClick={() => navigate("/exchange")} 
+                  className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-4 py-2 text-sm hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
+                >
                   {t('buttonExchange')}
                 </Button>
               </div>
@@ -93,7 +102,10 @@ const Index = () => {
                 <p className="text-gray-600 mb-3 text-xs">
                   Accedi al pannello di controllo aziendale per gestire i dipendenti, monitorare le performance di sostenibilità e configurare incentivi personalizzati.
                 </p>
-                <Button onClick={() => navigate("/dashboard-aziende")} className="bg-gradient-to-r from-sky-500 to-cyan-500 text-white px-4 py-2 text-sm hover:from-sky-600 hover:to-cyan-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full">
+                <Button 
+                  onClick={() => navigate("/dashboard-aziende")} 
+                  className="bg-gradient-to-r from-sky-500 to-cyan-500 text-white px-4 py-2 text-sm hover:from-sky-600 hover:to-cyan-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
+                >
                   {t('buttonCompanies')}
                 </Button>
               </div>
@@ -104,7 +116,10 @@ const Index = () => {
                 <p className="text-gray-600 mb-3 text-xs">
                   Entra nel centro di controllo comunale per gestire le integrazioni smart city, monitorare le segnalazioni cittadine e configurare incentivi locali.
                 </p>
-                <Button onClick={() => navigate("/comuni")} className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-2 text-sm hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full">
+                <Button 
+                  onClick={() => navigate("/comuni")} 
+                  className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-2 text-sm hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full"
+                >
                   {t('buttonMunicipalities')}
                 </Button>
               </div>
@@ -116,13 +131,20 @@ const Index = () => {
             {/* Video Section - Reduced by 30% */}
             <div className="mb-6 sm:mb-8 max-w-3xl mx-auto px-3">
               <AspectRatio ratio={16 / 9}>
-                <iframe src="https://www.youtube.com/embed/rdCqQPQfogs" title="Virtuosity Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen className="w-full h-full rounded-lg shadow-lg" />
+                <iframe 
+                  src="https://www.youtube.com/embed/rdCqQPQfogs" 
+                  title="Virtuosity Video" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                  allowFullScreen 
+                  className="w-full h-full rounded-lg shadow-lg" 
+                />
               </AspectRatio>
             </div>
           </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
 
 export default Index;
