@@ -407,7 +407,7 @@ const Comuni = () => {
             <div className="flex items-center space-x-2">
               <Button 
                 variant="ghost" 
-                onClick={() => navigate("/dashboard")} 
+                onClick={() => navigate("/")} 
                 className="p-2 min-h-[36px] min-w-[36px]" 
                 size="sm"
               >
