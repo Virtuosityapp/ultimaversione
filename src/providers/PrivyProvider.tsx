@@ -26,6 +26,12 @@ const privyConfig: PrivyClientConfig = {
     createOnLogin: 'all-users',
     requireUserPasswordOnCreate: false,
   },
+  externalWallets: {
+    metamask: false,
+    coinbaseWallet: false,
+    walletConnect: false,
+    rainbow: false,
+  },
   defaultChain: polygonAmoy,
   supportedChains: [polygonAmoy],
 };
