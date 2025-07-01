@@ -1,15 +1,13 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useVirtuosityAuth } from '@/hooks/useVirtuosityAuth';
-import { Wallet, LogOut, Brain } from 'lucide-react';
+import { Wallet, LogOut, CheckCircle, Plus } from 'lucide-react';
 
 export const VirtuosityAuth = () => {
   console.log('🎨 VirtuosityAuth component rendering');
   
   const { user, login, logout, createSmartWallet, isReady } = useVirtuosityAuth();
-
   console.log('🔐 VirtuosityAuth state:', { user, isReady });
 
   if (!isReady) {
@@ -45,7 +43,6 @@ export const VirtuosityAuth = () => {
           </Button>
           <div className="text-center text-sm text-gray-600">
             <p>✅ Wallet automatico creato per te</p>
-            <p>🧠 Smart wallet con gas sponsorizzato</p>
             <p>✅ Login con Google, Apple o Email</p>
             <p>✅ Nessuna frase segreta da memorizzare</p>
           </div>
@@ -58,34 +55,40 @@ export const VirtuosityAuth = () => {
   return (
     <Card className="max-w-md mx-auto">
       <CardHeader className="text-center">
-        <CardTitle className="text-lg">Connesso con successo! 🎉</CardTitle>
+        <div className="flex items-center justify-center mb-2">
+          <CheckCircle className="h-6 w-6 text-green-600 mr-2" />
+          <CardTitle className="text-lg">Connesso con successo! 🎉</CardTitle>
+        </div>
       </CardHeader>
       <CardContent className="space-y-3">
-        <div className="bg-green-50 p-3 rounded-lg space-y-2">
+        <div className="bg-green-50 p-3 rounded-lg">
           <p className="text-sm text-gray-700"><strong>Email:</strong> {user.email || 'Non disponibile'}</p>
           <p className="text-sm text-gray-700">
-            <strong>Embedded Wallet:</strong> {user.walletAddress ? `${user.walletAddress.slice(0, 6)}...${user.walletAddress.slice(-4)}` : 'Caricamento...'}
+            <strong>Wallet:</strong> {
+              user.walletAddress 
+                ? `${user.walletAddress.slice(0, 6)}...${user.walletAddress.slice(-4)}` 
+                : (
+                  <span className="inline-flex items-center">
+                    <div className="animate-spin h-3 w-3 border border-gray-400 border-t-transparent rounded-full mr-1"></div>
+                    Creazione wallet...
+                  </span>
+                )
+            }
           </p>
-          {user.smartWalletAddress && (
+          {user.hasSmartWallet && user.smartWalletAddress && (
             <p className="text-sm text-gray-700">
-              <strong>🧠 Smart Wallet:</strong> {`${user.smartWalletAddress.slice(0, 6)}...${user.smartWalletAddress.slice(-4)}`}
+              <strong>Smart Wallet:</strong> {`${user.smartWalletAddress.slice(0, 6)}...${user.smartWalletAddress.slice(-4)}`}
             </p>
-          )}
-          {user.hasSmartWallet && (
-            <div className="flex items-center text-sm text-green-600">
-              <Brain className="h-4 w-4 mr-1" />
-              Smart Wallet Attivo
-            </div>
           )}
         </div>
         
-        {!user.hasSmartWallet && user.isAuthenticated && (
+        {!user.hasSmartWallet && (
           <Button 
             onClick={createSmartWallet}
-            className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white"
             size="sm"
           >
-            <Brain className="h-4 w-4 mr-2" />
+            <Plus className="h-4 w-4 mr-2" />
             Crea Smart Wallet
           </Button>
         )}
