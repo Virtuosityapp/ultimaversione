@@ -66,7 +66,7 @@ export const VirtuosityAuth = () => {
           <p className="text-sm text-gray-700">
             <strong>Wallet:</strong> {
               user.walletAddress 
-                ? ${user.walletAddress.slice(0, 6)}...${user.walletAddress.slice(-4)} 
+                ? `${user.walletAddress.slice(0, 6)}...${user.walletAddress.slice(-4)}` 
                 : (
                   <span className="inline-flex items-center">
                     <div className="animate-spin h-3 w-3 border border-gray-400 border-t-transparent rounded-full mr-1"></div>
