@@ -17,15 +17,15 @@ export const useVirtuosityAuth = () => {
   const { wallets } = useWallets();
   const { client: smartWalletClient } = useSmartWallets();
 
-  const [virtuosityUser, setVirtuosityUser] = useState<VirtuosityUser>({
-    id: '',
-    email: undefined,
-    walletAddress: undefined,
-    smartWalletAddress: undefined,
-    isAuthenticated: false,
-    isLoading: true,
-    hasSmartWallet: false,
-  });
+  const newUser: VirtuosityUser = {
+    id: user?.id || '',
+    email: user?.email?.address,
+    walletAddress: embeddedWallet?.address,
+    smartWalletAddress: smartWalletAddress,
+    isAuthenticated: authenticated,
+    isLoading: false,
+    hasSmartWallet: !!smartWalletClient,
+  };
 
   useEffect(() => {
     if (!ready) return;
