@@ -2,9 +2,9 @@
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import { VirtuosityPrivyProvider } from "@/providers/PrivyProvider";
 import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import DashboardAziende from "./pages/DashboardAziende";
@@ -17,11 +17,10 @@ import DigitalWarrantyUpload from "./pages/DigitalWarrantyUpload";
 import WelfareManagement from "./pages/WelfareManagement";
 import RewardsManagement from "./pages/RewardsManagement";
 import WelfareUpload from "./pages/WelfareUpload";
-
-const queryClient = new QueryClient();
+import AuthTest from "./pages/AuthTest";
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
+  <VirtuosityPrivyProvider>
     <LanguageProvider>
       <TooltipProvider>
         <Toaster />
@@ -36,6 +35,7 @@ const App = () => (
             <Route path="/comuni" element={<Comuni />} />
             <Route path="/about" element={<About />} />
             <Route path="/report" element={<Report />} />
+            <Route path="/auth-test" element={<AuthTest />} />
             <Route path="/digital-warranty-upload" element={<DigitalWarrantyUpload />} />
             <Route path="/welfare-management" element={<WelfareManagement />} />
             <Route path="/rewards-management" element={<RewardsManagement />} />
@@ -46,7 +46,7 @@ const App = () => (
         </BrowserRouter>
       </TooltipProvider>
     </LanguageProvider>
-  </QueryClientProvider>
+  </VirtuosityPrivyProvider>
 );
 
 export default App;
