@@ -1,86 +1,93 @@
-
 import { usePrivy, useWallets } from '@privy-io/react-auth';
-import { useSmartWallets } from '@privy-io/react-auth/smart-wallets';
 import { useEffect, useState } from 'react';
 
 export interface VirtuosityUser {
   id: string;
   email?: string;
   walletAddress?: string;
-  smartWalletAddress?: string;
   isAuthenticated: boolean;
   isLoading: boolean;
-  hasSmartWallet: boolean;
 }
 
 export const useVirtuosityAuth = () => {
+  console.log('🔍 useVirtuosityAuth hook initialized');
+  
   const { user, authenticated, ready, login, logout } = usePrivy();
   const { wallets } = useWallets();
-  const { client: smartWalletClient } = useSmartWallets();
+  
+  console.log('📊 Privy state:', { user, authenticated, ready, walletsCount: wallets?.length });
   
   const [virtuosityUser, setVirtuosityUser] = useState<VirtuosityUser>({
     id: '',
     email: undefined,
     walletAddress: undefined,
-    smartWalletAddress: undefined,
     isAuthenticated: false,
     isLoading: true,
-    hasSmartWallet: false,
   });
+  const [forceReady, setForceReady] = useState(false);
+
+  // Timeout di sicurezza per forzare ready dopo 10 secondi
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      console.log('⏰ Timeout reached, forcing ready state');
+      setForceReady(true);
+    }, 10000);
+    return () => clearTimeout(timeout);
+  }, []);
 
   useEffect(() => {
-    if (!ready) return;
-
-    console.log('🔄 useVirtuosityAuth - updating user state');
-    console.log('User:', user);
-    console.log('Wallets:', wallets);
-    console.log('Smart wallet client:', smartWalletClient);
-
-    const embeddedWallet = wallets.find(wallet => wallet.walletClientType === 'privy');
-    const smartWalletAddress = smartWalletClient?.account?.address;
-
-    setVirtuosityUser({
-      id: user?.id || '',
-      email: user?.email?.address,
-      walletAddress: embeddedWallet?.address,
-      smartWalletAddress,
-      isAuthenticated: authenticated,
-      isLoading: false,
-      hasSmartWallet: !!smartWalletClient,
-    });
-  }, [ready, authenticated, user?.id, user?.email?.address, wallets.length, smartWalletClient?.account?.address]);
+    console.log('🔄 useEffect triggered - ready:', ready, 'forceReady:', forceReady);
+    
+    const isActuallyReady = ready || forceReady;
+    
+    if (isActuallyReady) {
+      // Fix: Explicitly type the wallet and use optional chaining
+      const embeddedWallet = wallets?.find((wallet: any) => 
+        wallet?.walletClientType === 'privy'
+      );
+      
+      console.log('💰 Embedded wallet found:', embeddedWallet?.address);
+      
+      const newUser: VirtuosityUser = {
+        id: user?.id || '',
+        email: user?.email?.address,
+        walletAddress: embeddedWallet?.address,
+        isAuthenticated: authenticated,
+        isLoading: false,
+      };
+      
+      console.log('👤 Setting virtuosity user:', newUser);
+      setVirtuosityUser(newUser);
+    }
+  }, [user, authenticated, ready, wallets, forceReady]);
 
   const handleLogin = async () => {
     try {
+      console.log('🚀 Login attempt started');
       await login();
+      console.log('✅ Login successful');
     } catch (error) {
-      console.error('Login failed:', error);
+      console.error('❌ Login failed:', error);
     }
   };
 
   const handleLogout = async () => {
     try {
+      console.log('👋 Logout attempt started');
       await logout();
+      console.log('✅ Logout successful');
     } catch (error) {
-      console.error('Logout failed:', error);
+      console.error('❌ Logout failed:', error);
     }
   };
 
-  const handleCreateSmartWallet = async () => {
-    try {
-      // Smart wallets are automatically created on login based on our PrivyProvider config
-      // This function is here for compatibility but may not be needed
-      console.log('Smart wallet creation is handled automatically on login');
-    } catch (error) {
-      console.error('Smart wallet creation failed:', error);
-    }
-  };
-
+  const actualReady = ready || forceReady;
+  console.log('📤 Returning hook data:', { user: virtuosityUser, isReady: actualReady });
+  
   return {
     user: virtuosityUser,
     login: handleLogin,
     logout: handleLogout,
-    createSmartWallet: handleCreateSmartWallet,
-    isReady: ready,
+    isReady: actualReady,
   };
 };
