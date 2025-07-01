@@ -1,14 +1,15 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useVirtuosityAuth } from '@/hooks/useVirtuosityAuth';
-import { Wallet, LogOut, CheckCircle, Plus } from 'lucide-react';
+import { Wallet, LogOut, CheckCircle, Plus, Wrench } from 'lucide-react';
 
 export const VirtuosityAuth = () => {
   console.log('🎨 VirtuosityAuth component rendering');
   
-  const { user, login, logout, isReady } = useVirtuosityAuth();
-  console.log('🔐 VirtuosityAuth state:', { user, isReady });
+  const { user, login, logout, createWallet, showWalletCreation, isReady } = useVirtuosityAuth();
+  console.log('🔐 VirtuosityAuth state:', { user, isReady, showWalletCreation });
 
   if (!isReady) {
     console.log('⏳ Privy not ready yet, showing loading...');
@@ -68,14 +69,36 @@ export const VirtuosityAuth = () => {
               user.walletAddress 
                 ? `${user.walletAddress.slice(0, 6)}...${user.walletAddress.slice(-4)}` 
                 : (
-                  <span className="inline-flex items-center">
-                    <div className="animate-spin h-3 w-3 border border-gray-400 border-t-transparent rounded-full mr-1"></div>
-                    Creazione wallet...
-                  </span>
+                  showWalletCreation ? (
+                    <span className="text-orange-600 font-medium">
+                      Wallet non ancora creato
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center">
+                      <div className="animate-spin h-3 w-3 border border-gray-400 border-t-transparent rounded-full mr-1"></div>
+                      Creazione wallet...
+                    </span>
+                  )
                 )
             }
           </p>
         </div>
+        
+        {showWalletCreation && !user.walletAddress && (
+          <div className="bg-orange-50 border border-orange-200 p-3 rounded-lg">
+            <p className="text-sm text-orange-800 mb-3">
+              ⚠️ La creazione automatica del wallet sta impiegando più tempo del previsto.
+            </p>
+            <Button 
+              onClick={createWallet}
+              className="w-full bg-orange-600 hover:bg-orange-700 text-white"
+              size="sm"
+            >
+              <Wrench className="h-4 w-4 mr-2" />
+              Crea Wallet Manualmente
+            </Button>
+          </div>
+        )}
         
         <Button 
           onClick={logout}

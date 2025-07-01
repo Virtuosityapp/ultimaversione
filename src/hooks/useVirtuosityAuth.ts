@@ -1,4 +1,5 @@
-import { usePrivy, useWallets } from '@privy-io/react-auth';
+
+import { usePrivy, useWallets, useCreateWallet } from '@privy-io/react-auth';
 import { useEffect, useState } from 'react';
 
 export interface VirtuosityUser {
@@ -14,6 +15,7 @@ export const useVirtuosityAuth = () => {
   
   const { user, authenticated, ready, login, logout } = usePrivy();
   const { wallets } = useWallets();
+  const { createWallet } = useCreateWallet();
   
   console.log('📊 Privy state:', { 
     user, 
@@ -26,11 +28,11 @@ export const useVirtuosityAuth = () => {
     id: '',
     email: undefined,
     walletAddress: undefined,
-    
     isAuthenticated: false,
     isLoading: true,
   });
   const [forceReady, setForceReady] = useState(false);
+  const [showWalletCreation, setShowWalletCreation] = useState(false);
 
   // Timeout di sicurezza per forzare ready dopo 10 secondi
   useEffect(() => {
@@ -41,22 +43,39 @@ export const useVirtuosityAuth = () => {
     return () => clearTimeout(timeout);
   }, []);
 
+  // Timeout per mostrare il pulsante di creazione wallet se ci mette troppo
   useEffect(() => {
-  if (!ready && !forceReady) return;
+    if (authenticated && !virtuosityUser.walletAddress) {
+      const walletTimeout = setTimeout(() => {
+        console.log('⏰ Wallet creation timeout, showing manual option');
+        setShowWalletCreation(true);
+      }, 8000); // 8 secondi per dare tempo alla creazione automatica
+      
+      return () => clearTimeout(walletTimeout);
+    }
+  }, [authenticated, virtuosityUser.walletAddress]);
 
-  const embeddedWallet = wallets?.find(
-    (wallet: any) => wallet?.walletClientType === 'privy'
-  );
+  useEffect(() => {
+    if (!ready && !forceReady) return;
 
-  const newUser: VirtuosityUser = {
-    id: user?.id || '',
-    email: user?.email?.address,
-    walletAddress: embeddedWallet?.address,
-    isAuthenticated: authenticated,
-    isLoading: false,
-  };
+    const embeddedWallet = wallets?.find(
+      (wallet: any) => wallet?.walletClientType === 'privy'
+    );
 
-  setVirtuosityUser(newUser);
+    const newUser: VirtuosityUser = {
+      id: user?.id || '',
+      email: user?.email?.address,
+      walletAddress: embeddedWallet?.address,
+      isAuthenticated: authenticated,
+      isLoading: false,
+    };
+
+    setVirtuosityUser(newUser);
+
+    // Se abbiamo un wallet address, nascondi il pulsante di creazione manuale
+    if (embeddedWallet?.address) {
+      setShowWalletCreation(false);
+    }
   }, [
     ready,
     forceReady,
@@ -86,13 +105,26 @@ export const useVirtuosityAuth = () => {
     }
   };
 
+  const handleCreateWallet = async () => {
+    try {
+      console.log('🔨 Manual wallet creation started');
+      await createWallet();
+      console.log('✅ Manual wallet creation successful');
+      setShowWalletCreation(false);
+    } catch (error) {
+      console.error('❌ Manual wallet creation failed:', error);
+    }
+  };
+
   const actualReady = ready || forceReady;
-  console.log('📤 Returning hook data:', { user: virtuosityUser, isReady: actualReady });
+  console.log('📤 Returning hook data:', { user: virtuosityUser, isReady: actualReady, showWalletCreation });
   
   return {
     user: virtuosityUser,
     login: handleLogin,
     logout: handleLogout,
+    createWallet: handleCreateWallet,
+    showWalletCreation,
     isReady: actualReady,
   };
 };
