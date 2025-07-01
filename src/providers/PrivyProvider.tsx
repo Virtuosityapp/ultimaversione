@@ -1,4 +1,3 @@
-
 import { PrivyProvider, PrivyClientConfig } from '@privy-io/react-auth';
 import { polygonAmoy } from 'viem/chains';
 import { createConfig } from '@privy-io/wagmi';
@@ -15,19 +14,30 @@ const wagmiConfig = createConfig({
   },
 });
 
+// 🔥 CONFIGURAZIONE SOLO SMART WALLETS (no embedded wallets)
 const privyConfig: PrivyClientConfig = {
-  loginMethods: ['email', 'google', 'apple'],
+  loginMethods: ['email', 'google', 'apple'], // ❌ Rimosso 'wallet' per ora
   appearance: {
     theme: 'light',
     accentColor: '#10b981',
     logo: '/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png',
   },
+  // ❌ DISABILITATO: Embedded Wallets
   embeddedWallets: {
-    createOnLogin: 'users-without-wallets',
-    requireUserPasswordOnCreate: false,
+    createOnLogin: 'off', // 🔥 DISABILITATO - usiamo solo Smart Wallets
   },
   defaultChain: polygonAmoy,
   supportedChains: [polygonAmoy],
+  // ✅ ABILITATO: SOLO Smart Wallets
+  smartWallet: {
+    createOnLogin: 'all-users', // 🔥 Crea Smart Wallet per tutti
+    sponsorGas: true, // 🔥 Privy paga il gas!
+    sponsorGasPrice: 'fast', // Velocità transazioni sponsorizzate
+  },
+  // Configurazione MFA
+  mfa: {
+    noPromptOnMfaRequired: false,
+  },
 };
 
 interface VirtuosityPrivyProviderProps {
