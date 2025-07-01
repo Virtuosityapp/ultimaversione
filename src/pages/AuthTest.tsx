@@ -7,8 +7,12 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
 const AuthTest = () => {
+  console.log('🎯 AuthTest component rendering');
+  
   const navigate = useNavigate();
   const { user } = useVirtuosityAuth();
+
+  console.log('📋 AuthTest - user state:', user);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-emerald-50 p-4">
@@ -29,6 +33,13 @@ const AuthTest = () => {
         </div>
 
         <div className="space-y-6">
+          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+            <h3 className="font-semibold text-yellow-800 mb-2">🔍 Debug Info:</h3>
+            <p className="text-sm text-yellow-700">Loading: {user.isLoading ? 'Sì' : 'No'}</p>
+            <p className="text-sm text-yellow-700">Authenticated: {user.isAuthenticated ? 'Sì' : 'No'}</p>
+            <p className="text-sm text-yellow-700">User ID: {user.id || 'None'}</p>
+          </div>
+          
           <VirtuosityAuth />
           
           {user.isAuthenticated && (

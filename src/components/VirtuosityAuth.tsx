@@ -6,17 +6,24 @@ import { useVirtuosityAuth } from '@/hooks/useVirtuosityAuth';
 import { Wallet, LogOut } from 'lucide-react';
 
 export const VirtuosityAuth = () => {
+  console.log('🎨 VirtuosityAuth component rendering');
+  
   const { user, login, logout, isReady } = useVirtuosityAuth();
 
+  console.log('🔐 VirtuosityAuth state:', { user, isReady });
+
   if (!isReady) {
+    console.log('⏳ Privy not ready yet, showing loading...');
     return (
       <div className="flex items-center justify-center min-h-[200px]">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600"></div>
+        <p className="ml-3 text-gray-600">Caricamento Privy...</p>
       </div>
     );
   }
 
   if (!user.isAuthenticated) {
+    console.log('🔓 User not authenticated, showing login form');
     return (
       <Card className="max-w-md mx-auto">
         <CardHeader className="text-center">
@@ -46,6 +53,7 @@ export const VirtuosityAuth = () => {
     );
   }
 
+  console.log('✅ User authenticated, showing success state');
   return (
     <Card className="max-w-md mx-auto">
       <CardHeader className="text-center">

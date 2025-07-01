@@ -11,8 +11,13 @@ export interface VirtuosityUser {
 }
 
 export const useVirtuosityAuth = () => {
+  console.log('🔍 useVirtuosityAuth hook initialized');
+  
   const { user, authenticated, ready, login, logout } = usePrivy();
   const { wallets } = useWallets();
+  
+  console.log('📊 Privy state:', { user, authenticated, ready, walletsCount: wallets?.length });
+  
   const [virtuosityUser, setVirtuosityUser] = useState<VirtuosityUser>({
     id: '',
     email: undefined,
@@ -22,34 +27,47 @@ export const useVirtuosityAuth = () => {
   });
 
   useEffect(() => {
+    console.log('🔄 useEffect triggered - ready:', ready);
+    
     if (ready) {
       const embeddedWallet = wallets.find(wallet => wallet.walletClientType === 'privy');
       
-      setVirtuosityUser({
+      console.log('💰 Embedded wallet found:', embeddedWallet?.address);
+      
+      const newUser = {
         id: user?.id || '',
         email: user?.email?.address,
         walletAddress: embeddedWallet?.address,
         isAuthenticated: authenticated,
         isLoading: false,
-      });
+      };
+      
+      console.log('👤 Setting virtuosity user:', newUser);
+      setVirtuosityUser(newUser);
     }
   }, [user, authenticated, ready, wallets]);
 
   const handleLogin = async () => {
     try {
+      console.log('🚀 Login attempt started');
       await login();
+      console.log('✅ Login successful');
     } catch (error) {
-      console.error('Login failed:', error);
+      console.error('❌ Login failed:', error);
     }
   };
 
   const handleLogout = async () => {
     try {
+      console.log('👋 Logout attempt started');
       await logout();
+      console.log('✅ Logout successful');
     } catch (error) {
-      console.error('Logout failed:', error);
+      console.error('❌ Logout failed:', error);
     }
   };
+
+  console.log('📤 Returning hook data:', { user: virtuosityUser, isReady: ready });
 
   return {
     user: virtuosityUser,
