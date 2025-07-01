@@ -16,7 +16,7 @@ export interface VirtuosityUser {
 export const useVirtuosityAuth = () => {
   const { user, authenticated, ready, login, logout } = usePrivy();
   const { wallets } = useWallets();
-  const { client: smartWalletClient, create: createSmartWallet } = useSmartWallets();
+  const { client: smartWalletClient } = useSmartWallets();
   
   const [virtuosityUser, setVirtuosityUser] = useState<VirtuosityUser>({
     id: '',
@@ -65,7 +65,9 @@ export const useVirtuosityAuth = () => {
 
   const handleCreateSmartWallet = async () => {
     try {
-      await createSmartWallet();
+      // Smart wallets are automatically created on login based on our PrivyProvider config
+      // This function is here for compatibility but may not be needed
+      console.log('Smart wallet creation is handled automatically on login');
     } catch (error) {
       console.error('Smart wallet creation failed:', error);
     }
