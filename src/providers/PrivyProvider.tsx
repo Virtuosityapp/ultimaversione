@@ -23,8 +23,20 @@ const privyConfig: PrivyClientConfig = {
     logo: '/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png',
   },
   embeddedWallets: {
-    createOnLogin: 'users-without-wallets',
+    createOnLogin: 'all-users',
     requireUserPasswordOnCreate: false,
+    showWalletUIs: true,
+  },
+  externalWallets: {
+    coinbaseWallet: {
+      connectionOptions: 'eoaOnly',
+    },
+    walletConnect: {
+      enabled: false,
+    },
+    metamask: {
+      enabled: false,
+    },
   },
   defaultChain: polygonMumbai,
   supportedChains: [polygonMumbai],

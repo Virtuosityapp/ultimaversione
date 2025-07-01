@@ -16,7 +16,13 @@ export const useVirtuosityAuth = () => {
   const { user, authenticated, ready, login, logout } = usePrivy();
   const { wallets } = useWallets();
   
-  console.log('📊 Privy state:', { user, authenticated, ready, walletsCount: wallets?.length });
+  console.log('📊 Privy state:', { 
+    user: user ? { id: user.id, email: user.email?.address } : null, 
+    authenticated, 
+    ready, 
+    walletsCount: wallets?.length,
+    walletTypes: wallets?.map(w => ({ type: w.walletClientType, address: w.address }))
+  });
   
   const [virtuosityUser, setVirtuosityUser] = useState<VirtuosityUser>({
     id: '',
@@ -27,12 +33,26 @@ export const useVirtuosityAuth = () => {
   });
 
   useEffect(() => {
-    console.log('🔄 useEffect triggered - ready:', ready);
+    console.log('🔄 useEffect triggered - ready:', ready, 'authenticated:', authenticated);
     
     if (ready) {
-      const embeddedWallet = wallets.find(wallet => wallet.walletClientType === 'privy');
+      // Look for embedded wallet specifically (Privy's embedded wallet)
+      const embeddedWallet = wallets.find(wallet => 
+        wallet.walletClientType === 'privy' || 
+        wallet.walletClientType === 'embedded'
+      );
       
-      console.log('💰 Embedded wallet found:', embeddedWallet?.address);
+      console.log('💰 Available wallets:', wallets.map(w => ({
+        type: w.walletClientType,
+        address: w.address,
+        chainId: w.chainId
+      })));
+      
+      console.log('🎯 Embedded wallet found:', embeddedWallet ? {
+        type: embeddedWallet.walletClientType,
+        address: embeddedWallet.address,
+        chainId: embeddedWallet.chainId
+      } : 'None');
       
       const newUser = {
         id: user?.id || '',
@@ -43,6 +63,12 @@ export const useVirtuosityAuth = () => {
       };
       
       console.log('👤 Setting virtuosity user:', newUser);
+      
+      // Additional check if user is authenticated but no wallet found
+      if (authenticated && !embeddedWallet && wallets.length === 0) {
+        console.warn('⚠️ User authenticated but no embedded wallet found. This might indicate a configuration issue.');
+      }
+      
       setVirtuosityUser(newUser);
     }
   }, [user, authenticated, ready, wallets]);
@@ -67,7 +93,11 @@ export const useVirtuosityAuth = () => {
     }
   };
 
-  console.log('📤 Returning hook data:', { user: virtuosityUser, isReady: ready });
+  console.log('📤 Returning hook data:', { 
+    user: virtuosityUser, 
+    isReady: ready,
+    hasEmbeddedWallet: !!virtuosityUser.walletAddress 
+  });
 
   return {
     user: virtuosityUser,
