@@ -27,6 +27,7 @@ const privyConfig: PrivyClientConfig = {
     requireUserPasswordOnCreate: false,
   },
   defaultChain: polygonMumbai,
+  supportedChains: [polygonMumbai],
 };
 
 interface VirtuosityPrivyProviderProps {
