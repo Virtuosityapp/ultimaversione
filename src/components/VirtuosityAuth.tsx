@@ -3,7 +3,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useVirtuosityAuth } from '@/hooks/useVirtuosityAuth';
-import { Wallet, LogOut } from 'lucide-react';
+import { Wallet, LogOut, CheckCircle } from 'lucide-react';
 
 export const VirtuosityAuth = () => {
   console.log('🎨 VirtuosityAuth component rendering');
@@ -57,12 +57,26 @@ export const VirtuosityAuth = () => {
   return (
     <Card className="max-w-md mx-auto">
       <CardHeader className="text-center">
-        <CardTitle className="text-lg">Connesso con successo! 🎉</CardTitle>
+        <div className="flex items-center justify-center mb-2">
+          <CheckCircle className="h-6 w-6 text-green-600 mr-2" />
+          <CardTitle className="text-lg">Connesso con successo! 🎉</CardTitle>
+        </div>
       </CardHeader>
       <CardContent className="space-y-3">
         <div className="bg-green-50 p-3 rounded-lg">
           <p className="text-sm text-gray-700"><strong>Email:</strong> {user.email || 'Non disponibile'}</p>
-          <p className="text-sm text-gray-700"><strong>Wallet:</strong> {user.walletAddress ? `${user.walletAddress.slice(0, 6)}...${user.walletAddress.slice(-4)}` : 'Caricamento...'}</p>
+          <p className="text-sm text-gray-700">
+            <strong>Wallet:</strong> {
+              user.walletAddress 
+                ? `${user.walletAddress.slice(0, 6)}...${user.walletAddress.slice(-4)}` 
+                : (
+                  <span className="inline-flex items-center">
+                    <div className="animate-spin h-3 w-3 border border-gray-400 border-t-transparent rounded-full mr-1"></div>
+                    Creazione wallet...
+                  </span>
+                )
+            }
+          </p>
         </div>
         <Button 
           onClick={logout}

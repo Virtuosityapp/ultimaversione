@@ -26,10 +26,24 @@ export const useVirtuosityAuth = () => {
     isLoading: true,
   });
 
+  const [forceReady, setForceReady] = useState(false);
+
+  // Timeout di sicurezza per forzare ready dopo 10 secondi
   useEffect(() => {
-    console.log('🔄 useEffect triggered - ready:', ready);
+    const timeout = setTimeout(() => {
+      console.log('⏰ Timeout reached, forcing ready state');
+      setForceReady(true);
+    }, 10000);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
+  useEffect(() => {
+    console.log('🔄 useEffect triggered - ready:', ready, 'forceReady:', forceReady);
     
-    if (ready) {
+    const isActuallyReady = ready || forceReady;
+    
+    if (isActuallyReady) {
       const embeddedWallet = wallets.find(wallet => wallet.walletClientType === 'privy');
       
       console.log('💰 Embedded wallet found:', embeddedWallet?.address);
@@ -45,7 +59,7 @@ export const useVirtuosityAuth = () => {
       console.log('👤 Setting virtuosity user:', newUser);
       setVirtuosityUser(newUser);
     }
-  }, [user, authenticated, ready, wallets]);
+  }, [user, authenticated, ready, wallets, forceReady]);
 
   const handleLogin = async () => {
     try {
@@ -67,12 +81,13 @@ export const useVirtuosityAuth = () => {
     }
   };
 
-  console.log('📤 Returning hook data:', { user: virtuosityUser, isReady: ready });
+  const actualReady = ready || forceReady;
+  console.log('📤 Returning hook data:', { user: virtuosityUser, isReady: actualReady });
 
   return {
     user: virtuosityUser,
     login: handleLogin,
     logout: handleLogout,
-    isReady: ready,
+    isReady: actualReady,
   };
 };
