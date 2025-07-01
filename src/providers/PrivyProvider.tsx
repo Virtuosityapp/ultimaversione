@@ -1,6 +1,6 @@
 
 import { PrivyProvider, PrivyClientConfig } from '@privy-io/react-auth';
-import { polygonMumbai } from 'viem/chains';
+import { polygonAmoy } from 'viem/chains';
 import { createConfig } from '@privy-io/wagmi';
 import { http } from 'wagmi';
 import { WagmiProvider } from '@privy-io/wagmi';
