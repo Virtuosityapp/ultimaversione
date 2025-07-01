@@ -16,7 +16,7 @@ const wagmiConfig = createConfig({
 });
 
 const privyConfig: PrivyClientConfig = {
-  loginMethods: ['email', 'google', 'apple'],
+  loginMethods: ['email'],
   appearance: {
     theme: 'light',
     accentColor: '#10b981',
@@ -37,14 +37,16 @@ interface VirtuosityPrivyProviderProps {
 export const VirtuosityPrivyProvider = ({ children }: VirtuosityPrivyProviderProps) => {
   return (
     <PrivyProvider
-      appId="cmckjxj1c00fgkw0n6qrf826e"
-      config={privyConfig}
+    appId="cmckjxj1c00fgkw0n6qrf826e"
+    config={{
+        embeddedWallets: {
+            ethereum: { 
+                createOnLogin: 'all-users',
+            }, 
+        }, 
+    }}
     >
-      <QueryClientProvider client={queryClient}>
-        <WagmiProvider config={wagmiConfig}>
-          {children}
-        </WagmiProvider>
-      </QueryClientProvider>
+      {children}
     </PrivyProvider>
   );
 };
