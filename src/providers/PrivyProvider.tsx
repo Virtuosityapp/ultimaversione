@@ -26,8 +26,8 @@ const privyConfig: PrivyClientConfig = {
     createOnLogin: 'all-users',
     requireUserPasswordOnCreate: false,
   },
-  defaultChain: polygonAmoi,
-  supportedChains: [polygonAmoi],
+  defaultChain: polygonAmoy,
+  supportedChains: [polygonAmoy],
 };
 
 interface VirtuosityPrivyProviderProps {
