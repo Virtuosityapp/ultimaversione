@@ -1,5 +1,6 @@
 
 import { PrivyProvider, PrivyClientConfig } from '@privy-io/react-auth';
+import { SmartWalletsProvider } from '@privy-io/react-auth/smart-wallets';
 import { polygonMumbai } from 'viem/chains';
 import { createConfig } from '@privy-io/wagmi';
 import { http } from 'wagmi';
@@ -28,17 +29,8 @@ const privyConfig: PrivyClientConfig = {
   },
   externalWallets: {
     coinbaseWallet: {
-      // Disable to avoid conflicts with embedded wallets
       connectionOptions: 'smartWalletOnly',
     },
-    metamask: {
-      // Disable to avoid conflicts  
-      connectionOptions: 'eoaOnly',
-    },
-  },
-  smartWallet: {
-    createOnLogin: 'all-users',
-    // Use the default Privy paymaster for now
   },
   defaultChain: polygonMumbai,
   supportedChains: [polygonMumbai],
@@ -56,7 +48,9 @@ export const VirtuosityPrivyProvider = ({ children }: VirtuosityPrivyProviderPro
     >
       <QueryClientProvider client={queryClient}>
         <WagmiProvider config={wagmiConfig}>
-          {children}
+          <SmartWalletsProvider>
+            {children}
+          </SmartWalletsProvider>
         </WagmiProvider>
       </QueryClientProvider>
     </PrivyProvider>

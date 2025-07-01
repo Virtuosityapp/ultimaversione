@@ -1,5 +1,6 @@
 
-import { usePrivy, useWallets, useSmartWallets } from '@privy-io/react-auth';
+import { usePrivy, useWallets } from '@privy-io/react-auth';
+import { useSmartWallets } from '@privy-io/react-auth/smart-wallets';
 import { useEffect, useState } from 'react';
 
 export interface VirtuosityUser {
