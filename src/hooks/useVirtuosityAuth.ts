@@ -34,7 +34,7 @@ export const useVirtuosityAuth = () => {
     const embeddedWallet = wallets.find(wallet => wallet.walletClientType === 'privy');
     const smartWalletAddress = smartWalletClient?.account?.address;
 
-    const newUser: VirtuosityUser = {
+    setVirtuosityUser({
       id: user?.id || '',
       email: user?.email?.address,
       walletAddress: embeddedWallet?.address,
@@ -42,10 +42,8 @@ export const useVirtuosityAuth = () => {
       isAuthenticated: authenticated,
       isLoading: false,
       hasSmartWallet: !!smartWalletClient,
-    };
-
-    setVirtuosityUser(newUser);
-  }, [user, authenticated, ready, wallets, smartWalletClient]);
+    });
+  }, [user?.id, user?.email?.address, authenticated, ready, wallets.length, smartWalletClient?.account?.address]);
 
   const handleLogin = async () => {
     try {
