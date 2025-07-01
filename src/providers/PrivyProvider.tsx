@@ -36,7 +36,7 @@ interface VirtuosityPrivyProviderProps {
 export const VirtuosityPrivyProvider = ({ children }: VirtuosityPrivyProviderProps) => {
   return (
     <PrivyProvider
-      appId={import.meta.env.VITE_PRIVY_APP_ID || 'placeholder-app-id'}
+      appId="cmckjxj1c00fgkw0n6qrf826e"
       config={privyConfig}
     >
       <QueryClientProvider client={queryClient}>
