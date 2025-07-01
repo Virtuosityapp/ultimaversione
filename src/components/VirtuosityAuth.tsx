@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,7 +7,7 @@ import { Wallet, LogOut, CheckCircle, Plus } from 'lucide-react';
 export const VirtuosityAuth = () => {
   console.log('🎨 VirtuosityAuth component rendering');
   
-  const { user, login, logout, createSmartWallet, isReady } = useVirtuosityAuth();
+  const { user, login, logout, isReady } = useVirtuosityAuth();
   console.log('🔐 VirtuosityAuth state:', { user, isReady });
 
   if (!isReady) {
@@ -76,23 +75,7 @@ export const VirtuosityAuth = () => {
                 )
             }
           </p>
-          {user.hasSmartWallet && user.smartWalletAddress && (
-            <p className="text-sm text-gray-700">
-              <strong>Smart Wallet:</strong> {`${user.smartWalletAddress.slice(0, 6)}...${user.smartWalletAddress.slice(-4)}`}
-            </p>
-          )}
         </div>
-        
-        {!user.hasSmartWallet && (
-          <Button 
-            onClick={createSmartWallet}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white"
-            size="sm"
-          >
-            <Plus className="h-4 w-4 mr-2" />
-            Crea Smart Wallet
-          </Button>
-        )}
         
         <Button 
           onClick={logout}

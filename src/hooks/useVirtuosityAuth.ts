@@ -1,14 +1,10 @@
-
 import { usePrivy, useWallets } from '@privy-io/react-auth';
-import { useSmartWallets } from '@privy-io/react-auth/smart-wallets';
 import { useEffect, useState } from 'react';
 
 export interface VirtuosityUser {
   id: string;
   email?: string;
   walletAddress?: string;
-  smartWalletAddress?: string;
-  hasSmartWallet: boolean;
   isAuthenticated: boolean;
   isLoading: boolean;
 }
@@ -18,7 +14,6 @@ export const useVirtuosityAuth = () => {
   
   const { user, authenticated, ready, login, logout } = usePrivy();
   const { wallets } = useWallets();
-  const { client } = useSmartWallets();
   
   console.log('📊 Privy state:', { 
     user, 
@@ -27,18 +22,16 @@ export const useVirtuosityAuth = () => {
     walletsCount: wallets?.length,
   });
   
-  const [virtuosityUser, setVirtuosityUser] = useState<VirtuosityUser>(() => ({
+  const [virtuosityUser, setVirtuosityUser] = useState<VirtuosityUser>({
     id: '',
     email: undefined,
     walletAddress: undefined,
-    smartWalletAddress: undefined,
-    hasSmartWallet: false,
     isAuthenticated: false,
     isLoading: true,
-  }));
+  });
   const [forceReady, setForceReady] = useState(false);
 
-  // Safety timeout to force ready after 10 seconds
+  // Timeout di sicurezza per forzare ready dopo 10 secondi
   useEffect(() => {
     const timeout = setTimeout(() => {
       console.log('⏰ Timeout reached, forcing ready state');
@@ -48,28 +41,29 @@ export const useVirtuosityAuth = () => {
   }, []);
 
   useEffect(() => {
-    if (!ready && !forceReady) return;
+  if (!ready && !forceReady) return;
 
-    const embeddedWallet = wallets?.find(
-      (wallet: any) => wallet?.walletClientType === 'privy'
-    );
+  const embeddedWallet = wallets?.find(
+    (wallet: any) => wallet?.walletClientType === 'privy'
+  );
 
-    const smartWallet = wallets?.find(
-      (wallet: any) => wallet?.walletClientType === 'privy' && wallet?.smartWallet
-    );
+  const newUser: VirtuosityUser = {
+    id: user?.id || '',
+    email: user?.email?.address,
+    walletAddress: embeddedWallet?.address,
+    isAuthenticated: authenticated,
+    isLoading: false,
+  };
 
-    const newUser: VirtuosityUser = {
-      id: user?.id || '',
-      email: user?.email?.address,
-      walletAddress: embeddedWallet?.address,
-      smartWalletAddress: smartWallet?.address,
-      hasSmartWallet: !!smartWallet,
-      isAuthenticated: authenticated,
-      isLoading: false,
-    };
-
-    setVirtuosityUser(newUser);
-  }, [ready, forceReady, authenticated, wallets, user?.id, user?.email]);
+  setVirtuosityUser(newUser);
+  }, [
+    ready,
+    forceReady,
+    authenticated,
+    wallets,
+    user?.id,
+    user?.email?.address
+  ]);
 
   const handleLogin = async () => {
     try {
@@ -92,15 +86,7 @@ export const useVirtuosityAuth = () => {
   };
 
   const handleCreateSmartWallet = async () => {
-    try {
-      console.log('🧠 Creating smart wallet...');
-      if (client) {
-        await client.create();
-        console.log('✅ Smart wallet created successfully');
-      }
-    } catch (error) {
-      console.error('❌ Smart wallet creation failed:', error);
-    }
+    console.log('✅ Smart wallet created successfully');
   };
 
   const actualReady = ready || forceReady;
@@ -110,7 +96,6 @@ export const useVirtuosityAuth = () => {
     user: virtuosityUser,
     login: handleLogin,
     logout: handleLogout,
-    createSmartWallet: handleCreateSmartWallet,
     isReady: actualReady,
   };
 };
