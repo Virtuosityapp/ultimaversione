@@ -3,12 +3,12 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useVirtuosityAuth } from '@/hooks/useVirtuosityAuth';
-import { Wallet, LogOut } from 'lucide-react';
+import { Wallet, LogOut, Brain } from 'lucide-react';
 
 export const VirtuosityAuth = () => {
   console.log('🎨 VirtuosityAuth component rendering');
   
-  const { user, login, logout, isReady } = useVirtuosityAuth();
+  const { user, login, logout, createSmartWallet, isReady } = useVirtuosityAuth();
 
   console.log('🔐 VirtuosityAuth state:', { user, isReady });
 
@@ -45,6 +45,7 @@ export const VirtuosityAuth = () => {
           </Button>
           <div className="text-center text-sm text-gray-600">
             <p>✅ Wallet automatico creato per te</p>
+            <p>🧠 Smart wallet con gas sponsorizzato</p>
             <p>✅ Login con Google, Apple o Email</p>
             <p>✅ Nessuna frase segreta da memorizzare</p>
           </div>
@@ -60,10 +61,35 @@ export const VirtuosityAuth = () => {
         <CardTitle className="text-lg">Connesso con successo! 🎉</CardTitle>
       </CardHeader>
       <CardContent className="space-y-3">
-        <div className="bg-green-50 p-3 rounded-lg">
+        <div className="bg-green-50 p-3 rounded-lg space-y-2">
           <p className="text-sm text-gray-700"><strong>Email:</strong> {user.email || 'Non disponibile'}</p>
-          <p className="text-sm text-gray-700"><strong>Wallet:</strong> {user.walletAddress ? `${user.walletAddress.slice(0, 6)}...${user.walletAddress.slice(-4)}` : 'Caricamento...'}</p>
+          <p className="text-sm text-gray-700">
+            <strong>Embedded Wallet:</strong> {user.walletAddress ? `${user.walletAddress.slice(0, 6)}...${user.walletAddress.slice(-4)}` : 'Caricamento...'}
+          </p>
+          {user.smartWalletAddress && (
+            <p className="text-sm text-gray-700">
+              <strong>🧠 Smart Wallet:</strong> {`${user.smartWalletAddress.slice(0, 6)}...${user.smartWalletAddress.slice(-4)}`}
+            </p>
+          )}
+          {user.hasSmartWallet && (
+            <div className="flex items-center text-sm text-green-600">
+              <Brain className="h-4 w-4 mr-1" />
+              Smart Wallet Attivo
+            </div>
+          )}
         </div>
+        
+        {!user.hasSmartWallet && user.isAuthenticated && (
+          <Button 
+            onClick={createSmartWallet}
+            className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700"
+            size="sm"
+          >
+            <Brain className="h-4 w-4 mr-2" />
+            Crea Smart Wallet
+          </Button>
+        )}
+        
         <Button 
           onClick={logout}
           variant="outline"

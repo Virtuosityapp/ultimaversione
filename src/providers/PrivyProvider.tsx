@@ -23,8 +23,22 @@ const privyConfig: PrivyClientConfig = {
     logo: '/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png',
   },
   embeddedWallets: {
-    createOnLogin: 'users-without-wallets',
+    createOnLogin: 'all-users',
     requireUserPasswordOnCreate: false,
+  },
+  externalWallets: {
+    coinbaseWallet: {
+      // Disable to avoid conflicts with embedded wallets
+      connectionOptions: 'smartWalletOnly',
+    },
+    metamask: {
+      // Disable to avoid conflicts  
+      connectionOptions: 'eoaOnly',
+    },
+  },
+  smartWallet: {
+    createOnLogin: 'all-users',
+    // Use the default Privy paymaster for now
   },
   defaultChain: polygonMumbai,
   supportedChains: [polygonMumbai],
