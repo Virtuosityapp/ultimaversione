@@ -26,6 +26,7 @@ export const useVirtuosityAuth = () => {
     id: '',
     email: undefined,
     walletAddress: undefined,
+    
     isAuthenticated: false,
     isLoading: true,
   });
@@ -83,10 +84,6 @@ export const useVirtuosityAuth = () => {
     } catch (error) {
       console.error('❌ Logout failed:', error);
     }
-  };
-
-  const handleCreateSmartWallet = async () => {
-    console.log('✅ Smart wallet created successfully');
   };
 
   const actualReady = ready || forceReady;
