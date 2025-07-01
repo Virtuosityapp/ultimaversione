@@ -31,6 +31,11 @@ export const useVirtuosityAuth = () => {
   useEffect(() => {
     if (!ready) return;
 
+    console.log('🔄 useVirtuosityAuth - updating user state');
+    console.log('User:', user);
+    console.log('Wallets:', wallets);
+    console.log('Smart wallet client:', smartWalletClient);
+
     const embeddedWallet = wallets.find(wallet => wallet.walletClientType === 'privy');
     const smartWalletAddress = smartWalletClient?.account?.address;
 
@@ -43,7 +48,7 @@ export const useVirtuosityAuth = () => {
       isLoading: false,
       hasSmartWallet: !!smartWalletClient,
     });
-  }, [user?.id, user?.email?.address, authenticated, ready, wallets.length, smartWalletClient?.account?.address]);
+  }, [ready, authenticated, user?.id, user?.email?.address, wallets.length, smartWalletClient?.account?.address]);
 
   const handleLogin = async () => {
     try {
