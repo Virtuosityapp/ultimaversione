@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -7,7 +8,7 @@ import { Wallet, LogOut, CheckCircle, Plus } from 'lucide-react';
 export const VirtuosityAuth = () => {
   console.log('🎨 VirtuosityAuth component rendering');
   
-  const { user, login, logout, isReady } = useVirtuosityAuth();
+  const { user, login, logout, isReady, createSmartWallet } = useVirtuosityAuth();
   console.log('🔐 VirtuosityAuth state:', { user, isReady });
 
   if (!isReady) {
@@ -66,7 +67,7 @@ export const VirtuosityAuth = () => {
           <p className="text-sm text-gray-700">
             <strong>Wallet:</strong> {
               user.walletAddress 
-                ? ${user.walletAddress.slice(0, 6)}...${user.walletAddress.slice(-4)} 
+                ? `${user.walletAddress.slice(0, 6)}...${user.walletAddress.slice(-4)}`
                 : (
                   <span className="inline-flex items-center">
                     <div className="animate-spin h-3 w-3 border border-gray-400 border-t-transparent rounded-full mr-1"></div>
@@ -75,7 +76,23 @@ export const VirtuosityAuth = () => {
                 )
             }
           </p>
+          {user.hasSmartWallet && user.smartWalletAddress && (
+            <p className="text-sm text-gray-700">
+              <strong>Smart Wallet:</strong> {`${user.smartWalletAddress.slice(0, 6)}...${user.smartWalletAddress.slice(-4)}`}
+            </p>
+          )}
         </div>
+        
+        {!user.hasSmartWallet && (
+          <Button 
+            onClick={createSmartWallet}
+            className="w-full mb-2"
+            variant="outline"
+          >
+            <Plus className="h-4 w-4 mr-2" />
+            Crea Smart Wallet
+          </Button>
+        )}
         
         <Button 
           onClick={logout}
