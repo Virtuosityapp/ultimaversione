@@ -14,30 +14,27 @@ const wagmiConfig = createConfig({
   },
 });
 
-// 🔥 CONFIGURAZIONE SOLO SMART WALLETS (no embedded wallets)
+// 🔥 CONFIGURAZIONE SMART WALLETS secondo la documentazione ufficiale
 const privyConfig: PrivyClientConfig = {
-  loginMethods: ['email', 'google', 'apple'], // ❌ Rimosso 'wallet' per ora
+  loginMethods: ['email', 'google', 'apple'],
   appearance: {
     theme: 'light',
     accentColor: '#10b981',
     logo: '/lovable-uploads/5930bd4d-6869-4b7d-8020-e58372708f8a.png',
+    showWalletLoginFirst: false, // Email/social first
   },
-  // ❌ DISABILITATO: Embedded Wallets
+  // 🔥 EMBEDDED WALLETS: Configurati per creare Smart Wallets
   embeddedWallets: {
-    createOnLogin: 'off', // 🔥 DISABILITATO - usiamo solo Smart Wallets
+    createOnLogin: 'all-users', // ✅ Crea per tutti gli utenti
+    requireUserPasswordOnCreate: false,
+    noPromptOnSignature: false,
   },
   defaultChain: polygonAmoy,
   supportedChains: [polygonAmoy],
-  // ✅ ABILITATO: SOLO Smart Wallets
-  smartWallet: {
-    createOnLogin: 'all-users', // 🔥 Crea Smart Wallet per tutti
-    sponsorGas: true, // 🔥 Privy paga il gas!
-    sponsorGasPrice: 'fast', // Velocità transazioni sponsorizzate
-  },
-  // Configurazione MFA
+  // 🔥 MFA configuration
   mfa: {
     noPromptOnMfaRequired: false,
-  },
+  }
 };
 
 interface VirtuosityPrivyProviderProps {
@@ -45,6 +42,8 @@ interface VirtuosityPrivyProviderProps {
 }
 
 export const VirtuosityPrivyProvider = ({ children }: VirtuosityPrivyProviderProps) => {
+  console.log('🚀 Initializing Privy with Smart Wallets support');
+  
   return (
     <PrivyProvider
       appId="cmckjxj1c00fgkw0n6qrf826e"

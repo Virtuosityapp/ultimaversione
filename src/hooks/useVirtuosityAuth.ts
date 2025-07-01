@@ -1,5 +1,4 @@
 import { usePrivy, useWallets } from '@privy-io/react-auth';
-import { useSmartWallets } from '@privy-io/react-auth'; // 🔥 AGGIUNTO
 import { useEffect, useState } from 'react';
 
 export interface VirtuosityUser {
@@ -8,26 +7,27 @@ export interface VirtuosityUser {
   walletAddress?: string;
   isAuthenticated: boolean;
   isLoading: boolean;
-  // 🔥 NUOVI CAMPI per Smart Wallets
+  // 🔥 Smart Wallets info
   hasSmartWallet?: boolean;
-  gasSponsored?: boolean;
-  walletType?: 'embedded' | 'smart' | 'none';
+  smartWalletAddress?: string;
+  smartWalletType?: string;
+  hasEmbeddedWallet?: boolean;
+  embeddedWalletAddress?: string;
+  totalWallets?: number;
 }
 
 export const useVirtuosityAuth = () => {
-  console.log('🔍 useVirtuosityAuth hook initialized');
+  console.log('🔍 useVirtuosityAuth hook initialized (Smart Wallets)');
   
   const { user, authenticated, ready, login, logout } = usePrivy();
   const { wallets } = useWallets();
-  // 🔥 AGGIUNTO: Smart Wallets hook
-  const { smartWallet, createSmartWallet } = useSmartWallets();
   
   console.log('📊 Privy state:', { 
-    user, 
+    user: user?.id, 
     authenticated, 
     ready, 
     walletsCount: wallets?.length,
-    smartWallet: smartWallet?.address // 🔥 AGGIUNTO
+    userLinkedAccounts: user?.linkedAccounts?.length
   });
   
   const [virtuosityUser, setVirtuosityUser] = useState<VirtuosityUser>({
@@ -36,115 +36,100 @@ export const useVirtuosityAuth = () => {
     walletAddress: undefined,
     isAuthenticated: false,
     isLoading: true,
-    hasSmartWallet: false, // 🔥 AGGIUNTO
-    gasSponsored: false,   // 🔥 AGGIUNTO
-    walletType: 'none',    // 🔥 AGGIUNTO
+    hasSmartWallet: false,
+    smartWalletAddress: undefined,
+    smartWalletType: undefined,
+    hasEmbeddedWallet: false,
+    embeddedWalletAddress: undefined,
+    totalWallets: 0,
   });
 
   const [forceReady, setForceReady] = useState(false);
-  const [isCreatingWallet, setIsCreatingWallet] = useState(false); // 🔥 AGGIUNTO
 
-  // Timeout di sicurezza per forzare ready dopo 10 secondi
+  // Timeout di sicurezza per Lovable
   useEffect(() => {
     const timeout = setTimeout(() => {
       console.log('⏰ Timeout reached, forcing ready state');
       setForceReady(true);
-    }, 10000);
+    }, 15000);
     return () => clearTimeout(timeout);
   }, []);
 
-  // 🔥 NUOVO: Auto-creazione Smart Wallet dopo login
-  useEffect(() => {
-    const createSmartWalletIfNeeded = async () => {
-      if (authenticated && ready && !smartWallet && !isCreatingWallet) {
-        console.log('🧠 User authenticated but no Smart Wallet found, creating...');
-        setIsCreatingWallet(true);
-        
-        try {
-          await createSmartWallet();
-          console.log('✅ Smart Wallet created successfully');
-        } catch (error) {
-          console.error('❌ Error creating Smart Wallet:', error);
-          
-          // 🔄 Retry dopo 3 secondi
-          setTimeout(async () => {
-            try {
-              console.log('🔄 Retrying Smart Wallet creation...');
-              await createSmartWallet();
-              console.log('✅ Smart Wallet created on retry');
-            } catch (retryError) {
-              console.error('❌ Smart Wallet retry failed:', retryError);
-            }
-          }, 3000);
-        } finally {
-          setIsCreatingWallet(false);
-        }
-      }
-    };
-
-    if (authenticated && ready) {
-      // Aspetta un secondo per essere sicuri che tutto sia inizializzato
-      const timer = setTimeout(createSmartWalletIfNeeded, 1000);
-      return () => clearTimeout(timer);
-    }
-  }, [authenticated, ready, smartWallet, createSmartWallet, isCreatingWallet]);
-
-  // 🔥 AGGIORNATO: useEffect principale per gestire Smart Wallets
+  // 🔥 useEffect principale per Smart Wallets
   useEffect(() => {
     console.log('🔄 useEffect triggered - ready:', ready, 'forceReady:', forceReady);
     
     const isActuallyReady = ready || forceReady;
     
     if (isActuallyReady) {
-      // 🔥 PRIORITÀ: Smart Wallet prima, poi Embedded Wallet come fallback
-      let walletAddress: string | undefined;
-      let walletType: 'embedded' | 'smart' | 'none' = 'none';
+      // 🔥 CERCA SMART WALLET nei linkedAccounts (metodo ufficiale)
+      const smartWallet = user?.linkedAccounts?.find(
+        (account: any) => account.type === 'smart_wallet'
+      );
+      
+      // 🔥 CERCA EMBEDDED WALLET nei wallets array
+      const embeddedWallet = wallets.find(wallet => 
+        wallet.walletClientType === 'privy'
+      );
+      
+      // Altri wallets esterni
+      const externalWallets = wallets.filter(wallet => 
+        wallet.walletClientType !== 'privy'
+      );
+      
+      // 🎯 LOGICA DI PRIORITÀ: Smart Wallet > Embedded Wallet > External Wallet
+      let primaryWalletAddress: string | undefined;
       let hasSmartWallet = false;
-      let gasSponsored = false;
-
+      let hasEmbeddedWallet = false;
+      
       if (smartWallet?.address) {
-        // ✅ Smart Wallet disponibile (preferenza)
-        walletAddress = smartWallet.address;
-        walletType = 'smart';
+        // ✅ SMART WALLET (priorità massima)
+        primaryWalletAddress = smartWallet.address;
         hasSmartWallet = true;
-        gasSponsored = true; // Smart Wallets hanno gas sponsorizzato
-        console.log('🧠 Smart Wallet found:', walletAddress);
+        console.log('🧠 Smart Wallet found:', {
+          address: smartWallet.address,
+          type: smartWallet.smartWalletType || 'unknown'
+        });
+      } else if (embeddedWallet?.address) {
+        // 💰 EMBEDDED WALLET (fallback)
+        primaryWalletAddress = embeddedWallet.address;
+        hasEmbeddedWallet = true;
+        console.log('💰 Embedded Wallet found:', embeddedWallet.address);
+      } else if (externalWallets.length > 0) {
+        // 🦊 EXTERNAL WALLET (ultimo fallback)
+        primaryWalletAddress = externalWallets[0].address;
+        console.log('🦊 External Wallet found:', primaryWalletAddress);
       } else {
-        // 🔄 Fallback su Embedded Wallet se Smart Wallet non disponibile
-        const embeddedWallet = wallets.find(wallet => wallet.walletClientType === 'privy');
-        if (embeddedWallet?.address) {
-          walletAddress = embeddedWallet.address;
-          walletType = 'embedded';
-          console.log('💰 Embedded wallet found as fallback:', walletAddress);
-        } else if (isCreatingWallet) {
-          // 🔄 Wallet in creazione
-          console.log('⏳ Wallet creation in progress...');
-        } else {
-          console.log('❌ No wallet found');
-        }
+        console.log('❌ No wallets found');
       }
       
       const newUser: VirtuosityUser = {
         id: user?.id || '',
         email: user?.email?.address,
-        walletAddress,
+        walletAddress: primaryWalletAddress,
         isAuthenticated: authenticated,
-        isLoading: isCreatingWallet, // 🔥 Loading se stiamo creando il wallet
+        isLoading: false,
+        // 🔥 Smart Wallet specifici
         hasSmartWallet,
-        gasSponsored,
-        walletType,
+        smartWalletAddress: smartWallet?.address,
+        smartWalletType: smartWallet?.smartWalletType || undefined,
+        // 🔥 Embedded Wallet specifici
+        hasEmbeddedWallet,
+        embeddedWalletAddress: embeddedWallet?.address,
+        // 🔥 Info generali
+        totalWallets: wallets.length,
       };
       
-      console.log('👤 Setting virtuosity user:', newUser);
+      console.log('👤 Setting virtuosity user (Smart Wallets):', newUser);
       setVirtuosityUser(newUser);
     }
-  }, [user, authenticated, ready, wallets, smartWallet, forceReady, isCreatingWallet]);
+  }, [user, authenticated, ready, wallets, forceReady]);
 
   const handleLogin = async () => {
     try {
-      console.log('🚀 Login attempt started');
+      console.log('🚀 Login attempt started (Smart Wallets)');
       await login();
-      console.log('✅ Login successful');
+      console.log('✅ Login successful - Smart Wallets should be created automatically');
     } catch (error) {
       console.error('❌ Login failed:', error);
     }
@@ -160,53 +145,31 @@ export const useVirtuosityAuth = () => {
     }
   };
 
-  // 🔥 NUOVO: Funzione per creare Smart Wallet manualmente
-  const handleCreateSmartWallet = async () => {
-    if (!authenticated) {
-      console.log('❌ User not authenticated');
-      return;
-    }
-
-    if (isCreatingWallet) {
-      console.log('⏳ Wallet creation already in progress');
-      return;
-    }
-
-    console.log('🧠 Manual Smart Wallet creation started');
-    setIsCreatingWallet(true);
-    
-    try {
-      await createSmartWallet();
-      console.log('✅ Manual Smart Wallet creation successful');
-    } catch (error) {
-      console.error('❌ Manual Smart Wallet creation failed:', error);
-    } finally {
-      setIsCreatingWallet(false);
-    }
-  };
-
   const actualReady = ready || forceReady;
   
-  // 🔥 AGGIORNATO: Return con nuove funzioni
+  // 🔥 Return data con info Smart Wallets
   const returnData = {
     user: virtuosityUser,
     login: handleLogin,
     logout: handleLogout,
     isReady: actualReady,
-    // 🔥 NUOVE funzioni e stati
-    createSmartWallet: handleCreateSmartWallet,
-    isCreatingWallet,
-    smartWallet,
-    // Informazioni aggiuntive per debug
+    // 🔥 Array di tutti i wallets per debug
+    allWallets: wallets,
+    allLinkedAccounts: user?.linkedAccounts || [],
+    // 🔥 Debug info specifico per Smart Wallets
     debug: {
       privyReady: ready,
       privyAuthenticated: authenticated,
-      embeddedWalletsCount: wallets.length,
-      hasSmartWallet: !!smartWallet,
+      walletsCount: wallets.length,
+      linkedAccountsCount: user?.linkedAccounts?.length || 0,
+      embeddedWallet: wallets.find(w => w.walletClientType === 'privy'),
+      smartWalletFromAccounts: user?.linkedAccounts?.find((a: any) => a.type === 'smart_wallet'),
+      externalWallets: wallets.filter(w => w.walletClientType !== 'privy'),
+      forceReady,
     }
   };
 
-  console.log('📤 Returning hook data:', returnData);
+  console.log('📤 Returning hook data (Smart Wallets):', returnData);
   
   return returnData;
 };
