@@ -26,12 +26,6 @@ const privyConfig: PrivyClientConfig = {
     createOnLogin: 'all-users',
     requireUserPasswordOnCreate: false,
   },
-  externalWallets: {
-    metamask: { connectionOptions: 'eoaOnly' },
-    coinbaseWallet: { connectionOptions: 'eoaOnly' },
-    walletConnect: { enabled: false },
-    rainbow: { connectionOptions: 'eoaOnly' },
-  },
   defaultChain: polygonAmoy,
   supportedChains: [polygonAmoy],
 };

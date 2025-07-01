@@ -17,7 +17,6 @@ export const useVirtuosityAuth = () => {
   const { wallets } = useWallets();
   
   console.log('📊 Privy state:', { user, authenticated, ready, walletsCount: wallets?.length });
-  console.log('💰 All wallets:', wallets?.map(w => ({ type: w.walletClientType, address: w.address })));
   
   const [virtuosityUser, setVirtuosityUser] = useState<VirtuosityUser>({
     id: '',
@@ -45,20 +44,14 @@ export const useVirtuosityAuth = () => {
     const isActuallyReady = ready || forceReady;
     
     if (isActuallyReady) {
-      // Cercare specificamente il wallet embedded di Privy
-      const privyWallet = wallets.find(wallet => wallet.walletClientType === 'privy');
+      const embeddedWallet = wallets.find(wallet => wallet.walletClientType === 'privy');
       
-      console.log('💰 Privy embedded wallet found:', privyWallet?.address);
-      console.log('🔍 Wallet details:', {
-        wallet: privyWallet,
-        address: privyWallet?.address,
-        clientType: privyWallet?.walletClientType
-      });
+      console.log('💰 Embedded wallet found:', embeddedWallet?.address);
       
       const newUser = {
         id: user?.id || '',
         email: user?.email?.address,
-        walletAddress: privyWallet?.address,
+        walletAddress: embeddedWallet?.address,
         isAuthenticated: authenticated,
         isLoading: false,
       };
