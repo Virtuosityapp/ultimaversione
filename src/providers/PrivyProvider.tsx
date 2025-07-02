@@ -37,14 +37,8 @@ interface VirtuosityPrivyProviderProps {
 export const VirtuosityPrivyProvider = ({ children }: VirtuosityPrivyProviderProps) => {
   return (
     <PrivyProvider
-    appId="cmckjxj1c00fgkw0n6qrf826e"
-    config={{
-        embeddedWallets: {
-            ethereum: { 
-                createOnLogin: 'all-users',
-            }, 
-        }, 
-    }}
+      appId="cmckjxj1c00fgkw0n6qrf826e"
+      config={privyConfig} // Pass the whole config object here
     >
       {children}
     </PrivyProvider>
