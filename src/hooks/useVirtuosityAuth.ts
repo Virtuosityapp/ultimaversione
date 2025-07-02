@@ -12,8 +12,32 @@ export interface VirtuosityUser {
 export const useVirtuosityAuth = () => {
   console.log('🔍 useVirtuosityAuth hook initialized');
   
-  const { user, authenticated, ready, login, logout } = usePrivy();
-  const { wallets } = useWallets();
+  // Aggiungi try-catch per gestire errori di inizializzazione
+  let privyState;
+  let walletsState;
+  
+  try {
+    privyState = usePrivy();
+    walletsState = useWallets();
+  } catch (error) {
+    console.error('❌ Error initializing Privy hooks:', error);
+    // Ritorna uno stato di errore se i hooks non sono disponibili
+    return {
+      user: {
+        id: '',
+        email: undefined,
+        walletAddress: undefined,
+        isAuthenticated: false,
+        isLoading: true,
+      },
+      login: async () => console.error('Privy not initialized'),
+      logout: async () => console.error('Privy not initialized'),
+      isReady: false,
+    };
+  }
+
+  const { user, authenticated, ready, login, logout } = privyState;
+  const { wallets } = walletsState;
   
   console.log('📊 Privy state:', { 
     user, 
@@ -26,37 +50,44 @@ export const useVirtuosityAuth = () => {
     id: '',
     email: undefined,
     walletAddress: undefined,
-    
     isAuthenticated: false,
     isLoading: true,
   });
+  
   const [forceReady, setForceReady] = useState(false);
 
-  // Timeout di sicurezza per forzare ready dopo 10 secondi
+  // Timeout di sicurezza ridotto a 5 secondi
   useEffect(() => {
     const timeout = setTimeout(() => {
       console.log('⏰ Timeout reached, forcing ready state');
       setForceReady(true);
-    }, 10000);
+    }, 5000);
     return () => clearTimeout(timeout);
   }, []);
 
   useEffect(() => {
-  if (!ready && !forceReady) return;
+    if (!ready && !forceReady) {
+      console.log('⏳ Privy not ready yet, waiting...');
+      return;
+    }
 
-  const embeddedWallet = wallets?.find(
-    (wallet: any) => wallet?.walletClientType === 'privy'
-  );
+    console.log('✅ Privy ready, processing user data...');
 
-  const newUser: VirtuosityUser = {
-    id: user?.id || '',
-    email: user?.email?.address,
-    walletAddress: embeddedWallet?.address,
-    isAuthenticated: authenticated,
-    isLoading: false,
-  };
+    // Controllo più sicuro per il wallet
+    const embeddedWallet = wallets?.find(
+      (wallet: any) => wallet?.walletClientType === 'privy'
+    );
 
-  setVirtuosityUser(newUser);
+    const newUser: VirtuosityUser = {
+      id: user?.id || '',
+      email: user?.email?.address,
+      walletAddress: embeddedWallet?.address,
+      isAuthenticated: authenticated || false,
+      isLoading: false,
+    };
+
+    console.log('👤 Setting new user state:', newUser);
+    setVirtuosityUser(newUser);
   }, [
     ready,
     forceReady,
@@ -69,6 +100,9 @@ export const useVirtuosityAuth = () => {
   const handleLogin = async () => {
     try {
       console.log('🚀 Login attempt started');
+      if (!login) {
+        throw new Error('Login function not available');
+      }
       await login();
       console.log('✅ Login successful');
     } catch (error) {
@@ -79,6 +113,9 @@ export const useVirtuosityAuth = () => {
   const handleLogout = async () => {
     try {
       console.log('👋 Logout attempt started');
+      if (!logout) {
+        throw new Error('Logout function not available');
+      }
       await logout();
       console.log('✅ Logout successful');
     } catch (error) {
