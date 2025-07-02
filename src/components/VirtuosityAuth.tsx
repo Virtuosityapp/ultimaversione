@@ -2,16 +2,17 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useVirtuosityAuth } from '@/hooks/useVirtuosityAuth';
+// 1. Importa useCreateWallet da Privy
+import { useCreateWallet } from '@privy-io/react-auth';
 import { Wallet, LogOut, CheckCircle, Plus } from 'lucide-react';
 
 export const VirtuosityAuth = () => {
-  console.log('🎨 VirtuosityAuth component rendering');
-  
   const { user, login, logout, isReady } = useVirtuosityAuth();
-  console.log('🔐 VirtuosityAuth state:', { user, isReady });
+  
+  // 2. Inizializza l'hook per ottenere la funzione createWallet
+  const { createWallet } = useCreateWallet();
 
   if (!isReady) {
-    console.log('⏳ Privy not ready yet, showing loading...');
     return (
       <div className="flex items-center justify-center min-h-[200px]">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600"></div>
@@ -21,7 +22,7 @@ export const VirtuosityAuth = () => {
   }
 
   if (!user.isAuthenticated) {
-    console.log('🔓 User not authenticated, showing login form');
+    // Questa parte rimane invariata
     return (
       <Card className="max-w-md mx-auto">
         <CardHeader className="text-center">
@@ -33,7 +34,7 @@ export const VirtuosityAuth = () => {
             Accedi con un click per iniziare il tuo percorso sostenibile
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent>
           <Button 
             onClick={login}
             className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white hover:from-green-700 hover:to-blue-700"
@@ -41,17 +42,37 @@ export const VirtuosityAuth = () => {
           >
             🚀 Accedi con Privy
           </Button>
-          <div className="text-center text-sm text-gray-600">
-            <p>✅ Wallet automatico creato per te</p>
-            <p>✅ Login con Google, Apple o Email</p>
-            <p>✅ Nessuna frase segreta da memorizzare</p>
-          </div>
         </CardContent>
       </Card>
     );
   }
 
-  console.log('✅ User authenticated, showing success state');
+  // L'utente è autenticato, ora controlliamo se ha un wallet
+  if (!user.walletAddress) {
+    // 3. Se l'utente è loggato ma non ha un wallet, mostra il pulsante per crearlo
+    return (
+      <Card className="max-w-md mx-auto">
+        <CardHeader className="text-center">
+          <CardTitle className="text-xl font-bold">Un Ultimo Passaggio</CardTitle>
+          <CardDescription>
+            Crea il tuo wallet sicuro per completare la configurazione.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Button 
+            onClick={createWallet} // Chiama la funzione createWallet al click
+            className="w-full"
+            size="lg"
+          >
+            <Plus className="h-4 w-4 mr-2" />
+            Crea il mio Wallet
+          </Button>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  // L'utente è autenticato e ha un wallet, mostra la schermata di successo
   return (
     <Card className="max-w-md mx-auto">
       <CardHeader className="text-center">
@@ -64,16 +85,7 @@ export const VirtuosityAuth = () => {
         <div className="bg-green-50 p-3 rounded-lg">
           <p className="text-sm text-gray-700"><strong>Email:</strong> {user.email || 'Non disponibile'}</p>
           <p className="text-sm text-gray-700">
-            <strong>Wallet:</strong> {
-              user.walletAddress 
-                ? `${user.walletAddress.slice(0, 6)}...${user.walletAddress.slice(-4)}` 
-                : (
-                  <span className="inline-flex items-center">
-                    <div className="animate-spin h-3 w-3 border border-gray-400 border-t-transparent rounded-full mr-1"></div>
-                    Creazione wallet...
-                  </span>
-                )
-            }
+            <strong>Wallet:</strong> {`${user.walletAddress.slice(0, 6)}...${user.walletAddress.slice(-4)}`}
           </p>
         </div>
         
