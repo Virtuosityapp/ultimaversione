@@ -1,7 +1,8 @@
+
 import { PrivyProvider, PrivyClientConfig } from '@privy-io/react-auth';
 import { polygonAmoy } from 'viem/chains';
 import { createConfig } from '@privy-io/wagmi';
-import { http } from 'viem';
+import { http } from 'wagmi';
 import { WagmiProvider } from '@privy-io/wagmi';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
@@ -35,15 +36,11 @@ interface VirtuosityPrivyProviderProps {
 
 export const VirtuosityPrivyProvider = ({ children }: VirtuosityPrivyProviderProps) => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <WagmiProvider config={wagmiConfig}>
-        <PrivyProvider
-          appId="cmckjxj1c00fgkw0n6qrf826e" // Assicurati che questo sia il tuo App ID corretto
-          config={privyConfig}
-        >
-          {children}
-        </PrivyProvider>
-      </WagmiProvider>
-    </QueryClientProvider>
+    <PrivyProvider
+      appId="cmckjxj1c00fgkw0n6qrf826e"
+      config={privyConfig} // Pass the whole config object here
+    >
+      {children}
+    </PrivyProvider>
   );
 };
