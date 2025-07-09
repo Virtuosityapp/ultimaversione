@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Calendar, Award, TrendingUp, MapPin, Clock, QrCode, Camera, Smartphone, Users, Trophy, Target, Zap, Wallet, Eye, Shield, Send, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { DppVerification } from "@/components/DppVerification";
+
 import CitizenReporting from "@/components/CitizenReporting";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
@@ -326,11 +326,10 @@ const Dashboard = () => {
         </div>
 
         <Tabs defaultValue="activities" className="space-y-3 sm:space-y-6">
-          <TabsList className="grid w-full grid-cols-4 bg-white/80 backdrop-blur-sm h-auto p-1 shadow-md">
+          <TabsList className="grid w-full grid-cols-3 bg-white/80 backdrop-blur-sm h-auto p-1 shadow-md">
             <TabsTrigger value="activities" className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-green-100 hover:to-emerald-100 hover:text-green-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-400 data-[state=active]:to-emerald-500 data-[state=active]:text-white data-[state=active]:shadow-lg">Le Mie Attività</TabsTrigger>
             <TabsTrigger value="certificates" className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-blue-100 hover:to-cyan-100 hover:text-blue-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-400 data-[state=active]:to-cyan-500 data-[state=active]:text-white data-[state=active]:shadow-lg">Il Mio Wallet</TabsTrigger>
             <TabsTrigger value="reporting" className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-orange-100 hover:to-red-100 hover:text-orange-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-400 data-[state=active]:to-red-500 data-[state=active]:text-white data-[state=active]:shadow-lg">Segnala </TabsTrigger>
-            <TabsTrigger value="dpp" className="text-[10px] sm:text-sm px-1 py-2 hover:bg-gradient-to-r hover:from-cyan-100 hover:to-teal-100 hover:text-cyan-700 active:scale-95 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-400 data-[state=active]:to-teal-500 data-[state=active]:text-white data-[state=active]:shadow-lg">Riscatta DPP</TabsTrigger>
           </TabsList>
 
           <TabsContent value="activities" className="space-y-3 sm:space-y-6">
@@ -717,22 +716,6 @@ const Dashboard = () => {
             </Card>
           </TabsContent>
 
-          <TabsContent value="dpp" className="space-y-3 sm:space-y-6">
-            <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-              <CardHeader className="pb-3 sm:pb-6">
-                <CardTitle className="flex items-center gap-2 text-base sm:text-xl">
-                  <QrCode className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
-                  Verifica Passaporto Digitale del Prodotto
-                </CardTitle>
-                <CardDescription className="text-xs sm:text-sm">
-                  Scansiona il QR code per verificare l'origine e la sostenibilità del prodotto
-                </CardDescription>
-              </CardHeader>
-              <CardContent id="dpp-wallet-section">
-                <DppVerification />
-              </CardContent>
-            </Card>
-          </TabsContent>
         </Tabs>
       </div>
     </div>;
