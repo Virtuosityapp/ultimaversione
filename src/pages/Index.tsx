@@ -29,10 +29,8 @@ const Index = () => {
       
       {/* Content */}
       <div className="relative z-10">
-        <LanguageSwitcher />
-        
-        {/* Top navigation */}
-        <div className="flex justify-end p-4 pt-16">
+        {/* Top navigation with both buttons */}
+        <div className="flex justify-end items-start gap-2 p-4 fixed top-0 right-0 z-50">
           <Button
             variant="outline"
             size="sm"
@@ -43,11 +41,12 @@ const Index = () => {
             <ExternalLink className="h-4 w-4 mr-2" />
             Business Plan
           </Button>
+          <LanguageSwitcher />
         </div>
         
         {/* Hero Section - Reduced by 30% */}
         <div className="relative overflow-hidden">
-          <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 py-8 sm:py-11 lg:py-14">
+          <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 py-8 sm:py-11 lg:py-14 pt-20">
             <div className="text-center">
               <div className="flex justify-center mb-3 sm:mb-4">
                 <div className="relative">
