@@ -5,10 +5,15 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import CircularityIcons from "@/components/CircularityIcons";
+import { ExternalLink } from "lucide-react";
 
 const Index = () => {
   const navigate = useNavigate();
   const { t } = useLanguage();
+
+  const handleBusinessPlanClick = () => {
+    window.open('https://bp.virtuosity.site', '_blank');
+  };
 
   return (
     <div 
@@ -25,7 +30,23 @@ const Index = () => {
       
       {/* Content */}
       <div className="relative z-10">
-        <LanguageSwitcher />
+        {/* Top navigation */}
+        <div className="flex justify-between items-start p-4">
+          <div></div>
+          <div className="flex gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleBusinessPlanClick}
+              className="bg-white/80 backdrop-blur-sm border border-gray-200 hover:bg-white hover:scale-105 transition-all duration-200 shadow-lg"
+              title="Business Plan Virtuosity"
+            >
+              <ExternalLink className="h-4 w-4 mr-2" />
+              Business Plan
+            </Button>
+            <LanguageSwitcher />
+          </div>
+        </div>
         
         {/* Hero Section - Reduced by 30% */}
         <div className="relative overflow-hidden">
