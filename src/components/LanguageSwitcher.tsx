@@ -22,7 +22,7 @@ const LanguageSwitcher = () => {
       variant="outline"
       size="sm"
       onClick={handleLanguageSwitch}
-      className="fixed top-4 right-4 z-50 bg-white/80 backdrop-blur-sm border border-gray-200 hover:bg-white hover:scale-105 transition-all duration-200 shadow-lg"
+      className="bg-white/80 backdrop-blur-sm border border-gray-200 hover:bg-white hover:scale-105 transition-all duration-200 shadow-lg"
       title={t('switchToEnglish')}
     >
       <span className="text-lg">{language === 'it' ? '🇬🇧' : '🇮🇹'}</span>
