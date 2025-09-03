@@ -164,16 +164,16 @@ const Exchange = () => {
     websiteUrl: "https://www.gardaland.it"
   }, {
     id: 3,
-    partner: "PAX ITALIA",
-    title: "Smartpos per Attività Commerciali",
-    description: "Sistema di pagamento intelligente che permette di scambiare certificati Virtuosity con sconti per i clienti",
-    discount: "Sconto 25% sul canone",
-    category: "tecnologia",
-    image: "/lovable-uploads/8bceb592-fe5b-4d95-a7f0-50b9d1e5cf08.png",
+    partner: "GENERALI",
+    title: "Polizza Green Insurance",
+    description: "Assicurazione auto e casa con sconti per comportamenti sostenibili certificati da Virtuosity",
+    discount: "Sconto 30% sul premio",
+    category: "assicurazione",
+    image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&h=300&fit=crop",
     validUntil: "31 Dicembre 2026",
-    pointsRequired: 300,
-    benefits: ["Integrazione certificati Virtuosity", "Dashboard analytics inclusa", "Supporto tecnico dedicato"],
-    websiteUrl: "https://www.pax.it"
+    pointsRequired: 250,
+    benefits: ["Premio ridotto per eco-driver", "Copertura per mobilità sostenibile", "Assistenza green 24/7"],
+    websiteUrl: "https://www.generali.it"
   }, {
     id: 4,
     partner: "BANCA GREEN",
