@@ -164,7 +164,7 @@ const Exchange = () => {
     websiteUrl: "https://www.gardaland.it"
   }, {
     id: 3,
-    partner: "GENERALI",
+    partner: "ASSICURAZIONE",
     title: "Polizza Green Insurance",
     description: "Assicurazione auto e casa con sconti per comportamenti sostenibili certificati da Virtuosity",
     discount: "Sconto 30% sul premio",
