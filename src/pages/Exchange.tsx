@@ -140,7 +140,7 @@ const Exchange = () => {
 
   const partnerOffers = [{
     id: 1,
-    partner: "Luce e Gas",
+    partner: "LUCE E GAS",
     title: "Fotovoltaico Residenziale",
     description: "Installa pannelli solari a casa tua con incentivi esclusivi per utenti Virtuosity",
     discount: "Sconto 15%",
