@@ -15,7 +15,7 @@ const translations = {
   it: {
     // Index page translations
     heroTitle: "Virtuosity",
-    heroSubtitle: "Un modello innovativo che stimola l'interazione tra comuni, aziende e cittadini per costruire insieme un futuro sostenibile.",
+    heroSubtitle: "Una concezione innovativa che fomenta l'interlocuzione fra amministrazioni comunali, compagini aziendali e collettività civica per edificare congiuntamente un avvenire ecosostenibile.",
     heroDescription: "La piattaforma che premia i tuoi comportamenti sostenibili. Tracciamento automatico, certificati blockchain e premi reali per un futuro più verde.",
     buttonVirtusosity: "Virtusosity",
     buttonUser: "Utente",
