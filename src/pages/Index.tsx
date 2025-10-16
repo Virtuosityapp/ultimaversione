@@ -65,23 +65,6 @@ const Index = () => {
                 {t('heroSubtitle')}
               </p>
               
-              {/* Virtuosity Info Block - Reduced by 30% */}
-              <div className="mb-6 sm:mb-8 max-w-xs mx-auto px-3">
-                <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-lg border border-yellow-200 hover:shadow-xl transition-all duration-300">
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">Virtuosity</h3>
-                  <p className="text-gray-600 mb-3 text-xs">Scopri i dettagli del progetto</p>
-                  <Button onClick={() => navigate("/about")} className="bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-4 py-2 text-sm hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full">
-                    Clicca qui
-                  </Button>
-                </div>
-              </div>
-
-              {/* Dashboard Preview Image - Reduced by 30% */}
-              <div className="mb-6 sm:mb-8 max-w-3xl mx-auto px-3">
-                
-                
-              </div>
-
               {/* Four Dashboard Blocks - Reduced by 30% */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 sm:mb-8 max-w-3xl mx-auto px-3">
                 
@@ -126,6 +109,17 @@ const Index = () => {
                   </p>
                   <Button onClick={() => navigate("/comuni")} className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-2 text-sm hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl w-full">
                     {t('buttonMunicipalities')}
+                  </Button>
+                </div>
+              </div>
+
+              {/* Virtuosity Info Block - Reduced by 30% */}
+              <div className="mb-6 sm:mb-8 max-w-xs mx-auto px-3">
+                <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-lg border border-yellow-200 hover:shadow-xl transition-all duration-300">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">Virtuosity</h3>
+                  <p className="text-gray-600 mb-3 text-xs">Scopri i dettagli del progetto</p>
+                  <Button onClick={() => navigate("/about")} className="bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-4 py-2 text-sm hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl w-full">
+                    Clicca qui
                   </Button>
                 </div>
               </div>
