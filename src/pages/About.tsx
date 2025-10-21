@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Leaf, ArrowLeft, Shield, Zap, Globe, Award, Users, TrendingUp, CheckCircle, Target, Heart, Lightbulb, Droplets, Recycle, Battery, MapPin, Building, Euro, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-
 const CertificateTypeCard = ({
   cert
 }) => <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
@@ -121,11 +120,7 @@ const PrivacySecurityCard = () => <Card className="border-0 shadow-lg bg-gradien
       </CardDescription>
       
       <div className="mt-8 mb-8">
-        <img 
-          src="/lovable-uploads/56496a06-43af-4808-b63c-de4e8104341d.png" 
-          alt="Dashboard Utente Virtuosity - Tracciamento Sostenibilità Personale" 
-          className="mx-auto rounded-lg shadow-2xl max-w-[80%] sm:max-w-[70%] md:max-w-[60%] h-auto border border-gray-200"
-        />
+        <img src="/lovable-uploads/56496a06-43af-4808-b63c-de4e8104341d.png" alt="Dashboard Utente Virtuosity - Tracciamento Sostenibilità Personale" className="mx-auto rounded-lg shadow-2xl max-w-[80%] sm:max-w-[70%] md:max-w-[60%] h-auto border border-gray-200" />
         <p className="text-sm text-gray-600 mt-3 italic">
           Dashboard utente: monitora le tue attività sostenibili quotidiane e i certificati blockchain generati
         </p>
@@ -590,11 +585,7 @@ const About = () => {
               </div>
 
               <div className="mb-8 text-center">
-                <img 
-                  src="/lovable-uploads/d9ea4e8e-53a1-4a2e-be6c-a037e855fef7.png" 
-                  alt="Esempio DPP - Scarpe da Corsa EcoRun" 
-                  className="mx-auto rounded-lg shadow-2xl max-w-[80%] sm:max-w-[70%] md:max-w-[60%] h-auto border border-gray-200"
-                />
+                <img src="/lovable-uploads/d9ea4e8e-53a1-4a2e-be6c-a037e855fef7.png" alt="Esempio DPP - Scarpe da Corsa EcoRun" className="mx-auto rounded-lg shadow-2xl max-w-[80%] sm:max-w-[70%] md:max-w-[60%] h-auto border border-gray-200" />
                 <p className="text-sm text-gray-600 mt-3 italic">
                   Esempio di Digital Product Passport: ogni prodotto avrà informazioni complete su origine, sostenibilità e filiera produttiva
                 </p>
@@ -797,11 +788,7 @@ const About = () => {
           </div>
 
           <div className="mb-8 text-center">
-            <img 
-              src="/lovable-uploads/2d7821bc-1566-4343-b88c-a65247d9b8be.png" 
-              alt="Spazio Welfare & Premi - Interfaccia di Gestione Aziendale" 
-              className="mx-auto rounded-lg shadow-2xl max-w-[80%] h-auto border border-gray-200"
-            />
+            <img src="/lovable-uploads/2d7821bc-1566-4343-b88c-a65247d9b8be.png" alt="Spazio Welfare & Premi - Interfaccia di Gestione Aziendale" className="mx-auto rounded-lg shadow-2xl max-w-[80%] h-auto border border-gray-200" />
             <p className="text-sm text-gray-600 mt-3 italic">
               Interfaccia di gestione aziendale: le aziende possono configurare criteri di assegnazione automatica e gestire il welfare per i dipendenti
             </p>
@@ -838,11 +825,7 @@ const About = () => {
 
         {/* Report Screenshot - Above Technology Stack */}
         <div className="mb-16 text-center">
-          <img 
-            src="/lovable-uploads/73fd355d-6dd7-4294-b693-b245772935e6.png" 
-            alt="Report Virtuosity - Interfaccia di Monitoraggio Sostenibilità" 
-            className="mx-auto rounded-lg shadow-2xl max-w-[90%] sm:max-w-[80%] md:max-w-[70%] h-auto border border-gray-200"
-          />
+          <img src="/lovable-uploads/73fd355d-6dd7-4294-b693-b245772935e6.png" alt="Report Virtuosity - Interfaccia di Monitoraggio Sostenibilità" className="mx-auto rounded-lg shadow-2xl max-w-[90%] sm:max-w-[80%] md:max-w-[70%] h-auto border border-gray-200" />
           <p className="text-sm text-gray-600 mt-3 italic">
             Interfaccia di reporting dettagliato: monitora le tue attività sostenibili e i certificati blockchain generati
           </p>
@@ -969,7 +952,7 @@ const About = () => {
                   </div>
                   <div className="flex items-center text-sm text-gray-600 justify-center">
                     <CheckCircle className="w-4 h-4 text-purple-500 mr-3 flex-shrink-0" />
-                    <span>White label solution</span>
+                    <span>label solution</span>
                   </div>
                   <div className="flex items-center text-sm text-gray-600 justify-center">
                     <CheckCircle className="w-4 h-4 text-purple-500 mr-3 flex-shrink-0" />
@@ -1059,5 +1042,4 @@ const About = () => {
       </div>
     </div>;
 };
-
 export default About;
