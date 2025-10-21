@@ -926,9 +926,9 @@ const About = () => {
             Scegli il piano più adatto alle tue esigenze e accedi alla piattaforma di sostenibilità più innovativa d'Europa.
           </p>
           
-          <div className="flex justify-center max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {/* Piano Enterprise */}
-            <Card className="border-2 border-purple-200 shadow-lg bg-white/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300 max-w-md w-full">
+            <Card className="border-2 border-purple-200 shadow-lg bg-white/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
               <CardHeader className="text-center pb-4">
                 <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full flex items-center justify-center text-white mb-4 mx-auto">
                   <Globe className="h-8 w-8" />
@@ -968,6 +968,51 @@ const About = () => {
                   </div>
                 </div>
                 <Button className="w-full bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:from-purple-600 hover:to-pink-700">
+                  Contattaci
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Piano White Label */}
+            <Card className="border-2 border-blue-200 shadow-lg bg-white/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+              <CardHeader className="text-center pb-4">
+                <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-full flex items-center justify-center text-white mb-4 mx-auto">
+                  <Sparkles className="h-8 w-8" />
+                </div>
+                <CardTitle className="text-2xl font-bold text-gray-900 text-center">Piano White Label</CardTitle>
+                <CardDescription className="text-gray-600 text-center">
+                  Soluzione personalizzata per il tuo brand
+                </CardDescription>
+                <div className="mt-4">
+                  <div className="flex items-center justify-center">
+                    <span className="text-4xl font-bold text-blue-600">Su richiesta</span>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="text-center">
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center text-sm text-gray-600 justify-center">
+                    <CheckCircle className="w-4 h-4 text-blue-500 mr-3 flex-shrink-0" />
+                    <span>Tutto del piano Enterprise +</span>
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600 justify-center">
+                    <CheckCircle className="w-4 h-4 text-blue-500 mr-3 flex-shrink-0" />
+                    <span>Branding personalizzato completo</span>
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600 justify-center">
+                    <CheckCircle className="w-4 h-4 text-blue-500 mr-3 flex-shrink-0" />
+                    <span>Dominio personalizzato</span>
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600 justify-center">
+                    <CheckCircle className="w-4 h-4 text-blue-500 mr-3 flex-shrink-0" />
+                    <span>Personalizzazione UI/UX completa</span>
+                  </div>
+                  <div className="flex items-center text-sm text-gray-600 justify-center">
+                    <CheckCircle className="w-4 h-4 text-blue-500 mr-3 flex-shrink-0" />
+                    <span>Supporto prioritario 24/7</span>
+                  </div>
+                </div>
+                <Button className="w-full bg-gradient-to-r from-blue-500 to-cyan-600 text-white hover:from-blue-600 hover:to-cyan-700">
                   Contattaci
                 </Button>
               </CardContent>
