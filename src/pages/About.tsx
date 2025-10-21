@@ -321,25 +321,30 @@ const About = () => {
     points: ["Analytics mobilità urbana", "Monitoraggio obiettivi ambientali", "Citizen engagement", "Smart city integration"]
   }];
   const roadmap = [{
-    phase: "Gen-Mar 2026",
-    title: "MVP & Pilot Cities",
+    phase: "Fase 1",
+    title: "ott-nov 2025",
     status: "upcoming",
-    items: ["Lancio app mobile", "Prime 5 città pilota", "Integrazione bike sharing", "1000 utenti beta"]
+    items: ["Investimento", "Onboarding", "Candidatura TecnoNidi"]
   }, {
-    phase: "Apr-Giu 2026",
-    title: "Espansione & Partnership",
+    phase: "Fase 2",
+    title: "feb-apr 2026",
     status: "upcoming",
-    items: ["20 città partner", "Integrazione trasporti pubblici", "10.000 utenti attivi", "Prime aziende B2B"]
+    items: ["Sviluppo MVP", "Co-progettazione"]
   }, {
-    phase: "Lug-Dic 2026",
-    title: "Marketplace & Blockchain",
+    phase: "Fase 3",
+    title: "ott-nov 2026",
     status: "upcoming",
-    items: ["Lancio marketplace", "Certificati blockchain", "Integrazione DPP", "100.000 utenti"]
+    items: ["PoC", "Candidatura Smart&Start"]
   }, {
-    phase: "2027-2028",
-    title: "Scala Europea & IA",
+    phase: "Fase 4",
+    title: "feb-set 2027",
     status: "upcoming",
-    items: ["Espansione EU", "API pubbliche", "IA predittiva", "1M utenti", "Carbon credit trading"]
+    items: ["Industrializzazione piattaforma", "Co-progettazione"]
+  }, {
+    phase: "Fase 5",
+    title: "lug 2027",
+    status: "upcoming",
+    items: ["GTM"]
   }];
   const integrations = [{
     name: "Bike Sharing",
